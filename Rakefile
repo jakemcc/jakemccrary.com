@@ -55,6 +55,12 @@ task :preview do
   system "trap 'kill $jekyllPid $compassPid' Exit; jekyll --auto --server & jekyllPid=$!; compass watch & compassPid=$!; wait"
 end
 
+desc "start up a jekyll instance hosting a server"
+task :host do
+  system "jekyll --server"
+end
+
+
 # usage rake new_post[my-new-post] or rake new_post['my new post'] or rake new_post (defaults to "new-post")
 desc "Begin a new post in #{source_dir}/#{posts_dir}"
 task :new_post, :title do |t, args|
