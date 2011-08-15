@@ -39,7 +39,7 @@ GEM
     rubypython (0.5.1)
       blankslate (>= 2.1.2.3)
       ffi (~> 1.0.7)
-    sass (3.1.5)
+    sass (3.1.7)
     syntax (1.0.0)
 
 PLATFORMS
