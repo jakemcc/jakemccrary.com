@@ -2,15 +2,25 @@
 // To give it a try, uncomment some of the lines below rebuild your blog, and see how it works.
 // If you need a handy color picker try http://hslpicker.com
 
-// $main-bg: #f8f8f8;
-// $page-bg: #252525;
-// $article-border: #eeeeee;
-// $header-bg: #263347;
-// $subtitle-color: lighten($header-bg, 58);
-// $nav-bg: desaturate(lighten(#8fc17a, 18), 5);
-// $sidebar-bg: desaturate(#eceff5, 8);
-// $sidebar-link-color: saturate(#526f9a, 10);
-// $sidebar-link-color-hover: darken(#7ab662, 9);
+$main-bg: #f8f8f8;
+$page-bg: $main-bg;
+$article-border: #eeeeee;
+$header-bg: $main-bg;
+$footer-bg: $main-bg;
+$title-color: #222;
+$subtitle-color: lighten($header-bg, 58);
+$nav-bg: $main-bg; //desaturate(lighten(#8fc17a, 18), 5);
+// $nav-color: darken($nav-bg, 38) !default;
+// $nav-color-hover: darken($nav-color, 25) !default;
+// $nav-placeholder: desaturate(darken($nav-bg, 10), 15) !default;
+// $nav-border: darken($nav-bg, 10) !default;
+$nav-border-top: $main-bg; //lighten($nav-bg, 15) !default;
+$nav-border-bottom: $main-bg; //darken($nav-bg, 25) !default;
+// $nav-border-left: darken($nav-bg, 11) !default;
+// $nav-border-right: lighten($nav-bg, 7) !default;
+$sidebar-bg: $main-bg; //desaturate(#eceff5, 8);
+$sidebar-link-color: saturate(#526f9a, 10);
+$sidebar-link-color-hover: darken(#7ab662, 9);
 
 //$main-bg: #f0f0f0;
 // $page-bg: #252525;
