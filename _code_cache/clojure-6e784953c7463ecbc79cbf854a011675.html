@@ -1,0 +1,20 @@
+<div class="highlight"><pre><span class="p">(</span><span class="k">defn </span><span class="nv">my-even?</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">letfn</span> <span class="p">[(</span><span class="nf">e?</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
+              <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">zero? </span><span class="nv">n</span><span class="p">)</span>
+                <span class="nv">true</span>
+                <span class="o">#</span><span class="p">(</span><span class="nv">o?</span> <span class="p">(</span><span class="nb">dec </span><span class="p">(</span><span class="nf">Math/abs</span> <span class="nv">n</span><span class="p">)))))</span>
+          <span class="p">(</span><span class="nf">o?</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
+              <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">zero? </span><span class="nv">n</span><span class="p">)</span>
+                <span class="nv">false</span>
+                <span class="o">#</span><span class="p">(</span><span class="nv">e?</span> <span class="p">(</span><span class="nb">dec </span><span class="p">(</span><span class="nf">Math/abs</span> <span class="nv">n</span><span class="p">)))))]</span>
+    <span class="p">(</span><span class="nf">trampoline</span> <span class="nv">e?</span> <span class="nv">n</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="k">defn </span><span class="nv">my-odd?</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
+  <span class="p">(</span><span class="nb">not </span><span class="p">(</span><span class="nf">my-even?</span> <span class="nv">n</span><span class="p">)))</span>
+
+<span class="nv">user&gt;</span> <span class="p">(</span><span class="nf">my-even?</span> <span class="mi">1000000</span><span class="p">)</span>
+<span class="nv">true</span>
+<span class="nv">user&gt;</span> <span class="p">(</span><span class="nf">my-odd?</span> <span class="mi">1000000</span><span class="p">)</span>
+<span class="nv">false</span>
+</pre>
+</div>

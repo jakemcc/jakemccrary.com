@@ -1,0 +1,12 @@
+<div class="highlight"><pre><span class="p">(</span><span class="nf">ns</span> <span class="nv">clargon-example</span>
+  <span class="p">(</span><span class="nf">:require</span> <span class="p">[</span><span class="nv">clargon</span><span class="o">.</span><span class="nv">core</span> <span class="nv">:as</span> <span class="nv">c</span><span class="p">]))</span>
+
+<span class="p">(</span><span class="k">defn </span><span class="nv">-main</span>
+  <span class="p">[</span><span class="nv">&amp;</span> <span class="nv">args</span><span class="p">]</span>
+  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">opts</span> <span class="p">(</span><span class="nf">c/clargon</span>
+              <span class="nv">args</span>
+              <span class="p">(</span><span class="nf">c/required</span> <span class="p">[</span><span class="s">&quot;--files&quot;</span> <span class="s">&quot;Files to process&quot;</span><span class="p">]</span>
+                          <span class="o">#</span><span class="p">(</span><span class="nv">vec</span> <span class="p">(</span><span class="o">.</span><span class="nv">split</span> <span class="nv">%</span> <span class="s">&quot;,&quot;</span><span class="p">))))]</span>
+    <span class="p">(</span><span class="nb">println </span><span class="s">&quot;Parsed opts: &quot;</span> <span class="nv">opts</span><span class="p">)))</span>
+</pre>
+</div>

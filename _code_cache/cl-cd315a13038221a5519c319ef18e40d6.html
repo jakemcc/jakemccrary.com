@@ -1,0 +1,16 @@
+<div class="highlight"><pre><span class="p">(</span><span class="nb">defun</span> <span class="nv">clojure-swank</span> <span class="p">()</span>
+  <span class="s">&quot;Launch swank-clojure from users homedir/.lein/bin&quot;</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">buffer</span> <span class="p">(</span><span class="nv">get-buffer-create</span> <span class="s">&quot;*clojure-swank*&quot;</span><span class="p">)))</span>
+    <span class="p">(</span><span class="k">flet</span> <span class="p">((</span><span class="nv">display-buffer</span> <span class="p">(</span><span class="nv">buffer-or-name</span> <span class="k">&amp;optional</span> <span class="nv">not-this-window</span> <span class="nv">frame</span><span class="p">)</span> <span class="no">nil</span><span class="p">))</span>
+          <span class="p">(</span><span class="nv">bury-buffer</span> <span class="nv">buffer</span><span class="p">)</span>
+          <span class="p">(</span><span class="nv">shell-command</span> <span class="s">&quot;~/.lein/bin/swank-clojure &amp;&quot;</span> <span class="nv">buffer</span><span class="p">))</span>
+    <span class="p">(</span><span class="nv">set-process-filter</span> <span class="p">(</span><span class="nv">get-buffer-process</span> <span class="nv">buffer</span><span class="p">)</span>
+                        <span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="nv">process</span> <span class="nv">output</span><span class="p">)</span>
+                           <span class="p">(</span><span class="nv">with-current-buffer</span> <span class="s">&quot;*clojure-swank*&quot;</span> <span class="p">(</span><span class="nv">insert</span> <span class="nv">output</span><span class="p">))</span>
+                           <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nv">string-match</span> <span class="s">&quot;Connection opened on local port +\\([0-9]+\\)&quot;</span> <span class="nv">output</span><span class="p">)</span>
+                             <span class="p">(</span><span class="nv">slime-connect</span> <span class="s">&quot;localhost&quot;</span> <span class="p">(</span><span class="nv">match-string</span> <span class="mi">1</span> <span class="nv">output</span><span class="p">))</span>
+                             <span class="p">(</span><span class="nv">set-process-filter</span> <span class="nv">process</span> <span class="no">nil</span><span class="p">))))</span>
+    <span class="p">(</span><span class="nv">message</span> <span class="s">&quot;Starting swank.. &quot;</span><span class="p">)))</span>
+</pre>
+</div>

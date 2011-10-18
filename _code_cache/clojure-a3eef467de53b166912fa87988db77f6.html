@@ -1,0 +1,16 @@
+<div class="highlight"><pre><span class="p">(</span><span class="nf">ns</span> <span class="nv">command-line-example</span>
+  <span class="p">(</span><span class="nf">:require</span> <span class="p">[</span><span class="nv">clojure</span><span class="o">.</span><span class="nv">contrib</span><span class="o">.</span><span class="nv">command-line</span> <span class="nv">:as</span> <span class="nv">ccl</span><span class="p">]))</span>
+
+<span class="p">(</span><span class="k">defn </span><span class="nv">-main</span> <span class="p">[</span><span class="nv">&amp;</span> <span class="nv">args</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">ccl/with-command-line</span> <span class="nv">args</span>
+    <span class="s">&quot;Command line demo&quot;</span>
+    <span class="p">[[</span><span class="nv">cow</span> <span class="s">&quot;This is the cows name&quot;</span> <span class="s">&quot;cow&quot;</span><span class="p">]</span>
+     <span class="p">[</span><span class="nv">chicken</span> <span class="s">&quot;This specifies the chickens name&quot;</span><span class="p">]</span>
+     <span class="p">[</span><span class="nv">milk?</span> <span class="nv">m?</span> <span class="s">&quot;Should you milk the cow?&quot;</span><span class="p">]</span>
+     <span class="nv">extras</span><span class="p">]</span>
+    <span class="p">(</span><span class="nb">println </span><span class="s">&quot;cow&#39;s name: &quot;</span> <span class="nv">cow</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">println </span><span class="s">&quot;chicken&#39;s name: &quot;</span> <span class="nv">chicken</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">println </span><span class="s">&quot;milk?: &quot;</span> <span class="nv">milk?</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">println </span><span class="s">&quot;extra args: &quot;</span> <span class="nv">extras</span><span class="p">)))</span>
+</pre>
+</div>

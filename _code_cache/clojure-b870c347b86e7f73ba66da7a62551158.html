@@ -1,0 +1,12 @@
+<div class="highlight"><pre><span class="p">(</span><span class="k">defn </span><span class="nv">create-table</span>
+  <span class="p">[</span><span class="nv">name</span> <span class="nv">&amp;</span> <span class="nv">specs</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">do-commands</span>                                              <span class="c1">; step 7</span>
+   <span class="p">(</span><span class="nf">format</span> <span class="s">&quot;CREATE TABLE %s (%s)&quot;</span>                           <span class="c1">; step 6</span>
+           <span class="p">(</span><span class="nf">as-str</span> <span class="nv">name</span><span class="p">)</span>
+           <span class="p">(</span><span class="nb">apply </span><span class="nv">str</span>                                       <span class="c1">; step 5</span>
+             <span class="p">(</span><span class="nb">map </span><span class="nv">as-str</span>                                    <span class="c1">; step 4</span>
+              <span class="p">(</span><span class="nb">apply </span><span class="nv">concat</span>                                 <span class="c1">; step 3</span>
+               <span class="p">(</span><span class="nf">interpose</span> <span class="p">[</span><span class="s">&quot;, &quot;</span><span class="p">]</span>                            <span class="c1">; step 2</span>
+                <span class="p">(</span><span class="nb">map </span><span class="p">(</span><span class="nb">partial </span><span class="nv">interpose</span> <span class="s">&quot; &quot;</span><span class="p">)</span> <span class="nv">specs</span><span class="p">))))))))</span>  <span class="c1">; step 1</span>
+</pre>
+</div>

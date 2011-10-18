@@ -1,0 +1,6 @@
+<div class="highlight"><pre><span class="p">(</span><span class="k">defn </span><span class="nv">to-milliseconds-from-epoch</span> <span class="p">[</span><span class="nv">x</span><span class="p">]</span>
+  <span class="p">(</span><span class="nf">to-ms</span>
+    <span class="p">(</span><span class="nb">apply </span><span class="nv">joda-date</span> <span class="p">(</span><span class="nb">map </span><span class="o">#</span><span class="p">(</span><span class="nv">Integer/parseInt</span> <span class="nv">%</span><span class="p">)</span>
+                           <span class="p">(</span><span class="o">.</span><span class="nv">split</span> <span class="nv">x</span> <span class="s">&quot;-&quot;</span><span class="p">)))))</span>
+</pre>
+</div>
