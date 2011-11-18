@@ -1,13 +1,13 @@
 Redirect 301 /blog/feed/ http://feeds.feedburner.com/JakeMccrarysMusings
-Redirect 301 /http://jakemccrary.com/blog/2011/07/25/utilities-i-like-autojump.html http://jakemccrary.com/blog/2011/07/25/utilities-i-like-autojump
-Redirect 301 /http://jakemccrary.com/blog/2011/06/28/a-simple-way-of-testing-disconnect-logic.html http://jakemccrary.com/blog/2011/06/28/a-simple-way-of-testing-disconnect-logic
-Redirect 301 /http://jakemccrary.com/blog/2011/04/12/command-line-arguments-in-clojure.html http://jakemccrary.com/blog/2011/04/12/command-line-arguments-in-clojure
-Redirect 301 /http://jakemccrary.com/blog/2011/01/19/creating-sql-table-with-composite-key-in-clojure.html http://jakemccrary.com/blog/2011/01/19/creating-sql-table-with-composite-key-in-clojure
-Redirect 301 /http://jakemccrary.com/blog/2011/01/18/generating-test-cases-in-clojure.html http://jakemccrary.com/blog/2011/01/18/generating-test-cases-in-clojure
-Redirect 301 /http://jakemccrary.com/blog/2010/12/07/quickily-starting-a-powerful-clojure-repl.html http://jakemccrary.com/blog/2010/12/07/quickily-starting-a-powerful-clojure-repl
-Redirect 301 /http://jakemccrary.com/blog/2010/12/06/trampolining-through-mutual-recursion.html http://jakemccrary.com/blog/2010/12/06/trampolining-through-mutual-recursion
-Redirect 301 /http://jakemccrary.com/blog/2010/06/06/inserting-values-into-a-nested-map-in-clojure.html http://jakemccrary.com/blog/2010/06/06/inserting-values-into-a-nested-map-in-clojure
-Redirect 301 /http://jakemccrary.com/blog/2010/02/21/plotting-time-series-data-with-incanter.html http://jakemccrary.com/blog/2010/02/21/plotting-time-series-data-with-incanter
+Redirect 301 /blog/2011/07/25/utilities-i-like-autojump.html http://jakemccrary.com/blog/2011/07/25/utilities-i-like-autojump
+Redirect 301 /blog/2011/06/28/a-simple-way-of-testing-disconnect-logic.html http://jakemccrary.com/blog/2011/06/28/a-simple-way-of-testing-disconnect-logic
+Redirect 301 /blog/2011/04/12/command-line-arguments-in-clojure.html http://jakemccrary.com/blog/2011/04/12/command-line-arguments-in-clojure
+Redirect 301 /blog/2011/01/19/creating-sql-table-with-composite-key-in-clojure.html http://jakemccrary.com/blog/2011/01/19/creating-sql-table-with-composite-key-in-clojure
+Redirect 301 /blog/2011/01/18/generating-test-cases-in-clojure.html http://jakemccrary.com/blog/2011/01/18/generating-test-cases-in-clojure
+Redirect 301 /blog/2010/12/07/quickily-starting-a-powerful-clojure-repl.html http://jakemccrary.com/blog/2010/12/07/quickily-starting-a-powerful-clojure-repl
+Redirect 301 /blog/2010/12/06/trampolining-through-mutual-recursion.html http://jakemccrary.com/blog/2010/12/06/trampolining-through-mutual-recursion
+Redirect 301 /blog/2010/06/06/inserting-values-into-a-nested-map-in-clojure.html http://jakemccrary.com/blog/2010/06/06/inserting-values-into-a-nested-map-in-clojure
+Redirect 301 /blog/2010/02/21/plotting-time-series-data-with-incanter.html http://jakemccrary.com/blog/2010/02/21/plotting-time-series-data-with-incanter
 Options All -Indexes
 ErrorDocument 404 /404.html
 ErrorDocument 403 /403.html
