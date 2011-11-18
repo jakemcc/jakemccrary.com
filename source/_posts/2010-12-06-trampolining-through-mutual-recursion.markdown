@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title: Trampolining through mutual recursion with Clojure
 categories: [clojure, code]
 ---

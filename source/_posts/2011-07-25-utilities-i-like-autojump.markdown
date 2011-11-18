@@ -1,7 +1,8 @@
 ---
+comments: true
 layout: post
 title: "Utilities I like: autojump"
-categories: [utilities, command-line, linux]
+categories: [utilities, command-line, linux, tools]
 ---
 
 [autojump](https://github.com/joelthelion/autojump) is a nifty command line tool that enables quicker jumping between directories. I've been using it for a few months now and miss it when I work other machines.

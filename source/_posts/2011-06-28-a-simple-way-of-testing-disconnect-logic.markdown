@@ -1,4 +1,5 @@
 ---
+comments: true
 layout: post
 title: A simple way of testing disconnect logic
 categories: [linux, testing, command-line, utilities]

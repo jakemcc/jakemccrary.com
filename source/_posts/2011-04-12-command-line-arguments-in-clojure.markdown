@@ -1,4 +1,5 @@
 ---
+comments: true
 layout: post
 title: Command line arguments in Clojure
 date: 2011-04-12 20:00

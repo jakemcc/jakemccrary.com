@@ -1,4 +1,5 @@
 ---
+comments: true
 layout: post
 title: Generating test cases in Clojure
 categories: [clojure, code, testing]

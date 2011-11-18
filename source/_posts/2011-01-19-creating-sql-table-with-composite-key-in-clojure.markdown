@@ -1,4 +1,5 @@
 ---
+comments: true
 layout: post
 title: Creating a SQL table with a composite primary key in Clojure
 categories: [clojure, code, sql]

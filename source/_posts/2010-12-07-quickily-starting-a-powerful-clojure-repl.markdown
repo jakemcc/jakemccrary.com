@@ -1,4 +1,5 @@
 ---
+comments: true
 layout: post
 title: Quickly starting a powerful Clojure REPL
 categories: [clojure, emacs]
