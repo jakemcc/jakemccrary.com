@@ -96,8 +96,7 @@ article + article {
     font-size: 2.2em;
     a { color: inherit; &:hover { color: $link-color-hover; } }
   }
-  a[rel=full-article],
-  a[rel=comments] {
+  a[rel=full-article] {
     background: darken($main-bg, 5);
     display: inline-block;
     padding: .4em .8em;
