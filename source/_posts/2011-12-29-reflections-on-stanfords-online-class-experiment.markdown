@@ -10,7 +10,7 @@ This past fall I took part in Stanford's online learning experiment. For those o
 
 I enrolled in both the AI and ML courses. Enrolling in two was more work, but I'm glad I did it. The classes followed slightly different formats and taking both provided a perspective in what style worked better for me.
 
-## AI Class
+### AI Class
 
 The AI class had video lectures, in video quizzes, homework, and two exams. The videos for this class were short. Each video lasted approximately one to four minutes. This was a nice length as you could easily go back and pick out specific topics to re-watch without jumping around a longer video. The videos showed the professor hand writing notes on pieces of paper. This style made it seem like you were receiving one-on-one tutoring.
 
@@ -20,7 +20,7 @@ The homework usually consisted of a fewer than 10 questions. You had until the d
 
 For both of the exams you had about three days to finish the 15 or so questions that were asked.
 
-## ML Class
+### ML Class
 
 The ML class had video lectures, in video quizzes, homework, and programming assignments. In contrast to the AI class, the ML video lectures were usually five to thirteen minutes long. This made it harder to re-watch specific parts as you had to jump around the video to find different topics. On the plus side, the ML videos could be easily downloaded and watched on any device (you could not do this with the AI lectures). The ML videos also had controls for speeding up playback. I watched the vast majority of the videos at 1.5 times the normal speed.
 
@@ -30,7 +30,7 @@ The homework in the ML class was different from the AI class in a couple of ways
 
 The ML class had programming assignments. In these exercises you filled in some [Octave](http://www.gnu.org/software/octave/) code to implement an aspect of machine learning. These exercises where great. Most of the time they made you think about the techniques you were learning that week. It was also nice to get some hands-on experience solving sample machine learning problems. It was rewarding watching my simple spam filter flag email as spam. The programming exercises were best when they weren't simply a task in translating math to code.
 
-## Thoughts on the differences
+### Thoughts on the differences
 
 I enjoyed the ML class homework style, instant feedback upon submission, better than the AI because it provided a quicker feedback cycle. Instead of submitting homework answers and waiting to review mistakes you were able to review instantly. I found this, and being able to repeat homework, to be more effective for learning than the single shot style of the AI class.
 
@@ -38,13 +38,13 @@ I preferred the shortness of the AI lectures. It allowed for easier repetition o
 
 I enjoyed both the programming exercises of ML class and the exams in the AI class. Both added an interesting way of learning to their respective class.
 
-## Recommendations
+### Recommendations
 
 If I were designing a course for myself, I found the short videos with many quiz questions style of lecturing to be the more effective style. I would offer homework in a fashion similar to the ML class. Submit as many times as you want, but with a minimum time between submissions. I would up that time to be at least one hour to minimize memorization of answers. My ideal class would also have both programming exercises and exams.
 
 Both classes had some student run question and answer boards (similar to [stackoverflow](http://stackoverflow.com)). This was alright but I would look into adding a type of forum that is more suited towards discussions. A Q&A style board is not a great environment for having a discussion that is ordered by time. I think normal forums style with replies ordered by time would be effective and worth an experiment.
 
-## Conclusion
+### Conclusion
 
 I greatly enjoyed taking these two Stanford classes. I think online lectures and homework were an extremely effective way of delivering information and reinforcing learning. I found taking these two classes to be a manageable amount of work. I did pretty much stop reading books while taking these classes and instead focused on watching lectures and doing homework. Had I only taken one class or spent breaks at work watching videos, I think I would have been able to maintain my other activities while taking these classes.
 
