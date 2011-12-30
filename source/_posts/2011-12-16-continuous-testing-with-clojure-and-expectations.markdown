@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Continuous testing with Clojure and expectations"
-date: 2011-12-15 22:30
+date: 2011-12-16 09:30
 comments: true
 categories: [clojure, code, testing]
 ---
@@ -43,3 +43,4 @@ Next time you end up saving you'll see your tests run again and the following ex
 
 This style of testing is called [continuous testing](http://blog.objectmentor.com/articles/2007/09/20/continuous-testing-explained). If you haven't tried it, I would highly recommend giving it a shot. Even just using it for the last few days changed how I think testing should be done.
 
+Source can be found on [Github](https://github.com/jakemcc/lein-autoexpect).
