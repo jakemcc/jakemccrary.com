@@ -3,9 +3,13 @@ comments: true
 layout: post
 title: Command line arguments in Clojure
 date: 2011-04-12 20:00
-updated: 2011-08-06
+updated: 2012-01-02
 categories: [clojure, code]
 ---
+
+_This post is now out of date. The library recommended by this post is now a contrib library. Check out [tools.cli](https://github.com/clojure/tools.cli) for great documentation about handling command line arguments in Clojure._
+
+***
 
 Write enough Clojure and eventually you will need to handle command line arguments. There are numerous ways of doing this. Keep reading for a brief introduction to three.
 
