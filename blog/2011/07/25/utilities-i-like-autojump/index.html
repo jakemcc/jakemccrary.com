@@ -1,0 +1,284 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Utilities I like: autojump - Jake McCrary</title>
+  <meta name="author" content="Jake McCrary">
+
+  
+  <meta name="description" content="autojump is a nifty command line tool that enables quicker jumping between directories. I&#8217;ve been using it for a few months now and miss it &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://jakemcc.github.com/blog/2011/07/25/utilities-i-like-autojump">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/JakeMccrarysMusings" rel="alternate" title="Jake McCrary" type="application/atom+xml">
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-19834208-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Jake McCrary</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/JakeMccrarysMusings" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:jakemcc.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about.html">About</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Utilities I Like: Autojump</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-07-25T00:00:00-05:00" pubdate data-updated="true">Jul 25<span>th</span>, 2011</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><a href="https://github.com/joelthelion/autojump">autojump</a> is a nifty command line tool that enables quicker jumping between directories. I&#8217;ve been using it for a few months now and miss it when I work other machines.</p>
+
+<p>To jump to a directory you type <code>j SUBSTRING_OF_DIR</code>. Example:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">pwd</span>
+</span><span class='line'>/Users/jmccrary
+</span><span class='line'><span class="nv">$ </span>j jake
+</span><span class='line'>/Users/jmccrary/src/github/jakemcc/jakemccrary.com
+</span><span class='line'><span class="nv">$ </span><span class="nb">pwd</span>
+</span><span class='line'>/Users/jmccrary/src/github/jakemcc/jakemccrary.com
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Above I jumped from my home directory to the root of this website&#8217;s code. Being able to jump between directories by just remembering a name (or part of a name) is great. This frees me from having to remember full paths or set up aliases.</p>
+
+<p>autojump works by keeping a database of &#8220;time&#8221; spent in directories and jumps to the most frequently visited one that match <code>SUBSTRING_OF_DIR</code>. If you are curious as to what that database looks like the tool <code>jumpstat</code> will give you a view.</p>
+
+<p>I used to set up aliases for jumping between projects but now that I&#8217;ve trained myself to use autojump I don&#8217;t think I&#8217;ll ever go back. Not having to do any extra work besides simply entering the root directory of new projects to setup efficient directory movement is great. I think that if you give it a shot for a while you&#8217;ll find the same benefits.</p>
+
+<p>If you are on a Mac and use <a href="https://github.com/mxcl/homebrew">homebrew</a> you can install by doing <code>brew install autojump</code>. For other platforms check out the <a href="https://github.com/joelthelion/autojump">github</a> page.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jake McCrary</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-07-25T00:00:00-05:00" pubdate data-updated="true">Jul 25<span>th</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/command-line/'>command-line</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/tools/'>tools</a>, <a class='category' href='/blog/categories/utilities/'>utilities</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jakemcc.github.com/blog/2011/07/25/utilities-i-like-autojump/" data-via="" data-counturl="http://jakemcc.github.com/blog/2011/07/25/utilities-i-like-autojump/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/06/28/a-simple-way-of-testing-disconnect-logic/" title="Previous Post: A simple way of testing disconnect logic">&laquo; A simple way of testing disconnect logic</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/12/16/continuous-testing-with-clojure-and-expectations/" title="next Post: Continuous testing with Clojure and expectations">Continuous testing with Clojure and expectations &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/03/28/working-on-multiple-clojure-projects-at-once/">Working on multiple Clojure projects at once</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/12/29/reflections-on-stanfords-online-class-experiment/">Reflections on Stanford's online class experiment</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/12/16/continuous-testing-with-clojure-and-expectations/">Continuous testing with Clojure and expectations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/07/25/utilities-i-like-autojump/">Utilities I like: autojump</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/28/a-simple-way-of-testing-disconnect-logic/">A simple way of testing disconnect logic</a>
+      </li>
+    
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Content licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/">Creative Commons Attribution-NonCommercial 3.0 Unported License</a>.
+  <!-- Copyright &copy; 2012 - Jake McCrary - -->
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'jakemccrary';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://jakemcc.github.com/blog/2011/07/25/utilities-i-like-autojump/';
+        var disqus_url = 'http://jakemcc.github.com/blog/2011/07/25/utilities-i-like-autojump/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

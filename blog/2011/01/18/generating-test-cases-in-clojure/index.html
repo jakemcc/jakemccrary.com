@@ -1,0 +1,347 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Generating test cases in Clojure - Jake McCrary</title>
+  <meta name="author" content="Jake McCrary">
+
+  
+  <meta name="description" content="Recently I was writing some data mining Clojure code which needed to parse a log file and do some transforms of the data. Some of the transforms were &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://jakemcc.github.com/blog/2011/01/18/generating-test-cases-in-clojure">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/JakeMccrarysMusings" rel="alternate" title="Jake McCrary" type="application/atom+xml">
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-19834208-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Jake McCrary</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/JakeMccrarysMusings" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:jakemcc.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about.html">About</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Generating Test Cases in Clojure</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-18T00:00:00-06:00" pubdate data-updated="true">Jan 18<span>th</span>, 2011</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Recently I was writing some data mining Clojure code which needed to parse a log file and do some transforms of the data. Some of the transforms were dependent on data found across multiple lines. There was no ordering or proximity guarantees to these lines.</p>
+
+<p>This required the code to handle a variety of situations. After writing a couple simple tests and getting those passing I wanted to more extensively test my solution. I was lazy though and did not want to hand code all of the potential orderings.  Enter <code>permutations</code>.</p>
+
+<p><code>permutations</code> is a function out of <a href="http://clojure.github.com/clojure-contrib/combinatorics-api.html">clojure.contrib.combinatorics</a>. As the name suggests, you give it a collection and it returns a lazy sequence containing all the different permutations of the elements in that collection. An example is below.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nv">user&gt;</span><span class="p">(</span><span class="nf">ns</span> <span class="nv">generate</span><span class="p">)</span>
+</span><span class='line'><span class="nv">generate&gt;</span><span class="p">(</span><span class="nf">use</span> <span class="o">&#39;</span><span class="p">[</span><span class="nv">clojure</span><span class="o">.</span><span class="nv">contrib</span><span class="o">.</span><span class="nv">combinatorics</span> <span class="nv">:only</span> <span class="p">[</span><span class="nv">permutations</span><span class="p">]])</span>
+</span><span class='line'><span class="nv">nil</span>
+</span><span class='line'><span class="nv">generate&gt;</span> <span class="p">(</span><span class="nf">permutations</span> <span class="p">[</span><span class="nv">:a</span> <span class="nv">:b</span> <span class="nv">:c</span><span class="p">])</span>
+</span><span class='line'><span class="p">((</span><span class="nf">:a</span> <span class="nv">:b</span> <span class="nv">:c</span><span class="p">)</span> <span class="p">(</span><span class="nf">:a</span> <span class="nv">:c</span> <span class="nv">:b</span><span class="p">)</span> <span class="p">(</span><span class="nf">:b</span> <span class="nv">:a</span> <span class="nv">:c</span><span class="p">)</span> <span class="p">(</span><span class="nf">:b</span> <span class="nv">:c</span> <span class="nv">:a</span><span class="p">)</span> <span class="p">(</span><span class="nf">:c</span> <span class="nv">:a</span> <span class="nv">:b</span><span class="p">)</span> <span class="p">(</span><span class="nf">:c</span> <span class="nv">:b</span> <span class="nv">:a</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can already see where this is going. I was able to use <code>permutations</code> to generate all the potential different orderings of the input. This saved me the trouble of having to do that by hand.</p>
+
+<p>One difficulty of generating test inputs pragmatically is telling what sort of inputs caused it to fail. To get around this I used the rarely used (at least in code I&#8217;m working on) second argument of <a href="http://clojure.github.com/clojure/clojure.test-api.html#clojure.test/is">clojure.test&#8217;s</a> <code>is</code>. This second argument is a message that prints on a failure.</p>
+
+<p>Below is a contrived example of using <code>permutations</code> to test an obviously wrong <code>silly-add</code> function. <code>silly-add</code> is defined below.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nv">generate&gt;</span> <span class="p">(</span><span class="k">defn </span><span class="nv">silly-add</span>
+</span><span class='line'>              <span class="p">[</span><span class="nv">x</span> <span class="nv">&amp;</span> <span class="nv">xs</span><span class="p">]</span>
+</span><span class='line'>              <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">zero? </span><span class="nv">x</span><span class="p">)</span>
+</span><span class='line'>                  <span class="p">(</span><span class="nb">apply </span><span class="nv">+</span> <span class="mi">40</span> <span class="nv">xs</span><span class="p">)</span>
+</span><span class='line'>                  <span class="p">(</span><span class="nb">apply </span><span class="nv">+</span> <span class="nv">x</span> <span class="nv">xs</span><span class="p">)))</span>
+</span><span class='line'><span class="o">#</span><span class="ss">&#39;generate/silly-add</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Below is a test that uses <code>permutations</code> to exercise <code>silly-add</code> with all the potential orderings three input numbers. Note that it takes advantage of the second argument to <code>is</code>. Without this we would not know what input caused the failure.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nv">generate&gt;</span> <span class="p">(</span><span class="nf">use</span> <span class="ss">&#39;clojure</span><span class="o">.</span><span class="nv">test</span><span class="p">)</span>
+</span><span class='line'><span class="nv">nil</span>
+</span><span class='line'><span class="nv">generate&gt;</span> <span class="p">(</span><span class="nf">deftest</span> <span class="nv">generate-some-tests</span>
+</span><span class='line'>            <span class="p">(</span><span class="nb">doseq </span><span class="p">[</span><span class="nv">input</span> <span class="p">(</span><span class="nf">permutations</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">9</span><span class="p">])]</span>
+</span><span class='line'>                   <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="mi">10</span> <span class="p">(</span><span class="nb">apply </span><span class="nv">silly-add</span> <span class="nv">input</span><span class="p">))</span>
+</span><span class='line'>                       <span class="p">(</span><span class="nb">str </span><span class="s">&quot;Failed on input: &quot;</span> <span class="p">(</span><span class="nb">seq </span><span class="nv">input</span><span class="p">)))))</span>
+</span><span class='line'><span class="o">#</span><span class="ss">&#39;generate/generate-some-tests</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Running the test we see that there is clearly an error.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nv">generate&gt;</span> <span class="p">(</span><span class="nf">run-tests</span><span class="p">)</span>
+</span><span class='line'><span class="nv">Testing</span> <span class="nv">generate</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">FAIL</span> <span class="nv">in</span> <span class="p">(</span><span class="nf">generate-some-tests</span><span class="p">)</span> <span class="p">(</span><span class="nf">NO_SOURCE_FILE:1</span><span class="p">)</span>
+</span><span class='line'><span class="nv">Failed</span> <span class="nv">on</span> <span class="nv">input:</span> <span class="p">(</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">9</span><span class="p">)</span>
+</span><span class='line'><span class="nv">expected:</span> <span class="p">(</span><span class="nb">= </span><span class="mi">10</span> <span class="p">(</span><span class="nb">apply </span><span class="nv">silly-add</span> <span class="nv">input</span><span class="p">))</span>
+</span><span class='line'>  <span class="nv">actual:</span> <span class="p">(</span><span class="nb">not </span><span class="p">(</span><span class="nb">= </span><span class="mi">10</span> <span class="mi">50</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">FAIL</span> <span class="nv">in</span> <span class="p">(</span><span class="nf">generate-some-tests</span><span class="p">)</span> <span class="p">(</span><span class="nf">NO_SOURCE_FILE:1</span><span class="p">)</span>
+</span><span class='line'><span class="nv">Failed</span> <span class="nv">on</span> <span class="nv">input:</span> <span class="p">(</span><span class="mi">0</span> <span class="mi">9</span> <span class="mi">1</span><span class="p">)</span>
+</span><span class='line'><span class="nv">expected:</span> <span class="p">(</span><span class="nb">= </span><span class="mi">10</span> <span class="p">(</span><span class="nb">apply </span><span class="nv">silly-add</span> <span class="nv">input</span><span class="p">))</span>
+</span><span class='line'>  <span class="nv">actual:</span> <span class="p">(</span><span class="nb">not </span><span class="p">(</span><span class="nb">= </span><span class="mi">10</span> <span class="mi">50</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>permutations</code> saved me a bit of time and let me test some situations that I otherwise would not have tested. This actually exposed a subtle bug in my code. Hopefully it can do the same for you.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jake McCrary</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-01-18T00:00:00-06:00" pubdate data-updated="true">Jan 18<span>th</span>, 2011</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/clojure/'>clojure</a>, <a class='category' href='/blog/categories/code/'>code</a>, <a class='category' href='/blog/categories/testing/'>testing</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jakemcc.github.com/blog/2011/01/18/generating-test-cases-in-clojure/" data-via="" data-counturl="http://jakemcc.github.com/blog/2011/01/18/generating-test-cases-in-clojure/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2010/12/07/quickily-starting-a-powerful-clojure-repl/" title="Previous Post: Quickly starting a powerful Clojure REPL">&laquo; Quickly starting a powerful Clojure REPL</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/01/19/creating-sql-table-with-composite-key-in-clojure/" title="next Post: Creating a SQL table with a composite primary key in Clojure">Creating a SQL table with a composite primary key in Clojure &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/03/28/working-on-multiple-clojure-projects-at-once/">Working on multiple Clojure projects at once</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/12/29/reflections-on-stanfords-online-class-experiment/">Reflections on Stanford's online class experiment</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/12/16/continuous-testing-with-clojure-and-expectations/">Continuous testing with Clojure and expectations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/07/25/utilities-i-like-autojump/">Utilities I like: autojump</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/28/a-simple-way-of-testing-disconnect-logic/">A simple way of testing disconnect logic</a>
+      </li>
+    
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Content licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/">Creative Commons Attribution-NonCommercial 3.0 Unported License</a>.
+  <!-- Copyright &copy; 2012 - Jake McCrary - -->
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'jakemccrary';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://jakemcc.github.com/blog/2011/01/18/generating-test-cases-in-clojure/';
+        var disqus_url = 'http://jakemcc.github.com/blog/2011/01/18/generating-test-cases-in-clojure/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

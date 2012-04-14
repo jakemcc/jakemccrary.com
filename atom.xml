@@ -1,111 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <title>Jake McCrary</title>
-  <meta name="author" content="Jake McCrary">
-
-  
-  <meta name="description" content="Very few coders would debate the wisdom of breaking a project into smaller libraries. One complaint about breaking a project into tinier libraries is &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  <link rel="canonical" href="http://jakemcc.github.com">
-  <link href="/favicon.ico" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <link href="http://feeds.feedburner.com/JakeMccrarysMusings" rel="alternate" title="Jake McCrary" type="application/atom+xml">
-  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
-<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
-
-  
-  <script type="text/javascript">
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', 'UA-19834208-1']);
-    _gaq.push(['_trackPageview']);
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  </script>
-
-
-</head>
-
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">Jake McCrary</a></h1>
-  
-</hgroup>
-
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="http://feeds.feedburner.com/JakeMccrarysMusings" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:jakemcc.github.com" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-<ul role=main-navigation>
-  <li><a href="/">Blog</a></li>
-  <li><a href="/about.html">About</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-</ul>
-
-</nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
-  
-  
-  
-    <article>
-      
-  <header>
+  <title><![CDATA[Jake McCrary]]></title>
+  <link href="http://jakemcc.github.com/atom.xml" rel="self"/>
+  <link href="http://jakemcc.github.com/"/>
+  <updated>2012-04-13T22:16:09-05:00</updated>
+  <id>http://jakemcc.github.com/</id>
+  <author>
+    <name><![CDATA[Jake McCrary]]></name>
     
-      <h1 class="entry-title"><a href="/blog/2012/03/28/working-on-multiple-clojure-projects-at-once/">Working on Multiple Clojure Projects at Once</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
 
   
-
-
-<time datetime="2012-03-28T21:18:00-05:00" pubdate data-updated="true">Mar 28<span>th</span>, 2012</time>
-        
-         | <a href="/blog/2012/03/28/working-on-multiple-clojure-projects-at-once/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Very few coders would debate the wisdom of breaking a project into smaller libraries. One complaint about breaking a project into tinier libraries is the added hassle of making changes simultaneously to multiple projects at once. Constantly releasing a library so another project can pick up changes is annoying and slows you down. Luckily for us in a <a href="http://clojure.org">Clojure</a> project using <a href="https://github.com/technomancy/leiningen">Leiningen</a> it is simple to make changes to a library and then use those changes without needing to perform a release.</p>
+  <entry>
+    <title type="html"><![CDATA[Working on multiple Clojure projects at once]]></title>
+    <link href="http://jakemcc.github.com/blog/2012/03/28/working-on-multiple-clojure-projects-at-once/"/>
+    <updated>2012-03-28T21:18:00-05:00</updated>
+    <id>http://jakemcc.github.com/blog/2012/03/28/working-on-multiple-clojure-projects-at-once</id>
+    <content type="html"><![CDATA[<p>Very few coders would debate the wisdom of breaking a project into smaller libraries. One complaint about breaking a project into tinier libraries is the added hassle of making changes simultaneously to multiple projects at once. Constantly releasing a library so another project can pick up changes is annoying and slows you down. Luckily for us in a <a href="http://clojure.org">Clojure</a> project using <a href="https://github.com/technomancy/leiningen">Leiningen</a> it is simple to make changes to a library and then use those changes without needing to perform a release.</p>
 
 <p>This is accomplished by using the <code>checkouts</code> directory feature of Leiningen. This is a feature that, despite being listed in the Leiningen FAQ, I only recently discovered. To make your Clojure project (from now on calling this the main project) depend on the source of another project simply make a <code>checkouts</code> directory in your main project&#8217;s root directory and then in <code>checkouts</code> link to the root of the library&#8217;s project. This causes the library to be added to the main project&#8217;s classpath. Now you can make changes to the main project and its dependencies without going through the hassle of releasing new versions of the library for every change.</p>
 
@@ -148,44 +61,15 @@
 
 
 <p>The Leiningen checkouts directory option is pretty useful. This feature isn&#8217;t there to discourage you from releasing versions of a library, but instead is there to facilitate quicker development cycles. I&#8217;d encourage you to experiment with it and figure out of it makes you more effective.</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/12/29/reflections-on-stanfords-online-class-experiment/">Reflections on Stanford&#8217;s Online Class Experiment</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-29T18:42:00-06:00" pubdate data-updated="true">Dec 29<span>th</span>, 2011</time>
-        
-         | <a href="/blog/2011/12/29/reflections-on-stanfords-online-class-experiment/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This past fall I took part in Stanford&#8217;s online learning experiment. For those of you who are not aware, Stanford gave anyone with Internet access the opportunity to enroll in three different online courses. This was free of charge, not even books were required. Each was an introductory level class, with the three subjects being <a href="http://ai-class.com">artificial intelligence</a>, <a href="http://ml-class.org">machine learning</a>, and <a href="http://db-class.org">databases</a> (links may die as offered classes change). As far as I know, this was the first time that lecture videos have been paired with scheduled homework, quizzes, and programming assignments at this scale. I only vaguely remember numbers for the AI (artificial intelligence) and ML (machine learning) classes but I believe before classes began there were greater than 100,000 students enrolled apiece. The number of active students was approximately a third of the enrolled number. Even still, this is teaching at an unheard of scale.</p>
+  <entry>
+    <title type="html"><![CDATA[Reflections on Stanford's online class experiment]]></title>
+    <link href="http://jakemcc.github.com/blog/2011/12/29/reflections-on-stanfords-online-class-experiment/"/>
+    <updated>2011-12-29T18:42:00-06:00</updated>
+    <id>http://jakemcc.github.com/blog/2011/12/29/reflections-on-stanfords-online-class-experiment</id>
+    <content type="html"><![CDATA[<p>This past fall I took part in Stanford&#8217;s online learning experiment. For those of you who are not aware, Stanford gave anyone with Internet access the opportunity to enroll in three different online courses. This was free of charge, not even books were required. Each was an introductory level class, with the three subjects being <a href="http://ai-class.com">artificial intelligence</a>, <a href="http://ml-class.org">machine learning</a>, and <a href="http://db-class.org">databases</a> (links may die as offered classes change). As far as I know, this was the first time that lecture videos have been paired with scheduled homework, quizzes, and programming assignments at this scale. I only vaguely remember numbers for the AI (artificial intelligence) and ML (machine learning) classes but I believe before classes began there were greater than 100,000 students enrolled apiece. The number of active students was approximately a third of the enrolled number. Even still, this is teaching at an unheard of scale.</p>
 
 <p>I enrolled in both the AI and ML courses. Enrolling in two was more work, but I&#8217;m glad I did it. The classes followed slightly different formats and taking both provided a perspective in what style worked better for me.</p>
 
@@ -228,44 +112,15 @@
 <p>I greatly enjoyed taking these two Stanford classes. I think online lectures and homework were an extremely effective way of delivering information and reinforcing learning. I found taking these two classes to be a manageable amount of work. I did pretty much stop reading books while taking these classes and instead focused on watching lectures and doing homework. Had I only taken one class or spent breaks at work watching videos, I think I would have been able to maintain my other activities while taking these classes.</p>
 
 <p>There are quite a few classes being offered at Stanford that start in the near future. Scroll to the bottom of <a href="http://www.ml-class.org/course/auth/index">this</a> page to take a look at what Stanford is offering starting in January. I would highly recommend taking a class. MIT also just announced <a href="http://web.mit.edu/newsoffice/2011/mitx-education-initiative-1219.html">MITx</a>. I haven&#8217;t heard a ton of information about it, but it sounds similar and I look forward to its launch.</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/12/16/continuous-testing-with-clojure-and-expectations/">Continuous Testing With Clojure and Expectations</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-12-16T09:30:00-06:00" pubdate data-updated="true">Dec 16<span>th</span>, 2011</time>
-        
-         | <a href="/blog/2011/12/16/continuous-testing-with-clojure-and-expectations/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&#8217;ve recently started using <a href="http://jayfields.com/">Jay Fields&#8217;</a> Clojure testing library, <a href="https://github.com/jaycfields/expectations"><code>expectations</code></a>. I&#8217;m not going to explain <code>expectations</code>, Jay already did a great job on his <a href="http://blog.jayfields.com/2011/11/clojure-expectations-introduction.html">blog</a>, but I will quote its <a href="https://github.com/jaycfields/expectations">Github</a> page.</p>
+  <entry>
+    <title type="html"><![CDATA[Continuous testing with Clojure and expectations]]></title>
+    <link href="http://jakemcc.github.com/blog/2011/12/16/continuous-testing-with-clojure-and-expectations/"/>
+    <updated>2011-12-16T09:30:00-06:00</updated>
+    <id>http://jakemcc.github.com/blog/2011/12/16/continuous-testing-with-clojure-and-expectations</id>
+    <content type="html"><![CDATA[<p>I&#8217;ve recently started using <a href="http://jayfields.com/">Jay Fields&#8217;</a> Clojure testing library, <a href="https://github.com/jaycfields/expectations"><code>expectations</code></a>. I&#8217;m not going to explain <code>expectations</code>, Jay already did a great job on his <a href="http://blog.jayfields.com/2011/11/clojure-expectations-introduction.html">blog</a>, but I will quote its <a href="https://github.com/jaycfields/expectations">Github</a> page.</p>
 
 <blockquote><p>expectations is a minimalist&#8217;s testing framework</p></blockquote>
 
@@ -312,44 +167,15 @@
 <p>This style of testing is called <a href="http://blog.objectmentor.com/articles/2007/09/20/continuous-testing-explained">continuous testing</a>. If you haven&#8217;t tried it, I would highly recommend giving it a shot. Even just using it for the last few days changed how I think testing should be done.</p>
 
 <p>Source can be found on <a href="https://github.com/jakemcc/lein-autoexpect">Github</a>.</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/07/25/utilities-i-like-autojump/">Utilities I Like: Autojump</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-07-25T00:00:00-05:00" pubdate data-updated="true">Jul 25<span>th</span>, 2011</time>
-        
-         | <a href="/blog/2011/07/25/utilities-i-like-autojump/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="https://github.com/joelthelion/autojump">autojump</a> is a nifty command line tool that enables quicker jumping between directories. I&#8217;ve been using it for a few months now and miss it when I work other machines.</p>
+  <entry>
+    <title type="html"><![CDATA[Utilities I like: autojump]]></title>
+    <link href="http://jakemcc.github.com/blog/2011/07/25/utilities-i-like-autojump/"/>
+    <updated>2011-07-25T00:00:00-05:00</updated>
+    <id>http://jakemcc.github.com/blog/2011/07/25/utilities-i-like-autojump</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/joelthelion/autojump">autojump</a> is a nifty command line tool that enables quicker jumping between directories. I&#8217;ve been using it for a few months now and miss it when I work other machines.</p>
 
 <p>To jump to a directory you type <code>j SUBSTRING_OF_DIR</code>. Example:</p>
 
@@ -375,44 +201,15 @@
 <p>I used to set up aliases for jumping between projects but now that I&#8217;ve trained myself to use autojump I don&#8217;t think I&#8217;ll ever go back. Not having to do any extra work besides simply entering the root directory of new projects to setup efficient directory movement is great. I think that if you give it a shot for a while you&#8217;ll find the same benefits.</p>
 
 <p>If you are on a Mac and use <a href="https://github.com/mxcl/homebrew">homebrew</a> you can install by doing <code>brew install autojump</code>. For other platforms check out the <a href="https://github.com/joelthelion/autojump">github</a> page.</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/06/28/a-simple-way-of-testing-disconnect-logic/">A Simple Way of Testing Disconnect Logic</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-06-28T00:00:00-05:00" pubdate data-updated="true">Jun 28<span>th</span>, 2011</time>
-        
-         | <a href="/blog/2011/06/28/a-simple-way-of-testing-disconnect-logic/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&#8217;m guessing that software you write connects to some other server. I&#8217;m also guessing that how it handles disconnects is tested (if ever tested) by either killing the process it connects to or by pulling out your network cable. I recently stumbled across a nifty Linux command line tool that makes causing disconnects significantly easier.</p>
+  <entry>
+    <title type="html"><![CDATA[A simple way of testing disconnect logic]]></title>
+    <link href="http://jakemcc.github.com/blog/2011/06/28/a-simple-way-of-testing-disconnect-logic/"/>
+    <updated>2011-06-28T00:00:00-05:00</updated>
+    <id>http://jakemcc.github.com/blog/2011/06/28/a-simple-way-of-testing-disconnect-logic</id>
+    <content type="html"><![CDATA[<p>I&#8217;m guessing that software you write connects to some other server. I&#8217;m also guessing that how it handles disconnects is tested (if ever tested) by either killing the process it connects to or by pulling out your network cable. I recently stumbled across a nifty Linux command line tool that makes causing disconnects significantly easier.</p>
 
 <p>This tool is <a href="http://linux.die.net/man/8/tcpkill">tcpkill</a>. To use <code>tcpkill</code> you specify an interface and a <a href="http://linux.die.net/man/8/tcpdump">tcpdump</a> style filter and it kills traffic on that interface that matches the filter.</p>
 
@@ -421,46 +218,15 @@
 <p><code>tcpkill</code> can be used for more than forcing disconnects. It can also be used as a simple website filter. If <a href="http://stackoverflow.com">Stack Overflow</a> wastes too much of your time then you could simply leave <code>tcpkill -i eth0 host stackoverflow.com</code> running and enjoy your increased productivity.</p>
 
 <p><code>tcpkill</code> is a pretty useful tool. If you want to install it in Ubuntu it is found in the dsniff package (<code>apt-get install dsniff</code>).</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/04/12/command-line-arguments-in-clojure/">Command Line Arguments in Clojure</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-
-  
-<time datetime="2011-04-12T20:00:00-05:00" pubdate data-updated="true">Apr 12<span>th</span>, 2011</time>
-        
-         | <a href="/blog/2011/04/12/command-line-arguments-in-clojure/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><em>This post is now out of date. The library recommended by this post is now a contrib library. Check out <a href="https://github.com/clojure/tools.cli">tools.cli</a> for great documentation about handling command line arguments in Clojure.</em></p>
+  <entry>
+    <title type="html"><![CDATA[Command line arguments in Clojure]]></title>
+    <link href="http://jakemcc.github.com/blog/2011/04/12/command-line-arguments-in-clojure/"/>
+    <updated>2011-04-12T20:00:00-05:00</updated>
+    <id>http://jakemcc.github.com/blog/2011/04/12/command-line-arguments-in-clojure</id>
+    <content type="html"><![CDATA[<p><em>This post is now out of date. The library recommended by this post is now a contrib library. Check out <a href="https://github.com/clojure/tools.cli">tools.cli</a> for great documentation about handling command line arguments in Clojure.</em></p>
 
 <hr />
 
@@ -640,44 +406,15 @@
 <h3>End</h3>
 
 <p>There are many more ways to handle command line parsing in Clojure. You are not limited to any of the three above. I&#8217;ve personally found clargon to hit all of my needs and plan on continuing to use it.</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/01/19/creating-sql-table-with-composite-key-in-clojure/">Creating a SQL Table With a Composite Primary Key in Clojure</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-01-19T00:00:00-06:00" pubdate data-updated="true">Jan 19<span>th</span>, 2011</time>
-        
-         | <a href="/blog/2011/01/19/creating-sql-table-with-composite-key-in-clojure/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I was interacting with a SQL database using Clojure and needed to create a table so I turned to <code>create-table</code> from <a href="http://clojure.github.com/clojure-contrib/sql-api.html">clojure.contrib.sql</a>. Looking at the <a href="http://clojure.github.com/clojure-contrib/sql-api.html#clojure.contrib.sql/create-table">docs</a> for <code>create-table</code> it seemed pretty straight forward. To create a table with columns <em>date</em>, <em>id</em>, <em>symbol</em>, <em>price</em>, and <em>quantity</em> you would write the following.</p>
+  <entry>
+    <title type="html"><![CDATA[Creating a SQL table with a composite primary key in Clojure]]></title>
+    <link href="http://jakemcc.github.com/blog/2011/01/19/creating-sql-table-with-composite-key-in-clojure/"/>
+    <updated>2011-01-19T00:00:00-06:00</updated>
+    <id>http://jakemcc.github.com/blog/2011/01/19/creating-sql-table-with-composite-key-in-clojure</id>
+    <content type="html"><![CDATA[<p>I was interacting with a SQL database using Clojure and needed to create a table so I turned to <code>create-table</code> from <a href="http://clojure.github.com/clojure-contrib/sql-api.html">clojure.contrib.sql</a>. Looking at the <a href="http://clojure.github.com/clojure-contrib/sql-api.html#clojure.contrib.sql/create-table">docs</a> for <code>create-table</code> it seemed pretty straight forward. To create a table with columns <em>date</em>, <em>id</em>, <em>symbol</em>, <em>price</em>, and <em>quantity</em> you would write the following.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -804,44 +541,15 @@
 </span><span class='line'>              <span class="p">[</span><span class="s">&quot;PRIMARY KEY&quot;</span> <span class="s">&quot;(date, id)&quot;</span><span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure>
 
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/01/18/generating-test-cases-in-clojure/">Generating Test Cases in Clojure</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-01-18T00:00:00-06:00" pubdate data-updated="true">Jan 18<span>th</span>, 2011</time>
-        
-         | <a href="/blog/2011/01/18/generating-test-cases-in-clojure/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Recently I was writing some data mining Clojure code which needed to parse a log file and do some transforms of the data. Some of the transforms were dependent on data found across multiple lines. There was no ordering or proximity guarantees to these lines.</p>
+  <entry>
+    <title type="html"><![CDATA[Generating test cases in Clojure]]></title>
+    <link href="http://jakemcc.github.com/blog/2011/01/18/generating-test-cases-in-clojure/"/>
+    <updated>2011-01-18T00:00:00-06:00</updated>
+    <id>http://jakemcc.github.com/blog/2011/01/18/generating-test-cases-in-clojure</id>
+    <content type="html"><![CDATA[<p>Recently I was writing some data mining Clojure code which needed to parse a log file and do some transforms of the data. Some of the transforms were dependent on data found across multiple lines. There was no ordering or proximity guarantees to these lines.</p>
 
 <p>This required the code to handle a variety of situations. After writing a couple simple tests and getting those passing I wanted to more extensively test my solution. I was lazy though and did not want to hand code all of the potential orderings.  Enter <code>permutations</code>.</p>
 
@@ -930,44 +638,15 @@
 
 
 <p><code>permutations</code> saved me a bit of time and let me test some situations that I otherwise would not have tested. This actually exposed a subtle bug in my code. Hopefully it can do the same for you.</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2010/12/07/quickily-starting-a-powerful-clojure-repl/">Quickly Starting a Powerful Clojure REPL</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-12-07T00:00:00-06:00" pubdate data-updated="true">Dec 7<span>th</span>, 2010</time>
-        
-         | <a href="/blog/2010/12/07/quickily-starting-a-powerful-clojure-repl/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I often find myself browsing the Internet and then suddenly I want to have a Clojure REPL at my fingertips. As I&#8217;ve become better with emacs and <a href="http://www.emacswiki.org/ParEdit">paredit</a> I&#8217;ve become dependent on the powerful editing this combo affords. The rest of this post details how I changed my five step process into a two step process. It does not explain basic emacs/slime setup but rather explains how I cut a few steps out of a suboptimal workflow for getting a powerful Clojure REPL up and running in emacs.</p>
+  <entry>
+    <title type="html"><![CDATA[Quickly starting a powerful Clojure REPL]]></title>
+    <link href="http://jakemcc.github.com/blog/2010/12/07/quickily-starting-a-powerful-clojure-repl/"/>
+    <updated>2010-12-07T00:00:00-06:00</updated>
+    <id>http://jakemcc.github.com/blog/2010/12/07/quickily-starting-a-powerful-clojure-repl</id>
+    <content type="html"><![CDATA[<p>I often find myself browsing the Internet and then suddenly I want to have a Clojure REPL at my fingertips. As I&#8217;ve become better with emacs and <a href="http://www.emacswiki.org/ParEdit">paredit</a> I&#8217;ve become dependent on the powerful editing this combo affords. The rest of this post details how I changed my five step process into a two step process. It does not explain basic emacs/slime setup but rather explains how I cut a few steps out of a suboptimal workflow for getting a powerful Clojure REPL up and running in emacs.</p>
 
 <p>My previous workflow was the following:</p>
 
@@ -1057,44 +736,15 @@
 
 
 <p>Both of those functions need to be added to a location where they will get defined on emacs start-up. Once this is done the powerful REPL you are used to emacs providing can be at your finger tips in practically no time at all.</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2010/12/06/trampolining-through-mutual-recursion/">Trampolining Through Mutual Recursion With Clojure</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-12-06T00:00:00-06:00" pubdate data-updated="true">Dec 6<span>th</span>, 2010</time>
-        
-         | <a href="/blog/2010/12/06/trampolining-through-mutual-recursion/#disqus_thread">Comments</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>The other day I stumbled across some <a href="http://clojure.org">Clojure</a> code that used <a href="http://en.wikipedia.org/wiki/Mutual_recursion">mutual recursion</a>. Mutual recursion can be a valuable tool when solving a problem. Unfortunately because of the lack of <a href="http://en.wikipedia.org/wiki/Tail_call">tail call optimization</a> on the JVM this can be a dangerous technique when writing Clojure code. It can be easy to forget about this limitation and end up writing code that blows the stack.</p>
+  <entry>
+    <title type="html"><![CDATA[Trampolining through mutual recursion with Clojure]]></title>
+    <link href="http://jakemcc.github.com/blog/2010/12/06/trampolining-through-mutual-recursion/"/>
+    <updated>2010-12-06T00:00:00-06:00</updated>
+    <id>http://jakemcc.github.com/blog/2010/12/06/trampolining-through-mutual-recursion</id>
+    <content type="html"><![CDATA[<p>The other day I stumbled across some <a href="http://clojure.org">Clojure</a> code that used <a href="http://en.wikipedia.org/wiki/Mutual_recursion">mutual recursion</a>. Mutual recursion can be a valuable tool when solving a problem. Unfortunately because of the lack of <a href="http://en.wikipedia.org/wiki/Tail_call">tail call optimization</a> on the JVM this can be a dangerous technique when writing Clojure code. It can be easy to forget about this limitation and end up writing code that blows the stack.</p>
 
 <p>Take the classic even/odd checking code from the <a href="http://en.wikipedia.org/wiki/Mutual_recursion">Wikipedia</a> page. If we just translate it to Clojure it will cause a <a href="http://en.wikipedia.org/wiki/Stack_overflow">stack overflow</a> error when we pass in a large number. The massive number of function calls require before returning causes too much memory to be consumed.</p>
 
@@ -1209,104 +859,145 @@
 
 
 <p>Now we have the best of both worlds. Mutual recursion without the worry of a stack overflow and functions that don&#8217;t force the caller to be aware of the implementation details.</p>
-</div>
+]]></content>
+  </entry>
   
+  <entry>
+    <title type="html"><![CDATA[Inserting values into a nested map in Clojure]]></title>
+    <link href="http://jakemcc.github.com/blog/2010/06/06/inserting-values-into-a-nested-map-in-clojure/"/>
+    <updated>2010-06-06T00:00:00-05:00</updated>
+    <id>http://jakemcc.github.com/blog/2010/06/06/inserting-values-into-a-nested-map-in-clojure</id>
+    <content type="html"><![CDATA[<p>Recently I was writing some Clojure with a coworker and we needed to insert values into a nested map structure. Our first solution (and example of using it at the repl) looked something like this.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">defn </span><span class="nv">add-to-cache</span> <span class="p">[</span><span class="nv">cache</span> <span class="nv">key1</span> <span class="nv">key2</span> <span class="nv">data</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">entry</span> <span class="p">(</span><span class="nb">get </span><span class="nv">cache</span> <span class="nv">key1</span> <span class="p">{})</span>
+</span><span class='line'>        <span class="nv">new-entry</span> <span class="p">(</span><span class="nb">assoc </span><span class="nv">entry</span> <span class="nv">key2</span> <span class="nv">data</span><span class="p">)]</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">assoc </span><span class="nv">cache</span> <span class="nv">key1</span> <span class="nv">new-entry</span><span class="p">)))</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">user&gt;</span> <span class="p">(</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nf">add-to-cache</span> <span class="p">{}</span> <span class="nv">:chicago</span> <span class="nv">:lakeview</span> <span class="nv">:jake</span><span class="p">)</span>
+</span><span class='line'>          <span class="p">(</span><span class="nf">add-to-cache</span> <span class="nv">:sf</span> <span class="nv">:mission</span> <span class="nv">:dan</span><span class="p">)</span>
+</span><span class='line'>          <span class="p">(</span><span class="nf">add-to-cache</span> <span class="nv">:chicago</span> <span class="nv">:wickerpark</span> <span class="nv">:alex</span><span class="p">))</span>
+</span><span class='line'><span class="p">{</span><span class="nv">:sf</span> <span class="p">{</span><span class="nv">:mission</span> <span class="nv">:dan</span><span class="p">}</span><span class="o">,</span> <span class="nv">:chicago</span> <span class="p">{</span><span class="nv">:wickerpark</span> <span class="nv">:alex,</span> <span class="nv">:lakeview</span> <span class="nv">:jake</span><span class="p">}}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This worked but seemed overly verbose for doing what (in our minds) should have been a simple operation. After some digging around in the docs we found the function <code>assoc-in</code>. This useful function allowed us to greatly simplify the code.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">defn </span><span class="nv">add-to-cache</span> <span class="p">[</span><span class="nv">cache</span> <span class="nv">key1</span> <span class="nv">key2</span> <span class="nv">data</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">assoc-in</span> <span class="nv">cache</span> <span class="p">[</span><span class="nv">key1</span> <span class="nv">key2</span><span class="p">]</span> <span class="nv">data</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">user&gt;</span> <span class="p">(</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nf">add-to-cache</span> <span class="p">{}</span> <span class="nv">:chicago</span> <span class="nv">:lakeview</span> <span class="nv">:jake</span><span class="p">)</span>
+</span><span class='line'>          <span class="p">(</span><span class="nf">add-to-cache</span> <span class="nv">:sf</span> <span class="nv">:mission</span> <span class="nv">:dan</span><span class="p">)</span>
+</span><span class='line'>          <span class="p">(</span><span class="nf">add-to-cache</span> <span class="nv">:chicago</span> <span class="nv">:wickerpark</span> <span class="nv">:alex</span><span class="p">))</span>
+</span><span class='line'><span class="p">{</span><span class="nv">:sf</span> <span class="p">{</span><span class="nv">:mission</span> <span class="nv">:dan</span><span class="p">}</span><span class="o">,</span> <span class="nv">:chicago</span> <span class="p">{</span><span class="nv">:wickerpark</span> <span class="nv">:alex,</span> <span class="nv">:lakeview</span> <span class="nv">:jake</span><span class="p">}}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Much simpler and easier to read. The next person to look at the code will be able to quickly skim and tell what the code is doing.</p>
+
+<p><code>assoc-in</code> can also be used with nested associative structures like vectors.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nv">user&gt;</span> <span class="p">(</span><span class="nf">assoc-in</span> <span class="p">[[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span> <span class="p">[</span><span class="nv">:a</span> <span class="nv">:b</span><span class="p">]]</span> <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span> <span class="nv">:z</span><span class="p">)</span>
+</span><span class='line'><span class="p">[[</span><span class="mi">0</span> <span class="nv">:z</span><span class="p">]</span> <span class="p">[</span><span class="nv">:a</span> <span class="nv">:b</span><span class="p">]]</span>
+</span><span class='line'><span class="nv">user&gt;</span> <span class="p">(</span><span class="nf">assoc-in</span> <span class="p">[[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span> <span class="p">[</span><span class="nv">:a</span> <span class="nv">:b</span><span class="p">]]</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">1</span><span class="p">]</span> <span class="nv">:z</span><span class="p">)</span>
+</span><span class='line'><span class="p">[[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span> <span class="p">[</span><span class="nv">:a</span> <span class="nv">:z</span><span class="p">]]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Hopefully this post makes searching for how to insert into nested maps slighly easier for the next person who thinks there must be a better way for doing this.</p>
+]]></content>
+  </entry>
   
+  <entry>
+    <title type="html"><![CDATA[Plotting time series data with Incanter]]></title>
+    <link href="http://jakemcc.github.com/blog/2010/02/21/plotting-time-series-data-with-incanter/"/>
+    <updated>2010-02-21T00:00:00-06:00</updated>
+    <id>http://jakemcc.github.com/blog/2010/02/21/plotting-time-series-data-with-incanter</id>
+    <content type="html"><![CDATA[<p>Recently I found myself wanting to plot some time series data and wanted to do this in Clojure. Unfortunately Incanter, a good statistical and graphics library for Clojure, did not provide a way to plot data where the x-axis is a time value. A quick fork on github and a pull request later and now Incanter does. Since I added this functionality I thought I would write up a short example of using it.</p>
+
+<p>The example time series data I’m using I took from Yahoo’s <a href="http://finance.yahoo.com/">finance section</a>. <a href="http://ichart.finance.yahoo.com/table.csv?s=YHOO&amp;a=03&amp;b=12&amp;c=1996&amp;d=01&amp;e=21&amp;f=2010&amp;g=d&amp;ignore=.csv">Here</a> is a link to the csv file I used.</p>
+
+<p>I’m using the <code>read-dataset</code> function provided by Incanter. This procedure reads a delimited file (or URL) and returns an Incanter dataset.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">def </span><span class="nv">yhoo</span> <span class="p">(</span><span class="nf">read-dataset</span> <span class="s">&quot;table.csv&quot;</span> <span class="nv">:header</span> <span class="nv">true</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
-    </article>
+<p>Yahoo stores the date in a yyyy-mm-dd format. I need to convert that to milliseconds from the epoch so it can be used in time-series-plot as the x-axis data. To do this I wrote a function which takes the string representation of the date, splits in on “-”, then use the <code>joda-date</code> and <code>to-ms</code> functions from incanter.chrono to get the number of milliseconds from the epoch.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">defn </span><span class="nv">to-milliseconds-from-epoch</span> <span class="p">[</span><span class="nv">x</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">to-ms</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">apply </span><span class="nv">joda-date</span> <span class="p">(</span><span class="nb">map </span><span class="o">#</span><span class="p">(</span><span class="nv">Integer/parseInt</span> <span class="nv">%</span><span class="p">)</span>
+</span><span class='line'>                           <span class="p">(</span><span class="o">.</span><span class="nv">split</span> <span class="nv">x</span> <span class="s">&quot;-&quot;</span><span class="p">)))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now that we have a function which takes the string representation and get the milliseconds it is time to get the data I want from the dataset. The below code selects the <code>:Close</code> and <code>:Date</code> column while mapping the <code>:Date</code> column to a millisecond from epoch representation of date.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">def </span><span class="nv">mod-data</span>
+</span><span class='line'>     <span class="p">(</span><span class="nf">col-names</span>
+</span><span class='line'>      <span class="p">(</span><span class="nf">conj-cols</span>
+</span><span class='line'>       <span class="p">(</span><span class="nf">$</span> <span class="nv">:Close</span> <span class="nv">yhoo</span><span class="p">)</span>
+</span><span class='line'>       <span class="p">(</span><span class="nf">$map</span> <span class="nv">to-milliseconds-from-epoch</span> <span class="nv">:Date</span> <span class="nv">yhoo</span><span class="p">))</span>
+</span><span class='line'>     <span class="p">[</span><span class="nv">:Close</span> <span class="nv">:Date</span><span class="p">]))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The next step is to use the <code>time-series-plot</code> function to actually create the plot. Because the data we have is in a dataset, we can pass in the column names as the x and y parameters and provide the data set as the value to the <code>:data</code> key in the optional parameters.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">def </span><span class="nv">chart</span> <span class="p">(</span><span class="nf">time-series-plot</span> <span class="nv">:Date</span> <span class="nv">:Close</span>
+</span><span class='line'>                             <span class="nv">:x-label</span> <span class="s">&quot;Date&quot;</span>
+</span><span class='line'>                             <span class="nv">:y-label</span> <span class="s">&quot;Closing Price&quot;</span>
+</span><span class='line'>                             <span class="nv">:title</span> <span class="s">&quot;Closing price over time for Yahoo&quot;</span>
+</span><span class='line'>                             <span class="nv">:data</span> <span class="nv">mod-data</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then we use the Incanter function <code>view</code> to actually see the chart.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">view</span> <span class="nv">chart</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="http://jakemcc.github.com/images/yhoo.png" title="Chart of historical YHOO closing prices" alt="Chart of historical YHOO closing prices" /></p>
+]]></content>
+  </entry>
   
-  <div class="pagination">
-    
-      <a class="prev" href="/blog/page/2/">&larr; Older</a>
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
-<aside class="sidebar">
-  
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2012/03/28/working-on-multiple-clojure-projects-at-once/">Working on multiple Clojure projects at once</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2011/12/29/reflections-on-stanfords-online-class-experiment/">Reflections on Stanford&#8217;s online class experiment</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2011/12/16/continuous-testing-with-clojure-and-expectations/">Continuous testing with Clojure and expectations</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2011/07/25/utilities-i-like-autojump/">Utilities I like: autojump</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2011/06/28/a-simple-way-of-testing-disconnect-logic/">A simple way of testing disconnect logic</a>
-      </li>
-    
-  </ul>
-</section>
-
-  
-</aside>
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Content licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/">Creative Commons Attribution-NonCommercial 3.0 Unported License</a>.
-  <!-- Copyright &copy; 2012 - Jake McCrary - -->
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
-</footer>
-  
-
-<script type="text/javascript">
-      var disqus_shortname = 'jakemccrary';
-      
-        
-        var disqus_script = 'count.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
-
-
-
-
-
-  <script type="text/javascript">
-    (function() {
-      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
-      script.src = 'https://apis.google.com/js/plusone.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
-    })();
-  </script>
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
-
-
-
-</body>
-</html>
+</feed>

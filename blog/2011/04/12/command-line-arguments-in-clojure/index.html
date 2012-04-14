@@ -1,0 +1,442 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Command line arguments in Clojure - Jake McCrary</title>
+  <meta name="author" content="Jake McCrary">
+
+  
+  <meta name="description" content="This post is now out of date. The library recommended by this post is now a contrib library. Check out tools.cli for great documentation about &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://jakemcc.github.com/blog/2011/04/12/command-line-arguments-in-clojure">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/JakeMccrarysMusings" rel="alternate" title="Jake McCrary" type="application/atom+xml">
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-19834208-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Jake McCrary</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/JakeMccrarysMusings" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:jakemcc.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about.html">About</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Command Line Arguments in Clojure</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+<time datetime="2011-04-12T20:00:00-05:00" pubdate data-updated="true">Apr 12<span>th</span>, 2011</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><em>This post is now out of date. The library recommended by this post is now a contrib library. Check out <a href="https://github.com/clojure/tools.cli">tools.cli</a> for great documentation about handling command line arguments in Clojure.</em></p>
+
+<hr />
+
+<p>Write enough Clojure and eventually you will need to handle command line arguments. There are numerous ways of doing this. Keep reading for a brief introduction to three.</p>
+
+<h3>Using built-in features</h3>
+
+<p>There exists a sequence named <code>*command-line-args*</code> which contains the arguments to your application. Using it is simple, it is just a sequence after all, and it is always available to you. No need to pull in external dependencies that others may not be familiar with.</p>
+
+<p>This simplicity is also a downside. Because only a sequence is provided for you it is up to you to actually figure out the arguments. If you want to do any sort of verification that certain arguments are supplied you write the code that does the verifying. If you want to move away from positional arguments to using command line flags once again it is up to you to write it.</p>
+
+<p>Because of the amount of code required to do any sort of advanced argument handling I tend to use <code>*command-line-args*</code> only for applications that take a single type of argument, for example a file path, and require one or more of this type of argument.</p>
+
+<h3>Setup for next two sections</h3>
+
+<p>For the next two sections I&#8217;m using version 1.5.0 of Leiningen and the specified versions of libraries as stated in the below <code>project.clj</code> file.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">defproject</span> <span class="nv">blogpost</span> <span class="s">&quot;1.0.0-SNAPSHOT&quot;</span>
+</span><span class='line'>  <span class="nv">:dependencies</span> <span class="p">[[</span><span class="nv">org</span><span class="o">.</span><span class="nv">clojure/clojure</span> <span class="s">&quot;1.2.0&quot;</span><span class="p">]</span>
+</span><span class='line'>                 <span class="p">[</span><span class="nv">org</span><span class="o">.</span><span class="nv">clojure/clojure-contrib</span> <span class="s">&quot;1.2.0&quot;</span><span class="p">]</span>
+</span><span class='line'>                 <span class="p">[</span><span class="nv">clargon</span> <span class="s">&quot;1.0.0&quot;</span><span class="p">]]</span>
+</span><span class='line'>  <span class="nv">:dev-dependencies</span> <span class="p">[[</span><span class="nv">swank-clojure</span> <span class="s">&quot;1.2.1&quot;</span><span class="p">]]</span>
+</span><span class='line'>  <span class="nv">:run-aliases</span> <span class="p">{</span><span class="nv">:clargon</span> <span class="nv">clargon-example</span>
+</span><span class='line'>                <span class="nv">:cc</span> <span class="nv">command-line-example</span><span class="p">})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I&#8217;m using <code>lein run</code> to run the examples. <code>lein run :cc</code> runs the clojure.contrib example. Likewise, running <code>lein run :clargon</code> will run the clargon examples. Both of these commands can be followed by additional arguments that get passed to the application.</p>
+
+<h3>Using clojure.contrib.command-line</h3>
+
+<p>The next step after using <code>*command-line-args*</code> is to use the library <code>clojure.contrib.command-line</code>. This library provides the function <code>with-command-line</code> that allows you specify requirements and then handles the parsing of the command line arguments for you.</p>
+
+<p>Positives of using <code>clojure.contrib.command-line</code>:
+* Part of <code>clojure.contrib</code>. Probably extremely low friction to start using it.
+* No longer need to write your own command line parsing code.
+* Responds to <code>-h</code> and <code>--help</code>.</p>
+
+<p>A negative of using <code>clojure.contrib.command-line</code> is that the documentation is pretty sparse. This can lead to some fumbling around as you learn how to use it. Another downside is that there isn&#8217;t a way of specifying whether an argument is required or optional. This means you must manually check for required arguments and give appropriate error messages to the user.</p>
+
+<p>Below is an example of using <code>clojure.contrib.command-line</code>. It specifies a few different arguments. The <code>--cow</code> argument has a default value of &#8220;cow&#8221;. <code>--chicken</code> has no default value, if it is left unspecified it will be <code>nil</code>. The line with <code>milk?</code> specifies a boolean value. If <code>--milk</code> (or <code>-m</code> because of the <code>m?</code> specification) is specified at the command line then <code>milk?</code> will be true. <code>extras</code> will collect any additional arguments.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">ns</span> <span class="nv">command-line-example</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">:require</span> <span class="p">[</span><span class="nv">clojure</span><span class="o">.</span><span class="nv">contrib</span><span class="o">.</span><span class="nv">command-line</span> <span class="nv">:as</span> <span class="nv">ccl</span><span class="p">]))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="k">defn </span><span class="nv">-main</span> <span class="p">[</span><span class="nv">&amp;</span> <span class="nv">args</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">ccl/with-command-line</span> <span class="nv">args</span>
+</span><span class='line'>    <span class="s">&quot;Command line demo&quot;</span>
+</span><span class='line'>    <span class="p">[[</span><span class="nv">cow</span> <span class="s">&quot;This is the cows name&quot;</span> <span class="s">&quot;cow&quot;</span><span class="p">]</span>
+</span><span class='line'>     <span class="p">[</span><span class="nv">chicken</span> <span class="s">&quot;This specifies the chickens name&quot;</span><span class="p">]</span>
+</span><span class='line'>     <span class="p">[</span><span class="nv">milk?</span> <span class="nv">m?</span> <span class="s">&quot;Should you milk the cow?&quot;</span><span class="p">]</span>
+</span><span class='line'>     <span class="nv">extras</span><span class="p">]</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">println </span><span class="s">&quot;cow&#39;s name: &quot;</span> <span class="nv">cow</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">println </span><span class="s">&quot;chicken&#39;s name: &quot;</span> <span class="nv">chicken</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">println </span><span class="s">&quot;milk?: &quot;</span> <span class="nv">milk?</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">println </span><span class="s">&quot;extra args: &quot;</span> <span class="nv">extras</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And here is an example of calling that <code>-main</code> function from the repl.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>lein run :cc --cow Herb --milk other args
+</span><span class='line'>cow<span class="s1">&#39;s name:  Herb</span>
+</span><span class='line'><span class="s1">chicken&#39;</span>s name:  nil
+</span><span class='line'>milk?:  <span class="nb">true</span>
+</span><span class='line'>extra args:  <span class="o">[</span>other args<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Using some other library</h3>
+
+<p>Another option is to use some library that isn&#8217;t found in <code>clojure.contrib</code>. One example of this is <a href="https://github.com/gar3thjon3s/clargon">clargon</a>. Clargon is a library that <a href="http://blog.gaz-jones.com/">Gaz Jones</a> (his blog post <a href="http://blog.gaz-jones.com/post/2528825514/command-line-applications-in-clojure">here</a>) wrote. The documentation (both in his blog post and through the github page and tests) is the primary reason I started using it.</p>
+
+<p>Pros of clargon:
+* Great documentation. Makes it quick to get started.
+* Can specify functions to transform arguments prior to gaining access to them
+* You specify if an argument is required or optional.
+* Responds to <code>-h</code> and <code>--help</code>.</p>
+
+<p>One potential negative of using clargon is that it isn&#8217;t a <code>clojure.contrib</code> library. This means there is slightly more friction to start using it on your project as, unlike <code>clojure.contrib</code>, you are probably not already depending on it.</p>
+
+<p>Below is an example similar to the above <code>clojure.contrib.command-line</code> example. One important difference is that some arguments are now specified as either required or optional. If a required argument is not specified then an error is printed and execution stops.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">ns</span> <span class="nv">clargon-example</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">:require</span> <span class="p">[</span><span class="nv">clargon</span><span class="o">.</span><span class="nv">core</span> <span class="nv">:as</span> <span class="nv">c</span><span class="p">]))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="k">defn </span><span class="nv">-main</span>
+</span><span class='line'>  <span class="p">[</span><span class="nv">&amp;</span> <span class="nv">args</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">opts</span>
+</span><span class='line'>        <span class="p">(</span><span class="nf">c/clargon</span>
+</span><span class='line'>         <span class="nv">args</span>
+</span><span class='line'>         <span class="p">(</span><span class="nf">c/optional</span> <span class="p">[</span><span class="s">&quot;--cow&quot;</span> <span class="s">&quot;Specify the cow&#39;s name&quot;</span> <span class="nv">:default</span> <span class="s">&quot;cow&quot;</span><span class="p">])</span>
+</span><span class='line'>         <span class="p">(</span><span class="nf">c/required</span> <span class="p">[</span><span class="s">&quot;--chicken&quot;</span> <span class="s">&quot;Chicken&#39;s name&quot;</span><span class="p">])</span>
+</span><span class='line'>         <span class="p">(</span><span class="nf">c/optional</span> <span class="p">[</span><span class="s">&quot;-m?&quot;</span> <span class="s">&quot;--milk?&quot;</span> <span class="s">&quot;should you milk the cow?&quot;</span><span class="p">]))]</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">println </span><span class="nv">args</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">println </span><span class="nv">opts</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>optional</code> and <code>required</code> both take a vector that defines the specification of a flag. Starting with the first element in that vector, each element that is a string and starts with a &#8216;-&#8217; is considered a potential flag for that argument. The last flag is stripped of leading &#8216;-&#8217; characters and is considered the name of that flag (unless a <code>:name</code> option is specified later). The name is used to look up the value of the argument in the option map that is returned by the <code>clargon</code> function. If the next element after the last flag is a string then it is considered the documentation for that flag. When clargon runs into a non-string element then it and everything after it are considered options and should be specified as key value pairs. Options that do something are <code>:default</code>, <code>:name</code>, and <code>:required</code>.</p>
+
+<p><code>optional</code> and <code>required</code> both can take a function as a second argument. This function will be passed the argument for that flag and should return a transformed version of it. Below is an example using this functionality to specify a required flag that takes a comma separated list of files. These comma separated files are split apart and stuck into a vector.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">ns</span> <span class="nv">clargon-example</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">:require</span> <span class="p">[</span><span class="nv">clargon</span><span class="o">.</span><span class="nv">core</span> <span class="nv">:as</span> <span class="nv">c</span><span class="p">]))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="k">defn </span><span class="nv">-main</span>
+</span><span class='line'>  <span class="p">[</span><span class="nv">&amp;</span> <span class="nv">args</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">opts</span> <span class="p">(</span><span class="nf">c/clargon</span>
+</span><span class='line'>              <span class="nv">args</span>
+</span><span class='line'>              <span class="p">(</span><span class="nf">c/required</span> <span class="p">[</span><span class="s">&quot;--files&quot;</span> <span class="s">&quot;Files to process&quot;</span><span class="p">]</span>
+</span><span class='line'>                          <span class="o">#</span><span class="p">(</span><span class="nv">vec</span> <span class="p">(</span><span class="o">.</span><span class="nv">split</span> <span class="nv">%</span> <span class="s">&quot;,&quot;</span><span class="p">))))]</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">println </span><span class="s">&quot;Parsed opts: &quot;</span> <span class="nv">opts</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Below is the above example being ran.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nv">$</span> <span class="nv">lein</span> <span class="nv">run</span> <span class="nv">:clargon</span> <span class="nv">--files</span> <span class="nv">one</span><span class="o">.</span><span class="nv">txt,two</span><span class="o">.</span><span class="nv">txt,three</span><span class="o">.</span><span class="nv">txt</span>
+</span><span class='line'><span class="nv">Parsed</span> <span class="nv">opts:</span>  <span class="p">{</span><span class="nv">:files</span> <span class="p">[</span><span class="nv">one</span><span class="o">.</span><span class="nv">txt</span> <span class="nv">two</span><span class="o">.</span><span class="nv">txt</span> <span class="nv">three</span><span class="o">.</span><span class="nv">txt</span><span class="p">]}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Clargon supports some more advanced nested argument handling that I&#8217;m not going to go into here. If you want to know more about clargon I&#8217;d recommend reading reading Gaz&#8217;s <a href="http://blog.gaz-jones.com/post/2528825514/command-line-applications-in-clojure">blog post</a> and the <a href="https://github.com/gar3thjon3s/clargon">clargon</a> readme and tests.</p>
+
+<h3>End</h3>
+
+<p>There are many more ways to handle command line parsing in Clojure. You are not limited to any of the three above. I&#8217;ve personally found clargon to hit all of my needs and plan on continuing to use it.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jake McCrary</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+<time datetime="2012-01-02T00:00:00-06:00" class="updated">Updated Jan 2<span>nd</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/clojure/'>clojure</a>, <a class='category' href='/blog/categories/code/'>code</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jakemcc.github.com/blog/2011/04/12/command-line-arguments-in-clojure/" data-via="" data-counturl="http://jakemcc.github.com/blog/2011/04/12/command-line-arguments-in-clojure/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/01/19/creating-sql-table-with-composite-key-in-clojure/" title="Previous Post: Creating a SQL table with a composite primary key in Clojure">&laquo; Creating a SQL table with a composite primary key in Clojure</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2011/06/28/a-simple-way-of-testing-disconnect-logic/" title="next Post: A simple way of testing disconnect logic">A simple way of testing disconnect logic &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/03/28/working-on-multiple-clojure-projects-at-once/">Working on multiple Clojure projects at once</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/12/29/reflections-on-stanfords-online-class-experiment/">Reflections on Stanford's online class experiment</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/12/16/continuous-testing-with-clojure-and-expectations/">Continuous testing with Clojure and expectations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/07/25/utilities-i-like-autojump/">Utilities I like: autojump</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/28/a-simple-way-of-testing-disconnect-logic/">A simple way of testing disconnect logic</a>
+      </li>
+    
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Content licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/">Creative Commons Attribution-NonCommercial 3.0 Unported License</a>.
+  <!-- Copyright &copy; 2012 - Jake McCrary - -->
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'jakemccrary';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://jakemcc.github.com/blog/2011/04/12/command-line-arguments-in-clojure/';
+        var disqus_url = 'http://jakemcc.github.com/blog/2011/04/12/command-line-arguments-in-clojure/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

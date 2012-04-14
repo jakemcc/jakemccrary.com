@@ -1,0 +1,373 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Trampolining through mutual recursion with Clojure - Jake McCrary</title>
+  <meta name="author" content="Jake McCrary">
+
+  
+  <meta name="description" content="The other day I stumbled across some Clojure code that used mutual recursion. Mutual recursion can be a valuable tool when solving a problem. &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://jakemcc.github.com/blog/2010/12/06/trampolining-through-mutual-recursion">
+  <link href="/favicon.ico" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/JakeMccrarysMusings" rel="alternate" title="Jake McCrary" type="application/atom+xml">
+  <!--Fonts from Google's Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-19834208-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Jake McCrary</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://feeds.feedburner.com/JakeMccrarysMusings" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:jakemcc.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+<ul role=main-navigation>
+  <li><a href="/">Blog</a></li>
+  <li><a href="/about.html">About</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Trampolining Through Mutual Recursion With Clojure</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-12-06T00:00:00-06:00" pubdate data-updated="true">Dec 6<span>th</span>, 2010</time>
+        
+         | <a href="#disqus_thread">Comments</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>The other day I stumbled across some <a href="http://clojure.org">Clojure</a> code that used <a href="http://en.wikipedia.org/wiki/Mutual_recursion">mutual recursion</a>. Mutual recursion can be a valuable tool when solving a problem. Unfortunately because of the lack of <a href="http://en.wikipedia.org/wiki/Tail_call">tail call optimization</a> on the JVM this can be a dangerous technique when writing Clojure code. It can be easy to forget about this limitation and end up writing code that blows the stack.</p>
+
+<p>Take the classic even/odd checking code from the <a href="http://en.wikipedia.org/wiki/Mutual_recursion">Wikipedia</a> page. If we just translate it to Clojure it will cause a <a href="http://en.wikipedia.org/wiki/Stack_overflow">stack overflow</a> error when we pass in a large number. The massive number of function calls require before returning causes too much memory to be consumed.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">declare</span> <span class="nv">my-odd?</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="k">defn </span><span class="nv">my-even?</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">zero? </span><span class="nv">n</span><span class="p">)</span>
+</span><span class='line'>    <span class="nv">true</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">my-odd?</span> <span class="p">(</span><span class="nb">dec </span><span class="p">(</span><span class="nf">Math/abs</span> <span class="nv">n</span><span class="p">)))))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="k">defn </span><span class="nv">my-odd?</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">zero? </span><span class="nv">n</span><span class="p">)</span>
+</span><span class='line'>    <span class="nv">false</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">my-even?</span> <span class="p">(</span><span class="nb">dec </span><span class="p">(</span><span class="nf">Math/abs</span> <span class="nv">n</span><span class="p">)))))</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">user&gt;</span> <span class="p">(</span><span class="nf">my-even?</span> <span class="mi">1000000</span><span class="p">)</span>
+</span><span class='line'><span class="c1">; Evaluation aborted. &lt;- this is a result of java.util.StackOverflowError</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Luckily since Clojure 1.0 there has been a useful function for dealing with this. <code>trampoline</code>, with minor modifications to your code, can be used to get around the lack of tail call optimizations (<a href="http://clojure.github.com/clojure/clojure.core-api.html#clojure.core/trampoline">docs here</a>).</p>
+
+<p><code>trampoline</code> takes a function (and, if needed, arguments to pass into the function) and calls it. If the function returns a function then <code>trampoline</code> calls that. As long as functions are returned <code>trampoline</code> will continue calling them. When a non-function value is returned <code>trampoline</code> returns, passing through the value.</p>
+
+<p>To make our sample code work with <code>trampoline</code> we simply change our functions to return a closure which wraps the call that was previously being executed. This just entails putting a <code>#</code> before the final s-exp. This takes advantage of Clojure&#8217;s anonymous function syntax to change the function call into a closure which is returned.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">defn </span><span class="nv">my-even?</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">zero? </span><span class="nv">n</span><span class="p">)</span>
+</span><span class='line'>    <span class="nv">true</span>
+</span><span class='line'>    <span class="o">#</span><span class="p">(</span><span class="nv">my-odd?</span> <span class="p">(</span><span class="nb">dec </span><span class="p">(</span><span class="nf">Math/abs</span> <span class="nv">n</span><span class="p">)))))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="k">defn </span><span class="nv">my-odd?</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">zero? </span><span class="nv">n</span><span class="p">)</span>
+</span><span class='line'>    <span class="nv">false</span>
+</span><span class='line'>    <span class="o">#</span><span class="p">(</span><span class="nv">my-even?</span> <span class="p">(</span><span class="nb">dec </span><span class="p">(</span><span class="nf">Math/abs</span> <span class="nv">n</span><span class="p">)))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>By doing this we&#8217;ve changed how the caller interacts with <code>my-even?</code> and <code>my-odd?</code>. It now needs to be called by <code>trampoline</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nv">user&gt;</span> <span class="p">(</span><span class="nf">trampoline</span> <span class="nv">my-even?</span> <span class="mi">1000000</span><span class="p">)</span>
+</span><span class='line'><span class="nv">true</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now we no longer suffer from the stack overflow error.</p>
+
+<p>I think we can still do better though, because now the caller of <code>my-even?</code> and <code>my-odd?</code> suffers since they are forced to remember to use <code>trampoline</code>. By forcing this on the caller, we&#8217;ve pushed what should be hidden implementations details into the callers code. We can fix this by pushing the use of <code>trampoline</code> into our functions.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">defn </span><span class="nv">my-even?</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">letfn</span> <span class="p">[(</span><span class="nf">e?</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
+</span><span class='line'>              <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">zero? </span><span class="nv">n</span><span class="p">)</span>
+</span><span class='line'>                <span class="nv">true</span>
+</span><span class='line'>                <span class="o">#</span><span class="p">(</span><span class="nv">o?</span> <span class="p">(</span><span class="nb">dec </span><span class="p">(</span><span class="nf">Math/abs</span> <span class="nv">n</span><span class="p">)))))</span>
+</span><span class='line'>          <span class="p">(</span><span class="nf">o?</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
+</span><span class='line'>              <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">zero? </span><span class="nv">n</span><span class="p">)</span>
+</span><span class='line'>                <span class="nv">false</span>
+</span><span class='line'>                <span class="o">#</span><span class="p">(</span><span class="nv">e?</span> <span class="p">(</span><span class="nb">dec </span><span class="p">(</span><span class="nf">Math/abs</span> <span class="nv">n</span><span class="p">)))))]</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">trampoline</span> <span class="nv">e?</span> <span class="nv">n</span><span class="p">)))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="k">defn </span><span class="nv">my-odd?</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">not </span><span class="p">(</span><span class="nf">my-even?</span> <span class="nv">n</span><span class="p">)))</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">user&gt;</span> <span class="p">(</span><span class="nf">my-even?</span> <span class="mi">1000000</span><span class="p">)</span>
+</span><span class='line'><span class="nv">true</span>
+</span><span class='line'><span class="nv">user&gt;</span> <span class="p">(</span><span class="nf">my-odd?</span> <span class="mi">1000000</span><span class="p">)</span>
+</span><span class='line'><span class="nv">false</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now we have the best of both worlds. Mutual recursion without the worry of a stack overflow and functions that don&#8217;t force the caller to be aware of the implementation details.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jake McCrary</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2010-12-06T00:00:00-06:00" pubdate data-updated="true">Dec 6<span>th</span>, 2010</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/clojure/'>clojure</a>, <a class='category' href='/blog/categories/code/'>code</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://jakemcc.github.com/blog/2010/12/06/trampolining-through-mutual-recursion/" data-via="" data-counturl="http://jakemcc.github.com/blog/2010/12/06/trampolining-through-mutual-recursion/" >Tweet</a>
+  
+  
+  <div class="g-plusone" data-size="medium"></div>
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2010/06/06/inserting-values-into-a-nested-map-in-clojure/" title="Previous Post: Inserting values into a nested map in Clojure">&laquo; Inserting values into a nested map in Clojure</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2010/12/07/quickily-starting-a-powerful-clojure-repl/" title="next Post: Quickly starting a powerful Clojure REPL">Quickly starting a powerful Clojure REPL &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/03/28/working-on-multiple-clojure-projects-at-once/">Working on multiple Clojure projects at once</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/12/29/reflections-on-stanfords-online-class-experiment/">Reflections on Stanford's online class experiment</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/12/16/continuous-testing-with-clojure-and-expectations/">Continuous testing with Clojure and expectations</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/07/25/utilities-i-like-autojump/">Utilities I like: autojump</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2011/06/28/a-simple-way-of-testing-disconnect-logic/">A simple way of testing disconnect logic</a>
+      </li>
+    
+  </ul>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Content licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/">Creative Commons Attribution-NonCommercial 3.0 Unported License</a>.
+  <!-- Copyright &copy; 2012 - Jake McCrary - -->
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'jakemccrary';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://jakemcc.github.com/blog/2010/12/06/trampolining-through-mutual-recursion/';
+        var disqus_url = 'http://jakemcc.github.com/blog/2010/12/06/trampolining-through-mutual-recursion/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
