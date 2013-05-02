@@ -14,10 +14,17 @@ In case the above paragraph isn't clear, here is an example of the main projects
 ``` bash
     $ pwd
     src/main-project
-    $ ls
-    README checkouts classes lib project.clj src test
-    $ ls checkouts/
-    subproject
+    $ tree
+    .
+    ├── checkouts
+    │   └── subproject -> /Users/jmccrary/src/temp/subproject/
+    ├── project.clj
+    ├── src
+    │   └── main_project
+    │       └── core.clj
+    └── test
+        └── main_project
+            └── core_test.clj
     $ ls checkouts/subproject/
     README project.clj src test
 ```
