@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Book Review: Clojure Data Analysis Cookbook"
-date: 2013-05-04 12:57
+date: 2013-05-06 07:00
 comments: true
 categories: [clojure, book-review]
 ---
@@ -23,4 +23,4 @@ Would I recommend reading this book front to back? Probably not. I would recomme
 Just like a food cookbook's purpose (usually) isn't to teach you how to cook, this book will not teach you how to write Clojure. It will help you become better at specific tasks.
 
 
-[^1]: I was given this book to review by Packt Publishing. Lately I've been both reviewing books for feedback before publication and reviews after. If you think you have something interesting to read and want another set of eyes on it, feel free to reach out.
+[^1]: I was given this book to review by Packt Publishing. If you think you have something interesting to read and want another set of eyes on it, feel free to reach out. Depending on the topic I'm willing to give feedback before publication or potentially write a review after.
