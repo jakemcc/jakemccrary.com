@@ -10,6 +10,8 @@ $footer-bg: $main-bg;
 $title-color: #222;
 $subtitle-color: lighten($header-bg, 58);
 $nav-bg: $main-bg; //desaturate(lighten(#8fc17a, 18), 5);
+$nav-bg-back: $main-bg;
+$nav-bg-front: $main-bg;
 // $nav-color: darken($nav-bg, 38) !default;
 // $nav-color-hover: darken($nav-color, 25) !default;
 // $nav-placeholder: desaturate(darken($nav-bg, 10), 15) !default;
@@ -22,9 +24,10 @@ $sidebar-bg: $main-bg; //desaturate(#eceff5, 8);
 $sidebar-link-color: saturate(#526f9a, 10);
 $sidebar-link-color-hover: darken(#7ab662, 9);
 
-//$main-bg: #f0f0f0;
-// $page-bg: #252525;
-// $article-border: #eeeeee;
+$footer-bg-front: $main-bg;
+$footer-bg-back: $main-bg;
+
+
 //$header-bg: #553355;
 // $subtitle-color: lighten($header-bg, 58);
 // $nav-bg: desaturate(lighten(#8fc17a, 18), 5);
