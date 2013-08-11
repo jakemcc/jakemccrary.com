@@ -3,7 +3,7 @@ layout: post
 title: "Manage your workspace with grids under Linux, OS X, and Windows"
 date: 2013-04-15 19:15
 comments: true
-categories: windows, tools, linux, osx
+categories: [windows, tools, linux, osx]
 ---
 
 I'm the type of computer user that wants an organized
