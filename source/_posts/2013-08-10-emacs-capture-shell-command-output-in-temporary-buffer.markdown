@@ -6,23 +6,29 @@ comments: true
 categories: [emacs, elisp]
 ---
 
-My prefered text editor of choice is Emacs. The extensibility of it is
-the reason for this preference. The ease of adding additional
-functionality means you can customize it to your liking. I don't think
-you should go overboard with changing too much default behavior but I
-do think you should feel free to add additional features.
+My text editor of choice is Emacs. Its extensibility is a major
+contributor to this preference. The ease of adding additional
+functionality means you can customize it to your liking. You should
+not go overboard and change too much of the default behavior but you
+should feel free to add additional features.
 
-I recently added a function which runs a shell script I often run and captures
-the output in a temporary buffer. The buffer has the same
-behavior as the buffer that pops up when you pull up a help dialogue
-(`C-h m`). The help buffers have a nifty feature where if they are
-focused you can hit `q` to close them and bounce back to your previous
-location. It took me a while to figure out how to do this so I thought
-I would share it here where it might benefit others.
+I recently found myself often editing a file in emacs and then
+switching to a terminal and running a bash script to see how the
+output changed. This is part of my work flow for shutting down or
+starting new server processes. Since this is something I'll be doing
+quite frequently in the future, I wrote some Emacs Lisp to run the
+shell script and display the output in a temporary buffer. With this
+function in place I no longer have to toggle to a terminal and run a
+command.
+
+I'm picky and I wanted this output buffer to have the same behavior as
+the help buffer. That is, I wanted to be able to close the buffer by
+just hitting the letter `q`. It took me a while to figure out how to
+do this so I thought I would share it here in hopes it might benefit others.
 
 First I'll show the code and then I'll explain what it is doing.
 
-````elisp
+``` cl
 (defun blog-example ()
   (interactive)
   (with-output-to-temp-buffer "*blog-example*"
@@ -30,41 +36,38 @@ First I'll show the code and then I'll explain what it is doing.
                    "*blog-example*"
                    "*Messages*")
     (pop-to-buffer "*blog-example*")))
-````
+```
 
-First the function is using `defun` to define a function named
-`blog-example`. The second line `(interactive)` is making this a
-function that is interactively-callable, that is a function that you
-can call. Without it there you cannot call it after typing `M-x`. More
-information about `interactive` can be found over at the Emacs Lisp
-[documentation](http://www.gnu.org/software/emacs/manual/html_node/elisp/Using-Interactive.html).
+The above snippet defines a function named `blog-example`. It takes no
+arguments and is interactive (as indicated by the second line calling
+`interactive`). This call to `interactive` makes `blog-example`
+available to be called interactively, meaning you can call it after
+triggering `M-x`. This is probably a simplification of what is
+actually does, so if you care the documentation is available
+[here](http://www.gnu.org/software/emacs/manual/html_node/elisp/Using-Interactive.html).
 
-After the call to `interactive` we hit the core of this function.
-`with-output-to-temp-buffer` takes the buffer name as a first argument
-and then some forms and puts the output of forms into the named
-buffer. If the buffer doesn't exist it will make it.
+After the call to `interactive` we hit the core of this function, the
+call to `with-output-to-temp-buffer`. This function a buffer name as a first argument
+and additional forms. The output of those forms is put into the named
+buffer.
 
-The form I'm passing to `with-output-to-temp-buffer` uses the
-synchronous `shell-command` to run `echo This is an example`. The
-stdout of the command is being directed to the same buffer that
-`with-output-to-temp-buffer` is creating and directs stderr to
+The form I'm passing to `with-output-to-temp-buffer` is a call to
+`shell-command`. `shell-command` will run `echo This is an example`
+synchronously and redirect stdout to `*blog-example*` and stderr to
 `*Messages*`.
 
-The final line is simply changing the focus to the newly created
-buffer. This isn't necesarry (opening help doesn't do this) but I
-prefer it. I want to run a command, see the output, and then hit `q`
-and be immediately back to what I was doing.
+The final line opens the buffer and switches focus to it. Now you can
+look at the output and when you are ready to return just hit `q`.
 
-This is clearly a simplified example but shows how easy it is to
-define your own custom elisp functions that run a command and display
-the output in a temporary buffer. The workflow I improved by doing
-this I do fairly regularly and this makes it easier to do.
+This is a simplified example but it shows how easy it is to extend
+Emacs functionality. Doing something similar to this made a task I do
+frequently more pleasant.
 
 My use case is a bit more complicated and involves saving the buffer
 I'm currently editing and then running a command against the saved
-file. Below is some sample code for acheiving this.
+file. Below is some sample code that does something similar.
 
-````elisp
+``` cl
 (defun example2 ()
   (interactive)
   (when (and (buffer-modified-p)
@@ -77,4 +80,4 @@ file. Below is some sample code for acheiving this.
                    "*blog-example*"
                    "*Messages*")
     (pop-to-buffer "*blog-example*")))
-````
+```
