@@ -10,6 +10,13 @@ coming up with simple solutions to solve the complex problems faced by
 a trading firm. I've found that pair programming and test driven
 development deliver the best solutions.
 
+I've written code in a decent number of languages including Clojure,
+Java, C#, C++, C, Q, Perl, Python, Ruby, JavaScript, ClojureScript,
+Haskell, Emacs Lisp, Scala, VBA, and probably some others I'm not remembering. So
+far I've been happiest when coding in a Lisp though I need to explore
+some more languages with a good type system (looking at you Haskell, I
+need to write more of you).
+
 When not coding I try to be active, mostly focusing on rock climbing
 and sailing. I've hiked to the top of [Mount Kilimanjaro](/kili.html)
 and have sailed multiple times in the
