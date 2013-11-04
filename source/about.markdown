@@ -3,12 +3,17 @@ layout: page
 title: about
 ---
 
-I write code. Currently I'm paid to write code at
-[DRW Trading](http://drw.com). At DRW I've spent my time writing
-research tools, latency sensitive trading systems, and more. I enjoy
-coming up with simple solutions to solve the complex problems faced by
-a trading firm. I've found that pair programming and test driven
-development deliver the best solutions.
+I write code. I currently work at [Outpace](http://outpace.com) trying
+to change the way business applications are delivered to the
+enterprise.
+
+Previously I worked at [DRW Trading](http://drw.com). At DRW I spent
+my time writing research tools, trading systems (latency sensitive and
+non-latency sensitive), and more.
+
+I enjoy coming up with simple solutions to solve the complex problems
+faced by a trading firm. I've found that pair programming and test
+driven development deliver the best solutions.
 
 I've written code in a decent number of languages including Clojure,
 Java, C#, C++, C, Q, Perl, Python, Ruby, JavaScript, ClojureScript,
