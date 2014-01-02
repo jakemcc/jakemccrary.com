@@ -6,17 +6,29 @@ comments: true
 categories: [books, incanter, clojure]
 ---
 
-I've been using [goodreads](https://goodreads.com) to keep track of my
-reading since 2010 (my
-[profile](https://www.goodreads.com/user/show/3431614-jake-mccrary)). I've found it extremely useful for capturing what books I want to read along with being a repository of what I've read. I thought it would be fun to take a closer look at the books I read in 2013 and decided to use the [Clojure](http://clojure.org/) library [Incanter](http://incanter.org/). I haven't used Incanter since I [contributed](http://jakemccrary.com/blog/2010/02/21/plotting-time-series-data-with-incanter/) to it back in 2010 and thought this would be a good opportunity to regain some familiarity.
+I use [goodreads](https://goodreads.com) to keep track of
+[my reading](https://www.goodreads.com/user/show/3431614-jake-mccrary)
+and have since early 2010. I find very useful for capturing what I
+want to read and reminding me of how I felt about books I've read. I
+thought it would be fun to take a closer look at what I read in 2013.
+I'm doing this using [Clojure](http://clojure.org/) with
+[Incanter](http://incanter.org/). I haven't used Incanter since I
+wrote
+[this](http://jakemccrary.com/blog/2010/02/21/plotting-time-series-data-with-incanter/)
+post and thought this would be a good opportunity to visit it again.
 
-The first step to playing around with my goodreads data was to somehow get it out of goodreads. I've done work with the Goodreads API before [^1] but decided that was a bit overkill for this. Instead I used goodreads export functionality (follow the links: My Books > import/export) to download a csv file. This also let me do a little of data cleanup since some of the book's page counts were missing [^2].
+First I need to get my data out of goodreads. I've worked with the
+Goodreads API before [^1] but am not going to use it for this
+exercise. Instead I'm using the goodreads export functionality (at
+goodreads follow the links: My Books > import/export) to export a csv
+file. Having the csv file also lets me cleanup some of the data since
+some of the book's page counts were missing [^2].
 
 [^1]: A project on Heroku that takes your to-read list from goodreads and queries the Chicago Public Library to see if books are available. Someday I'll give it some love and make it usable by others.
 
 [^2]: I've also applied to be a goodreads librarian so I can actually fix their data as well.
 
-Armed with my goodreads data it was time to start playing with it. After running `lein new goodreads-summary` I edited my `project.clj` file to have a dependency on Incanter.
+Now that I have data it is time to start playing with it. Run `lein new goodreads-summary` and edit the `project.clj` file to have a dependency on Incanter.
 
 ``` clojure
     (defproject goodreads-summary "0.1.0-SNAPSHOT"
@@ -26,7 +38,14 @@ Armed with my goodreads data it was time to start playing with it. After running
                      [clj-time "0.6.0"]])
 ```
 
-This first step towards playing with my data was to get it into an Incanter dataset. Since the data was already in a csv file it was really straightforward to do. Just needed to `require` the right libraries and use [incanter.io/read-dataset](http://liebke.github.io/incanter/io-api.html#incanter.io/read-dataset). The snippet below has all of the necessary requires for the remainder of the examples. It isn't well documented but by passing `:keyword-headers false` to `read-dataset` the headers are not converted to keywords. Some of the goodreads headers have spaces in them which makes dealing with them as keywords a pain.
+Next I'm going to take the csv file and transform it into an Incanter
+dataset. This is easily done with
+[incanter.io/read-dataset](http://liebke.github.io/incanter/io-api.html#incanter.io/read-dataset).
+It isn't well documented but by passing `:keyword-headers false` to
+`read-dataset` the headers from the csv are not converted to keywords.
+I'm doing this because some of the goodreads headers contain spaces
+and dealing with spaces in keywords is a pain. The snippet below has
+all of the necessary requires for the remainder of the examples.
 
 ``` clojure
     (ns goodreads-summary.core
@@ -42,23 +61,43 @@ This first step towards playing with my data was to get it into an Incanter data
       (io/read-dataset filepath :header true :keyword-headers false))
 ```
 
-Calling `read-csv` with the path to the exported goodreads data results in an Incanter dataset. A useful function when experimenting with datasets is [incanter.core/view](http://liebke.github.io/incanter/core-api.html#incanter.core/view). Running `(incanter/view (read-csv "goodreads_export.csv"))` pops up a grid of all of the entire dataset. For my purposes I didn't care about most of the data provided; I only wanted to look at a few columns and only books finished in 2013. This lead me to look into how to filter and select from an Incanter dataset.
-
-Let's take a at selecting columns first. Selecting columns can be done with (incanter.core/sel)[http://liebke.github.io/incanter/core-api.html#incanter.core/sel]. Like most Incanter functions it has many overloaded versions. One way to use it is to pass a dataset as the first argument and then a vector of columns you want to select. 
+Calling `read-csv` with the path to the exported goodreads data
+results in dataset. If you want to view the data use
+[incanter.core/view](http://liebke.github.io/incanter/core-api.html#incanter.core/view).
+Running `(incanter/view (read-csv "goodreads_export.csv"))` pops up a
+grid of with all the data. I don't care about most of the columns so
+lets define a function that selects out the few I care about.
 
 ``` clojure
     (defn select-columns [dataset]
-      (incanter/sel dataset :cols (str->keys ["Number of Pages" "Date Read" "Bookshelves" "Exclusive Shelf"])))
+      (incanter/sel dataset :cols ["Number of Pages" "Date Read" "Bookshelves" "Exclusive Shelf"]))
 ```
 
-Filtering a dataset is done using (incanter.core/$where)[]. Filtering for books that are on your goodreads *read* shelf is pretty straightforward.
+Selecting columns is done with
+[incanter.core/sel](http://liebke.github.io/incanter/core-api.html#incanter.core/sel).
+Like most Incanter functions it has many overloads. One way to use it
+is to pass a dataset with a vector of columns you want to select.
+
+
+Filtering a dataset is done using
+[incanter.core/$where](http://liebke.github.io/incanter/core-api.html#incanter.core/$where).
+Goodreads has three default shelves **to-read**,
+**currently-reading**, and **read**. To select all your read books you
+filter of the **Exclusive Shelf** column for **read** books.
 
 ``` clojure
     (defn finished [dataset]
       (incanter/$where {"Exclusive Shelf" "read"} dataset))
 ```
 
-Filtering for books read in 2013 is a bit more complicated. First I converted the **"Date Read"** column from a string to a `org.joda.time.DateTime`. This was done with the combination of `transform-date-read-column` and `parse-date`. Some of my goodreads data doesn't have the **"Date Read"** column filled in. I handled this by replacing the missing date with a date time set to `clj-time.core/date-time 0`.
+Filtering for books read in 2013 is a bit more complicated. First I
+convert the **Date Read** column from a string to a
+`org.joda.time.DateTime`. This is done with the combination of
+`transform-date-read-column` and `parse-date`. Some of the my data is missing a **Date Read** value. I'm choosing to handle this by treating missing data as the result of `(clj-time.core/date-time 0)`.
+
+The `$where` in `books-read-in-2013` is a bit more complicated than
+the filtering in `finished`. Here I'm providing a predicate to
+use instead of just doing an equality comparison.
 
 ``` clojure
     (defn parse-date [date-str]
@@ -77,54 +116,70 @@ Filtering for books read in 2013 is a bit more complicated. First I converted th
       (let [finished (finished (select-columns dataset))
             with-dates (incanter/$where {"Date Read" {:fn identity}} finished)
             with-date-objects (transform-date-read-column with-dates)]
-        (incanter/$where {"Date Read" {:fn (date-greater-than? (parse-date "2012/12/31"))}} with-date-objects)))
+        (incanter/$where {"Date Read" {:fn (date-greater-than-pred (parse-date "2012/12/31"))}}
+                         with-date-objects)))
 ```
 
-The `$where` in `books-read-in-2013` is a bit more complicated than the filtering done in `finished`. Here I'm providing a predicate to use instead of just doing an equality comparison.
-
-After performing this filter I finally had that I read in 2013. Now to generate some data for each month. I approached this by writing a function that adds a **Month** column to my dataset. I originally had the function below. It uses `incanter.core/$map` to generate the data, makes a dataset with the new data, and then adds that to the original dataset.
+Now we have a dataset that that contains only books read in 2013
+(well, until I read a book in 2014 and the filter above also grabs
+books in 2014). Now to generate some analytic for each month. First
+lets add a **Month** column to our data. Originally I wrote the
+function below. It uses `incanter.core/$map` to generate the data,
+makes a dataset with the new data, and then adds that to the original
+dataset.
 
 ``` clojure
     (defn add-month-read-column [dataset]
       (let [month-read (incanter/$map tc/month "Date Read" dataset)
-            month-dataset (incanter/dataset [:month-read] month-read)
+            month-dataset (incanter/dataset ["Month"] month-read)
             with-month-read (incanter/conj-cols dataset month-dataset)]
         with-month-read))
 ```
 
-This felt like a indirect way of adding a derived column. While writing this post I happened to run across (incanter.core/add-derived-column)[] which does exactly what we want. The above function turned into a one-liner.
+When I wrote the above code it seemed like there should be a better
+way. While writing this post I stumbled across
+[incanter.core/add-derived-column](http://liebke.github.io/incanter/core-api.html#incanter.core/add-derived-column).
+Switching to `add-derived-column` makes `add-month-read-column` almost trivial.
 
 ``` clojure
     (defn add-month-read-column [dataset]
-      (incanter/add-derived-column :month-read ["Date Read"] tc/month dataset))
+      (incanter/add-derived-column "Month" ["Date Read"] tc/month dataset))
 ```
 
-With `add-month-read-column` in place we can now start aggregating some stats. Below is code for figuring out the total number of pages read per month and the number of books read.
+Now that we have `add-month-read-column`  we can now start aggregating
+some stats. Lets write code for calculating the pages read per month.
 
 ``` clojure
     (defn pages-by-month [dataset]
       (let [with-month-read (add-month-read-column dataset)]
-        (->> (incanter/$rollup :sum "Number of Pages" :month-read with-month-read)
-             (incanter/$order :month-read :asc))))
-    
+        (->> (incanter/$rollup :sum "Number of Pages" "Month" with-month-read)
+             (incanter/$order "Month" :asc))))
+```
+
+That was pretty easy. Lets write a function to count the number of books read per month.
+
+``` clojure
     (defn book-count-by-month [dataset]
       (let [with-month-read (add-month-read-column dataset)]
-        (->> (incanter/$rollup :count "Number of books" :month-read with-month-read)
-             (incanter/$order :month-read :asc))))
+        (->> (incanter/$rollup :count "Number of books" "Month" with-month-read)
+             (incanter/$order "Month" :asc))))
+```
 
+`pages-by-month` and `book-count-by-month` are very similar. Each uses [incanter.core/$rollup](http://liebke.github.io/incanter/core-api.html#incanter.core/$rollup) to calculate per month stats. The first argument to `$rollup` can be a function that takes a sequence of values or one of the supported magical "function identifier keywords".
+
+Next lets combine the data together so we can print out a nice table. While we are at it lets add another column.
+
+``` clojure
     (defn stats-by-month [dataset]
-      (->> (incanter/$join [:month-read :month-read]
+      (->> (incanter/$join ["Month" "Month"]
                          (pages-by-month dataset)
                          (book-count-by-month dataset))
-           (incanter/rename-cols {:month-read "Month"
-                                "Number of Pages" "Page Count"
-                                "Number of books" "Book Count"})
+           (incanter/rename-cols {"Number of Pages" "Page Count"
+                                  "Number of books" "Book Count"})
            (incanter/add-derived-column "Pages/Books"
                                       ["Page Count" "Book Count"]
                                       (fn [p b] (Math/round (double (/ p b)))))))
 ```
-
-`pages-by-month` and `book-count-by-month` are very similar. Each uses (incanter.core/$rollup)[http://liebke.github.io/incanter/core-api.html#incanter.core/$rollup] to calculate per month stats. The first argument to `$rollup` can be a function that takes a sequence of values or one of the supported magical "function identifier keywords".
 
 `stats-by-month` returns a dataset which when printed looks like the following table. It joins the data, renames columns, and adds a derived column.
 
@@ -144,14 +199,14 @@ With `add-month-read-column` in place we can now start aggregating some stats. B
     |    11 |          5 |       2248 |         450 |
     |    12 |          7 |       1716 |         245 |
 
-So a nice ascii table is great but what about producing some images? Incanter has some functions for doing just that. Lets make a bar chart.
+Great. Now we have a little ascii table. Lets make get graphical and make some bar charts.
 
 ``` clojure
     (defn chart-column-by-month [column dataset]
       (let [select (fn [column] (incanter/sel dataset :cols column))
             months (select "Month")]
         (charts/bar-chart months (select column)
-                           :y-label column :x-label "Month")))
+                          :y-label column :x-label "Month")))
     
     (defn chart-page-count-by-month [dataset]
       (chart-column-by-month "Page Count" dataset))
@@ -167,7 +222,49 @@ So a nice ascii table is great but what about producing some images? Incanter ha
           incanter/view))
 ```
 
-Running the snippet `view-page-count-chart` produces a pop-up with the below bar chart. The chart actually surprises me as I fully expected to have higher page counts during the winter months than the summer months.
+Running the snippet `view-page-count-chart` produces a pop-up with the
+below bar chart. The chart actually surprises me as I fully expected
+to have higher page counts during the winter months than the summer
+months. This chart and analysis is pretty useless though without
+knowing the difficulty of the pages read. For example, last February I
+read
+[Infinite Jest](http://www.amazon.com/Infinite-Jest-David-Foster-Wallace/dp/0316920045/).
+Knowing that I don't feel like having a low page count in that month
+is slacking at all.
 
 ![Bar chart of total page count by month](/images/page-count-by-month.png "Bar chart of total page count by month")
 
+
+### 2013 Summary ###
+
+2013 was a pretty big year of reading. I read more books this past
+year than all other years that I have data. I also read some of the
+best books I've ever read. Not only that but I actually created
+multiple [^3] custom Kindle dictionaries to help improve my (and
+others) reading experience.
+
+[^3]: One for [Functional JavaScript](http://jakemccrary.com/blog/2013/07/09/releasing-the-functional-javascript-companion/) and another for [Dune](http://gum.co/dune-dictionary). If you want a custom Kindle dictionary made feel free to reach out.
+
+Summary table [^4]:
+
+[^4]: tech shelf only includes programming books.
+
+    |   :shelf | :books | :pages |
+    |----------+--------+--------|
+    | non-tech |     51 |  17798 |
+    |     tech |     10 |   2707 |
+    |     read |     61 |  20505 |
+    
+
+
+### Plans for 2014 ###
+
+I'm planning on reading a similar about in this upcoming year but
+probably having a bit more non-fiction books. First step towards doing
+that is to start classifying my books as non-fiction or fiction. I'm
+also planning on rereading at least two books that I've read in the
+last few years. This is unusual for me because I don't often reread
+books that quickly.
+
+If you have any book recommendations feel free to leave them in the
+comments or contact me through twitter or email.
