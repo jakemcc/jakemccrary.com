@@ -9,13 +9,14 @@ I've collected some of the pictures fellow travelers took and have posted them [
 
 ### Gear
 
-[Here](http://picasaweb.google.com/lh/photo/fPHpZRYO3HDxsc5WaNMqAQ?feat=directlink) is a picture along with a list of what gear I brought to climb Mount Kilimanjaro and [here](http://picasaweb.google.com/lh/photo/9eiiSHxunDVWdZK2mCaNkw?feat=directlink) it is all packed. I don't think I over or underpacked for this trip. If I were to do it again I would swap out the gloves I had for some nice mittens. They would have been much more useful for the summit.
+[Here](http://picasaweb.google.com/lh/photo/fPHpZRYO3HDxsc5WaNMqAQ?feat=directlink) is a picture along with a list of what gear I brought to climb Mount Kilimanjaro and [here](http://picasaweb.google.com/lh/photo/9eiiSHxunDVWdZK2mCaNkw?feat=directlink) it is all packed. I don't think I over or under-packed for this trip. If I were to do it again I would swap out the gloves I had for some nice mittens. They would have been much more useful for the summit.
 
 ### Traveling to Tanzania
 
 The trip started on September 21st, 2010. Most of us started the trip from Chicago. From there we flew to Detroit to pick up the two Michigan residing travelers before starting the international legs of the trip. From Detroit we flew to Amsterdam, switched planes, and continued on to Kilimanjaro International Airport (JRO). The flights in Chicago started around 1:30 PM on the 21st and we arrived in Africa on Sept 22nd at about 8:30 PM (all times local to region bodies were located in). 
 
-When we arrived at JRO we departed the plane by walking down stairs that were brought over to one of the many doors of the plane and we walked done onto the tarmac. Leaving a massive place in this fashion is pretty cool. The arrival area of JRO was a small building. Inside it we bought our travel visas (100 USD), grabbed our luggage, and walked through customs.  After customs we were greeted by David, a representative from [Good Earth](http://www.goodearthtours.com) (our tour company). We then started our bus ride to our home away from home, the hotel Le Jacaranda. This ride was our first introduction to riding in cars in Tanzania and it took about an hour to get to our hotel.
+
+We landed at JRO and deplaned onto the tarmac. The difference in size between our plane and the small customs building was memorable. Inside it we bought our travel visas (100 USD), grabbed our luggage, and walked through customs. David, a representative from [Good Earth](http://www.goodearthtours.com) (our tour company), greeted us and lead us to his vehicle. We then started our bus ride to our home away from home, the hotel Le Jacaranda. After about an hour we stepped out of the vehicle and walked into our hotel.
 
 ### Driving
 
@@ -73,7 +74,7 @@ After waking up at the usual time (about 7 am) and eating our normal breakfast w
 
 This day was full of rocky travels. Both Jessi and Brett had issues with getting to the Lava Tower with both of them ending up throwing up.
 
-### Day 4 (Baranco Camp, 4000m -> Karanga Vally, 4200m)
+### Day 4 (Baranco Camp, 4000m -> Karanga Valley, 4200m)
 
 This day we waited till the sun had been up a bit before getting up so it would be warmer out and to give other hikers a chance to get ahead of us if they were doing the usual Baranco Camp -> Barafu Camp hike. We opted to take an extra day on the mountain in order to give us more time to adjust to the altitude. As a result this day was only supposed to be about three hours of hiking. It probably was more like four hours. 
 
@@ -87,9 +88,9 @@ After finishing Baranco Wall we still had a lot of hiking left before we made it
 
 This day was also supposed to be about three hours. I'm not sure how long it actually took. Because of the idea that it would be a short hike we once again slept until the sun was already out and the air was a bit warmer. We ate our usual breakfast and started the hike.
 
-This was the first day were our group split into two groups. Jessi and Mark along with the guides Marame and Winston formed one group while the rest of us (Alex, Brett, Jon, myself and the guides Joseph and Godlisten) formed another. This allowed my group to move at a quicker pace. It also allowed us to take a steeper shortcut to Barafu camp. Godlisten said the steeper shortcut simulated what the hike to the summit would be like. The pace we took was also closer to what pace Godlisten wanted to take while summitting.
+This was the first day were our group split into two groups. Jessi and Mark along with the guides Marame and Winston formed one group while the rest of us (Alex, Brett, Jon, myself and the guides Joseph and Godlisten) formed another. This allowed my group to move at a quicker pace. It also allowed us to take a steeper shortcut to Barafu camp. Godlisten said the steeper shortcut simulated what the hike to the summit would be like. The pace we took was also closer to what pace Godlisten wanted to take while summiting.
 
-Barafu camp was the highest we would camp. The terrian was entirely rocks. You needed to pay attention to where you stepped as the rocks you were stepping on could slide. We were told that barafu in Swahili means ice.  This was the coldest camp so the name was fitting. There was still a ranger camping out here with a book for us to sign. He also sold candy bars, coke, and t-shirts though none of us bought any. Godlisten said the rangers spend a week at each camp before going to the next one. Spending a week at Barafu camp would not be a great time.
+Barafu camp was the highest we would camp. The terrain was entirely rocks. You needed to pay attention to where you stepped as the rocks you were stepping on could slide. We were told that barafu in Swahili means ice.  This was the coldest camp so the name was fitting. There was still a ranger camping out here with a book for us to sign. He also sold candy bars, coke, and t-shirts though none of us bought any. Godlisten said the rangers spend a week at each camp before going to the next one. Spending a week at Barafu camp would not be a great time.
 
 We tried to sleep as much as possible after arriving in camp because our next hike would start at midnight.
 
@@ -123,7 +124,7 @@ Once we got back to Barafu camp we had time for a 30 minute rest. We took a nap 
 
 The walk down to Mweka camp was uneventful. I found it pretty painful. After a while every step I took started to hurt my knees. Walking on a downward slope for so long is terrible.
 
-Mweka Camp was back in the heather region. We were back to camping amongst trees. We ate our final dinner and slept. You could tell that everyone was excited to be off the mountain. While this was a vacation for the six of us it was a job for the 21 people who made the climb possible. A job that took them away from their families for seven days. It was easy to tell that people were ready to make it to the bottom.
+Mweka Camp was back in the heather region. We were back to camping surrounded by trees. We ate our final dinner and slept. You could tell that everyone was excited to be off the mountain. While this was a vacation for the six of us it was a job for the 21 people who made the climb possible. A job that took them away from their families for seven days. It was easy to tell that people were ready to make it to the bottom.
 
 It was at Mweka Camp that we tipped our crew. I don't remember specifics so the following are mostly guesses. I think they are approximately correct. Porters received 50 USD each from the group. I think we gave the cooks $77. Head porter received around $100. Assistant guides about $120. Godlisten received about $155 and Joseph about $135. If you were a porter who had a special job we gave you an additional $10.
 
