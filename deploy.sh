@@ -1,2 +1,2 @@
 #!/bin/bash
-bundle exec rake rsync
+bundle exec rake deploy
