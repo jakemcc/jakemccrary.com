@@ -20,17 +20,17 @@ We landed at JRO and deplaned onto the tarmac. The difference in size between ou
 
 ### Driving
 
-Traveling by car in Tanzania was quite the experience. I only recall seeing a single stop light the entire trip. I don't remember seeing any other traffic flow control signs. Flow of traffic was controlled by speed bumps. No matter where you were driving there was a near constant passing of other vehicles (or being passed). There seemed to be a usage of blinkers and lights to help signal to other cars when it was safe to pass. I wasn't able to completely figure it out but I was pretty impressed with the controlled chaos of driving.
+Traveling by car in Tanzania was quite the experience. I only recall seeing a single stop light the entire trip. I don't remember seeing any other traffic flow control signs. Flow of traffic was controlled by speed bumps. No matter where you were driving there was a near constant passing of other vehicles (or being passed). There seemed to be a usage of blinkers and lights to help signal to other cars when it was safe to pass. I wasn't able to completely figure it out but I was impressed with the controlled chaos of driving.
 
 ### La Jacaranda
 
-Our hotel was pretty nice. We had three rooms between the six of us and split the rooms so Jon and I had a room with three beds, Mark and Jessi had some sort of suite with a single bed, and Brett and Alex had a room (I never saw it and cannot comment on what it was like).
+Our hotel was nice. We had three rooms between the six of us and split the rooms so Jon and I had a room with three beds, Mark and Jessi had some sort of suite with a single bed, and Brett and Alex had a room (I never saw it and cannot comment on what it was like).
 
-Each bed had mosquito netting to keep out mosquitoes while sleeping. The beds seemed to be made out of a memory foam type material and they were pretty comfortable.
+Each bed had mosquito netting to keep out mosquitoes while sleeping. The beds seemed to be made out of a memory foam type material and they were comfortable.
 
 ### Day 0 (Safari day before climb)
 
-We took a driving safari in Arusha National Park. It was pretty awesome. Animals were abundant. It is best described by looking at [pictures](http://picasaweb.google.com/jakemcc/Tanzania?feat=directlink).
+We took a driving safari in Arusha National Park. It was awesome. Animals were abundant. It is best described by looking at [pictures](http://picasaweb.google.com/jakemcc/Tanzania?feat=directlink).
 
 ### Day 1 (Machame Gate, 1800 m -> Machame Camp, 3000 m)
 
@@ -38,7 +38,7 @@ After breakfast our head guide Godlisten came to pick us up from the hotel. We w
 
 Once at Machame gate we still had to wait while park fee were paid and gear was split between the porters. Once the paper work was done we started our trek. 
 
-The first day was mostly traveling through the rain forest zone. This path was pretty wide and well covered so sun wasn't a huge deal. The weather was nice and not too cold or hot. After the rain forest we entered what the guide called the heather region. It was in this region that we slept the first night.
+The first day was spent traveling through the rain forest zone. This path was wide and well covered so sun wasn't a huge deal. The weather was nice and not too cold or hot. After the rain forest we entered what the guide called the heather region. It was in this region that we slept the first night.
 
 It was during this day that Godlisten gave us the advice which we heard many times throughout the trip. That advice was to go 'pole, pole' which means 'slowly, slowly.' The other advice was to drink tons of water. Both of these tips were supposed to help with your body adjusting to the increasing altitude. If another group passed us Godlisten would claim they were going too fast.
 
