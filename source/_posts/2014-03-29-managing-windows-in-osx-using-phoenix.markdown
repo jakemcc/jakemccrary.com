@@ -26,7 +26,7 @@ At the recommendation from a reader I switched to
 [Slate](https://github.com/jigish/slate). Slate has a ton of features
 and I barely scratched the surface in how I used it. I really just
 used it as a replacement for Spectacle and didn't use any of the
-advanced features. I ended up becoming disatisfied with Slate. After
+advanced features. I ended up becoming dissatisfied with Slate. After
 running for a while (talking at least a week) it started to respond
 slowly to commands. I'd try to move a window to another monitor and it
 wouldn't register. Eventually I'd be in another process and the
@@ -34,7 +34,7 @@ command would register and a different window would jump monitors.
 
 ## Phoenix ##
 
-I was looking for solutions to Slate's unreponsiveness when I stumbled
+I was looking for solutions to Slate's unresponsiveness when I stumbled
 on [Phoenix](https://github.com/sdegutis/Phoenix). I was drawn towards
 the stated goal of stating that it "aims for efficiency and a very
 small footprint." The fact that it is still being actively developed
@@ -55,7 +55,7 @@ Luckily there are now
 [examples](https://github.com/sdegutis/Phoenix/wiki) out there you can
 follow in order to get the features you want. Browsing through those
 should give a good starting point and idea of what types of features
-are imlementable.
+are implementable.
 
 My
 [configuration](https://github.com/jakemcc/dotfiles/blob/master/phoenix.js)
