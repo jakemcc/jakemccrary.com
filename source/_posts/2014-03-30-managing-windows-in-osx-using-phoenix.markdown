@@ -3,7 +3,6 @@ layout: post
 title: "Managing windows in OS X using Phoenix"
 date: 2014-03-30 18:30
 comments: true
-publish: false
 categories: [osx, tools, phoenix]
 ---
 
