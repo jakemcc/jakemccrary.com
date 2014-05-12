@@ -3,7 +3,7 @@ layout: post
 title: "Building a Standing Desk"
 date: 2014-05-11 19:17
 comments: true
-categories: [desk, work_space, DIY]
+categories: [desk, work space, DIY]
 ---
 
 A few months ago I started working from home. This has been an overall
