@@ -199,7 +199,7 @@ Next lets combine the data together so we can print out a nice table. While we a
     |    11 |          5 |       2248 |         450 |
     |    12 |          7 |       1716 |         245 |
 
-Great. Now we have a little ascii table. Lets make get graphical and make some bar charts.
+Great. Now we have a little ascii table. Lets get graphical and make some bar charts.
 
 ``` clojure
     (defn chart-column-by-month [column dataset]
