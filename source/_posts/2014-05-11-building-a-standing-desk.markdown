@@ -3,6 +3,7 @@ layout: post
 title: "Building a Standing Desk"
 date: 2014-05-11 19:17
 comments: true
+published: false
 categories: [desk, work-space, DIY]
 ---
 
