@@ -18,10 +18,9 @@ reload your code and then reruns either your
 tests. Using tools like these has changed my development process.
 
 Version 0.5.0 of **lein-test-refresh** was released last week. This
-release enables even quicker feedback by tracking which tests are
-failing and after reloading your code it runs those tests first. Only
-when your previously failed tests pass does it then rerun all of your
-tests.
+release enables even quicker feedback by tracking which tests fail and
+after reloading your code it runs those tests first. Only when your
+previously failed tests pass does it then rerun all of your tests.
 
 **lein-test-refresh** has had quite a few features added since I last
 wrote about it. The
@@ -42,9 +41,10 @@ they include:
 * Reports on your tests running time.
 
 I don't have enough experience with the new **lein-test-refresh** to
-say how having failing tests will affect my development practices. My
-guess is it won't drastically change my practice but will enable
-quicker feedback. Quick feedback cycles are what it is all about.
+say how having failing tests will affect my development practices. I
+don't expect this to change my development practices but it will
+enable quicker feedback. Quick feedback cycles are what it is all
+about.
 
 ### Acknowledgments ###
 
