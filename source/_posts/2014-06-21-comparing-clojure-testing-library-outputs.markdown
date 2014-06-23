@@ -16,11 +16,21 @@ disappointed with how Midje reports test failures.
 
 This inspired me to spend some time
 [exploring](https://github.com/jakemcc/clojure-test-bed) different
-Clojure testing libraries. The rest of this post comapares test output
+Clojure testing libraries. The rest of this post compares test output
 from clojure.test (with and without humane-test-output), expectations,
 Midje, and Speclj. I'm most familiar with clojure.test and
 expectations so please leave a comment and open a pull request if the
 clojure-test-bed project can be improved.
+
+##### Caveats #####
+
+I ran all of these examples using Leiningen. I'm not going to color
+the example output like the libraries color it for this post. I find
+the color added to the output of expectations and Midje to be useful.
+Speclj also adds color but I found it negatively affected reading the
+output. I use a dark colored terminal and Speclj colors the line in
+the output that tells where the failure occurs black. This made it
+hard to read. None of the clojure.test output is colored.
 
 I'm not going go show what the tests look like for each testing
 library past the first comparison. How a test in expressed is
@@ -66,7 +76,7 @@ not really useful here it also shows a diff.
 
 Fewer programmers have probably used Jay Field's
 [expectations](http://jayfields.com/expectations/). It is library with
-a mimimal syntax. Below are the same tests as above written using expectations.
+a minimal syntax. Below are the same tests as above written using expectations.
 
 
 ``` clojure
@@ -93,9 +103,9 @@ The output from expectations is pretty nice. You can easily pick out
 what the expected and actual values. It also shows you where the
 string starts to diverge.
 
-##### speclj #####
+##### Speclj #####
 
-Before writing this post I had zero experiance with
+Before writing this post I had zero experience with
 [Speclj](http://speclj.com/). Unlike expectations it provides a
 significant number of [functions](http://speclj.com/docs).
 
@@ -108,7 +118,7 @@ significant number of [functions](http://speclj.com/docs).
      (should= "space" "spice")))
 ```
 
-``` console speclj
+``` console Speclj
   9) String comparisons have nice error message
      Expected: "space"
           got: "spice" (using =)
@@ -116,13 +126,13 @@ significant number of [functions](http://speclj.com/docs).
 ```
 
 Speclj's test output above isn't hard to parse. Pretty easily can pick
-out the expected and actual values. Definitly an improvement over the basic
+out the expected and actual values. Definitely an improvement over the basic
 `clojure.test` output. It be nice if it did a bit more to help you spot the difference.
 
 ##### Midje #####
 
 [Midje](https://github.com/marick/Midje) is used by some of the
-projects I work on so I have some experiance with it. Unlike the other
+projects I work on so I have some experience with it. Unlike the other
 libraries mentioned it switches up the assertion syntax. In Midje the
 expected value is on the right side of `=>`.
 
@@ -137,7 +147,7 @@ expected value is on the right side of `=>`.
    "spice" => "space")
 ```
 
-``` console midje
+``` console Midje
 FAIL "strings not equal" at (string_test.clj:8)
     Expected: "space"
       Actual: "spice"
@@ -160,15 +170,17 @@ spot the difference or even find the expected and actual values.
 Comparing maps
 --------------
 
-#### clojure.test ####
+For maps I've setup comparisons three assertions. The first has an
+extra a key-value pair in the actual. The second has an extra in the
+expected. The final assertion has a different value for the `:cheese`
+key. The clojure.test example is below.
+
 
 ``` clojure
-(ns example.map-test
-  (:require [clojure.test :refer :all]))
-
 (deftest map-comparisons
-  (is (= {:sheep 1} {:goats 1 :sheep 1}))
-  (is (= {:goats 1 :sheep 1} {:sheep 1})))
+  (is (= {:sheep 1} {:cheese 1 :sheep 1}))
+  (is (= {:sheep 1 :cheese 1} {:sheep 1}))
+  (is (= {:sheep 1 :cheese 1} {:sheep 1 :cheese 5})))
 ```
 
 ``` console clojure.test
@@ -184,6 +196,10 @@ FAIL in (map-comparisons) (map_test.clj:7)
 expected: (= {:sheep 1, :cheese 1} {:sheep 1, :cheese 5})
   actual: (not (= {:cheese 1, :sheep 1} {:cheese 5, :sheep 1}))
 ```
+
+Unsurprisingly the default clojure.test output for maps suffers from
+the same problems found in the string comparisons. To find the
+actual and expected values you need to manually parse the output.
 
 ``` console clojure.test with humane-test-output
 FAIL in (map-comparisons) (map_test.clj:5)
@@ -202,6 +218,12 @@ expected: {:cheese 1, :sheep 1}
     diff: - {:cheese 1}
           + {:cheese 5}
 ```
+
+Above is the output of using clojure.test with humane-test-output. It
+is a big improvement over the default clojure.test. You can quickly
+see the expected and actual values. Unlike with the string assertions
+the diff view actually is helpful. Looking at the diffs does a pretty
+good job at telling you what is different.
 
 ``` console expectations
 failure in (map_expectations.clj:6) : example.map-expectations
@@ -232,24 +254,37 @@ failure in (map_expectations.clj:8) : example.map-expectations
            in actual, not expected: {:cheese 1}
 ```
 
-``` console speclj
-  4) map comparsions have nice error messages when extra entries keys present
+Expectations does a pretty good job helping you as well. As before you
+can clearly see the expected and actual values. Expectations also
+provides some hint as to what is different between the maps. I think
+the English descriptions are a bit easier to understand than the `+`
+or `-` used in the humane-test-output diff but just barely. Seeing `in
+expected, not actual: null` is a bit confusing and the output would
+be improved if that type of line was suppressed.
+
+
+I'm just going to lump Speclj and Midje together. The output for each
+is below. The both improve over clojure.test by making it easy to see
+the expected and actual value. The both don't do anything beyond that.
+
+``` console Speclj
+  4) map comparisons have nice error messages when extra entries keys present
      Expected: {:sheep 1}
           got: {:cheese 1, :sheep 1} (using =)
      /Users/jake/src/jakemcc/example/spec/example/map_spec.clj:7
 
-  5) map comparsions have nice error messages when missing an entry
+  5) map comparisons have nice error messages when missing an entry
      Expected: {:cheese 1, :sheep 1}
           got: {:sheep 1} (using =)
      /Users/jake/src/jakemcc/example/spec/example/map_spec.clj:9
 
-  6) map comparsions have nice error messages when mismatched values
+  6) map comparisons have nice error messages when mismatched values
      Expected: {:cheese 5, :sheep 1}
           got: {:cheese 1, :sheep 1} (using =)
      /Users/jake/src/jakemcc/example/spec/example/map_spec.clj:11
 ```
 
-``` console midje
+``` console Midje
 FAIL "map is missing an entry" at (map_test.clj:5)
     Expected: {:cheese 1, :sheep 1}
       Actual: {:sheep 1}
@@ -263,9 +298,18 @@ FAIL "map has a different value" at (map_test.clj:11)
       Actual: {:cheese 1, :sheep 1}
 ```
 
+##### Best map comparisons? #####
+
+Going go cope out here and give the award to best map comparisons to
+both expectations and clojure.test with humane-test-output. Both do a
+good job of helping the reader spot the difference.
+
 Comparing sets
 --------------
 
+Next up is comparing sets. Only two assertions for this section. One
+where the expected set has an extra member and one where it is missing
+a member.
 
 ``` clojure
 (ns example.set-test
@@ -276,6 +320,10 @@ Comparing sets
   (is (= #{:a :b :c} #{:a :b})))
 ```
 
+First up is the basic clojure.test output. It suffers from the same
+problem is has suffered this entire time. It doesn't make it easy to
+read the expected and actual values. 
+
 ``` console clojure.test
 FAIL in (set-comparisons) (set_test.clj:5)
 expected: (= #{:b :a} #{:c :b :a})
@@ -285,6 +333,11 @@ FAIL in (set-comparisons) (set_test.clj:6)
 expected: (= #{:c :b :a} #{:b :a})
   actual: (not (= #{:c :b :a} #{:b :a}))
 ```
+
+No surprises with clojure.test and humane-test-output. It improves the
+clojure.test output by making it easy to read the expected and actual
+values. The diff view also helps figure out what is causing the
+assertion to fail.
 
 ``` console clojure.test with humane-test-output
 FAIL in (set-comparisons) (set_test.clj:5)
@@ -297,6 +350,10 @@ expected: #{:c :b :a}
   actual: #{:b :a}
     diff: - #{:c}
 ```
+
+Expectations once again delivers on nice output. It continues to be
+easy to find the expected and actual values and helps you spot the
+differences with a diff view.
 
 ``` console expectations
 failure in (set_expectations.clj:4) : example.set-expectations
@@ -318,7 +375,9 @@ failure in (set_expectations.clj:5) : example.set-expectations
            in actual, not expected: null
 ```
 
-``` console speclj
+Speclj and Midje both have better output than the basic clojure.test.
+
+``` console Speclj
   7) set comparisons have nice error messages when missing item
      Expected: #{:b :a}
           got: #{:c :b :a} (using =)
@@ -330,7 +389,7 @@ failure in (set_expectations.clj:5) : example.set-expectations
      /Users/jake/src/jakemcc/example/spec/example/set_spec.clj:11
 ```
 
-``` console midje
+``` console Midje
 FAIL "set is superset of expected" at (set_test.clj:5)
     Expected: #{:a :b}
       Actual: #{:a :b :c}
@@ -340,8 +399,18 @@ FAIL "set is subset of expected" at (set_test.clj:8)
       Actual: #{:a :b}
 ```
 
+##### Best set comparison? #####
+
+Similar to the winner of the map comparisons I'm going to say claim
+that expectations and clojure.test with humane-test-output tie.
+
 Comparing lists
 ---------------
+
+Next up we compare lists (and lists to vectors). There are three
+comparisons; one with an extra element, one with same length but a
+single different and one comparing a vector and list with drastically
+different contents.
 
 ``` clojure
 (ns example.seq-test
@@ -350,8 +419,11 @@ Comparing lists
 (deftest list-comparisons
   (is (= '(1 2 3) '(1 2 3 4)))
   (is (= '(1 2 4) '(1 2 3)))
-  (is (= '(1 2 4) [1 2 4])))
+  (is (= '(9 8 7) [1 2 3])))
 ```
+
+First up clojure.test. Same issues as with all the previous
+comparisons.
 
 ``` console clojure.test
 FAIL in (list-comparisons) (seq_test.clj:5)
@@ -366,6 +438,11 @@ FAIL in (list-comparisons) (seq_test.clj:7)
 expected: (= (quote (9 8 7)) [1 2 3])
   actual: (not (= (9 8 7) [1 2 3]))
 ```
+
+Once again clojure.test with humane-test-output improves upon
+clojure.test. Only interesting difference from previous comparisons is
+that the diff view ends up having `nil` values in it where the
+elements are the same.
 
 ``` console clojure.test with humane-test-output
 FAIL in (list-comparisons) (seq_test.clj:5)
@@ -385,6 +462,10 @@ expected: (9 8 7)
     diff: - [9 8 7]
           + [1 2 3]
 ```
+
+Expectations continues to have good output. It tries to help you out
+as well. Here you have the same result as humane-test-output, `nil`
+values are inserted where there isn't a difference.
 
 ``` console expectations
 failure in (list_expectations.clj:4) : example.list-expectations
@@ -416,24 +497,28 @@ failure in (list_expectations.clj:6) : example.list-expectations
            in actual, not expected: [1 2 3]
 ```
 
-``` console speclj
-  1) List/vector comparissons when there is an extra element
+In a completely unsurprising result both Speclj and Midje are better
+than clojure.test but again don't give you anything extra besides
+making it easy to find the expected and actual values.
+
+``` console Speclj
+  1) List/vector comparisons when there is an extra element
      Expected: (1 2 3)
           got: (1 2 3 4) (using =)
      /Users/jake/src/jakemcc/example/spec/example/string_spec.clj:7
 
-  2) List/vector comparissons when there is a mismatched element
+  2) List/vector comparisons when there is a mismatched element
      Expected: (1 2 4)
           got: (1 2 3) (using =)
      /Users/jake/src/jakemcc/example/spec/example/string_spec.clj:9
 
-  3) List/vector comparissons when comparing different types
+  3) List/vector comparisons when comparing different types
      Expected: (9 8 7)
           got: [1 2 3] (using =)
      /Users/jake/src/jakemcc/example/spec/example/string_spec.clj:11
 ```
 
-``` console midje
+``` console Midje
 FAIL "lists are different sizes" at (seq_test.clj:5)
     Expected: (1 2 3)
       Actual: (1 2 3 4)
@@ -447,5 +532,19 @@ FAIL "compare very different list like values" at (seq_test.clj:14)
       Actual: [1 2 3]
 ```
 
-speclj test runner prints file and line number in black. Seems like a
-poor default when having a dark terminal is fairly common.
+##### List comparison conclusion #####
+
+I find the clojure.test with humane-test-output to be a bit easier to
+read than expectations. Both have better output than the basic
+clojure.test, Speclj, and Midje.
+
+## Conclusion ##
+
+It is great that Clojure ships with clojure.test. It is unfortunate
+that it does so little to help you read a failing test. As shown every
+library I tried has better output than clojure.test.
+
+If I were picking a testing library entirely on what a failing test
+looks like I would use expectations. My second pick would be
+clojure.test with humane-test-output.
+
