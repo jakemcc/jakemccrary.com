@@ -1,34 +1,36 @@
 ---
 layout: post
-title: "Comparing Clojure testing library outputs"
-date: 2014-06-21 10:51
+title: "Comparing Clojure Testing Libraries: Output"
+date: 2014-06-22 21:16
 comments: true
-published: false
-categories: [clojure, testing]
+published: true
+categories:
+- clojure
+- testing
 ---
 
 I recently became interested in how Clojure testing libraries help you
 when there is a test failure. This interest resulted in me
 [exploring](https://github.com/jakemcc/clojure-test-bed) different
-Clojure testing libraries. I created the same tests using clojure.test
+Clojure testing libraries. I created the same tests using **clojure.test**
 (with and without
 [humane-test-output](https://github.com/pjstadig/humane-test-output)),
 [expectations](http://jayfields.com/expectations/),
 [Midje](https://github.com/marick/Midje), and
 [Speclj](http://speclj.com/) and looked at the output.
 
-I ran all of these examples using Leiningen. Midje, Speclj, and
-expectations color their output but I'm not going to try to reproduce
-that here. The color added by Midje and expectations is useful. Speclj
-color hurt its readability. I use a dark colored terminal and Speclj
+I ran all of these examples using Leiningen. **Midje**, **Speclj**, and
+**expectations** color their output but I'm not going to try to reproduce
+that here. The color added by **Midje** and **expectations** is useful. **Speclj**
+color hurt its readability. I use a dark colored terminal and **Speclj**
 colors the line that tells where the failure occurs
 black. This made it hard to read.
 
-I'm not going go show what the tests look like for each testing
+I'm not going to show what the tests look like for each testing
 library past the first comparison. How a test in expressed is
 important but not what I want to focus on in this post.
 
-Comparing strings
+Comparing Strings
 -----------------
 
 Going to start off with a basic string comparison. The failing test
@@ -37,7 +39,7 @@ compares two strings that only differ by one character.
 ##### clojure.test #####
 
 Most (hopefully all) Clojure programmers should be familiar with
-clojure.test. It is the testing library that is included with Clojure.
+**clojure.test**. It is the testing library that is included with Clojure.
 
 ``` clojure
 (ns example.string-test
@@ -58,9 +60,9 @@ expected: (= "space" "spice")
   actual: (not (= "space" "spice"))
 ```
 
-Below is the same test but with humane-test-output enabled. It is easy
+Below is the same test but with **humane-test-output** enabled. It is easy
 to read the output and see the expected and actual value. It even
-provides a diff between them. In this situation it isn't that useful.
+provides a diff between them although in this situation it isn't that useful.
 
 ``` console clojure.test with humane-test-output
 FAIL in (string-comparisons) (string_test.clj:6)
@@ -96,7 +98,7 @@ failure in (string_expectations.clj:5) : example.string-expectations
                   &: "ice"
 ```
 
-The output from expectations is very readable. You can easily pick out
+The output from **expectations** is very readable. You can easily pick out
 the expected and actual values. It also shows you where the
 string starts to diverge.
 
@@ -122,7 +124,7 @@ string test and its output.
      /Users/jake/src/jakemcc/example/spec/example/string_spec.clj:7
 ```
 
-Speclj's test output above is an improvement over `clojure.test`. You
+**Speclj**'s test output above is an improvement over **clojure.test**. You
 can easily find the expected and actual values. It doesn't provide any
 help with diagnosing how those values are different.
 
@@ -130,7 +132,7 @@ help with diagnosing how those values are different.
 
 I have a little bit of experience with Brian Marick's
 [Midje](https://github.com/marick/Midje). Unlike the other libraries
-it switches up the assertion syntax. In Midje the expected value is on
+it switches up the assertion syntax. In **Midje** the expected value is on
 the right side of `=>`.
 
 ``` clojure
@@ -150,26 +152,26 @@ FAIL "strings not equal" at (string_test.clj:8)
       Actual: "spice"
 ```
 
-Midje's output is similar to Speclj's. You can quickly find the
+**Midje**'s output is similar to **Speclj**'s. You can quickly find the
 expected and actual values but it doesn't help you spot the
 difference.
 
-### String comparison winner ###
+### String Comparison Winner ###
 
-expectations wins for best output. You can easily spot the expected
+**expectations** wins for best output. You can easily spot the expected
 and actual values and it also helps you find the difference between
 the strings.
 
-The worst output comes from clojure.test. It doesn't make it easy to
+The worst output comes from **clojure.test**. It doesn't make it easy to
 spot the difference or even find the expected and actual values.
 
-Comparing maps
+Comparing Maps
 --------------
 
-For maps I've setup three assertions. The first has an extra a
-key-value pair in the actual value. The second has an extra in the
-expected value. The final assertion has a different value for the
-`:cheese` key. The clojure.test example is below.
+For maps I've setup three assertions. The first has an extra key-value
+pair in the actual value. The second has an extra in the expected
+value. The final assertion has a different value for the `:cheese`
+key. The **clojure.test** example is below.
 
 
 ``` clojure
@@ -193,7 +195,7 @@ expected: (= {:sheep 1, :cheese 1} {:sheep 1, :cheese 5})
   actual: (not (= {:cheese 1, :sheep 1} {:cheese 5, :sheep 1}))
 ```
 
-Unsurprisingly the default clojure.test output for maps suffers from
+Unsurprisingly the default **clojure.test** output for maps suffers from
 the same problems found in the string comparisons. To find the
 actual and expected values you need to manually parse the output.
 
@@ -215,8 +217,8 @@ expected: {:cheese 1, :sheep 1}
           + {:cheese 5}
 ```
 
-Above is the output of using clojure.test with humane-test-output. It
-is a big improvement over the default clojure.test. You can quickly
+Above is the output of using **clojure.test** with **humane-test-output**. It
+is a big improvement over the default **clojure.test**. You can quickly
 see the expected and actual values. Unlike with the string assertions
 the diff view is actually helpful. The diffs do a good job of helping
 you identify the error.
@@ -250,18 +252,18 @@ failure in (map_expectations.clj:8) : example.map-expectations
            in actual, not expected: {:cheese 1}
 ```
 
-expectations does a pretty good job helping you as well. As before,
-you can clearly read the expected and actual values. expectations also
+**expectations** does a pretty good job helping you as well. As before,
+you can clearly read the expected and actual values. **expectations** also
 provides some hint as to what is different between the maps. I find
 the English descriptions a bit easier to read than
-humane-test-output's diff view. Still seeing lines like line 7 (`in
+**humane-test-output**'s diff view. Still seeing lines like line 7 (`in
 expected, not actual: null`) is a bit confusing and the output would
 be improved if it was suppressed.
 
 
-I'm just going to lump Speclj and Midje together. The output for each
-is below. They both improve over clojure.test by making it easy to see
-the expected and actual value. The both don't do anything beyond that.
+I'm just going to lump **Speclj** and **Midje** together. The output for each
+is below. They both improve over **clojure.test** by making it easy to see
+the expected and actual value. They both don't do anything beyond that.
 
 ``` console Speclj
   4) map comparisons have nice error messages when extra entries keys present
@@ -294,12 +296,12 @@ FAIL "map has a different value" at (map_test.clj:11)
       Actual: {:cheese 1, :sheep 1}
 ```
 
-### Map comparison winner ###
+### Map Comparison Winner ###
 
-Tie between humane-test-output and expectations. Both do a
+Tie between **humane-test-output** and **expectations**. Both do a
 good job of helping the reader spot the difference.
 
-Comparing sets
+Comparing Sets
 --------------
 
 Next up are sets. Only two assertions for this section. One
@@ -315,7 +317,7 @@ missing a member.
   (is (= #{:a :b :c} #{:a :b})))
 ```
 
-First up is the basic clojure.test output. It suffers from the same
+First up is the basic **clojure.test** output. It suffers from the same
 problem it has suffered this entire time. It doesn't make it easy to
 read the expected and actual values. 
 
@@ -329,7 +331,7 @@ expected: (= #{:c :b :a} #{:b :a})
   actual: (not (= #{:c :b :a} #{:b :a}))
 ```
 
-No surprises with humane-test-output. It improves the clojure.test
+No surprises with **humane-test-output**. It improves the **clojure.test**
 output by making it easy to read the expected and actual values. The
 diff view also helps figure out what is causing the assertion to fail.
 
@@ -345,7 +347,7 @@ expected: #{:c :b :a}
     diff: - #{:c}
 ```
 
-expectations once again delivers nice output. It continues to be easy
+**expectations** once again delivers nice output. It continues to be easy
 to find the expected and actual values and helps you spot the
 differences with a diff view.
 
@@ -369,7 +371,7 @@ failure in (set_expectations.clj:5) : example.set-expectations
            in actual, not expected: null
 ```
 
-Speclj and Midje both have better output than the basic clojure.test.
+**Speclj** and **Midje** both have better output than the basic **clojure.test**.
 
 ``` console Speclj
   7) set comparisons have nice error messages when missing item
@@ -393,12 +395,12 @@ FAIL "set is subset of expected" at (set_test.clj:8)
       Actual: #{:a :b}
 ```
 
-### Set comparison winner ###
+### Set Comparison Winner ###
 
 Similar to the winner of the map comparisons I'm going to split the
-victory between expectations and humane-test-output.
+victory between **expectations** and **humane-test-output**.
 
-Comparing lists
+Comparing Lists
 ---------------
 
 Next up we compare lists (and lists to vectors). There are three
@@ -416,7 +418,7 @@ different contents.
   (is (= '(9 8 7) [1 2 3])))
 ```
 
-First up clojure.test. Same issues as with all the previous
+First up **clojure.test**. Same issues as with all the previous
 comparisons.
 
 ``` console clojure.test
@@ -433,7 +435,7 @@ expected: (= (quote (9 8 7)) [1 2 3])
   actual: (not (= (9 8 7) [1 2 3]))
 ```
 
-Once again humane-test-output improves upon clojure.test. Only
+Once again **humane-test-output** improves upon **clojure.test**. Only
 interesting difference from previous comparisons is that the diff view
 ends up having `nil` values in it where the elements are the same.
 
@@ -456,7 +458,7 @@ expected: (9 8 7)
           + [1 2 3]
 ```
 
-expectations continues to have good output. It tries to help you out
+**expectations** continues to have good output. It tries to help you out
 as well. You'll notice that it also has `nil` values inserted
 where the lists are the same.
 
@@ -490,7 +492,7 @@ failure in (list_expectations.clj:6) : example.list-expectations
            in actual, not expected: [1 2 3]
 ```
 
-Surprising no one, Speclj and Midje are better than clojure.test but
+Unsurprisingly, **Speclj** and **Midje** are better than **clojure.test** but
 again don't go beyond making easy to find the expected and actual
 values.
 
@@ -525,20 +527,20 @@ FAIL "compare very different list like values" at (seq_test.clj:14)
       Actual: [1 2 3]
 ```
 
-### List comparison winner ###
+### List Comparison Winner ###
 
-I find the clojure.test with humane-test-output to be a bit easier to
-read than expectations. Both have better output than the basic
-clojure.test, Speclj, and Midje.
+I find the **clojure.test** with **humane-test-output** to be a bit easier to
+read than **expectations**. Both have better output than the basic
+**clojure.test**, **Speclj**, and **Midje**.
 
 ## Overall Winner ##
 
 If I were picking a testing library based entirely on what a failing
-test looks like I would use expectations. My second pick would be
-clojure.test with humane-test-output.
+test looks like I would use **expectations**. My second pick would be
+**clojure.test** with **humane-test-output**.
 
-It is great that Clojure ships with clojure.test. It is unfortunate
+It is great that Clojure ships with **clojure.test**. It is unfortunate
 that it does so little to help you read a failing test. Every library
-I tried has better output than clojure.test.
+I tried has better output than **clojure.test**.
 
 
