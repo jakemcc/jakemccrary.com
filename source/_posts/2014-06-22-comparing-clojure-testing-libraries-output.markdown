@@ -543,4 +543,14 @@ It is great that Clojure ships with **clojure.test**. It is unfortunate
 that it does so little to help you read a failing test. Every library
 I tried has better output than **clojure.test**.
 
+### Addendum ###
+
+_Added 2014/06/23_
+
+Colin Jones
+[points out](http://jakemccrary.com/blog/2014/06/22/comparing-clojure-testing-libraries-output/#comment-1449451549)
+that Speclj provides `should==`. `should==` checks that the expected
+and actual value have the same contents. He provided a
+[gist](https://gist.github.com/trptcolin/7e1ece5179581085730f) that
+shows the difference.
 
