@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Using Emacs to Explore an HTTP API"
-date: 2014-07-04 11:13
+title: Using Emacs to Explore an HTTP API
+date: 2014-07-04 13:05
 comments: true
-published: false
+published: true
 categories:
 - Emacs
 ---
