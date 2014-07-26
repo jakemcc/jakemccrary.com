@@ -3,7 +3,7 @@ layout: post
 title: "Building the ErgoDox Keyboard"
 date: 2014-07-25 22:19
 comments: true
-categories: [egrodox, hardware]
+categories: [ErgoDox, hardware]
 published: false
 ---
 
@@ -20,20 +20,20 @@ I opted to wait till Massdrop did a drop and bought a kit from them.
 
 ### Why? ###
 
-I was drawn to building an ErgoDox for a rew reasons. For the
+I was drawn to building an ErgoDox for a few reasons. For the
 last eight years I've used a Microsoft natural (ergonomic) keyboard
 and I was interested in trying out a fully split design. The second
 reason is that I wanted to have a keyboard with mechanical
-keyswitches. I was also intrigued by the additional thumb keys.
+key switches. I was also intrigued by the additional thumb keys.
 
 ### Buying ###
 
 As mentioned earlier I bought my parts from Massdrop. With the buy I
 participated in I had the option of a full hand case or the
 traditional case and opted for the full hand. Another option I payed
-more for was having aluminium top layers to the otherwise fully
-acrylic top. Since the aluminium top was an extra piece I still had
-the option of using all acrylic. I ended un using all acrylic on one
+more for was having aluminum top layers to the otherwise fully
+acrylic top. Since the aluminum top was an extra piece I still had
+the option of using all acrylic. I ended up using all acrylic on one
 of my hands and actually like the look and feel of it better.
 
 I also opted to buy a set of blank DSA keycaps through Massdrop. If I
@@ -47,7 +47,7 @@ Plastics. These are keys that have a different top shape. This allows
 you to tell when you fingers are above the home row. I'd recommend
 doing this.
 
-For keyswitches I bought Cherry MX Blues through Massdrop. Blues are
+For key switches I bought Cherry MX Blues through Massdrop. Blues are
 extremely clicky. You can easily hear me typing in every room of my
 apartment. It is very satisfying.
 
@@ -80,13 +80,13 @@ minimized the pain of making an error.
 
 I batched up the steps. I'd do a whole row of the first step, then
 move to the second for the entire row, then do the third, etc. Being
-rigerious about testing every connection is important. It will save
+rigorous about testing every connection is important. It will save
 you a ton of trouble later. You want to verify as you go that you are
-successfully completeing steps. Waiting till the end would be a
+successfully completing steps. Waiting till the end would be a
 disaster.
 
 It was very useful to me to test the diode's connection after the
-first half of it was soldered. It is faily easy to detach a single
+first half of it was soldered. It is fairly easy to detach a single
 side of a diode. If you solder both sides and then you learn you put
 it on backwards it is significantly harder to detach.
 
@@ -102,14 +102,13 @@ my computer about my USB Keyboard drawing too much power.
 I've
 [annotated a copy](https://www.evernote.com/shard/s68/nl/7741043/4f51c3b2-b50b-47d3-8219-ea155cf5fef5/)
 of Massdrop's instructions using Evernote. It contains the above tips
-inline (in red) with the steps go with.some of the steps with tips and
-things I learned.
+inline.
 
 ### Firmware ###
 
 After you physically build your keyboard you need to build the
 firmware. There are a few different firmwares that can work and you
-can discover those on GeekHack. I'm using a fork of what Maassdrop's
+can discover those on GeekHack. I'm using a fork of what Massdrop's
 graphical configuration tool uses. It is based off
 [benblazak/ergodox-firmware](https://github.com/benblazak/ergodox-firmware).
 
@@ -134,7 +133,7 @@ the thumbs. I also don't use the keyboard layers too often. I only
 purposefully switch layers to hit my media keys.
 
 Would I recommend building your own ErgoDox? If you already can or are
-willing to learn to solder and this sounds at all intersting to you I
+willing to learn to solder and this sounds at all interesting to you I
 would recommend it. The project can be frustrating but the result is
 great.
 
@@ -144,7 +143,7 @@ great.
 - [GeekHack ErgoDox thread](http://geekhack.org/index.php?topic=22780.0)
 - [GeekHack FAQ](http://geekhack.org/index.php?topic=40501.0)
   Useful for general information about keyboard topics.
-- [GeekHack Cherry actuation forcesFAQ](http://geekhack.org/index.php?topic=40501.0#post_DD)
+- [GeekHack Cherry actuation forces](http://geekhack.org/index.php?topic=40501.0#post_DD)
 - [Massdrop Buy](https://www.massdrop.com/buy/ergodox)
 - [Massdrop Configuration Tool](https://www.massdrop.com/ext/ergodox)
 - [benblazak/ergodox-firmware](https://github.com/benblazak/ergodox-firmware)
