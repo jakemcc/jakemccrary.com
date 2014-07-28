@@ -1,10 +1,12 @@
 ---
 layout: post
-title: "Building the ErgoDox Keyboard"
-date: 2014-07-25 22:19
+title: Building the ErgoDox Keyboard
+date: 2014-07-27 21:05
 comments: true
-categories: [ErgoDox, hardware]
-published: false
+categories:
+- ErgoDox
+- hardware
+published: true
 ---
 
 Earlier this year I built an
