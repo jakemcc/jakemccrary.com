@@ -112,7 +112,7 @@ warnings from my computer about my USB Keyboard drawing too much
 power.
 
 I've
-[annotated a copy](https://www.evernote.com/shard/s68/nl/7741043/4f51c3b2-b50b-47d3-8219-ea155cf5fef5/)
+[annotated a copy](https://www.evernote.com/shard/s68/sh/4f51c3b2-b50b-47d3-8219-ea155cf5fef5/df239167726bcebf06cc2b5101ac8e42/)
 of Massdrop's instructions using Evernote. It contains the above tips
 inline.
 
