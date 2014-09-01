@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Book Review: Haskell Data Analysis Cookbook"
-date: 2014-09-01 11:33
+title: ! 'Book Review: Haskell Data Analysis Cookbook'
+date: 2014-09-01 13:49
 comments: true
-published: false
+published: true
 categories:
 - haskell
 - book-review
