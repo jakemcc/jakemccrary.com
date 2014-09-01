@@ -34,13 +34,12 @@ something you would read through. It doesn't dive deep into any topic
 but does point you toward libraries for various tasks and shows a
 short example of using them.
 
-A common  critic I have of most blog posts and examples in books can be
-applied to this book. Most examples do not do qualified imports of
-namespaces or selective imports of functions from namespaces. This is
-especially useful when your examples might be read by people who are
-not be familiar with the languages standard libraries. Reading code
-and immediately knowing where a function comes from is incredibly
-useful to understanding.
+A common critic I have of most code examples applies to this book.
+Most examples do not do qualified imports of namespaces or selective
+imports of functions from namespaces. This is especially useful when
+your examples might be read by people who are not be familiar with the
+languages standard libraries. Reading code and immediately knowing
+where a function comes from is incredibly useful to understanding.
 
 The code for this book is available on
 [GitHub](https://github.com/BinRoot/Haskell-Data-Analysis-Cookbook).
