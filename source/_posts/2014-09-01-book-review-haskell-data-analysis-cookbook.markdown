@@ -11,7 +11,7 @@ categories:
 
 Packt Publishing recently asked me to write a review of the book
 [Haskell Data Analysis Cookbook](http://bit.ly/X0YQaL) by Nishant
-Shukla. The book is broken into small sections that show you how to to
+Shukla. The book is broken into small sections that show you how to do
 a particular task related to data analysis. These tasks vary from
 reading a csv file or parsing json to listening to a stream of tweets.
 
@@ -34,7 +34,7 @@ something you would read through. It doesn't dive deep into any topic
 but does point you toward libraries for various tasks and shows a
 short example of using them.
 
-A critic I have of most blog posts and examples in books can be
+A common  critic I have of most blog posts and examples in books can be
 applied to this book. Most examples do not do qualified imports of
 namespaces or selective imports of functions from namespaces. This is
 especially useful when your examples might be read by people who are
