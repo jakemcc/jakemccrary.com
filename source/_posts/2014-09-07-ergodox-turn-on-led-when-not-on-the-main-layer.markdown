@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "ErgoDox: Turn on LED When Not on the Main Layer"
-date: 2014-09-07 16:23
+title: ! 'ErgoDox: Turn on LED When Not on the Main Layer'
+date: 2014-09-07 17:35
 comments: true
-published: false
+published: true
 categories:
 - ErgoDox
 - keyboard
