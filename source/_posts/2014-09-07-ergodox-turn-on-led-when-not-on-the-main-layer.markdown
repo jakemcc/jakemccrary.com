@@ -1,6 +1,6 @@
 ---
 layout: post
-title: ! 'ErgoDox: Turn on LED When Not on the Main Layer'
+title: ! 'ErgoDox: Turn on an LED When Not on the Main Layer'
 date: 2014-09-07 17:35
 comments: true
 published: true
