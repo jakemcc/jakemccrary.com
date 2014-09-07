@@ -5,7 +5,8 @@ date: 2014-09-07 16:23
 comments: true
 published: false
 categories:
-- ergodox
+- ErgoDox
+- keyboard
 ---
 
 The
