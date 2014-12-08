@@ -11,36 +11,36 @@ categories:
 
 [{% img center /images/justin-searls-code-reviews-harmful.png The way most organizations implement code reviews in teams is usually more harmful than helpful. I generally recommend going without them. - Justin Searls %}](https://twitter.com/searls/status/540603801955471360)
 
-The above was tweeted [^1] recently and until early August I'm not sure I
-could claim otherwise. In August I took part of a code review process
-that changed my mind about the usefulness of code reviews.
+The above was tweeted [^1] recently and I'm not sure I can disagree
+with it. I will say that at [Outpace](http://www.outpace.com) we've
+figured out a process that does lead to effective code reviews.
+[Carin Meier](https://twitter.com/gigasquid), one of my teammates,
+[responded](https://twitter.com/gigasquid/status/540606002547425281)
+to the tweet and gave a brief overview of our process. The rest of
+this post gives more details about our process.
 
 [^1]: Reading through the discussion on Twitter after this tweet can give some hints as to what it takes to have an effective code review.
 
-[Carin Meier](https://twitter.com/gigasquid), one of my teammates,
-[responded](https://twitter.com/gigasquid/status/540606002547425281)
-to the tweet and touched on the process used for code reviews at
-[Outpace](http://www.outpace.com). The rest of this post expands on
-what Carin said.
-
-Outpace is a software company that practices, despite every programmer
-working remotely, nearly 100% pair programming. In addition the team
-Carin and I are on do most of our work through GitHub pull requests.
-Before merging with master the pull requests are reviewed by other
-teammates. Between pairing and pull requests many eyes see every line
-of code.
+Some background before we dive into the code review process. Outpace
+is a software company that practices, despite every programmer working
+remotely, nearly 100% pair programming. In addition, the team Carin
+and I are on do most of our work through GitHub pull requests. Before
+merging with master the pull requests are reviewed by other teammates.
+Between pairing and pull requests many eyes see every line of code as
+change happens.
 
 Even with pairing and work being done through pull requests we've
 found value in more traditional code reviews (where part or all of the
-system is reviewed). Reviewing what we have (a more traditional code review)
-has resulted in different changes than when reviewing changes (pull request
-with new functionality).
+system is reviewed). Take the time to review what we have (a more
+traditional code review) has resulted in different types of changes
+than when review code changes as they happen (pull requests with new
+functionality).
 
-The process below has also been successfully used to review an
-internal library where the reviewers where mostly interested users
-with a couple minor contributors. It has also been successful on teams
-that were not that adherent to doing work through reviewed pull
-requests.
+In addition to working for the team described above, the process below
+has been successfully used to review an internal library where the
+reviewers where mostly interested users with a couple contributors. It
+has also been successful on teams that were not adherent to doing work
+through reviewed pull requests.
 
 ### The Code Review Process
 
@@ -61,26 +61,26 @@ way to end a week.
 
 #### Step 2: Open the code review
 
-A few days (late Tuesday or early Wednesday) before the scheduled code
-review meeting we start the code review. We do this by opening a
-[GitHub](https://github.com) pull request. To open a pull request lets
-you open pull request that lets you comment on every line of code
-being reviewed you take the following steps.
+A few days (typically late Tuesday or early Wednesday) before the
+Friday code review meeting we start the review. We do this by opening
+a [GitHub](https://github.com) pull request. The following steps will
+create a pull request where you can comment every line of code being
+reviewed.
 
-1. Create a branch.
-1. Delete the code being reviewed.
+1. Create a local branch.
+1. Delete the code being reviewed and commit locally.
 1. Push the branch to GitHub.
 1. Open a pull request.
 
-Those steps leave you with a pull request with the code being reviewed
-marked as deleted. This lets every line of code appear in the **Files
-changed** tab.
+These steps are necessary because GitHub pull requests only let you
+view code that has changed. This process marks every line as deleted
+causing every line to appear the _Files changed_ tab.
 
 Opening the pull request a few days before the end of week meeting
-provides a location for pre-meeting comments to be added. It lets code
-reviewers spend a couple days thinking about the code. Comments on the
-pull request indicate a conversation should happen during the code
-review meeting.
+provides a location for pre-meeting comments to be added. This lets
+reviewers spend a couple days thinking about and commenting on the
+code. Comments on the pull request indicate a conversation should
+happen during the code review meeting.
 
 #### Step 3: The code review meeting
 
@@ -90,17 +90,17 @@ review. At least one other person volunteers to be a note taker.
 
 The leader directs the code review and keeps it moving forward. To do
 this the leader shares their screen with the video conference and
-scrolls through the **Files changed** view of the pull request. When a
-comment appears on the screen the leader stops and discussion starts.
+scrolls through the _Files changed_ view of the pull request. When a
+comment appears on screen the leader stops scrolling and discussion
+starts.
 
 The comments are read (often silently) and discussion happens. The
-leader should be trying to notice when a conclusion has been reached
-or realize when further discussion, outside of the code review, needs
-to happen. When a conclusion is reached someone (often the leader)
-states a quick summary and a note taker records the next steps. The
-next steps are added as additional comments in the comment thread
-being discussed. As the next steps are recorded the leader moves
-on to the next comment.
+leader tries to recognize when a conclusion has been reached or when
+further discussion, outside of the code review, needs to happen. When
+a conclusion is reached someone (often the leader) states a quick
+summary and a note taker records the next steps. The next steps are
+added as additional comments in the comment thread being discussed. As
+the next steps are recorded the leader moves on to the next comment.
 
 This continues until either time runs out or the group runs out of
 things to discuss.
