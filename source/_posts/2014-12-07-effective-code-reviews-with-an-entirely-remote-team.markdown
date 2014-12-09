@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Effective Code Reviews With an Entirely Remote Team"
+title: "An Effective Code Review Process"
 date: 2014-12-07 15:45
 comments: true
 published: false
@@ -11,30 +11,31 @@ categories:
 
 [{% img center /images/justin-searls-code-reviews-harmful.png The way most organizations implement code reviews in teams is usually more harmful than helpful. I generally recommend going without them. - Justin Searls %}](https://twitter.com/searls/status/540603801955471360)
 
-The above was tweeted [^1] recently and I'm not sure I can disagree
-with it. I will say that at [Outpace](http://www.outpace.com) we've
-figured out a process that does lead to effective code reviews.
-[Carin Meier](https://twitter.com/gigasquid), one of my teammates,
-[responded](https://twitter.com/gigasquid/status/540606002547425281)
-to the tweet and gave a brief overview of our process. The rest of
-this post gives more details about our process.
+The above was tweeted [^1] recently and it resulted in some decent
+discussion about code reviews. In the past six months at
+[Outpace](http://www.outpace.com), I've been part of a handful of code
+review sessions that have been extremely productive. After the reviews
+many developers have expressed shock at the effectiveness of the process.
+A tweet-sized overview of the process we've followed can be found in
+[Carin Meier](https://twitter.com/gigasquid)'s
+[responses](https://twitter.com/gigasquid/status/540606002547425281) to
+the above tweet. Since you can't fit details into tweets the rest of
+this post expands on our code review process.
 
 [^1]: Reading through the discussion on Twitter after this tweet can give some hints as to what it takes to have an effective code review.
 
-Some background before we dive into the code review process. Outpace
-is a software company that practices, despite every programmer working
-remotely, nearly 100% pair programming. In addition, the team Carin
-and I are on do most of our work through GitHub pull requests. Before
-merging with master the pull requests are reviewed by other teammates.
-Between pairing and pull requests many eyes see every line of code as
-change happens.
+Some background before we dive into the details.
+[Outpace](http://www.outpace.com) is a software company that
+practices, despite every programmer working remotely, nearly 100% pair
+programming. In addition, the team Carin and I are on do most of our
+work through GitHub pull requests. Before merging with master, the
+pull requests are reviewed by other teammates. Between pairing and
+pull requests many eyes see every line of code as changes are made.
 
-Even with pairing and work being done through pull requests we've
-found value in more traditional code reviews (where part or all of the
-system is reviewed). Take the time to review what we have (a more
-traditional code review) has resulted in different types of changes
-than when review code changes as they happen (pull requests with new
-functionality).
+Even with all this, we've found value in having more traditional code
+reviews. We've found that different feedback and action items emerge
+from reviewing code that we already have than from reviews of code
+changes (e.g., pull requests).
 
 In addition to working for the team described above, the process below
 has been successfully used to review an internal library where the
@@ -111,17 +112,15 @@ usual work.
 
 ### Results
 
-So far I've seen impressive improvements to the code quality of the
-projects that have done this style of code review. Both small and
-large changes have happened after taking the time to reflect on the
-code under review. Code has become simpler, clearer, and improved
-performance as a result of code reviews. The feeling of collective
-code ownership and general knowledge of the code has also improved.
+We've seen impressive improvements to code quality in the projects
+that have undergone this style of code review. Both small and large
+changes have happened as a result. Code has become simpler, clearer,
+and better understood. Additionally, the feeling of collective code
+ownership has increased.
 
-Teammates have been surprised as how well this style of code review
-has worked. More than a couple have said that historically they
-haven't found code reviews useful but they have found these code
-reviews useful.
+Teammates have been surprised at how well this process has worked.
+More than a couple have said that historically they have not found
+code reviews useful but that these were.
 
 This style of code review has worked in a few different settings and I
 encourage you to give it a shot.
