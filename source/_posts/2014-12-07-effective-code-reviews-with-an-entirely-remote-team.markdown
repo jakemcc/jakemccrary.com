@@ -45,20 +45,18 @@ through reviewed pull requests.
 
 ### The Code Review Process
 
-#### Step 1: Select code to review
+#### Step 1: Select the code to review
 
 Typically we do this between a week and two weeks before the code
-review. Here we identify the code we want to review and create a two
-hour meeting on a Friday at the end of day.
+review. Here we identify the code we want to review and create a
+two-hour meeting on a Friday at the end of day.
 
-Doing the code reviews late on a Friday plays a critical part in the
-code review process. It is a good time for unwinding before the
-weekend. Code reviewers grab their beverage of choice and we hang out
-in a video conference in a relaxed environment. I don't think I've met
-a developer that doesn't like talking about how to make code better
-and this end of week meeting allows us to finish the week feeling like
-we were part of something that results in cleaner code. It is a great
-way to end a week.
+Having the meeting late on Friday helps create a relaxed environment.
+The review becomes a time to unwind, enjoy a beverage of choice, and
+talk about code. I haven't met a developer that doesn't enjoy
+discussing how to make code better and this lets everyone finish the
+week doing just that. The code review becomes an uplifting way to
+finish a week.
 
 #### Step 2: Open the code review
 
@@ -74,14 +72,14 @@ reviewed.
 1. Open a pull request.
 
 These steps are necessary because GitHub pull requests only let you
-view code that has changed. This process marks every line as deleted
-causing every line to appear the _Files changed_ tab.
+view code that has changed. This process marks every line as deleted,
+which causes every line to appear the _Files changed_ tab.
 
-Opening the pull request a few days before the end of week meeting
-provides a location for pre-meeting comments to be added. This lets
-reviewers spend a couple days thinking about and commenting on the
-code. Comments on the pull request indicate a conversation should
-happen during the code review meeting.
+Opening the pull request a few days before the review meeting provides
+a location for pre-meeting comments to be added. This lets reviewers
+spend a couple days thinking about and commenting on the code.
+Comments on the pull request indicate a conversation should happen
+during the code review meeting.
 
 #### Step 3: The code review meeting
 
