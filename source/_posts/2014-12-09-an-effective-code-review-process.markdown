@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "An Effective Code Review Process"
-date: 2014-12-07 15:45
+title: An Effective Code Review Process
+date: 2014-12-09 20:44
 comments: true
-published: false
-categories: 
+published: true
+categories:
 - process
 - code review
 ---
