@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Restricting access to certain routes"
-date: 2014-12-21 13:39
+title: Restricting access to certain routes
+date: 2014-12-21 16:48
 comments: true
-published: false
-categories: 
+published: true
+categories:
 - clojure
 - compojure
 - web
