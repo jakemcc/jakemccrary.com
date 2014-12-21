@@ -91,7 +91,7 @@ satisfies the required roles. Our first pass at using
 ```
 
 This is much nicer. The repetition is removed by extracting routes
-that require authorization into a seperate `defroutes` and wrapping it
+that require authorization into a separate `defroutes` and wrapping it
 with `friend/wrap-authorize`.
 
 This introduces a subtle bug. A response with status code 404 is no
