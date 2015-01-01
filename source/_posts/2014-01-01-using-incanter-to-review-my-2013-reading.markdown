@@ -259,8 +259,8 @@ Summary table [^4]:
 
 ### Plans for 2014 ###
 
-I'm planning on reading a similar about in this upcoming year but
-probably having a bit more non-fiction books. First step towards doing
+I'm planning on reading a similar amount in this upcoming year but
+will probably have a bit more non-fiction books. First step towards doing
 that is to start classifying my books as non-fiction or fiction. I'm
 also planning on rereading at least two books that I've read in the
 last few years. This is unusual for me because I don't often reread
