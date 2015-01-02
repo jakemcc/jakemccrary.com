@@ -1,0 +1,85 @@
+---
+layout: post
+title: "Reading in 2014"
+date: 2015-01-01 16:37
+comments: true
+published: false
+categories:
+- books
+---
+
+Last year I
+[wrote](http://jakemccrary.com/blog/2014/01/01/using-incanter-to-review-my-2013-reading/)
+some Clojure code that used Incanter to review my 2013 reading. Using
+the similar code I took a look at my 2014 stats. If you are interested
+in seeing more of what I've read the details can be found on
+[Goodreads](https://www.goodreads.com/user/show/3431614-jake-mccrary).
+
+
+### 2014 Reading Goals ###
+
+I entered 2014 without a specific reading goal. I didn't have a number
+of books or pages I wanted to hit. I had two books I wanted to reread
+and a nebulous goal of reading more non-fiction.
+
+### 2014 Results ###
+
+I ended up setting a new record. I read 69 books for a total of nearly
+almost 23000 pages read. I also read every week of
+[Day One](http://www.amazon.com/gp/product/B00FDWVIHO/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B00FDWVIHO&linkCode=as2&tag=jakemccrary08-20&linkId=S6TWD3DEAED3EDBF),
+a weekly literary journal that contains (usually) one short story and
+one poem from new writers. Since Day One is something I don't review
+on Goodreads it does not count towards number of books or pages read.
+
+More than a third (25 books) of my reading was non-fiction. I don't
+have numbers for 2013 but that feels like an increase. I think I
+achieved my goal of reading more non-fiction.
+
+I also reread the two books I had planned on rereading. I wanted to
+reread
+([Infinite Jest](http://www.amazon.com/gp/product/B000S1M9LY/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B000S1M9LY&linkCode=as2&tag=jakemccrary08-20&linkId=XEJIFRILDRUSJXWG)
+and
+[Hard-Boiled Wonderland and the End of the World](http://www.amazon.com/Hard-Boiled-Wonderland-World-Haruki-Murakami-ebook/dp/B004AP9W1O/ref=sr_1_1?ie=UTF8&qid=1420159468&sr=8-1&keywords=a+hard+boiled+wonderland)
+and succeeded in rereading both of them.
+
+### Recommendations ###
+
+Seven books received a five (out of five) star rating. I've listed
+them below in (in no particular order). Each book I'd recommend
+without hesitation.
+
+* [Working Effectively with Unit Tests](http://www.amazon.com/gp/product/B00QS2HXUO/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B00QS2HXUO&linkCode=as2&tag=jakemccrary08-20&linkId=RWTY2PCQBTCXMLOK) by Jay Fields ([my review](https://www.goodreads.com/review/show/984963558))
+* [The Secrets of Consulting](http://www.amazon.com/gp/product/B004J35LHQ/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B004J35LHQ&linkCode=as2&tag=jakemccrary08-20&linkId=FP26VU2OR4JMMDOZ) by Gerald Weinberg ([my review](https://www.goodreads.com/review/show/519452572))
+* [Extreme Programming Explained](http://www.amazon.com/gp/product/B00N1ZN6C0/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B00N1ZN6C0&linkCode=as2&tag=jakemccrary08-20&linkId=LW3CLVNSZMRLBDVW) by Kent Beck ([my review](https://www.goodreads.com/review/show/1119479193))
+* [Meditations](http://www.amazon.com/gp/product/B000FC1JAI/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B000FC1JAI&linkCode=as2&tag=jakemccrary08-20&linkId=5TFM37LOXWLSBMUD) by Marcus Aurelious and translated by Gregory Hays ([my review](https://www.goodreads.com/review/show/998010207))
+* [A Man Without a Country](http://www.amazon.com/gp/product/B000QUELZ4/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B000QUELZ4&linkCode=as2&tag=jakemccrary08-20&linkId=56W5DEBPW3LU6XZX) by Kurt Vonnegut ([my review](https://www.goodreads.com/review/show/93929432))
+* [Infinite Jest](http://www.amazon.com/gp/product/B000S1M9LY/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B000S1M9LY&linkCode=as2&tag=jakemccrary08-20&linkId=XEJIFRILDRUSJXWG) by David Foster Wallace ([my first review](https://www.goodreads.com/review/show/509610965), [second review](https://www.goodreads.com/review/show/880349659))
+* [The Bone Clocks](http://www.amazon.com/gp/product/B00IHMF9KE/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B00IHMF9KE&linkCode=as2&tag=jakemccrary08-20&linkId=WPOULKSHDQDXKMLZ) by David Mitchell ([my review](https://www.goodreads.com/review/show/1030027657))
+
+
+```
+| Binding   | Number of books |
+|-----------+-----------------|
+| Hardcover |               1 |
+| Paperback |               4 |
+| Kindle    |              64 |
+```
+
+
+
+```
+| Month | Book Count | Page Count | Pages/Books |
+|-------+------------+------------+-------------|
+|     1 |          8 |       2602 |         325 |
+|     2 |          6 |       1642 |         274 |
+|     3 |          2 |        678 |         339 |
+|     4 |          6 |       3057 |         510 |
+|     5 |          7 |       1723 |         246 |
+|     6 |          6 |       1946 |         324 |
+|     7 |          9 |       2492 |         277 |
+|     8 |          6 |       2216 |         369 |
+|     9 |          7 |       2493 |         356 |
+|    10 |          3 |       1195 |         398 |
+|    11 |          4 |       1425 |         356 |
+|    12 |          5 |       1439 |         288 |
+```
