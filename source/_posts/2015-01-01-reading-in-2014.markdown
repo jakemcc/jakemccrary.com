@@ -10,11 +10,12 @@ categories:
 
 Last year I
 [wrote](http://jakemccrary.com/blog/2014/01/01/using-incanter-to-review-my-2013-reading/)
-some Clojure code that used Incanter to review my 2013 reading. Using
-the similar code I took a look at my 2014 stats. If you are interested
-in seeing more of what I've read the details can be found on
-[Goodreads](https://www.goodreads.com/user/show/3431614-jake-mccrary).
-
+some Clojure code that used Incanter to review my 2013 reading. This
+year I used some of that code along with Excel to reflect on my 2014
+reading. I track most of my reading (all books, not periodicals) using
+Goodreads. If you are interested in seeing more details about what
+I've read I can be found
+[here](https://www.goodreads.com/user/show/3431614-jake-mccrary).
 
 ### 2014 Reading Goals ###
 
@@ -46,7 +47,7 @@ and succeeded in rereading both of them.
 
 Seven books received a five (out of five) star rating. I've listed
 them below in (in no particular order). Each book I'd recommend
-without hesitation.
+without hesitation. Titles are links to Amazon.
 
 * [Working Effectively with Unit Tests](http://www.amazon.com/gp/product/B00QS2HXUO/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B00QS2HXUO&linkCode=as2&tag=jakemccrary08-20&linkId=RWTY2PCQBTCXMLOK) by Jay Fields ([my review](https://www.goodreads.com/review/show/984963558))
 * [The Secrets of Consulting](http://www.amazon.com/gp/product/B004J35LHQ/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B004J35LHQ&linkCode=as2&tag=jakemccrary08-20&linkId=FP26VU2OR4JMMDOZ) by Gerald Weinberg ([my review](https://www.goodreads.com/review/show/519452572))
@@ -56,6 +57,33 @@ without hesitation.
 * [Infinite Jest](http://www.amazon.com/gp/product/B000S1M9LY/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B000S1M9LY&linkCode=as2&tag=jakemccrary08-20&linkId=XEJIFRILDRUSJXWG) by David Foster Wallace ([my first review](https://www.goodreads.com/review/show/509610965), [second review](https://www.goodreads.com/review/show/880349659))
 * [The Bone Clocks](http://www.amazon.com/gp/product/B00IHMF9KE/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B00IHMF9KE&linkCode=as2&tag=jakemccrary08-20&linkId=WPOULKSHDQDXKMLZ) by David Mitchell ([my review](https://www.goodreads.com/review/show/1030027657))
 
+It should be noted that I'm recommending a specific translation of
+_Meditations_. I attempted to read different one first and ended up
+giving up. The linked translation is good and I highly recommend it.
+
+If you are looking for a good series to read I'd recommend
+[The Magicians](http://www.amazon.com/gp/bookseries/B00HUQBPWE/kindle/?ie=UTF8&camp=1789&creative=390957&linkCode=ur2&tag=jakemccrary08-20&linkId=ABX4JPELH5GKERZP)
+by Lev Grossman. The first book is the weakest in the series but over
+all they are a fun trip into a world like our own but with magic. The
+friend who introduced me to the series described it as "Harry Potter
+but with depressed characters."
+
+### 2015 Goals ###
+
+2015 isn't going to have an easily measured goal. Once again I'm not
+going to set any kind of volume goal. I'll be shooting to have my 2015
+reading look pretty similar to 2014. The goal I have is to improve the
+quality of my reading. I want to get more out of the act of reading.
+
+
+### Random metrics ###
+
+Below are some random metrics that are probably only interesting to me.
+
+This year I recorded the format of the books I read. This year was
+dominated by ebooks; over 90% of the books I read were read on my
+Kindle. I wish I had been more careful about recording this in
+previous years.
 
 ```
 | Binding   | Number of books |
@@ -65,21 +93,41 @@ without hesitation.
 | Kindle    |              64 |
 ```
 
-
+My average rating has been going down over the last four years.
 
 ```
-| Month | Book Count | Page Count | Pages/Books |
-|-------+------------+------------+-------------|
-|     1 |          8 |       2602 |         325 |
-|     2 |          6 |       1642 |         274 |
-|     3 |          2 |        678 |         339 |
-|     4 |          6 |       3057 |         510 |
-|     5 |          7 |       1723 |         246 |
-|     6 |          6 |       1946 |         324 |
-|     7 |          9 |       2492 |         277 |
-|     8 |          6 |       2216 |         369 |
-|     9 |          7 |       2493 |         356 |
-|    10 |          3 |       1195 |         398 |
-|    11 |          4 |       1425 |         356 |
-|    12 |          5 |       1439 |         288 |
+| Year | Average Rating |
+|------+----------------|
+| 2011 | 3.84           |
+| 2012 | 3.66           |
+| 2013 | 3.67           |
+| 2014 | 3.48           |
+```
+
+Three authors composed nearly 25% of my reading (by page count). The top five authors by page count are below.
+
+```
+| Author               | My Average Rating | Number of Books | Number of Pages | Percent of Total Page Count |
+|----------------------+-------------------+-----------------+-----------------+-----------------------------|
+| David Mitchell       |                 4 |               5 |            2334 |                      10.19% |
+| David Foster Wallace |       4.333333333 |               3 |            1753 |                       7.65% |
+| Lev Grossman         |       3.666666667 |               3 |            1244 |                       5.43% |
+| Marisha Pessl        |               3.5 |               2 |            1153 |                       5.03% |
+| Haruki Murakami      |               3.5 |               2 |             768 |                       3.35% |
+| Cormac McCarthy      |               3.5 |               2 |             650 |                       2.84% |
+```
+
+The next table has the top six (It was going to be five but David
+Mitchell was number six and I couldn't leave him off) authors by
+average rating.
+
+```
+| Author               | My Average Rating | Number of Books | Number of Pages | Percent of Total Page Count |
+|----------------------+-------------------+-----------------+-----------------+-----------------------------|
+| Gerald M. Weinberg   |                 5 |               1 |             228 |                       1.00% |
+| Kent Beck            |                 5 |               1 |             224 |                       0.98% |
+| Jay Fields           |                 5 |               1 |             204 |                       0.89% |
+| Kurt Vonnegut        |               4.5 |               2 |             377 |                       1.65% |
+| David Foster Wallace |       4.333333333 |               3 |            1753 |                       7.65% |
+| David Mitchell       |                 4 |               5 |            2334 |                      10.19% |
 ```
