@@ -30,4 +30,4 @@ for sites to earn advertising fees by advertising and linking to amazon.com.
 
 If there are any questions please reach out to me at [jake@jakemccrary.com](mailto:jake@jakemccrary.com)
 
-_Last updated January 5, 2015_
+_Last updated January 3, 2015_
