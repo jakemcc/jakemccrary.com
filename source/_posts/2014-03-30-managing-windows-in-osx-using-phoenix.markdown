@@ -59,14 +59,14 @@ a great way of becoming familiar with what is possible and can be
 inspiring.
 
 My
-[configuration](https://github.com/jakemcc/dotfiles/blob/master/phoenix.js)
+[configuration](https://github.com/jakemcc/dotfiles/blob/master/home/.phoenix.js)
 is relatively minimal. I've written
-[code](https://github.com/jakemcc/dotfiles/blob/master/phoenix.js#L42-L87)
+[code](https://github.com/jakemcc/dotfiles/blob/master/home/.phoenix.js#L42-L87)
 to move windows between monitors (rotating between three added some
 complexity to this),
-[start or focus](https://github.com/jakemcc/dotfiles/blob/master/phoenix.js#L90-L122)
+[start or focus](https://github.com/jakemcc/dotfiles/blob/master/home/.phoenix.js#L90-L122)
 certain applications, and
-[resize](https://github.com/jakemcc/dotfiles/blob/master/phoenix.js#L11-L37)
+[resize](https://github.com/jakemcc/dotfiles/blob/master/home/.phoenix.js#L11-L37)
 windows. This is enough for me to feel efficient.
 
 I encourage you to use a tool to help manage your windows. Personally
