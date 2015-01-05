@@ -11,9 +11,9 @@ Previously I worked at [DRW Trading](http://drw.com). At DRW I spent
 my time writing research tools, trading systems (latency sensitive and
 non-latency sensitive), and more.
 
-I enjoy coming up with simple solutions to solve the complex problems
-faced by a trading firm. I've found that pair programming and test
-driven development deliver the best solutions.
+I enjoy coming up with simple solutions to seemingly complex problems.
+I've found that pair programming and test driven development helps
+deliver high quality software.
 
 I've written code in a decent number of languages including Clojure,
 Java, C#, C++, C, Q, Perl, Python, Ruby, JavaScript, ClojureScript,
