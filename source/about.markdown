@@ -1,6 +1,7 @@
 ---
 layout: page
 title: about
+sharing: false
 ---
 
 I write code. I currently work at [Outpace](http://outpace.com) trying
