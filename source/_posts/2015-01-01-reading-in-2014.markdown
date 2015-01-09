@@ -1,4 +1,4 @@
----
+ ---
 layout: post
 title: "Reading in 2014"
 date: 2015-01-01 16:37
@@ -10,11 +10,11 @@ categories:
 
 Last year I
 [wrote](http://jakemccrary.com/blog/2014/01/01/using-incanter-to-review-my-2013-reading/)
-some Clojure code that used Incanter to review my 2013 reading. This
-year I used some of that code along with Excel to reflect on my 2014
-reading. I track most of my reading (all books, not periodicals) using
-Goodreads. If you are interested in seeing more details about what
-I've read I can be found
+some Clojure code that used Incanter to generate stats about my 2013
+reading. This year I used some of that code along with Excel to
+reflect on my 2014 reading. I track most of my reading (all books, not
+periodicals) using Goodreads. If you are interested in seeing more
+details about what I've read I can be found
 [here](https://www.goodreads.com/user/show/3431614-jake-mccrary).
 
 ### 2014 Reading Goals ###
@@ -76,14 +76,16 @@ reading look pretty similar to 2014. The goal I have is to improve the
 quality of my reading. I want to get more out of the act of reading.
 
 
-### Random metrics ###
+### 2014 Measurements ###
 
-Below are some random metrics that are probably only interesting to me.
+Below are some random metrics that are probably only interesting to
+me.
 
 This year I recorded the format of the books I read. This year was
-dominated by ebooks; over 90% of the books I read were read on my
-Kindle. I wish I had been more careful about recording this in
-previous years.
+dominated by ebooks; over 90% of the books I read were electronic. I
+wish I had been more careful about recording this in previous years.
+I'd be interested in knowing how much (if any) this has changed since last
+year. My feeling is that I read many more ebooks this year than in the past.
 
 ```
 | Binding   | Number of books |
@@ -104,7 +106,8 @@ My average rating has been going down over the last four years.
 | 2014 | 3.48           |
 ```
 
-Three authors composed nearly 25% of my reading (by page count). The top five authors by page count are below.
+In 2014, three authors composed nearly 25% of my reading (by page count). The
+top six authors by page count are below.
 
 ```
 | Author               | My Average Rating | Number of Books | Number of Pages | Percent of Total Page Count |
@@ -117,9 +120,8 @@ Three authors composed nearly 25% of my reading (by page count). The top five au
 | Cormac McCarthy      |               3.5 |               2 |             650 |                       2.84% |
 ```
 
-The next table has the top six (It was going to be five but David
-Mitchell was number six and I couldn't leave him off) authors by
-average rating.
+My top six authors by average rating (with ties broken by number of
+books) are below.
 
 ```
 | Author               | My Average Rating | Number of Books | Number of Pages | Percent of Total Page Count |
@@ -131,3 +133,8 @@ average rating.
 | David Foster Wallace |       4.333333333 |               3 |            1753 |                       7.65% |
 | David Mitchell       |                 4 |               5 |            2334 |                      10.19% |
 ```
+
+I did top six for both of these because otherwise David Mitchell would
+not have been in the second one. I've devoured his writing in the last
+year and a half for a reason. I'm consistently rating his books
+highly.
