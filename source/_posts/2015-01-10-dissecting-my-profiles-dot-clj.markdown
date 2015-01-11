@@ -11,17 +11,17 @@ categories:
 
 Leiningen has the concept of
 [profiles](https://github.com/technomancy/leiningen/blob/master/doc/PROFILES.md).
-Profiles allow you to have development tools available to a project
-without having them become a dependency of the jar you are releasing.
-An example of when you might want to do this is when you are using a
-testing library like
+One thing profiles are useful for is allowing you to have development
+tools available to a project without having them as dependencies when
+you release your project. An example of when you might want to do this
+is when you are using a testing library like
 [expectations](https://github.com/jaycfields/expectations).
 
-Some development tools, like
+Some development tools, such as
 [lein-test-refresh](https://github.com/jakemcc/lein-test-refresh), are
-useful to have across most (or all) of your Clojure projects. Rather
-nicely, Leiningen supports adding profiles to `~/.lein/profiles.clj`
-which allows you to specify profiles that apply to every project.
+useful to have across most of your Clojure projects. Rather nicely,
+Leiningen supports adding global profiles to `~/.lein/profiles.clj`.
+These profiles are available to all of your projects.
 
 What are some useful cross-project development tools? The rest of this
 post will dive into what I have in my `~/.lein/profiles.clj`. These
@@ -53,10 +53,11 @@ services.
 
 The next few lines are all related. They setup
 [humane-test-output](https://github.com/pjstadig/humane-test-output).
-`humane-test-output` makes `clojure.test` output more readable. You
-can see comparisons of it to other testing output in a
-[post](http://jakemccrary.com/blog/2014/06/22/comparing-clojure-testing-libraries-output/)
-from earlier this year.
+`humane-test-output` makes `clojure.test` output more readable. It
+makes the output of `clojure.test` so much better. Examples can be
+found in my
+[Comparing Clojure Testing Libraries](/blog/2014/06/22/comparing-clojure-testing-libraries-output/)
+post from last year.
 
 ``` clojure
 :dependencies [[pjstadig/humane-test-output "0.6.0"]]
@@ -89,7 +90,7 @@ in
 I'm still pretty unfamiliar with **clj-refactor.el** and admit to
 pretty much only using it for the move to let, extract to let, and
 introduce let features. Even still I have `refactor-nrepl` because I'm
-trying to get more familar with clj-refactor.
+trying to get more familiar with clj-refactor.
 
 `[com.jakemccrary/lein-test-refresh "0.5.5"]` is next. It enables
 [lein-test-refresh](https://github.com/jakemcc/lein-test-refresh)
@@ -132,3 +133,6 @@ tell me when my tests pass or fail.
 ``` clojure
 :test-refresh {:notify-command ["terminal-notifier" "-title" "Tests" "-message"]}
 ```
+
+That is my `~/.lein/profiles.clj`. It is my own collection of Clojure
+tools that I find useful to have across all of my projects.
