@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Dissecting my profiles.clj"
+title: "Overview of my Leiningen profiles.clj"
 date: 2015-01-10 15:59:38 -0600
 comments: true
 published: false
@@ -9,7 +9,8 @@ categories:
 - clojure
 ---
 
-Leiningen has the concept of
+[Leiningen](https://github.com/technomancy/leiningen), a Clojure build
+tool, has the concept of
 [profiles](https://github.com/technomancy/leiningen/blob/master/doc/PROFILES.md).
 One thing profiles are useful for is allowing you to have development
 tools available to a project without having them as dependencies when
