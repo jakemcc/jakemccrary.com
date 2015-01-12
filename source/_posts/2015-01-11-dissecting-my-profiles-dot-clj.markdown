@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Overview of my Leiningen profiles.clj"
-date: 2015-01-10 15:59:38 -0600
+title: Overview of my Leiningen profiles.clj
+date: 2015-01-11 22:12
 comments: true
-published: false
-categories: 
+published: true
+categories:
 - leiningen
 - clojure
 ---
