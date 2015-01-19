@@ -16,6 +16,30 @@ are multiple computers and multiple desks. The rest of this post is
 going to give some recommendations on how to successfully pair remotely.
 
 
+## Why remote pairing?
+
+The pair programming benefits from the
+[c2 wiki](http://c2.com/cgi/wiki?PairProgrammingBenefits) apply to
+both remote and co-located pairing. I've noticed a couple more
+benefits from remote pairing.
+
+It helps increase **social interaction**. Every time I tell someone I
+work out of my apartment they respond with statement about how they
+couldn't do that because they would miss the interaction with
+coworkers. Pairing helps you build and maintain relationships with
+members of your team.
+
+** WORK ON THIS **
+
+I find that pairing helps me work **saner hours**. If I'm soloing on
+something it is very easy for me to give up my evenings because I'm
+trying to solve a problem. It is easy to get carried away. Pairing
+helps with that as between the two of us there is a decent chance one
+of us will have a commitment and need to leave. This helps the other
+member
+
+
+
 ## Connecting Machines
 
 We've standardized at Outpace so that every person has a computer
