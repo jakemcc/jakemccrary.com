@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Remote Pairing"
-date: 2015-01-18 16:56:18 -0600
+title: Remote Pairing
+date: 2015-01-24 15:19
 comments: true
-published: false
-categories: 
+published: true
+categories:
 - pairing
 ---
 
