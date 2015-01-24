@@ -125,7 +125,7 @@ becoming too isolated.
 
 ## Conclusion
 
-Remote pairing works. Before joining [Outpace](http://outpace.com) I
-wasn't sure how well it would work. It turns out it works really well.
-Modern technology almost makes it feel as if your pair is in the same
-room as you.
+Remote pairing works. Working at [Outpace](http://outpace.com) has
+shown me how well it can work. With the right people and modern
+technology almost makes it feel as if your pair is in the same room as
+you.
