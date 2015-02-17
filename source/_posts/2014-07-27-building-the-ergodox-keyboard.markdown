@@ -57,7 +57,7 @@ extremely clicky. You can easily hear me typing in every room of my
 apartment. It is very satisfying.
 
 After using the keyboard for about a week I also ended up buying some
-[pads](http://www.amazon.com/gp/product/B00897D3OQ/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B00897D3OQ&linkCode=as2&tag=bookrobot01-20&linkId=GVYJYM2BME5I2UK3)
+[pads](http://www.amazon.com/gp/product/B00897D3OQ/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B00897D3OQ&linkCode=as2&tag=jakemccrary08-20&linkId=HTBBKS475FGFIG2M)
 for my wrists. I occasionally rest my wrists on the keyboard and the
 keyboard's edge would dig into me.
 

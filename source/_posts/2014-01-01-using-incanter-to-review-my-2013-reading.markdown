@@ -228,7 +228,7 @@ to have higher page counts during the winter months than the summer
 months. This chart and analysis is pretty useless though without
 knowing the difficulty of the pages read. For example, last February I
 read
-[Infinite Jest](http://www.amazon.com/Infinite-Jest-David-Foster-Wallace/dp/0316920045/).
+[Infinite Jest](http://www.amazon.com/gp/product/0316920045/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=0316920045&linkCode=as2&tag=bookrobot01-20&linkId=RTXH5NFJLAODUEBP).
 Knowing that I don't feel like having a low page count in that month
 is slacking at all.
 
