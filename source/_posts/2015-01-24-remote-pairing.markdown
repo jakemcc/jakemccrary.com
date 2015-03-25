@@ -48,7 +48,7 @@ better and you'll stop your pair from hearing themselves through your
 computer.
 
 I use
-[these headphones](http://www.amazon.com/gp/product/B005VAORH6/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B005VAORH6&linkCode=as2&tag=jakemccrary08-20&linkId=3AX26BCB4ZHZWLC5)[^1].
+[these headphones](http://www.amazon.com/gp/product/B005VAORH6/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B005VAORH6&linkCode=as2&tag=jakemccrary08-20&linkId=3AX26BCB4ZHZWLC5).
 They are cheap, light, and open-eared but are wired. I've been told I
 sound the best when I'm using them. I also own these
 [wireless headphones](http://www.amazon.com/gp/product/B003VANOFY/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B003VANOFY&linkCode=as2&tag=jakemccrary08-20&linkId=LDHRWNCUOO45B7G4).
@@ -61,8 +61,6 @@ Some people don't like wearing headphones all day. If you are one of
 those I'd recommend picking up a directional microphone. Many of my
 colleagues use a
 [Snowball](http://www.amazon.com/gp/product/B002OO333Q/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B002OO333Q&linkCode=as2&tag=jakemccrary08-20&linkId=XVNYHVNXTAC3J2RD).
-
-[^1]: This link and all others to Amazon in this post are affiliate links.
 
 ## Connecting the machines
 
