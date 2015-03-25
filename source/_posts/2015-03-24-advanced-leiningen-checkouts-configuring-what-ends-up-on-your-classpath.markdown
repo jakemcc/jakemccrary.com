@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Advanced Leiningen checkouts: configuring what ends up on your classpath"
-date: 2015-03-24 20:06:12 -0500
+title: ! 'Advanced Leiningen checkouts: configuring what ends up on your classpath'
+date: 2015-03-24 21:29
 comments: true
-published: false
+published: true
 categories:
 - leiningen
 - clojure
