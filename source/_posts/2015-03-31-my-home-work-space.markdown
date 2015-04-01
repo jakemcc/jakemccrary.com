@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "My home work space"
-date: 2015-03-30 19:51:40 -0500
+title: My home work space
+date: 2015-03-31 20:09
 comments: true
-published: false
-categories: 
+published: true
+categories:
 - desk
 ---
 
