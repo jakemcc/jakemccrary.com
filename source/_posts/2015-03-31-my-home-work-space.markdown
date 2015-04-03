@@ -43,7 +43,7 @@ I highly recommend getting one.
 The middle monitor, the one I use the most, has had the standard stand
 (you can see it in the right monitor) replaced with an
 [ErgoTech Freedom Arm](http://www.amazon.com/gp/product/B00BZC05WU/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B00BZC05WU&linkCode=as2&tag=jakemccrary08-20&linkId=ADQ435RJ65U5DK3C).
-The lets me raise the monitor to a comfortable height when I'm
+This lets me raise the monitor to a comfortable height when I'm
 standing (as seen in this picture). It also allows me to rotate the
 monitor vertically, though I have only done that once since installing
 it. Installation of the arm wasn't trivial, but it wasn't that
