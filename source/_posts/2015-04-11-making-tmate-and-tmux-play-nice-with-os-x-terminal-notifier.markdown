@@ -34,7 +34,7 @@ to install
 and change your `tmate` configuration to use it. If you use `brew` you
 can install by running `brew install --with-wrap-pbcopy-and-pbpaste
 reattach-to-user-namespace`. Then open your `.tmux.conf` or
-`.tmate.conf` file and add the line found below.
+`.tmate.conf` file and add the line below.
 
 ```
 set-option -g default-command "which reattach-to-user-namespace > /dev/null && reattach-to-user-namespace -l $SHELL || $SHELL"
