@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Making tmate and tmux play nice with OS X terminal-notifier"
-date: 2015-04-11 19:44:32 -0500
+title: Making tmate and tmux play nice with OS X terminal-notifier
+date: 2015-04-12 17:47
 comments: true
-published: false
+published: true
 categories:
 - tmux
 - tmate
