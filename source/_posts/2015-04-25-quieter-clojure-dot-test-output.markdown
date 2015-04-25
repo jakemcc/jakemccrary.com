@@ -22,7 +22,9 @@ summary messages. To enable this feature add `:quiet true` to the
 `:test-refresh` configuration map in either your project.clj or
 profiles.clj file. If you configure `lein-test-refresh` in
 `~/.lein/profiles.clj` then turning on this feature looks like the
-following.
+following. [^1]
+
+[^1]: More configuration options can be found [here](https://github.com/jakemcc/lein-test-refresh/blob/master/sample.project.clj#L5-L24)
 
 ``` clojure
 {:user {:plugins [[com.jakemccrary/lein-test-refresh "0.9.0"]]
