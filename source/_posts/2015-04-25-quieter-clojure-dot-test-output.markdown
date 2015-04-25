@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Quieter clojure.test output"
-date: 2015-04-25 14:31:34 -0500
+title: Quieter clojure.test output
+date: 2015-04-25 15:40
 comments: true
-published: false
-categories: 
+published: true
+categories:
 - clojure
 - testing
 ---
