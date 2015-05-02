@@ -8,20 +8,19 @@ categories:
 - bash
 ---
 
-I'm fairly certain the following scenario has happened to most
-terminal users. You run a command and while its running realize you
+I'm fairly certain the following scenario has happened to every
+terminal user. You run a command and while it is running realize you
 wish you had prefixed it with [time](http://linux.die.net/man/1/time).
 The command finally finishes and you really wish you knew how long it
 took.
 
-For the last year I've lived in a world where I don't have to think
-about if I want to time how long a command takes; timing commands
-happens automatically and the results get displayed in my prompt. It
-is pretty great.
+For the last year I've lived in a world without this problem. Upon
+completion, a command's approximate run time is displayed in my
+prompt. It is awesome.
 
 ## Overview 
 
-Most of the below code is taken straight from a post on
+Most of the below code is from a post on
 [Stack Overflow](http://stackoverflow.com/a/1862762/491871). It has
 been slightly modified to support having multiple commands in your
 `$PROMPT_COMMAND` variable. Below is a minimal snippet that could be
@@ -44,33 +43,35 @@ PROMPT_COMMAND="$PROMPT_COMMAND; timer_stop"
 PS1='[last: ${timer_show}s][\w]$ '
 ```
 
-Modifying your `.bashrc` to include the above will leave you with a
-prompt that looks like the image below. Notice how it tells us how
-long the previous command took in the prompt. While the below prompt
-isn't too great, having the time of the last command in it is pretty
-awesome.
+Modify your `.bashrc` to include the above and you'll have a prompt
+that looks like the below image. It is a minimal prompt but it
+includes the time spent on the last command. This is great. No more
+wondering how long a command took.
 
 ![Example of prompt](/images/prompt-timings.png)
 
 ## The details
 
-The above code setups a trap that runs `timer_start` after every
-simple command. The function `timer_start` sets `timer` to be
-`$SECONDS` isn't already set to a value. Because `timer_stop` is part
-of your `$PROMPT_COMMAND` it will be executed prior to your prompt
-displayed. `timer_stop` calculates the timer value and unsets `timer`,
-which allows `timer` to be set back to `$SECONDS` next time a command
-is executed. Finally `$PS1` is set to include `$timer_show` in the
-prompt.
+`timer_start` is a function that sets `timer` to be its current value
+or, if `timer` is unset, sets it to the value in `$SECONDS`.
+`$SECONDS` is a special variable that contains the number of seconds
+since the shell was started. `timer_start` in invoked after every
+simple command as a result of `trap 'timer_start' DEBUG`.
 
-It is important that `timer_stop` be the **last** command in
-`$PROMPT_COMMAND`. If it isn't than your timings will be screwed up.
-`timer_start` will be triggered by the commands run after `timer_stop`
-and it will incorrectly set the `timer` value too early. This results
-in you measuring the time since your last prompt was displayed instead
-of the run time of the previous command.
+`timer_stop` calculates the difference between `$SECONDS` and `timer` and
+stores it in `timer_show`. It also unsets `timer`. This allows
+`timer_start` to initialize it next time it is called. Because
+`timer_stop` is part of the `$PROMPT_COMMAND` it is executed prior to
+the prompt being printed.
 
-## Fin
+It is the interaction between `timer_start` and `timer_stop` that
+captures the run time of commands. It is important that `timer_stop`
+is the **last** command in the `$PROMPT_COMMAND`. If there are other
+commands after it then those will be executed and their execution
+might cause `timer_start` to be called. This results in you timing the
+length of time between the prior and current prompts being printed.
+
+## My prompt
 
 My prompt is a bit more complicated. It shows the last exit code, last
 run time, time of day, directory, and git information. I'd rank the
