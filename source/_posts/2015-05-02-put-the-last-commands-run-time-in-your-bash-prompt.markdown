@@ -9,10 +9,11 @@ categories:
 ---
 
 I'm fairly certain the following scenario has happened to every
-terminal user. You run a command and while it is running realize you
-wish you had prefixed it with [time](http://linux.die.net/man/1/time).
-The command finally finishes and you really wish you knew how long it
-took.
+terminal user. You run a command and, while it is running, realize you
+should have prefixed it [`time`](http://linux.die.net/man/1/time). You
+momentarily struggle with the thought of killing the command and
+rerunning it with `time`. You decide not to and the command finishes
+without you knowing how long it took. You debate running it again.
 
 For the last year I've lived in a world without this problem. Upon
 completion, a command's approximate run time is displayed in my
@@ -20,7 +21,7 @@ prompt. It is awesome.
 
 ## Overview 
 
-Most of the below code is from a post on
+Most of the code below is from a post on
 [Stack Overflow](http://stackoverflow.com/a/1862762/491871). It has
 been slightly modified to support having multiple commands in your
 `$PROMPT_COMMAND` variable. Below is a minimal snippet that could be
@@ -53,16 +54,16 @@ wondering how long a command took.
 ## The details
 
 `timer_start` is a function that sets `timer` to be its current value
-or, if `timer` is unset, sets it to the value in `$SECONDS`.
+or, if `timer` is unset, sets it to the value of `$SECONDS`.
 `$SECONDS` is a special variable that contains the number of seconds
 since the shell was started. `timer_start` in invoked after every
 simple command as a result of `trap 'timer_start' DEBUG`.
 
-`timer_stop` calculates the difference between `$SECONDS` and `timer` and
-stores it in `timer_show`. It also unsets `timer`. This allows
-`timer_start` to initialize it next time it is called. Because
-`timer_stop` is part of the `$PROMPT_COMMAND` it is executed prior to
-the prompt being printed.
+`timer_stop` calculates the difference between `$SECONDS` and `timer`
+and stores it in `timer_show`. It also unsets `timer`. Next time
+`timer_start` is invoked, `timer` will be set to the current value of
+`$SECONDS`. Because `timer_stop` is part of the `$PROMPT_COMMAND` it
+is executed prior to the prompt being printed.
 
 It is the interaction between `timer_start` and `timer_stop` that
 captures the run time of commands. It is important that `timer_stop`
@@ -74,9 +75,8 @@ length of time between the prior and current prompts being printed.
 ## My prompt
 
 My prompt is a bit more complicated. It shows the last exit code, last
-run time, time of day, directory, and git information. I'd rank the
-git information as my most useful part of my prompt but the time of
-the last command is a close second. I highly recommend you add it to
-yours.
+run time, time of day, directory, and git information. The run time of
+the last command is one of the more useful parts of my prompt. I
+highly recommend you add it to yours.
 
 ![My prompt](/images/my-prompt.png)
