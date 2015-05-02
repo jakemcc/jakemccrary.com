@@ -23,8 +23,8 @@ is pretty great.
 
 Most of the below code is taken straight from a post on
 [Stack Overflow](http://stackoverflow.com/a/1862762/491871). It has
-been slightly modified to support having mutltiple commands in your
-`$PROMT_COMMAND` variable. Below is a minimal snippet that could be
+been slightly modified to support having multiple commands in your
+`$PROMPT_COMMAND` variable. Below is a minimal snippet that could be
 included in your `.bashrc`.
 
 ``` bash
