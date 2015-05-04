@@ -39,7 +39,11 @@ function timer_stop {
 
 trap 'timer_start' DEBUG
 
-PROMPT_COMMAND="$PROMPT_COMMAND; timer_stop"
+if [ "$PROMPT_COMMAND" == "" ]; then
+  PROMPT_COMMAND="timer_stop"
+else
+  PROMPT_COMMAND="$PROMPT_COMMAND; timer_stop"
+fi
 
 PS1='[last: ${timer_show}s][\w]$ '
 ```
