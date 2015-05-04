@@ -45,7 +45,7 @@ PS1='[last: ${timer_show}s][\w]$ '
 ```
 
 Modify your `.bashrc` to include the above and you'll have a prompt
-that looks like the below image. It is a minimal prompt but it
+that looks like the image below. It is a minimal prompt but it
 includes the time spent on the last command. This is great. No more
 wondering how long a command took.
 
@@ -56,12 +56,12 @@ wondering how long a command took.
 `timer_start` is a function that sets `timer` to be its current value
 or, if `timer` is unset, sets it to the value of `$SECONDS`.
 `$SECONDS` is a special variable that contains the number of seconds
-since the shell was started. `timer_start` in invoked after every
+since the shell was started. `timer_start` is invoked after every
 simple command as a result of `trap 'timer_start' DEBUG`.
 
 `timer_stop` calculates the difference between `$SECONDS` and `timer`
 and stores it in `timer_show`. It also unsets `timer`. Next time
-`timer_start` is invoked, `timer` will be set to the current value of
+`timer_start` is invoked `timer` will be set to the current value of
 `$SECONDS`. Because `timer_stop` is part of the `$PROMPT_COMMAND` it
 is executed prior to the prompt being printed.
 
