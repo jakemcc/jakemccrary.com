@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Put the last command's run time in your Bash prompt"
-date: 2015-05-02 16:15:04 -0500
+title: Put the last command's run time in your Bash prompt
+date: 2015-05-03 20:37
 comments: true
-published: false
-categories: 
+published: true
+categories:
 - bash
 ---
 
