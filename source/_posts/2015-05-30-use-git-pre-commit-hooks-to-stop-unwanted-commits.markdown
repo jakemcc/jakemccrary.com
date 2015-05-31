@@ -121,6 +121,8 @@ After following those steps any repository created by `git init` will
 contain the pre-commit hook. To add to an existing repository `cd` into
 the repo and run  `git init .`.
 
+### Example output
+
 If you try to commit some text with _nocommit_ in it you'll see
 something similar to the image below and the commit will be rejected.
 
