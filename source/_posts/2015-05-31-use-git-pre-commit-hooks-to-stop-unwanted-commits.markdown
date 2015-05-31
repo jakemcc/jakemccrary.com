@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Use git pre-commit hooks to stop unwanted commits"
-date: 2015-05-30 13:23:47 -0500
+title: Use git pre-commit hooks to stop unwanted commits
+date: 2015-05-31 11:51
 comments: true
-published: false
-categories: 
+published: true
+categories:
 - git
 ---
 
