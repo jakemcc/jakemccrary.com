@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Emacs: automatically require common namespaces"
-date: 2015-06-15 21:17:23 -0500
+title: ! 'Emacs: automatically require common namespaces'
+date: 2015-06-18 12:52
 comments: true
-published: false
+published: true
 categories:
 - emacs
 - clojure
