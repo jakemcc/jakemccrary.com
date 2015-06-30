@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "My favorite clj-refactor features"
-date: 2015-06-30 07:57:59 -0500
+title: My favorite clj-refactor features
+date: 2015-06-30 08:40
 comments: true
-published: false
-categories: 
+published: true
+categories:
 - clojure
 - emacs
 ---
