@@ -14,17 +14,18 @@ If you write Clojure using Emacs you should check out
 is working better than ever and makes developing Clojure more
 enjoyable.
 
-I don't use all the features in clj-refactor. This is a combination of
-there being many refactorings I don't find myself doing as well as
-there are many I'm just can't remember or am not aware of. Below are
-the features I use consistently. 
+I don't use all the features in clj-refactor. There are a lot of
+features I haven't had the need to use and many I just can't remember.
+Below are the features I use consistently.
+
+### Favorite Features
 
 My favorite feature of clj-refactor is the
-[magic requires](http://jakemccrary.com/blog/2015/06/18/emacs-automatically-require-common-namespaces/).
+[magic requires](/blog/2015/06/18/emacs-automatically-require-common-namespaces/).
 This feature lets you type a prefix (such as `(str/)`) and have the
 namespace automatically added to your `ns` form (in this example
 `[clojure.string :as str]`). It is awesome. You can also add
-[your own]((http://jakemccrary.com/blog/2015/06/18/emacs-automatically-require-common-namespaces/)
+[your own](/blog/2015/06/18/emacs-automatically-require-common-namespaces/)
 prefix mappings.
 
 My other most frequently used refactorings are
