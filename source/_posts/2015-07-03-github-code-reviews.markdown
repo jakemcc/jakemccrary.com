@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "GitHub Code Reviews"
-date: 2015-07-03 09:40:48 -0500
+title: GitHub Code Reviews
+date: 2015-07-03 11:22 -0500
 comments: true
-published: false
-categories: 
+published: true
+categories:
 - code review
 - process
 - github
