@@ -425,7 +425,8 @@ task :publish_draft do
   drafts = Array.new()
   Dir.glob("#{posts_path}/*.*").each_with_index do |post, idx|
     yaml = Preamble.load(post)
-    published = yaml[0]["published"]
+
+    published = yaml.metadata["published"]
     if published == false
       post_shortname = post.gsub(/#{posts_path}\//, '')
       drafts.push(post_shortname)
@@ -449,8 +450,8 @@ task :publish_draft do
   post_path = "#{posts_path}/#{post_shortname}"
   yaml = Preamble.load(post_path);
   puts "  Post details:"
-  puts "    Title:\t#{yaml[0]["title"]}"
-  puts "    Date:\t#{yaml[0]["date"]}"
+  puts "    Title:\t#{yaml.metadata["title"]}"
+  puts "    Date:\t#{yaml.metadata["date"]}"
   puts
   publish_option = ask("Publish with current date (p), existing date (e) or cancel (c)", ['p', 'e', 'c'])
 
@@ -458,8 +459,8 @@ task :publish_draft do
     exit 0
   elsif publish_option == 'p'
     puts "Publishing with current date"
-    yaml[0]["published"] = true
-    yaml[0]["date"] = Time.now.strftime('%Y-%m-%d %H:%M')
+    yaml.metadata["published"] = true
+    yaml.metadata["date"] = Time.now.strftime('%Y-%m-%d %H:%M %z')
 
     matchData = post_shortname.match(/^\d{4}-\d{1,2}-\d{1,2}-(.*)$/)
     title_from_filename = matchData[1];
@@ -468,9 +469,9 @@ task :publish_draft do
     File::delete(post_path)
 
     open(new_post_path, 'w') do |write_post|
-      write_post.puts yaml[0].to_yaml
+      write_post.puts yaml.metadata.to_yaml
       write_post.puts "---"
-      write_post.puts yaml[1]
+      write_post.puts yaml.content
     end
 
     puts "The post has been published as #{new_post_path}"
@@ -479,9 +480,9 @@ task :publish_draft do
     puts "Publishing with existing date"
     yaml[0]["published"] = true
     open(post_path, 'w') do |write_post|
-      write_post.puts yaml[0].to_yaml
+      write_post.puts yaml.metadata.to_yaml
       write_post.puts "---"
-      write_post.puts yaml[1]
+      write_post.puts yaml.content
     end
   end
 end
