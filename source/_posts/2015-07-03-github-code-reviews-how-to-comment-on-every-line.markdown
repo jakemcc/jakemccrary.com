@@ -35,7 +35,7 @@ for a bit more color on the process.
    action items as a comment. The leader of the code review keeps
    discussion moving.
 
-Its a lightweight process. If you're already using GitHub it doesn't
+It's a lightweight process. If you're already using GitHub it doesn't
 bring in any other tools and, unlike some dedicated code review
 software I've used, the GitHub pull request interface has good
 performance.
