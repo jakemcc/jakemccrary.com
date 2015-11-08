@@ -11,7 +11,7 @@ categories:
 ---
 
 I've recently started working on projects that use
-[Postgres](http://www.postgresql.org/) as our relational datastore. This
+[Postgres](http://www.postgresql.org/) as our relational database. This
 has allowed us to use features that Postgres supports to simplify
 our code by moving some logic into the database queries. One SQL
 function found in Postgres that has been used which greatly
@@ -73,7 +73,7 @@ select title, name as category
  SQL Post     | postgres
 ```
 
-With a small enough dataset the above isn't difficult to read but it
+With a small enough data set the above isn't difficult to read but it
 becomes eventually becomes cumbersome. What you really want to read is
 a single line per blog post. You can get this using `array_agg`.
 
