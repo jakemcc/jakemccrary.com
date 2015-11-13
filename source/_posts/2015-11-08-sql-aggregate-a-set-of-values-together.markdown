@@ -20,13 +20,13 @@ function.
 
 ## What is `array_agg`?
 
-The `array_agg(expression)` function takes an expression and returns
-an array of the argument type. It's probably easiest to explain with
-an example. The snippet below shows a simplified schema for a database
-describing a blog. There is a table called `blog_posts` that contains
-details about individual blog posts, a table called `categories` that
-has some labels that can be applied to individual blog posts, and a
-join table called `post_categories` that links the two tables together.
+The `array_agg` function takes an argument and returns an array of the
+argument type. That sentence will make more sense after an example.
+The snippet below shows a simplified schema for a blog's database.
+There is a table called `blog_posts` that contains details about
+posts, a table called `categories` that has labels that can be applied
+to blog posts, and a join table called `post_categories` that links
+the two previous tables together.
 
 ```sql
 blog=# select id, title from blog_posts;
@@ -47,19 +47,18 @@ blog=# select * from post_categories;
  blog_post_id | category_id
 --------------+-------------
             1 |           1
-            1 |           4
             2 |           2
+            1 |           4
             2 |           3
 ```
 
-Now you want to know how each blog post has been categorized. Before I
-learned about `array_agg` I would have done something similar to the
-following query.
+Before I learned about `array_agg`, if I wanted to know how each blog
+post had been categorized I might have written the following query.
 
 ```
 select title, name as category
-  from blog_posts
-  join post_categories pc on pc.blog_post_id = blog_posts.id
+  from blog_posts bp
+  join post_categories pc on pc.blog_post_id = bp.id
   join categories c on c.id = pc.category_id
   order by title;
 
@@ -72,15 +71,20 @@ select title, name as category
  SQL Post     | postgres
 ```
 
-With a small enough data set the above isn't difficult to read but it
-becomes eventually becomes cumbersome. What you really want to read is
-a single line per blog post. You can get this using `array_agg`.
+The result is pretty readable but as the number of posts and
+categories grow it becomes harder to read. There is also a pretty good
+chance the first time I write a sql statement like that that I forget
+the `order by` clause and end up not grouping my posts. That query
+also doesn't answer the question, "How are my posts categorized?",
+well. A question like wants to have a single answer per post. If you
+use `array_agg` you can get that single answer. Below is a snippet
+that uses `array_agg`.
 
 
 ```sql
 select title, array_agg(name) as categories
-  from blog_posts
-  join post_categories pc on pc.blog_post_id = blog_posts.id
+  from blog_posts bp
+  join post_categories pc on pc.blog_post_id = bp.id
   join categories c on c.id = pc.category_id
   group by title;
 
@@ -90,22 +94,30 @@ select title, array_agg(name) as categories
  Clojure Post | {emacs,clojure}
 ```
 
-I find the resulting data from the query using `array_agg` to be much
-nicer to read. I think the query also better expresses the question
-you're trying to answer.
+I find the `array_agg` version much nicer to read. The result answers
+the question in a very direct fashion and the query expresses the
+question well. Everything about the query expresses the question, you
+no longer have an extra `order by` clause to make the result more
+readable by human eyes.
 
 ## How did it make my Clojure code simpler?
 
+The above is great and it makes everything more readable for a human.
+Most of the time I'm not querying a SQL database so that a human can
+directly read the results; instead I'm using Clojure to manipulate
+results of a query. Fortunately, `array_agg` simplifies my Clojure
+code as well.
+
 I'm working with a schema that has many relationships similar to the
-above relationship. Prior to using `array_agg` we needed to develop
-and maintain code to translate from the one row per category result
-to a single map per post. Example of data shapes below.
+above relationship. Continuing with the example above; the snippet
+below shows the data shape we'd get back from `clojure.java.ddbc`
+prior to using `array_agg`. The data shape we actually want follows.
 
 ``` clojure
-;; data shape you get from query.
+;; data shape you get from the non-array_agg query.
 [{:title "Clojure Post" :category "emacs"}
- {:title "Clojure Post" :category "clojure"}
  {:title "SQL Post" :category "sql"}
+ {:title "Clojure Post" :category "clojure"}
  {:title "SQL Post" :category "postgres"}]
 
 ;; data shape you want
@@ -113,8 +125,8 @@ to a single map per post. Example of data shapes below.
  {:title "SQL Post" :categories ["sql" "postgres"]}]
 ```
 
-One way of reshaping the data is presented below. The code snippet has
-quite a bit going on and is very specific to this translation.
+Since we're not getting data in our desired shape we need to write
+code that combines rows. One way of doing that is to use `reduce` and `map`.
 
 ``` clojure
 (defn squash-by-title [rows]
@@ -123,19 +135,19 @@ quite a bit going on and is very specific to this translation.
        (map (fn [[title categories]] {:title title :categories categories}))))
 ```
 
-In my experience you'll often start with something like this and then
-start doing very similar squash operations on slightly different data.
-Eventually you end up extracting a function (maybe called `squash`)
-that performs the common operations. You'll feel great about this
-extraction and then a few months later you'll finally write another
-query that needs to use `squash`. In effort to understand it you'll
-stare at it for a handful of minutes and then start looking for usages
-in the rest of your code base. Luckily (if you're using a database
-that supports `array_agg`) there is a better way.
+I've been writing Clojure for a long time and when I see something
+like above it still takes me a bit of time to figure out what is
+happening. Not only that, but eventually your project has different
+squash operations depending on what data you're pulling back from the
+database. They are probably mostly similar and eventually you abstract
+the differences and feel great. Then you come back months later and
+have to figure out how it all works. Luckily, if you're using a
+database that supports `array_agg`, there is a better way.
 
-If you start using `array_agg` in your queries than the only code that
-needs to be maintained and understood is a pretty straight-forward
-protocol extension.
+The first step is to change your queries to use `array_agg`. The
+second step is to extend the `clojure.java.jdbc/IResultSetReadColumn`
+protocol to the type returned by your jdbc driver. For my project that
+looks like the following code:
 
 ``` clojure
 ;; clojure.java.jdbc has been required as jdbc
@@ -146,5 +158,7 @@ protocol extension.
     (vec (.getArray pgobj))))
 ```
 
-Those four lines of code let you use `array_agg` in your queries and
-get back your data in the shape you want it.
+By changing my queries to use `array_agg` and adding those four lines
+of code I'm able to delete all of my squashing functions and get back
+the data in the shape I want. It results in easier to understand code
+and more expressive queries. It is awesome.
