@@ -10,12 +10,11 @@ categories:
 - clojure
 ---
 
-I've recently started working on projects that use
-[Postgres](http://www.postgresql.org/) as our relational database. This
-has allowed us to use features that Postgres supports to simplify
-our code by moving some logic into the database queries. One SQL
-function found in Postgres that has been used which greatly
-simplified out code is the `array_agg`
+Lately I've been working on projects that use
+[Postgres](http://www.postgresql.org/) as our relational database.
+This has allowed us to simplify some of our Clojure code by leaning on
+some built-in features of Postgres. One SQL function supported by
+Postgres which has greatly simplified our code is the `array_agg`
 [aggregate](http://www.postgresql.org/docs/9.4/static/functions-aggregate.html)
 function.
 
