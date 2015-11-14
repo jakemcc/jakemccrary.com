@@ -110,7 +110,7 @@ code as well.
 
 I'm working with a schema that has many relationships similar to the
 above relationship. Continuing with the example above; the snippet
-below shows the data shape we'd get back from `clojure.java.ddbc`
+below shows the data shape we'd get back from `clojure.java.jdbc`
 prior to using `array_agg`. The data shape we actually want follows.
 
 ``` clojure
