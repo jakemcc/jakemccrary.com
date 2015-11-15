@@ -71,15 +71,11 @@ select title, name as category
  SQL Post     | postgres
 ```
 
-The result is pretty readable but as the number of posts and
-categories grow it becomes harder to read. There is also a pretty good
-chance the first time I write a sql statement like that that I forget
-the `order by` clause and end up not grouping my posts. That query
-also doesn't answer the question, "How are my posts categorized?",
-well. A question like wants to have a single answer per post. If you
-use `array_agg` you can get that single answer. Below is a snippet
-that uses `array_agg`.
-
+The result is readable but as the number of posts and categories grow
+it becomes harder to read. The query also doesn't answer the question,
+"How are my posts categorized?", well. The ideal answer is a single
+row per post that shows the post's categories. You can use `array_agg`
+to get that ideal answer.
 
 ```sql
 select title, array_agg(name) as categories
@@ -109,7 +105,7 @@ results of a query. Fortunately, `array_agg` simplifies my Clojure
 code as well.
 
 I'm working with a schema that has many relationships similar to the
-above relationship. Continuing with the example above; the snippet
+above relationship. Continuing with the example from above the snippet
 below shows the data shape we'd get back from `clojure.java.jdbc`
 prior to using `array_agg`. The data shape we actually want follows.
 
@@ -135,10 +131,10 @@ code that combines rows. One way of doing that is to use `reduce` and `map`.
        (map (fn [[title categories]] {:title title :categories categories}))))
 ```
 
-I've been writing Clojure for a long time and when I see something
-like above it still takes me a bit of time to figure out what is
-happening. Not only that, but eventually your project has different
-squash operations depending on what data you're pulling back from the
+I've been writing Clojure for a long time and when I see code like
+above it still takes me a bit of time to figure out what is happening.
+Not only that, but eventually your project has different squash
+operations depending on what data you're pulling back from the
 database. They are probably mostly similar and eventually you abstract
 the differences and feel great. Then you come back months later and
 have to figure out how it all works. Luckily, if you're using a
@@ -159,9 +155,9 @@ looks like the following code:
 ```
 
 By changing my queries to use `array_agg` and adding those four lines
-of code I'm able to delete all of my squashing functions and get back
-the data in the shape I want. It results in easier to understand code
-and more expressive queries. Awesome.
+of code I'm able to delete all of my squashing functions and get data
+from my database in the shape I want. I also end up with easier to
+understand code and more expressive queries. Awesome.
 
 _Thanks to [Timothy Pratley](http://timothypratley.blogspot.com/) for
 providing feedback on earlier versions of this post._
