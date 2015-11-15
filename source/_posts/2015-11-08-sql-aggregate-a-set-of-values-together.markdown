@@ -161,4 +161,7 @@ looks like the following code:
 By changing my queries to use `array_agg` and adding those four lines
 of code I'm able to delete all of my squashing functions and get back
 the data in the shape I want. It results in easier to understand code
-and more expressive queries. It is awesome.
+and more expressive queries. Awesome.
+
+_Thanks to [Timothy Pratley](http://timothypratley.blogspot.com/) for
+providing feedback on earlier versions of this post._
