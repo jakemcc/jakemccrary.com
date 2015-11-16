@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "SQL: Aggregate a set of values together"
-date: 2015-11-08 13:45:46 -0600
+title: ! 'SQL: Aggregate a set of values together'
+date: 2015-11-15 19:45 -0600
 comments: true
-published: false
+published: true
 categories:
 - sql
 - postgres
