@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Even quicker feedback from your Clojure tests"
-date: 2015-12-18 14:31:14 -0600
+title: Even quicker feedback from your Clojure tests
+date: 2015-12-18 15:29 -0600
 comments: true
-published: false
+published: true
 categories:
 - clojure
 - testing
