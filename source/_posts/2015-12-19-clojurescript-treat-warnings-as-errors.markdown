@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "ClojureScript: Treat warnings as errors"
-date: 2015-12-19 14:54:43 -0600
+title: ! 'ClojureScript: Treat warnings as errors'
+date: 2015-12-19 17:09 -0600
 comments: true
-published: false
-categories: 
+published: true
+categories:
 - clojurescript
 - leiningen
 - clojure
