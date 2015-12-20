@@ -41,7 +41,7 @@ and definitely not a build failure.
 We weren't seeing this warning before so we opened ClojureScript's
 source and found the
 [default warning handler](https://github.com/clojure/clojurescript/blob/452edf43927566cc0ea0a3846706c0294cef235d/src/main/clojure/cljs/analyzer.cljc#L360-L366).
-The default handler checks that the `warning-type` is set to true in
+The default handler checks that `warning-type` has a truthy value in
 the map `*cljs-warnings*`. Inspired by the default handler we added
 the same check to the start of our warning handler.
 
