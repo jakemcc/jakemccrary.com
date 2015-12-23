@@ -139,7 +139,7 @@ committing numerous times. I'd recommend adopting it.
 
 ## Errata
 
-*2015/12/24*
+*2015/12/23*
 
 I'm updated the code to be more portable. It was brought to my
 attention by a comment that the original code took advantage of some
