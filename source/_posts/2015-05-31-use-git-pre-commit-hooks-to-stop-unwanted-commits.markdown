@@ -34,19 +34,19 @@ else
     against=$(git hash-object -t tree /dev/null)
 fi
 
-patch_filename=$(mktemp -t commit_hook_changes)
+patch_filename=$(mktemp -t commit_hook_changes.XXXXXX)
 git diff --exit-code --binary --ignore-submodules --no-color > $patch_filename
 has_unstaged_changes=$?
 
-if [[ $has_unstaged_changes != 0 ]]; then
+if [ $has_unstaged_changes -ne 0 ]; then
     echo "Stashing unstaged changes in $patch_filename."
     git checkout -- .
 fi
 
-function quit {
-    if [[ $has_unstaged_changes != 0 ]]; then
+quit() {
+    if [ $has_unstaged_changes -ne 0 ]; then
         git apply $patch_filename
-        if [[ $? != 0 ]]; then
+        if [ $? -ne 0 ]; then
             git checkout -- .
             git apply $patch_filename
         fi
@@ -61,7 +61,7 @@ exec 1>&2
 
 files_with_nocommit=$(git diff --cached --name-only --diff-filter=ACM $against | xargs grep -i "nocommit" -l | tr '\n' ' ')
 
-if [[ "x${files_with_nocommit}x" != "xx" ]]; then
+if [ "x${files_with_nocommit}x" != "xx" ]; then
     tput setaf 1
     echo "File being committed with 'nocommit' in it:"
     echo $files_with_nocommit | tr ' ' '\n'
@@ -135,3 +135,15 @@ _nocommit_) then you can ignore pre-commit hooks by using `git commit
 
 I've found this pre-commit hook really useful. It has saved me from
 committing numerous times. I'd recommend adopting it.
+
+
+## Errata
+
+*2015/12/24*
+
+I'm updated the code to be more portable. It was brought to my
+attention by a comment that the original code took advantage of some
+bash extensions and specific `mktemp` behavior found in OS X. The
+pre-commit code has now been tested works in OS X and Ubuntu 14.04.
+There may be minor changes you need to perform to get it to work on
+your system.
