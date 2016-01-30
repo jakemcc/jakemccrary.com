@@ -4,30 +4,36 @@ title: about
 sharing: false
 ---
 
-I write code. I currently work at [Outpace](http://outpace.com) trying
-to change the way business applications are delivered to the
-enterprise.
+I'm an experienced software developer. I enjoy coming up with simple
+solutions to seemingly complex problems. I'm a reliable team lead that
+can be depended on to understand business requirements, make
+technology choices, and make teams better through mentoring and
+providing a place for team members to grow.
+
+I currently work at [Outpace](http://outpace.com) leading development
+of marketing tools.
 
 Previously I worked at [DRW Trading](http://drw.com). At DRW I spent
 my time writing research tools, trading systems (latency sensitive and
 non-latency sensitive), and more.
 
-I enjoy coming up with simple solutions to seemingly complex problems.
-I've found that pair programming and test driven development helps
-deliver high quality software.
+I've worked on a range of problems using a variety of technologies and
+methodologies. I've found testing to be critical to delivering quality
+software.
 
-I've written code in a decent number of languages including Clojure,
-Java, C#, C++, C, Q, Perl, Python, Ruby, JavaScript, ClojureScript,
-Haskell, Emacs Lisp, Scala, VBA, and probably some others I'm not remembering. So
-far I've been happiest when coding in a Lisp though I need to explore
-some more languages with a good type system (looking at you Haskell, I
-need to write more of you).
+I've worked professionally in more languages than I can
+remember. Since 2014 most my development has been in Clojure and
+ClojureScript. Prior to that I worked in Java, C#, C++, C, Q, Perl,
+Python, Ruby, JavaScript, Clojure, ClojureScript, Haskell, Emacs Lisp,
+Scala and VBA. I've found writing in a functional style leads to
+easier to reason about code.
 
 When not coding I try to be active, mostly focusing on rock climbing
 and sailing. I've hiked to the top of [Mount Kilimanjaro](/kili.html)
 and have sailed multiple times in the
 [Chicago to Mackinac](http://en.wikipedia.org/wiki/Chicago_to_Mackinac_Boat_Race)
-race. In the 2013 race the boat I crewed on placed second in our fleet.
+race. In the 2013 and 2015 race the boat I crewed on, Talisman, placed
+second in our fleet.
 
 The best way to contact me is through
 [email](mailto:jake@jakemccrary.com). I can also be found on
@@ -36,4 +42,3 @@ The best way to contact me is through
 [LinkedIn](http://www.linkedin.com/in/jakemccrary), and
 [Goodreads](http://www.goodreads.com/user/show/3431614-jake-mccrary).
 
-<a href="https://profiles.google.com/jakemcc" rel="me"></a>
