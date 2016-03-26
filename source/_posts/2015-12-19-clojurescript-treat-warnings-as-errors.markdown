@@ -4,6 +4,7 @@ title: ! 'ClojureScript: Treat warnings as errors'
 date: 2015-12-19 17:09 -0600
 comments: true
 published: true
+description: Treat your ClojureScript build warnings as errors.
 categories:
 - clojurescript
 - leiningen
