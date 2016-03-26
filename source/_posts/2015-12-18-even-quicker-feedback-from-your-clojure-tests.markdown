@@ -4,6 +4,7 @@ title: Even quicker feedback from your Clojure tests
 date: 2015-12-18 15:29 -0600
 comments: true
 published: true
+description: Get even quicker feedback with lein-test-refresh's newest feature.
 categories:
 - clojure
 - testing
