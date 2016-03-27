@@ -12,30 +12,8 @@ function getNav() {
   });
 }
 
-function addSidebarToggler() {
-  if(!$('body').hasClass('sidebar-footer')) {
-    $('#content').append('<span class="toggle-sidebar"></span>');
-    $('.toggle-sidebar').bind('click', function(e) {
-      e.preventDefault();
-      $('body').toggleClass('collapse-sidebar');
-    });
-  }
-  var sections = $('aside.sidebar > section');
-  if (sections.length > 1) {
-    sections.each(function(index, section){
-      if ((sections.length >= 3) && index % 3 === 0) {
-        $(section).addClass("first");
-      }
-      var count = ((index +1) % 2) ? "odd" : "even";
-      $(section).addClass(count);
-    });
-  }
-  if (sections.length >= 3){ $('aside.sidebar').addClass('thirds'); }
-}
-
 $('document').ready(function() {
-  getNav();
-  addSidebarToggler();
+  getNav(); // should be able to just generate this instead of using JavaScript to to work.
 });
 
 // iOS scaling bug fix
