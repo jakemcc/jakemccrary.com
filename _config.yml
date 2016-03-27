@@ -74,12 +74,12 @@ github_skip_forks: true
 twitter_user: jakemcc
 twitter_widget_id: 551934225822138369
 twitter_tweet_count: 5
-twitter_follow_button: true
+twitter_follow_button: false
 twitter_show_follower_count: false
 twitter_tweet_button: false
 
 # Google +1
-google_plus_one: true
+google_plus_one: false
 google_plus_one_size: medium
 
 # Google Plus Profile
