@@ -1,21 +1,3 @@
-function getNav() {
-  var mainNav = $('ul.main-navigation, ul[role=main-navigation]').before('<fieldset class="mobile-nav">')
-  var mobileNav = $('fieldset.mobile-nav').append('<select>');
-  mobileNav.find('select').append('<option value="">Navigate&hellip;</option>');
-  var addOption = function(i, option) {
-    mobileNav.find('select').append('<option value="' + this.href + '">&raquo; ' + $(this).text() + '</option>');
-  }
-  mainNav.find('a').each(addOption);
-  $('ul.subscription a').each(addOption);
-  mobileNav.find('select').bind('change', function(event) {
-    if (event.target.value) { window.location.href = event.target.value; }
-  });
-}
-
-$('document').ready(function() {
-  getNav(); // should be able to just generate this instead of using JavaScript to to work.
-});
-
 // iOS scaling bug fix
 // Rewritten version
 // By @mathias, @cheeaun and @jdalton
