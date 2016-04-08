@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "Book review: Serverless Single Page Apps"
-date: 2016-04-08 09:42:19 -0500
+title: 'Book review: Serverless Single Page Apps'
+date: 2016-04-08 10:15 -0500
 comments: true
-published: false
+published: true
 description: Ben Rady's 'Serverless Single Page Apps' is great and I recommend it.
-keywords: 'serverless single page apps, ben rady, book review'
+keywords: serverless single page apps, ben rady, book review
 categories:
 - book-review
 - javascript
