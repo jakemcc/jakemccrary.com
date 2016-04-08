@@ -124,6 +124,7 @@ task :new_post, :title do |t, args|
     post.puts "comments: true"    
     post.puts "published: false"
     post.puts "description: PUT SUMMARY HERE "
+    post.puts "keywords: 'csv, keywords, here'"
     post.puts "categories: "
     post.puts "---"
   end
