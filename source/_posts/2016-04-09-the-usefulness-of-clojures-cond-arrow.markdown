@@ -4,8 +4,8 @@ title: "The usefulness of Clojure's cond->"
 date: 2016-04-09 15:10:42 -0500
 comments: true
 published: false
-description: PUT SUMMARY HERE 
-keywords: 'csv, keywords, here'
+description: Clojure's cond-> (and cond->>) is a pretty useful function.
+keywords: clojure, cond->, functional programming, cond->>
 categories: 
 - clojure
 ---
@@ -14,7 +14,9 @@ Clojure's
 [`cond->`](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/cond-%3E)
 (and `cond->>`) is a versatile function. It isn't a new function, it
 has been around since version 1.5, but I finally discovered and
-started using it sometime last year. It has definitely helped me write nicer Clojure.
+started using it sometime last year. It isn't a function you'll use
+every day but when it is useful you definitely end up with better
+code.
 
 ### What is `cond->`? ###
 
@@ -98,6 +100,23 @@ You can rewrite the above with `cond->`.
   (some-pred? q) (assoc :a-key :a-value))
 ```
 
-Hopefully this gives you a taste of `cond->`. I've been very pleased
-with the areas in our code base where `cond->` has been used. It
-definitely has a place in a Clojure developer's toolbox.
+One of the projects I work on uses
+[honeysql](https://github.com/jkk/honeysql) for expressing some of the
+SQL queries as Clojure data structures. Starting with a base query and
+selectively modifying it using `cond->` has helped with code
+clarity. An example of doing this is below.
+
+``` clojure
+(defn query [params]
+  (let [and-clause (fnil conj [:and])
+        base-query {:select [:name :job]
+                    :from [:person]}]
+    (cond-> base-query
+      (:job params) (update :where and-clause [:= :job (:job params)])
+      (:name params) (update :where and-clause [:= :name (:name params)])
+      (:min-age params) (update :where and-clause [:> :age (:min-age params)]))))
+```
+
+Hopefully this gives you a taste of `cond->`. It has been a useful
+addition to my codebases. It has a place in every Clojure developer's
+toolbox.
