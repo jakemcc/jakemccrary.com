@@ -14,9 +14,8 @@ Clojure's
 [`cond->`](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/cond-%3E)
 (and `cond->>`) is a versatile function. It isn't a new function, it
 has been around since version 1.5, but I finally discovered and
-started using it sometime last year. It isn't a function you'll use
-every day but when it is useful you definitely end up with better
-code.
+started using it sometime last year. It isn't a workhorse function,
+you won't be using it everyday, but it comes in handy.
 
 ### What is `cond->`? ###
 
@@ -41,10 +40,10 @@ So what does the docstring mean? Let's break it down with an example.
 
 In the above example `10` is the `expr` mentioned in the docstring and
 everything after it are the `clauses`. Each clause is a pair made up
-of a test and a form. The value `false` is the form and the function
-`inc` is the form. Since the test evaluates to a false value, the
-expression is not threaded into the form. As a result the
-original expression, `10`, is returned.
+of a test and a form. In this example there is a single clause with
+the value `false` as the test the function `inc` as the form. Since
+the test evaluates to a false value the expression is not threaded
+into the form. As a result the original expression, `10`, is returned.
 
 Let's look at an example with a truthy test.
 
@@ -54,10 +53,10 @@ Let's look at an example with a truthy test.
 => 8
 ```
 
-Here `10` is still the starting expression. The single clause has a
-test that evaluates to true, so the expression is threaded into the
-first position of the form `(- 10 2)`. The result of this is `8` and
-that is returned.
+Once again, `10` is the starting expression. The single clause has a
+test that evaluates to true so the expression is threaded into the
+first position of the form `(- 2)`. The result is `8` and this is
+returned.
 
 Next is an example of a `cond->` with multiple clauses. Explanations
 are inline with the code.
@@ -75,17 +74,18 @@ are inline with the code.
 => 6 ; The result of (- 11 5) is 6.
 ```
 
-If you understand the above example then you have a good grasp of `cond->`. But when is this functionality useful?
+If you understand the above example then you have a good grasp of
+`cond->`. But when is this functionality useful?
 
 ### When do I use cond->? ###
 
-Looking through the codebases I work on I almost exclusively see us
-using `cond->` with the initial expression being a hash-map. It is
-primarily be used in situations where we want to want to selectively
+Looking through the codebases I work on, I almost primarily see
+`cond->` being used with the initial expression being a hash-map. It
+is being used in situations where we want to want to selectively
 `assoc`, `update`, or `dissoc` something from a map.
 
-If `cond->` didn't exist you would write something similar to below to
-selectively `assoc` something into a map.
+If `cond->` did not exist you would accomplish those selective
+modifications with code similar to below.
 
 ``` clojure
 (if (some-pred? q)
@@ -100,23 +100,27 @@ You can rewrite the above with `cond->`.
   (some-pred? q) (assoc :a-key :a-value))
 ```
 
-One of the projects I work on uses
-[honeysql](https://github.com/jkk/honeysql) for expressing some of the
-SQL queries as Clojure data structures. Starting with a base query and
-selectively modifying it using `cond->` has helped with code
-clarity. An example of doing this is below.
+If you're not used to seeing `cond->` the above transformation might
+seem like a step backwards. I know it felt that way to me when I first
+saw `cond->`. Give yourself time to get familiar with it and you'll be
+glad you're using it.
+
+A meatier example of using `cond->` is demonstrated below. Here we're
+manipulating data structures designed for use with
+[honeysql](https://github.com/jkk/honeysql) to generate SQL
+statements. We start with a `base-query` and selectively modify it
+based on incoming parameters.
 
 ``` clojure
-(defn query [params]
+(defn query [req-params]
   (let [and-clause (fnil conj [:and])
         base-query {:select [:name :job]
                     :from [:person]}]
     (cond-> base-query
-      (:job params) (update :where and-clause [:= :job (:job params)])
-      (:name params) (update :where and-clause [:= :name (:name params)])
-      (:min-age params) (update :where and-clause [:> :age (:min-age params)]))))
+      (:job req-params) (update :where and-clause [:= :job (:job req-params)])
+      (:name req-params) (update :where and-clause [:= :name (:name req-params)])
+      (:min-age req-params) (update :where and-clause [:> :age (:min-age req-params)]))))
 ```
 
-Hopefully this gives you a taste of `cond->`. It has been a useful
-addition to my codebases. It has a place in every Clojure developer's
-toolbox.
+Hopefully this gives you a taste of `cond->`. I've found it to be
+quite useful. It has a place in every Clojure developer's toolbox.
