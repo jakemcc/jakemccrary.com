@@ -4,7 +4,7 @@ title: The usefulness of Clojure's cond->
 date: 2016-04-10 18:45 -0500
 comments: true
 published: true
-description: Clojure's cond-> (and cond->>) is a pretty useful function.
+description: Clojure's cond-> (and cond->>) is a pretty useful macro.
 keywords: clojure, cond->, functional programming, cond->>
 categories:
 - clojure
@@ -12,9 +12,9 @@ categories:
 
 Clojure's
 [`cond->`](https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/cond-%3E)
-(and `cond->>`) is a versatile function. It isn't a new function, it
+(and `cond->>`) is a versatile macro. It isn't a new macro, it
 has been around since version 1.5, but I finally discovered and
-started using it sometime last year. It isn't a workhorse function,
+started using it sometime last year. It isn't a workhorse macro,
 you won't be using it everyday, but it comes in handy.
 
 ### What is `cond->`? ###
