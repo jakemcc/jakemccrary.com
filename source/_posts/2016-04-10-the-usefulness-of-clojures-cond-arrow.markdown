@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "The usefulness of Clojure's cond->"
-date: 2016-04-09 15:10:42 -0500
+title: The usefulness of Clojure's cond->
+date: 2016-04-10 18:45 -0500
 comments: true
-published: false
+published: true
 description: Clojure's cond-> (and cond->>) is a pretty useful function.
 keywords: clojure, cond->, functional programming, cond->>
-categories: 
+categories:
 - clojure
 ---
 
