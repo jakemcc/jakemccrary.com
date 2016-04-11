@@ -81,7 +81,7 @@ If you understand the above example then you have a good grasp of
 
 Looking through the codebases I work on, I almost primarily see
 `cond->` being used with the initial expression being a hash-map. It
-is being used in situations where we want to want to selectively
+is being used in situations where we want to selectively
 `assoc`, `update`, or `dissoc` something from a map.
 
 If `cond->` did not exist you would accomplish those selective
