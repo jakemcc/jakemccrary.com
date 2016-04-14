@@ -70,6 +70,7 @@ In our division we got second because we finished the race 8 minutes after the f
 I think we'll be looking into doing other adventure races in the future. Next time we'll have to bring our own bikes.
 
 Advice for next time:
+
 * Bring your own bike
 * Bring gaiters
 * Wear all synthetic gear
