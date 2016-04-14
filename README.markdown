@@ -1,5 +1,6 @@
 ## What?
 
 
-This powers jakemccrary.com. It uses Octopress for generating my
-static site.
+This powers jakemccrary.com. It uses an old version of Octopress to
+generate [jakemccrary.com](https://jakemccrary.com) from the data
+found in this git repository.
