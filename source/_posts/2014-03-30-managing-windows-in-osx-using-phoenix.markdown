@@ -4,6 +4,7 @@ title: "Managing windows in OS X using Phoenix"
 date: 2014-03-30 18:30
 comments: true
 categories: [osx, tools, phoenix]
+description: I manage my OS X windows efficiently using Phoenix and you can too.
 ---
 
 [Last year](http://jakemccrary.com/blog/2013/04/15/manage-your-workspace-with-grids-under-linux-osx-and-windows/)
@@ -59,14 +60,14 @@ a great way of becoming familiar with what is possible and can be
 inspiring.
 
 My
-[configuration](https://github.com/jakemcc/dotfiles/blob/master/home/.phoenix.js)
+[configuration](https://github.com/jakemcc/dotfiles/blob/17a73f89a2f3f7b2c9aa07a63d1928b86cc5425d/home/.phoenix.js)
 is relatively minimal. I've written
-[code](https://github.com/jakemcc/dotfiles/blob/master/home/.phoenix.js#L42-L87)
+[code](https://github.com/jakemcc/dotfiles/blob/17a73f89a2f3f7b2c9aa07a63d1928b86cc5425d/home/.phoenix.js#L42-L87)
 to move windows between monitors (rotating between three added some
 complexity to this),
-[start or focus](https://github.com/jakemcc/dotfiles/blob/master/home/.phoenix.js#L90-L122)
+[start or focus](https://github.com/jakemcc/dotfiles/blob/17a73f89a2f3f7b2c9aa07a63d1928b86cc5425d/home/.phoenix.js#L90-L122)
 certain applications, and
-[resize](https://github.com/jakemcc/dotfiles/blob/master/home/.phoenix.js#L11-L37)
+[resize](https://github.com/jakemcc/dotfiles/blob/17a73f89a2f3f7b2c9aa07a63d1928b86cc5425d/home/.phoenix.js#L11-L37)
 windows. This is enough for me to feel efficient.
 
 I encourage you to use a tool to help manage your windows. Personally
