@@ -18,19 +18,21 @@ an interesting essay by Matt Gemmmell. Reading that essay inspired me
 to think about my own site and what experience I want to deliver to
 readers.
 
-I can't imagine what experience every reader wants but I know what I
-want to experience when I read an article online. Good content is most
-important. Beyond that I prefer when a page loads fast and when the
-visual design doesn't get in the way. I think a great example of these
-two requirements is [zen habits](http://zenhabits.net/falling/) (along
-with Jeff's blog above and Matt Gemmell's).
+I can't imagine what every reader wants but I know what I want to
+experience when I read an article online. Reading high quality content
+is my highest priority. Beyond that I enjoy when a page loads fast and
+the visual design doesn't get in the way. I think a great example of
+these two requirements is [zen habits](http://zenhabits.net/falling/)
+(along with Jeff Ramnani's and Matt Gemmell's).
 
 My own site sort of achieves those goals. I like to think I'm writing
 well-written content that helps others. I know it has helped me. With
-regards to clean design I think there is room for improvement. I don't
+regards to visual design I think there is room for improvement. I don't
 think my site's design is actively distracting from the content
 though, so I've decided to focus on improving the page load time
 first.
+
+### Staring the optimization process
 
 As with any optimization problem it is important figure what you're
 going to measure, how you're going to measure it and your starting
@@ -47,7 +49,7 @@ Insights but I think I was scoring around a 66/100 for mobile and
 As measured by Web Page Test, the first load of my main page took five
 seconds and it wasn't fully loaded for another second. This is
 ridiculous. My page is almost entirely static content and most of my
-assets are served from CloudFlare.
+assets are served from CloudFlare. It should be blazing fast.
 
 Next I looked at what was actually being loaded. Google's PageSpeed
 Insights identified that I had three render-blocking `script`
