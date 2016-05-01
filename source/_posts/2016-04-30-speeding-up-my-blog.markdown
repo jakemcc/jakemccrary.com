@@ -1,12 +1,13 @@
 ---
 layout: post
-title: "Speeding up my blog"
-date: 2016-04-22 19:34:05 -0500
+title: Speeding up my blog
+date: 2016-04-30 23:42 -0500
 comments: true
-published: false
-description: In an effort to improve my readers' experience I made my Octopress generated blog load significantly faster.
-keywords: 'octopress, blog, writing, javascript'
-categories: 
+published: true
+description: In an effort to improve my readers' experience I made my Octopress blog
+  load significantly faster.
+keywords: octopress, blog, writing, javascript
+categories:
 - blog
 ---
 
