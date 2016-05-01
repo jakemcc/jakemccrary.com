@@ -32,7 +32,7 @@ think my site's design is actively distracting from the content
 though, so I've decided to focus on improving the page load time
 first.
 
-### Staring the optimization process
+## The optimization process
 
 As with any optimization problem it is important figure what you're
 going to measure, how you're going to measure it and your starting
@@ -96,7 +96,8 @@ At this point the remaining JavaScript used for my blog was enabling
 comments with Disqus and showing recent tweets in my sidebar. I still
 enjoy having comments on my blog so I'm keeping Disqus around. I doubt
 that readers care what my most recent tweets are so I removed
-Twitter's JavaScript.
+Twitter's JavaScript. Removing my tweets also cleans up my sidebar and
+helps keep the focus on my writing.
 
 ### Nearly no JavaScript, now what?
 
