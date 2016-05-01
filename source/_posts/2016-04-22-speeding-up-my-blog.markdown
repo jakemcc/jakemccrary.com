@@ -121,10 +121,10 @@ and 92/100 for desktop.
 ![Web Page Test after optimization](/images/after-optimizations.png)
 
 Honestly, that number still seems high[^1] to me and I'm sure I could
-get it lower. But for now it is good enough[^2]. As a result of this
-exploration I've learned more about my blogging setup and managed to
-speed up my page load. Now it is time to go back to focusing
-researching for future posts (and at some point restyling).
+get it lower. But for now it is good enough[^2]. As a result of doing
+this I've learned more about my blogging setup and managed to speed up
+my page load. Now it is time to focus on researching for future
+posts (and at some point restyling).
 
 [^1]: I'm asking Web Page Test to load my page using IE10. I get much faster load times using Chrome or Firefox locally which is what most of my readers use. This is good enough for now.
 
