@@ -108,11 +108,10 @@ CloudFlare setting.
 
 I opted to not inline my css. This would require me to modify my
 site's generation and I just didn't feel like diving down that rabbit
-hole. I also didn't move the web fonts lower on the page. I find font
-flashing jarring and will be attempting to get rid of them entirely
-sometime in the future.
+hole. I also didn't move the web fonts lower on the page. I find fonts
+re-rendering jarring and as a result kept them loading in my `<head>`.
 
-### Results
+## The results
 
 I used Web Page Test to measure again and now the page load time is
 down to 2.5 seconds. Page load times are cut in half from the starting
