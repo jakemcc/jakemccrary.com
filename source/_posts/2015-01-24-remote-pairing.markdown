@@ -124,6 +124,6 @@ becoming too isolated.
 ## Conclusion
 
 Remote pairing works. Working at [Outpace](http://outpace.com) has
-shown me how well it can work. With the right people and modern
-technology almost makes it feel as if your pair is in the same room as
-you.
+shown me how well it can work. Reasonably fast Internet paired with
+modern tools can make it seem like you're almost in the same room as
+your pair.
