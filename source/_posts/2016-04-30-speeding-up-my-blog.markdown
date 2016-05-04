@@ -110,7 +110,7 @@ CloudFlare setting.
 I opted to not inline my css. This would require me to modify my
 site's generation and I just didn't feel like diving down that rabbit
 hole. I also didn't move the web fonts lower on the page. I find fonts
-re-rendering jarring and as a result kept them loading in my `<head>`.
+re-rendering jarring and as a result kept them loading[^0] in my `<head>`.
 
 ## The results
 
@@ -126,6 +126,17 @@ get it lower. But for now it is good enough[^2]. As a result of doing
 this I've learned more about my blogging setup and managed to speed up
 my page load. Now it is time to focus on researching for future
 posts (and at some point restyling).
+
+## Update on 2016-05-03
+
+I ended up removing the web font loading from my site. Getting rid of
+the two fonts cut my load time, as measured by Web Page Test, down by
+a second. Google's PageSpeed Insights scores this site at 90/100 for
+mobile and 96/100 for desktop.
+
+![Web Page Test after font removal](/images/after-optimizations2.png)
+
+[^0]: When I first wrote this I didn't change anything about my web fonts. After thinking about it for a few days I ended up removing them completely. Details are in the update at the end of the post.
 
 [^1]: I'm asking Web Page Test to load my page using IE10. I get much faster load times using Chrome or Firefox locally which is what most of my readers use. This is good enough for now.
 
