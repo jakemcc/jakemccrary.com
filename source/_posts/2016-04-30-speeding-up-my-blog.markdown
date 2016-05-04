@@ -129,9 +129,9 @@ posts (and at some point restyling).
 
 ## Update on 2016-05-03
 
-I ended up removing the web font loading from my site. Getting rid of
-the two fonts cut my load time, as measured by Web Page Test, down by
-a second. Google's PageSpeed Insights scores this site at 90/100 for
+I completely removed web font loading from my site. Getting rid of the
+fonts reduced my load time, as measured by Web Page Test, by a
+second. Google's PageSpeed Insights now scores this site at 90/100 for
 mobile and 96/100 for desktop.
 
 ![Web Page Test after font removal](/images/after-optimizations2.png)
