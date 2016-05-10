@@ -40,12 +40,35 @@ h3 {
 h5 { font-size: 0.75em; }
 h6 { font-size: 0.563em; }
 
+
 article h1 {
   color: #333;
   font-weight: normal;
   line-height: 1.3em;
   margin-top: 1em;
   text-align: center;
+}
+
+sup, sub {
+  font-size: 0.70em;
+  position: relative;
+  display: inline-block;
+  padding: 0 .2em;
+  line-height: 0;
+}
+
+sup { top: -.5em; vertical-align: super; }
+sub { bottom: -.5em; }
+
+a[rev='footnote']{ font-size: .75em; padding: 0 .3em; line-height: 1; }
+
+.footnotes ol li {
+  font-size: 0.8em;
+  margin-top: 2em;
+  margin-left: 2em;
+  margin-right: 2em;
+  margin-bottom: 2em;
+  list-style-type: decimal;
 }
 
 p {
@@ -61,6 +84,13 @@ p {
 // layout
 
 $max-width: 1200px !default;
+
+.basic-alignment {
+  &.left { float: left; margin-right: 1.5em; }
+  &.right { float: right; margin-left: 1.5em; }
+  &.center { display:block; margin: 0 auto 1.5em; }
+  &.left, &.right { margin-bottom: .8em; }
+}
 
 body {
   background-color: #fff;
