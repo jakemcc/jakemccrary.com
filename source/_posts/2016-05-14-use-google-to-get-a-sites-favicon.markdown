@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "Use Google to get a site's favicon"
-date: 2016-05-11 16:22:58 -0500
+title: Use Google to get a site's favicon
+date: 2016-05-14 09:10 -0500
 comments: true
-published: false
+published: true
 description: It is easy to use a feature from Google to get a site's favicon.
 keywords: favicon
-categories: 
+categories:
 - web
 ---
 
