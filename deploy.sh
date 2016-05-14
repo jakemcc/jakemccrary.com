@@ -1,2 +1,2 @@
 #!/bin/bash
-bundle exec rake gen_deploy
+bundle exec rake clean gen_deploy
