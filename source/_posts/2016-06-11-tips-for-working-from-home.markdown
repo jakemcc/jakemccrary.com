@@ -6,7 +6,8 @@ comments: true
 published: false
 description: I've worked from home for nearly three years. Here are some tips I've learned.
 keywords: 'working from home, remote work, remotely'
-categories: 
+categories:
+- remote
 ---
 
 I've been working remotely since October 2013. I can barely believe
@@ -72,7 +73,7 @@ and non-working mindsets.
 I reintroduced a decompression activity between work and non-work and
 became less stressed and generally happier. I've replaced my commute
 intermission with reading, cooking, or riding my bicycle. I've found
-doing a non-computer related activty benefits me the most.
+doing a non-computer related activity benefits me the most.
 
 ### Stop working
 
@@ -86,7 +87,7 @@ In an office you have signals; your coworkers leaving, the cleaning
 crew vacuuming, air conditioning turning off, etc., that give a pretty
 strong signal that you should think about stopping. You don't have as
 many or as strong as signals when you are working remotely. There also
-isn't that spatial boundry between your office and your home.
+isn't that spatial boundary between your office and your home.
 
 You can search online and find many articles about how overwork is
 detrimental. You and your employer benefit if you are **not**
@@ -114,7 +115,7 @@ team.
 
 Having non-work related conversations helps you make better
 connections with your coworkers. These better connections can lead to
-better communcation, both with voice and text, and humanize the person
+better communication, both with voice and text, and humanize the person
 on the other side of the screen.
 
 Its even better if you can do this in a video conference. Then you get
@@ -155,7 +156,7 @@ of the things I've noticed over the last three years.
 Looking back over this list and I find it interesting that some of
 them also apply to working in person. Some of these tips are
 actionable at an individual level, some are not. Hopefully this list
-can help give guidence towards improving your remote work
+can help give guidance towards improving your remote work
 situation.
 
 
