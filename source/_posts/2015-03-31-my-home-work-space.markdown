@@ -61,15 +61,13 @@ long enough that I want to bring a large monitor.
 
 ## The Chair
 
-My desk chair is a Herman Miller
-[Setu](http://www.amazon.com/gp/product/B003YBMD34/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B003YBMD34&linkCode=as2&tag=jakemccrary08-20&linkId=L3ILROZ432MA4D3X).
-It is a very comfortable chair that boasts only a single adjustment.
-You can only raise or lower it.
+My desk chair is a Herman Miller [Setu](http://amzn.to/1XNWKru). It
+is a very comfortable chair that boasts only a single adjustment. You
+can only raise or lower it.
 
 I moved to this chair from a Herman Miller
-[Aeron](http://www.amazon.com/gp/product/B003M1C7XW/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B003M1C7XW&linkCode=as2&tag=jakemccrary08-20&linkId=UCME7BFLAB2XXQJV).
-The Aeron had been my primary chair for eight years prior to me buying
-the Setu.
+[Aeron](http://amzn.to/1tjeuxJ). The Aeron had been my primary chair
+for eight years prior to me buying the Setu.
 
 They are both great chairs. I haven't missed the extreme amount of
 customization the Aeron provides; its actually nice having fewer knobs
