@@ -1,11 +1,12 @@
 ---
 layout: post
-title: "Tips for working from home"
-date: 2016-06-11 09:45:06 -0500
+title: Tips for working from home
+date: 2016-06-14 10:05 -0500
 comments: true
-published: false
-description: I've worked from home for nearly three years. Here are some tips I've learned.
-keywords: 'working from home, remote work, remotely'
+published: true
+description: I've worked from home for nearly three years. Here are some tips I've
+  learned.
+keywords: working from home, remote work, remotely
 categories:
 - remote
 ---
