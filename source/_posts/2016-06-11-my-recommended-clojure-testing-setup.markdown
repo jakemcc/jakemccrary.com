@@ -37,17 +37,18 @@ tests using it.
 You should use clojure.test with
 [humane-test-output](https://github.com/pjstadig/humane-test-output). Together
 they provide a testing library that has minimal additional syntax and
-pretty good failing test output.
+good test failure reporting.
 
-### 3. Use lein-test-refresh (or some other autotest runner)
+### 3. Use lein-test-refresh
 
-If you're not using a tool where on file change your namespaces are
-reloaded and tests rerun then you are wasting your time. With a proper
-tool you'll cut your feedback cycle drastically. Nearly everyone I
-know who tries a tool like this sticks with it and reports changes to
-their development style. Many of these converts weren't newcomers to
-the language either, they had years of experience and had already
-developed workflows that worked for them.
+If you're not using a tool that reloads and reruns your tests on file
+changes then you are wasting your time. The delay between changing
+code and seeing test results is drastically reduced by using a tool
+like lein-test-refresh. Nearly everyone I know who adds
+lein-test-refresh to their testing toolbox ends up continuing to use
+it a. Many of these converts haven't been newcomers to Clojure either,
+they had years of experience and had already developed workflows that
+worked for them.
 
 ### 4. Use lein-test-refresh's advanced features
 
