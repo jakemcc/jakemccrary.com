@@ -11,42 +11,54 @@ categories:
 - testing
 ---
 
-Frequently I read a question on Stack Overflow or in the
-[Clojurians](http://clojurians.net/) Slack team about recommendations
-for testing in Clojure. For my entire development career I've worked
-primarily with a test driven development mindset and have some
-recommendations when it comes to testing in Clojure.
+Occasionally, either on Stack Overflow or in the
+[Clojurians](http://clojurians.net/) Slack group, I see someone asking
+for Clojure testing advice. Often is a new Clojure programmer trying
+to navigate a new-to-them language environment.
 
-### 1. Use clojure.test with humane-test-output
+Below is what I would currently recommend to other Clojure
+developers. If I were starting a new project this is what I'd
+recommend. For those who don't feel like reading a whole post, here is
+a summary.
+
+> Use clojure.test with
+> [humane-test-output](https://github.com/pjstadig/humane-test-output)
+> and [lein-test-refresh](https://github.com/jakemcc/lein-test-refresh).
+
+### 1. Use clojure.test
+
+clojure.test is ubiquitous and not a big departure from other
+languages' testing libraries. It has its warts but your team will be
+able to understand it quickly and will be able to write maintainable
+tests using it.
+
+### 2. Use humane-test-output
 
 You should use clojure.test with
-[humane-test-output](https://github.com/pjstadig/humane-test-output)
-because together they provide a testing library that has minimal
-additional syntax, great output for failing tests (thanks
-humane-test-output), and clojure.test is available anywhere Clojure
-is.
+[humane-test-output](https://github.com/pjstadig/humane-test-output). Together
+they provide a testing library that has minimal additional syntax and
+pretty good failing test output.
 
-### 2. Use a tool to rerun your tests on file change
+### 3. Use lein-test-refresh (or some other autotest runner)
 
-If you're not using a tool that reloads namespaces on file changes and
-then reruns your test you are wasting your time. Nearly everyone I
+If you're not using a tool where on file change your namespaces are
+reloaded and tests rerun then you are wasting your time. With a proper
+tool you'll cut your feedback cycle drastically. Nearly everyone I
 know who tries a tool like this sticks with it and reports changes to
-their development style. With a proper tool you'll cut your feedback
-cycle drastically.
+their development style. Many of these converts weren't newcomers to
+the language either, they had years of experience and had already
+developed workflows that worked for them.
 
-I'm a bit biased since I'm the author, but I'd recommend
-[lein-test-refresh](https://github.com/jakemcc/lein-test-refresh) as
-that tool to refresh and rerun your tests.
+### 4. Use lein-test-refresh's advanced features
 
-### 3. Use lein-test-refresh's advanced features
-
-lein-test-refresh makes development better even if you don't change
-any of its settings. It gets even better if you use some of its
-advanced features.
+[lein-test-refresh](https://github.com/jakemcc/lein-test-refresh)
+makes development better even if you don't change any of its
+settings. It gets even better if you use some of its advanced
+features.
 
 Below is a stripped down version of my `~/.lein/profiles.clj`. The
-settings I put in my `~/.lein/profiles.clj` are below. The
-`:test-refresh` key points towards my recommended lein-test-refresh settings.
+`:test-refresh` key points towards my recommended lein-test-refresh
+settings.
 
 ```clojure
 {:user {:dependencies [[pjstadig/humane-test-output "0.8.0"]]
@@ -58,14 +70,14 @@ settings I put in my `~/.lein/profiles.clj` are below. The
                        :changes-only true}}}
 ```
 
-Those settings turn on notifications when my tests finish running
+These settings turn on notifications when my tests finish running
 (`:notify-command` setting), make clojure.test's output less verbose
-(`:quiet true`), and only runs tests in namespaces affected by the
-previous change (`:changes-only true`). These three settings give me
-the quickest feedback and free me from always having my terminal
+(`:quiet true`), and only run tests in namespaces affected by the
+previous code change (`:changes-only true`). These three settings give
+me the quickest feedback possible and free me from having the terminal
 running `lein test-refresh` visible.
 
-Quick feedback from tests lets you make changes faster. If you're
-going to write tests, which I very much think you should, you should
-be concerned with getting feedback quickly. This setup is my fastest
-way of getting feedback.
+Quick feedback lets you make changes faster. If you're going to write
+tests, and you should write tests, having them run quickly is
+powerful. After years of writing Clojure, this is my current go-to for
+testing Clojure code and getting extremely fast feedback.
