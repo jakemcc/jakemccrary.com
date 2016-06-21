@@ -12,45 +12,43 @@ categories:
 ---
 
 Occasionally, either on Stack Overflow or in the
-[Clojurians](http://clojurians.net/) Slack group, I see someone asking
-for Clojure testing advice. Often is a new Clojure programmer trying
-to navigate a new-to-them language environment.
-
-Below is what I would currently recommend to other Clojure
-developers. If I were starting a new project this is what I'd
-recommend. For those who don't feel like reading a whole post, here is
-a summary.
+[Clojurians](http://clojurians.net/) Slack group, someone will ask
+what tools they should use to test Clojure code. Below is what I would
+currently recommend. This recommendation comes from using many of the
+testing libraries out there and observing teams using different
+testing tools.
 
 > Use clojure.test with
 > [humane-test-output](https://github.com/pjstadig/humane-test-output)
 > and [lein-test-refresh](https://github.com/jakemcc/lein-test-refresh).
 
-### 1. Use clojure.test
+### Use clojure.test
 
 clojure.test is ubiquitous and not a big departure from other
 languages' testing libraries. It has its warts but your team will be
 able to understand it quickly and will be able to write maintainable
-tests using it.
+tests.
 
-### 2. Use humane-test-output
+### Use humane-test-output
 
 You should use clojure.test with
 [humane-test-output](https://github.com/pjstadig/humane-test-output). Together
 they provide a testing library that has minimal additional syntax and
 good test failure reporting.
 
-### 3. Use lein-test-refresh
+### Use lein-test-refresh
 
 If you're not using a tool that reloads and reruns your tests on file
 changes then you are wasting your time. The delay between changing
 code and seeing test results is drastically reduced by using a tool
-like lein-test-refresh. Nearly everyone I know who adds
-lein-test-refresh to their testing toolbox ends up continuing to use
-it a. Many of these converts haven't been newcomers to Clojure either,
-they had years of experience and had already developed workflows that
-worked for them.
+like
+[lein-test-refresh](https://github.com/jakemcc/lein-test-refresh). Nearly
+everyone I know who tries adding lein-test-refresh to their testing
+toolbox continues to use it. Many of these converts were not newcomers
+to Clojure either, they had years of experience and had already
+developed workflows that worked for them.
 
-### 4. Use lein-test-refresh's advanced features
+### Use lein-test-refresh's advanced features
 
 [lein-test-refresh](https://github.com/jakemcc/lein-test-refresh)
 makes development better even if you don't change any of its
