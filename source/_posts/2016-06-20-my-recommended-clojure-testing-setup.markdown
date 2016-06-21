@@ -1,12 +1,13 @@
 ---
 layout: post
-title: "My recommended Clojure testing setup"
-date: 2016-06-11 13:42:11 -0500
+title: My recommended Clojure testing setup
+date: 2016-06-20 21:03 -0500
 comments: true
-published: false
-description: I've been test driving Clojure for over five years and this is my recommended setup.
-keywords: 'clojure, testing, TDD, lein-test-refresh, test driven development'
-categories: 
+published: true
+description: I've been test driving Clojure for over five years and this is my recommended
+  setup.
+keywords: clojure, testing, TDD, lein-test-refresh, test driven development
+categories:
 - clojure
 - testing
 ---
