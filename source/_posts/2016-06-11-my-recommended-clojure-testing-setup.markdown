@@ -15,7 +15,7 @@ Occasionally, either on Stack Overflow or in the
 [Clojurians](http://clojurians.net/) Slack group, someone will ask
 what tools they should use to test Clojure code. Below is what I would
 currently recommend. This recommendation comes from using many of the
-testing libraries out there and observing teams using different
+available testing libraries and observing teams using different
 testing tools.
 
 > Use clojure.test with
