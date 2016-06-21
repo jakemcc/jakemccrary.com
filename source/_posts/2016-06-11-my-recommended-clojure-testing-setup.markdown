@@ -14,9 +14,9 @@ categories:
 Occasionally, either on Stack Overflow or in the
 [Clojurians](http://clojurians.net/) Slack group, someone will ask
 what tools they should use to test Clojure code. Below is what I would
-currently recommend. This recommendation comes from using many of the
-available testing libraries and observing teams using different
-testing tools.
+currently recommend. I've come to this recommendation through
+observing teams using a variety of testing tools and through my own
+use them.
 
 > Use clojure.test with
 > [humane-test-output](https://github.com/pjstadig/humane-test-output)
