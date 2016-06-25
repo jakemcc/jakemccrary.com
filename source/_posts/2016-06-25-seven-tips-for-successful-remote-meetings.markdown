@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Tips for running successful remote meetings"
+title: "7 tips for a successful remote meeting"
 date: 2016-06-25 11:08:19 -0500
 comments: true
 published: false
-description: PUT SUMMARY HERE 
+description: Here are seven tips for having successful remote meetings.
 keywords: 'csv, keywords, here'
 categories: 
 - remote
