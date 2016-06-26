@@ -101,7 +101,11 @@ abbr, acronym { border-bottom: 1px dotted; cursor: help; }
 
 pre, code, tt { @extend .mono; }
 
-hr { margin-bottom: 0.2em; }
+hr {
+  border: 0;
+  border-bottom: 1px dashed #ccc;
+  margin-bottom: 1.5em;
+}
 
 small { font-size: .8em; }
 
