@@ -16,19 +16,19 @@ article, I've been working remotely for nearly three years. In those
 three years I've been in countless meetings, both productive and
 unproductive. Meetings in general are hard and remote meetings pose
 some unique challenges. Remote meetings also offer some benefits that
-are harder to acheive with co-located meetings. Below are seven tips
+are harder to achieve with co-located meetings. Below are seven tips
 that will help you have successful remote meetings. Many of them are
 applicable to in-person meetings as well.
 
 ### Have an agenda
 
 If you're planning a meeting you should write down an agenda. The
-agenda doesn't have to be complicated, it can be as simple as writing
+agenda doesn't have to be complicated; it can be as simple as writing
 down a list of what topics you want to discuss. The act of writing
 down an agenda forces you to think about what the meeting is trying to
-accomplish which will help you run a successful meeting. Write enough
-so that someone invited to the meeting can read it and have an idea
-about what the meeting is about.
+accomplish. This helps you run a successful meeting. Write enough so
+that someone invited to the meeting can read it and have an idea about
+what the meeting is about.
 
 This agenda should be sent out with the meeting invite. This lets the
 invitees know what the meeting is about and gives them time to think
@@ -58,8 +58,9 @@ multiple people try to speak at the same time. It is terrible.
 
 This is I recommend using video chat. Video conferences allow you to
 see the other people on the call and you can pick up on physical
-cues. These cues make all the difference and vastly improves
+cues. These cues make all the difference and vastly improve
 communication in the meeting.
+
 
 ### Co-located attendees should use their own device
 
@@ -101,7 +102,7 @@ being direct.
 ### Have a shared artifact
 
 This is one of the more important tips in this list and is one of the
-aspects of remote meetings that works better than in-person meetings.
+aspects of remote meetings have the advantage over in-person meetings.
 
 When the meeting starts give everyone a link to a shared document that
 everyone can edit (for example a
@@ -116,8 +117,7 @@ With in-person meetings, this shared artifact is often a
 whiteboard. Whiteboards are immensely useful but are barely editable
 by more than one person at once and are harder to reference after a
 meeting. I know I'm not the only person who dislikes trying to
-decipher terrible whiteboard handwriting captured by someone's
-phone.
+decipher terrible whiteboard handwriting captured by someone's phone.
 
 ### Assign responsibilities
 
@@ -127,13 +127,13 @@ follow-up responsibilities as the meeting progresses. Make the
 follow-up actions explicit and assigned to an individual. You can
 capture these responsibilities in your shared artifact.
 
-## The End
+---
 
-Meetings are hard. You should do what you can to make them more
-successful. If you are being invite to a meeting without an agenda,
-ask for an agenda. If you're in a meeting and you can tell someone is
-constantly distracted, try nicely calling them out on it (either
-privately or in the group). If there isn't a shared artifact, make one
-and suggest it to the group. Meetings don't have to be terrible. We
-can make them better.
+Meetings can be difficult. You should do what you can to make them
+more successful. If you are being invite to a meeting without an
+agenda, ask for an agenda. If you're in a meeting and you can tell
+someone is constantly distracted, try nicely calling them out on it
+(either privately or in the group). If there isn't a shared artifact,
+make one and suggest it to the group. Meetings don't have to be
+terrible. We can make them better.
 
