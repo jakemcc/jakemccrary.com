@@ -4,8 +4,8 @@ title: "7 tips for a successful remote meeting"
 date: 2016-06-25 11:08:19 -0500
 comments: true
 published: false
-description: Here are seven tips for having successful remote meetings.
-keywords: 'csv, keywords, here'
+description: Here are seven tips for having a successful remote meeting.
+keywords: 'remote, meeting, remote meeting, video chat'
 categories: 
 - remote
 ---
@@ -56,8 +56,8 @@ start speaking and, as a result, there are awkward pauses while
 everyone waits for someone else to speak and there are times when
 multiple people try to speak at the same time. It is terrible.
 
-This is I recommend using video chat. Video conferences allow you to
-see the other people on the call and you can pick up on physical
+This is why I recommend using video chat. Video conferences allow you
+to see the other people on the call and you can pick up on physical
 cues. These cues make all the difference and vastly improve
 communication in the meeting.
 
@@ -101,8 +101,9 @@ being direct.
  
 ### Have a shared artifact
 
-This is one of the more important tips in this list and is one of the
-aspects of remote meetings have the advantage over in-person meetings.
+This is one of the more important tips in this list and it is one of
+the areas where remote meetings have an advantage over in-person
+meetings.
 
 When the meeting starts give everyone a link to a shared document that
 everyone can edit (for example a
@@ -118,6 +119,13 @@ whiteboard. Whiteboards are immensely useful but are barely editable
 by more than one person at once and are harder to reference after a
 meeting. I know I'm not the only person who dislikes trying to
 decipher terrible whiteboard handwriting captured by someone's phone.
+
+Except for when drawing diagrams, I've found the Google Docs style
+shared document used during a remote meeting more effective than using
+a whiteboard in an in-person meeting. You can always use a shared
+document in an in-person meeting as well but then you are requiring
+attendees to have a laptop open and that is an invitation for
+distracted attendees.
 
 ### Assign responsibilities
 
@@ -136,4 +144,3 @@ someone is constantly distracted, try nicely calling them out on it
 (either privately or in the group). If there isn't a shared artifact,
 make one and suggest it to the group. Meetings don't have to be
 terrible. We can make them better.
-
