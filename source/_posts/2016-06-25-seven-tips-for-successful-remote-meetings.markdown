@@ -55,13 +55,12 @@ Even if you don't work remotely, you've probably had to dial in to a
 group audio chat. This is almost always a terrible experience. Without
 body language, it is near impossible to tell when someone is about to
 start speaking and, as a result, there are awkward pauses while
-everyone waits for someone else to speak and there are times when
-multiple people try to speak at the same time. It is terrible.
+everyone waits for someone else to speak and everyone speaks over each
+other. It is terrible.
 
-This is why I recommend using video chat. Video conferences allow you
-to see the other people on the call and allows you to pick up on
-physical cues. These cues make vastly improve communication in the
-meeting.
+This is why I recommend using video chat. Video chats let you to see
+the other people on the call and this allows you to pick up on
+physical cues. These cues vastly improve communication in the meeting.
 
 ### Co-located attendees should use their own device
 
@@ -76,9 +75,10 @@ reliably view them. Sharing a single microphone also makes it so some
 co-located attendees are easy to hear and others are barely audible.
 
 Using a single device also makes it harder for all the co-located
-attendees to view the remote attendees. Without a clear view of remote
-attendees it is easy to slip into focusing your speech towards the
-co-located attendees.
+attendees to view the remote attendees. Without a clear view of the
+remote attendees, the co-located attendees often accidently exclude
+the remote people by focusing on discussions between the co-located
+group.
 
 ### Ignore distractions
 
@@ -91,7 +91,7 @@ user.
 When you are attending a remote meeting, minimize what can distract
 you. Close your email and hide the chat program. Put your phone out of
 arms reach. Try to focus intently on the meeting. If you find yourself
-not paying attention and not contributing take this as a signal that
+not paying attention and not contributing, take this as a signal that
 you shouldn't be in this meeting. If nothing on the rest of the agenda
 seems like it requires you, then leave the meeting and be more
 selective about what you join in the future.
@@ -110,10 +110,10 @@ When the meeting starts give everyone a link to a shared document that
 everyone can edit (for example a
 [Google Doc](https://www.google.com/docs/about/)). It can be useful to
 seed this document with the agenda. This shared document can be used
-to capture whatever you want. Depending on the meetings agenda, I've
-found it useful to capture options discussed, pros/cons lists, and
-follow-up actions. Writing in the shared document helps solidify ideas
-and gives the group a reference both during and after the meeting.
+to capture whatever you want. I've found it useful to capture options
+discussed, pros/cons lists, and follow-up actions. Writing in the
+shared document helps solidify ideas and gives the group a reference
+both during and after the meeting.
 
 With in-person meetings, this shared artifact is often a
 whiteboard. Whiteboards are immensely useful but are barely editable
@@ -139,7 +139,7 @@ capture these responsibilities in your shared artifact.
 ---
 
 Meetings can be difficult. You should do what you can to make them
-more successful. If you are being invite to a meeting without an
+more successful. If you are being invited to a meeting without an
 agenda, ask for an agenda. If you're in a meeting and you can tell
 someone is constantly distracted, try nicely calling them out on it
 (either privately or in the group). If there isn't a shared artifact,
