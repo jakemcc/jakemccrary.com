@@ -76,7 +76,7 @@ co-located attendees are easy to hear and others are barely audible.
 
 Using a single device also makes it harder for all the co-located
 attendees to view the remote attendees. Without a clear view of the
-remote attendees, the co-located attendees often accidently exclude
+remote attendees, the co-located attendees often accidentally exclude
 the remote people by focusing on discussions between the co-located
 group.
 
