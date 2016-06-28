@@ -14,38 +14,40 @@ As mentioned in my
 [tips for working from home](/blog/2016/06/14/tips-for-working-from-home/)
 article, I've been working remotely for nearly three years. In those
 three years I've been in countless meetings, both productive and
-unproductive. Meetings in general are hard and remote meetings pose
-some unique challenges. Remote meetings also offer some benefits that
-are harder to achieve with co-located meetings. Below are seven tips
-that will help you have successful remote meetings. Many of them are
-applicable to in-person meetings as well.
+unproductive. Meetings, both in-person and remote, are hard. Remote
+meetings pose some additional challenges but they also offer some
+unique benefits.
+
+Below are seven tips that will help you have successful remote
+meetings. I wrote this article focusing on remote meetings but many of
+these tips will improve your co-located meetings as well.
 
 ### Have an agenda
 
-If you're planning a meeting you should write down an agenda. The
-agenda doesn't have to be complicated; it can be as simple as writing
-down a list of what topics you want to discuss. The act of writing
-down an agenda forces you to think about what the meeting is trying to
-accomplish. This helps you run a successful meeting. Write enough so
-that someone invited to the meeting can read it and have an idea about
-what the meeting is about.
+If you are organizing a meeting, you should make sure that the meeting
+has an agenda. The agenda doesn't have to be a long, complicated
+document; it can be as simple as a list of topics and goals.
 
-This agenda should be sent out with the meeting invite. This lets the
-invitees know what the meeting is about and gives them time to think
-about the topics being discussed. It also provides an opportunity for
-them to reach out and either exclude themselves from the meeting or
-suggest a person that should be included in the discussion.
+Why should you have an agenda? An agenda helps focus discussion by
+providing an outline of what the meeting is designed to cover.
 
-The agenda should be used to lead the discussion in the meeting.
+Send out your agenda with the meeting invite. This gives invitees time
+to think about the topics and helps prevent people from showing up
+clueless. It also provides an opportunity for an invitee to excuse
+themself or suggest an alternative person if they don't believe they
+will contribute to the meeting.
 
 ### Start and end on time
 
-You need to be protective about your time and the meeting attendees
-time. Start your meetings and end your meetings on time (or end them
-early). As you get near your scheduled ending time, wind down the
-meeting. If more discussions need to happen, reflect and see if more
-time needs to be scheduled with the entire group or if only a subset
-of the group is required.
+You should start your meetings on time. You should end your meetings
+on time or early. If you are not starting and ending on time then you
+are not being respectful of your attendees time. The lack of
+punctuality contributes towards people dreading meetings.
+
+If you are running out of time, wind down the meeting. If more
+discussions need to happen, reflect and see if more time needs to be
+scheduled with the entire group or if only a subset of the group is
+required.
 
 ### Use video chat
 
@@ -57,10 +59,9 @@ everyone waits for someone else to speak and there are times when
 multiple people try to speak at the same time. It is terrible.
 
 This is why I recommend using video chat. Video conferences allow you
-to see the other people on the call and you can pick up on physical
-cues. These cues make all the difference and vastly improve
-communication in the meeting.
-
+to see the other people on the call and allows you to pick up on
+physical cues. These cues make vastly improve communication in the
+meeting.
 
 ### Co-located attendees should use their own device
 
@@ -72,7 +73,7 @@ Co-located attendees sharing a single device is non-optimal for many
 reasons. It is often hard for all the co-located attendees to be
 captured by the camera in a way that enables the remote attendees to
 reliably view them. Sharing a single microphone also makes it so some
-co-located attendees are easy to hear and others impossible.
+co-located attendees are easy to hear and others are barely audible.
 
 Using a single device also makes it harder for all the co-located
 attendees to view the remote attendees. Without a clear view of remote
