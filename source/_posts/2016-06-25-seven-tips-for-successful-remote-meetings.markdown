@@ -8,6 +8,7 @@ description: Here are seven tips for having a successful remote meeting.
 keywords: 'remote, meeting, remote meeting, video chat'
 categories: 
 - remote
+- meetings
 ---
 
 As mentioned in my
