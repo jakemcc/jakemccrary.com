@@ -59,7 +59,7 @@ start speaking and, as a result, there are awkward pauses while
 everyone waits for someone else to speak and everyone speaks over each
 other. It is terrible.
 
-This is why I recommend using video chat. Video chats let you to see
+This is why I recommend using video chat. Video chats let you see
 the other people on the call and this allows you to pick up on
 physical cues. These cues vastly improve communication in the meeting.
 
