@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "7 tips for a successful remote meeting"
-date: 2016-06-25 11:08:19 -0500
+title: 7 tips for a successful remote meeting
+date: 2016-06-28 09:36 -0500
 comments: true
-published: false
+published: true
 description: Here are seven tips for having a successful remote meeting.
-keywords: 'remote, meeting, remote meeting, video chat'
-categories: 
+keywords: remote, meeting, remote meeting, video chat
+categories:
 - remote
 - meetings
 ---
