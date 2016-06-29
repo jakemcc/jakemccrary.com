@@ -6,6 +6,7 @@ comments: true
 published: true
 categories:
 - pairing
+- remote
 ---
 
 Over a year ago I joined [Outpace](http://outpace.com). All of

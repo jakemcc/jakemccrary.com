@@ -7,6 +7,7 @@ published: true
 categories:
 - process
 - code review
+- remote
 ---
 
 [{% img center /images/justin-searls-code-reviews-harmful.png The way most organizations implement code reviews in teams is usually more harmful than helpful. I generally recommend going without them. - Justin Searls %}](https://twitter.com/searls/status/540603801955471360)
