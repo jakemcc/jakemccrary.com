@@ -27,7 +27,7 @@ fashion. [Worker environments](http://docs.aws.amazon.com/elasticbeanstalk/lates
 are designed to run operations that you wouldn't want performed by
 your front-end serving web application.
 
-A major difference between the two environment teirs is that a worker
+A major difference between the two environment tiers is that a worker
 environment provisions a [SQS](https://aws.amazon.com/sqs/) queue and
 provides a daemon that reads from this queue and POSTs messages to an
 instance of your worker service. This daemon prevents your worker
