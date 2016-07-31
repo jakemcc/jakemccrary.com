@@ -1,12 +1,14 @@
 ---
 layout: post
-title: "AWS Elastic Beanstalk: Send a SQS message to a specific route in your worker environment"
-date: 2016-07-30 13:57:52 -0500
+title: 'AWS Elastic Beanstalk: Send a SQS message to a specific route in your worker
+  environment'
+date: 2016-07-31 12:16 -0500
 comments: true
-published: false
-description: By default messages to an AWS EB Worker environment hit a single endpoint. Here is how you can vary the endpoint for each message.
-keywords: 'aws, elastic beanstalk, sqs'
-categories: 
+published: true
+description: By default messages to an AWS EB Worker environment hit a single endpoint.
+  Here is how you can vary the endpoint for each message.
+keywords: aws, elastic beanstalk, sqs
+categories:
 - AWS
 - Elastic Beanstalk
 ---
