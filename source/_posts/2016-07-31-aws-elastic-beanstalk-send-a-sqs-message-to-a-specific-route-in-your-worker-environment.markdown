@@ -35,8 +35,7 @@ provides a daemon that reads from this queue and POSTs messages to an
 instance of your worker service. This daemon prevents your worker
 service from having to connect to and manage a SQS queue. By default,
 the daemon POSTs messages to `http://localhost/`. You can optionally
-configure it to POST to a different route. Messages placed on the SQS
-queue end up being POSTed to this route.
+configure it to POST to a different route.
 
 It is possible to have different messages POST to different
 routes. You can do this by setting the `beanstalk.sqsd.path` attribute
