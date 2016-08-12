@@ -21,17 +21,22 @@ We use [Leiningen](http://leiningen.org/) (version 2.5.3) and
 [lein-cljsbuild](https://github.com/emezeske/lein-cljsbuild) (version
 1.1.1). After some searching we found that lein-cljsbuild supports
 [specifying custom warning handlers](https://github.com/emezeske/lein-cljsbuild#custom-warning-handlers)
-as the value to the `:warning-handlers` key. The `:warning-handlers`
-key is a sibling to your build's `:id` key. The lein-cljsbuild README even
+as the value to the `:warning-handlers` key. The lein-cljsbuild README even
 provides an example, which we took and added a `(System/exit 1)` to
-the end of it.
+the end of it. This resulted in a build configuration that looked similar to below.
 
 ```clojure
-:warning-handlers [(fn [warning-type env extra]
-                     (when-let [s (cljs.analyzer/error-message warning-type extra)]
-                       (binding [*out* *err*]
-                         (println "WARNING:" (cljs.analyzer/message env s)))
-                       (System/exit 1)))]
+{:id "prod"
+ :warning-handlers [(fn [warning-type env extra]
+                      (when-let [s (cljs.analyzer/error-message warning-type extra)]
+                        (binding [*out* *err*]
+                          (println "WARNING:" (cljs.analyzer/message env s)))
+                        (System/exit 1)))]
+ :source-paths ["src/cljc" "src/cljs"]
+ :compiler {:output-to "resources/public/js/compiled/ui.js"
+            :externs ["resources/intercom-externs.js"
+                      "resources/mixpanel-externs.js"]
+            :optimizations :advanced}}
 ```
 
 This worked! Well, it sort of worked. Our build failed whenever there
