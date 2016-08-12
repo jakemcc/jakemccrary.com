@@ -21,9 +21,10 @@ We use [Leiningen](http://leiningen.org/) (version 2.5.3) and
 [lein-cljsbuild](https://github.com/emezeske/lein-cljsbuild) (version
 1.1.1). After some searching we found that lein-cljsbuild supports
 [specifying custom warning handlers](https://github.com/emezeske/lein-cljsbuild#custom-warning-handlers)
-as the value to the `:warning-handlers` key. The lein-cljsbuild README
-even provides an example, which we took and added a `(System/exit 1)`
-to the end of it.
+as the value to the `:warning-handlers` key. The `:warning-handlers`
+key is a sibling to your build's `:id` key. The lein-cljsbuild README even
+provides an example, which we took and added a `(System/exit 1)` to
+the end of it.
 
 ```clojure
 :warning-handlers [(fn [warning-type env extra]
