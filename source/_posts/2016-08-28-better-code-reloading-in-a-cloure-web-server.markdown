@@ -10,17 +10,16 @@ categories:
 - clojure
 ---
 
-I'm announcing the release of
+A couple weeks ago I released
 [com.jakemccrary/reload](https://github.com/jakemcc/reload). This tiny
-library was created in January 2016 as a result of wanting a ring
-middleware that uses
+library provides a ring middleware that uses
 [org.clojure/tools.namespace](https://github.com/clojure/tools.namespace)
-to reload changed code.
+ to reload changed Clojure code on incoming http requests.
 
-That desire happened because my team was running into reloading
-problems using ring's `wrap-reload` middleware. Unfortunately these
-problems happened about nine months ago and, since I didn't write this
-post back then, I've since forgotten these problems. Regardless, this
+This middleware was created because my team was running into problems
+using ring's `wrap-reload` middleware. Unfortunately these problems
+happened about nine months ago and, since I didn't write this post
+back then, I've since forgotten these problems. Regardless, this
 project has been used since the beginning of this year and has helped
 make my team's development workflow smoother. If you are running into
 problems it might help you too.
