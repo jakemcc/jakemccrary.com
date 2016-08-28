@@ -26,9 +26,7 @@ make my team's development workflow smoother.
 
 ### Usage 
 
-If you'd like to give it a shot, then add the [latest version](https://clojars.org/com.jakemccrary/reload) to your project.clj. 
-
-[![Clojars Project](https://img.shields.io/clojars/v/com.jakemccrary/reload.svg)](https://clojars.org/com.jakemccrary/reload)
+If you'd like to give it a shot, then add the [latest version](https://clojars.org/com.jakemccrary/reload) (at the time of writing `[com.jakemccrary/reload "0.1.0"]`) to your project.clj. 
 
 Require `com.jakemccrary.middleware.reload` and wrap your handler with `wrap-reload`.
 
