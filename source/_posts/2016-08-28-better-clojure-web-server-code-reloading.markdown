@@ -18,7 +18,7 @@ middleware that uses
 reload changed code.
 
 That desire happened because my team was running into reloading
-problems using ring's `wrap-reload` middleware. Unforunately these
+problems using ring's `wrap-reload` middleware. Unfortunately these
 problems happened prior to January 2016 and, since I didn't write this
 post back then, I've since forgotten what the problems
 were. Regardless, this project has been being used since the beginning
