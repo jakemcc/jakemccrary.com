@@ -22,7 +22,8 @@ problems using ring's `wrap-reload` middleware. Unfortunately these
 problems happened about nine months ago and, since I didn't write this
 post back then, I've since forgotten these problems. Regardless, this
 project has been used since the beginning of this year and has helped
-make my team's development workflow smoother.
+make my team's development workflow smoother. If you are running into
+problems it might help you too.
 
 ### Usage 
 
