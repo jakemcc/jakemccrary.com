@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "Better code reloading in a Clojure web server"
-date: 2016-08-28 13:36:37 -0500
+title: Better code reloading in a Clojure web server
+date: 2016-08-28 17:20 -0500
 comments: true
-published: false
+published: true
 description: Here is a better alternative to ring/wrap-reload.
-keywords: 'clojure, ring, wrap-reload, reload'
-categories: 
+keywords: clojure, ring, wrap-reload, reload
+categories:
 - clojure
 ---
 
