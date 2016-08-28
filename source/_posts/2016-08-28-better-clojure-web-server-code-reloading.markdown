@@ -15,15 +15,14 @@ I'm announcing the release of
 library was created in January 2016 as a result of wanting a ring
 middleware that uses
 [org.clojure/tools.namespace](https://github.com/clojure/tools.namespace)
-reload changed code.
+to reload changed code.
 
 That desire happened because my team was running into reloading
 problems using ring's `wrap-reload` middleware. Unfortunately these
-problems happened prior to January 2016 and, since I didn't write this
-post back then, I've since forgotten what the problems
-were. Regardless, this project has been being used since the beginning
-of this year and has helped make my team's development workflow
-smoother.
+problems happened about nine months ago and, since I didn't write this
+post back then, I've since forgotten these problems. Regardless, this
+project has been used since the beginning of this year and has helped
+make my team's development workflow smoother.
 
 ### Usage 
 
