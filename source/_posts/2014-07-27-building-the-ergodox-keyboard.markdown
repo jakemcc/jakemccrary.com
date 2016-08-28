@@ -10,7 +10,7 @@ published: true
 ---
 
 Earlier this year I built an
-[ErgoDox](http://ergodox.org/Default.aspx). The ErgoDox is a split
+[ErgoDox](https://deskthority.net/wiki/ErgoDox). The ErgoDox is a split
 hand mechanical keyboard whose design has been released under the GNU
 GPLv3. There are a few standard [^1] ways of getting the parts. It
 basically comes down to sourcing all the parts yourself or buying a
