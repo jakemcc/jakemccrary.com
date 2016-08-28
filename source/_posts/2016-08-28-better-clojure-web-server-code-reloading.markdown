@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Better Clojure web server code reloading"
+title: "Better code reloading in a Clojure web server"
 date: 2016-08-28 13:36:37 -0500
 comments: true
 published: false
