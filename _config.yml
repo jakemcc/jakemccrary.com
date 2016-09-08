@@ -7,7 +7,7 @@ url: http://jakemccrary.com
 title: Jake McCrary
 #subtitle: Musings of a software developer
 author: Jake McCrary
-simple_search: http://google.com/search
+simple_search: https://google.com/search
 description: "Home of Jake McCrary's writing on software, teams, and technology."
 
 # Default date format is "ordinal" (resulting in "July 22nd 2007")
