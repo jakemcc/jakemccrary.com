@@ -23,11 +23,11 @@ called [hstr](https://github.com/dvorka/hstr).
 
 hstr is a neat Bash and Zsh utility that lets you easily search, view,
 and manage your command history. hstr provides a tool named `hh` that
-provides a nice text interface for manipulating your command
+provides a text interface for manipulating your command
 history. To see what it looks like check out
 the [README](https://github.com/dvorka/hstr/blob/master/README.md) and
 this [video](https://www.youtube.com/watch?v=sPF29NyXe2U) tutorial. If
-you are running OS X you can install it using brew by running `brew
+you are running OS X and use Homebrew you can install it by running `brew
 install hh`.
 
 ## Making global history searchable but arrows cycle through local history
@@ -58,7 +58,7 @@ bind -x '"\C-r": "HISTFILE=~/.bash_history.global hh"'
 
 With those two additions to my `.bashrc` I've achieved my ideal
 command history searching. When I hit ctrl-r I'm searching all of my
-history and can still cycle through a shell's local history with my
+history and yet I only cycle through a shell's local history with the
 arrow keys. This small addition[^1] made my command line productivity
 higher.
 
