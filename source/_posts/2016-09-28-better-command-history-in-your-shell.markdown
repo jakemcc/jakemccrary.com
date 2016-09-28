@@ -1,12 +1,13 @@
 ---
 layout: post
-title: "Better command history in your shell"
-date: 2016-09-27 17:16:02 -0500
+title: Better command history in your shell
+date: 2016-09-28 11:42 -0500
 comments: true
-published: false
-description: Here is how to have better command history searching with minimal changes to your shell's configuration.
-keywords: 'bash, command line, history, hh, hstr'
-categories: 
+published: true
+description: Here is how to have better command history searching with minimal changes
+  to your shell's configuration.
+keywords: bash, command line, history, hh, hstr
+categories:
 - command-line
 - tools
 - utilities
