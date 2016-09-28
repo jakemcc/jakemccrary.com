@@ -10,13 +10,13 @@ categories:
 - command-line
 - tools
 - utilities
+- bash
 ---
 
-Since February of this year I've had pretty awesome command history in
-my Bash shell. My ideal command history would let me search the
-history of every shell but when I hit the up arrow it would only cycle
-through my current shell's history. This is exactly the setup I've
-been able to achieve by using a utility
+My ideal command history would let me search the history of every
+shell but when I hit the up arrow it would only cycle through my
+current shell's history. In February, I was able to achieve this setup
+in large part because of a utility
 called [hstr](https://github.com/dvorka/hstr).
 
 ## What is `hstr`?
@@ -62,4 +62,4 @@ history and yet I only cycle through a shell's local history with the
 arrow keys. This small addition[^1] made my command line productivity
 higher.
 
-[^1]: My setup was inspired by [this](https://unix.stackexchange.com/questions/200225/search-history-from-multiple-bash-session-only-when-ctrl-r-is-used-not-when-a) StackOverflow post.
+[^1]: My setup was inspired by [this](https://unix.stackexchange.com/questions/200225/search-history-from-multiple-bash-session-only-when-ctrl-r-is-used-not-when-a) StackExchange post.
