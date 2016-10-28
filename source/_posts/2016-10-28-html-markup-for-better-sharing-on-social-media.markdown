@@ -9,29 +9,28 @@ keywords: 'Facebook, HTML, markup, social media, twitter'
 categories: blog
 ---
 
-For a bit more than a year I worked on a project that involved web
-crawling and consuming status updates Facebook and Twitter. After
-seeing thousands of posts on social media I finally took the time to
-improve this blogs markup so that articles would be previewed better
-when shared on Facebook and Twitter.
+For a bit more than a year I worked on a project that crawled the web
+and indexed articles. Two of our sources of data were articles shared
+on Facebook and Twitter. After seeing thousands of article previews on
+these two social networks, I decided to improve how my own articles were
+previewed.
 
-It took a bit of digging to figure out what markup needed to be
-included with each post. Most of the articles you find are from scammy
-feeling SEO blogs or other equally scammy feeling "optimize your
-presence on social media" articles. The useful information in those
-articles is buried under pop-ups trying to get you onto a mailing list
-and other annoying features of the modern web.
+I thought figuring out the markup I needed to add would be a painless
+experience. Unfortunately if you search the web for this information
+you end up at various SEO optimization and other similar type sites
+where you get the pleasure of experiencing full screen pop-overs
+trying to get you to sign up for mailing lists and other annoying
+features of the modern web. Probably unsurprisingly, the best source
+for this information turned out to be the social networks themselves.
 
-Below is the markup you'll want to add to your articles to have them
-preview better when shared on Facebook and Twitter. I'm just going to
-copy this from my template that is used to generate the `<head>`
-section of my articles. Items in all caps should be values that make
-sense for your articles. Check
-the [Twitter](https://dev.twitter.com/cards/markup)
+Below is the markup you'll want to add to the `<head>` section of
+your articles' markup. Items in all caps should be values that make
+sense for your articles. Most fields are pretty self-evident, but
+check [Twitter's](https://dev.twitter.com/cards/markup)
 and
-[Facebook](https://developers.facebook.com/docs/sharing/webmasters#markup). The
-[Open Graph](http://ogp.me/) documentation has more details on the
-Open Graph markup.
+[Facebook's](https://developers.facebook.com/docs/sharing/webmasters#markup) documentation
+for more details. The [Open Graph](http://ogp.me/) documentation has
+more details as well.
 
 ```html
 <meta itemprop="name" content="ARTICLE TITLE" />
@@ -55,10 +54,10 @@ Open Graph markup.
 <meta property="article:published_time" content="PUBLISHED DATETIME" />
 ```
 
-There you go. If you're in control of your site's markup and want to
-start having the preview of your articles show up better on various
-social media outlets then you should add similar markup to your web
-site  [^1]. Hopefully this article has saved you from having some full
-screen pop-over prompt you to join yet another mailing list.
+If you have control of your site's markup and want better previews of
+your articles on the various social networks then you should add this
+markup to your web site [^1]. Hopefully this article has saved you
+from having a full screen pop-over prompt you to join yet another
+mailing list.
 
 [^1]: You can actually remove the `twitter:title`, `twitter:description`, and `twitter:image` lines since Twitter will fallback to the equivalent Open Graph markup if they missing.
