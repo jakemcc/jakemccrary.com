@@ -1,11 +1,12 @@
 ---
 layout: post
-title: "HTML markup for better sharing on social media"
-date: 2016-10-28 08:59:51 -0500
+title: HTML markup for better sharing on social media
+date: 2016-10-28 10:05 -0500
 comments: true
-published: false
-description: Short, no nonsense guide to improving how your articles appear when shared on social media.
-keywords: 'Facebook, HTML, markup, social media, twitter'
+published: true
+description: Short, no nonsense guide to improving how your articles appear when shared
+  on social media.
+keywords: Facebook, HTML, markup, social media, twitter
 categories: blog
 ---
 
