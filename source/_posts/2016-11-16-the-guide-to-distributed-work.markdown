@@ -290,14 +290,14 @@ and more important to pay attention to the categories of
 tools. Categories of tools tend to be more stable than a specific
 recommendation.
 
-## Text Chat 
+## Text chat 
 
 You'll want a chat application. Be careful though, chat applications
 can be a huge interuption. [Slack](https://slack.com)
 and [HipChat](https://www.hipchat.com) are just two of the many
 available services.
 
-## Video Conference
+## Video conference
 
 Video conferencing is a technology that you should embrace. It is much
 better than talking to either an individual or a group on a
@@ -307,12 +307,21 @@ and [Zoom](https://zoom.us) for hundreds of hours each and prefer
 Zoom. [appear.in](https://appear.in) is another option that doesn't
 require installing anything. There are numerous other options in this space.
 
-## Phone Conferences
+## Phone conferences
 
 I'd try to get rid of phone conferences in preference to video
 conferences. Video offers so many benefits over phone. I actually
 can't recommend any phone conferencing tools but I will mention that
 Zoom supports people dialing into a video conference.
+
+## Screen sharing
+
+You'll want to have a way to show another person or group what is on
+your screen. It is even better if someone else can take control of
+your machine or use their cursor to point towards something on your
+screen.
+
+Most of my experience with this is using the feature built-in to Zoom.
 
 ## Real-time collaboration on a document
 
@@ -343,19 +352,39 @@ use
 [Google Drawings](https://drawings.google.com). [Precursor](https://precursorapp.com/) is
 a design focused collaborative tool that can also work.
 
-
-
-
 # Communication
+
+Communication is inherently different on a distributed team. All of a
+sudden, you cannot just walk across an office to interupt someone and
+ask them a question. Communication happens mostly through text. Your
+skill at written communication needs to be high.
+
+You lose a lot of context with written communication when compared to
+vocal or in person communication. You no longer have body language or
+tone of voice to help you interpret what someone means. Losing tone is
+huge. Text communication tends to be interpretted more negatively
+[TODO: source?] than intended. Try to read text messages with a
+positive tone.
+
+It can also be useful to have rules around the expectations of
+different forms of communication. How quickly does an email need to be
+responded to? How quick should a response be to a chat room meessage?
+When should you pick up the phone and call someone?
+
 ## Stand ups
 ## Meeting recommendations
 ## Remote Pairing
 ## 1 on 1s
 ## Difficulties of Slack / chat 
 ## Picking the right medium
-# Stand ups
 # Recommendations
 # Other references
+
+- Book: Remote by Jason Fried and DHH
+- Zapier has a pretty good remote guide
+- Paul Stadig blog post
+- Tim's recommendations
+
 # Acknowledgements
 
 [^1]: Though, you may want to pay for Internet or provide a budget to help remote employees setup their home office.
