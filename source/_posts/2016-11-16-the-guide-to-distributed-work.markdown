@@ -80,7 +80,92 @@ problems.
 ## Flexibility in schedule
 
 This is another benefit that most people can immediately
-identify. Working remotely gives you more power over schedule.
+identify. Working remotely gives you more power over your
+schedule. Even in a synchronous distributed team you gain
+flexibility. All of a sudden your work breaks become time you can use
+to enrich your non-work life.
+
+Picking or dropping off your children at daycare or school becomes
+easier. You can walk your dog easier. You have more time (because of
+lack of commute) to make breakfast for you or your family. You can run
+errands or go to your favorite lunch spot during the day. Doing this
+saves you time since you are going at off-hours compared to most of
+the in-office 9-5 workers.
+
+## Customize your work space
+
+You get to choose where you work. For many, this will be in a home
+office. This is your space, you get to choose what it is like. 
+
+Do you like to work in a cave? Paint the walls a dark color, block out
+the windows and enjoy your cave like experience. Prefer sunlight and
+plants? Work near a window and have bring some house plants into your
+space. Do you want that awesome sit-stand desk and chair? Buy them
+[TODO: Link to other post].
+
+One of my former collegues likes to walk on a treadmill while walking
+or, if sitting, he likes having peddles under his desk. These are
+customizations he would have a hard time getting at most offices and
+they allow him to move more every day.
+
+## Eat the food you want to eat
+
+Many of us have a certain diet we prefer, or are forced, to
+follow. Maybe you cannot eat gluten or prefer to follow the Paleo
+diet. When you work from your home office you can more easily eat food
+you prepare.
+
+When you work from an office you have a few food options. You can
+either bring your own food, go out to eat, or (if your employee offers
+it) eat food provided by your company. If you follow a restrictive
+diet, all of these options are more hassle then making your lunch at
+home every day.
+
+Feel like eating food someone else has prepared? You can still do that
+while working from home.
+
+## Off hours support
+
+This is a benefit I have not seen other people mention. Off hours
+support becomes much easier if you are working remotely. The actions
+you would take for an urgent alert at 1 AM are the same actions you
+would take at 1 PM.
+
+When you get that 1 AM page you don't have to struggle to remember how
+you check production while at home; this is an activity you do on a
+regular basis. You know what you need to do. You don't have to
+remember how to VPN into your company's network, you do that every day.
+
+## Recruiting
+
+Instead of being limited to your local work force you are able to
+recruit from a much wider region. This means you can find the top
+skilled workers in whatever technology, tools, or industry your
+company is in. This is huge. 
+
+Back in 2012 it was quite difficult to find experienced Clojure
+programmers. Because [Outpace](https://outpace.com) was a distributed
+company, we were able to hire experts from across the entire United
+States. We would not have been able to hire nearly as well if we were
+limited to a single location.
+
+## Employee retention
+
+When you are a distributed company (or really, a company that allows
+and supports remote work) then you remove one entire reason for an
+employee leaving. If an employee needs or wants to move to a new
+location then they are able to do that while still working for your
+company.
+
+Somtimes, a person needs to move.  Working for a company that supports
+remote work allows them to move and not leave the company.
+
+## Reduced office costs
+
+Having a distributed workforce can reduce office costs drastically. In
+a fully distributed company it reduces the costs to zero [^1]. When
+IBM started encouraging telecommuting [TODO: reference] they saved
+[TODO: NUMBER] dollars in office costs.
 
 # Downsides
 # Tools
@@ -96,3 +181,4 @@ identify. Working remotely gives you more power over schedule.
 # Other references
 # Acknowledgements
 
+[^1]: Though, you may want to pay for Internet or provide a budget to help remote employees setup their home office.
