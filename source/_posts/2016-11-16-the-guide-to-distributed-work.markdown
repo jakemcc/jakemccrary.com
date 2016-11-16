@@ -216,7 +216,51 @@ I've made going to the rock climbing gym my main social activity.
 
 ## Distractions
 
+This is the downside that non-remote workers often identify. People
+assume that television and other things in your home are irresitable
+distractions that will cause you to not get work done. In my
+experience this isn't a problem.
+
+I'm not sure if people I've worked with are watching television all
+day. Given the quality of work I've seen, I have a hard time imagining
+they would be able to pay attention to television and produce that
+quality of work at the same time.
+
+Roommates, kids, and family interrupting you is another
+distraction. You can combat this by setting boundaries. Maybe have a
+rule if your office door is closed then you are unavailable. I'd argue
+that coworkers interrupting you in an office is as distracting as the
+much rarer interruption from someone within your home.
+
+Employees that work remotely are typically making a choice to work
+remotely. They know they need to produce quality work and will take
+steps to make sure they do.
+
 ## Working too much
+
+When you first start working from home you suddenly find yourself
+living in the same space that you work. The lack of change of location
+and commute makes it easier to keep working. You get invested in a
+problem and all of a sudden it is past the time when you really should
+stop working.
+
+Even if you stop working on time it is easy to slip back into work
+mode. The computer setup I like to use in the evening is in the same
+location as my work setup. This made it easy to just take one more
+peek at our monitoring dashboards or work email and all of a sudden
+realize an hour has passed.
+
+You do do not want to overwork and you do not want your teammates to
+overwork. In the short term it can be beneficial. Long term it can
+lead to burn out and poor outcomes.
+
+## Fewer casual interactions
+
+This is both a negative and positive when it comes to working
+remotely. When you are working remotely you have fewer random
+interactions with random coworkers. You probably interact with your
+team fairly regularly but you probably do not interact outside of your
+team too often.
 
 
 # Tools
