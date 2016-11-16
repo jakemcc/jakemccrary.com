@@ -168,6 +168,57 @@ IBM started encouraging telecommuting [TODO: reference] they saved
 [TODO: NUMBER] dollars in office costs.
 
 # Downsides
+
+While the benifits are huge, there are downsides to working
+remotely. When I talk to non-remote workers about working remotely,
+they typically say something along the lines of "I don't know how you
+do it, I'd be so distracted." This touches on one of the downsides of
+remote work but it isn't largest one. The rest of this section
+describes some of the downsides I (and others I've talked to) observed.
+
+## Loneliness and isolation
+
+When I've talked to other remote workers, even those with fully
+distributed teams and companies, this is the main negative they
+noticed.
+
+Most of us are social creatures. You do not get the same type of
+social interaction with your coworkers when you are working
+remotely. Instead of bumping into a wide range of people in the office
+you interact with a smaller group, your team, through video chats,
+phone calls, chat rooms, and email. Depending on what you are doing,
+you might not even get that interaction with a smaller group.
+
+This is very unfamiliar to most of us. We're used to being in physical
+proximity to other humans. We're used to having small talk and
+grabbing coffee or lunch with other people.
+
+You can combat these feelings by setting up communication with other
+employees at your company. Have some chat rooms that are dedicated to
+non-work discussions. Have a daily, short video meeting that is a
+status check within team so everyone gets to see another persons face
+at least once a day. If you work in a city that has other
+remote workers from your company, meet up occasionally for a dinner or
+happy hour.
+
+If you are having troubles with loneliness and isolation, try to find
+an area where you can work where there are other people. Two options
+are a coworking space or coffee shop. Alternatively, try to have
+social activities you do regularly with other non-coworkers in your
+area. Having strong connections with non-coworkers can help combat
+loneliness.
+
+Even with the rich connections I have with my fellow coworkers, if I
+don't leave my home and see other people every couple days I tend to
+get grumpy. I need to make sure I get out and socialize with others at
+least every couple of days. This has benefited my rock climbing as
+I've made going to the rock climbing gym my main social activity.
+
+## Distractions
+
+## Working too much
+
+
 # Tools
 # Communication
 ## Stand ups
