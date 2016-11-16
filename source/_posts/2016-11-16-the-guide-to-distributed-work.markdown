@@ -254,16 +254,98 @@ You do do not want to overwork and you do not want your teammates to
 overwork. In the short term it can be beneficial. Long term it can
 lead to burn out and poor outcomes.
 
-## Fewer casual interactions
+## Fewer interactions
 
 This is both a negative and positive when it comes to working
 remotely. When you are working remotely you have fewer random
 interactions with random coworkers. You probably interact with your
-team fairly regularly but you probably do not interact outside of your
-team too often.
+team plus the same handful of people outside of your team fairly
+regularly but rarely interact with others.
 
+In an office, there is a chance you'll run into people outside your
+typical circle of communication. You might eat lunch with a wider
+variety of people. You may bump into others while getting some coffee
+or a snack.
+
+You can help increase interactions on a distributed team by having
+some chat rooms that encourage random discussions. Another option is
+to have a regular and optional meeting scheduled were people can give
+an informal presentation on something that interests them.
 
 # Tools
+
+You will need to select tools that work for distributed teams. Most
+tools that are used on a computer or web based can still be used in a
+distributed setting. Any physical tools will need to be replaced with
+something that works independently of location.
+
+A prime example of this is the classic card wall for tracking work. A
+physical wall with actual cards will not work as soon as there is a
+single remote employee ona team. Instead of a physical wall, you'll be
+pushed to using something like [Trello](https://trello.com)
+or [Clubhouse](https://clubhouse.io/).
+
+It is less important to get stuck on a particular tool recommendation
+and more important to pay attention to the categories of
+tools. Categories of tools tend to be more stable than a specific
+recommendation.
+
+## Text Chat 
+
+You'll want a chat application. Be careful though, chat applications
+can be a huge interuption. [Slack](https://slack.com)
+and [HipChat](https://www.hipchat.com) are just two of the many
+available services.
+
+## Video Conference
+
+Video conferencing is a technology that you should embrace. It is much
+better than talking to either an individual or a group on a
+phone. Being able to read body language makes communication so much
+better. Personally, I've used Google Hangouts
+and [Zoom](https://zoom.us) for hundreds of hours each and prefer
+Zoom. [appear.in](https://appear.in) is another option that doesn't
+require installing anything. There are numerous other options in this space.
+
+## Phone Conferences
+
+I'd try to get rid of phone conferences in preference to video
+conferences. Video offers so many benefits over phone. I actually
+can't recommend any phone conferencing tools but I will mention that
+Zoom supports people dialing into a video conference.
+
+## Real-time collaboration on a document
+
+Being able to collectively edit a document with a group is pretty
+amazing. [Etherpad](http://etherpad.org/)
+and [Google Docs](https://www.google.com/intl/en/docs/about/) are two
+options. Most of my experience is with Google Docs.
+
+With a document that supports real-time collaboration you can do
+amazing things. You can use it to capture ideas from a remote
+group. You can use it to facilitate a remote meeting (this goes really
+well once you get the practice of it). If you
+open
+[this talk](http://idlewords.com/talks/fan_is_a_tool_using_animal.htm)
+and search for "Google doc" you'll jump to a slide where you can see
+an extreme version if this.
+
+## Whiteboards
+
+Whiteboards are an example of a tool that is always brought up, even
+by remote workers, as something that will be missed on a distributed
+team. You can find alternative solutions to whiteboards that work with
+a remote worker.
+
+One solution is to use Zoom's built-in whiteboard. This works fairly
+well. Another is to
+use
+[Google Drawings](https://drawings.google.com). [Precursor](https://precursorapp.com/) is
+a design focused collaborative tool that can also work.
+
+
+
+
 # Communication
 ## Stand ups
 ## Meeting recommendations
