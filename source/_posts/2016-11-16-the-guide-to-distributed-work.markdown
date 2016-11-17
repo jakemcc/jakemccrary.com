@@ -371,7 +371,160 @@ different forms of communication. How quickly does an email need to be
 responded to? How quick should a response be to a chat room meessage?
 When should you pick up the phone and call someone?
 
-## Stand ups
+## Stand-ups
+
+Most of the teams I've been part of, whether distributed or
+co-located, have had a daily stand-up meeting. The intention of this
+meeting was to provide a short, scheduled time for communicating any
+roadblocks to progress, interesting information, status updates, and
+desire for help.
+
+With the distributed teams I've been part of a daily stand-up still
+played an important role. The team joined a video conference and we
+gathered around a shared Google Doc that had prompts similar to the
+snippet below.
+
+[TODO: Images]
+
+```
+Day: 2016-07-11
+
+Whats interesting?
+
+Want help?
+
+Meetings
+
+```
+
+These prompts provided a starting point for team members to add in
+additional text. Our stand-ups were at the beginning of the day, so
+frequently team members would add text to the document at the end of
+the prior day. Filling in the document at the end of the day instead
+of right before the stand-up was useful as memories and thoughts were
+often fresher without having to remember them the following morning.
+
+After being filled in, the document would look like below.
+
+```
+Day: 2016-07-11
+
+What's interesting?
+  - New deploy lowered response time by 20% - Jake
+  - Discovered bug in datetime library around checking if datetime is within interval - Sue
+  - Greg joined the team!
+  - Adding blocker functionality going to take longer than expected. Guessing another 2 days - Donald
+
+Want help?
+  - Having difficulties recreating running batch process locally. - Tom
+  - I'm having a hard time understanding propensity calculation - Mike
+
+Meetings
+  - API overview with client @ 2 PM
+```
+
+At the start of our day, we would gather around the Google Doc and
+everyone would take a couple of minutes to silently read. If anyone
+felt like something was worth talking about they would **bold** the
+text and then we'd work from the top to bottom and have a quick
+discussion. For our `Want help?` section we'd solicit volunteers and
+move on. The `Meetings?` section was primarily there to provide
+visibility to the entire team times when certain members might not be
+available. After we worked through the `Want help?` section we'd pop
+over to Trello and review the work in progress and make sure everyone
+had an idea of what they would be working on.
+
+The nice thing about doing a stand-up around a shared Google Doc is
+that you can put in richer media than just text. Screenshots of
+monitoring graphs were a common addition to the `What's interesting?`
+section.
+
+Every day a new section was added to the top of the Google Doc and the
+previous day was pushed lower on the page. Having this written history
+of stand-ups was useful as it allowed us to notice patterns through a
+persisted medium instead of relying on our memory. It also let someone
+who was on vacation come back and have an idea of what had happened
+while they were gone. Below is what the document would look like on
+the next day (comments removed to keep the example shorter).
+
+```
+Day: 2016-07-12
+
+What's interesting?
+  - [...]
+
+Want help?
+  - [...]
+
+Meetings
+  - [...]
+
+-------
+Day: 2016-07-11
+
+What's interesting?
+  - [...]
+
+Want help?
+  - [...]
+
+Meetings
+  - [...]
+```
+
+This is just an example from one of the teams I worked with. Another
+team used the following prompts.
+
+```
+1. Accomplished Yesterday
+
+2. Requires Attention/Roadblocks
+
+3. Scope Creep Alerts
+
+4. Would like to Do Today
+```
+
+The important thing is to find something that works for your
+team. Different teams are going to prefer different formats.
+
+Another interesting benefit of using a Google Doc to drive your
+stand-up is that it can be visible to other teams. You can even
+combine teams into a single document. Below is an example with two
+teams in a single document.
+
+```
+**Everyone**
+  - 
+
+**Team Events**
+  1. Accomplished Yesterday
+     - [...]
+  2. Requires Attention/Roadblocks
+     - [...]
+  3. Scope Creep Alerts
+     - [...]
+  4. Would like to do today
+     - [...]
+
+**Team Engine**
+What's interesting?
+  -
+Want help?
+  -
+Meetings
+  -
+``` 
+
+I've seen this work successfully with five related teams in a single
+document. News and information that affected everyone was put in the
+**Everyone** section. Team information ended up in the team
+sections. Each team had their own stand-up that looked at just their
+section but because their section was part of a larger document
+everyone got a taste of what was going on in the other related
+teams. This helped replace the random hallway chatter you get in a
+shared office and gave everyone a slightly broader picture.
+
 ## Meeting recommendations
 ## Remote Pairing
 ## 1 on 1s
