@@ -525,6 +525,23 @@ everyone got a taste of what was going on in the other related
 teams. This helped replace the random hallway chatter you get in a
 shared office and gave everyone a slightly broader picture.
 
+## Stand-downs
+
+Stand-downs are an informal meeting that provide a time to informally
+chat with your team. I've seen them used as an end-of-day optional
+water cooler activity for a team to chat about whatever they feel
+like. These chats often happen, but are unscheduled, in an office.
+
+These meetings should be an optional, short time scheduled near the
+end of the day. This gives team members a good excuse (to chat with
+their coworkers) to stop working (which helps with the problem of
+overwork). No one should feel pressured to be at these meetings.
+
+Maybe the conversation is about something work related. Maybe its
+about some langauge feature someone learned. Perhaps its just talking
+about some book. It doesn't matter what is discussed, these meetings
+can help a team get closer.
+
 ## Meeting recommendations
 
 ## Remote Pair Programming
