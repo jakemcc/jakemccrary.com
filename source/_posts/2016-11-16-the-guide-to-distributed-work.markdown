@@ -565,7 +565,20 @@ when you are not sitting next to them. If you notice your pair has
 zoned out, nicely call them out on it or ask them a question to get
 them reengaged.
 
-## 1 on 1s
+## One-on-ones
+
+[One-on-ones](TODO LINK) are a useful practice in both a co-located
+and distributed team. I'm not going to go into all the reasons they
+are useful as their is plenty of documentation around that
+online. Instead, I'll describe why I've found them to be even more
+useful in a distributed team.
+
+With a distributed team you lose out on a lot of the body language you
+can pick up on when in person. It is harder to tell when someone is
+frustrated or when a pair is not working well together. Burn out is
+harder to notice. One-on-ones provide a time for that information to
+come out.
+
 ## Difficulties of Slack / chat 
 ## Picking the right medium
 # Recommendations
