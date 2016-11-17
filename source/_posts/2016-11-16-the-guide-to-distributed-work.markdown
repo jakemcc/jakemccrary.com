@@ -577,7 +577,7 @@ With a distributed team you lose out on a lot of the body language you
 can pick up on when in person. It is harder to tell when someone is
 frustrated or when a pair is not working well together. Burn out is
 harder to notice. One-on-ones provide a time for that information to
-come out.
+come out. 
 
 ## Difficulties of Slack / chat 
 ## Picking the right medium
