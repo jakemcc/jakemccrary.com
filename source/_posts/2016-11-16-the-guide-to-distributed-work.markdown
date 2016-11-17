@@ -526,7 +526,45 @@ teams. This helped replace the random hallway chatter you get in a
 shared office and gave everyone a slightly broader picture.
 
 ## Meeting recommendations
-## Remote Pairing
+
+## Remote Pair Programming
+
+[Pair programming](TODO LINK) is a technique that often people employ
+when working in person. It works even better when remote and helps
+solve some of the difficulties of working remotely.
+
+Remote pair programming helps fight the feeing of loneliness and
+isolation that some remote workers feel. Remote pairing forces intense
+interaction between two people. It also helps keep the two people
+focused on the work. It is easy for a single person to get distracted
+by endless Hacker News browsing but much harder for both people to get
+sucked into it.
+
+The best co-located pair programming setup is when you take a single
+machine and hook up two large monitors, two keyboards, and two mice
+and then mirror the monitors. This lets both programmers use their own
+keyboard and stare straight ahead at their own monitor.
+
+Remote pair programming is an even better setup. One developer, the
+host, somehow shares their environment with the other developer. This
+can be done through screen sharing using Zoom, screen hero, VNC,
+tmate, or some other way. The important part is that both developers
+can see the code and, if necessary, some way of viewing a UI.
+
+Like the ideal local pair programming environment, each developer has
+their own keyboard, mouse, and monitor. Unlike the local pair
+programming environment they each also have their own computer. This
+allows one developer look up documentation on their computer while the
+host developer continues to write code. It also allows the non-host
+developer to shield the host from distractions like answering
+questions in the chat room or responding to emails.
+
+It is easier for the non-host developer to checkout and distract
+themself. It is easier to be rude and not pay attention to you pair
+when you are not sitting next to them. If you notice your pair has
+zoned out, nicely call them out on it or ask them a question to get
+them reengaged.
+
 ## 1 on 1s
 ## Difficulties of Slack / chat 
 ## Picking the right medium
