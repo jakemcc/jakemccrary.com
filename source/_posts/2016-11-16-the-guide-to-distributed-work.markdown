@@ -125,6 +125,16 @@ home every day.
 Feel like eating food someone else has prepared? You can still do that
 while working from home.
 
+## Fewer interruptions
+
+This isn't necessarily true but is most likely true for most remote
+workers. As a remote worker you are able to choose where you
+work. This gives you the option of choosing a location with fewer
+distractions that could remove or prevent you from acheiving a state
+of [flow](https://en.wikipedia.org/wiki/Flow_(psychology\)).
+
+TODO: check that link when rendered ^^^^
+
 ## Off hours support
 
 This is a benefit I have not seen other people mention. Off hours
