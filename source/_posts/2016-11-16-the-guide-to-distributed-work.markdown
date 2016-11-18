@@ -689,6 +689,25 @@ mediums. Maybe direct chat messages are expected to be responded to
 under 10 minutes. Perhaps emails are ok having a delay of a few
 hours. This is something your group will need to decide.
 
+## Meetup in person
+
+You should have your distributed team or company meet in person. This
+shouldn't happen too regularly; I think ideally this would happen two
+or three times a year. While collaborating remotely is possible there
+is still some magic that happens when you occasionally meet in person.
+
+You can use this time to do the typical day-to-day work but I think it
+is more productive to try other activities. I've seen these in person
+meetups be successful when they were used times to focus on group
+discussion. This can take the form of a mini-conference
+or [Open Space](http://openspaceworld.org/wp2/what-is/). Another
+option is to brainstorm some potentially wild ideas and try
+implementing them to see how far you can get.
+
+Use this time to have some meals with your collegues and get to know
+them as more than someone inside your computer. This can help with
+communication and understanding personalities.
+
 # Recommendations
 
 
