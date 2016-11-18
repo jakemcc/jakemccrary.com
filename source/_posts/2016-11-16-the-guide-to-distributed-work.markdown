@@ -9,11 +9,12 @@ keywords: 'csv, keywords, here'
 categories: 
 ---
 
-Distributed, also known as remote, companies are quickly becoming a
-thing that many of us will have an opportunity to work at or
-lead. They are companies where nearly all of the employees work
-remotely; these employees are not regularly doing work from the same
-physical location as other employees.
+Distributed companies are quickly becoming an option for many of
+us. Technology improvements, pervasive Internet, and mindset changes
+are driving this change. Distributed companies are companies where
+nearly all of the employees work remotely; these employees are not
+regularly doing work from the same physical location as other
+employees.
 
 The number of distributed companies is growing (VERIFY) as technology
 is enabling collaboration across distances. With many jobs only
