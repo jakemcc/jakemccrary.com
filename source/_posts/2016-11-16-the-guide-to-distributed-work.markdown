@@ -352,6 +352,14 @@ use
 [Google Drawings](https://drawings.google.com). [Precursor](https://precursorapp.com/) is
 a design focused collaborative tool that can also work.
 
+In practice, many distributed workers find that they do not miss
+having a whiteboard. Whiteboards are a very convenient tool when
+meeting in person but there are other ways of collaborating when
+working remotely. Shared documents and screen sharing go a long way
+towards enabling collaboration. Tools that work well for remote
+collaboration often have another benefit over whiteboards; they are
+easier to persist and reference later.
+
 # Communication
 
 Communication is inherently different on a distributed team. All of a
