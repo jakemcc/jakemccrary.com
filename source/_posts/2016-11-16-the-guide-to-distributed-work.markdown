@@ -616,6 +616,16 @@ including useful bots in the room. These bots can perform many
 functions. You can just look at the [Slack App Directory](TODO Link)
 to see some of the many bots that people are producing.
 
+For a certain class of automated messages I'd recommend setting up a
+separate channel (or chat room) [TODO: what is the right language
+here, something universal?]. This room can be dedicated to certain
+types of automated messages. These messages tend to be ones that are
+useful to see periodically but you don't want cluttering up your main
+channel. Often these types of messages are something that happen
+frequently, such as git commits or Trello card updates. It is nice to
+see them in a single spot but they should not be able to interrupt
+conversation.
+
 Chat rooms can also be a big time sink. They are one more source of
 concentration interrupting notifications. The feeling of missing out
 on conversation can drive some people to join a large number of
@@ -639,9 +649,49 @@ they span a larger unit of time. Don't be afraid to move a
 conversation to email or another medium that is better suited for
 longer discussions.
 
+Many chat solutions offer the ability to have private rooms or direct
+messaging to a user. Don't be afraid of using these private
+communications but before communicating something ask if it should be
+in a public room. It can be difficult to ask a question and admit you
+don't know something but seeing that dialogue might help
+others. Similarily, having discussions about a feature, bug, or task can
+help spread knowledge.
 
-## Picking the right medium
+## Email
+
+Despite all of the efforts to replace email; email is still useful. It
+is the common form of communication between companies, it is
+pervasive, and it usually has pretty good search.
+
+A good email thread can keep a topic contained in a form that is
+possible to follow. Unlike a chat room, there aren't off-topic
+interjections from uninvolved parties.
+
+## Phone
+
+You shouldn't be afraid of calling someone. Just recognize that this
+is an interruption. Have a directory of telephone numbers for
+employees that is accessible everyone.
+
+The downside of phone conversations it that they aren't automatically
+persisted. It can be worth following up a phone discussion with an
+email summarizing the discussion and the next steps.
+
+## Picking the right communication medium
+
+When you are working on a distributed team you no longer can walk over
+to someone's desk and interrupt them. This is great. Not every
+question deserves an immediate answer.
+
+Agree with your team when to use different forms of communication. Set
+expectations with regards to response times and urgency for different
+mediums. Maybe direct chat messages are expected to be responded to
+under 10 minutes. Perhaps emails are ok having a delay of a few
+hours. This is something your group will need to decide.
+
 # Recommendations
+
+
 # Other references
 
 - Book: Remote by Jason Fried and DHH
