@@ -604,7 +604,42 @@ frustrated or when a pair is not working well together. Burn out is
 harder to notice. One-on-ones provide a time for that information to
 come out. 
 
-## Difficulties of Slack / chat 
+## Chat rooms
+
+Chat room applications (IRC, Slack, HipChat, etc) are pretty
+great. They provide a medium of communication that has a lower barrier
+to entry than email. Chat tools definitely have a place in the
+distributed teams tool chest.
+
+The chat room becomes even more central to work once you start
+including useful bots in the room. These bots can perform many
+functions. You can just look at the [Slack App Directory](TODO Link)
+to see some of the many bots that people are producing.
+
+Chat rooms can also be a big time sink. They are one more source of
+concentration interrupting notifications. The feeling of missing out
+on conversation can drive some people to join a large number of
+channels. They also give a feeling of immediacy that isn't actually
+there.
+
+Despite having search functionality, it is often difficult to find a
+previous conversation in chat applications. If something important is
+said in a chat room that causes a change in direction, or some other
+noticable change (TODO: What other changes?), I'd recommend extracting
+it from chat application and recording the decision somewhere else.
+
+I'd also recommend turning off notifications for all but most definite
+"someone is trying to reach me" triggers. Encourage members of your
+chat to use entire channel notifications sparingly and only for
+messages that immediately need everyone's attention. There are not
+many messages that immediately require everyone's attention.
+
+It can also be a challenge to follow chat conversations, especially if
+they span a larger unit of time. Don't be afraid to move a
+conversation to email or another medium that is better suited for
+longer discussions.
+
+
 ## Picking the right medium
 # Recommendations
 # Other references
