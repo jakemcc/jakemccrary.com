@@ -9,32 +9,24 @@ keywords: 'csv, keywords, here'
 categories: 
 ---
 
-Distributed companies are quickly becoming an option for many of
-us. Technology improvements, pervasive Internet, and mindset changes
-are driving this change. Distributed companies are companies where
-nearly all of the employees work remotely; these employees are not
-regularly doing work from the same physical location as other
-employees.
+Distributed companies are becoming an option for many of us. A
+distributed company is a company where nearly all of the employees
+work remotely.
 
-The number of distributed companies is growing (VERIFY) as technology
-is enabling collaboration across distances. With many jobs only
-requiring a computer and an Internet connection there are few reasons
-to continue to force employees to live in commuting distance to an
-office.
+The number of employees that work remotely is growing [^1]. Technology
+improvements, pervasive Internet, and mindset changes are some of the
+drivers for this change.
 
-Distributed companies offer an opportunity to break free of the
-in-person office politics, the forced banter around the water cooler,
-and the drudgery of a forced commute.
+[^1]: http://globalworkplaceanalytics.com/telecommuting-statistics
 
-The remainder of this article highlights some observations over the
-last few years of working for distributed companies. These are not
-just my observations from working remotely; I've interviewed and
-corresponded with many other remote and formerly remote knowledge
-workers. Their contributions, along with other readings on distributed
-teams, has influenced my thinking about what it means to have a
-successful distributed company.
+The remainder of this article highlights some observations from my
+last few years of working for distributed companies. I've also
+interviewed and corresponded with many other remote and formerly
+remote workers. Their contributions, along with other books and
+articles on remote work, has influenced my thinking about what it
+means to have a successful distributed company.
 
-My experience with distributed companies has been in companies that
+My experience with distributed companies has been with companies that
 are distributed but not asynchronous. We had core working hours that
 were standardized around one of the middle time zones in the
 continental United States. You could live anywhere you wanted but you
@@ -42,10 +34,10 @@ needed to be willing to work while others were also working.
 
 Much of the following also applies to individuals working remotely for
 a not-entirely-distributed company or team. Being the only remote
-individual in a non-remote team comes with its own set of
-challenges. My recommendation for this scenario is that if a team has
-any remote members, or if members occasionally work remotely, you
-should treat that team as a remote team.
+individual in a non-remote team comes with its own set of challenges
+that I'm not going to attempt to present. If you are part of a team
+where some members work remotely, my recommendation is that you should
+treat that team as a remote team. If you don't, the remote worker 
 
 # Benefits
 
@@ -60,9 +52,11 @@ advantages as well.
 
 This is the benefit that most workers, remote and non-remote, identify
 when asked about benefits of remote working. This is a huge
-benefit. In the United States the average one-way commute is 24
-minutes long [TODO: SOURCE NEEDED]. This means the average worker spends
-nearly one hour commuting back and forth to an office.
+benefit. In the United States the average one-way commute
+is
+[25 minutes long](https://project.wnyc.org/commute-times-us/embed.html#5.00/42.000/-89.500). This
+means the average worker spends nearly one hour commuting back and
+forth to an office.
 
 If you expand that to a five day work week than this means that the
 average employee is spending five hours a week doing an activity with
@@ -174,9 +168,11 @@ remote work allows them to move and not leave the company.
 ## Reduced office costs
 
 Having a distributed workforce can reduce office costs drastically. In
-a fully distributed company it reduces the costs to zero [^1]. When
+a fully distributed company it reduces the costs to zero [^2]. When
 IBM started encouraging telecommuting [TODO: reference] they saved
 [TODO: NUMBER] dollars in office costs.
+
+[^2]: Though, you may want to pay for Internet or provide a budget to help remote employees setup their home office.
 
 # Downsides
 
@@ -634,14 +630,13 @@ distributed teams tool chest.
 
 The chat room becomes even more central to work once you start
 including useful bots in the room. These bots can perform many
-functions. You can just look at the [Slack App Directory](TODO Link)
+functions. You can just look at the [Slack App Directory](https://slack.com/apps)
 to see some of the many bots that people are producing.
 
 For a certain class of automated messages I'd recommend setting up a
-separate channel (or chat room) [TODO: what is the right language
-here, something universal?]. This room can be dedicated to certain
-types of automated messages. These messages tend to be ones that are
-useful to see periodically but you don't want cluttering up your main
+separate channel. This room can be dedicated to certain types of
+automated messages. These messages tend to be ones that are useful to
+see periodically but you don't want cluttering up your main
 channel. Often these types of messages are something that happen
 frequently, such as git commits or Trello card updates. It is nice to
 see them in a single spot but they should not be able to interrupt
@@ -653,11 +648,10 @@ on conversation can drive some people to join a large number of
 channels. They also give a feeling of immediacy that isn't actually
 there.
 
-Despite having search functionality, it is often difficult to find a
+Despite having search functionality, I've found it difficult to find a
 previous conversation in chat applications. If something important is
-said in a chat room that causes a change in direction, or some other
-noticable change (TODO: What other changes?), I'd recommend extracting
-it from chat application and recording the decision somewhere else.
+said in a chat, I'd recommend extracting it from the chat application
+and recording the decision somewhere else.
 
 I'd also recommend turning off notifications for all but most definite
 "someone is trying to reach me" triggers. Encourage members of your
@@ -734,11 +728,12 @@ communication and understanding personalities.
 
 # Other references
 
-- Book: Remote by Jason Fried and DHH
-- Zapier has a pretty good remote guide
-- Paul Stadig blog post
+- [Remote - Jason Fried and David Heinemeier Hansson](http://amzn.to/2geZYlw)
+- [The Ultimate Guide to Remote Work - Zapier](https://zapier.com/learn/the-ultimate-guide-to-remote-working/)
+- [Remote != Distributed - Paul Stadig](http://paul.stadig.name/2013/07/remote-distributed.html)
+- [Remote worker vs distributed team - Bob Mcwhirter](http://bob.mcwhirter.org/blog/2010/09/13/remote-worker-distributed-team/)
 - Tim's recommendations
-
+- [Remote or co-located - Martin Fowler](http://martinfowler.com/articles/remote-or-co-located.html)
 # Acknowledgements
 
-[^1]: Though, you may want to pay for Internet or provide a budget to help remote employees setup their home office.
+
