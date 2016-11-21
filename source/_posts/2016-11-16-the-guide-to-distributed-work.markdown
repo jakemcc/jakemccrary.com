@@ -98,7 +98,7 @@ plants? Work near a window and have bring some house plants into your
 space. Do you want that awesome sit-stand desk and chair? Buy them
 [TODO: Link to other post].
 
-One of my former collegues likes to walk on a treadmill while walking
+One of my former colleagues likes to walk on a treadmill while walking
 or, if sitting, he likes having peddles under his desk. These are
 customizations he would have a hard time getting at most offices and
 they allow him to move more every day.
@@ -124,7 +124,7 @@ while working from home.
 This isn't necessarily true but is most likely true for most remote
 workers. As a remote worker you are able to choose where you
 work. This gives you the option of choosing a location with fewer
-distractions that could remove or prevent you from acheiving a state
+distractions that could remove or prevent you from achieving a state
 of [flow](https://en.wikipedia.org/wiki/Flow_(psychology\)).
 
 TODO: check that link when rendered ^^^^
@@ -162,7 +162,7 @@ employee leaving. If an employee needs or wants to move to a new
 location then they are able to do that while still working for your
 company.
 
-Somtimes, a person needs to move.  Working for a company that supports
+Sometimes, a person needs to move.  Working for a company that supports
 remote work allows them to move and not leave the company.
 
 ## Reduced office costs
@@ -176,7 +176,7 @@ IBM started encouraging telecommuting [TODO: reference] they saved
 
 # Downsides
 
-While the benifits are huge, there are downsides to working
+While the benefits are huge, there are downsides to working
 remotely. When I talk to non-remote workers about working remotely,
 they typically say something along the lines of "I don't know how you
 do it, I'd be so distracted." This touches on one of the downsides of
@@ -210,7 +210,7 @@ happy hour.
 
 If you are having troubles with loneliness and isolation, try to find
 an area where you can work where there are other people. Two options
-are a coworking space or coffee shop. Alternatively, try to have
+are a co-working space or coffee shop. Alternatively, try to have
 social activities you do regularly with other non-coworkers in your
 area. Having strong connections with non-coworkers can help combat
 loneliness.
@@ -224,7 +224,7 @@ I've made going to the rock climbing gym my main social activity.
 ## Distractions
 
 This is the downside that non-remote workers often identify. People
-assume that television and other things in your home are irresitable
+assume that television and other things in your home are irresistible
 distractions that will cause you to not get work done. In my
 experience this isn't a problem.
 
@@ -288,7 +288,7 @@ something that works independently of location.
 
 A prime example of this is the classic card wall for tracking work. A
 physical wall with actual cards will not work as soon as there is a
-single remote employee ona team. Instead of a physical wall, you'll be
+single remote employee on a team. Instead of a physical wall, you'll be
 pushed to using something like [Trello](https://trello.com)
 or [Clubhouse](https://clubhouse.io/).
 
@@ -300,7 +300,7 @@ recommendation.
 ## Text chat 
 
 You'll want a chat application. Be careful though, chat applications
-can be a huge interuption. [Slack](https://slack.com)
+can be a huge interruption. [Slack](https://slack.com)
 and [HipChat](https://www.hipchat.com) are just two of the many
 available services.
 
@@ -370,20 +370,20 @@ easier to persist and reference later.
 # Communication
 
 Communication is inherently different on a distributed team. All of a
-sudden, you cannot just walk across an office to interupt someone and
+sudden, you cannot just walk across an office to interrupt someone and
 ask them a question. Communication happens mostly through text. Your
 skill at written communication needs to be high.
 
 You lose a lot of context with written communication when compared to
 vocal or in person communication. You no longer have body language or
 tone of voice to help you interpret what someone means. Losing tone is
-huge. Text communication tends to be interpretted more negatively
+huge. Text communication tends to be interpreted more negatively
 [TODO: source?] than intended. Try to read text messages with a
 positive tone.
 
 It can also be useful to have rules around the expectations of
 different forms of communication. How quickly does an email need to be
-responded to? How quick should a response be to a chat room meessage?
+responded to? How quick should a response be to a chat room message?
 When should you pick up the phone and call someone?
 
 ## Stand-ups
@@ -426,7 +426,7 @@ Day: 2016-07-11
 
 What's interesting?
   - New deploy lowered response time by 20% - Jake
-  - Discovered bug in datetime library around checking if datetime is within interval - Sue
+  - Discovered bug in date-time library around checking if a datetime is within interval - Sue
   - Greg joined the team!
   - Adding blocker functionality going to take longer than expected. Guessing another 2 days - Donald
 
@@ -553,7 +553,7 @@ their coworkers) to stop working (which helps with the problem of
 overwork). No one should feel pressured to be at these meetings.
 
 Maybe the conversation is about something work related. Maybe its
-about some langauge feature someone learned. Perhaps its just talking
+about some language feature someone learned. Perhaps its just talking
 about some book. It doesn't matter what is discussed, these meetings
 can help a team get closer.
 
@@ -566,7 +566,7 @@ technique that often people employ when working in person. It works
 even better when remote and helps solve some of the difficulties of
 working remotely.
 
-Remote pair programming helps fight the feeing of loneliness and
+Remote pair programming helps fight the feeling of loneliness and
 isolation that some remote workers feel. Remote pairing forces intense
 interaction between two people. It also helps keep the two people
 focused on the work. It is easy for a single person to get distracted
@@ -669,7 +669,7 @@ messaging to a user. Don't be afraid of using these private
 communications but before communicating something ask if it should be
 in a public room. It can be difficult to ask a question and admit you
 don't know something but seeing that dialogue might help
-others. Similarily, having discussions about a feature, bug, or task can
+others. Similarly, having discussions about a feature, bug, or task can
 help spread knowledge.
 
 ## Email
@@ -701,10 +701,10 @@ question deserves an immediate answer.
 Agree with your team when to use different forms of communication. Set
 expectations with regards to response times and urgency for different
 mediums. Maybe direct chat messages are expected to be responded to
-under 10 minutes. Perhaps emails are ok having a delay of a few
+under 10 minutes. Perhaps emails are OK having a delay of a few
 hours. This is something your group will need to decide.
 
-## Meetup in person
+## Meet in person
 
 You should have your distributed team or company meet in person. This
 shouldn't happen too regularly; I think ideally this would happen two
@@ -734,6 +734,7 @@ communication and understanding personalities.
 - [Remote worker vs distributed team - Bob Mcwhirter](http://bob.mcwhirter.org/blog/2010/09/13/remote-worker-distributed-team/)
 - Tim's recommendations
 - [Remote or co-located - Martin Fowler](http://martinfowler.com/articles/remote-or-co-located.html)
+
 # Acknowledgements
 
 
