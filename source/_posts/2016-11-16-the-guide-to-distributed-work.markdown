@@ -565,9 +565,10 @@ can help a team get closer.
 
 ## Remote Pair Programming
 
-[Pair programming](TODO LINK) is a technique that often people employ
-when working in person. It works even better when remote and helps
-solve some of the difficulties of working remotely.
+[Pair programming](http://c2.com/xp/PairProgramming.html) is a
+technique that often people employ when working in person. It works
+even better when remote and helps solve some of the difficulties of
+working remotely.
 
 Remote pair programming helps fight the feeing of loneliness and
 isolation that some remote workers feel. Remote pairing forces intense
