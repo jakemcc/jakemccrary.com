@@ -17,7 +17,7 @@ The number of employees that work remotely is growing [^1]. Technology
 improvements, pervasive Internet, and mindset changes are some of the
 drivers for this change.
 
-[^1]: http://globalworkplaceanalytics.com/telecommuting-statistics
+
 
 The remainder of this article highlights some observations from my
 last few years of working for distributed companies. I've also
@@ -39,7 +39,7 @@ that I'm not going to attempt to present. If you are part of a team
 where some members work remotely, my recommendation is that you should
 treat that team as a remote team. If you don't, the remote worker 
 
-# Benefits
+## Benefits
 
 If you asked someone that never worked remotely before for the
 benefits of working remotely they would probably be able to guess at
@@ -48,7 +48,7 @@ commute and more flexibility in your schedule. Those two advantages
 are definitely huge advantages. There are other, less obvious
 advantages as well.
 
-## No commute
+### No commute
 
 This is the benefit that most workers, remote and non-remote, identify
 when asked about benefits of remote working. This is a huge
@@ -72,7 +72,7 @@ Commuting has been shown to have negative affects on the commuters
 [TODO: LINKS]. Being able to work remotely lets you avoid those
 problems.
 
-## Flexibility in schedule
+### Flexibility in schedule
 
 This is another benefit that most people can immediately
 identify. Working remotely gives you more power over your
@@ -87,7 +87,7 @@ errands or go to your favorite lunch spot during the day. Doing this
 saves you time since you are going at off-hours compared to most of
 the in-office 9-5 workers.
 
-## Customize your work space
+### Customize your work space
 
 You get to choose where you work. For many, this will be in a home
 office. This is your space, you get to choose what it is like. 
@@ -103,7 +103,7 @@ or, if sitting, he likes having peddles under his desk. These are
 customizations he would have a hard time getting at most offices and
 they allow him to move more every day.
 
-## Eat the food you want to eat
+### Eat the food you want to eat
 
 Many of us have a certain diet we prefer, or are forced, to
 follow. Maybe you cannot eat gluten or prefer to follow the Paleo
@@ -119,17 +119,21 @@ home every day.
 Feel like eating food someone else has prepared? You can still do that
 while working from home.
 
-## Fewer interruptions
+### Fewer interruptions
 
-This isn't necessarily true but is most likely true for most remote
-workers. As a remote worker you are able to choose where you
-work. This gives you the option of choosing a location with fewer
-distractions that could remove or prevent you from achieving a state
+As a remote worker you are able to choose your working location. This
+gives you the option of choosing a spot with fewer distractions that
+could remove or prevent you from achieving a state
 of [flow](https://en.wikipedia.org/wiki/Flow_(psychology\)).
+
+After an interuption it is estimated that it takes up to a half an
+hour to get back to your original task [^2].
+
+
 
 TODO: check that link when rendered ^^^^
 
-## Off hours support
+### Off hours support
 
 This is a benefit I have not seen other people mention. Off hours
 support becomes much easier if you are working remotely. The actions
@@ -141,7 +145,7 @@ you check production while at home; this is an activity you do on a
 regular basis. You know what you need to do. You don't have to
 remember how to VPN into your company's network, you do that every day.
 
-## Recruiting
+### Recruiting
 
 Instead of being limited to your local work force you are able to
 recruit from a much wider region. This means you can find the top
@@ -154,7 +158,7 @@ company, we were able to hire experts from across the entire United
 States. We would not have been able to hire nearly as well if we were
 limited to a single location.
 
-## Employee retention
+### Employee retention
 
 When you are a distributed company (or really, a company that allows
 and supports remote work) then you remove one entire reason for an
@@ -165,16 +169,16 @@ company.
 Sometimes, a person needs to move.  Working for a company that supports
 remote work allows them to move and not leave the company.
 
-## Reduced office costs
+### Reduced office costs
 
 Having a distributed workforce can reduce office costs drastically. In
-a fully distributed company it reduces the costs to zero [^2]. When
+a fully distributed company it reduces the costs to zero [^3]. When
 IBM started encouraging telecommuting [TODO: reference] they saved
 [TODO: NUMBER] dollars in office costs.
 
-[^2]: Though, you may want to pay for Internet or provide a budget to help remote employees setup their home office.
 
-# Downsides
+
+## Downsides
 
 While the benefits are huge, there are downsides to working
 remotely. When I talk to non-remote workers about working remotely,
@@ -183,7 +187,7 @@ do it, I'd be so distracted." This touches on one of the downsides of
 remote work but it isn't largest one. The rest of this section
 describes some of the downsides I (and others I've talked to) observed.
 
-## Loneliness and isolation
+### Loneliness and isolation
 
 When I've talked to other remote workers, even those with fully
 distributed teams and companies, this is the main negative they
@@ -221,7 +225,7 @@ get grumpy. I need to make sure I get out and socialize with others at
 least every couple of days. This has benefited my rock climbing as
 I've made going to the rock climbing gym my main social activity.
 
-## Distractions
+### Distractions
 
 This is the downside that non-remote workers often identify. People
 assume that television and other things in your home are irresistible
@@ -243,7 +247,7 @@ Employees that work remotely are typically making a choice to work
 remotely. They know they need to produce quality work and will take
 steps to make sure they do.
 
-## Working too much
+### Working too much
 
 When you first start working from home you suddenly find yourself
 living in the same space that you work. The lack of change of location
@@ -261,7 +265,7 @@ You do do not want to overwork and you do not want your teammates to
 overwork. In the short term it can be beneficial. Long term it can
 lead to burn out and poor outcomes.
 
-## Fewer interactions
+### Fewer interactions
 
 This is both a negative and positive when it comes to working
 remotely. When you are working remotely you have fewer random
@@ -279,7 +283,7 @@ some chat rooms that encourage random discussions. Another option is
 to have a regular and optional meeting scheduled were people can give
 an informal presentation on something that interests them.
 
-# Tools
+## Tools
 
 You will need to select tools that work for distributed teams. Most
 tools that are used on a computer or web based can still be used in a
@@ -297,14 +301,14 @@ and more important to pay attention to the categories of
 tools. Categories of tools tend to be more stable than a specific
 recommendation.
 
-## Text chat 
+### Text chat 
 
 You'll want a chat application. Be careful though, chat applications
 can be a huge interruption. [Slack](https://slack.com)
 and [HipChat](https://www.hipchat.com) are just two of the many
 available services.
 
-## Video conference
+### Video conference
 
 Video conferencing is a technology that you should embrace. It is much
 better than talking to either an individual or a group on a
@@ -314,14 +318,14 @@ and [Zoom](https://zoom.us) for hundreds of hours each and prefer
 Zoom. [appear.in](https://appear.in) is another option that doesn't
 require installing anything. There are numerous other options in this space.
 
-## Phone conferences
+### Phone conferences
 
 I'd try to get rid of phone conferences in preference to video
 conferences. Video offers so many benefits over phone. I actually
 can't recommend any phone conferencing tools but I will mention that
 Zoom supports people dialing into a video conference.
 
-## Screen sharing
+### Screen sharing
 
 You'll want to have a way to show another person or group what is on
 your screen. It is even better if someone else can take control of
@@ -330,7 +334,7 @@ screen.
 
 Most of my experience with this is using the feature built-in to Zoom.
 
-## Real-time collaboration on a document
+### Real-time collaboration on a document
 
 Being able to collectively edit a document with a group is pretty
 amazing. [Etherpad](http://etherpad.org/)
@@ -346,7 +350,7 @@ open
 and search for "Google doc" you'll jump to a slide where you can see
 an extreme version if this.
 
-## Whiteboards
+### Whiteboards
 
 Whiteboards are an example of a tool that is always brought up, even
 by remote workers, as something that will be missed on a distributed
@@ -367,7 +371,7 @@ towards enabling collaboration. Tools that work well for remote
 collaboration often have another benefit over whiteboards; they are
 easier to persist and reference later.
 
-# Communication
+## Communication
 
 Communication is inherently different on a distributed team. All of a
 sudden, you cannot just walk across an office to interrupt someone and
@@ -386,7 +390,7 @@ different forms of communication. How quickly does an email need to be
 responded to? How quick should a response be to a chat room message?
 When should you pick up the phone and call someone?
 
-## Stand-ups
+### Stand-ups
 
 Most of the teams I've been part of, whether distributed or
 co-located, have had a daily stand-up meeting. The intention of this
@@ -540,7 +544,7 @@ everyone got a taste of what was going on in the other related
 teams. This helped replace the random hallway chatter you get in a
 shared office and gave everyone a slightly broader picture.
 
-## Stand-downs
+### Stand-downs
 
 Stand-downs are an informal meeting that provide a time to informally
 chat with your team. I've seen them used as an end-of-day optional
@@ -557,9 +561,9 @@ about some language feature someone learned. Perhaps its just talking
 about some book. It doesn't matter what is discussed, these meetings
 can help a team get closer.
 
-## Meeting recommendations
+### Meeting recommendations
 
-## Remote Pair Programming
+### Remote Pair Programming
 
 [Pair programming](http://c2.com/xp/PairProgramming.html) is a
 technique that often people employ when working in person. It works
@@ -598,7 +602,7 @@ when you are not sitting next to them. If you notice your pair has
 zoned out, nicely call them out on it or ask them a question to get
 them reengaged.
 
-## One-on-ones
+### One-on-ones
 
 One-on-ones are a useful practice in both a co-located and distributed
 team. For those who aren't familiar with a one-on-one, it is a meeting
@@ -621,7 +625,7 @@ frustrated or when a pair is not working well together. Burn out is
 harder to notice. One-on-ones provide a time for that information to
 come out. 
 
-## Chat rooms
+### Chat rooms
 
 Chat room applications (IRC, Slack, HipChat, etc) are pretty
 great. They provide a medium of communication that has a lower barrier
@@ -672,7 +676,7 @@ don't know something but seeing that dialogue might help
 others. Similarly, having discussions about a feature, bug, or task can
 help spread knowledge.
 
-## Email
+### Email
 
 Despite all of the efforts to replace email; email is still useful. It
 is the common form of communication between companies, it is
@@ -682,7 +686,7 @@ A good email thread can keep a topic contained in a form that is
 possible to follow. Unlike a chat room, there aren't off-topic
 interjections from uninvolved parties.
 
-## Phone
+### Phone
 
 You shouldn't be afraid of calling someone. Just recognize that this
 is an interruption. Have a directory of telephone numbers for
@@ -692,7 +696,7 @@ The downside of phone conversations it that they aren't automatically
 persisted. It can be worth following up a phone discussion with an
 email summarizing the discussion and the next steps.
 
-## Picking the right communication medium
+### Picking the right communication medium
 
 When you are working on a distributed team you no longer can walk over
 to someone's desk and interrupt them. This is great. Not every
@@ -704,7 +708,7 @@ mediums. Maybe direct chat messages are expected to be responded to
 under 10 minutes. Perhaps emails are OK having a delay of a few
 hours. This is something your group will need to decide.
 
-## Meet in person
+### Meet in person
 
 You should have your distributed team or company meet in person. This
 shouldn't happen too regularly; I think ideally this would happen two
@@ -723,10 +727,10 @@ Use this time to have some meals with your collegues and get to know
 them as more than someone inside your computer. This can help with
 communication and understanding personalities.
 
-# Recommendations
+## Recommendations
 
 
-# Other references
+## Other references
 
 - [Remote - Jason Fried and David Heinemeier Hansson](http://amzn.to/2geZYlw)
 - [The Ultimate Guide to Remote Work - Zapier](https://zapier.com/learn/the-ultimate-guide-to-remote-working/)
@@ -735,6 +739,14 @@ communication and understanding personalities.
 - Tim's recommendations
 - [Remote or co-located - Martin Fowler](http://martinfowler.com/articles/remote-or-co-located.html)
 
-# Acknowledgements
+## Acknowledgements
 
+I gave a presentation at
+the [2016 AIT Workshop](http://lanyrd.com/2016/aitworkshop/) on remote
+work. Discussions there were useful in helping solidfy and confirm
+some of my thoughts towards working remotely. I've also had
+correspondence with TODO NAMES.
 
+[^1]: [http://globalworkplaceanalytics.com/telecommuting-statistics](http://globalworkplaceanalytics.com/telecommuting-statistics)
+[^2]: [http://www.npr.org/2015/09/22/442582422/the-cost-of-interruptions-they-waste-more-time-than-you-think](http://www.npr.org/2015/09/22/442582422/the-cost-of-interruptions-they-waste-more-time-than-you-think)
+[^3]: Though, you may want to pay for Internet or provide a budget to help remote employees setup their home office.
