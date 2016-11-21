@@ -604,11 +604,20 @@ them reengaged.
 
 ## One-on-ones
 
-[One-on-ones](TODO LINK) are a useful practice in both a co-located
-and distributed team. I'm not going to go into all the reasons they
-are useful as their is plenty of documentation around that
-online. Instead, I'll describe why I've found them to be even more
-useful in a distributed team.
+One-on-ones are a useful practice in both a co-located and distributed
+team. For those who aren't familiar with a one-on-one, it is a meeting
+between you and your manager (flip that if you are the manager). It
+should be a regularly scheduled meeting where you discuss higher-level
+topics than the daily work. They are extremely useful for helping you
+develop professionally and helping a team run smoothly. If you
+currently have one-on-ones and you aren't finding them useful I'd
+recommend reading some recommendations for making them useful. Here
+are
+a
+[couple](https://www.themuse.com/advice/how-to-have-oneonones-that-actually-matter) [articles](https://hbr.org/2016/08/how-to-make-your-one-on-ones-with-employees-more-productive) that
+I think are pretty good about one-on-ones. As a both a team lead and a
+team member I've found them extremely useful. I thought they were even
+more useful when on a distributed team.
 
 With a distributed team you lose out on a lot of the body language you
 can pick up on when in person. It is harder to tell when someone is
