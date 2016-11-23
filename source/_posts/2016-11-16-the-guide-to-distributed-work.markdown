@@ -381,14 +381,104 @@ skill at written communication needs to be high.
 You lose a lot of context with written communication when compared to
 vocal or in person communication. You no longer have body language or
 tone of voice to help you interpret what someone means. Losing tone is
-huge. Text communication tends to be interpreted more negatively
-[TODO: source?] than intended. Try to read text messages with a
-positive tone.
+huge. Text communication tends to be interpreted as more emotionally
+negative or neutral than intended [^4]. If you're reading text
+communication, try to read with a positive tone.
 
 It can also be useful to have rules around the expectations of
 different forms of communication. How quickly does an email need to be
 responded to? How quick should a response be to a chat room message?
 When should you pick up the phone and call someone?
+
+
+### Chat rooms
+
+Chat room applications (IRC, Slack, HipChat, etc) are pretty
+great. They provide a medium of communication that has a lower barrier
+to entry than email. Chat tools definitely have a place in the
+distributed teams tool chest.
+
+The chat room becomes even more central to work once you start
+including useful bots in the room. These bots can perform many
+functions. You can just look at the [Slack App Directory](https://slack.com/apps)
+to see some of the many bots that people are producing.
+
+For a certain class of automated messages I'd recommend setting up a
+separate channel. This room can be dedicated to certain types of
+automated messages. These messages tend to be ones that are useful to
+see periodically but you don't want cluttering up your main
+channel. Often these types of messages are something that happen
+frequently, such as git commits or Trello card updates. It is nice to
+see them in a single spot but they should not be able to interrupt
+conversation.
+
+Chat rooms can also be a big time sink. They are one more source of
+concentration interrupting notifications. The feeling of missing out
+on conversation can drive some people to join a large number of
+channels. They also give a feeling of immediacy that isn't actually
+there.
+
+Despite having search functionality, I've found it difficult to find a
+previous conversation in chat applications. If something important is
+said in a chat, I'd recommend extracting it from the chat application
+and recording the decision somewhere else.
+
+I'd also recommend turning off notifications for all but most definite
+"someone is trying to reach me" triggers. Encourage members of your
+chat to use entire channel notifications sparingly and only for
+messages that immediately need everyone's attention. There are not
+many messages that immediately require everyone's attention.
+
+It can also be a challenge to follow chat conversations, especially if
+they span a larger unit of time. Don't be afraid to move a
+conversation to email or another medium that is better suited for
+longer discussions.
+
+Many chat solutions offer the ability to have private rooms or direct
+messaging to a user. Don't be afraid of using these private
+communications but before communicating something ask if it should be
+in a public room. It can be difficult to ask a question and admit you
+don't know something but seeing that dialogue might help
+others. Similarly, having discussions about a feature, bug, or task can
+help spread knowledge.
+
+### Email
+
+Despite all of the efforts to replace email; email is still useful. It
+is the common form of communication between companies, it is
+pervasive, and it usually has pretty good search.
+
+A good email thread can keep a topic contained in a form that is
+possible to follow. Unlike a chat room, there aren't off-topic
+interjections from uninvolved parties.
+
+### Phone
+
+You shouldn't be afraid of calling someone. Just recognize that this
+is an interruption. Have a directory of telephone numbers for
+employees that is accessible everyone.
+
+The downside of phone conversations it that they aren't automatically
+persisted. It can be worth following up a phone discussion with an
+email summarizing the discussion and the next steps.
+
+### Picking the right communication medium
+
+When you are working on a distributed team you no longer can walk over
+to someone's desk and interrupt them. This is great. Not every
+question deserves an immediate answer.
+
+Agree with your team when to use different forms of communication. Set
+expectations with regards to response times and urgency for different
+mediums. Maybe direct chat messages are expected to be responded to
+under 10 minutes. Perhaps emails are OK having a delay of a few
+hours. This is something your group will need to decide.
+
+## Practices
+
+These are some practices I've seen work well with distributed
+teams. Many of them are slight variations on what you might have
+experienced on a co-located team.
 
 ### Stand-ups
 
@@ -561,8 +651,6 @@ about some language feature someone learned. Perhaps its just talking
 about some book. It doesn't matter what is discussed, these meetings
 can help a team get closer.
 
-### Meeting recommendations
-
 ### Remote Pair Programming
 
 [Pair programming](http://c2.com/xp/PairProgramming.html) is a
@@ -625,89 +713,6 @@ frustrated or when a pair is not working well together. Burn out is
 harder to notice. One-on-ones provide a time for that information to
 come out. 
 
-### Chat rooms
-
-Chat room applications (IRC, Slack, HipChat, etc) are pretty
-great. They provide a medium of communication that has a lower barrier
-to entry than email. Chat tools definitely have a place in the
-distributed teams tool chest.
-
-The chat room becomes even more central to work once you start
-including useful bots in the room. These bots can perform many
-functions. You can just look at the [Slack App Directory](https://slack.com/apps)
-to see some of the many bots that people are producing.
-
-For a certain class of automated messages I'd recommend setting up a
-separate channel. This room can be dedicated to certain types of
-automated messages. These messages tend to be ones that are useful to
-see periodically but you don't want cluttering up your main
-channel. Often these types of messages are something that happen
-frequently, such as git commits or Trello card updates. It is nice to
-see them in a single spot but they should not be able to interrupt
-conversation.
-
-Chat rooms can also be a big time sink. They are one more source of
-concentration interrupting notifications. The feeling of missing out
-on conversation can drive some people to join a large number of
-channels. They also give a feeling of immediacy that isn't actually
-there.
-
-Despite having search functionality, I've found it difficult to find a
-previous conversation in chat applications. If something important is
-said in a chat, I'd recommend extracting it from the chat application
-and recording the decision somewhere else.
-
-I'd also recommend turning off notifications for all but most definite
-"someone is trying to reach me" triggers. Encourage members of your
-chat to use entire channel notifications sparingly and only for
-messages that immediately need everyone's attention. There are not
-many messages that immediately require everyone's attention.
-
-It can also be a challenge to follow chat conversations, especially if
-they span a larger unit of time. Don't be afraid to move a
-conversation to email or another medium that is better suited for
-longer discussions.
-
-Many chat solutions offer the ability to have private rooms or direct
-messaging to a user. Don't be afraid of using these private
-communications but before communicating something ask if it should be
-in a public room. It can be difficult to ask a question and admit you
-don't know something but seeing that dialogue might help
-others. Similarly, having discussions about a feature, bug, or task can
-help spread knowledge.
-
-### Email
-
-Despite all of the efforts to replace email; email is still useful. It
-is the common form of communication between companies, it is
-pervasive, and it usually has pretty good search.
-
-A good email thread can keep a topic contained in a form that is
-possible to follow. Unlike a chat room, there aren't off-topic
-interjections from uninvolved parties.
-
-### Phone
-
-You shouldn't be afraid of calling someone. Just recognize that this
-is an interruption. Have a directory of telephone numbers for
-employees that is accessible everyone.
-
-The downside of phone conversations it that they aren't automatically
-persisted. It can be worth following up a phone discussion with an
-email summarizing the discussion and the next steps.
-
-### Picking the right communication medium
-
-When you are working on a distributed team you no longer can walk over
-to someone's desk and interrupt them. This is great. Not every
-question deserves an immediate answer.
-
-Agree with your team when to use different forms of communication. Set
-expectations with regards to response times and urgency for different
-mediums. Maybe direct chat messages are expected to be responded to
-under 10 minutes. Perhaps emails are OK having a delay of a few
-hours. This is something your group will need to decide.
-
 ### Meet in person
 
 You should have your distributed team or company meet in person. This
@@ -750,3 +755,5 @@ correspondence with TODO NAMES.
 [^1]: [http://globalworkplaceanalytics.com/telecommuting-statistics](http://globalworkplaceanalytics.com/telecommuting-statistics)
 [^2]: [http://www.npr.org/2015/09/22/442582422/the-cost-of-interruptions-they-waste-more-time-than-you-think](http://www.npr.org/2015/09/22/442582422/the-cost-of-interruptions-they-waste-more-time-than-you-think)
 [^3]: Though, you may want to pay for Internet or provide a budget to help remote employees setup their home office.
+[^4]: [Carrying too Heavy a Load? The Communication and Miscommunication of Emotion by Email](http://amr.aom.org/content/33/2/309.short) and [Why It's So Hard To Detect Emotion In Emails And Texts
+](https://www.fastcodesign.com/3036748/evidence/why-its-so-hard-to-detect-emotion-in-emails-and-texts)
