@@ -11,7 +11,7 @@ categories:
 
 Distributed companies are becoming an option for many of us. A distributed company is a company where nearly all of the employees work remotely.
 
-The number of employees that work remotely is growing [^1]. Technology improvements, pervasive Internet, and mindset changes are some of the drivers for this change.
+The number of employees that work remotely is growing[^1]. Technology improvements, pervasive Internet, and mindset changes are some of the drivers for this change.
 
 The remainder of this article highlights some observations from my last few years of working for distributed companies. I've also interviewed and corresponded with many other remote and formerly remote workers. Their contributions, along with other books and articles on remote work, has influenced my thinking about what it means to have a successful distributed company.
 
@@ -57,11 +57,7 @@ Feel like eating food someone else has prepared? You can still do that while wor
 
 As a remote worker, you are able to choose your working location. This gives you the option of choosing a spot with fewer distractions that could remove or prevent you from achieving a state of [flow](https://en.wikipedia.org/wiki/Flow_(psychology\)).
 
-After an interruption it is estimated that it takes up to a half an hour to get back to your original task [^2].
-
-
-
-TODO: check that link when rendered ^^^^
+Minimizing interruptions is one of the keys to accomplishing challenging tasks. After an interruption it is estimated that it takes up to a half an hour to get back to your original task[^2].
 
 ### Off hours support
 
@@ -384,5 +380,4 @@ I gave a presentation at the [2016 AIT Workshop](http://lanyrd.com/2016/aitworks
 [^1]: [http://globalworkplaceanalytics.com/telecommuting-statistics](http://globalworkplaceanalytics.com/telecommuting-statistics)
 [^2]: [http://www.npr.org/2015/09/22/442582422/the-cost-of-interruptions-they-waste-more-time-than-you-think](http://www.npr.org/2015/09/22/442582422/the-cost-of-interruptions-they-waste-more-time-than-you-think)
 [^3]: Though, you may want to pay for the Internet or provide a budget to help remote employees set up their home office.
-[^4]: [Carrying too Heavy a Load? The Communication and Miscommunication of Emotion by Email](http://amr.aom.org/content/33/2/309.short) and [Why It's So Hard To Detect Emotion In Emails And Texts
-](https://www.fastcodesign.com/3036748/evidence/why-its-so-hard-to-detect-emotion-in-emails-and-texts)
+[^4]: [Carrying too Heavy a Load? The Communication and Miscommunication of Emotion by Email](http://amr.aom.org/content/33/2/309.short) and [Why It's So Hard To Detect Emotion In Emails And Texts](https://www.fastcodesign.com/3036748/evidence/why-its-so-hard-to-detect-emotion-in-emails-and-texts)
