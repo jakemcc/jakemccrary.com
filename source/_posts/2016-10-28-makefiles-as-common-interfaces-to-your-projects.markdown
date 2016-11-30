@@ -1,12 +1,13 @@
 ---
 layout: post
-title: Makefiles as common interfaces to your projects
+title: Unify your project interfaces
 date: 2016-10-28 10:15 -0500
 comments: true
 published: false
-description: PUT SUMMARY HERE
-keywords: csv, keywords, here
+description: Make your life easier and unify the command line interface to working on your projects.
+keywords: programming, makefile
 categories: 
+- command-line
 ---
 
 Jeff Ramnani wrote an [article](https://jefframnani.com/project-build-protocol/) about unifying your command line interactions across programming projects. I recommend that you read it. The basic gist is that we often find ourselves working on multiple projects at a time. Frequently these projects are in different languages and use different build tools. Remembering the necessary incantations to interact with the various projects is difficult and we're lazy. We can do better by standardizing an interface to our projects.
