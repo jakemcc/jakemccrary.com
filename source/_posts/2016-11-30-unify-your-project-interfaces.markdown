@@ -1,12 +1,13 @@
 ---
 layout: post
 title: Unify your project interfaces
-date: 2016-10-28 10:15 -0500
+date: 2016-11-30 17:51 -0600
 comments: true
-published: false
-description: Make your life easier and unify the command line interface to working on your projects.
+published: true
+description: Make your life easier and unify the command line interface to working
+  on your projects.
 keywords: programming, makefile
-categories: 
+categories:
 - command-line
 ---
 
