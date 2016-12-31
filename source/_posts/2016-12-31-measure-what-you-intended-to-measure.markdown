@@ -1,10 +1,11 @@
 ---
 layout: post
-title: "Making code fast: Measure what you intend to measure"
-date: 2016-12-20 13:15:34 -0600
+title: 'Making code fast: Measure what you intend to measure'
+date: 2016-12-31 10:52 -0600
 comments: true
-published: false
-description: When trying to make code faster, make sure sure you are measuring what you think you are measuring.
+published: true
+description: When trying to make code faster, make sure sure you are measuring what
+  you think you are measuring.
 keywords: clojure, profiling, tufte, laziness
 categories:
 - clojure
