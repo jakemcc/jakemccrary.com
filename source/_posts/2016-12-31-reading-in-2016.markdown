@@ -44,7 +44,7 @@ I awarded twelve books a five star rating. I've listed them below in no particul
 * [Seveneves - Neal Stephenson](http://amzn.to/2hKJVAd) ([my review](https://www.goodreads.com/review/show/1295783533))
 * [A Little Life - Hanya Yanagihara](http://amzn.to/2iIBqCq) ([my review](https://www.goodreads.com/review/show/1474596789))
 * [The Paper Menagerie and Other Stories - Ken Liu](http://amzn.to/2iY2g8R) ([my review](https://www.goodreads.com/review/show/1827462108))
-* [This Is How You Lose Her - Junot Díaz](http://amzn.to/2iwv6hP) ([my review](https://www.goodreads.com/review/show/1600396478)[^1])
+* [This Is How You Lose Her - Junot DÃ­az](http://amzn.to/2iwv6hP) ([my review](https://www.goodreads.com/review/show/1600396478)[^1])
 
 While I enjoyed all of the above books, a few stand out.
 
@@ -120,7 +120,7 @@ I read multiple books by quite a few authors. Below is a table summarizing my ye
 | James S.A. Corey |          3.667 |               3 |            1673 |
 | Scott Meyer      |              4 |               3 |            1249 |
 | Don Winslow      |              4 |               2 |            1182 |
-| Junot Díaz       |              4 |               2 |             565 |
+| Junot DÃ­az       |              4 |               2 |             565 |
 | Michael Crichton |            3.5 |               2 |             814 |
 | Neil Gaiman      |              4 |               2 |             981 |
 ```
