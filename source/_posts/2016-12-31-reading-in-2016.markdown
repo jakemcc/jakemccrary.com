@@ -54,7 +54,7 @@ This book is about the war on drugs. It brings together studies, history, and an
 
 #### *Deep Work* by Cal Newport
 
-This book is game changer for those of us that have hobbies or work in fields where distraction-free concentration is beneficial or required. Cal Newport makes the argument that the ability to perform deep work is critical for mastering complicated information and producing great results. The book is split in to two parts. The first defines and makes the argument for deep work. The second prescribes rules for enabling yourself to perform more deep work. I highly recommend reading this book **and** implementing the recommendations. I'm considering writing up more about this book and some changes I've made to help myself do deeper work.
+This book is game changer for those of us that have hobbies or work in fields where distraction-free concentration is beneficial or required. Cal Newport makes the argument that the ability to perform deep work is critical for mastering complicated information and producing great results. The book is split in to two parts. The first defines and makes the argument for deep work. The second prescribes rules for enabling yourself to perform more deep work. I highly recommend reading this book **and** implementing the recommendations[^2].
 
 #### *A Little Life* by Hanya Yanagihara
 
@@ -128,3 +128,5 @@ I read multiple books by quite a few authors. Below is a table summarizing my ye
 Five of the seven authors had multiple books because I was reading a series. Those authors were Ann Leckie, James S.A. Corey, Scott Meyer, Don Winslow, and Neil Gaiman. There were more repeat authors than last year but these repeat authors did not have as consistently high of book rating. Last year two of my four repeat authors held an average rating of five stars. That is pretty incredible. This year quite a few managed to stay up  at 4 stars bu this is only 0.16 stars above my average rating for the year.
 
 [^1]: This review is currently blank on Goodreads because this was a book read for a book club I'm part of and we haven't met to discuss the book yet. We typically don't post reviews online of books we'll be discussing. To any of my book club members that are reading this post, I apologize for spoiling the surprise of what star rating I'm planning on giving this book.
+
+[^2]: I'm considering writing up more about this book and some changes I've made to help myself do more deep work.
