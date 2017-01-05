@@ -12,7 +12,7 @@ categories:
 
 The time has come for another end-of-year summary of my reading from the previous year. Here are links to my previous end-of-year reflections: [2013](//jakemccrary.com/blog/2014/01/01/using-incanter-to-review-my-2013-reading/), [2014](//jakemccrary.com/blog/2015/01/08/reading-in-2014/), [2015](//jakemccrary.com/blog/2016/03/13/reading-in-2015/).
 
-I've continued to keep track of my reading by using
+I've continued to keep track of my reading using
 [Goodreads](http://goodreads.com). My
 [profile](https://www.goodreads.com/user/show/3431614-jake-mccrary)
 contains the full list and reviews of books I've read
@@ -50,7 +50,7 @@ While I enjoyed all of the above books, a few stand out.
 
 #### *Chasing the Scream* by Johann Hari
 
-This book is about the war on drugs. It brings together studies, history, and anecdotes to present a compelling read on addiction and drug policy. I think it would be hard to finish this book and not be persuaded to vote for policies of drug decriminalization or legalization and more humane addiction treatments. The [goodreads reviews](https://www.goodreads.com/book/show/24379960-chasing-the-scream) of this book are generally extremely positive, with 61% of them being five stars. Go read the book's summary and a few reviews and I think you'll want to read this book.
+This book is about the war on drugs. It brings together studies, history, and anecdotes to present a compelling read on addiction and drug policy. I think it would be hard to finish this book and not be persuaded to vote for policies of drug decriminalization or legalization and more humane addiction treatments. The [goodreads reviews](https://www.goodreads.com/book/show/24379960-chasing-the-scream) of this book are generally extremely positive, with 61% of them being five stars. Go read the book's summary and a few reviews and you'll want to read this book.
 
 #### *Deep Work* by Cal Newport
 
@@ -58,29 +58,31 @@ This book is game changer for those of us that have hobbies or work in fields wh
 
 #### *A Little Life* by Hanya Yanagihara
 
-This is a depressing and challenging book. As [this](https://www.goodreads.com/review/show/1167073305?book_show_action=true) review says, this book is really about a terribly broken character, Jude, and his struggles. The writing is excellent. If you feel up to reading a long, difficult book that exposes you to some terrible experiences then read this book. I'm having a hard time saying this was my favorite fiction book from last year but it is the only five star fiction book I'm specifically calling out.
+This is a depressing and challenging book. As [this](https://www.goodreads.com/review/show/1167073305?book_show_action=true) review says, this book is about a terribly broken character, Jude, and his struggles. The writing is excellent. If you feel up to reading a long, difficult book that exposes you to some terrible experiences then read this book. I'm having a hard time saying this was my favorite fiction book from last year but it is the only five star fiction book I'm specifically calling out.
 
 #### *Moral Tribes* by Joshua Greene
 
-I didn't give this book five stars but I'm still going to recommend [Moral Tribes](http://amzn.to/2iIzDNQ) by Joshua Greene. This book explains how conflict arises when two moral groups meet and interact (an "Us" vs "Them" situation) and proposes that Utilitarianism as a solution to this problem. While some parts of the book were a chore to finish, I'm glad I've read this book. [My review](https://www.goodreads.com/review/show/1825978507) highlights more of what I found interesting in this book.
+I didn't give this book five stars but I'm still going to recommend [Moral Tribes](http://amzn.to/2iIzDNQ) by Joshua Greene. This book explains how conflict arises when two moral groups meet and interact (an "Us" vs "Them" situation) and proposes Utilitarianism as a solution to this problem. While some parts of the book were a chore to finish, I'm glad I've read this book. [My review](https://www.goodreads.com/review/show/1825978507) highlights more of what I found interesting in this book.
+
+There is a section of the book that presents both sides of the abortion debate which I've shown to friends on both side of the debate. All of them seemed to enjoy reading this small section of the book.
 
 ## Series read this year
 
-I've finished nearly every book I've started reading. If there is any hope I'll enjoy a book I'll finish it and because I read quickly this attitude doesn't hold up getting to better books too much. This means that with series, the end of each book provides a checkpoint for me to reevaluate if I want to continue the series. While none in the below books earned five stars, I'm highlighting them because each series represents me making the choice to continue staying in author's world.
+I finish almost every book I start reading. I read quick enough where I find it worthwhile to finish marginal books just in case they turn out good. With a book series the end of each book provides a checkpoint for me to reevaluate if I want to continue the series. While none of the below series earned five stars, I'm highlighting them because each series represents me making the choice to continue staying in author's world.
 
 I continued [The Expanse](http://amzn.to/2hLiUN1) series this year and read books 4-6. This is just great space opera and I'll continue reading it until it stops being written. 
 
 I started and finished Don Winslow's [The Power of the Dog](https://www.goodreads.com/series/156704-power-of-the-dog) series. It tells the fictionalized tale of drug cartels in Mexico. Parts are brutal and violent and unfortunately often based on real events.
 
-I read the three main books of Ann Leckie's [Imperial Radch](https://www.goodreads.com/series/113751-imperial-radch). It is a neat science fiction story that deals with interesting topics. As a warning, I found the first book in the series to be the weakest. Other people I've talked to about the series have said the same. Keep pushing and read the second before giving up on this story.
+I read the three main books of Ann Leckie's [Imperial Radch](https://www.goodreads.com/series/113751-imperial-radch). It is a neat science fiction story that deals with interesting topics. As a warning, I found the first book in the series to be the weakest. Keep pushing and read the second before giving up on this story.
 
-Scott Meyer's [Magic 2.0](https://www.goodreads.com/series/131379-magic-2-0) was a fun read in which the main character realizes he can edit a file and change reality. It is a silly premise and it delivers good, funny, and lighthearted reading.
+Scott Meyer's [Magic 2.0](https://www.goodreads.com/series/131379-magic-2-0) was a fun read in which the main character realizes he can edit a file and change reality. It is a silly premise and it delivers good, funny, lighthearted reading.
 
-I also read Neil Gaiman's American Gods and Anasazi Boys. Despite the length I devoured both of these books.
+I also read Neil Gaiman's *American Gods* and *Anasazi Boys*. I devoured both of these books.
 
 ## Technical books read
 
-I didn't read many books on software this year. This year was the lowest number of software related books since I've started keeping track. I read Ben Rady's [Serverless Single Page Apps](http://amzn.to/2j2L81T) and Ron Jeffries' [The Nature of Software Development](http://amzn.to/2i8tpGi). I also read most of Google's [Site Reliability Engineering](http://amzn.to/2j2TWVc) but wasn't able to finish it before the end of 2016. I did read a few more non-fiction books than the previous year but I would have liked to see more software books in the mix.
+I didn't read many books on software in 2016. I read the lowest number of software related books since I've started keeping track. I finished Ben Rady's [Serverless Single Page Apps](http://amzn.to/2j2L81T) and Ron Jeffries' [The Nature of Software Development](http://amzn.to/2i8tpGi). I also read most of Google's [Site Reliability Engineering](http://amzn.to/2j2TWVc) but did not finish it before the end of 2016. I read more non-fiction books than in 2015 but I would have liked to see more software books in the mix.
 
 ## More stats
 
@@ -111,7 +113,7 @@ My average rating was about the same as 2015.
 | 2016 |           3.83 |
 ```
 
-I read multiple books by quite a few authors. Below is a table summarizing my year of repeat authors.
+I read multiple books by quite a few authors. Below is a table summarizing my repeat
 
 ```
 | Author           | Average Rating | Number of Books | Number of Pages |
@@ -125,7 +127,9 @@ I read multiple books by quite a few authors. Below is a table summarizing my ye
 | Neil Gaiman      |              4 |               2 |             981 |
 ```
 
-Five of the seven authors had multiple books because I was reading a series. There were more repeat authors than last year but these repeat authors did not have as consistently high of book rating. Last year two of my four repeat authors held an average rating of five stars. That is pretty incredible. This year quite a few managed to stay up  at 4 stars but this is only 0.16 stars above my average rating for the year.
+## 2017 goals
+
+This year I'm planning on revisiting some of my favorite books. I'm not going to set a concrete number for this goal and will just have to trust myself to honestly judge if I accomplish this goal.
 
 [^1]: This review is currently blank on Goodreads because this was a book read for a book club I'm part of and we haven't met to discuss the book yet. We typically don't post reviews online of books we'll be discussing. To any of my book club members that are reading this post, I apologize for spoiling the surprise of what star rating I'm planning on giving this book.
 
