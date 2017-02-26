@@ -4,8 +4,8 @@ title: "Using lein-test-refresh with expectations"
 date: 2017-02-26 11:27:00 -0600
 comments: true
 published: false
-description: PUT SUMMARY HERE 
-keywords: 'csv, keywords, here'
+description: Quick introduction to using lein-test-refresh with expectations.
+keywords: 'clojure, clojure.test, expectations, lein-autoexpect, lein-test-refresh, autoexpect, test-refresh'
 categories: 
 - testing
 - clojure
