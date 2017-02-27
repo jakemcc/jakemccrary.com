@@ -1,12 +1,13 @@
 ---
 layout: post
-title: "Using lein-test-refresh with expectations"
-date: 2017-02-26 11:27:00 -0600
+title: Using lein-test-refresh with expectations
+date: 2017-02-27 09:19 -0600
 comments: true
-published: false
+published: true
 description: Quick introduction to using lein-test-refresh with expectations.
-keywords: 'clojure, clojure.test, expectations, lein-autoexpect, lein-test-refresh, autoexpect, test-refresh'
-categories: 
+keywords: clojure, clojure.test, expectations, lein-autoexpect, lein-test-refresh,
+  autoexpect, test-refresh
+categories:
 - testing
 - clojure
 ---
