@@ -167,6 +167,8 @@ One solution is to use Zoom's built-in whiteboard. This works fairly well. Anoth
 
 In practice, many distributed workers find that they do not miss having a whiteboard. Whiteboards are a very convenient tool when meeting in person but there are other ways of collaborating when working remotely. Shared documents and screen sharing go a long way towards enabling collaboration. Tools that work well for remote collaboration often have another benefit over whiteboards; they are easier to persist and reference later.
 
+**TODO: talk about wacom tablet**
+
 ## Communication
 
 Communication is inherently different on a distributed team. All of a sudden, you cannot just walk across an office to interrupt someone and ask them a question. Communication happens mostly through text. Your skill at written communication needs to be high.
