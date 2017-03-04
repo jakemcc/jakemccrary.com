@@ -64,7 +64,7 @@ settings.
 {:user {:dependencies [[pjstadig/humane-test-output "0.8.0"]]
         :injections [(require 'pjstadig.humane-test-output)
                      (pjstadig.humane-test-output/activate!)]
-        :plugins [[[com.jakemccrary/lein-test-refresh "0.16.0"]]]
+        :plugins [[com.jakemccrary/lein-test-refresh "0.16.0"]]
         :test-refresh {:notify-command ["terminal-notifier" "-title" "Tests" "-message"]
                        :quiet true
                        :changes-only true}}}
