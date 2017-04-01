@@ -1,12 +1,13 @@
 ---
 layout: post
-title: "Which Clojure testing library is most used?"
-date: 2017-03-04 15:09:00 -0600
+title: Which Clojure testing library is most used?
+date: 2017-03-31 21:54 -0500
 comments: true
-published: false
-description: Let's use Google's BigQuery to discover the most widely used Clojure testing library.
-keywords: 'clojure, clojure.test, expectations, midje, fudje, speclj, bigquery'
-categories: 
+published: true
+description: Let's use Google's BigQuery to discover the most widely used Clojure
+  testing library.
+keywords: clojure, clojure.test, expectations, midje, fudje, speclj, bigquery
+categories:
 - clojure
 - testing
 - google
