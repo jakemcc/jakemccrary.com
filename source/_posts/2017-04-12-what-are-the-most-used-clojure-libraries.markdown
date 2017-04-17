@@ -131,8 +131,8 @@ ORDER BY count desc
 |  20 | org.clojure/core.cache         |   179 |
 ```
 
-Clojure and ClojureScript are at the top, which isn't suprising. I'm
-suprised to see `tools.nrepl` in the next five results (rows 3-7). It
+Clojure and ClojureScript are at the top, which isn't surprising. I'm
+surprised to see `tools.nrepl` in the next five results (rows 3-7). It
 is the only library out of the top that I haven't used.
 
 What testing library is used the most? We already answered this in
