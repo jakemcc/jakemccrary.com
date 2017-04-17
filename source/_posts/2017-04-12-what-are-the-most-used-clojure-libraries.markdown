@@ -159,4 +159,71 @@ ORDER BY count desc
 
 Those results are fairly close to the previous results. Of the non-clojure.test libraries, midje still ends up on top.
 
+Let's answer the question that provoked this exploration, what is the most used library?
 
+```
+SELECT library, sum(count) count
+FROM [clojure.libraries]
+WHERE library != 'org.clojure/clojure'
+GROUP BY library
+ORDER BY count desc
+
+| Row | library                     | count |
+|-----+-----------------------------+-------|
+|   1 | compojure                   |  3609 |
+|   2 | lein-cljsbuild              |  3413 |
+|   3 | org.clojure/clojurescript   |  3080 |
+|   4 | org.clojure/core.async      |  2612 |
+|   5 | lein-ring                   |  1809 |
+|   6 | cheshire                    |  1802 |
+|   7 | environ                     |  1763 |
+|   8 | ring                        |  1678 |
+|   9 | clj-http                    |  1648 |
+|  10 | clj-time                    |  1613 |
+|  11 | hiccup                      |  1591 |
+|  12 | lein-figwheel               |  1582 |
+|  13 | org.clojure/tools.logging   |  1579 |
+|  14 | org.clojure/data.json       |  1546 |
+|  15 | http-kit                    |  1423 |
+|  16 | lein-environ                |  1325 |
+|  17 | ring/ring-defaults          |  1302 |
+|  18 | org.clojure/tools.nrepl     |  1244 |
+|  19 | midje                       |  1122 |
+|  20 | com.cemerick/piggieback     |  1096 |
+|  21 | org.clojure/java.jdbc       |  1064 |
+|  22 | org.clojure/tools.cli       |  1053 |
+|  23 | enlive                      |  1001 |
+|  24 | ring/ring-core              |   995 |
+|  25 | org.clojure/tools.namespace |   982 |
+```
+
+[Compojure](https://github.com/weavejester/compojure) takes the top slot. I've put the full result into a [Google spreadsheet](https://docs.google.com/a/jakemccrary.com/spreadsheets/d/1-zmcOVPKLGrdRT_VkTrRUuRFyuxxmXi9eeH6Xzlt7yg/edit?usp=sharing).
+
+
+What groups (as identified by the Maven groupId) have their libraries referenced the most? Top 12 are below but the [full result](https://docs.google.com/a/jakemccrary.com/spreadsheets/d/1QGRRGSo5t5Pnpwizdv_H8negs8NBxtRour6KxWN6hVY/edit?usp=sharing) is available.
+
+```
+SELECT REGEXP_EXTRACT(library, r'(\S+)/\S+') AS group, sum(count) AS count
+FROM [clojure.libraries]
+GROUP BY group
+HAVING group IS NOT null
+ORDER BY count DESC
+
+| Row | group                 | count |
+|-----+-----------------------+-------|
+|   1 | org.clojure           | 39611 |
+|   2 | ring                  |  5817 |
+|   3 | com.cemerick          |  2053 |
+|   4 | com.taoensso          |  1605 |
+|   5 | prismatic             |  1398 |
+|   6 | org.slf4j             |  1209 |
+|   7 | cljsjs                |   868 |
+|   8 | javax.servlet         |   786 |
+|   9 | com.stuartsierra      |   642 |
+|  10 | com.badlogicgames.gdx |   586 |
+|  11 | cider                 |   560 |
+|  12 | pjstadig              |   536 |
+```
+
+This was fun data to play around with and BigQuery made it very
+easy.
