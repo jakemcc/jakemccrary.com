@@ -26,7 +26,7 @@ most used libraries in Clojure projects?
 
 Before we can answer that question, we'll need to transform some
 data. First, we create the Clojure subset of the GitHub dataset. I did
-that by executing the following queries and saving them to a couple
+that by executing the following queries and saving the results to
 tables.
 
 ```sql
