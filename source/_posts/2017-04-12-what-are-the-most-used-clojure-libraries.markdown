@@ -13,27 +13,21 @@ categories:
 ---
 
 In
-my
-[previous post](/blog/2017/03/31/what-clojure-testing-library-is-most-used/) we
-used Google's BigQuery and the
+a
+[previous post](/blog/2017/03/31/what-clojure-testing-library-is-most-used/),
+we used Google's BigQuery and the
 public
 [GitHub dataset](https://cloud.google.com/bigquery/public-data/github)
 to discover the most used Clojure testing library. The answer wasn't
 surprising. The built-in `clojure.test` was by far the most used.
 
-Let's use the dataset to answer a less obvious question, what
-libraries are used the most in Clojure projects?
+Let's use the dataset to answer a less obvious question, what are the
+most used libraries in Clojure projects?
 
-## The Setup
-
-In early March I ran a couple queries to create a Clojure specific
-subset of the public GitHub
-dataset. BigQuery [charges](https://cloud.google.com/bigquery/pricing)
-you based on how much data your queries process and on storage
-used. Querying the whole GitHub dataset blows through the free limits
-of BigQuery. It is recommended that you select a subset of data you
-care about and then do your future queries against that data. Below
-are the queries I used to create a Clojure subset.
+Before we can answer that question, we'll need to transform some
+data. First, we create the Clojure subset of the GitHub dataset. I did
+that by executing the following queries and saving them to a couple
+tables.
 
 ```sql
 -- Save the results of this query to the clojure.files table
@@ -45,7 +39,7 @@ WHERE
   RIGHT(path, 4) = '.clj'
   OR RIGHT(path, 5) = '.cljc'
   OR RIGHT(path, 5) = '.cljs'
-  OR path CONTAINS 'boot.build'
+  OR RIGHT(path, 10) = 'boot.build'
 
 -- Save the results to clojure.contents
 SELECT *
@@ -58,9 +52,9 @@ files. Fortunately for us, both of these files specify dependencies in
 the same format, so we're able to use the same regular expression on both types.
 
 The query below identifies `project.clj` and `build.boot` files,
-splits the file content into lines, and uses a regular expression to
-extract the library name and version. There is some filtering done to
-get rid of some spurious results.
+splits each file into lines, and extracts referenced library names and
+versions using a regular expression. Additional filtering is done get
+rid of some spurious results.
 
 ```sql
 SELECT
@@ -89,8 +83,8 @@ ORDER BY
   count DESC
 ```
 
-The first five rows in the results are below. Let's save the entire
-result to a `clojure.libraries` table.
+The first five rows results are below. Let's save the entire result to
+a `clojure.libraries` table.
 
 ```
 | library             | version | count |
@@ -137,29 +131,59 @@ ORDER BY count desc
 |  20 | org.clojure/core.cache         |   179 |
 ```
 
-Clojure and ClojureScript are at the top, which isn't suprising. Out of the next five results (rows 3 - 7), `tools.nrepl` surprises me. It is the only library out of the top that I haven't used.
+Clojure and ClojureScript are at the top, which isn't suprising. I'm
+suprised to see `tools.nrepl` in the next five results (rows 3-7). It
+is the only library out of the top that I haven't used.
 
-In the [last post](/blog/2017/03/31/what-clojure-testing-library-is-most-used/) we looked into what testing libraries were used the most by performing queries against file contents. Let's answer that same question by looking at libraries extracted this way.
+What testing library is used the most? We already answered this in
+my
+[last article](/blog/2017/03/31/what-clojure-testing-library-is-most-used/) but
+let's see if we get the same answer when we're counting how many times
+a library is pulled into a project.
 
 ```
 SELECT library, sum(count) count
 FROM [clojure.libraries] 
-WHERE library in ('midje', 'expectations', 'speclj', 'smidjen', 'fudje', 'org.clojure/test.check')
+WHERE library in ('midje', 'expectations', 'speclj', 'smidjen', 'fudje')
 GROUP BY library
 ORDER BY count desc
 
 | Row | library                | count |
 |-----+------------------------+-------|
 |   1 | midje                  |  1122 |
-|   2 | org.clojure/test.check |   603 |
-|   3 | speclj                 |   336 |
-|   4 | expectations           |   235 |
-|   5 | smidjen                |     1 |
+|   2 | speclj                 |   336 |
+|   3 | expectations           |   235 |
+|   4 | smidjen                |     1 |
 ```
 
-Those results are fairly close to the previous results. Of the non-clojure.test libraries, midje still ends up on top.
+Those results are close to the previous results. Of the non-clojure.test libraries, midje still ends up on top.
 
-Let's answer the question that provoked this exploration, what is the most used library?
+What groups (as identified by the Maven groupId) have their libraries referenced the most? Top 12 are below but the [full result](https://docs.google.com/a/jakemccrary.com/spreadsheets/d/1QGRRGSo5t5Pnpwizdv_H8negs8NBxtRour6KxWN6hVY/edit?usp=sharing) is available.
+
+```
+SELECT REGEXP_EXTRACT(library, r'(\S+)/\S+') AS group, sum(count) AS count
+FROM [clojure.libraries]
+GROUP BY group
+HAVING group IS NOT null
+ORDER BY count DESC
+
+| Row | group                 | count |
+|-----+-----------------------+-------|
+|   1 | org.clojure           | 39611 |
+|   2 | ring                  |  5817 |
+|   3 | com.cemerick          |  2053 |
+|   4 | com.taoensso          |  1605 |
+|   5 | prismatic             |  1398 |
+|   6 | org.slf4j             |  1209 |
+|   7 | cljsjs                |   868 |
+|   8 | javax.servlet         |   786 |
+|   9 | com.stuartsierra      |   642 |
+|  10 | com.badlogicgames.gdx |   586 |
+|  11 | cider                 |   560 |
+|  12 | pjstadig              |   536 |
+```
+
+And finally, the question that inspired this article, what is the most used library?
 
 ```
 SELECT library, sum(count) count
@@ -197,33 +221,12 @@ ORDER BY count desc
 |  25 | org.clojure/tools.namespace |   982 |
 ```
 
-[Compojure](https://github.com/weavejester/compojure) takes the top slot. I've put the full result into a [Google spreadsheet](https://docs.google.com/a/jakemccrary.com/spreadsheets/d/1-zmcOVPKLGrdRT_VkTrRUuRFyuxxmXi9eeH6Xzlt7yg/edit?usp=sharing).
+[Compojure](https://github.com/weavejester/compojure) takes the top
+slot. [Full results are available](https://docs.google.com/a/jakemccrary.com/spreadsheets/d/1-zmcOVPKLGrdRT_VkTrRUuRFyuxxmXi9eeH6Xzlt7yg/edit?usp=sharing).
 
+Before doing this research I tried to predict what libraries I'd see
+in the top 10. I predicted that clj-time and clj-http would be up
+there. They barely made it in.
 
-What groups (as identified by the Maven groupId) have their libraries referenced the most? Top 12 are below but the [full result](https://docs.google.com/a/jakemccrary.com/spreadsheets/d/1QGRRGSo5t5Pnpwizdv_H8negs8NBxtRour6KxWN6hVY/edit?usp=sharing) is available.
-
-```
-SELECT REGEXP_EXTRACT(library, r'(\S+)/\S+') AS group, sum(count) AS count
-FROM [clojure.libraries]
-GROUP BY group
-HAVING group IS NOT null
-ORDER BY count DESC
-
-| Row | group                 | count |
-|-----+-----------------------+-------|
-|   1 | org.clojure           | 39611 |
-|   2 | ring                  |  5817 |
-|   3 | com.cemerick          |  2053 |
-|   4 | com.taoensso          |  1605 |
-|   5 | prismatic             |  1398 |
-|   6 | org.slf4j             |  1209 |
-|   7 | cljsjs                |   868 |
-|   8 | javax.servlet         |   786 |
-|   9 | com.stuartsierra      |   642 |
-|  10 | com.badlogicgames.gdx |   586 |
-|  11 | cider                 |   560 |
-|  12 | pjstadig              |   536 |
-```
-
-This was fun data to play around with and BigQuery made it very
-easy.
+It was pretty pleasant using BigQuery to do this analysis. Queries
+executed quickly with each query finishing within seconds of starting.
