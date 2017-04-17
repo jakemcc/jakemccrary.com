@@ -1,11 +1,12 @@
 ---
 layout: post
-title: "What are the most used Clojure libraries?"
-date: 2017-04-12 19:19:32 -0500
+title: What are the most used Clojure libraries?
+date: 2017-04-17 10:07 -0500
 comments: true
-published: false
-description: Let's use the power of Google's BigQuery to discover the most used Clojure libraries.
-keywords: 'clojure, bigquery, libraries, library'
+published: true
+description: Let's use the power of Google's BigQuery to discover the most used Clojure
+  libraries.
+keywords: clojure, bigquery, libraries, library
 categories:
 - clojure
 - bigquery
