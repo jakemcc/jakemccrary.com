@@ -22,12 +22,16 @@ to discover the most used Clojure testing library. The answer wasn't
 surprising. The built-in `clojure.test` was by far the most used.
 
 Let's use the dataset to answer a less obvious question, what are the
-most used libraries in Clojure projects?
+most used libraries in Clojure projects? We'll measure this by
+counting references to libraries in `project.clj` and `build.boot`
+files.
 
-Before we can answer that question, we'll need to transform some
+Before we can answer that question, we'll need to transform the
 data. First, we create the Clojure subset of the GitHub dataset. I did
-that by executing the following queries and saving the results to
-tables.
+this by executing the following queries and saving the results to
+tables[^1].
+
+[^1]: I did this in early March 2017.
 
 ```sql
 -- Save the results of this query to the clojure.files table
@@ -83,8 +87,8 @@ ORDER BY
   count DESC
 ```
 
-The first five rows results are below. Let's save the entire result to
-a `clojure.libraries` table.
+The first five rows from the result are below. Let's save the entire
+result to a `clojure.libraries` table.
 
 ```
 | library             | version | count |
@@ -225,8 +229,11 @@ ORDER BY count desc
 slot. [Full results are available](https://docs.google.com/a/jakemccrary.com/spreadsheets/d/1-zmcOVPKLGrdRT_VkTrRUuRFyuxxmXi9eeH6Xzlt7yg/edit?usp=sharing).
 
 Before doing this research I tried to predict what libraries I'd see
-in the top 10. I predicted that clj-time and clj-http would be up
-there. They barely made it in.
+in the top 10. I thought that clj-time and clj-http would be up
+there. I'm happy to see my guess was correct.
 
 It was pretty pleasant using BigQuery to do this analysis. Queries
-executed quickly with each query finishing within seconds of starting.
+took at most seconds to execute. This quick feedback let me play
+around in the web interface without feeling like I was waiting for
+computers to do work. It was pretty painless to use BigQuery to get an
+understanding of the Clojure library ecosystem.
