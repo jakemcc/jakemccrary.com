@@ -75,7 +75,32 @@ we'll be staying in an en suite room.
 
 **March 22nd**
 
-Climb with Edwin
+We were eager to get on the rocks, so we opted to climb at one of the
+closest crags (crags are also called sectors) to the Olive Branch. We
+hiked about ten minutes
+to
+[Cocina Caliente](https://elchorronewroutes.blogspot.com/2014/04/new-sector-cocina-caliente.html). 
+
+Once there we enjoyed a beautiful day of sun with moderate
+temperatures. We managed to knock out every line at the
+sector. Ratings ranged from 5 to 6b with heights between 20 and 30
+meters.
+
+We had a blast here. It was great knocking out so much climbing in a
+single day, especially after having a slower start in the
+morning. Highlight route was probably "Happiness is a Warm Pasty".
+
+- Shake your money maker, 5+, 20m
+- He's got the Jaén, 6a, 20m
+- Mongi, 6a+, 20m
+- Odios los espárragos, 5, 20m
+- Pie Slice, 5, 20m
+- Happiness is a Warm Pasty, 6b, 30m
+- Autovia de las Cabras, 6a+, 30m
+- Toast, 6b, 30m
+- Stay on the scene, 5+, 30m
+- El Nazareno, 6a, 25m
+- ¡Soy Caliente!, 6a+, 25m
 
 **March 23rd**
 
