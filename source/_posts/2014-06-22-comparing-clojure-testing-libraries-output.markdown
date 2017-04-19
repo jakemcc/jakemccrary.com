@@ -4,6 +4,8 @@ title: "Comparing Clojure Testing Libraries: Output"
 date: 2014-06-22 21:16
 comments: true
 published: true
+description: An in-depth comparison of the output of Clojure testing libraries.
+keywords: clojure, testing, clojure.test, midje, expectations, speclj
 categories:
 - clojure
 - testing
