@@ -16,8 +16,8 @@ I spent March 20th through March 30th taking a trip to Spain. It was my first ti
 
 El Chorro is a small village found in the mountains of southern Spain. The area is gorgeous, with a river cutting through the city and cliffs everywhere you look.
 
-While in El Chorro, we stayed at the [Olive Branch](http://www.olivebranchelchorro.co.uk/home.html). The Olive Branch provides a couple different accommodations, ranging from
-private en suite rooms to space to pitch your tent. In our time there, we both stayed in an en suite room and camped.
+While in El Chorro, we stayed at the [Olive Branch](http://www.olivebranchelchorro.co.uk/home.html). The Olive Branch provides a few different accommodations, ranging from
+private en suite rooms to space to pitch your tent. In our time there, we stayed in both a private room and camped.
 
 The climbing in El Chorro was great. The limestone cliffs reach up towards the sky
 
@@ -25,9 +25,9 @@ Usually a trip summary and recommendations would go at the end of an article lik
 
 ## Transportation
 
-We opted to not rent a car for this trip as we had read that we wouldn't need one. We managed without one but if I did this trip again I would rent a car. A car would have opened up some more areas and made the approach to others much shorter. While the hikes to sectors we climbed weren't too bad, a car would have transformed the hikes from 40-50 minutes to 10-15.
+We opted to not rent a car as we had read that we wouldn't need one. We managed without one but next time I would rent a car. A car would have let us climb in more areas and would have made the approach to others much shorter. A car would have reduced the hikes from 40-50 minutes to 10-15.
 
-I'd rent a car in Malaga instead of Madrid even if I flew into Madrid. The train ride from Madrid to Malaga was enjoyable and I don't think driving from Madrid would have saved time. The train ride also give some time to sleep. I wouldn't have wanted to drive from Madrid to El Chorro after flying overnight to Madrid.
+Even if I flew into Madrid, I'd rent a car in Malaga. The train ride from Madrid to Malaga was enjoyable and driving from Madrid would not have saved time. The train ride also provides some time to sleep. I wouldn't have wanted to drive from Madrid to El Chorro after flying overnight to Madrid.
 
 The train system was pretty easy to navigate. Be warned, if you opt to take a train from Malaga to El Chorro there are fairly limited departure time options.
 
@@ -39,19 +39,17 @@ They offer a few different types of accommodations. We stayed in a private room 
 
 We were paranoid about renting tents and sleeping pads from the Olive Branch so we brought our own. That was unfound paranoia. Their tents looked great and renting those would have saved us a ton of luggage space.
 
-Showers and bathrooms were available and included in the price.
-
 There was a lounge where people hung out on couches, shot pool, and threw darts. Guidebooks and topo maps were available for reference.
 
-The Olive Branch provides cooking space. We never took advantage of it except for making sandwiches.
+Showers and bathrooms were available and included in the price. A kitchen and food storage space are also provided.
 
-We never took advantage of the cooking space because we always purchased breakfast and dinner from the Olive Branch. You put your name on a list for either meal (either the night before or, for dinner, in the morning) and then you'd have some food prepared for you.
+We barely took advantage of the cooking space because we always purchased breakfast and dinner from the Olive Branch. You put your name on a list for either meal (either the night before or, for dinner, in the morning) and then you'd have some food prepared for you.
 
-While I definitely usually cook, or at least open some yogurt, on climbing trips, it was nice having a hot meal ready for breakfast and after getting back from the crag.
+Usually I cook on climbing trips but nice having a hot meal ready for breakfast and after getting back from the crag. It reduced the extra tasks that usually intrude on your day.
 
-If you had breakfast, you definitely weren't doing an alpine start, but at least the day had a chance to warm up some.
+If you had breakfast, you definitely weren't doing an alpine start but at least the day had a chance to warm up.
 
-Dinner was ready at 8 pm, so that sort of put a limit to how late you were willing to stay out climbing.
+Dinner was ready at 8 pm, so that sort of put a limit to how late we were willing to stay out climbing.
 
 Wine, beer, and snacks were available for purchase the entire day. Wifi was available and as reasonably fast as you might expect for being shared between everyone and powered by either satilite or radio (I forget which).
 
