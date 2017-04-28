@@ -34,21 +34,27 @@ else
     against=$(git hash-object -t tree /dev/null)
 fi
 
-patch_filename=$(mktemp -t commit_hook_changes.XXXXXX)
-git diff --exit-code --binary --ignore-submodules --no-color > $patch_filename
+patch_filename=$(mktemp -t commit_hook_changes.XXXXXXX)
+git diff --exit-code --binary --ignore-submodules --no-color > "$patch_filename"
 has_unstaged_changes=$?
 
 if [ $has_unstaged_changes -ne 0 ]; then
-    echo "Stashing unstaged changes in $patch_filename."
-    git checkout -- .
+    # Unstaged changes have been found
+    if [ ! -f "$patch_filename" ]; then
+        echo "Failed to create a patch file"
+        exit 1
+    else
+        echo "Stashing unstaged changes in $patch_filename."
+        git checkout -- .
+    fi
 fi
 
 quit() {
     if [ $has_unstaged_changes -ne 0 ]; then
-        git apply $patch_filename
+        git apply "$patch_filename"
         if [ $? -ne 0 ]; then
             git checkout -- .
-            git apply $patch_filename
+            git apply --whitespace=nowarm --ignore-whitespaace "$patch_filename"
         fi
     fi
 
@@ -59,12 +65,15 @@ quit() {
 # Redirect output to stderr.
 exec 1>&2
 
-files_with_nocommit=$(git diff --cached --name-only --diff-filter=ACM $against | xargs grep -i "nocommit" -l | tr '\n' ' ')
+files_with_nocommit=$(git diff --cached --name-only --diff-filter=ACM $against | xargs -I{} grep -i "nocommit" -l {} | tr '\n' ' ')
 
 if [ "x${files_with_nocommit}x" != "xx" ]; then
     tput setaf 1
     echo "File being committed with 'nocommit' in it:"
-    echo $files_with_nocommit | tr ' ' '\n'
+    IFS=$'\n'
+    for f in $(git diff --cached --name-only --diff-filter=ACM $against | xargs -I{} grep -i "nocommit" -l {}); do
+        echo $f
+    done
     tput sgr0
     quit 1
 fi
@@ -147,3 +156,9 @@ bash extensions and specific `mktemp` behavior found in OS X. The
 pre-commit code has now been tested works in OS X and Ubuntu 14.04.
 There may be minor changes you need to perform to get it to work on
 your system.
+
+*2017/04/28*
+
+Updated code to handle if `mktemp` fails and if whitespace changes
+between creating a patch and applying it. Also adds in a change that
+better handles whitespace in paths.
