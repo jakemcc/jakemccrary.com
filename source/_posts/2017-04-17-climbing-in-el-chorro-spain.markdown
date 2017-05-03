@@ -104,19 +104,88 @@ morning. Highlight route was probably "Happiness is a Warm Pasty".
 
 **March 23rd**
 
-Climb with Edwin
+We decided to hike into through the forest to
+the
+[Frontales](https://www.rockfax.com/databases/results_crag.html?id=504) area. This
+area is nearly always in your view as you walk around town. It looms
+over the city.
+
+Edwin and I set out and planned on going to sector Los
+Albercones. This is one of the westernmost sectors in the Frontales
+area. From the Olive Branch, we opted to walk through the woods until
+we hit the cliffs and then hike west.
+
+While making our way to Los Albercones we stopped at The
+Solarium. There we knocked out Las Amigas De Lula (26m, 5) and El
+Osito Polar (26m, 5).
+
+Next up was climbing in Los Albercones. We started with La chica
+pelirroja, a wonderful 6a+ that felt like it just kept going and going
+(probably about 30 meters). This was one of my highlight routes of the
+trip. The climbing was pretty much vertical until you hit some slab
+near the top. Your toes disappeared into tiny slots as you edged your
+way up.
+
+The other route we climbed at Los Albercones was Putifero. This 30
+meter route had a 5 rating in our Rockfax guidebook and at the time
+this book was published, it was considered one of the top 50 routes in
+El Chorro. This route gets a lot of traffic and it shows. I'd consider
+the crux of this route getting by the extremely polished holds near
+the beginning of this climb. Still a fun climb, but I thought La chica
+pelirroja was much more enjoyable.
+
+If you like long, nearly vertical routes then Los Albercones would be
+a great crag to visit. If you have a car, it is also near a parking
+lot.
+
+After those two routes we started the hike back to Olive Branch. A lot
+of this day was spent hiking. Our unfamiliarity with the area
+definitely caused us to waste a of time trying to figure out where we
+were and caused us to take non-optimal paths.
 
 **March 24th**
 
-Take a day off climbing and take the morning train back to
-Málaga. Spend the day there with Edwin doing some sightseeing. Seamus
-arrives by train around lunch time and we meet up with him. The three
-of us take the train back to El Chorro and once again get picked up on
-the walk to Olive Branch.
+We took today off climbing and took the morning train into Malaga. We
+spent the morning walking
+around
+[Alcazaba](http://www.malagaturismo.com/en/tourist-resources/detail/alcazaba/6) and
+the
+[Roman Theatre](http://www.malagaturismo.com/en/tourist-resources/detail/teatro-romano/413). Malaga
+is on the southern coast and we were able to enjoy beautiful views
+from the walls of Alcazaba.
+
+Another friend, Seamus, joined our trip today and met us in
+Malaga. The three of us enjoyed tapas and beers in random plazas. The
+weather was perfect and spending time outside was wonderful.
+
+Eventually we made our way back to the train station and, while we
+waited for the train back to El Chorro, we bought groceries in a
+market.
 
 **March 25th**
 
-Climb with Edwin and Seamus
+We wanted to get Seamus on some rock as quickly as possible so we
+opted to clime at Las Encantadas. This crag is within a ten minute
+walk of Olive Branch and extremely easy to find.
+
+The Rockfax book is particularly out of date with this crag. Luckily,
+we were able to download a topo from
+the
+[Climbing Lodge](http://www.klettern-in-spanien.de/en/el-chorro/topo-download/).
+
+Below are the routes we climbed. There were so many here that we
+didn't climb. One of the highlights of this crag was Crisis de
+identidad. This was a shorter route but had a really great small roof
+/ bulge you had to pull. Guerrera and La de Seba felt pretty
+adventures.
+
+- Bohem destrell, 6a+
+- Variante, ?
+- Crisis de identitad, 6a+
+- Clandestina, 6a
+- Guerrera, 6b
+- La de Seba, 6b
+- Geisha, 6a
 
 **March 26th**
 
