@@ -167,6 +167,3 @@ What would I do differently? The main thing I'd do is rent a car in Málaga. I l
 By the end of the trip, as with every climbing trip, I wanted to stay longer and keep climbing.
 
 Would I go back? Maybe. There is so much more to climb here and having some experience in the area would make the trip go smoother. There is so much climbing in El Chorro that a future trip could be quite different from this one. There is so much climbing in Spain though; I'm unsure if I'd rather explore new areas.
-
-
-
