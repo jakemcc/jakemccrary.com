@@ -17,7 +17,7 @@ Spain. It was my first time in Spain and the main reason for the trip
 was to rock climb in El Chorro.
 
 El Chorro is a small village found in the mountains of southern
-Spain. The scenary is gorgeous, with a river cutting through the city
+Spain. The scenery is gorgeous, with a river cutting through the city
 and cliffs everywhere you look.
 
 While in El Chorro, we stayed at
@@ -28,7 +28,7 @@ private en suite rooms to space to pitch your tent. In our time there,
 we both stayed in an en suite room and camped.
 
 The climbing in El Chorro was great. The limestone cliffs reach up
-towards the skey.
+towards the sky.
 
 ## Trip Timeline
 
@@ -193,7 +193,7 @@ We set off with the intention of climbing some powerful pumpy routes at [Sector 
 
 It should have been easy to get there, but we grew impatient hiking in and prematurely stopped at a neat looking crag which we think was Sector Momia. There Seamus picked a cool looking line and started climbing. We didn't know what we were climbing on and are still a bit unsure. In the end I think we linked together a few different sections of various routes. Whatever route we climbed, it was pretty neat and was one of my favorite routes of the trip.
 
-After that adventure climb we continued hiking until we hit what we thought was the route Quatro elephants, a 5 and the start of Sector Suizo. Well, we were wrong here too. We actually climbed the first two pitches (as a single pitch) of some multi-pitch route. We're not really sure which route this was either. It was a fairly casual route that increased in difficutly as you went up. The height, the wind, and the sense of the unknown made this route feel fairly exciting. Our 70 meter rope was barely enough to link the first two pitches.
+After that adventure climb we continued hiking until we hit what we thought was the route Quatro elephants, a 5 and the start of Sector Suizo. Well, we were wrong here too. We actually climbed the first two pitches (as a single pitch) of some multi-pitch route. We're not really sure which route this was either. It was a fairly casual route that increased in difficulty as you went up. The height, the wind, and the sense of the unknown made this route feel fairly exciting. Our 70 meter rope was barely enough to link the first two pitches.
 
 We continued hiking and actually made it to Sector Suizo. Once again, I'm not really certain what we climbed here but I think they were the left most routes since those were in the shade. We either climbed one or two routes in the same little area of the crag. The one I remember had a neat and powerful bulge you pulled to get to the chains. It was fun.
 
@@ -201,7 +201,7 @@ We continued hiking and actually made it to Sector Suizo. Once again, I'm not re
 
 Someone at Olive Branch encouraged us to hike up to a newer crag, Serena ([topo](http://www.klettern-in-spanien.de/fileadmin/files/Download/Serena.pdf)). This was a long hike, made longer by us not knowing exactly where to turn off the road. It probably took about 50 minutes to get there. This crag is the top of the mountain. You have an amazing view of the country side from the base of this crag. You also don't have any sun protection. Luckily, it was a cloudy day.
 
-We hiked to this crag to hop on the route Hashfield, a 7a that was highly recommended. This was a great route. None of us got it cleanly but it was a ton of fun. The route starts with a slighly overhanging face climb on thinner holds with minimal foot options. Then it smacks you with some slopers and slots to transition to a few bolts of stellar slab climbing. This was such a fun route.
+We hiked to this crag to hop on the route Hashfield, a 7a that was highly recommended. This was a great route. None of us got it cleanly but it was a ton of fun. The route starts with a slightly overhanging face climb on thinner holds with minimal foot options. Then it smacks you with some slopers and slots to transition to a few bolts of stellar slab climbing. This was such a fun route.
 
 List of routes climbed at this crag:
 
@@ -233,11 +233,11 @@ We basically spent the remainder of the day walking around and enjoying the city
 
 **March 30th**
 
-Seamus and I have an early flights home to Chicago. We take public transit to the airport and buy a ticket from an actual person at a counter. We couldn't get the automatted machines to work.
+Seamus and I have an early flights home to Chicago. We take public transit to the airport and buy a ticket from an actual person at a counter. We couldn't get the automated machines to work.
 
 My flight takes off from a different terminal than the main one and I have to find another bus. This was a bit stressful as it felt like I was running out of time. I'm unsure if I would have made my flight had it not been delayed.
 
-I make it home and am exhausted. I was hit badly hit by jetlag and am out of sync and tired for the next few days.
+I make it home and am exhausted. I was hit badly hit by jet lag and am out of sync and tired for the next few days.
 
 
 
