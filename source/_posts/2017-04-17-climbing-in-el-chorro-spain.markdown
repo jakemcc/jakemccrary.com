@@ -28,13 +28,13 @@ The trip starts today. Edwin and I take an evening flight from Chicago to Madrid
 
 **March 21st**
 
-We've arrived in Madrid and now need to find our way to the central train station, the Atocha Railway Station. We've already bought our train tickets from Madrid to M·laga, which also lets us, for free, take a local train from the airport to the central station.
+We've arrived in Madrid and now need to find our way to the central train station, the Atocha Railway Station. We've already bought our train tickets from Madrid to M√°laga, which also lets us, for free, take a local train from the airport to the central station.
 
-We arrive downtown and have some time to kill before our train leaves to M·laga. We wander around and end up in [Matilda Cafe Cantina](https://www.tripadvisor.es/Restaurant_Review-g187514-d6404685-Reviews-Matilda_Cafe_Cantina-Madrid.html). Its a cozy cafe and we enjoy espressos and toast with toppings.
+We arrive downtown and have some time to kill before our train leaves to M√°laga. We wander around and end up in [Matilda Cafe Cantina](https://www.tripadvisor.es/Restaurant_Review-g187514-d6404685-Reviews-Matilda_Cafe_Cantina-Madrid.html). Its a cozy cafe and we enjoy espressos and toast with toppings.
 
-We catch the early afternoon train to M·laga. It is about a three hour train ride through the Spanish countryside. I love taking trains and this ride does not disappoint. Between moments of sleep I take in as much of the view as possible.
+We catch the early afternoon train to M√°laga. It is about a three hour train ride through the Spanish countryside. I love taking trains and this ride does not disappoint. Between moments of sleep I take in as much of the view as possible.
 
-We spent the hour of downtime walking around the M·laga train station and picking up a SIM card. A short 45 minute train ride later and we're in El Chorro.
+We spent the hour of downtime walking around the M√°laga train station and picking up a SIM card. A short 45 minute train ride later and we're in El Chorro.
 
 As obvious from all the train rides, we opted to not rent a car for this trip. That meant our next step was to hike up to the Olive Branch from the El Chorro train station. Luckily, some a nice couple offered us a ride about halfway into the walk.
 
@@ -53,16 +53,16 @@ Once there we enjoyed a beautiful day of sun with moderate temperatures. We mana
 We had a blast here. It was great knocking out so much climbing in a single day, especially after having a slower start in the morning. Highlight route was probably "Happiness is a Warm Pasty".
 
 - Shake your money maker, 5+, 20m
-- He's got the JaÈn, 6a, 20m
+- He's got the Ja√©n, 6a, 20m
 - Mongi, 6a+, 20m
-- Odios los esp·rrragos, 5, 20m
+- Odios los esp√°rrragos, 5, 20m
 - Pie Slice, 5, 20m
 - Happiness is a Warm Pasty, 6b, 30m
 - Autovia de las Cabras, 6a+, 30m
 - Toast, 6b, 30m
 - Stay on the scene, 5+, 30m
 - El Nazareno, 6a, 25m
-- °Soy Caliente!, 6a+, 25m
+- ¬°Soy Caliente!, 6a+, 25m
 
 **March 23rd**
 
@@ -82,9 +82,9 @@ After those two routes we started the hike back to Olive Branch. A lot of this d
 
 **March 24th**
 
-We took today off climbing and took the morning train into M·laga. We spent the morning walking around [Alcazaba](http://www.malagaturismo.com/en/tourist-resources/detail/alcazaba/6) and the [Roman Theatre](http://www.malagaturismo.com/en/tourist-resources/detail/teatro-romano/413). M·laga is on the southern coast and we were able to enjoy beautiful views from the walls of Alcazaba.
+We took today off climbing and took the morning train into M√°laga. We spent the morning walking around [Alcazaba](http://www.malagaturismo.com/en/tourist-resources/detail/alcazaba/6) and the [Roman Theatre](http://www.malagaturismo.com/en/tourist-resources/detail/teatro-romano/413). M√°laga is on the southern coast and we were able to enjoy beautiful views from the walls of Alcazaba.
 
-Another friend, Seamus, joined our trip today and met us in M·laga. The three of us enjoyed tapas and beers in random plazas. The weather was perfect and spending time outside was wonderful.
+Another friend, Seamus, joined our trip today and met us in M√°laga. The three of us enjoyed tapas and beers in random plazas. The weather was perfect and spending time outside was wonderful.
 
 Eventually we made our way back to the train station and, while we waited for the train back to El Chorro, we bought groceries in a market.
 
@@ -132,7 +132,7 @@ These were all great routes and it was a great end to the climbing portion of ou
 
 **March 28th**
 
-A couple of train rides later (El Chorro -> M·laga and M·laga -> Madrid) and we're in Madrid. Edwin bought a class of train tickets that was one step above the cheapest class for a few Euros more. This entitled us to food and drink service in a slightly nicer train car. This was great since we didn't have time to eat breakfast in El Chorro before we had to rush off to catch our train. Drinking wine and coffee and cruising through the Spanish countryside is great.
+A couple of train rides later (El Chorro -> M√°laga and M√°laga -> Madrid) and we're in Madrid. Edwin bought a class of train tickets that was one step above the cheapest class for a few Euros more. This entitled us to food and drink service in a slightly nicer train car. This was great since we didn't have time to eat breakfast in El Chorro before we had to rush off to catch our train. Drinking wine and coffee and cruising through the Spanish countryside is great.
 
 We have an airbnb a few blocks away from the train station and check-in. Its a minimal setup but we're just sleeping here and it works great. The location is prime for walking around.
 
@@ -140,13 +140,13 @@ We spend the day walking through the streets, meandering our way towards the [Me
 
 Our walk was great and we had wonderful weather. We went through the [Plaza de Oriente](https://foursquare.com/v/plaza-de-oriente/4adcda37f964a520203c21e3) and just kept walking through parks around there enjoying views, statues, and buildings. We managed to be on of the last groups let into the [Templo de Debod](https://foursquare.com/v/templo-de-debod/4adcda37f964a520113c21e3).
 
-We ate dinner at [Asador de Aranda](https://foursquare.com/v/asador-de-aranda/4adcda3af964a520263d21e3) and stopped in an Irish bar to catch some of the Spain vs France soccer friendly. We then had  drinks and tapas at [Matador](https://foursquare.com/v/matador/4b8311b5f964a520b9f530e3). I'd recommend Matador. It was a great place for grabbing a snack and drink. We finished the night with some outdoor beers from [Autom·tico](https://foursquare.com/v/autom%C3%A1tico/4adcda34f964a520213b21e3).
+We ate dinner at [Asador de Aranda](https://foursquare.com/v/asador-de-aranda/4adcda3af964a520263d21e3) and stopped in an Irish bar to catch some of the Spain vs France soccer friendly. We then had  drinks and tapas at [Matador](https://foursquare.com/v/matador/4b8311b5f964a520b9f530e3). I'd recommend Matador. It was a great place for grabbing a snack and drink. We finished the night with some outdoor beers from [Autom√°tico](https://foursquare.com/v/autom%C3%A1tico/4adcda34f964a520213b21e3).
 
 **March 29th**
 
-We spent most of the day in the [Museo Nacional Centro de Arte Reina SofÌa](https://foursquare.com/v/museo-nacional-centro-de-arte-reina-sof%C3%ADa-mncars/4b4ddd13f964a520b6d926e3). It was a nice museum and we saw some neat art but there was a lot of it. We left a bit exhausted and ready for a change.
+We spent most of the day in the [Museo Nacional Centro de Arte Reina Sof√≠a](https://foursquare.com/v/museo-nacional-centro-de-arte-reina-sof%C3%ADa-mncars/4b4ddd13f964a520b6d926e3). It was a nice museum and we saw some neat art but there was a lot of it. We left a bit exhausted and ready for a change.
 
-We basically spent the remainder of the day walking around and enjoying the city. Madrid is pretty neat and, at least in the areas we visited, vibrant. People were out and about, enjoying plazas and generally full of energy. The major park we walked through was the [Madrid RÌo](https://www.google.com/maps/place/Madrid+R%C3%ADo/@40.3964956,-3.7098679,16.28z/data=!4m13!1m7!3m6!1s0xd42287920e082ab:0x5c01eafe0385036b!2sMercado+de+San+Miguel,+28005+Madrid,+Spain!3b1!8m2!3d40.4153716!4d-3.708997!3m4!1s0x0:0x770d1cbb29cc6fba!8m2!3d40.3980328!4d-3.7109354).
+We basically spent the remainder of the day walking around and enjoying the city. Madrid is pretty neat and, at least in the areas we visited, vibrant. People were out and about, enjoying plazas and generally full of energy. The major park we walked through was the [Madrid R√≠o](https://www.google.com/maps/place/Madrid+R%C3%ADo/@40.3964956,-3.7098679,16.28z/data=!4m13!1m7!3m6!1s0xd42287920e082ab:0x5c01eafe0385036b!2sMercado+de+San+Miguel,+28005+Madrid,+Spain!3b1!8m2!3d40.4153716!4d-3.708997!3m4!1s0x0:0x770d1cbb29cc6fba!8m2!3d40.3980328!4d-3.7109354).
 
 **March 30th**
 
