@@ -16,7 +16,7 @@ I spent March 20th through March 30th taking a trip. That trip was to Spain. It 
 
 El Chorro is a small village found in the mountains of southern Spain. The scenery is gorgeous, with a river cutting through the city and cliffs everywhere you look.
 
-While in El Chorro, we stayed at the [Olive Branch](http://www.olivebranchelchorro.co.uk/home.html). The Olive Branch provides a couple different accommodations, ranging from private en suite rooms to space to pitch your tent. In our time there, we both stayed in an en suite room and camped.
+While in El Chorro, we stayed at the [Olive Branch](http://www.olivebranchelchorro.co.uk/home.html). The Olive Branch provides a couple different accommodations, ranging from private en-suite rooms to space to pitch your tent. In our time there, we both stayed in an en suite room and camped.
 
 The climbing in El Chorro was great. The limestone cliffs reach up towards the sky.
 
@@ -32,15 +32,15 @@ We've arrived in Madrid and now need to find our way to the central train statio
 
 We arrive downtown and have some time to kill before our train leaves to Málaga. We wander around and end up in [Matilda Cafe Cantina](https://www.tripadvisor.es/Restaurant_Review-g187514-d6404685-Reviews-Matilda_Cafe_Cantina-Madrid.html). Its a cozy cafe and we enjoy espressos and toast with toppings.
 
-We catch the early afternoon train to Málaga. It is about a three hour train ride through the Spanish countryside. I love taking trains and this ride does not disappoint. Between moments of sleep I take in as much of the view as possible.
+We catch the early afternoon train to Málaga. It is about a three-hour train ride through the Spanish countryside. I love taking trains and this ride does not disappoint. Between moments of sleep, I take in as much of the view as possible.
 
-We spent the hour of downtime walking around the Málaga train station and picking up a SIM card. A short 45 minute train ride later and we're in El Chorro.
+We spent the hour of downtime walking around the Málaga train station and picking up a SIM card. A short 45-minute train ride later and we're in El Chorro.
 
 As obvious from all the train rides, we opted to not rent a car for this trip. That meant our next step was to hike up to the Olive Branch from the El Chorro train station. Luckily, some a nice couple offered us a ride about halfway into the walk.
 
 The walk from the train station to the Olive Branch is about 25 minutes. It is a pretty walk. Carrying all of our gear and doing that walk was not fun though. Especially given that we had been carrying our gear all day. My shoulders were raw.
 
-We get to the Olive Branch and check-in. For our first few nights, we'll be staying in an en suite room.
+We get to the Olive Branch and check-in. For our first few nights, we'll be staying in an en-suite room.
 
 **Maybe more about olive branch**
 
@@ -74,11 +74,11 @@ While making our way to Los Albercones we stopped at The Solarium. There we knoc
 
 Next up was climbing in Los Albercones. We started with La chica pelirroja, a wonderful 6a+ that felt like it just kept going and going (probably about 30 meters). This was one of my highlight routes of the trip. The climbing was pretty much vertical until you hit some slab near the top. Your toes disappeared into tiny slots as you edged your way up.
 
-The other route we climbed at Los Albercones was Putifero. This 30 meter route had a 5 rating in our Rockfax guidebook and at the time this book was published, it was considered one of the top 50 routes in El Chorro. This route gets a lot of traffic and it shows. I'd consider the crux of this route getting by the extremely polished holds near the beginning of this climb. Still a fun climb, but I thought La chica pelirroja was much more enjoyable.
+The other route we climbed at Los Albercones was Putifero. This 30-meter route had a 5 rating in our Rockfax guidebook and at the time this book was published, it was considered one of the top 50 routes in El Chorro. This route gets a lot of traffic and it shows. I'd consider the crux of this route getting by the extremely polished holds near the beginning of this climb. Still a fun climb, but I thought La chica pelirroja was much more enjoyable.
 
 If you like long, nearly vertical routes then Los Albercones would be a great crag to visit. If you have a car, it is also near a parking lot.
 
-After those two routes we started the hike back to Olive Branch. A lot of this day was spent hiking. Our unfamiliarity with the area definitely caused us to waste a of time trying to figure out where we were and caused us to take non-optimal paths.
+After those two routes, we started the hike back to Olive Branch. A lot of this day was spent hiking. Our unfamiliarity with the area definitely caused us to waste time trying to figure out where we were and caused us to take non-optimal paths.
 
 **March 24th**
 
@@ -86,15 +86,15 @@ We took today off climbing and took the morning train into Málaga. We spent the
 
 Another friend, Seamus, joined our trip today and met us in Málaga. The three of us enjoyed tapas and beers in random plazas. The weather was perfect and spending time outside was wonderful.
 
-Eventually we made our way back to the train station and, while we waited for the train back to El Chorro, we bought groceries in a market.
+Eventually, we made our way back to the train station and, while we waited for the train back to El Chorro, we bought groceries in a market.
 
 **March 25th**
 
-We wanted to get Seamus on some rock as quickly as possible so we opted to clime at Las Encantadas. This crag is within a ten minute walk of Olive Branch and extremely easy to find.
+We wanted to get Seamus on some rock as quickly as possible so we opted to climb at Las Encantadas. This crag is within a ten-minute walk of Olive Branch and extremely easy to find.
 
 The Rockfax book is particularly out of date with this crag. Luckily, we were able to download a topo from the [Climbing Lodge](http://www.klettern-in-spanien.de/en/el-chorro/topo-download/).
 
-Below are the routes we climbed. There were so many here that we didn't climb. One of the highlights of this crag was Crisis de identidad. This was a shorter route but had a really great small roof / bulge you had to pull. Guerrera and La de Seba felt pretty adventures.
+Below are the routes we climbed. There were so many here that we didn't climb. One of the highlights of this crag was Crisis de identidad. This was a shorter route but had a really great small roof/bulge you had to pull. Guerrera and La de Seba felt pretty adventures.
 
 - Bohem destrell, 6a+
 - Variante, ?
@@ -108,15 +108,15 @@ Below are the routes we climbed. There were so many here that we didn't climb. O
 
 We set off with the intention of climbing some powerful pumpy routes at [Sector Suizo](https://www.rockfax.com/databases/results_buttress.html?id=1878) (a crag in the Frontales area). We had been told that the climbing here was reminiscent of climbing at the Red River Gorge in Kentucky. The Red River Gorge is where we've spent most of our time climbing and we were excited to try out a comparable area in El Chorro.
 
-It should have been easy to get there, but we grew impatient hiking in and prematurely stopped at a neat looking crag which we think was Sector Momia. There Seamus picked a cool looking line and started climbing. We didn't know what we were climbing on and are still a bit unsure. In the end I think we linked together a few different sections of various routes. Whatever route we climbed, it was pretty neat and was one of my favorite routes of the trip.
+It should have been easy to get there, but we grew impatient hiking in and prematurely stopped at a neat looking crag which we think was Sector Momia. There Seamus picked a cool looking line and started climbing. We didn't know what we were climbing on and are still a bit unsure. In the end, I think we linked a few different sections of various routes. Whatever route we climbed, it was pretty neat and was one of my favorite routes of the trip.
 
-After that adventure climb we continued hiking until we hit what we thought was the route Quatro elephants, a 5 and the start of Sector Suizo. Well, we were wrong here too. We actually climbed the first two pitches (as a single pitch) of some multi-pitch route. We're not really sure which route this was either. It was a fairly casual route that increased in difficulty as you went up. The height, the wind, and the sense of the unknown made this route feel fairly exciting. Our 70 meter rope was barely enough to link the first two pitches.
+After that adventure climb, we continued hiking until we hit what we thought was the route Quatro elephants, a 5 and the start of Sector Suizo. Well, we were wrong here too. We actually climbed the first two pitches (as a single pitch) of some multi-pitch route. We're not really sure which route this was either. It was a fairly casual route that increased in difficulty as you went up. The height, the wind, and the sense of the unknown made this route feel fairly exciting. Our 70-meter rope was barely enough to link the first two pitches.
 
 We continued hiking and actually made it to Sector Suizo. Once again, I'm not really certain what we climbed here but I think they were the left most routes since those were in the shade. We either climbed one or two routes in the same little area of the crag. The one I remember had a neat and powerful bulge you pulled to get to the chains. It was fun.
 
 **March 27th**
 
-Someone at Olive Branch encouraged us to hike up to a newer crag, Serena ([topo](http://www.klettern-in-spanien.de/fileadmin/files/Download/Serena.pdf)). This was a long hike, made longer by us not knowing exactly where to turn off the road. It probably took about 50 minutes to get there. This crag is the top of the mountain. You have an amazing view of the country side from the base of this crag. You also don't have any sun protection. Luckily, it was a cloudy day.
+Someone at Olive Branch encouraged us to hike up to a newer crag, Serena ([topo](http://www.klettern-in-spanien.de/fileadmin/files/Download/Serena.pdf)). This was a long hike, made longer by us not knowing exactly where to turn off the road. It probably took about 50 minutes to get there. This crag is the top of the mountain. You have an amazing view of the countryside from the base of this crag. You also don't have any sun protection. Luckily, it was a cloudy day.
 
 We hiked to this crag to hop on the route Hashfield, a 7a that was highly recommended. This was a great route. None of us got it cleanly but it was a ton of fun. The route starts with a slightly overhanging face climb on thinner holds with minimal foot options. Then it smacks you with some slopers and slots to transition to a few bolts of stellar slab climbing. This was such a fun route.
 
