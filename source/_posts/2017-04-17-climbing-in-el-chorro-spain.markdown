@@ -131,6 +131,8 @@ We continued hiking and made it to Sector Suizo. Once again, I’m not sure what
 
 One of the neat things about climbing in El Chorro is that occasionally you'll hear some bells ringing and getting closer. This ringing is a shepherd grazing a herd of sheep. The sheep will get quite close to you. This happened to us at Sector Suizo.
 
+{% imgcap /images/el-chorro/sheep-up-close.jpg Sheep trying to be our new friends %}
+
 **March 27th**
 
 Someone at Olive Branch encouraged us to hike up to a newer crag, [Serena](http://www.klettern-in-spanien.de/fileadmin/files/Download/Serena.pdf). This was a long hike, made longer by us not knowing exactly where to turn off the road. It probably took about 50 minutes to get there. This crag is the top of the mountain. You have an amazing view of the countryside from the base of this crag. You also don’t have any trees for sun protection. Luckily, it was a cloudy day.
