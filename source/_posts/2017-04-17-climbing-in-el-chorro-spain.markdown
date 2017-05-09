@@ -14,7 +14,7 @@ categories:
 
 From March 20th to 30th I was traveling in Spain. Most of this time was spent climbing in El Chorro.
 
-{% imgcap /images/el-chorro/spain-map.png El Chorro is the pin %}
+{% imgcap /images/el-chorro/spain-map.jpg El Chorro is the pin %}
 
 El Chorro is a small town found in the mountains of southern Spain. The views around town are inspiring. Almost any direction you look contains beautiful cliffs or rolling green hills.
 
