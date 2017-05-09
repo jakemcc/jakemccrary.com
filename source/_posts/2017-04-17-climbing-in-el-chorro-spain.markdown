@@ -187,4 +187,4 @@ What would I do differently? The main thing I'd do is rent a car in Málaga. I l
 
 By the end of the trip, as with every climbing trip, I wanted to stay longer and keep climbing.
 
-Would I recommend this trip to others? Yes. Would I go back? Probably. There is so much more to climb and having some experience in the area would make the trip go smoother. The abundance of climbing in Spain is the primary factor in my hesitation to go back; would it be better to explore a new area?
+Would I recommend this trip to others? Yes. Would I go back? Probably. There is so much more to climb and having some experience in the area would make the trip go smoother. The abundance of climbing in Spain is the primary factor in my hesitation to go back. Would it be better to explore a new area?
