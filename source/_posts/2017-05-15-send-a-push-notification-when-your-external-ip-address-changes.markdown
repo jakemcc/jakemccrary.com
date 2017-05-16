@@ -1,11 +1,12 @@
 ---
 layout: post
-title: "Send a push notification when your external IP address changes"
-date: 2017-05-15 21:02:23 -0500
+title: Send a push notification when your external IP address changes
+date: 2017-05-15 22:15 -0500
 comments: true
-published: false
-description: Use dig and curl to send a push notification when your external IP address changes.
-keywords: 'bash, pushover, external ip'
+published: true
+description: Use dig and curl to send a push notification when your external IP address
+  changes.
+keywords: bash, pushover, external ip
 categories: bash
 ---
 
