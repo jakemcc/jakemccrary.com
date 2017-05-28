@@ -12,7 +12,7 @@ layout: null
       "name" : "{{ site.author | strip_html }}"
   },
   "user_comment": "This feed allows you to read the posts from this site in any feed reader that supports the JSON Feed format. To add this feed to your reader, copy the following URL - {{ site.url }}/feed.json - and add it your reader.",
-  "items": [{% for post in site.posts limit: 2 %}
+  "items": [{% for post in site.posts limit: 20 %}
     {
       "id": "{{ site.url }}{{ post.id }}",
       "url": "{{ site.url }}{{ post.url }}",
