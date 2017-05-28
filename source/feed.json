@@ -3,7 +3,7 @@ layout: null
 ---
 {
   "version": "https://jsonfeed.org/version/1",
-  "title": "{{ site.title | cdata_escape }}",
+  "title": {{ site.title | jsonify }},
   "home_page_url": "{{ site.url }}",
   "feed_url": "{{site.url}}/feed.json",
   "favicon": "{{ site.url }}/favicon.png",
@@ -17,9 +17,9 @@ layout: null
       "id": "{{ site.url }}{{ post.id }}",
       "url": "{{ site.url }}{{ post.url }}",
       "date_published": "{{ post.date | date_to_xmlschema }}",
-      "title": "{% if site.titlecase %}{{ post.title | titlecase }}{% else %}{{ post.title }}{% endif %}",
-      {% if post.description %}"summary": "{{ post.description }}",{% endif %}
-      "content_html": "{{ post.content | expand_urls: site.url }}",
+      "title": {% if site.titlecase %}{{ post.title | titlecase | jsonify }}{% else %}{{ post.title | jsonify }}{% endif %},
+      {% if post.description %}"summary": {{ post.description | jsonify }},{% endif %}
+      "content_html": {{ post.content | expand_urls: site.url | jsonify }},
       "author" : {
         "name" : "{{ site.author | strip_html }}"
       }
