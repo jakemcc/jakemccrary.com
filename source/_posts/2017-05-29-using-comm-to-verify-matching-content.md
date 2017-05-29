@@ -1,12 +1,13 @@
 ---
 layout: post
-title: "Using comm to verify file content matches"
-date: 2017-05-29 09:12:32 -0500
+title: Using comm to verify file content matches
+date: 2017-05-29 10:45 -0500
 comments: true
-published: false
-description: comm is a useful command line tool for looking for common and unique lines in files.
-keywords: 'comm, utilities, linux, sort, cut, osx, tools'
-categories: 
+published: true
+description: comm is a useful command line tool for looking for common and unique
+  lines in files.
+keywords: comm, utilities, linux, sort, cut, osx, tools
+categories:
 - utilities
 - linux
 - osx
