@@ -31,6 +31,11 @@ I've worked on a range of problems using a variety of technologies and
 methodologies. I've found testing to be critical to delivering quality
 software.
 
+I've presented at [AIT Workshop](http://lanyrd.com/2016/aitworkshop/)
+and speakerconf, two invite only conferences, and the Chicago Clojure
+group. Topics have included distributed teams, machine learning, and
+web development.
+
 I've worked professionally in more languages than I can
 remember. Since 2014 most my development has been in Clojure and
 ClojureScript. Prior to that I worked in Java, C#, C++, C, Q, Perl,
