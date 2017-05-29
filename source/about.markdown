@@ -4,6 +4,8 @@ title: about
 sharing: false
 ---
 
+{% img left /images/jake-surprised-eyes-brighter.jpg 300 Picture of Jake McCrary %}
+
 I'm an experienced software developer. I enjoy coming up with simple
 solutions to seemingly complex problems. I've proven to be a reliable
 technology leader that can be depended on to understand business
