@@ -5,13 +5,23 @@ sharing: false
 ---
 
 I'm an experienced software developer. I enjoy coming up with simple
-solutions to seemingly complex problems. I'm a reliable team lead that
-can be depended on to understand business requirements, make
-technology choices, and make teams better through mentoring and
-providing a place for team members to grow.
+solutions to seemingly complex problems. I've proven to be a reliable
+technology leader that can be depended on to understand business
+requirements, make technology choices, and make teams better through
+mentoring and growing team members.
 
-I currently work at [Outpace](http://outpace.com) leading development
-of marketing tools.
+I currently work at [Outpace](http://outpace.com) developing marketing
+tools.
+
+Before rejoining Outpace, I was the CTO
+at [Lumanu](https://lumanu.com). While I was there, Lumanu scoured the
+web for articles and extracted useful data. That data was used to both
+help authors create better content and help marketers build
+relationships with content creators. I set architecture direction,
+made technology choices, set business direction, talked to potential
+investors, dealt with third-party vendors, helped with recruiting, and
+provided guidance across the data science and software engineering
+teams.
 
 Previously I worked at [DRW Trading](http://drw.com). At DRW I spent
 my time writing research tools, trading systems (latency sensitive and
