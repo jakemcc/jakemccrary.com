@@ -1,12 +1,13 @@
 ---
 layout: post
-title: "Adding a JSON Feed to an Octopress / Jekyll generated site"
+title: "Adding a JSON Feed to an Octopress/Jekyll generated site"
 date: 2017-05-29 12:19:11 -0500
 comments: true
 published: false
-description: PUT SUMMARY HERE 
-keywords: 'csv, keywords, here'
+description: Quick guide to adding a JSON Feed to your Octopress/Jekyll generated site
+keywords: 'json feed, json, jekyll, octopress, liquid'
 categories: 
+- blog
 ---
 
 I went to a coffee shop this last weekend with the intention of writing up a quick blog post on `comm`. I sat down, sipping my coffee, and wasn't motivated. I didn't feel like knocking out a short post and I didn't feel like editing a draft I've been sitting on for a while. I wanted to do some work though, so I decided to add a [JSON Feed](https://jsonfeed.org/) to this site.
