@@ -12,7 +12,7 @@ categories:
 
 I went to a coffee shop this last weekend with the intention of writing up a [quick article](/blog/2017/05/29/using-comm-to-verify-matching-content/) on `comm`. I sat down, sipping my coffee, and wasn’t motivated. I didn’t feel like knocking out a short post, and I didn’t feel like editing a draft I’ve been sitting on for a while. I wanted to do some work though, so I decided to add a [JSON Feed](https://jsonfeed.org/) to this site.
 
-JSON Feed is an alternative to [Atom](https://tools.ietf.org/html/rfc4287) and [RSS](http://cyber.harvard.edu/rss/rss.html) that uses JSON instead of XML. I figured I could add support for it in less than the time it would take to enjoy my coffee and maybe some readers would find it useful. I’d be shocked if having anyone finds this useful, but it was a fun little exercise anyway.
+JSON Feed is an alternative to [Atom](https://tools.ietf.org/html/rfc4287) and [RSS](http://cyber.harvard.edu/rss/rss.html) that uses JSON instead of XML. I figured I could add support for it in less than the time it would take to enjoy my coffee and maybe some readers would find it useful. I’d be shocked if having anyone actually finds this useful, but it was a fun little exercise anyway.
 
 An old version of Octopress (2.something), which uses an old version of Jekyll (2.5.3), generates this site. Despite this, I don’t think the template would need to change much if I moved to a new version. The template below is saved as [source/feed.json](https://github.com/jakemcc/jakemccrary.com/blob/master/source/feed.json) in my git repository.
 
@@ -50,7 +50,7 @@ layout: null
 ```
 {% endraw %}
 
-I approached this problem by reading the [JSON Feed Version 1 spec](https://jsonfeed.org/version/1) and cribbing values from the template for my Atom feed. The trickiest part was filling in the `"content_html"` value. It took me a while to find figure out that `jsonify` needed to be at the end of {% raw %}`{{ post.content | expand_urls: site.url | jsonify }}`{% endraw %}. That translates the value into its JSON representation. You’ll notice that any template expression with `jsonify` at the end also isn’t wrapped in quotes, this is because `jsonify` is doing that for me.
+I approached this problem by reading the [JSON Feed Version 1 spec](https://jsonfeed.org/version/1) and cribbing values from the template for my Atom feed. The trickiest part was filling in the `"content_html"` value. It took me a while to find figure out that `jsonify` needed to be at the end of {% raw %}`{{ post.content | expand_urls: site.url | jsonify }}`{% endraw %}. That translates the post's HTML content into its JSON representation. You’ll notice that any template expression with `jsonify` at the end also isn’t wrapped in quotes. This is because `jsonify` is doing that for me.
 
 The {% raw %}`{% if forloop.last == false %},{% endif %}`{% endraw %} is also important. Without this, the generated JSON has an extra `,` after the final element in items. This isn’t valid JSON.
 
