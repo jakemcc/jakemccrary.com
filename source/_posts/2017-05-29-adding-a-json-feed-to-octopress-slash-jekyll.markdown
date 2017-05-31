@@ -50,7 +50,7 @@ layout: null
 ```
 {% endraw %}
 
-I approached this problem by reading the [JSON Feed Version 1 spec](https://jsonfeed.org/version/1) and cribbing values from the template for my Atom feed. The trickiest part was filling in the `"content_html"` value. It took me a while to find figure out that `jsonify` needed to be at the of {% raw %}`{{ post.content | expand_urls: site.url | jsonify }}`{% endraw %}. That translates the value into its JSON representation. You’ll notice that any template expression with `jsonify` at the end also isn’t wrapped in quotes, this is because `jsonify` is doing that for me.
+I approached this problem by reading the [JSON Feed Version 1 spec](https://jsonfeed.org/version/1) and cribbing values from the template for my Atom feed. The trickiest part was filling in the `"content_html"` value. It took me a while to find figure out that `jsonify` needed to be at the end of {% raw %}`{{ post.content | expand_urls: site.url | jsonify }}`{% endraw %}. That translates the value into its JSON representation. You’ll notice that any template expression with `jsonify` at the end also isn’t wrapped in quotes, this is because `jsonify` is doing that for me.
 
 The {% raw %}`{% if forloop.last == false %},{% endif %}`{% endraw %} is also important. Without this, the generated JSON has an extra `,` after the final element in items. This isn’t valid JSON.
 
