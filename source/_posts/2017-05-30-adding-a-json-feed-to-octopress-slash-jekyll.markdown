@@ -1,12 +1,13 @@
 ---
 layout: post
-title: "Adding a JSON Feed to an Octopress/Jekyll generated site"
-date: 2017-05-29 12:19:11 -0500
+title: Adding a JSON Feed to an Octopress/Jekyll generated site
+date: 2017-05-30 22:31 -0500
 comments: true
-published: false
-description: Quick guide to adding a JSON Feed to your Octopress/Jekyll generated site
-keywords: 'json feed, json, jekyll, octopress, liquid'
-categories: 
+published: true
+description: Quick guide to adding a JSON Feed to your Octopress/Jekyll generated
+  site
+keywords: json feed, json, jekyll, octopress, liquid
+categories:
 - blog
 ---
 
