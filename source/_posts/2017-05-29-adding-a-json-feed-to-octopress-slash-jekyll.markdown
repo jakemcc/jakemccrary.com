@@ -10,11 +10,11 @@ categories:
 - blog
 ---
 
-I went to a coffee shop this last weekend with the intention of writing up a quick blog post on `comm`. I sat down, sipping my coffee, and wasn't motivated. I didn't feel like knocking out a short post and I didn't feel like editing a draft I've been sitting on for a while. I wanted to do some work though, so I decided to add a [JSON Feed](https://jsonfeed.org/) to this site.
+I went to a coffee shop this last weekend with the intention of writing up a [quick article](/blog/2017/05/29/using-comm-to-verify-matching-content/) on `comm`. I sat down, sipping my coffee, and wasn’t motivated. I didn’t feel like knocking out a short post, and I didn’t feel like editing a draft I’ve been sitting on for a while. I wanted to do some work though, so I decided to add a [JSON Feed](https://jsonfeed.org/) to this site.
 
-JSON Feed is an alternative to [Atom](https://tools.ietf.org/html/rfc4287) and [RSS](http://cyber.harvard.edu/rss/rss.html) that uses JSON instead of XML. I figured I could add support for it in less than the time it would take to enjoy my coffee and maybe some readers would find it useful. I don't actually think there will be an advantage to having this implemented, but it was a fun little exercise anyway.
+JSON Feed is an alternative to [Atom](https://tools.ietf.org/html/rfc4287) and [RSS](http://cyber.harvard.edu/rss/rss.html) that uses JSON instead of XML. I figured I could add support for it in less than the time it would take to enjoy my coffee and maybe some readers would find it useful. I’d be shocked if having anyone finds this useful, but it was a fun little exercise anyway.
 
-This site is powered by an old verson of Octopress (2.something) which uses an old version of Jekyll (2.5.3). I think there is probably a better chance of me ditching both than actually going through the work of upgrading. I don't think the template would need to change much even if I moved to a new version. Below is the template. This file is saved as [source/feed.json](https://github.com/jakemcc/jakemccrary.com/blob/master/source/feed.json) in my repository.
+An old version of Octopress (2.something), which uses an old version of Jekyll (2.5.3), generates this site. Despite this, I don’t think the template would need to change much if I moved to a new version. The template below is saved as [source/feed.json](https://github.com/jakemcc/jakemccrary.com/blob/master/source/feed.json) in my git repository.
 
 {% raw %}
 ``` javascript
@@ -50,13 +50,13 @@ layout: null
 ```
 {% endraw %}
 
-I approached this problem by reading the [JSON Feed Version 1 spec](https://jsonfeed.org/version/1) and cribbing values from the template for my Atom feed. The most difficult part was filling in the `"content_html"` value. The `jsonify` at the end of {% raw %}`{{ post.content | expand_urls: site.url | jsonify }}`{% endraw %} is really important. That translates the value into a JSON representation. You'll notice that any template expression with `jsonify` at the end also isn't wrapped in quotes, this is because `jsonify` is doing that for me.
+I approached this problem by reading the [JSON Feed Version 1 spec](https://jsonfeed.org/version/1) and cribbing values from the template for my Atom feed. The trickiest part was filling in the `"content_html"` value. It took me a while to find figure out that `jsonify` needed to be at the of {% raw %}`{{ post.content | expand_urls: site.url | jsonify }}`{% endraw %}. That translates the value into its JSON representation. You’ll notice that any template expression with `jsonify` at the end also isn’t wrapped in quotes, this is because `jsonify` is doing that for me.
 
-the {% raw %}`{% if forloop.last == false %},{% endif %}`{% endraw %} is also important. Without this, the generated JSON has an extra `,` after the final element in `items`. This isn't valid JSON.
+The {% raw %}`{% if forloop.last == false %},{% endif %}`{% endraw %} is also important. Without this, the generated JSON has an extra `,` after the final element in items. This isn’t valid JSON.
 
-I caught that by using the command line tool [json](http://trentm.com/json/). If you are ever editing JSON by hand or generating it a template like this then you add this tool to your toolbox. It will prevent you from creating invalid JSON.
+I caught that by using the command line tool [json](http://trentm.com/json/). If you ever edit JSON by hand or generate it from a template then you should add this tool to your toolbox. It will prevent you from creating invalid JSON.
 
-How did I use it? I'd make a change to the `feed.json` template and generate an output file. Then I'd `cat` that file to `json --validate`. Below is an example of what I saw when there was an error.
+How did I use it? I’d make a change in the `feed.json` template and generate an output file. Then I’d `cat` that file to `json --validate`. When there was an error, I’d see a message like below.
 
 
 ``` console
@@ -69,7 +69,7 @@ json: error: input is not JSON: Expected ',' instead of '{' at line 25, column 5
 $
 ```
 
-Here is a success.
+And there would be zero output on success.
 
 ``` console
 0 [last: 5s] 12:45:25 ~/src/jakemcc/blog (master)
@@ -78,4 +78,4 @@ $ cat public/feed.json | json --validate
 $
 ```
 
-It was pretty straightforward to add this. Was it a good use of my time? `¯\_(ツ)_/¯`. In the process of doing it I learned more about Liquid templating and figured out how to embed liquid tags into a blog post.
+It was pretty straightforward to add a JSON Feed. Was it a good use of my time? `¯\_(ツ)_/¯`. In the process of adding the feed I learned more about Liquid templating and figured out how to embed liquid tags into a blog post. Even adding redundant features can be a useful exercise.
