@@ -60,6 +60,11 @@ default_asides: [asides/recent_posts.html]
 # post_asides:
 # page_asides:
 
+collections:
+  adventures:
+    output: true
+    permalink: /adventures/:path/
+    
 # ----------------------- #
 #   3rd Party Settings    #
 # ----------------------- #
