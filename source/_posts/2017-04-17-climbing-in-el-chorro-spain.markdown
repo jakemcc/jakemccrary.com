@@ -106,6 +106,8 @@ Eventually, we made our way back to the train station and, while we waited for t
 
 We wanted to get Seamus on some rock as quickly as possible, so we opted to climb at Las Encantadas. This crag is within a ten-minute walk of Olive Branch, and you'd only have problems finding it if you hiked with your eyes closed.
 
+{% imgcap /images/el-chorro/seamus-double-pinky-monos.jpg Seamus pulling the double pinky monos %}
+
 The Rockfax book is particularly out of date with this crag. Luckily, we were able to download a topo from the [Climbing Lodge](http://www.klettern-in-spanien.de/en/el-chorro/topo-download/).
 
 Below are the routes we climbed. One of the highlights of this crag was Crisis de identidad. This shorter route had a great small roof/bulge you had to pull. Guerrera and La de Seba felt pretty adventurous.
@@ -118,7 +120,7 @@ Below are the routes we climbed. One of the highlights of this crag was Crisis d
 - La de Seba, 6b
 - Geisha, 6a
 
-{% imgcap /images/el-chorro/jake-setting-up-for-pulling-bulge-small.jpg Bulge on Crisis de identidad %}
+{% imgcap /images/el-chorro/jake-setting-up-for-pulling-bulge-small.jpg Me before the bulge on Crisis de identidad %}
 
 **March 26th**
 
