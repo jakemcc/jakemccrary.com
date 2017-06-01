@@ -184,7 +184,9 @@ I make it home and am exhausted. I was hit badly by jet lag and am out of sync a
 
 This trip was great. The climbing was fun, and the weather was perfect. The Olive Branch was a great place to stay. I'd stay there, either camping or private room, again in an instant.
 
-What would I do differently? The main thing I'd do is rent a car in Málaga. I loved not driving and riding trains, but it would have been nice to have a car in El Chorro. El Chorro is very walkable but having a car would have unlocked some of the surrounding areas and saved us some time. Also, if camping again, I'd rent the Olive Branch's tents and pads. This would have saved some packing space and been one less thing to lug around.
+What would I do differently? The main thing I'd do is rent a car[^1] in Málaga. I loved not driving and riding trains, but it would have been nice to have a car in El Chorro. El Chorro is very walkable but having a car would have unlocked some of the surrounding areas and saved us some time. Also, if camping again, I'd rent the Olive Branch's tents and pads. This would have saved some packing space and been one less thing to lug around.
+
+[^1]: As a warning, Edwin spent a lot more time in Spain and warned that he met people that got very screwed over by renting cars. Long waits and massive tolls. Something to be wary about.
 
 By the end of the trip, as with every climbing trip, I wanted to stay longer and keep climbing.
 
