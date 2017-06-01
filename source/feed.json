@@ -22,7 +22,9 @@ layout: null
       "content_html": {{ post.content | expand_urls: site.url | jsonify }},
       "author" : {
         "name" : "{{ site.author | strip_html }}"
-      }
+      }{% if post.image %},
+      "image": "{{ site.url }}/{{ post.image }}"
+      {% endif %}
     }{% if forloop.last == false %},{% endif %}
     {% endfor %}
   ]

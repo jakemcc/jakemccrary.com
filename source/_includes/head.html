@@ -10,6 +10,7 @@
     {% capture canonical %}{{ site.url }}{% if site.permalink contains '.html' %}{{ page.url }}{% else %}{{ page.url | remove:'index.html' }}{% endif %}{% endcapture %}
     {% capture description %}{% if page.url == "/index.html" %}{{ site.description | condense_spaces }}{% else %}{% if page.description %}{{ page.description | condense_spaces }}{% else %} {{ content | raw_content | strip_html | condense_spaces | truncate:150}}{% endif %}{% endif %}{% endcapture %}
     {% capture page_title %}{% if page.title %}{% if site.titlecase %}{{ page.title | titlecase }}{% else %}{{ page.title }}{% endif %}{% else %}{{ site.title }}{% endif %}{% endcapture %}
+    {% capture page_image %}{% if page.image %}{{site.url}}/{{page.image}}{% else %}{{ site.url }}/images/jake-surprised-eyes-brighter.jpg{% endif %}{% endcapture %}
 
     <meta itemprop="name" content="{{ page_title }}" />
     <meta itemprop="description" content="{{ description }}" />
@@ -20,14 +21,14 @@
     <meta name="twitter:title" content="{{ page_title }}" />
     <meta name="twitter:description" content="{{ description }}" />
     <meta name="twitter:creator" content="@jakemcc" />
-    <meta name="twitter:image" content="{{ site.url }}/images/jake-surprised-eyes-brighter.jpg" />
+    <meta name="twitter:image" content="{{ page_image }}" />
 
     <!-- Open Graph data -->
     <meta property="og:site_name" content="The Blog of Jake McCrary" />
     <meta property="og:url" content="{{ canonical }}" />
     <meta property="og:title" content="{{ page_title }}" />
     <meta property="og:description" content="{{ description }}" />
-    <meta property="og:image" content="{{ site.url }}/images/jake-surprised-eyes-brighter.jpg" />
+    <meta property="og:image" content="{{ page_image }}" />
     {% if page.title %}
       <meta property="og:type" content="article" />
     {% endif %}

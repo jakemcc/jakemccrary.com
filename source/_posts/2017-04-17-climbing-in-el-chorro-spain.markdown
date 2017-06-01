@@ -2,6 +2,7 @@
 layout: post
 title: "Climbing in El Chorro, Spain"
 date: 2017-04-17 21:42:05 -0500
+image: images/el-chorro/las-encantadas-small.jpg
 comments: true
 published: false
 description: Trip report from spending some time climbing in El Chorro, Spain.
