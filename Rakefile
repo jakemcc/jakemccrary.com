@@ -97,7 +97,7 @@ end
 
 desc "start up a jekyll instance hosting a server"
 task :host do
-  system "jekyll --server"
+  system "jekyll serve"
 end
 
 
