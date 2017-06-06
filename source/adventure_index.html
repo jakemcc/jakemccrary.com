@@ -4,7 +4,8 @@ layout: default
 <div class="blog-index">
   {% assign index = true %}
   <ul class="timeline">
-    {% for post in site.adventures | sort: 'start_date' %}
+    {% assign adventures = site.adventures | sort: 'start_date' %}
+    {% for post in adventures %}
       <li class="timeline-event">
         <label class="timeline-event-icon"></label>
         <div class="timeline-event-copy">
