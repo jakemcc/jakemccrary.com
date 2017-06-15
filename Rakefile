@@ -95,6 +95,25 @@ task :preview do
   [jekyllPid, compassPid, rackupPid].each { |pid| Process.wait(pid) }
 end
 
+desc "preview the site in a web browser"
+task :develop do
+  raise "### You haven't set anything up yet. First run `rake install` to set up an Octopress theme." unless File.directory?(source_dir)
+  puts "Starting to watch source with Jekyll and Compass. Starting Rack on port #{server_port}"
+  system "compass compile --css-dir #{source_dir}/stylesheets" unless File.exist?("#{source_dir}/stylesheets/screen.css")
+  touch '.preview-mode'
+  jekyllPid = Process.spawn("jekyll build --watch")
+  compassPid = Process.spawn("compass watch")
+  rackupPid = Process.spawn("rackup --host 0.0.0.0 --port #{server_port}")
+
+  trap("INT") {
+    [jekyllPid, compassPid, rackupPid].each { |pid| Process.kill(9, pid) rescue Errno::ESRCH }
+    exit 0
+  }
+
+  [jekyllPid, compassPid, rackupPid].each { |pid| Process.wait(pid) }
+end
+
+
 desc "start up a jekyll instance hosting a server"
 task :host do
   system "jekyll serve"
