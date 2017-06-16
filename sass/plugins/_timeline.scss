@@ -2,10 +2,6 @@
 
 /* Variables */
 $color-1: black;
-$color-2: white;
-$color-3: rgb(168, 50, 121);
-
-$color-1: black;
 $color-2: $main-bg;
 $color-3: rgb(168, 50, 121);
 
@@ -56,8 +52,8 @@ $color-3: rgb(168, 50, 121);
     box-shadow: 0 1px 3px -1px rgba(0, 0, 0, .6);
 
     &:hover, &:active, &:focus {
-      background: darken($color-1, 10%);
-      // color: $text;
+      background: $color-3;
+      color: $color-2;
       text-decoration: none;
     }
   }
