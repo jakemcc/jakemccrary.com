@@ -1,12 +1,13 @@
 ---
 layout: post
-title: "Speeding up this site by optionally loading Disqus comments"
-date: 2017-06-29 13:06:38 -0500
+title: Speeding up this site by optionally loading Disqus comments
+date: 2017-06-30 19:37 -0500
 comments: true
-published: false
-description: Optionally loading Disqus comments drastically reduced how much data readers of this site download.
-keywords: 'disqus, speed, load times'
-categories: 
+published: true
+description: Optionally loading Disqus comments drastically reduced how much data
+  readers of this site download.
+keywords: disqus, speed, load times
+categories:
 - blog
 ---
 
