@@ -4,7 +4,7 @@ title: "Using my phone's voice control for a month"
 date: 2017-07-02 19:43:35 -0500
 comments: true
 published: false
-description: PUT SUMMARY HERE 
+description: I used my phone's voice control for a month and it wasn't terrible.
 keywords: 'android, voice control, ok google'
 categories: 
 - cell phone
