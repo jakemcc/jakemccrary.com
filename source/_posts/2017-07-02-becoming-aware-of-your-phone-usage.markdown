@@ -9,7 +9,7 @@ keywords: 'android, voice control, ok google'
 categories: 
 - cell phone
 - android
-- mindfullness
+- mindfulness
 ---
 
 From May 6th till June 2nd the screen of my phone was cracked. I have an Android phone, and the crack was through the software buttons at the bottom of the screen. As a result, I could not touch the back, home, or overview (app switching) buttons. For nearly a month I never saw my home screen, couldn't go back, or switch an application through touching my phone. I was very reliant on arriving notifications giving me an opportunity to open apps.
@@ -38,11 +38,11 @@ It is much more obvious you are using your phone when you use your voice to cont
 
 This also stopped me from using my phone in Ubers/Lyfts/cabs. I often talk to the driver or other passengers anyway, but this cemented that.
 
-### You become more concious of what apps you use
+### You become more conscious of what apps you use
 
 When you have to say “Okay Google, open Instagram” every time you want to open Instagram, you become way more aware of how often you use Instagram. Using your voice instead of tapping a button on your screen is a much bigger hurdle between having the urge to open something and actually opening it. It gives you more time to observe what you are doing.
 
-### You become more concious of using your phone
+### You become more conscious of using your phone
 
 Using your phone becomes a lot harder. This increased difficulty helped highlight when I was using my phone. My phone’s functionality dropped drastically and, as a result, I stopped reaching for it as much.
 
@@ -58,7 +58,7 @@ Setting alarms, starting countdown timers, adding reminders, and checking the we
 
 ### I wish it worked all the time
 
-I suppose this is an argument for getting a [Google Home](https://store.google.com/us/product/google_home?hl=en-US) or [Amazon Echo](http://amzn.to/2vctz9A). I have to wake my phone up to use voice commands with it. This limits the usefulness as I have to be within reach of my phone and by the time I’ve already touched it to unlock the phone, I might as well just use the touch screen.
+I suppose this is an argument for getting a [Google Home](https://store.google.com/us/product/google_home?hl=en-US) or [Amazon Echo](http://amzn.to/2vctz9A). I have to wake my phone up to use voice commands with it. This limits the usefulness as I have to be within reach of my phone and by the time I've already touched it to unlock the phone, I might as well just use the touch screen.
 
 ### I wish it could do more
 
