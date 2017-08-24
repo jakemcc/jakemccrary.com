@@ -68,9 +68,9 @@ $color-3: rgb(168, 50, 121);
       background-color: $color-3;
     }
 
-    .timeline-event-thumbnail {
-      @include box-shadow(inset 40em 0 0 0 $color-3);
-    }
+    // .timeline-event-thumbnail {
+    //   @include box-shadow(inset 40em 0 0 0 $color-3);
+    // }
   }
 }
 
