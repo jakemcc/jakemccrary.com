@@ -4,6 +4,8 @@ title: Overview of my Leiningen profiles.clj
 date: 2015-01-11 22:12
 comments: true
 published: true
+description: Here is a quick overview of what is in my Leiningen profiles.clj
+keywords: 'clojure, leiningen, profiles.clj'
 categories:
 - leiningen
 - clojure
