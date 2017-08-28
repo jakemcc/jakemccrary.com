@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "My current Leiningen profiles.clj"
-date: 2017-08-27 18:38:22 -0500
+title: My current Leiningen profiles.clj
+date: 2017-08-27 19:06 -0500
 comments: true
-published: false
+published: true
 description: Here is a snapshot of my current Leiningen profiles.clj
-keywords: 'clojure, leiningen, profiles.clj'
-categories: 
+keywords: clojure, leiningen, profiles.clj
+categories:
 - leiningen
 - clojure
 ---
