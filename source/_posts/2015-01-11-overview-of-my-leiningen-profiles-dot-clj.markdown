@@ -11,6 +11,8 @@ categories:
 - clojure
 ---
 
+**2017-08-27: I've published an updated version [here](/blog/2017/08/27/my-current-leiningen-profiles-dot-clj/).**
+
 [Leiningen](https://github.com/technomancy/leiningen), a Clojure build
 tool, has the concept of
 [profiles](https://github.com/technomancy/leiningen/blob/master/doc/PROFILES.md).
