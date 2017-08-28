@@ -36,7 +36,7 @@ I’ve also removed Eastwood and Kibit from my toolchain. I love static analysis
 
 I'm also taking advantage of some new features that [lein-test-refresh](https://github.com/jakemcc/lein-test-refresh) provides. These settings enable the most reliable, fastest feedback possible while writing tests. My [recommended testing setup](/blog/2016/06/20/my-recommended-clojure-testing-setup/) article goes into more details.
 
-`lein-ancient` and `lein-pprint` have stuck around. I rarely use `lein-pprint` but it comes in handy when debugging project.clj problems. `lein-ancient` is great for helping you keep your project's dependencies up to date. I use a forked version that contains some changes I need to work with my companies private repository.
+`lein-ancient` and `lein-pprint` have stuck around. I rarely use `lein-pprint` but it comes in handy when debugging project.clj problems. `lein-ancient` is great for helping you keep your project's dependencies up to date. I use a forked version that contains some changes I need to work with my company's private repository.
 
 And there you have it. My updated profiles.clj[^1].
 
