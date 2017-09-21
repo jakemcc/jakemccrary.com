@@ -157,9 +157,11 @@ task :new_adventure, :title do |t, args|
   else
     title = get_stdin("Enter a title for your post: ")
   end
+  start_date = get_stdin("Start date (YYYY-MM-dd): ")
+  end_date = get_stdin("End date (YYYY-MM-dd): ")
   raise "### You haven't set anything up yet. First run `rake install` to set up an Octopress theme." unless File.directory?(source_dir)
   mkdir_p "#{source_dir}/#{adventures_dir}"
-  filename = "#{source_dir}/#{adventures_dir}/#{title.to_url}.#{new_post_ext}"
+  filename = "#{source_dir}/#{adventures_dir}/#{start_date}-#{end_date}-#{title.to_url}.#{new_post_ext}"
   if File.exist?(filename)
     abort("rake aborted!") if ask("#{filename} already exists. Do you want to overwrite?", ['y', 'n']) == 'n'
   end
@@ -170,8 +172,8 @@ task :new_adventure, :title do |t, args|
     post.puts "published: false"
     post.puts "title: \"#{title.gsub(/&/,'&amp;')}\""
     post.puts "date: #{Time.now.strftime('%Y-%m-%d %H:%M:%S %z')}"
-    post.puts "start_date: START_DATE"
-    post.puts "end_date: END_DATE"
+    post.puts "start_date: #{start_date}"
+    post.puts "end_date: #{end_date}"
     post.puts "description: PUT SUMMARY HERE "
     post.puts "---"
   end
