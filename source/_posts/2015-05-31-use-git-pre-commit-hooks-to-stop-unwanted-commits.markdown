@@ -54,7 +54,7 @@ quit() {
         git apply "$patch_filename"
         if [ $? -ne 0 ]; then
             git checkout -- .
-            git apply --whitespace=nowarm --ignore-whitespaace "$patch_filename"
+            git apply --whitespace=nowarm --ignore-whitespace "$patch_filename"
         fi
     fi
 
