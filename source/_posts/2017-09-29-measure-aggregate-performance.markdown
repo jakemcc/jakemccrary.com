@@ -3,7 +3,7 @@ layout: post
 title: "Measuring aggregate performance in Clojure"
 date: 2017-09-29 08:48:01 -0500
 comments: true
-published: false
+published: true
 description: Short Clojure code for measuring the aggregate performance of chunks of code.
 keywords: clojure, profiling, laziness
 categories: 
