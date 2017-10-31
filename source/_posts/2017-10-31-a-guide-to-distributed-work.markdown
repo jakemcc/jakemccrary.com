@@ -1,7 +1,7 @@
 ---
 layout: post
 title: A guide to distributed work
-date: 2017-10-31 09:21 -0500
+date: 2017-10-31 18:30 -0500
 comments: true
 published: true
 description: I've been working remotely for four years. Here is are some things I've
