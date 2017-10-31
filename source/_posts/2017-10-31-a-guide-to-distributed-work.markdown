@@ -12,15 +12,13 @@ categories:
 - remote
 ---
 
-Since October 2013, I've been working remotely. I've held a few different roles; ranging from team lead to software developer to CTO, at a couple of different companies. These companies are fully distributed. They have no office employees work from.
-
 Whether it is working as the one remote employee at a traditional company or being one of many at a distributed company, remote work is becoming an option for many of us.
 
 The number of employees that work remotely is growing[^1]. Technology improvements, pervasive Internet, and mindset changes are some of the drivers for this change.
 
-The remainder of this article highlights some observations from my last few years of working for distributed companies. I've also interviewed and corresponded with many other remote and formerly remote workers. Their contributions, along with books and articles on remote work, have influenced my thinking about what it means to have a successful distributed company.
+The remainder of this article highlights some observations from my last few years of working for distributed companies. I've also interviewed and corresponded with many other remote and formerly remote workers. Their contributions, along with books and articles on remote work, have influenced my thinking about what it means to have a successful distributed company. I've been working remotely since October 2013 in roles that have ranged from being a team lead to software developer to CTO. Each company I've worked for was fully distributed. There were no offices.
 
-The types of distributed companies I've worked with have not been asynchronous. They have had core working hours centered around one of the middle time zones in the continental United States. You could work from anywhere, but you needed to be willing to work while others were working. I call this type of distributed work synchronous.
+The types of distributed companies I've worked with have not been asynchronous. They have had core working hours centered around one of the middle time zones in the continental United States. You could work from anywhere, but you needed to be willing to work while others were working. I consider this synchronous remote work.
 
 Much of the following also applies to individuals working remotely for a not-entirely-distributed company or team. Being the only remote individual in a non-remote team comes with its own set of challenges that I'm not going to attempt to present. If you are part of a team where some members work remotely, my recommendation is that you should treat that team as a remote team. If you don't, the remote worker will have a harder time keeping up with the rest of the team.
 
@@ -32,7 +30,7 @@ If you ask someone that has never worked remotely before for the benefits of wor
 
 This is the benefit that most workers, remote and non-remote, identify when asked about benefits of remote work. This benefit stands out because it is huge and obvious. In the United States, the average one-way commute is [25 minutes long](https://project.wnyc.org/commute-times-us/embed.html#5.00/42.000/-89.500). The average worker spends nearly one hour going to and from their work.
 
-If you are going to work five days a week, then you're over four hours commuting.  That is half of a full workday riding a bicycle, car, train, or bus. In the best case scenario, you are using that time to read, listen to a podcast, or trying to think deeply about a problem. In reality, you're trying to do one of those activities, but you are continuously distracted by the world around you. You have to worry about avoiding accidents, driving safely, or another distracting concern.
+If you are going to work five days a week, then you're spending over four hours commuting.  That is half of a full workday riding a bicycle, car, train, or bus. In the best case scenario, you are using that time to read, listen to a podcast, or trying to think deeply about a problem. In reality, you're trying to do one of those activities, but you are continuously distracted by the world around you. You have to worry about avoiding accidents, driving safely, or another distracting concern.
 
 Commuting has been shown to have negative effects on the commuters[^6]. Being able to work remotely lets you avoid those problems.
 
@@ -44,11 +42,11 @@ Picking up or dropping off your children at daycare or school becomes easier. Ta
 
 ### More time with family
 
-If you're working at home, then it becomes easy to see your family more. You can say hi to your kids when they get home from school. You have more time in the evening to spend with your baby before it needs to go to bed.
+If you're working at home, then it becomes easy to see your family more. You can say hi to your kids when they get home from school. You have more time in the evening to spend with your baby before bedtime.
 
 ### Customize your workspace
 
-You get to choose where you work. For many, this will be in a home office. This is your space; you get to make it your own.
+You get to choose where you work. For many, this will be in a home office. This is your space. You get to make it your own.
 
 Do you like to work in a cave? Paint the walls a dark color, block out the windows and enjoy your cave-like experience. Do you prefer sunlight and plants? Work near a window and add houseplants to your space. Do you want an awesome sit-stand desk and chair? Buy [them](/blog/2015/03/31/my-home-work-space/).
 
@@ -70,7 +68,7 @@ Minimizing interruptions is one of the keys to accomplishing challenging tasks. 
 
 ### Off-hours support
 
-This is a benefit I have not seen mentioned many other places. Off-hours support becomes much easier if you are working remotely. The actions you would take for an urgent alert at 1 AM are the same actions you would make at 1 PM.
+This is a benefit I have not seen mentioned many other places. Off-hours support becomes much easier if you are working remotely. The actions you would take for an urgent alert at 1 AM are the same actions you would take at 1 PM.
 
 When you get that 1 AM page you don't have to struggle to remember how you check production while at home; this is an activity you do on a regular basis. You know what you need to do. You don't have to remember how to VPN into your company's network; you do that every day.
 
@@ -112,9 +110,9 @@ If I stay inside for more than a couple days, I get grumpy. I didn't realize thi
 
 This is the downside that non-remote workers most often identify. People assume that television and other distractions in your home are irresistible and will cause you not to get work done. When you are working 100% remotely, you don't have the same distractions you have when you are only occasionally working remotely. You can't do laundry every day. You only have so much TV you can watch.
 
-Personally, I don't have a problem with distractions when working at home. I know others that have. They mostly have when they first started working from home. When they first started working at home, they found themselves doing too much around the house. As a result, they worked late hours or felt like they weren't getting enough work done. Once you recognize the problem, it is possible to train yourself not to get distracted.
+Personally, I don't have a problem with distractions when working at home. I know others that do. They mostly have when they first started working from home. When they first started working at home, they found themselves doing too much around the house. As a result, they worked late hours or felt like they weren't getting enough work done. Once you recognize the problem, it is possible to train yourself not to get distracted.
 
-Roommates, kids, and family are another (sometimes welcome) distraction. You can combat interruptions from others this by setting boundaries. Many of my co-workers have a rule that when their office door is closed, they are unavailable. I'll claim that co-workers interrupting you in an office are as distracting as the much rarer interruption from someone within your home.
+Roommates, kids, and family are another (sometimes welcome) distraction. You can combat interruptions from others by setting boundaries. Many of my co-workers have a rule that when their office door is closed, they are unavailable. I'll claim that co-workers interrupting you in an office are more distracting as the much rarer interruption from someone within your home.
 
 Employees that work remotely are typically choosing to work remotely. Once they get used to working remotely, distractions stop being a problem. They know they need to produce quality work and will take steps to make sure they do.
 
@@ -124,11 +122,11 @@ When you first start working from home, you suddenly find yourself living in the
 
 Even if you manage to stop working on time, it is easy to slip back into work mode. The computer setup I like to use in the evening is in the same location as my work setup. This makes it easy for me to take one more peek at our monitoring dashboards or check my work email.
 
-You do not want to overwork and you do not want your teammates to overwork. In the short-term, it can be beneficial. Long-term it leads to burnout and poor outcomes.
+You do not want to overwork and you do not want your teammates to overwork. In the short-term, overwork can be beneficial. Long-term it leads to burnout and poor outcomes.
 
 ### Fewer interactions
 
-This is a negative and positive. When you are working remotely, you have fewer random interactions with coworkers. You most likely interact with your team plus the same handful of people outside of your team regularly but rarely interact with others.
+This is a negative and positive. When you are working remotely, you have fewer random interactions with coworkers. You most likely interact with your team plus the same handful of people outside of your team regularly but you rarely interact with others.
 
 In an office, there is a chance you'll run into people outside your usual circle of communication. You might eat lunch with a broader variety of people. You may bump into others while getting a coffee or a snack.
 
@@ -166,7 +164,7 @@ Being able to collectively edit a document with a group is pretty amazing. [Ethe
 
 When a document supports real-time collaboration, you can do amazing things. You can use it to capture ideas from a remote group. An extreme version of this can be viewed by opening [this page](http://idlewords.com/talks/fan_is_a_tool_using_animal.htm) and searching for "Google doc."
 
-You can use a shared document to facilitate a remote meeting (this goes amazingly well once you get the practice of it). Having a document that everyone in a meeting can edit is so much better than a whiteboard that only one or two people can simultaneously use.
+You can use a shared document to facilitate a remote meeting (this goes incredibly well once you get the practice of it). Having a document that everyone in a meeting can edit is so much better than a whiteboard that only one or two people can simultaneously use.
 
 ### Whiteboards
 
@@ -204,7 +202,7 @@ I'd also recommend turning off notifications for all but most definite "someone 
 
 It can be a challenge to follow chat conversations, especially if they span a larger unit of time. Don't be afraid to move a conversation to email or another medium that is better suited for longer and more complex discussions.
 
-Many chat applications offer the ability to have private rooms or send direct messages to a user. Don't be afraid of using these private channels, but if your communication can be public, it should be public. It can be challenging to ask a question and admit you don't know something but seeing that dialogue might help others. Similarly, having discussions about a feature, bug, or task can help spread knowledge.
+Many chat applications offer the ability to have private rooms or to send direct messages to a user. Don't be afraid of using these private channels, but if your communication can be public, it should be public. It can be challenging to ask a question and admit you don't know something but seeing that dialogue might help others. Similarly, having discussions about a feature, bug, or task can help spread knowledge.
 
 ### Email
 
