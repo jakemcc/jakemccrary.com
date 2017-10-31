@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "The guide to distributed work"
+title: "A guide to distributed work"
 date: 2016-11-16 10:14:11 -0600
 comments: true
 published: false
-description: I've been working remotely for four years. Here is a guide to remote work. 
+description: I've been working remotely for four years. Here is are some things I've learned along the way.
 keywords: 'remote, remote work, distributed, working from home, work from home, distributed teams'
 categories: 
 ---
@@ -23,13 +23,13 @@ Much of the following also applies to individuals working remotely for a not-ent
 
 ## Benefits
 
-If you asked someone that never worked remotely before for the benefits of working remotely they would probably be able to guess at some of the most obvious benefits. The top two would be having no commute and more flexibility in your schedule. Those two advantages are huge. There are other, less obvious advantages as well.
+If you ask someone that has never worked remotely before for the benefits of working remotely, they would probably be able to guess at some of the most obvious benefits. The top two responses I've received to this question are having no commute and more flexibility in your schedule. These two advantages are huge. There are other, less obvious advantages as well.
 
 ### No commute
 
-This is the benefit that most workers, remote and non-remote, identify when asked about benefits of remote working. This benefit stands out because it is huge and obvious. In the United States, the average one-way commute is [25 minutes long](https://project.wnyc.org/commute-times-us/embed.html#5.00/42.000/-89.500). The average worker spends nearly one hour going to and from their work.
+This is the benefit that most workers, remote and non-remote, identify when asked about benefits of remote work. This benefit stands out because it is huge and obvious. In the United States, the average one-way commute is [25 minutes long](https://project.wnyc.org/commute-times-us/embed.html#5.00/42.000/-89.500). The average worker spends nearly one hour going to and from their work.
 
-If you are going to work five days a week, then you're over four hours commuting.  That is half of a full workday riding a bicycle, car, train, or bus. In the best case scenario, you are using that time to read, listen to a podcast, or trying to think deeply about a problem. In reality, you're trying to do one of those activities, but are continuously distracted by the world around you. You have to worry about avoiding accidents, driving safely, or another distracting concern.
+If you are going to work five days a week, then you're over four hours commuting.  That is half of a full workday riding a bicycle, car, train, or bus. In the best case scenario, you are using that time to read, listen to a podcast, or trying to think deeply about a problem. In reality, you're trying to do one of those activities, but you are continuously distracted by the world around you. You have to worry about avoiding accidents, driving safely, or another distracting concern.
 
 Commuting has been shown to have negative effects on the commuters[^6]. Being able to work remotely lets you avoid those problems.
 
@@ -37,23 +37,23 @@ Commuting has been shown to have negative effects on the commuters[^6]. Being ab
 
 This is another benefit that most people can immediately identify. Remote works gives you more power over your schedule. Even if you're part of a synchronous distributed team, you gain flexibility. All of a sudden your breaks become time you can use to enrich your non-work life.
 
-Picking up or dropping off your children at daycare or school becomes easier. Taking your dog for a midday walk becomes possible. Since you aren't commuting, you have more time to make breakfast for you and your family. You can run errands or go to your favorite neighborhood lunch spot during the day. These errands and restaurant trips are quicker since you're effectively doing them at off hours, most of your neighbors are working at their office.
+Picking up or dropping off your children at daycare or school becomes easier. Taking your dog for a midday walk becomes possible. Since you aren't commuting, you have more time to make breakfast for you and your family. You can run errands or go to your favorite neighborhood lunch spot during the day. These errands and restaurant trips are quicker since you're effectively doing them at off hours as most of your neighbors are working at their office.
 
 ### More time with family
 
-If you're working at home, then it becomes easy to see your family more. You can say hi to your kids when they get home from school. You have more time in the evening to spend with your baby before it needs to bed.
+If you're working at home, then it becomes easy to see your family more. You can say hi to your kids when they get home from school. You have more time in the evening to spend with your baby before it needs to go to bed.
 
 ### Customize your workspace
 
 You get to choose where you work. For many, this will be in a home office. This is your space; you get to make it your own.
 
-Do you like to work in a cave? Paint the walls a dark color, block out the windows and enjoy your cave-like experience. Do you prefer sunlight and plants? Work near a window and add houseplants to your space. Do you want an awesome sit-stand desk and chair? Buy them [TODO: Link to other post].
+Do you like to work in a cave? Paint the walls a dark color, block out the windows and enjoy your cave-like experience. Do you prefer sunlight and plants? Work near a window and add houseplants to your space. Do you want an awesome sit-stand desk and chair? Buy [them](/blog/2015/03/31/my-home-work-space/).
 
-One of my former colleagues likes to walk on a treadmill while standing or, if sitting, he enjoyed having peddles [TODO: under desk peddles] under his desk. These are customizations he would have a hard time getting at most offices.
+One of my former colleagues likes to walk on a treadmill while standing or, if sitting, he enjoyed having [pedals](http://amzn.to/2gRypQD) under his desk. These are customizations he would have a hard time getting at most offices.
 
 ### Eat the food you want to eat
 
-Many of us have preferred diet (or a diet we're forced to follow). Maybe you cannot eat gluten or prefer to follow the Paleo diet. When you work from home, it is easier to eat food you prepare yourself.
+Many of us have preferred diet (or a diet we're forced to follow). When you work from home, it is easier to eat food you know you should eat.
 
 When you work from an office, you have a few food options. You can bring your food, go out to eat, or (if your employer offers it) eat food provided by your company. If you follow a restrictive diet, all of these options are more hassle than making your lunch at home every day.
 
@@ -65,15 +65,17 @@ As a remote worker, you can choose your working location. This lets you select a
 
 Minimizing interruptions is one of the keys to accomplishing challenging tasks. After an interruption, it takes up to a half an hour to get back to your original task[^2].
 
-### Off hours support
+### Off-hours support
 
-This is a benefit I have seen mentioned many other places. Off hours support becomes much easier if you are working remotely. The actions you would take for an urgent alert at 1 AM are the same actions you would make at 1 PM.
+This is a benefit I have not seen mentioned many other places. Off-hours support becomes much easier if you are working remotely. The actions you would take for an urgent alert at 1 AM are the same actions you would make at 1 PM.
 
 When you get that 1 AM page you don't have to struggle to remember how you check production while at home; this is an activity you do on a regular basis. You know what you need to do. You don't have to remember how to VPN into your company's network; you do that every day.
 
+No one likes getting woken up by a support call. At least this way you get to use your normal tools for solving problems.
+
 ### Recruiting
 
-Instead of being limited to your local workforce you can recruit from a much broader region. This means you can find the top talent for your company. This is huge.
+Since you aren't limited to your locale, you can recruit from a much broader region. This means you can find the top talent for your company. This is huge.
 
 Back in late 2013, it was quite challenging to find experienced Clojure programmers. Because [Outpace](https://outpace.com) is a distributed company, we were able to hire experts from across the entire United States. We would not have been able to recruit nearly as well if we were limited to a single location.
 
@@ -81,20 +83,19 @@ Back in late 2013, it was quite challenging to find experienced Clojure programm
 
 If your company supports remote work, then you remove an entire reason for an employee leaving. Sometimes, a person needs to move.  Working for a company that supports remote work allows them to move and not leave the company.
 
-
 ### Reduced office costs
 
-Having a distributed workforce can reduce office costs drastically. In a fully distributed company, it reduces the costs to zero [^3].
+Having a distributed workforce can reduce office costs drastically. In a fully distributed company, it reduces the costs to zero[^3].
 
 ## Downsides
 
-While there are many benefits, there are also downsides to working remotely. When I talk to non-remote workers about working remotely, I typically hear "I don't know how you do it, I'd be so distracted." This statement touches on one of the downsides of remote work, but it isn't largest one. The rest of this section describes some of the downsides that I and others have observed.
+While there are many benefits, there are also downsides to working remotely. When I talk to non-remote workers about working remotely, I typically hear "I don't know how you do it, I'd be so distracted." This statement touches on one of the downsides of remote work, but it isn't largest one. Below are some downsides that I and others have observed.
 
 ### Loneliness and isolation
 
-When I've talked to other remote workers, this is the main negative they noticed.
+Nearly everyone I've talked to, including myself, puts this as the top downside.
 
-Most of us are social creatures. You do not get the same type of social interaction with your coworkers when you are working remotely. Instead of bumping into a wide range of people in the office, you interact with a smaller group through video chats, phone calls, chat rooms, and email. Depending on what you are doing, you might not even get that interaction with a smaller group.
+Most of us are social creatures. You do not get the same type of social interaction with your coworkers when you are working remotely. Instead of bumping into a wide range of people in the office, you interact with a smaller group through video chats, phone calls, chat rooms, and email. Depending on what you are doing, you might not even get that interaction.
 
 This is very unfamiliar to most of us. We're used to being in physical proximity to other humans. We're used to having small talk and grabbing coffee or lunch with other people.
 
@@ -102,19 +103,21 @@ You can combat these feelings by setting up communication with other employees a
 
 If you are having troubles with loneliness and isolation, try to find an area where you can work surrounded by other people. Two options are co-working spaces and coffee shops. Alternatively, try to have social activities you regularly do with non-coworkers in your area. Having strong connections with non-coworkers can help combat loneliness.
 
-If I stay inside for more than a couple days, I get grumpy. I didn't realize this when I worked in an office. Noticing this has benefited my rock climbing, as I've made that my non-work social activity. Even if I merely go boulder by myself, being around other humans helps. If you're working remotely and feeling grumpy, try to find an activity you can regularly do and see if doing that helps.
+If I stay inside for more than a couple days, I get grumpy. I didn't realize this when I worked in an office. Noticing this has benefited my rock climbing, as I've made that my main non-work social activity. Even if I merely go bouldering by myself, being around other humans helps. If you're working remotely and feeling grumpy, try to find an activity you can regularly do and see if doing that helps.
 
 ### Distractions
 
-This is the downside that non-remote workers most often identify. People assume that television and other distractions in your home are irresistible and will cause you not to get work done. In my experience, this isn't a problem. When you are working 100% remotely, you don't have the same distractions you have when you are only occasionally working remotely. You need to treat working remotely seriously.
+This is the downside that non-remote workers most often identify. People assume that television and other distractions in your home are irresistible and will cause you not to get work done. When you are working 100% remotely, you don't have the same distractions you have when you are only occasionally working remotely. You can't do laundry every day. You only have so much TV you can watch.
 
-Roommates, kids, and family interrupting you is another distraction. You can combat this by setting boundaries. Many of my co-workers have a rule that when their office door is closed, they are unavailable. I'll claim that co-workers interrupting you in an office are as distracting as the much rarer interruption from someone within your home.
+Personally, I don't have a problem with distractions when working at home. I know others that have. They mostly have when they first started working from home. When they first started working at home, they found themselves doing too much around the house. As a result, they worked late hours or felt like they weren't getting enough work done. Once you recognize the problem, it is possible to train yourself not to get distracted.
 
-Employees that work remotely are typically choosing to work remotely. They know they need to produce quality work and will take steps to make sure they do.
+Roommates, kids, and family are another (sometimes welcome) distraction. You can combat interruptions from others this by setting boundaries. Many of my co-workers have a rule that when their office door is closed, they are unavailable. I'll claim that co-workers interrupting you in an office are as distracting as the much rarer interruption from someone within your home.
+
+Employees that work remotely are typically choosing to work remotely. Once they get used to working remotely, distractions stop being a problem. They know they need to produce quality work and will take steps to make sure they do.
 
 ### Working too much
 
-When you first start working from home, you suddenly find yourself living in the same space that you work. This lack of change in location and commute makes it easy to keep working. You get invested in a problem and all of a sudden it is past the time when you really should stop working.
+When you first start working from home, you suddenly find yourself living in the same space that you work. This lack of change in location and commute makes it easy to keep working. You get invested in a problem and all of a sudden it is past the time when you should have stopped working.
 
 Even if you manage to stop working on time, it is easy to slip back into work mode. The computer setup I like to use in the evening is in the same location as my work setup. This makes it easy for me to take one more peek at our monitoring dashboards or check my work email.
 
@@ -124,7 +127,7 @@ You do not want to overwork and you do not want your teammates to overwork. In t
 
 This is a negative and positive. When you are working remotely, you have fewer random interactions with coworkers. You most likely interact with your team plus the same handful of people outside of your team regularly but rarely interact with others.
 
-In an office, there is a chance you'll run into people outside your usual circle of communication. You might eat lunch with a broader variety of people. You may bump into others while getting some coffee or a snack.
+In an office, there is a chance you'll run into people outside your usual circle of communication. You might eat lunch with a broader variety of people. You may bump into others while getting a coffee or a snack.
 
 You can help increase interactions on a distributed team by having some chat rooms that encourage random discussions. Another option is to have a regular and optional meeting scheduled where people can give an informal presentation on something that interests them.
 
@@ -138,7 +141,7 @@ It is less important to get stuck on a particular tool recommendation and more e
 
 ### Text chat 
 
-You'll want a chat application. [Slack](https://slack.com) and [HipChat](https://www.hipchat.com) are just two of the many available services.
+You'll want a chat application. [Slack](https://slack.com) and [Stride](https://www.stride.com/) are just two of the many available services.
 
 ### Video conference
 
@@ -176,31 +179,33 @@ Even after four years, I occasionally find myself missing a whiteboard or shared
 
 Communication is inherently different on a distributed team. You cannot just walk across an office to interrupt someone and ask them a question. Communication happens mostly through text. You need to be skilled at written communication.
 
-You lose context with written communication when compared to vocal or in-person communication. You no longer have body language or tone of voice to help you interpret what someone means. Lack of tone is huge. This is one reason that text communication is interpreted as more emotionally negative or neutral than intended [^4]. If you're reading text communication, try to read it with a positive tone.
+You lose context with written communication when compared to vocal or in-person communication. You no longer have body language or tone of voice to help you interpret what someone means. Lack of tone is huge. This is one reason that text communication is interpreted as more emotionally negative or neutral than intended[^4]. If you're reading text communication, try to read it with a positive tone.
 
 It can also be useful to have rules around the expectations of different forms of communication. How quickly do you need to respond to an email? How quick should a response be to a chat room message?  When should you pick up the phone and call someone?
 
 ### Chat rooms
 
-Chat room applications (IRC, Slack, HipChat, etc.) are pretty great. They provide a medium of communication that has a lower barrier to entry than email. Chat tools have a place in the distributed teams tool chest.
+Chat room applications (IRC, Slack, Stride, Flowdock, etc.) are pretty great. They provide a medium of communication that has a lower barrier to entry than email. Chat tools have a place in the distributed teams tool chest.
 
 The chat room becomes even more central to work once you start including useful bots in the room. These bots can perform many functions. You can look in the [Slack App Directory](https://slack.com/apps) to see some of the bots that people are producing.
 
-If you start adding bots and other automated messages to your chat application, you might want to think about setting up a separate channel. Some messages are not worthy of being interjected into your teams main chat. They can be distracting and hurt the flow of conversation. These messages tend to be ones that are informative, but not critical. For my teams, these messages include things like git commits and Trello card updates. It is great to see these in a single spot but annoying when they interrupt a conversation.
+If you start adding bots and other automated messages to your chat application, you might want to think about setting up a separate channel. Some messages are not worthy of being interjected into your team's main chat. They can be distracting and hurt the flow of conversation. These messages tend to be ones that are informative, but not critical. For my teams, these messages include things like git commits and Trello card updates. It is great to see these in a single spot but annoying when they interrupt a conversation.
 
-Chat rooms can also be a big time sink. They are a source of concentration interrupting notifications. The feeling of missing out on conversations can drive people to join a large number of channels. This piles on the potential for distraction. Chat rooms also provide a feeling of immediacy that isn't actually there. You don't know if key people have seen your message or have had time to respond.
+Chat rooms can also be a big time sink. They are a source of concentration interrupting notifications. The feeling of missing out on conversations can drive people to join a large number of channels. This piles on the potential for distraction.
+
+Chat rooms also provide a feeling of immediacy that isn't actually there. You don't know if key people have seen your message or have had time to respond.
 
 Despite having search functionality, I've found it hard to find previous conversations in chat applications. If something important appears in chat, I'd recommend extracting it from the chat application and recording it somewhere else.
 
-I'd also recommend turning off notifications for all but most definite "someone is trying to reach me" triggers. Encourage members of your chat to use entire channel notifications sparingly and only for messages that need everyone's attention. There are not any messages that immediately require everyone's attention.
+I'd also recommend turning off notifications for all but most definite "someone is trying to reach me" triggers. Encourage members of your chat to use entire channel notifications sparingly and only for messages that need everyone's attention. There are not many messages that immediately require everyone's attention.
 
 It can be a challenge to follow chat conversations, especially if they span a larger unit of time. Don't be afraid to move a conversation to email or another medium that is better suited for longer and more complex discussions.
 
-Many chat applications offer the ability to have private rooms or send direct messages to a user. Don't be afraid of using these private channels, but if your communication can be in public, it should be in public. It can be challenging to ask a question and admit you don't know something but seeing that dialogue might help others. Similarly, having discussions about a feature, bug, or task can help spread knowledge.
+Many chat applications offer the ability to have private rooms or send direct messages to a user. Don't be afraid of using these private channels, but if your communication can be public, it should be public. It can be challenging to ask a question and admit you don't know something but seeing that dialogue might help others. Similarly, having discussions about a feature, bug, or task can help spread knowledge.
 
 ### Email
 
-Despite all of the efforts to replace email; email is still useful. It is the common form of communication between companies, it is pervasive, and it usually comes with good search capabilities.
+Despite all of the efforts to replace email; email is still useful. It is the most common form of communication between companies, it is pervasive, and it usually comes with good search capabilities.
 
 A good email thread can keep a topic contained in a form that is possible to follow. Unlike a chat room, there (usually) aren't off-topic interjections from uninvolved parties.
 
@@ -212,9 +217,9 @@ One downside of any voice conversation is that it is not automatically persisted
 
 ### Picking the right communication medium
 
-When you are working on a distributed team, you no longer can walk over to someone's desk and interrupt them. This is great. Not every question deserves an immediate answer.
+When you are working on a distributed team, you can no longer walk over to someone's desk and interrupt them. This is great. Not every question deserves an immediate answer.
 
-Agree with your team when to use different forms of communication. Set expectations with regards to response times and urgency for different mediums. Maybe direct chat messages are expected to be responded to under 10 minutes. Perhaps emails are OK having a delay of a few hours. This is something your group will need to decide.
+Agree with your team when to use different forms of communication. Set expectations with regards to response times and urgency for different mediums. Maybe direct chat messages are expected to be responded to in under 10 minutes. Perhaps emails are OK having a delay of a few hours. This is something your group will need to decide.
 
 ## Practices
 
@@ -224,7 +229,7 @@ These are some practices I've seen work well with distributed teams. Many of the
 
 Most of the teams I've been part of, whether distributed or co-located, have had a daily stand-up meeting. The intention of this meeting was to provide a short, scheduled time for communicating any roadblocks to progress, interesting information, status updates, and desire for help.
 
-With my distributed teams daily stand-ups still played a significant role. The team joined a video conference and we gathered around a shared Google Doc that had prompts similar to the snippet below.
+For a distributed stand-up, the team joins a video conference and we gather around a shared Google Doc that has prompts similar to the snippet below.
 
 ```
 Day: 2017-07-11
@@ -236,7 +241,7 @@ Want help?
 Meetings:
 ```
 
-These prompts provided a starting point for team members to add additional text. Our stand-ups were at the beginning of the day, so frequently team members would add text to the document at the end of the prior day. Filling in the document at the end of the day instead of right before the stand-up was useful as memories and thoughts were often fresher without having to remember them the following morning.
+These prompts provide a starting point for team members to add additional text. Our stand-ups were at the beginning of the day, so frequently team members would add text to the document at the end of the prior day. Filling in the document at the end of the day instead of right before the stand-up was useful as memories and thoughts were often fresher without having to remember them the following morning.
 
 After being filled in, the document would look like below.
 
@@ -244,20 +249,20 @@ After being filled in, the document would look like below.
 Day: 2017-07-11
 
 What's interesting?
-  - New deploy lowered response time by 20% - Jake
-  - Discovered bug in date-time library around checking if a date-time is within interval - Sue
+  - New deploy lowered response time by 20% [Jake]
+  - Discovered bug in date-time library around checking if date is within interval [Sue]
   - Greg joined the team!
-  - Adding blocker functionality going to take longer than expected. Guessing another two days - Donald
+  - Adding blocker functionality going to take longer than expected [Donald]
 
 Want help?
-  - Having difficulties running batch process locally. - Tom
-  - I'm having a hard time understanding propensity calculation - Mike
+  - Having difficulties running batch process locally. [Tom]
+  - I'm having a hard time understanding propensity calculation [Mike]
 
-Meetings
-  - API overview with client @ 2 PM Central - Jake/Jeremy
+Meetings:
+  - API overview with client @ 2 PM Central [Jake/Jeremy]
 ```
 
-Near the beginning of our day, we would gather around the Google Doc and everyone would take a couple of minutes to read silently. If anyone felt like something was worth talking about they would **bold** the text and then we'd work from top to bottom and have a quick discussion. For our `Want help?` section we'd solicit volunteers and move on. The `Meetings?` section was primarily there to provide visibility as to when certain members might not be available. After we worked through the `Want help?` section we'd pop over to Trello and review the work in progress and make sure everyone had an idea of what they would be doing that day.
+We would gather around the Google Doc and everyone would take a couple of minutes to read silently. If anyone felt like something was worth talking about they would **bold** the text and then we'd work from top to bottom and have a quick discussion. For our `Want help?` section we'd solicit volunteers and move on. The `Meetings` section was primarily there to provide visibility as to when certain members might not be available. After we worked through the `Want help?` section we'd pop over to Trello and review the work in progress and make sure everyone had an idea of what they would be doing that day.
 
 The nice thing about doing a stand-up around a shared Google Doc is that you can put in richer media than just text. Screenshots of monitoring graphs were a regular addition to the `What's interesting?` section.
 
@@ -272,7 +277,7 @@ What's interesting?
 Want help?
   - [...]
 
-Meetings
+Meetings:
   - [...]
 
 -------
@@ -284,7 +289,7 @@ What's interesting?
 Want help?
   - [...]
 
-Meetings
+Meetings:
   - [...]
 ```
 
@@ -323,11 +328,11 @@ What's interesting?
   - [...]
 Want help?
   - [...]
-Meetings
+Meetings:
   - [...]
 ``` 
 
-I've seen this work successfully with five related teams in a single document. News and information that affects everyone is added in the **Everyone** section. Team specific information is put in the team sections. Each team still has their individual stand-up where they only look at their section. But since their section is part of the larger document, they get a taste of what is going on in the other related teams. This helps replace the random hallway chatter you get in a shared office and gives everyone a slightly broader picture.
+I've seen this work successfully with five related teams in a single document. News and information that affects everyone is added in the `Everyone` section. Team specific information is put in the team sections. Each team still has their individual stand-up where they only look at their section. But since their section is part of the larger document, they get a taste of what is going on in the other related teams. This helps replace the random hallway chatter you get in a shared office and gives everyone a slightly broader picture.
 
 This worked shockingly well. I've had colleagues reach out, some years after leaving, to ask for the template we used for this multi-team stand-up.
 
@@ -337,27 +342,27 @@ Stand-downs are a meeting that provides time to informally chat with a group. I'
 
 These meetings should be an optional, short meeting scheduled near the end of the day. This gives team members a good excuse (socializing with their coworkers) to stop working (which helps with the problem of overwork). No one should feel pressure to be at these meetings.
 
-The conversation may or may not be work. Maybe you discuss a  language feature someone learned. You might talk about a book you started reading. It doesn't matter what is discussed; these meetings can help a team get closer and promote more social interaction.
+The conversation may or may not be work-related. Maybe you discuss a language feature someone learned. You might talk about a book you started reading. It doesn't matter what is discussed; these meetings can help a team get closer and promote more social interaction.
 
 I've also worked with teams that play games, such as [Jackbox Party Packs](https://jackboxgames.com/project/jbpp3/), through video conferences.
 
 ### Remote Pair Programming
 
-[Pair programming](http://c2.com/xp/PairProgramming.html) is a technique that people often employ when working in person. It works even better when remote and helps solve some of the difficulties of working remotely.
+[Pair programming](http://c2.com/xp/PairProgramming.html) is a technique that people often employ when working in-person. It works even better when remote and helps solve some of the difficulties of working remotely.
 
 Remote pair programming helps fight the feeling of loneliness and isolation that remote workers feel. Remote pairing forces intense interaction between two people. It also helps keep the two people focused on work. It is easy for a single person to get distracted by browsing Hacker News but much harder for both people to get sucked into it.
 
-The ideal in-person pair programming setup is when you take a single machine and hook up two large monitors, two keyboards, and two mice to a single computer and then mirror the monitors. This lets both programmers use their personal keyboard and stare straight ahead at their monitor.
+The ideal in-person pair programming setup is when you take a single computer and hook up two large monitors, two keyboards, and two mice and then mirror the monitors. This lets both programmers use their personal keyboard and stare straight ahead at their monitor.
 
-Remote pair programming is an even better setup. One developer, the host, somehow shares their environment with the other developer. This can be done through screen sharing using Zoom, Slack, VNC, tmate, or some other way. The important part is that both developers can see the code and, if necessary, someway of viewing a UI component.
+Remote pair programming is an even better setup. One developer, the host, somehow shares their environment with the other developer. This can be done through screen sharing using Zoom, Slack, VNC, tmate, or some other way. The important part is that both developers can see the code and, if necessary, someway of viewing a UI component. They should both be able to edit the code.
 
-Like the ideal local pair programming environment, each developer uses their personal keyboard, mouse, and monitor. Unlike the local pair programming environment, they each also have their own computer. This allows one developer look up documentation on their computer while the host developer continues to write code. It also allows the non-host developer to shield the host from distractions like answering questions in the chat room or responding to emails.
+Like the ideal local pair programming environment, each developer uses their personal keyboard, mouse, and monitor. Unlike the local pair programming environment, they each also have their own computer. This lets one developer look up documentation on their computer while the host developer continues to write code. It also allows the non-host developer to shield the host from distractions like answering questions in the chat room or responding to emails.
 
 When remote programming it is easier for the non-host developer to stop paying attention. It is easier to be rude and not pay attention to your pair when you are not sitting next to them. If you notice your pair has zoned out, nicely call them out on it or ask them a question to get them to re-engage.
 
 ### One-on-ones
 
-One-on-ones are a useful practice in both a co-located and distributed team. For those who aren't familiar with one-on-ones, they are meetings between you and your manager (flip that if you are the manager). It should be a regularly scheduled meeting where you discuss higher-level topics than the daily work. They are extremely useful for helping you develop professionally and helping a team run smoothly. If you currently have one-on-ones and you aren't finding them useful, I'd recommend reading some articles with tips for making them useful. Here are a [couple](https://www.themuse.com/advice/how-to-have-oneonones-that-actually-matter) [articles](https://hbr.org/2016/08/how-to-make-your-one-on-ones-with-employees-more-productive) that give some pretty good advice. As both a team lead and a team member I've found one-on-ones extremely useful. I thought they were even more useful when on a distributed team.
+One-on-ones are a useful practice in both a co-located and distributed team. For those who aren't familiar with one-on-ones, they are meetings between you and your manager (flip that if you are the manager). They should be scheduled regularly and be a time where you discuss higher-level topics than the daily work. They are extremely useful for helping you develop professionally and helping a team run smoothly. If you currently have one-on-ones and you aren't finding them useful, I'd recommend reading some articles with tips for making them useful. Here are a [couple](https://www.themuse.com/advice/how-to-have-oneonones-that-actually-matter) [articles](https://hbr.org/2016/08/how-to-make-your-one-on-ones-with-employees-more-productive) that give some pretty good advice. As both a team lead and a team member I've found one-on-ones extremely useful. I thought they were even more useful when on a distributed team.
 
 With a distributed team you lose out on a lot of the body language you can pick up on when in person. It is harder to tell when someone is frustrated or when a pair is not working well together. Burnout is harder to notice. One-on-ones provide a time for that information to come out.
 
@@ -369,6 +374,18 @@ You can use this time to do the typical day-to-day work, but I think it is more 
 
 Use this time to have some meals and drinks with your co-workers. Play some board games and talk about things other than work. Sing some karaoke. Get to know your co-workers as more than someone inside your computer. Doing so can help with communication and understanding personalities.
 
+## Fin
+
+It is an exciting time to be a remote worker. New tools are emerging that try to make remote work easier. New techniques are being discovered. Old techniques are being adapted.
+
+I hope you've found this article useful. If you are a remote worker, maybe you've picked up some ideas to bring into your remote work. If you work in an office, perhaps you've found some useful arguments for moving towards remote work.
+
+There is much more I could write about remote work and distributed teams. Some of these sections deserve their own posts and extended examples.
+
+## Acknowledgements
+
+I gave a presentation at the [2016 AIT Workshop](http://lanyrd.com/2016/aitworkshop/) on remote work. I've also had correspondence with [Timothy Pratley](https://timothypratley.blogspot.com/), [Rusty Bentley](http://www.rustybentley.com/), [Carin Meier](http://gigasquidsoftware.com/), [Devin Walters](https://twitter.com/devn), [Paco Viramontes](https://twitter.com/kidpollo), [Jeff Bay](http://www.xpteam.com/), [Michael Halvorson](https://www.linkedin.com/in/michaelthalvorson/). The input and discussions I've had with all of these people and more have influenced my thoughts towards remote work. Thank you.
+
 ## Other references
 
 - [Remote - Jason Fried and David Heinemeier Hansson](http://amzn.to/2geZYlw)
@@ -377,9 +394,6 @@ Use this time to have some meals and drinks with your co-workers. Play some boar
 - [Remote worker vs distributed team - Bob Mcwhirter](http://bob.mcwhirter.org/blog/2010/09/13/remote-worker-distributed-team/)
 - [Remote or co-located - Martin Fowler](http://martinfowler.com/articles/remote-or-co-located.html)
 
-## Acknowledgements
-
-I gave a presentation at the [2016 AIT Workshop](http://lanyrd.com/2016/aitworkshop/) on remote work. Discussions there were useful in helping solidify and confirm some of my thoughts towards working remotely. I've also had correspondence with [Timothy Pratley](https://timothypratley.blogspot.com/), [Rusty Bentley](http://www.rustybentley.com/), [Carin Meier](http://gigasquidsoftware.com/), [Devin Walters](https://twitter.com/devn), [Paco Viramontes](https://twitter.com/kidpollo), [Jeff Bay](http://www.xpteam.com/), [Michael Halvorson](https://www.linkedin.com/in/michaelthalvorson/). Their 
 
 [^1]: [http://globalworkplaceanalytics.com/telecommuting-statistics](http://globalworkplaceanalytics.com/telecommuting-statistics)
 [^2]: [http://www.npr.org/2015/09/22/442582422/the-cost-of-interruptions-they-waste-more-time-than-you-think](http://www.npr.org/2015/09/22/442582422/the-cost-of-interruptions-they-waste-more-time-than-you-think)
