@@ -379,9 +379,11 @@ Use this time to have some meals and drinks with your co-workers. Play some boar
 
 It is an exciting time to be a remote worker. New tools are emerging that try to make remote work easier. New techniques are being discovered. Old techniques are being adapted.
 
-I hope you've found this article useful. If you are a remote worker, maybe you've picked up some ideas to bring into your remote work. If you work in an office, perhaps you've found some useful arguments for moving towards remote work.
+I hope you've found this article useful. If you are a remote worker, maybe you've picked up some ideas to bring into your remote work. If you work in an office, perhaps you've found some useful arguments for moving towards remote work. 
 
 There is much more I could write about remote work and distributed teams. Some of these sections deserve their own posts and extended examples.
+
+If you've enjoyed this article, consider sharing ([tweeting](https://twitter.com/intent/tweet?text=A%20guide%20to%20distributed%20work%20https%3A%2F%2Fjakemccrary.com%2Fblog%2F2017%2F10%2F31%2Fa-guide-to-distributed-work%2F&via=jakemcc)) it to your followers.
 
 ## Acknowledgments
 
