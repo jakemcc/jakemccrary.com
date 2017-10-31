@@ -112,7 +112,7 @@ This is the downside that non-remote workers most often identify. People assume 
 
 Personally, I don't have a problem with distractions when working at home. I know others that do. They mostly have when they first started working from home. When they first started working at home, they found themselves doing too much around the house. As a result, they worked late hours or felt like they weren't getting enough work done. Once you recognize the problem, it is possible to train yourself not to get distracted.
 
-Roommates, kids, and family are another (sometimes welcome) distraction. You can combat interruptions from others by setting boundaries. Many of my co-workers have a rule that when their office door is closed, they are unavailable. I'll claim that co-workers interrupting you in an office are more distracting as the much rarer interruption from someone within your home.
+Roommates, kids, and family are another (sometimes welcome) distraction. You can combat interruptions from others by setting boundaries. Many of my coworkers have a rule that when their office door is closed, they are unavailable. I'll claim that coworkers interrupting you in an office are more distracting as the much rarer interruption from someone within your home.
 
 Employees that work remotely are typically choosing to work remotely. Once they get used to working remotely, distractions stop being a problem. They know they need to produce quality work and will take steps to make sure they do.
 
@@ -373,7 +373,7 @@ You should have your distributed team or company meet in person. This shouldn't 
 
 You can use this time to do the typical day-to-day work, but I think it is more productive to try other activities. The most successful in-person meetups I've been part of consisted mostly of group discussions. This can take the form of a mini-conference or [Open Space](http://openspaceworld.org/wp2/what-is/). Another option is to brainstorm some potentially wild ideas and try implementing them to see how far you can get.
 
-Use this time to have some meals and drinks with your co-workers. Play some board games and talk about things other than work. Sing some karaoke. Get to know your co-workers as more than someone inside your computer. Doing so can help with communication and understanding personalities.
+Use this time to have some meals and drinks with your coworkers. Play some board games and talk about things other than work. Sing some karaoke. Get to know your coworkers as more than someone inside your computer. Doing so can help with communication and understanding personalities.
 
 ## End
 
