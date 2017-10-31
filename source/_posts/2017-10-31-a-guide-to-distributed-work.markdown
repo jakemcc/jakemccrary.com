@@ -9,6 +9,7 @@ description: I've been working remotely for four years. Here is are some things 
 keywords: remote, remote work, distributed, working from home, work from home, distributed
   teams
 categories: 
+- remote
 ---
 
 Since October 2013, I've been working remotely. I've held a few different roles; ranging from team lead to software developer to CTO, at a couple of different companies. These companies are fully distributed. They have no office employees work from.
@@ -19,7 +20,7 @@ The number of employees that work remotely is growing[^1]. Technology improvemen
 
 The remainder of this article highlights some observations from my last few years of working for distributed companies. I've also interviewed and corresponded with many other remote and formerly remote workers. Their contributions, along with books and articles on remote work, have influenced my thinking about what it means to have a successful distributed company.
 
-The types of distributed companies I've worked with have not been asynchronous. They have had core working hours centered around one of the middle timezones in the continental United States. You could work from anywhere, but you needed to be willing to work while others were working. I call this type of distributed work synchronous.
+The types of distributed companies I've worked with have not been asynchronous. They have had core working hours centered around one of the middle time zones in the continental United States. You could work from anywhere, but you needed to be willing to work while others were working. I call this type of distributed work synchronous.
 
 Much of the following also applies to individuals working remotely for a not-entirely-distributed company or team. Being the only remote individual in a non-remote team comes with its own set of challenges that I'm not going to attempt to present. If you are part of a team where some members work remotely, my recommendation is that you should treat that team as a remote team. If you don't, the remote worker will have a harder time keeping up with the rest of the team.
 
@@ -376,7 +377,7 @@ You can use this time to do the typical day-to-day work, but I think it is more 
 
 Use this time to have some meals and drinks with your co-workers. Play some board games and talk about things other than work. Sing some karaoke. Get to know your co-workers as more than someone inside your computer. Doing so can help with communication and understanding personalities.
 
-## Fin
+## End
 
 It is an exciting time to be a remote worker. New tools are emerging that try to make remote work easier. New techniques are being discovered. Old techniques are being adapted.
 
@@ -384,9 +385,9 @@ I hope you've found this article useful. If you are a remote worker, maybe you'v
 
 There is much more I could write about remote work and distributed teams. Some of these sections deserve their own posts and extended examples.
 
-## Acknowledgements
+## Acknowledgments
 
-I gave a presentation at the [2016 AIT Workshop](http://lanyrd.com/2016/aitworkshop/) on remote work. I've also had correspondence with [Timothy Pratley](https://timothypratley.blogspot.com/), [Rusty Bentley](http://www.rustybentley.com/), [Carin Meier](http://gigasquidsoftware.com/), [Devin Walters](https://twitter.com/devn), [Paco Viramontes](https://twitter.com/kidpollo), [Jeff Bay](http://www.xpteam.com/), [Michael Halvorson](https://www.linkedin.com/in/michaelthalvorson/). The input and discussions I've had with all of these people and more have influenced my thoughts towards remote work. Thank you.
+This article came to life from the notes and research I did prior to speaking at the [2016 AIT Workshop](http://lanyrd.com/2016/aitworkshop/). Some of those notes came from correspondence with [Timothy Pratley](https://timothypratley.blogspot.com/), [Rusty Bentley](http://www.rustybentley.com/), [Carin Meier](http://gigasquidsoftware.com/), [Devin Walters](https://twitter.com/devn), [Paco Viramontes](https://twitter.com/kidpollo), [Jeff Bay](http://www.xpteam.com/), and [Michael Halvorson](https://www.linkedin.com/in/michaelthalvorson/). Discussions at the conference, with the above individuals, and working remotely at [Outpace](https://outpace.com) and [Lumanu](https://lumanu.com) really helped solidify my thoughts.
 
 ## Other references
 
@@ -402,4 +403,4 @@ I gave a presentation at the [2016 AIT Workshop](http://lanyrd.com/2016/aitworks
 [^3]: Though, you may want to pay for the Internet or provide a budget to help remote employees set up their home office.
 [^4]: [Carrying too Heavy a Load? The Communication and Miscommunication of Emotion by Email](http://amr.aom.org/content/33/2/309.short) and [Why It's So Hard To Detect Emotion In Emails And Texts](https://www.fastcodesign.com/3036748/evidence/why-its-so-hard-to-detect-emotion-in-emails-and-texts)
 [^5]: Like being surprised at how tall or short your coworkers are. It gets me every time.
-[^6]: Various articles: [one](https://www.psychologytoday.com/blog/urban-survival/201501/commuting-the-stress-doesnt-pay), [two](http://time.com/9912/10-things-your-commute-does-to-your-body/), [three](http://www.businessinsider.com/long-commutes-have-an-impact-on-health-and-productivity-2017-5), [four](https://www.theguardian.com/news/datablog/2014/feb/12/how-does-commuting-affect-wellbeing), [five](http://www.npr.org/2011/10/19/141514467/small-changes-can-help-you-thrive-happily), [six](https://www.forbes.com/sites/amymorin/2014/12/07/want-to-be-happier-change-your-commute-or-change-your-attitude/#5d71cadc7417)
+[^6]: Various articles: [one](https://www.psychologytoday.com/blog/urban-survival/201501/commuting-the-stress-doesnt-pay), [two](http://time.com/9912/10-things-your-commute-does-to-your-body/), [three](http://www.businessinsider.com/long-commutes-have-an-impact-on-health-and-productivity-2017-5), [four](https://www.theguardian.com/news/datablog/2014/feb/12/how-does-commuting-affect-wellbeing), [five](http://www.npr.org/2011/10/19/141514467/small-changes-can-help-you-thrive-happily), [six](https://www.forbes.com/sites/amymorin/2014/12/07/want-to-be-happier-change-your-commute-or-change-your-attitude/#5d71cadc7417), [seven](http://webarchive.nationalarchives.gov.uk/20160107224314/http://www.ons.gov.uk/ons/dcp171766_351954.pdf)
