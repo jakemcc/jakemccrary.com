@@ -1,11 +1,13 @@
 ---
 layout: post
-title: "A guide to distributed work"
-date: 2016-11-16 10:14:11 -0600
+title: A guide to distributed work
+date: 2017-10-31 09:21 -0500
 comments: true
-published: false
-description: I've been working remotely for four years. Here is are some things I've learned along the way.
-keywords: 'remote, remote work, distributed, working from home, work from home, distributed teams'
+published: true
+description: I've been working remotely for four years. Here is are some things I've
+  learned along the way.
+keywords: remote, remote work, distributed, working from home, work from home, distributed
+  teams
 categories: 
 ---
 
