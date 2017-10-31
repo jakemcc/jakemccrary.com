@@ -9,15 +9,17 @@ keywords: 'remote, remote work, distributed, working from home, work from home, 
 categories: 
 ---
 
-Distributed companies are becoming an option for many of us. A distributed company is a company where nearly all of the employees work remotely.
+Since October 2013, I've been working remotely. I've held a few different roles; ranging from team lead to software developer to CTO, at a couple of different companies. These companies are fully distributed. They have no office employees work from.
+
+Whether it is working as the one remote employee at a traditional company or being one of many at a distributed company, remote work is becoming an option for many of us.
 
 The number of employees that work remotely is growing[^1]. Technology improvements, pervasive Internet, and mindset changes are some of the drivers for this change.
 
-The remainder of this article highlights some observations from my last few years of working for distributed companies. I've also interviewed and corresponded with many other remote and formerly remote workers. Their contributions, along with other books and articles on remote work, has influenced my thinking about what it means to have a successful distributed company.
+The remainder of this article highlights some observations from my last few years of working for distributed companies. I've also interviewed and corresponded with many other remote and formerly remote workers. Their contributions, along with books and articles on remote work, have influenced my thinking about what it means to have a successful distributed company.
 
-My experience with distributed companies has been with companies that are distributed but not asynchronous. We had core working hours that were standardized around one of the middle time zones in the continental United States. You could live anywhere you wanted but you needed to be willing to work while others were also working.
+The types of distributed companies I've worked with have not been asynchronous. They have had core working hours centered around one of the middle timezones in the continental United States. You could work from anywhere, but you needed to be willing to work while others were working. I call this type of distributed work synchronous.
 
-Much of the following also applies to individuals working remotely for a not-entirely-distributed company or team. Being the only remote individual in a non-remote team comes with its own set of challenges that I'm not going to attempt to present. If you are part of a team where some members work remotely, my recommendation is that you should treat that team as a remote team. If you don't, the remote worker
+Much of the following also applies to individuals working remotely for a not-entirely-distributed company or team. Being the only remote individual in a non-remote team comes with its own set of challenges that I'm not going to attempt to present. If you are part of a team where some members work remotely, my recommendation is that you should treat that team as a remote team. If you don't, the remote worker will have a harder time keeping up with the rest of the team.
 
 ## Benefits
 
@@ -29,7 +31,7 @@ This is the benefit that most workers, remote and non-remote, identify when aske
 
 If you are going to work five days a week, then you're over four hours commuting.  That is half of a full workday riding a bicycle, car, train, or bus. In the best case scenario, you are using that time to read, listen to a podcast, or trying to think deeply about a problem. In reality, you're trying to do one of those activities, but are continuously distracted by the world around you. You have to worry about avoiding accidents, driving safely, or another distracting concern.
 
-Commuting has been shown to have negative effects on the commuters [TODO: LINKS]. Being able to work remotely lets you avoid those problems.
+Commuting has been shown to have negative effects on the commuters[^6]. Being able to work remotely lets you avoid those problems.
 
 ### Flexibility in schedule
 
@@ -384,3 +386,4 @@ I gave a presentation at the [2016 AIT Workshop](http://lanyrd.com/2016/aitworks
 [^3]: Though, you may want to pay for the Internet or provide a budget to help remote employees set up their home office.
 [^4]: [Carrying too Heavy a Load? The Communication and Miscommunication of Emotion by Email](http://amr.aom.org/content/33/2/309.short) and [Why It's So Hard To Detect Emotion In Emails And Texts](https://www.fastcodesign.com/3036748/evidence/why-its-so-hard-to-detect-emotion-in-emails-and-texts)
 [^5]: Like being surprised at how tall or short your coworkers are. It gets me every time.
+[^6]: Various articles: [one](https://www.psychologytoday.com/blog/urban-survival/201501/commuting-the-stress-doesnt-pay), [two](http://time.com/9912/10-things-your-commute-does-to-your-body/), [three](http://www.businessinsider.com/long-commutes-have-an-impact-on-health-and-productivity-2017-5), [four](https://www.theguardian.com/news/datablog/2014/feb/12/how-does-commuting-affect-wellbeing), [five](http://www.npr.org/2011/10/19/141514467/small-changes-can-help-you-thrive-happily), [six](https://www.forbes.com/sites/amymorin/2014/12/07/want-to-be-happier-change-your-commute-or-change-your-attitude/#5d71cadc7417)
