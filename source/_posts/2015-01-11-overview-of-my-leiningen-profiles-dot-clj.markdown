@@ -4,10 +4,14 @@ title: Overview of my Leiningen profiles.clj
 date: 2015-01-11 22:12
 comments: true
 published: true
+description: Here is a quick overview of what is in my Leiningen profiles.clj
+keywords: 'clojure, leiningen, profiles.clj'
 categories:
 - leiningen
 - clojure
 ---
+
+**2017-08-27: I've published an updated version [here](/blog/2017/08/27/my-current-leiningen-profiles-dot-clj/).**
 
 [Leiningen](https://github.com/technomancy/leiningen), a Clojure build
 tool, has the concept of

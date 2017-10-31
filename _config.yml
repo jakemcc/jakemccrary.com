@@ -3,7 +3,7 @@
 # ----------------------- #
 
 
-url: http://jakemccrary.com
+url: https://jakemccrary.com
 title: Jake McCrary
 #subtitle: Musings of a software developer
 author: Jake McCrary
@@ -60,6 +60,11 @@ default_asides: [asides/recent_posts.html]
 # post_asides:
 # page_asides:
 
+collections:
+  adventures:
+    output: true
+    permalink: /adventures/:path/
+    
 # ----------------------- #
 #   3rd Party Settings    #
 # ----------------------- #
@@ -78,10 +83,6 @@ twitter_follow_button: false
 twitter_show_follower_count: false
 twitter_tweet_button: false
 
-# Google +1
-google_plus_one: false
-google_plus_one_size: medium
-
 # Google Plus Profile
 # Hidden: No visible button, just add author information to search results
 googleplus_user: jakemcc
@@ -91,16 +92,9 @@ googleplus_hidden: true
 pinboard_user:
 pinboard_count: 3
 
-# Delicious
-delicious_user:
-delicious_count: 3
-
 # Disqus Comments
 disqus_short_name: jakemccrary
 disqus_show_comment_count: true
 
 # Google Analytics
 google_analytics_tracking_id: UA-19834208-2
-
-# Facebook Like
-facebook_like: false

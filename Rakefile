@@ -23,7 +23,8 @@ blog_index_dir  = 'source'    # directory for your blog's index page (if you put
 deploy_dir      = "_deploy"   # deploy directory (for Github pages deployment)
 stash_dir       = "_stash"    # directory to stash posts for speedy generation
 posts_dir       = "_posts"    # directory for blog files
-themes_dir      = ".themes"   # directory for blog files
+adventures_dir  = "_adventures" # directory for adventures files
+themes_dir      = ".themes"   # directory for theme files
 new_post_ext    = "markdown"  # default new post file extension when using the new_post task
 new_page_ext    = "markdown"  # default new page file extension when using the new_page task
 server_port     = "4000"      # port for preview server eg. localhost:4000
@@ -95,9 +96,28 @@ task :preview do
   [jekyllPid, compassPid, rackupPid].each { |pid| Process.wait(pid) }
 end
 
+desc "preview the site in a web browser"
+task :develop do
+  raise "### You haven't set anything up yet. First run `rake install` to set up an Octopress theme." unless File.directory?(source_dir)
+  puts "Starting to watch source with Jekyll and Compass. Starting Rack on port #{server_port}"
+  system "compass compile --css-dir #{source_dir}/stylesheets" unless File.exist?("#{source_dir}/stylesheets/screen.css")
+  touch '.preview-mode'
+  jekyllPid = Process.spawn("jekyll build --watch")
+  compassPid = Process.spawn("compass watch")
+  rackupPid = Process.spawn("rackup --host 0.0.0.0 --port #{server_port}")
+
+  trap("INT") {
+    [jekyllPid, compassPid, rackupPid].each { |pid| Process.kill(9, pid) rescue Errno::ESRCH }
+    exit 0
+  }
+
+  [jekyllPid, compassPid, rackupPid].each { |pid| Process.wait(pid) }
+end
+
+
 desc "start up a jekyll instance hosting a server"
 task :host do
-  system "jekyll --server"
+  system "jekyll serve"
 end
 
 
@@ -126,6 +146,35 @@ task :new_post, :title do |t, args|
     post.puts "description: PUT SUMMARY HERE "
     post.puts "keywords: 'csv, keywords, here'"
     post.puts "categories: "
+    post.puts "---"
+  end
+end
+
+desc "Begin a new post in #{source_dir}/#{posts_dir}"
+task :new_adventure, :title do |t, args|
+  if args.title
+    title = args.title
+  else
+    title = get_stdin("Enter a title for your post: ")
+  end
+  start_date = get_stdin("Start date (YYYY-MM-dd): ")
+  end_date = get_stdin("End date (YYYY-MM-dd): ")
+  raise "### You haven't set anything up yet. First run `rake install` to set up an Octopress theme." unless File.directory?(source_dir)
+  mkdir_p "#{source_dir}/#{adventures_dir}"
+  filename = "#{source_dir}/#{adventures_dir}/#{start_date}-#{end_date}-#{title.to_url}.#{new_post_ext}"
+  if File.exist?(filename)
+    abort("rake aborted!") if ask("#{filename} already exists. Do you want to overwrite?", ['y', 'n']) == 'n'
+  end
+  puts "Creating new post: #{filename}"
+  open(filename, 'w') do |post|
+    post.puts "---"
+    post.puts "layout: page"
+    post.puts "published: false"
+    post.puts "title: \"#{title.gsub(/&/,'&amp;')}\""
+    post.puts "date: #{Time.now.strftime('%Y-%m-%d %H:%M:%S %z')}"
+    post.puts "start_date: #{start_date}"
+    post.puts "end_date: #{end_date}"
+    post.puts "description: PUT SUMMARY HERE "
     post.puts "---"
   end
 end
