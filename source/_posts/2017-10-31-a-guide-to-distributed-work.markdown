@@ -86,7 +86,7 @@ If your company supports remote work, then you remove an entire reason for an em
 
 ### Reduced office costs
 
-Having a distributed workforce can reduce office costs drastically. In a fully distributed company, it reduces the costs to zero[^3].
+Having a distributed workforce can reduce office costs drastically. In a fully distributed company, it could reduce the cost to zero. Realistically, I'd expect the company I work for to provide computer hardware so there are still some costs[^3]. Unless the company pays for Internet and phone, the recurring costs are minimal.
 
 ## Downsides
 
