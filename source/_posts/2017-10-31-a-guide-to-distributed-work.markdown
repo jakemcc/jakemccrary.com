@@ -387,7 +387,7 @@ If you've enjoyed this article, consider sharing ([tweeting](https://twitter.com
 
 ## Acknowledgments
 
-This article came to life from the notes and research I did prior to speaking at the [2016 AIT Workshop](http://lanyrd.com/2016/aitworkshop/). Some of those notes came from correspondence with [Timothy Pratley](https://timothypratley.blogspot.com/), [Rusty Bentley](http://www.rustybentley.com/), [Carin Meier](http://gigasquidsoftware.com/), [Devin Walters](https://twitter.com/devn), [Paco Viramontes](https://twitter.com/kidpollo), [Jeff Bay](http://www.xpteam.com/), and [Michael Halvorson](https://www.linkedin.com/in/michaelthalvorson/). Discussions at the conference, with the above individuals, and working remotely at [Outpace](https://outpace.com) and [Lumanu](https://lumanu.com) really helped solidify my thoughts.
+This article came to life from the notes and research I did prior to speaking at the [2016 AIT Workshop](http://lanyrd.com/2016/aitworkshop/). Some of those notes came from correspondence with [Timothy Pratley](https://timothypratley.blogspot.com/), [Rusty Bentley](http://www.rustybentley.com/), [Carin Meier](http://gigasquidsoftware.com/), [Devin Walters](https://twitter.com/devn), [Paco Viramontes](https://twitter.com/kidpollo), [Jeff Bay](http://www.xpteam.com/), and [Michael Halvorson](http://www.grayduckllc.com/). Discussions at the conference, with the above individuals, and working remotely at [Outpace](https://outpace.com) and [Lumanu](https://lumanu.com) really helped solidify my thoughts.
 
 ## Other references
 
