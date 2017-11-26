@@ -5,10 +5,11 @@ description: "Trip with Alina, Christine, and Nate to climb in El Potrero Chico.
 date: 2017-06-05 21:42:05 -0500
 start_date: 2016-02-13
 end_date: 2016-02-20
-published: false
+image: images/el-potrero-chico/2016/los-lobos-area-in-early-morning.png
+keywords: 'climbing, travel, mexico, el potrero chico'
 ---
 
-> This text was originally an email sent out to my family after the trip. As a result, it sort of misses some details about routes that I've been including in other write-ups.
+> Most of this text was originally an email sent out to my family immediately after the trip. As a result, it sort of misses some details about routes that I've been including in other write-ups. Recommendations at the bottom are from my memory now (almost 2 years after the original trip).
 
 Four of us (Alina, Christine, Nate, and myself) went down to [El Potrero Chico](http://potrerochico.org/) in Mexico from February 13th till February 20th. We flew into Monterrey and then took an hour cab ride to a camping area / hotel called [La Posada](http://potrerochico.org/listing/la-posada). We rented the Casa Grande, a four bed house with kitchen and stayed there for the week. La Posada is one of the places people stay when climbing in El Potrero Chico and I believe one of the more popular. It, along with the other camping areas, is about a 10-15 minute walk down a road from the entrance to the park. From the park entrance you could get to climbs with anywhere from five minutes to an hour of hiking off road.
 
@@ -53,6 +54,7 @@ Even if it is warm outside, you might want to bring up a jacket to protect yours
 
 There are a lot of bolts. Even so, every once in a while something looks run out. Usually that meant that section was quite easy and there was a very small chance of falling. You'll be fine.
 
+Some of the approaches have a lot of scree. Be careful.
 
 ## Food
 
