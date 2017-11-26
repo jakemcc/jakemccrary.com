@@ -18,7 +18,7 @@ Saturday we climbed at [The Gallery](http://www.redriverclimbing.com/RRCGuide/?t
 - [Short by a Foot](http://www.redriverclimbing.com/RRCGuide/?type=route&id=3487), 5.10c
 - [Dain Bramage](http://www.redriverclimbing.com/RRCGuide/?type=route&id=3113), 5.10d
 
-Of those five routes, I really enjoyed **Crimpy and the Brain** and **Dain Bramage**. **Crimpy and the Brain** had a couple pretty great sloper sequence on it (though, not everyone in our group did that sequence) and was super fun. Dain Bramage started similar to a lot of the routes in this area (powerful pocking pulling) but ended up transitioning to dihedral and then to an arete. It was a ton of fun and noticeably longer than the other routes.
+Of those five routes, I really enjoyed **Crimpy and the Brain** and **Dain Bramage**. **Crimpy and the Brain** had a couple pretty great sloper sequence on it (though, not everyone in our group did that sequence) and was super fun. Dain Bramage started similar to a lot of the routes in this area (powerful pocking pulling) but ended up transitioning into a dihedral and then moving onto an arete. It was a ton of fun and noticeably longer than the other routes.
 
 We didn't get on it, but there is a newer 5.12a called [Starry Night](http://www.redriverclimbing.com/RRCGuide/?type=route&id=3439) in that area. It looks pretty great. Someday we'll have to come back here and hit this up.
 
