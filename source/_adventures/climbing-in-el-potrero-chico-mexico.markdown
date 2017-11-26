@@ -47,7 +47,7 @@ I don't know the current (writing this paragraph in November 2017) guidebook sit
 
 ## Climbing recommendations
 
-This is going to be weather dependent, but don't climb in the sun. We climbed a little bit in the sun and it was brutal. Follow the shade. Because of the orientation of the park, you can always find it.
+This might be weather dependent, but don't climb in the sun. We climbed a little bit in the sun and it was brutal. Follow the shade. Because of the orientation of the park, you can always find it.
 
 Even if it is warm outside, you might want to bring up a jacket to protect yourself from the wind. Once you get high on the wall the wind really picks up. You can see how all of us had on some sort of fleece or wind-proof jacket in the picture of us at the top of Satori. We learned this the hard way after climbing "Will the Wolf Survive?" and being real cold near the top.
 
