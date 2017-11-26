@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "Parsing multiple date formats"
+title: "Parsing multiple date formats with clj-time"
 date: 2017-11-25 20:54:03 -0600
 comments: true
 published: false
-description: 
+description: Need to parse strings with multiple date formats into dates? Here is how you can do it.
 keywords: 'clojure, java, joda, jodatime, joda-time, date, clj-time'
 categories: 
 - clojure
