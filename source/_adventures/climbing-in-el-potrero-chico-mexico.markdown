@@ -45,9 +45,20 @@ You'll want to bring a 70 meter rope. You also will want to wear a helmet. There
 
 I don't know the current (writing this paragraph in November 2017) guidebook situation. When we were there in 2016 we picked up a thin paper guidebook. We quickly learned that you really should take the number of draw recommendation with a grain of salt. Bring up a bunch of draws. I've recently read 24 as a recommended number if you are linking up multi-pitch routes.
 
+## Climbing recommendations
+
+This is going to be weather dependent, but don't climb in the sun. We climbed a little bit in the sun and it was brutal. Follow the shade. Because of the orientation of the park, you can always find it.
+
+Even if it is warm outside, you might want to bring up a jacket to protect yourself from the wind. Once you get high on the wall the wind really picks up. You can see how all of us had on some sort of fleece or wind-proof jacket in the picture of us at the top of Satori. We learned this the hard way after climbing "Will the Wolf Survive?" and being real cold near the top.
+
+There are a lot of bolts. Even so, every once in a while something looks run out. Usually that meant that section was quite easy and there was a very small chance of falling. You'll be fine.
+
+
 ## Food
 
 We ate a lot of dinners at various restaurants all within walking distance of were we stayed. It was pretty tasty and I'd probably do the same again. There was a pizza and margarita trailer between the park and where we stayed. We befriended the owner and ended up eating and drinking there a couple of times.
+
+You'll want calorie dense food for the actual climbing. You're potentially going to be on a wall all day and will want to minimize what you're carrying. 
 
 ## Transportation
 
