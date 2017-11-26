@@ -22,7 +22,7 @@ Of those five routes, I really enjoyed **Crimpy and the Brain** and **Dain Brama
 
 We didn't get on it, but there is a newer 5.12a called [Starry Night](http://www.redriverclimbing.com/RRCGuide/?type=route&id=3439) in that area. It looks pretty great. Someday we'll have to come back here and hit this up.
 
-On Sunday we climbed at the [Secret Garden](http://www.redriverclimbing.com/RRCGuide/?type=wall&id=179) in Miller Fork. We were aiming for a different style of climbing than Saturday and Secret Garden delivers. We mostly climbed slabby and vertical routes here.
+On Sunday we climbed at the [Secret Garden](http://www.redriverclimbing.com/RRCGuide/?type=wall&id=179) in Miller Fork. We were aiming for a different style of climbing than Saturday and Secret Garden delivered. We mostly climbed slabby and vertical routes here.
 
 - [Hippie Lip Balm](http://www.redriverclimbing.com/RRCGuide/?type=route&id=2737), 5.9
 - [Cock to the Rock](http://www.redriverclimbing.com/RRCGuide/?type=route&id=3029), 5.10b
