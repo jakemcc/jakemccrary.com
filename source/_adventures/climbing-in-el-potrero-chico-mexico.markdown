@@ -7,3 +7,33 @@ start_date: 2016-02-13
 end_date: 2016-02-20
 published: false
 ---
+
+> This text was originally an email sent out to my family after the trip. As a result, it sort of misses some details about routes that I've been including in other write-ups.
+
+Four of us (Alina, Christine, Nate, and myself) went down to [El Potrero Chico](http://potrerochico.org/) in Mexico from February 13th till February 20th. We flew into Monterrey and then took an hour cab ride to a camping area / hotel called [La Posada](http://potrerochico.org/listing/la-posada). We rented the Casa Grande, a four bed house with kitchen and stayed there for the week. La Posada is one of the places people stay when climbing in El Potrero Chico and I believe one of the more popular. It, along with the other camping areas, is about a 10-15 minute walk down a road from the entrance to the park. From the park entrance you could get to climbs with anywhere from five minutes to an hour of hiking off road.
+
+{% imgcap /images/el-potrero-chico/2016/view-from-back-porch.png View from our back porch %}
+
+We arrived in the early afternoon on Saturday (the 13th). We went into town and bought some food from a local corner grocery. We primarily used this food for breakfasts and ate Clif bars and snacks while climbing. Dinners were always from a restaurant in the area. We also hiked into the park to check out the climbs in preparation for the next day. If we had known how close and accessible the climbing was we probably would have squeezed in some climbing on Saturday.
+
+{% imgcap /images/el-potrero-chico/2016/walking-into-el-potrero-chico.png Walking to the park entrance %}
+
+Sunday and Monday were spent climbing. These days were primarily spent climbing single pitch sport routes. I think we accidently climbed a two-pitch route.
+
+We took Tuesday off and spent the entire day with Alina's friend from Monterrey. He took us to his favorite restaurant and showed some of Monterrey and the surrounding area.
+
+We woke up early Wednesday and got to the route "Will the Wolf Survive?" slightly after 7:30 AM. This route was our first planned multi-pitch route. "Will the Wolf Survive" is a 4 pitch climb and estimated at around 400 feet of climbing. I enjoyed the climb, though when rappelling our rope got stuck and I had to reclimb part of it to get the rope down. I think all four of us were back on the ground around 1 PM. We then continued climbing single pitch routes at the part of the park called the "Cat Wall."
+
+{% imgcap /images/el-potrero-chico/2016/jake-clipping-rope.jpg Clipping a bolt at Cat Wall %}
+
+We woke up early again on Thursday to climb [Satori](https://www.mountainproject.com/route/106198915/satori). Satori is a 7 pitch, about 700 feet, climb. After a pretty challenging hike, we arrived at the base of the climb around 8 AM. Nate and I were the lead pair going up this route. We got to the top sometime between 1 and 2 PM. Nate and I waited at the top for Alina and Christine and then we rappeled down. We spent 1 - 2 hours rappelling and then hiked back out. It was a pretty great view from the top and a really different feeling climbing that high off the ground. This is the biggest climb I've done.
+
+{% imgcap /images/el-potrero-chico/2016/satori-near-the-top.png Random show from up on Satori. Those blue rectangles are HUGE pools. %}
+
+{% imgcap /images/el-potrero-chico/2016/starting-the-descent-off-satori.jpg The four of us starting the rappel down Satori. %}
+
+Friday was Nate's last day but we still helped him squeeze in some climbing in the morning. After Nate left the rest of us continued climbing. After spending four other days climbing we were feeling more comfortable on this rock and, despite being worn out, we climbed our hardest climbs of the trip.
+
+Saturday was a travel day back to Monterrey and then back to Chicago.
+
+The trip was pretty amazing. We all felt like we were just getting into the swing of it and wished we had more time down there.
