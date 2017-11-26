@@ -18,7 +18,7 @@ We arrived in the early afternoon on Saturday (the 13th). We went into town and 
 
 {% imgcap /images/el-potrero-chico/2016/walking-into-el-potrero-chico.png Walking to the park entrance %}
 
-Sunday and Monday were spent climbing. These days were primarily spent climbing single pitch sport routes. I think we accidently climbed a two-pitch route.
+Sunday and Monday were spent climbing. These days were primarily spent climbing single pitch sport routes. I think we accidentally climbed a two-pitch route.
 
 We took Tuesday off and spent the entire day with Alina's friend from Monterrey. He took us to his favorite restaurant and showed some of Monterrey and the surrounding area.
 
@@ -26,7 +26,7 @@ We woke up early Wednesday and got to the route "Will the Wolf Survive?" slightl
 
 {% imgcap /images/el-potrero-chico/2016/jake-clipping-rope.jpg Clipping a bolt at Cat Wall %}
 
-We woke up early again on Thursday to climb [Satori](https://www.mountainproject.com/route/106198915/satori). Satori is a 7 pitch, about 700 feet, climb. After a pretty challenging hike, we arrived at the base of the climb around 8 AM. Nate and I were the lead pair going up this route. We got to the top sometime between 1 and 2 PM. Nate and I waited at the top for Alina and Christine and then we rappeled down. We spent 1 - 2 hours rappelling and then hiked back out. It was a pretty great view from the top and a really different feeling climbing that high off the ground. This is the biggest climb I've done.
+We woke up early again on Thursday to climb [Satori](https://www.mountainproject.com/route/106198915/satori). Satori is a 7 pitch, about 700 feet, climb. After a pretty challenging hike, we arrived at the base of the climb around 8 AM. Nate and I were the lead pair going up this route. We got to the top sometime between 1 and 2 PM. Nate and I waited at the top for Alina and Christine and then we rappelled down. We spent 1 - 2 hours rappelling and then hiked back out. It was a pretty great view from the top and a really different feeling climbing that high off the ground. This is the biggest climb I've done.
 
 {% imgcap /images/el-potrero-chico/2016/satori-near-the-top.png Random show from up on Satori. Those blue rectangles are HUGE pools. %}
 
@@ -37,3 +37,21 @@ Friday was Nate's last day but we still helped him squeeze in some climbing in t
 Saturday was a travel day back to Monterrey and then back to Chicago.
 
 The trip was pretty amazing. We all felt like we were just getting into the swing of it and wished we had more time down there.
+
+
+## Gear recommendations
+
+You'll want to bring a 70 meter rope. You also will want to wear a helmet. There is a fair amount of rockfall.
+
+I don't know the current (writing this paragraph in November 2017) guidebook situation. When we were there in 2016 we picked up a thin paper guidebook. We quickly learned that you really should take the number of draw recommendation with a grain of salt. Bring up a bunch of draws. I've recently read 24 as a recommended number if you are linking up multi-pitch routes.
+
+## Food
+
+We ate a lot of dinners at various restaurants all within walking distance of were we stayed. It was pretty tasty and I'd probably do the same again. There was a pizza and margarita trailer between the park and where we stayed. We befriended the owner and ended up eating and drinking there a couple of times.
+
+## Transportation
+
+We got by alright without a car. It wasn't too costly to have someone drive us back and forth from the airport and the climbing is all within walking distance. A car would have been useful for getting to town for shopping or checking out [El Buho](http://potrerochico.org/listing/el-buho). We were able to bum rides from others when we went shopping.
+
+
+
