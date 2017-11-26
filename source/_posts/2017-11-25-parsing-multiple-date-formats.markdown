@@ -15,9 +15,9 @@ I recently needed to optimize the speed of some Clojure code. After investigatin
 
 The code throwing the exceptions was parsing strings into Joda-Time DateTime objects using the [clj-time](https://github.com/clj-time/clj-time) library.
 
-The code was calling [clj-time.coerce/from-string](https://github.com/clj-time/clj-time/blob/cce58248937bc05452ebfc8b65134961227a554e/src/clj_time/coerce.clj#L33-L38) which calls [clj-time.format/parse](https://github.com/clj-time/clj-time/blob/cce58248937bc05452ebfc8b65134961227a554e/src/clj_time/format.clj#L156-L165). `format/parse` iterates through up to approximately 50 formatters in an attempt to parse whatever string you pass it. If one of these formatters doesn’t parse the string, it throws an exception which format/parse catches and ignores before going to the next formatter.
+The code was calling [clj-time.coerce/from-string](https://github.com/clj-time/clj-time/blob/cce58248937bc05452ebfc8b65134961227a554e/src/clj_time/coerce.clj#L33-L38) which calls [clj-time.format/parse](https://github.com/clj-time/clj-time/blob/cce58248937bc05452ebfc8b65134961227a554e/src/clj_time/format.clj#L156-L165). `format/parse` iterates through up to approximately 50 formatters in an attempt to parse whatever string you pass it. If one of these formatters doesn’t parse the string, it throws an exception which `format/parse` catches and ignores before attempting the next formatter.
 
-This is pretty wasteful. This was especially wasteful in the code I was working in since it only needed to handle two different date formats.
+This was pretty wasteful. This was especially wasteful in the code I was working in since it only needed to handle two different date formats.
 
 Luckily, Joda-Time has a way to build a formatter that handles multiple formats and clj-time provides access to it. Below is code that creates a formatter that handles two different formats.
 
