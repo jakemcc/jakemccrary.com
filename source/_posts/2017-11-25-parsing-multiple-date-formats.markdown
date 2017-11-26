@@ -27,7 +27,9 @@ Luckily, Joda-Time has a way to build a formatter that handles multiple formats 
             [clj-time.format :as time-format]))
 
 (def multi-format
-  (time-format/formatter time/utc "YYYY-MM-dd" "YYYY-MM-dd'T'HH:mm:ss.SSSZ"))
+  (time-format/formatter time/utc
+                         "YYYY-MM-dd"
+                         "YYYY-MM-dd'T'HH:mm:ss.SSSZ"))
 
 (defn parse [s]
   (time-format/parse multi-format s))
@@ -42,8 +44,8 @@ multiple-dates.core> (parse "2017-09-04")
 multiple-dates.core> (parse "2017-09-04T12:11:02.123Z")
 #object[org.joda.time.DateTime 0x174f3a5c "2017-09-04T12:11:02.123Z"]
 
-multiple-dates.core> (println (parse "2017-09-04-12:11:02.123Z"))
+multiple-dates.core> (parse "2017-09-04-12:11:02.123Z")
 IllegalArgumentException Invalid format: "2017-09-04-12:11:02.123Z" is malformed at "-12:11:02.123Z"  org.joda.time.format.DateTimeFormatter.parseDateTime (DateTimeFormatter.java:945)
 ```
 
-This was pretty straightforward. I'll admit that it took a while to figure out how to use `clj-time.format/formatter` to make a formatter that worked with multiple formats. I had to look at Joda-Time's documentation and implement my own using Java interop before I cracked how to just use `clj-time.format/formatter` to do the same thing.
+Looking back at that code, it seems pretty straightforward. I'll admit that it took me and my pair a while to figure out how to do this using `clj-time`.. I had to look at Joda-Time's documentation and implement my own using Java interop before I cracked how to use `clj-time.format/formatter` to do the same thing.
