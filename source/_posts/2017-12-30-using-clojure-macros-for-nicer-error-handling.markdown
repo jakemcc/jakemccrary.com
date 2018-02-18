@@ -4,8 +4,8 @@ title: "Using Clojure macros for nicer error handling"
 date: 2017-12-30 18:56:39 -0600
 comments: true
 published: false
-description: Here is a useful Clojure macro for halting the execution of a pipeline of steps early
-keywords: 'clojure, macro'
+description: Here is one way to have better error handling by using Clojure macros
+keywords: 'clojure, macro, error handling, monad'
 categories: 
 - clojure
 ---
