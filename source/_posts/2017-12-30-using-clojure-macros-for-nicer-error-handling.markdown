@@ -36,16 +36,15 @@ then it returns an error response. I found this pretty ugly. This
 small chunk of code has numerous `if` branches and quite a bit of
 nesting. All of this makes it hard to read and hurts understanding.
 
-While adding a new feature to it, I remembered some code
-[Case](https://github.com/snoe) and me wrote back in late 2015. Back
-then we were working on Lumanu and wrote a Clojure macro that we
-called `halt-on-error->>`. This macro worked similarly to `->>`,
-except it allowed any step in the processing pipeline to halt
-execution and trigger an error handler. We were working on a web
-crawler at the time, and this macro significantly improved the
-readability of our data processing pipeline. There was a lot of error
-handling code throughout the web crawler, and this macro helped keep
-it readable.
+While adding a new feature to it, I remembered some code I wrote with
+[Case](https://github.com/snoe) back in late 2015. Back then we were
+working on Lumanu and wrote a Clojure macro that we called
+`halt-on-error->>`. This macro worked similarly to `->>`, except it
+allowed any step in the processing pipeline to halt execution and
+trigger an error handler. We were working on a web crawler at the
+time, and this macro significantly improved the readability of our
+data processing pipeline. There was a lot of error handling code
+throughout the web crawler, and this macro helped keep it readable.
 
 I realized that using a similar macro would make this code easier to
 follow. I recreated `halt-on-error->>` to allow any form to cause it
