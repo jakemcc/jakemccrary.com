@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "Using Clojure macros for nicer error handling"
-date: 2017-12-30 18:56:39 -0600
+title: Using Clojure macros for nicer error handling
+date: 2018-02-18 11:24 -0600
 comments: true
-published: false
+published: true
 description: Here is one way to have better error handling by using Clojure macros
-keywords: 'clojure, macro, error handling, monad'
-categories: 
+keywords: clojure, macro, error handling, monad
+categories:
 - clojure
 ---
 
