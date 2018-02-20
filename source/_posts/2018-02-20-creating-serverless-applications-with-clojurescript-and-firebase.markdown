@@ -1,12 +1,13 @@
 ---
 layout: post
-title: "Creating serverless applications with ClojureScript and Firebase"
-date: 2018-02-20 11:19:20 -0600
+title: Creating serverless applications with ClojureScript and Firebase
+date: 2018-02-20 11:30 -0600
 comments: true
-published: false
-description: Here is the presentation I gave at IN/Clojure 2018 on building serverless apps using ClojureScript.
-keywords: 'clojure, firebase, clojurescript, serverless'
-categories: 
+published: true
+description: Here is the presentation I gave at IN/Clojure 2018 on building serverless
+  apps using ClojureScript.
+keywords: clojure, firebase, clojurescript, serverless
+categories:
 - clojurescript
 - firebase
 - talks
