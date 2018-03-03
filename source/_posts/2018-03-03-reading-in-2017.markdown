@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "Reading in 2017"
-date: 2018-03-03 08:28:29 -0600
+title: Reading in 2017
+date: 2018-03-03 11:17 -0600
 comments: true
-published: false
+published: true
 description: A look back at the books I read in 2017.
-keywords: '2017, books, book review, reading'
-categories: 
+keywords: 2017, books, book review, reading
+categories:
 - books
 ---
 
