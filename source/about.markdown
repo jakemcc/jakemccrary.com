@@ -4,13 +4,13 @@ title: about
 sharing: false
 ---
 
-{% img left /images/jake-surprised-eyes-brighter.jpg 300 Picture of Jake McCrary %}
+{% img right /images/speaking-at-in-clojure.png 350 Picture of Jake McCrary %}
 
 I'm an experienced software developer. I enjoy coming up with simple
 solutions to seemingly complex problems. I've proven to be a reliable
 technology leader that can be depended on to understand business
 requirements, make technology choices, and make teams better through
-mentoring and growing team members.
+individual contributions and mentoring others.
 
 I currently work at [Outpace](http://outpace.com) developing marketing
 tools.
@@ -33,10 +33,12 @@ I've worked on a range of problems using a variety of technologies and
 methodologies. I've found testing to be critical to delivering quality
 software.
 
-I've presented at [AIT Workshop](http://lanyrd.com/2016/aitworkshop/)
-and speakerconf, two invite only conferences, and the Chicago Clojure
-group. Topics have included distributed teams, machine learning, and
-web development.
+I've presented at [IN/Clojure](/blog/2018/02/20/creating-serverless-applications-with-clojurescript-and-firebase/)),
+[AIT Workshop](http://lanyrd.com/2016/aitworkshop/) (formerly known as
+speakerconf, a conference composed of only invited speakers), and the
+Chicago Clojure group. Topics have included developing serverless
+applications, distributed teams, machine learning, and general web
+development.
 
 I've worked professionally in more languages than I can
 remember. Since 2014 most my development has been in Clojure and
