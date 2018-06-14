@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "A method of preventing multiple simultaneous long-running invocations"
+title: "Preventing duplicate long-running invocations in Clojure"
 date: 2018-04-13 14:24:45 -0500
 comments: true
 published: false
