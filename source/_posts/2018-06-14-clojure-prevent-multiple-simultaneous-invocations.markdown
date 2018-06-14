@@ -1,12 +1,13 @@
 ---
 layout: post
-title: "Preventing duplicate long-running invocations in Clojure"
-date: 2018-04-13 14:24:45 -0500
+title: Preventing duplicate long-running invocations in Clojure
+date: 2018-06-14 09:47 -0500
 comments: true
-published: false
-description: Here is a quick Clojure solution to ensuring multiple invocations of a function don't result in duplicate work.
-keywords: 'clojure'
-categories: 
+published: true
+description: Here is a quick Clojure solution to ensuring multiple invocations of
+  a function don't result in duplicate work.
+keywords: clojure
+categories:
 - clojure
 ---
 
