@@ -1,12 +1,13 @@
 ---
 layout: post
-title: "Tracking changes to a Reagent atom"
-date: 2018-04-12 13:42:03 -0500
+title: Tracking changes to a Reagent atom
+date: 2018-06-15 09:05 -0500
 comments: true
-published: false
-description: Debug your ClojureScript Reagent UIs by tracking changes to your applications global db.
-keywords: 'clojurescript, clojure, reagent'
-categories: 
+published: true
+description: Debug your ClojureScript Reagent UIs by tracking changes to your applications
+  global db.
+keywords: clojurescript, clojure, reagent
+categories:
 - clojurescript
 - reagent
 ---
