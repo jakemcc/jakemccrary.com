@@ -6,7 +6,9 @@ comments: true
 published: false
 description: lein-test-refresh now contains a built-in test selector. This lets you quickly focus on a subset of your tests without restarting your testing process.
 keywords: 'clojure, testing, lein-test-refresh'
-categories: clojure, testing
+categories:
+- clojure
+- testing
 ---
 
 If you follow my work you probably know that I value fast feedback cycles. Most of the open-source I maintain was developed to enable faster feedback cycles. This is why [lein-test-refresh](https://github.com/jakemcc/lein-test-refresh/) and [lein-autoexpect](https://github.com/clojure-expectations/lein-autoexpect) were originally created.
