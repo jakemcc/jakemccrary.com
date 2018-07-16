@@ -1,11 +1,12 @@
 ---
 layout: post
-title: "Built-in test narrowing with lein-test-refresh"
-date: 2018-07-16 09:59:59 -0500
+title: Built-in test narrowing with lein-test-refresh
+date: 2018-07-16 14:47 -0500
 comments: true
-published: false
-description: lein-test-refresh now contains a built-in test selector. This lets you quickly focus on a subset of your tests without restarting your testing process.
-keywords: 'clojure, testing, lein-test-refresh'
+published: true
+description: lein-test-refresh now contains a built-in test selector. This lets you
+  quickly focus on a subset of your tests without restarting your testing process.
+keywords: clojure, testing, lein-test-refresh
 categories:
 - clojure
 - testing
