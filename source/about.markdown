@@ -33,7 +33,7 @@ I've worked on a range of problems using a variety of technologies and
 methodologies. I've found testing to be critical to delivering quality
 software.
 
-I've presented at [IN/Clojure](/blog/2018/02/20/creating-serverless-applications-with-clojurescript-and-firebase/)),
+I've presented at [IN/Clojure](/blog/2018/02/20/creating-serverless-applications-with-clojurescript-and-firebase/),
 [AIT Workshop](http://lanyrd.com/2016/aitworkshop/) (formerly known as
 speakerconf, a conference composed of only invited speakers), and the
 Chicago Clojure group. Topics have included developing serverless
