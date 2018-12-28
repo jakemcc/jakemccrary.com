@@ -1,7 +1,7 @@
 ---
 layout: page
 published: false
-title: "Weekend in Denver"
+title: "Denver SUP and scooter"
 date: 2018-12-27 20:17:58 -0600
 start_date: 2018-07-27
 end_date: 2018-07-29
