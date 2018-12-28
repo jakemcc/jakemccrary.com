@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "A more helpful makefile"
-date: 2018-12-27 20:48:59 -0600
+title: A more helpful makefile
+date: 2018-12-27 21:21 -0600
 comments: true
-published: false
-description: PUT SUMMARY HERE 
-keywords: 'makefile'
-categories: 
+published: true
+description: Make your makefiles more useful with this helpful target
+keywords: makefile
+categories:
 - make
 - command-line
 ---
