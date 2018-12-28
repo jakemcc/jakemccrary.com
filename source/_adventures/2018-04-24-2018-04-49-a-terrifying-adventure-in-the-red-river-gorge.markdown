@@ -1,6 +1,6 @@
 ---
 layout: page
-published: false
+published: true
 title: "A terrifying adventure in the Red River Gorge"
 date: 2018-05-11 17:53:08 -0500
 start_date: 2018-04-24
@@ -12,7 +12,7 @@ Moses, Adam, Seamus, and myself leave Chicago late Tuesday afternoon and drive d
 
 Recent weather has been pretty rainy and we get the occasional sprinkle throughout the day. We head to Indy Wall since the guidebook claims it will be alright in a light rain.
 
-This is mostly true. A couple of the routes are wet, but we're able to climb on plenty other. Indy Wall is the home of the first bolted route in Muir Valley. Unfortunately, this route was wet. At Indy Wall, we climbed
+This is mostly true. A couple of the routes are wet, but we're able to climb on plenty others. Indy Wall is the home of the first bolted route in Muir Valley. Unfortunately, this route is wet. At Indy Wall, we climbed
 
 - Face Up To That Arete, 5.8 
 - Makin' Bacon, 5.10d
@@ -20,7 +20,7 @@ This is mostly true. A couple of the routes are wet, but we're able to climb on 
 - Peer Pressure, 5.10b
 - Posse Whipped, 5.12a
 
-Posse Whipped went really well. I think I fell once or twice but it felt completely doable. Just need to remember the beta for next time (and then try a couple more times).
+Posse Whipped went really well. I think I fell once or twice but it felt completely doable. Just need to remember the beta for next time (and then try a couple more times). Social Stigma was also a ton of fun.
 
 Next we decided to hike over to The Hideout and we knocked out a couple routes there.
 
@@ -65,19 +65,19 @@ We spring into action. Adam rushes over to Seamus to check on him. I grab my pho
 
 Luckily, Seamus is breathing but probably unconscious. Adam attends to him while I talk with 911. Meanwhile, Moses finds some other climbers and enlists them to help.
 
-Seamus comes to and is trying to move. He is in an awkward position, with his face down in some leaves. Adam and I carefully rotate him onto his back with his head wound above his chest. Seamus doesn't know what is going on, but he is talking and able to move his arms and legs. Adam and I keep trying to get him to stay still.
+Seamus comes to and tries to move. He is in an awkward position with his face down in some leaves. Adam and I carefully rotate him onto his back with his head wound above his chest. Seamus doesn't know what is going on, but he is talking and able to move his arms and legs. Adam and I keep trying to get him to stay still.
 
 The [Wolfe County Search and Rescue](https://www.facebook.com/WCSART/) start showing up and they take over. They get Seamus into a stretcher with a single wheel while the other climbers help clear the trail of any logs. We get Seamus down to the valley floor where he is transferred to an ambulance which takes him to a helipad. Then he is flown to UK's hospital in Lexington. During this, I call Brendan to let him know that his cousin just had an accident.
 
 Moses, Adam, and I hike our gear out of the valley (big thanks to the other climbers that helped us get our gear down to the valley floor and helped get Seamus out) and pack up our tents at Land of the Arches. We head to Lexington to stay with Seamus.
 
-Its a frightening evening of doctors figuring out what needs to happen and doing what they can to take care of Seamus. In the end, Seamus broke his back and fractured his neck. He ended up having surgery to put some hardware in his back and is stuck in a neck brace till he heals.
+It is a frightening evening of doctors figuring out what needs to happen and doing what they can to take care of Seamus. In the end, Seamus broke his back and fractured his neck. He ended up having surgery to put some hardware in his back and is stuck in a neck brace till he heals.
 
 (Aside: I wrote this a couple months after the accident and am editing and publishing it near the end of 2018. I can happily report that Seamus is doing great and is back to climbing.)
 
 McKenzie was planning on coming down to Kentucky that Friday to camp and climb with me since Seamus, Moses, and Adam were going to leave for a wedding on Saturday. She still came down, but instead of climbing we explored the Lexington area.
 
-Since she got down so late and we were in the hospital so long we stayed in a hotel the first night. The second evening we found a great campground alongside a river and had a good evening there.
+I stayed in the hospital till McKenzie got down to Kentucky and we find a hotel room for the night. The second evening we found a great campground alongside a river and had a good evening there.
 
 We spent our weekend doing a Four Roses bourbon tasting and trying out various restaurants in the area. I've been down to Kentucky so many times to climb but barely at all to do non-climbing activities. It was pretty enjoyable.
 
