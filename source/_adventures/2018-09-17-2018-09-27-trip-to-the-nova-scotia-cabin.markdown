@@ -1,0 +1,9 @@
+---
+layout: page
+published: false
+title: "Trip to the Nova Scotia cabin"
+date: 2018-12-27 20:31:43 -0600
+start_date: 2018-09-17
+end_date: 2018-09-27
+description: Another trip to the Nova Scotia cabin. The entire time it was only Preethi, Steve, and myself.  This is the latest I've been at the cabin and as a result I got to be part of getting the cabin ready for winter. The weather started warm but quickly cooled off and most of the trip was cool. Before I arrived, Steve and had installed a wood burning stove and solar panels and battery. These were all very useful. I brought electronics and installed lighting powered by the battery on the main floor of the cabin. I also made a box for storing wood next to the stove and Preethi did a wonderful paint job on it. We also built a very solid bookshelf out of an old door and some excess 2x4s.
+---
