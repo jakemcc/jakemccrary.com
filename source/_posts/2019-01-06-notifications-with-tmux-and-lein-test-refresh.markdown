@@ -1,12 +1,14 @@
 ---
 layout: post
-title: "Notifications with tmux and lein-test-refresh"
-date: 2019-01-06 15:31:19 -0600
+title: Notifications with tmux and lein-test-refresh
+date: 2019-01-06 16:55 -0600
 comments: true
-published: false
-description: This lein-test-refresh setting lets you run lein test-refresh in a non-visible tmux window and still see test results
-keywords: 'lein-test-refresh, tmux'
-categories: 
+published: true
+description: This lein-test-refresh setting lets you run lein test-refresh in a non-visible
+  tmux window and still see test results
+image: images/tmux-test-refresh.gif
+keywords: lein-test-refresh, tmux, clojure, testing, feedback
+categories:
 - lein-test-refresh
 - tmux
 - testing
