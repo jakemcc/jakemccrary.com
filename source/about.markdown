@@ -34,10 +34,7 @@ investors, dealt with third-party vendors, helped with recruiting, and
 provided guidance across the data science and software engineering
 teams.
 
-Before Outpace and Lumanu, I worked at [DRW
-Trading](http://drw.com). At DRW I spent my time writing research
-tools, trading systems (latency sensitive and non-latency sensitive),
-and more.
+Before Outpace and Lumanu, I worked at [DRW Trading](http://drw.com). At DRW I spent my time writing research tools, trading systems (latency sensitive and non-latency sensitive), and more.
 
 I've worked on a range of problems using a variety of technologies and
 methodologies. I've found testing to be critical to delivering quality
