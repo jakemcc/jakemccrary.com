@@ -14,20 +14,18 @@ categories:
 - tools
 ---
 
-I've been doing more work from home recently and have found myself SSHing into my beefy Linux workstation in the office. While I can work on software on my MacBook Pro, I've found it more effective to SSH into my Linux workstation and fire up a terminal Emacs and Clojure repl. This lets me interact with the pieces of software that are trickier to get working locally under OS X.
+I've been using Emacs in a remote [tmux](https://github.com/tmux/tmux) session lately and I've been missing [lein-test-refresh](https://github.com/jakemcc/lein-test-refresh#notifications) notifications when my Clojure tests pass or fail. Luckily, it only took me a little bit of searching to figure out a solution for when I'm working inside of tmux.
 
-When I'm working on a Clojure project, I like to have `lein test-refresh` always running somewhere. I don't often actually look at the output, I rely on notifications to tell me my tests are passing or failing.
-
-Remitting into a machine thwarts my typical pop-up notifications so I've turned to tmux. Below is a GIF of the notifications I get as my tests run and pass or fail.
+Below is a GIF of the notifications I get as my tests run and pass or fail.
 
 ![tmux and test-refresh notifications](/images/tmux-test-refresh.gif "tmux and test-refresh notifications")
 
-This is pretty easy to setup. You can trigger a message in tmux by running `tmux display-message <MESSAGE_HERE>`. To configure [lein-test-refresh](https://github.com/jakemcc/lein-test-refresh#notifications) to send notifications by tmux, update the `:test-refresh` section of your `project.clj` or `profiles.clj` to look like the following.
+With the above notifications, I can keep my focus on my code and only switch to the tmux window with `lein test-refresh` running when a test fails.
+
+This was pretty easy to setup. You can trigger a message in tmux by running `tmux display-message <MESSAGE_HERE>`. To configure [lein-test-refresh](https://github.com/jakemcc/lein-test-refresh#notifications) to send notifications to tmux simply include the following in your `:test-refresh` section of your `project.clj` or `profiles.clj`.
 
 ```clojure
 :test-refresh {:notify-command ["tmux" "display-message"]}
 ```
 
-Pretty straightforward change. Now I find myself toggling between that setting and my usual one that provides pop-up notifications depending on whether or not I'm local to my Linux box or SSHed in. A next step might be to introduce a shell script that does the right thing depending on if I'm in tmux or not.
-
-I hope you enjoy this. Its has made using a remote terminal with tmux and (lein-test-refresh)[https://github.com/jakemcc/lein-test-refresh] more enjoyable.
+I hope you enjoy this. Its has made using a remote terminal with tmux and [lein-test-refresh](https://github.com/jakemcc/lein-test-refresh) more enjoyable.
