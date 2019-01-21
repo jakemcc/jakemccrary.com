@@ -4,7 +4,7 @@ title: Reading in 2018
 date: 2019-01-21 14:29 -0600
 comments: true
 published: true
-description: PUT SUMMARY HERE
+description: A look back at the books I read in 2018.
 keywords: 2018, books, book review, reading
 categories:
 - books
