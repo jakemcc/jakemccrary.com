@@ -10,24 +10,24 @@ categories:
 - books
 ---
 
-At the beginning of every year I like to take the time to reflect on my previous year's reading. It gives me a time to make sure my data is correct and lets me think about where I want my reading to go in the upcoming year.
+At the beginning of every year I like to take the time to reflect on my previous year's reading. It gives me a time to correct my data and think about where I want my reading to go in the upcoming year.
 
 Here are links to my previous end-of-year reflections: [2013](/blog/2014/01/01/using-incanter-to-review-my-2013-reading/), [2014](/blog/2015/01/08/reading-in-2014/), [2015](/blog/2016/03/13/reading-in-2015/), [2016](/blog/2017/01/04/reading-in-2016/), and [2017](/blog/2018/03/03/reading-in-2017/).
 
 I've continued to keep track of my reading using [Goodreads](http://goodreads.com). My [profile](https://www.goodreads.com/user/show/3431614-jake-mccrary) continues to have the full list of the books I've read since 2010. [Here](https://www.goodreads.com/review/list/3431614-jake-mccrary?read_at=2018) is my entire 2018 record.
 
-I slacked off a bit when writing reviews for all of my read books in Goodreads this year. I often didn't write a review until some time passed after reading the book and as a result I think I did a worse job reviewing books. I've even noticed that some books don't have a written review. I'm not a fan of this and we'll see if I do better in 2018. I might need to revisit how I track my reviews.
+I slacked off a bit when writing reviews for all of my read books in Goodreads. I often didn't write a review until some time had passed after completing the book and, as a result, I think I did a worse job reviewing books. Some books don't even have a written review. I'm not a fan of this and will push myself some in 2019 to do a better job.
 
 ## 2018 Goal
 
-> There are a few more books on writing that I've wanted to read for a while. I'm planning on reading at least one of them this year. I'm also want to read more Octavia Butler.
+> There are a few more books on writing that I've wanted to read for a while. I'm planning on reading at least one of them this year. I'm also want to read more Octavia Butler. - Me (in the previous reading post)
 
-The above quote was my goal for 2018. It basically breaks down into two goals:
+That was my goal for 2018. It breaks down into two goals:
 
 1. Read at least one book on writing.
 1. Read more Octavia Butler.
 
-I definitely succeeded with regards to the Octavia Butler goal and completely failed with the other.
+I succeeded on the Octavia Butler goal and completely failed with the other.
 
 ## 2018 Numbers
 
@@ -37,15 +37,15 @@ I read 43 books for a total of 16,213 pages. This is a bit less than last year b
 
 Below is a list of my five star books from 2018. The book titles link to Amazon and are affiliate links. The other links are to my Goodreads review. Unfortunately, this year I didn't do a great job of always writing a review so some of them are missing or very short.
 
-I generally highlight a lot of passages while reading and then rarely go back to look at them. If I think I have worthwhile highlights to share, I'll include a link to them. Are they worthwhile without the context of the book? Who knows. I've reread them and got something out of them but many are also so far removed from my memory that they are almost useless.
+I generally highlight a lot of passages while reading and then rarely go back to look at them. I've included links to my highlights. Are they worthwhile without the context of the book? I have no idea. I've reread them and got something out of them but many are also so far removed from my memory that they are almost useless.
 
 - [Being Mortal: Medicine and What Matters in the End by Atul Gawande](https://amzn.to/2TYyeo2) ([my review](https://www.goodreads.com/review/show/1380346555), [my highlights](https://www.goodreads.com/notes/23290548-being-mortal/3431614-jake-mccrary))
-- [Sapiens: A Brief History of Humankind by Yuval Noah Harari](https://amzn.to/2TaFJZb) ([my review](https://www.goodreads.com/review/show/1679140092) [my highlights](https://www.goodreads.com/notes/20873740-sapiens/3431614-jake-mccrary))
-- [Essentialism: The Disciplined Pursuit of Less by Greg McKeown](https://amzn.to/2FP8jvk) ([my review](https://www.goodreads.com/review/show/1178908716) [my highlights](https://www.goodreads.com/notes/19776547-essentialism/3431614-jake-mccrary))
-- [Crucial Conversations Tools for Talking When Stakes Are High by Kerry Patterson,  Joseph Grenny, Ron McMillan, Al Switzler](https://amzn.to/2Docah1) ([my empty review](https://www.goodreads.com/review/show/2391621570) [my highlights](https://www.goodreads.com/notes/13041257-crucial-conversations-tools-for-talking-when-stakes-are-high/3431614-jake-mccrary))
+- [Sapiens: A Brief History of Humankind by Yuval Noah Harari](https://amzn.to/2TaFJZb) ([my review](https://www.goodreads.com/review/show/1679140092), [my highlights](https://www.goodreads.com/notes/20873740-sapiens/3431614-jake-mccrary))
+- [Essentialism: The Disciplined Pursuit of Less by Greg McKeown](https://amzn.to/2FP8jvk) ([my review](https://www.goodreads.com/review/show/1178908716), [my highlights](https://www.goodreads.com/notes/19776547-essentialism/3431614-jake-mccrary))
+- [Crucial Conversations Tools for Talking When Stakes Are High by Kerry Patterson,  Joseph Grenny, Ron McMillan, Al Switzler](https://amzn.to/2Docah1) ([my highlights](https://www.goodreads.com/notes/13041257-crucial-conversations-tools-for-talking-when-stakes-are-high/3431614-jake-mccrary))
 - [Rediscovering JavaScript: Master ES6, ES7, and ES8 by Venkat Subramaniam](https://amzn.to/2sAWpNB) ([my review](https://www.goodreads.com/review/show/2450809712))
 - [CivilWarLand in Bad Decline by George Saunders](https://amzn.to/2U2QDjy) ([my review](https://www.goodreads.com/review/show/104227855))
-- [The Obelisk Gate (The Broken Earth #2) by N.K. Jemisin](https://amzn.to/2Do2fIt) ([my empty review](https://www.goodreads.com/review/show/2462106186))
+- [The Obelisk Gate (The Broken Earth #2) by N.K. Jemisin](https://amzn.to/2Do2fIt)
 - [The Stone Sky (The Broken Earth, #3) by N.K. Jemisin](https://amzn.to/2FLwbje) ([my review](https://www.goodreads.com/review/show/2467372092))
 - [The Hate U Give by Angie Thomas](https://amzn.to/2FNdgo8) ([my review](https://www.goodreads.com/review/show/2221117127))
 - [Six of Crows (Six of Crows, #1) by Leigh Bardugo](https://amzn.to/2T4PUy9) ([my review](https://www.goodreads.com/review/show/2309941150))
@@ -55,7 +55,7 @@ I generally highlight a lot of passages while reading and then rarely go back to
 
 This book deals with the end of our lives. It was great. There is a lot of good insight here. Like a lot of the non-fiction books I read, I really should go back and take notes on what I highlighted.
 
-We're all going to deal with death and sickness. I'd highly recommend this book.
+We're all going to deal with death and sickness. This book can help.
 
 #### Sapiens: A Brief History of Humankind by Yuval Noah Harari
 
@@ -63,7 +63,7 @@ My entire Goodreads review is two sentences.
 
 > This is an incredible book. You should read this. - Me
 
-I still agree with this. My friend Steve Deobald [described](https://www.goodreads.com/review/show/2347504001?book_show_action=false) this book as "the most lucid book he's ever read." There is a reason this book has a 4.45 rating on Goodreads. Go read the blurb about it there and then buy and read this book[^1].
+I still agree with this. My friend, Steve Deobald, [described](https://www.goodreads.com/review/show/2347504001?book_show_action=false) this book as "the most lucid book he's ever read." There is a reason this book has a 4.45 rating on Goodreads. Go read the blurb about it there and then buy and read this book[^1].
 
 [^1]: In the beginning of 2019 I also read Harari's "21 lessons for the 21st Century." Spoiler alert: this book will end up in my 2019 reading summary post.
 
@@ -73,11 +73,9 @@ I still agree with this. My friend Steve Deobald [described](https://www.goodrea
 
 A really great book encouraging you to focus on what matters and, as a result, make a bigger impact and be happier. It is better to make a mile of progress on one thing instead of making inches of progress in a bunch. 
 
-Tim Ferris recently [published a podcast](https://tim.blog/2019/01/09/greg-mckeown-essentialism/) with Greg McKeown which I'd also recommend. I've been enjoying listening to the podcast after a bit of time away from the book. This has helped remind and reinforce ideas from the book. If you're hesitant to read the book, take the time to listen and pay attention to this long podcast.
+Tim Ferris recently [published a podcast](https://tim.blog/2019/01/09/greg-mckeown-essentialism/) with Greg McKeown which I'd also recommend. I've enjoyed listening to the podcast after a bit of time away from the book. This has helped reinforce ideas from the book. If you're hesitant to read the book, take the time to listen and pay attention to this long podcast.
 
 I highlighted over 100 sections of this book. I plan on revisiting these notes and this book periodically.
-
-If you've really been paying attention to some themes in the books I read, you could group this one in with Deep Work by Cal Newport (another must read from a previous year).
 
 #### Crucial Conversations Tools for Talking When Stakes Are High by Kerry Patterson, Joseph Grenny, Ron McMillan, Al Switzler
 
@@ -89,9 +87,9 @@ I enjoyed this book and thought I picked up some useful tips from it. I think th
 
 Do you write JavaScript?
 
-Did you write JavaScript in the past but then move on to languages like ClojureScript and then stop paying attention to all the changes that have happened in JavaScript?
+Did you write JavaScript in the past but then move on to languages like ClojureScript and miss all the changes that happened to JavaScript?
 
-Well, both of those sentences apply to me. This book has been great at catching up to modern JavaScript. I find myself referencing it while writing JavaScript and it has been very helpful. This was recommended to me by Ben Rady and I'm happy I've read it and it sits on my virtual bookshelf.
+Both of those sentences apply to me. This book has been great at catching up on modern JavaScript. I find myself referencing it while writing JavaScript and it has been very helpful. It is to the point and I find myself referencing it periodically.
 
 #### CivilWarLand in Bad Decline by George Saunders
 
@@ -111,9 +109,9 @@ I read this as part of my book club and it was universally enjoyed.
 
 #### Six of Crows (Six of Crows, #1) and Crooked Kingdom (Six of Crows #2) by Leigh Bardugo
 
-I just really enjoyed this series. I enjoyed the fantasy world it was set it and have read most of Leigh Bardugo's other books that are set in it.
+I just really enjoyed this series. I enjoyed the fantasy world it was set in and have read most of Leigh Bardugo's other books that are set in this same world.
 
-The series is a young adult series. It isn't complex. The reading isn't difficult. It isn't going to change your life. You're not going to be blown away by the writing. It almost feels weird to include this series in the same list as CivilWarLand and The Broken Earth series. Even still, I found myself sucked into the story and didn't mind spending the short amount of time it took to read the books.
+The series is a young adult series. It isn't complex. The reading isn't difficult. It isn't going to change your life and you're not going to be blown away by the writing. It almost feels weird to include this series in the same list as CivilWarLand and The Broken Earth series. Even still, I found myself sucked into the story and didn't mind spending the short amount of time it took to read the books.
 
 ### Non-Five Star highlights
 
@@ -129,13 +127,13 @@ I thought this was a really interesting book.
 
 I really enjoyed this. Pink references other works to build a narrative about how timing matters. When should you take a nap? Is it better to go do the doctors in the morning or afternoon? How do are cognitive abilities generally change throughout the day? How should you try to end your vacations?
 
-I did take some notes on the book while reading it and I have referenced them post-read. It was a good book. I should have taken more notes.
+I did take some notes on the book while reading it and I have referenced them. It was a good book. I should have taken more notes.
 
 #### Bloodchild and Other Stories by Octavia E. Butler
 
 [amazon](https://amzn.to/2MreMxO), [my review](https://www.goodreads.com/review/show/2293497979), [my highlights](https://www.goodreads.com/notes/40274755-bloodchild-and-other-stories/3431614-jake-mccrary)
 
-This is a great collection of short stories and non-fiction articles written by Octavia Butler. I really love her writing. I've read a few of her works and still love [Lilith's Brood](https://www.goodreads.com/book/show/60926.Lilith_s_Brood) the most.
+This is a great collection of short stories and non-fiction articles written by Octavia Butler. I really love her writing. I've read a few of her works and still enjoy [Lilith's Brood](https://www.goodreads.com/book/show/60926.Lilith_s_Brood) the most.
 
 Below is a quote from her about science fiction that really resonated with me. It really hits home on one of the reasons I love reading science fiction.
 
@@ -149,15 +147,15 @@ This book is real bizarre. For some reason I liked it.
 
 #### Factfulness: Ten Reasons We're Wrong About the World--and Why Things Are Better Than You Think by Hans Rosling
 
-[amazon](https://amzn.to/2FQBmP8),[my review](https://www.goodreads.com/review/show/2402596250) ,[my highlights](https://www.goodreads.com/notes/36185940-factfulness/3431614-jake-mccrary)
+[amazon](https://amzn.to/2FQBmP8), [my review](https://www.goodreads.com/review/show/2402596250), [my highlights](https://www.goodreads.com/notes/36185940-factfulness/3431614-jake-mccrary)
 
 This book is great. It is very approachable and dispels some wrong common knowledge.
 
 ## Stats
 
-I struggled generating stats this year. I kept having data issues with Goodreads. It is making me wonder what it would take to build exactly what I want with regards to tracking my own data.
+I struggled generating stats this year. I kept having data issues with Goodreads. There is data that is in Goodreads that is failing to export both through their export feature and API. I'm somewhat wondering what I would need to do to track reading in a different way.
 
-Below is the reading stats per month. This is based on when a book is completed. That is one reason why December is so low. I had a couple large books in December that wrapped up in January.
+Below is the reading stats per month. The numbers are based on when the book is completed. December is partially so low because the other books all carried over to January.
 
 ![Book and pages count by month](/images/2018-books-and-pages.svg "Book and pages count by month")
 
