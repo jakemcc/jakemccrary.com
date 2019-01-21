@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "Reading in 2018"
-date: 2019-01-15 21:28:46 -0600
+title: Reading in 2018
+date: 2019-01-21 14:29 -0600
 comments: true
-published: false
-description: PUT SUMMARY HERE 
+published: true
+description: PUT SUMMARY HERE
 keywords: 2018, books, book review, reading
-categories: 
+categories:
 - books
 ---
 
