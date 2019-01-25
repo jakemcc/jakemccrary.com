@@ -11,6 +11,8 @@ categories:
 - tools
 ---
 
+<!-- First Draft: 26 minutes -->
+
 I've been using [tmux](https://github.com/tmux/tmux) a lot more lately. This resulted in me figuring out how to get [lein-test-refresh](https://github.com/jakemcc/lein-test-refresh#notifications) to send [notifications using tmux](/blog/2019/01/06/notifications-with-tmux-and-lein-test-refresh/).
 
 The setup linked above works great for when I'm doing work all by myself. Once I started pairing with another developer it showed some problems. It only send the notifications to one of the developers. One is better than none but still not ideal.
