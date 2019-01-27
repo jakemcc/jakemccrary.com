@@ -5,6 +5,7 @@ date: 2019-01-27 17:03 -0600
 comments: true
 published: true
 description: Here is how to display a message to all tmux clients
+image: images/tmux-notify-script.gif
 keywords: tmux
 categories:
 - tmux
