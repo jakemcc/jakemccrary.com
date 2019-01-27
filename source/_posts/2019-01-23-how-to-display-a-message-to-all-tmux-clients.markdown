@@ -13,17 +13,17 @@ categories:
 
 <!-- First Draft: 26 minutes -->
 
-I've been using [tmux](https://github.com/tmux/tmux) a lot more lately. This resulted in me figuring out how to get [lein-test-refresh](https://github.com/jakemcc/lein-test-refresh#notifications) to send [notifications using tmux](/blog/2019/01/06/notifications-with-tmux-and-lein-test-refresh/).
+Lately, I've been using [tmux](https://github.com/tmux/tmux) a lot. This resulted in me figuring out how to get [lein-test-refresh](https://github.com/jakemcc/lein-test-refresh#notifications) to send [notifications using tmux](/blog/2019/01/06/notifications-with-tmux-and-lein-test-refresh/).
 
-The setup linked above works great for when I'm doing work all by myself. Once I started pairing with another developer it showed some problems. It only send the notifications to one of the developers. One is better than none but still not ideal.
+The setup linked above works great for when I'm doing work all by myself. It showed a problem when using ssh and tmux to pair with another developer. Instead of both developers receiving a notification, only one did. One is better than none but not ideal.
 
-Below is a GIF of what I'm talking about. Each window simulates a different developer pairing together on a project.
+Below is a GIF showing the problem. Each window simulates a different developer.
 
 ![tmux only showing one developer a notification](/images/tmux-pair-fail.gif)
 
-This wasn't too hard to fix though. A little digging through the tmux manpage shows that `tmux display-message` takes an optional flag telling it which client gets the message. I had the idea that if I could get a list of all the clients then I could iterate over them and send a message to each.
+This wasn't too hard to fix. A little digging through the tmux manpage shows that `tmux display-message` takes an optional flag telling it which client receives the message. If we can get a list of all the clients then iterating over them and sending a message to each is straightforward.
 
-We can get a list of clients with `tmux list-clients`. This gives output like below.
+`tmux list-clients` give us this list. Below is the output.
 
 ```
 $ tmux list-clients
@@ -31,9 +31,9 @@ $ tmux list-clients
 /dev/ttys006: 0 [78x42 xterm-256color] (utf8)
 ```
 
-Cool. What we care about is the parts that look like `/dev/ttys002`. At first I used `cut` to grab those values but then I dug a bit deeper into the `tmux` manpage.
+What we care about are the parts that look like `/dev/ttys002`. At first I used `cut` to grab these values but then I dug a bit deeper into the `tmux` manpage.
 
-It turns out, you can specify a format to `tmux list-clients`. If you run `tmux list-clients -F "#{client_name}"` it gives only the output we care about.
+It turns out that you can specify a format to `tmux list-clients`. Running `tmux list-clients -F "#{client_name}"` gives us the output we care about.
 
 ```
 $ tmux list-clients -F "#{client_name}"
@@ -41,11 +41,11 @@ $ tmux list-clients -F "#{client_name}"
 /dev/ttys006
 ```
 
-Next, I combined that with `xargs` and to send a message to multiple clients.
+We can combine that with `xargs` to send a message to multiple clients.
 
 ![tmux xargs example](/images/tmux-xargs-example.gif)
 
-Finally, I put it into a script called `notify` and configured `lein-test-refresh` to use that as its notification command. Script and GIF of that below. Now you and your pairs can get notifications!
+That command is a bit much to put into `lein-test-refresh`'s configuration so I shoved it in a script called `notify` and configured `lein-test-refresh` to use it. Script and GIF of that below. Now both you and your pair can get notifications.
 
 ```bash
 #!/bin/bash
