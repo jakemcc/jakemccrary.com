@@ -33,3 +33,7 @@ publish_draft: ## Publishes a draft
 .PHONEY: unpublished
 unpublished: ## List drafts
 	@ag -l 'published: false' source/_posts/
+
+.PHONEY: build
+build: ## Generate site
+	bundle exec rake generate
