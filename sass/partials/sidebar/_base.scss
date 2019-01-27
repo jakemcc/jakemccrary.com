@@ -57,7 +57,7 @@ aside.sidebar {
 }
 
 @media only screen and (min-width: 768px) {
-  .toggle-sidebar {
+  .toggle-sidebar { //TODO look into
     outline: none;
     position: absolute; right: -10px; top: 0; bottom: 0;
     display: inline-block;
@@ -82,25 +82,6 @@ aside.sidebar {
       border-right: 1px solid $sidebar-border;
       content: "\00BB";
       text-indent: -1px;
-    }
-    .collapse-sidebar & {
-      text-indent: 0px;
-      right: -20px;
-      width: 19px;
-      &:hover {
-        background: mix($sidebar-border, $sidebar-bg);
-      }
-      &:after {
-        border-left: 1px solid $sidebar-border;
-        text-shadow: #fff 0 1px;
-        content: "\00AB";
-        left: 0px; right: 0;
-        text-align: center;
-        text-indent: 0;
-        border: 0;
-        border-right-width: 0;
-        background: none;
-      }
     }
   }
 }
