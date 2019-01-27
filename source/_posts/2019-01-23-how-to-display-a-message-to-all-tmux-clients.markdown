@@ -12,6 +12,7 @@ categories:
 ---
 
 <!-- First Draft: 26 minutes -->
+<!-- First edits: 14 minutes -->
 
 Lately, I've been using [tmux](https://github.com/tmux/tmux) a lot. This resulted in me figuring out how to get [lein-test-refresh](https://github.com/jakemcc/lein-test-refresh#notifications) to send [notifications using tmux](/blog/2019/01/06/notifications-with-tmux-and-lein-test-refresh/).
 
