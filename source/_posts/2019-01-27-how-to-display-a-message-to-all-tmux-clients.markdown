@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "How to display a message to all tmux clients"
-date: 2019-01-23 18:45:04 -0600
+title: How to display a message to all tmux clients
+date: 2019-01-27 17:03 -0600
 comments: true
-published: false
+published: true
 description: Here is how to display a message to all tmux clients
 keywords: tmux
-categories: 
+categories:
 - tmux
 - tools
 ---
