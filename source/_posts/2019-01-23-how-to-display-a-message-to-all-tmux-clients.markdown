@@ -11,6 +11,7 @@ categories:
 - tools
 ---
 
+<!-- Estimated time: 30 minutes -->
 <!-- First Draft: 26 minutes -->
 <!-- First edits: 14 minutes -->
 
