@@ -88,11 +88,8 @@ aside.sidebar {
   &.left, &.right { margin-bottom: .8em; }
 }
 
-.toggle-sidebar { &, .no-sidebar & { display: none; }}
-
 body.sidebar-footer {
   #content { margin-right: 0px; }
-  .toggle-sidebar { display: none; }
 }
 
 @media only screen and (min-width: 550px) {

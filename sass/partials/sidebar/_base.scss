@@ -56,32 +56,3 @@ aside.sidebar {
   }
 }
 
-@media only screen and (min-width: 768px) {
-  .toggle-sidebar { //TODO look into
-    outline: none;
-    position: absolute; right: -10px; top: 0; bottom: 0;
-    display: inline-block;
-    text-decoration: none;
-    color: mix($text-color-light, $sidebar-bg);
-    width: 9px;
-    cursor: pointer;
-    &:hover {
-      background: mix($sidebar-border, $sidebar-bg);
-      @include background(linear-gradient(left, rgba($sidebar-border, .5), rgba($sidebar-border, 0)));
-    }
-    &:after {
-      position: absolute; right: -11px; top: 0;
-      width: 20px;
-      font-size: 1.2em;
-      line-height: 1.1em;
-      padding-bottom: .15em;
-      @include border-bottom-right-radius(.3em);
-      text-align: center;
-      background: $main-bg $noise-bg;
-      border-bottom: 1px solid $sidebar-border;
-      border-right: 1px solid $sidebar-border;
-      content: "\00BB";
-      text-indent: -1px;
-    }
-  }
-}
