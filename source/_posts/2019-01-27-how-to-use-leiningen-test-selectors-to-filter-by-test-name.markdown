@@ -74,4 +74,6 @@ If you wanted to make `lein test` or `lein test-refresh` only run non-integratio
                                                               "integration")))}
 ```
 
+Enjoy! I hope this example helps run a subset[^1] of your Clojure tests through Leiningen test selectors.
 
+[^1]: Running a subset of your tests can be helpful and test-refresh has a few features that help you do that. If you can, I'd still recommend making all your tests fast enough to run them all the time.
