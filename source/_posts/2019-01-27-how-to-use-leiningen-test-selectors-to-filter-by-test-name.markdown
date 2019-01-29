@@ -16,6 +16,7 @@ categories:
 <!-- Estimate: 30 minutes -->
 <!-- First draft: 38 minutes -->
 <!-- First edit: 13 minutes -->
+<!-- Second edit: 8 minutes -->
 
 Leiningen test selectors are great. They allow you to filter what tests run by applying a function to the test's metadata. If that function returns a truthy value then that test will run. [lein-test-refresh](https://github.com/jakemcc/lein-test-refresh/blob/master/CHANGES.md#040) supports them and even includes a built in one for its [focus feature](https://github.com/jakemcc/lein-test-refresh#built-in-test-narrowing-test-selector).
 
