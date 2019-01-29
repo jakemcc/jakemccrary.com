@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "How to use Leiningen test selectors to filter by test name"
-date: 2019-01-27 18:36:54 -0600
+title: How to use Leiningen test selectors to filter by test name
+date: 2019-01-28 21:27 -0600
 comments: true
-published: false
+published: true
 description: 
-keywords: 'clojure, leiningen, test selectors, filter, test-refresh'
-categories: 
+keywords: clojure, leiningen, test selectors, filter, test-refresh
+categories:
 - clojure
 - leiningen
 - lein-test-refresh
