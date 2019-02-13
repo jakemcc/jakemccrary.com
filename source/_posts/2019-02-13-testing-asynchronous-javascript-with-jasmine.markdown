@@ -1,12 +1,13 @@
 ---
 layout: post
-title: "Testing asynchronous JavaScript with Jasmine"
-date: 2019-02-10 17:15:25 -0600
+title: Testing asynchronous JavaScript with Jasmine
+date: 2019-02-13 17:46 -0600
 comments: true
-published: false
-description: I recently struggled to get some asynchronous JavaScript code under test. Here is my solution.
+published: true
+description: I recently struggled to get some asynchronous JavaScript code under test.
+  Here is my solution.
 keywords: javascript, jasmine, testing
-categories: 
+categories:
 - javascript
 - testing
 ---
