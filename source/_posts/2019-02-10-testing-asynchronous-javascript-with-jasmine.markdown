@@ -11,7 +11,7 @@ categories:
 - testing
 ---
 
-I was recently adding a feature to an internal web UI that caught all unhandled JavaScript errors and reported them to the backend service. The implementation went smoothly with the most effort spent figuring out how to test the code that was reporting the errors.
+I was recently adding a feature to an internal web UI that caught all unhandled JavaScript errors and reported them to the backend service. The implementation went smoothly with most of the effort spent figuring out how to test the code that was reporting the errors.
 
 If the error reporting failed, I didn't want to trigger reporting another error or completely lose that error. I decided to log a reporting error to the console. I wanted to write a test showing that errors reporting errors were handled so that a future me, or another developer, didn't accidentally remove this special error handling and enable a never ending cycle of of reporting failed reporting attempts.
 
@@ -34,7 +34,7 @@ It takes an incoming `event` object and merges it with a default value and posts
 Below is what I eventually came up with for testing the error handling feature of `reportEvent`.
 
 ```javascript
-describe("reporting events", function() {
+describe('reporting events', function() {
   it('logs errors', (done) => {
     spyOn(console, 'error').and.callFake(() => {
       expect(console.error).toHaveBeenCalled();
