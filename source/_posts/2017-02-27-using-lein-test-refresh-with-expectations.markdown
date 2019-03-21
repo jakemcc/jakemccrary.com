@@ -10,6 +10,7 @@ keywords: clojure, clojure.test, expectations, lein-autoexpect, lein-test-refres
 categories:
 - testing
 - clojure
+- lein-test-refresh
 ---
 
 The 2.2.0 release[^1]

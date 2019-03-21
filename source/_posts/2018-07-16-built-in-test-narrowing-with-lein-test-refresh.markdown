@@ -10,6 +10,7 @@ keywords: clojure, testing, lein-test-refresh
 categories:
 - clojure
 - testing
+- lein-test-refresh
 ---
 
 If you follow my work you probably know that I value fast feedback cycles. Most of the open-source I maintain was developed to enable faster feedback cycles. This is why [lein-test-refresh](https://github.com/jakemcc/lein-test-refresh/) and [lein-autoexpect](https://github.com/clojure-expectations/lein-autoexpect) were originally created.
