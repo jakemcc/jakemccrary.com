@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "Breaking change and more in lein-test-refresh 0.24.0"
-date: 2019-03-20 20:48:34 -0500
+title: Breaking change and more in lein-test-refresh 0.24.0
+date: 2019-03-20 21:30 -0500
 comments: true
-published: false
+published: true
 description: A bunch of new features arrived in version 0.24.0 of lein-test-refresh
-keywords: 'clojure, lein-test-refresh, testing'
-categories: 
+keywords: clojure, lein-test-refresh, testing
+categories:
 - clojure
 - testing
 - lein-test-refresh
