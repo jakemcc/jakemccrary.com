@@ -9,11 +9,13 @@ keywords: twitter, Facebook, social media, focus
 categories: 
 ---
 
-Over the years, I've read many articles about the negative parts of social media. You've probably read articles extolling the benefits of cutting social media out of your life. These articles are abundant and easy to find through a search for ["stop social media"](https://www.google.com/search?q=stop+social+media) or ["quit social media"](https://www.google.com/search?q=quit+social+media).
+Over the years, I've read many articles about the negative aspects of social media. You've probably read articles extolling the benefits of cutting social media out of your life. These articles are abundant and easy to find through a search for ["stop social media"](https://www.google.com/search?q=stop+social+media) or ["quit social media"](https://www.google.com/search?q=quit+social+media).
 
-Social media hasn't played a significant role in my life for a couple years. I first started being more mindful of how I consumed social media in 2013. Back then, I temporarily switched to using a [feature phone](https://en.wikipedia.org/wiki/Feature_phone) (a non-smart phone) for a month and a half. This really reset my relationship with consuming media on a phone. Since my phone was my primary entry point into Twitter and Facebook, my usage of both plummeted.
+Social media hasn't played a significant role in my life for a couple of years. I first started being more mindful of how I consumed social media in 2013. Back then, I temporarily switched to using a [feature phone](https://en.wikipedia.org/wiki/Feature_phone) (a non-smart phone) for a month and a half. This really reset my relationship with consuming media on a phone. Since my phone was my primary entry point into Twitter and Facebook, my usage of both plummeted.
 
-Since then, I've continued to take a careful look into how I use social media and how to tweak my usage to get maximum enjoyment with minimal downsides. This has involved changing how I use the desktop web applications for both Twitter and Facebook.
+Since then, I've continued to take a careful look at how I use social media and have made tweaks to get maximum enjoyment with minimal downsides. This has involved changing how I use the desktop web applications for both Twitter and Facebook[^1].
+
+[^1]: Ignoring LinkedIn and Goodreads, I think Facebook and Twitter were the only social media platforms I used back then.
 
 The following books have helped shape my thinking towards digital distractions. They've put into words some of the practices I stumbled into. They've affected how I use smart phones and how I approach social media.
 
@@ -22,7 +24,7 @@ The following books have helped shape my thinking towards digital distractions. 
 - [Essentialism](https://amzn.to/2XX6imC) by Greg Mckeown
 - [The Distracted Mind](https://amzn.to/2WgdBVR) by Adam Gazzaley & Larry D. Rosen
 
-One of the ideas in both *Digital Minimalism* and *Essentialism* is that you can pick and choose what you add to your life. You can intentionally pick what features of a product you use. This is something I arrived at prior to reading these books and it was nice hearing others putting this idea into words.
+One of the ideas in both *Digital Minimalism* and *Essentialism* is that you can pick and choose what you add to your life. This extends to individual features of products you use. This is something I arrived at prior to reading these books and it was nice hearing others putting this idea into words.
 
 Below is how I've chosen to use various social media platforms.
 
@@ -38,7 +40,7 @@ I rarely tweet but when I do it is usually to promote my own or another person's
 
 ## Facebook
 
-I only consume Facebook on my computer and mostly stopped using the website in 2016. The 2016 US presidential election made me realize I didn't find the Facebook news feed useful. It did not add value to my life.
+I only consume Facebook on my computer and mostly stopped using the website in 2016. The 2016 US presidential election made me realize I didn't find the Facebook news feed useful. It did not add positive value to my life.
 
 That is when I found the [News Feed Eradicator](https://chrome.google.com/webstore/detail/news-feed-eradicator-for/fjcldmjmjhkklehbacihaiopjklihlgg?hl=en) Chrome extension. This extension gets rid of the news feed. It is great.
 
@@ -72,7 +74,7 @@ I post occasionally to Instagram both using the story feature and normal posts. 
 
 # End
 
-So that is how I consume social media. It happens mostly on my computer and I use a subset of whatever the platform offers. I've reached a point where I feel like I'm getting a lot of the pros without too many of the cons.
+So that is how I consume social media. It mostly happens on my computer and I use a subset of features a platform offers. I've reached a point where I feel like I'm getting a lot of the pros without too many of the cons.
 
-It is an area that I'll keep experimenting in though. I'd encourage you to as well. Try a different usage pattern for an extended period of time and then reflect on your changed behavior. Keep the changes that have made a positive impact.
+It is an area in which I'll keep experimenting. I'd encourage you to as well. Try a different usage pattern for an extended period of time and then reflect on your changed behavior. Keep the changes that have made a positive impact.
 
