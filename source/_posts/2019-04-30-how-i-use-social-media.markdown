@@ -1,7 +1,7 @@
 ---
 layout: post
 title: How I use social media
-date: 2019-04-30 12:11 -0500
+date: 2019-04-30 17:50 -0500
 comments: true
 published: true
 description: I selectively use social media. Here is how I use it.
