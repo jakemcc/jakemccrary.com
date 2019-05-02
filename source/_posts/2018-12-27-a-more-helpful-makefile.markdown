@@ -16,7 +16,7 @@ In an [older article](/blog/2016/11/30/unify-your-project-interfaces/) of mine I
 That tip is to have the default target of your makefile be one that prints out a helpful message. This looks like the following.
 
 ```
-.PHONEY: help
+.PHONY: help
 help:
 	@grep -E '^[0-9a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
 	 sort | \
@@ -28,31 +28,31 @@ There is a lot going on there but it basically looks through your makefile targe
 As an example, the makefile for my website looks similar to the below file.
 
 ```
-.PHONEY: help
+.PHONY: help
 help:
 	@grep -E '^[0-9a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
 	 sort | \
 	 awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
-.PHONEY: watch
+.PHONY: watch
 watch: ## Watch for changes and serve preview of site with drafts
 	bundle exec rake clean
 	bundle exec rake preview
 
-.PHONEY: develop
+.PHONY: develop
 develop: ## Serve a preview of the site without drafts and refresh changes
 	bundle exec rake clean
 	bundle exec rake develop
 
-.PHONEY: new_adventure
+.PHONY: new_adventure
 new_adventure: ## Start a new adventure post
 	bundle exec rake new_adventure
 
-.PHONEY: new_post
+.PHONY: new_post
 new_post: ## Start a new post
 	bundle exec rake new_post 
 
-.PHONEY: deploy
+.PHONY: deploy
 deploy: ## deploy
 	./deploy.sh
 ```
