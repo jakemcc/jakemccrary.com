@@ -34,19 +34,19 @@ Our original plan for Friday was to knock out all the easy routes at The Shire a
 
 The Gallery was much drier. Once again, I did not climb _Johnny B. Good_. My head was in a weird place after Thursday and I was opting to just continue taking it easy this trip. Both Joel and I both moved left at the slab section on _Murano_ which most likely downgrades this route by a letter.
 
-Saturday was going to be 80+ degrees Fahrenheit and we planned on leaving early for the drive back to Chicago. We opted to go to [Coyote Cliff](https://www.redriverclimbing.com/RRCGuide/?type=wall&id=148) in Muir Valley. It is a shady all day crag and this was crucial to keeping our temperatures down. Here we climbed three routes.
+Saturday was going to be 80+ degrees Fahrenheit and we planned on leaving early for the drive back to Chicago. We opted to go to [Coyote Cliff](https://www.redriverclimbing.com/RRCGuide/?type=wall&id=148) in Muir Valley. It is shady all day and this was crucial to keeping our temperatures down. Here we climbed three routes.
 
 - [Manteleer](https://www.redriverclimbing.com/RRCGuide/?type=route&id=2008), 5.9+
 - [Thunderclinger](https://www.redriverclimbing.com/RRCGuide/?type=route&id=2010), 5.10c
 - [Bombardier](https://www.redriverclimbing.com/RRCGuide/?type=route&id=2011), 5.10b
 
-This was the day I was feeling better about climbing. Manteleer's name tells you the technique you need to use to finish this route.
+On this day I felt better about climbing. _Manteleer's_ name tells you the technique you need to use to finish this route.
 
-Thunderclinger was my favorite route of the trip. It was pretty beta intensive and had some really fun movement on it. The comments on redriverclimbing.com really highlight some of my favorite parts.
+_Thunderclinger_ was my favorite route of the trip. It was pretty beta intensive and had some really fun movement on it. The comments on redriverclimbing.com really highlight some of my favorite parts. One comment calls it 5.12 movement with 5.10 holds.
 
-While at Coyote Cliff we only saw two other climbing duos. This was pretty amazing considering the heat and how full the parking lot was when we left. The distance from the parking lot most likely discourages too many people from coming out here.
+While at Coyote Cliff we only saw two other climbing duos. This was pretty amazing considering the heat and how full the parking lot was when we left. Coyote Cliff is far from the parking lot and many climbers are probably discouraged by the length of the hike (25 - 30 minutes).
 
-Overall it was a pretty enjoyable trip even without climbing anything too challenging. This trip exposed that I have some mental issues to work through when climbing in Kentucky.
+Overall it was a pretty enjoyable trip even without climbing anything too challenging. This trip exposed that I have some mental issues to work through when climbing in Kentucky. I didn't have the same anxieties last fall in Red Wing, Minnesota so hopefully more exposure to Kentucky helps.
 
 
 
