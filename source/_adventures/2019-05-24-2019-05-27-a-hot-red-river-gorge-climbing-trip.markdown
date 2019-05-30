@@ -35,7 +35,7 @@ _The Record Shop_ has a pretty massive overhang section in it.
 We planned on starting the drive home on Monday in the mid-afternoon. We wouldn't have much time to climb and wanted to minimize the time taken on the approach. This resulted in us going to [Drive-By Crag](https://www.redriverclimbing.com/RRCGuide/index.php?type=wall&id=68). Here we knocked out a few routes and then went and stared at Bob Marley Crag a bit.
 
 - [Slick and the 9mm](https://www.redriverclimbing.com/RRCGuide/?type=route&id=1009), 5.10b
-  - [Layback and Groove](https://www.redriverclimbing.com/RRCGuide/?type=route&id=3779), 5.10b
+- [Layback and Groove](https://www.redriverclimbing.com/RRCGuide/?type=route&id=3779), 5.10b
 - [Pottsville Escarpment](https://www.redriverclimbing.com/RRCGuide/?type=route&id=2619), 5.10a
 
 The day was humid and sweaty. The crag was busy but there wasn't much competition for the routes we climbed. We ended up checking out the area past the big cave. There are quite a few interesting sounding routes over there. We only climbed _Pottsville Escarpment_, a fun and easy 80 foot slab climb. You'll definitely want a long stick clip for its first bolt.
