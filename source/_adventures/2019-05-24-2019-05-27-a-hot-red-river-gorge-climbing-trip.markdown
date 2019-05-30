@@ -14,8 +14,8 @@ We drove down Friday night and made it to the cabin we rented about 4 am Eastern
 
 We had a late start on Saturday and went to the [Solar Collector](https://www.redriverclimbing.com/RRCGuide/?type=wall&id=71) crag. We started as the only people there and eventually I heard another group. Here we climbed:
 
-- [The Decline of Western Civilization 5.10a](https://www.redriverclimbing.com/RRCGuide/?type=route&id=2472)
-- [Brambly Downslide 5.10a](https://www.redriverclimbing.com/RRCGuide/?type=route&id=2123)
+- [The Decline of Western Civilization](https://www.redriverclimbing.com/RRCGuide/?type=route&id=2472),  5.10a
+- [Brambly Downslide](https://www.redriverclimbing.com/RRCGuide/?type=route&id=2123), 5.10a
 - [Buttsweat and Tears](https://www.redriverclimbing.com/RRCGuide/?type=route&id=2475), 5.10c (or 5.11a if you trust RRC.com climbing consensus)
 - [Super Pinch](https://www.redriverclimbing.com/RRCGuide/?type=route&id=916), 5.10d (or 5.11a if you trust RRC.com climbing consensus)
 
