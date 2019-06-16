@@ -12,14 +12,14 @@ Christine, Alina, Sandy, and I spent Memorial Day weekend rock climbing in the R
 
 We drove down Friday night and made it to the cabin we rented about 4 am Eastern time.
 
-We had a late start on Saturday and went to the [Solar Collector](https://www.redriverclimbing.com/RRCGuide/?type=wall&id=71) crag. We started as the only people there and eventually I heard another group. Here we climbed:
+We had a late start on Saturday and went to the [Solar Collector](https://www.redriverclimbing.com/RRCGuide/?type=wall&id=71) crag. Despite the crag's name, it was mostly shady and we had a nice breeze. We started as the only people there and eventually I heard another group. Here we climbed:
 
 - [The Decline of Western Civilization](https://www.redriverclimbing.com/RRCGuide/?type=route&id=2472),  5.10a
 - [Brambly Downslide](https://www.redriverclimbing.com/RRCGuide/?type=route&id=2123), 5.10a
 - [Buttsweat and Tears](https://www.redriverclimbing.com/RRCGuide/?type=route&id=2475), 5.10c (or 5.11a if you trust RRC.com climbing consensus)
 - [Super Pinch](https://www.redriverclimbing.com/RRCGuide/?type=route&id=916), 5.10d (or 5.11a if you trust RRC.com climbing consensus)
 
-This was a great mix of overhanging climbing, _The Decline of Western Civilization_ and _Super Pinch_, and slab climbing, _Brambly Downslide_ and _Buttsweat and Tears_. I led everything though not cleanly. I'd come here again and do the same routes and get on some more of the harder ones. My endurance on overhanging routes is terrible right now.
+This was a great mix of overhanging climbing, _The Decline of Western Civilization_ and _Super Pinch_, and slab climbing, _Brambly Downslide_ and _Buttsweat and Tears_. I led everything but didn't get them all cleanly. I'd come here again and do the same routes and get on some more of the harder ones. My endurance on overhanging routes is terrible right now.
 
 On Sunday, we climbed in Miller Fork at [The Record Shop](https://www.redriverclimbing.com/RRCGuide/?type=wall&id=207). This crag is deep in Miller Fork and took about 30 minutes to reach. We were rewarded with a quiet crag with only a couple other climbers there. Here we climbed:
 
@@ -32,7 +32,7 @@ These were all good routes. _Call Me Maybe_ is a spicy one and definitely took s
 
 _The Record Shop_ has a pretty massive overhang section in it.
 
-We planned on starting the drive home on Monday in the mid-afternoon. We wouldn't have much time to climb and wanted to minimize the time taken on the approach. This resulted in us going to [Drive-By Crag](https://www.redriverclimbing.com/RRCGuide/index.php?type=wall&id=68). Here we knocked out a few routes and then went and stared at Bob Marley Crag a bit.
+We planned on starting the drive home on Monday in the mid-afternoon. We wouldn't have much time to climb and wanted to minimize the time taken on the approach. Given those constraints, we opted to climb at [Drive-By Crag](https://www.redriverclimbing.com/RRCGuide/index.php?type=wall&id=68). Here we knocked out a few routes and then went and stared at Bob Marley Crag a bit.
 
 - [Slick and the 9mm](https://www.redriverclimbing.com/RRCGuide/?type=route&id=1009), 5.10b
 - [Layback and Groove](https://www.redriverclimbing.com/RRCGuide/?type=route&id=3779), 5.10b
@@ -40,5 +40,5 @@ We planned on starting the drive home on Monday in the mid-afternoon. We wouldn'
 
 The day was humid and sweaty. The crag was busy but there wasn't much competition for the routes we climbed. We ended up checking out the area past the big cave. There are quite a few interesting sounding routes over there. We only climbed _Pottsville Escarpment_, a fun and easy 80 foot slab climb. You'll definitely want a long stick clip for its first bolt.
 
-The cabin we rented as off a road that shares the exit as the Rockhouse restaurant. There were some very nice looking cabins back there. It was nice having a full kitchen and hot tub.
+The cabin we rented was off a road that shares the exit of the Rockhouse restaurant. There were some very nice looking cabins back there. It was nice having a full kitchen and hot tub.
 
