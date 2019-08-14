@@ -9,6 +9,17 @@ keywords: 'csv, keywords, here'
 categories: 
 ---
 
+I've infrequently wondered how repetative I am in the various articles I write on my website.
+
+Luckily, this curiousity lines up with one of the problems we solved at Lumanu. At the time, Lumanu was indexing online articles we crawled and helping people do better content marketing. Part of that was allowing people to search and see articles that were relevant to that search. It was important to us to not show a bunch of very similar articles to any given search.
+
+We did this at Lumanu by 
+
+
+
+
+
+
 Years ago, I was heading up the technology team at a small content marketing startup. In one version of our product, we crawled the web for articles and used that data to connect clients to authors. It also functioned as a search engine over the content we crawled.
 
 One way we made our search better was to identify similar articles and only display one article instead of all the very similar results. This was a much nicer user experience.
