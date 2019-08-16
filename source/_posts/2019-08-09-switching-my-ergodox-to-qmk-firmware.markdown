@@ -14,9 +14,9 @@ Last fall I started to work in an office again. I've used a hand-built Ergodox f
 
 The Ergodox EZ uses the [QMK](https://github.com/qmk/qmk_firmware) firmware. This has a lot of fancier options than the firmware I had been using on my hand-built ergodox.
 
-This mostly didn't matter and I just configured the Ergodox EZ to match my original Ergodox's layout. I started a new job and found myself programming in Scala using Intellij IDEA.
+This mostly didn't matter and I just configured the Ergodox EZ to match my original Ergodox's layout. I started a new job and found myself programming in Scala using IntelliJ IDEA.
 
-Shockingly, after not using Intellij for years, I still remembered many of the keyboard shortcuts. This was great! Unfortunately, in my years since last using Intellij, I created some conflicting keyboard shortcuts for managing my window layout. These were mostly shortcuts that involved holding Command + Alt and pushing an arrow key. Luckily, the QMK firmware supports a *Meh* key.
+Shockingly, after not using IntelliJ for years, I still remembered many of the keyboard shortcuts. This was great! Unfortunately, in my years since last using IntelliJ, I created some conflicting keyboard shortcuts for managing my window layout. These were mostly shortcuts that involved holding Command + Alt and pushing an arrow key. Luckily, the QMK firmware supports a *Meh* key.
 
 What is the *Meh* key? It is a key that presses Control + Alt + Shift all at the same time.
 
