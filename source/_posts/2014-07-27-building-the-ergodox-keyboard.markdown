@@ -6,6 +6,7 @@ comments: true
 categories:
 - ErgoDox
 - hardware
+- keyboard
 published: true
 ---
 
