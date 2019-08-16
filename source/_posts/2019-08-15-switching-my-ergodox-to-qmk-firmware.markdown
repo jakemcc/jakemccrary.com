@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "Switching my Ergodox to QMK firmware"
-date: 2019-08-09 18:21:38 -0500
+title: Switching my Ergodox to QMK firmware
+date: 2019-08-15 19:07 -0500
 comments: true
-published: false
-description: PUT SUMMARY HERE 
-keywords: 'ergodox, qmk, qmk firmware, ergodox ez'
-categories: 
+published: true
+description: Here are some steps I followed for flashing my hand-built Ergodox to the QMK firmware.
+keywords: ergodox, qmk, qmk firmware, ergodox ez
+categories:
 - ErgoDox
 - hardware
 - keyboard
