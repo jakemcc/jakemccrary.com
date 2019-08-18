@@ -9,6 +9,7 @@ description: Make your life easier and unify the command line interface to worki
 keywords: programming, makefile
 categories:
 - command-line
+- make
 ---
 
 Jeff Ramnani wrote an [article](https://jefframnani.com/project-build-protocol/) about unifying your command line interactions across programming projects. I recommend that you read it. The basic gist is that we often find ourselves working on multiple projects at a time. Frequently these projects are in different languages and use different build tools. Remembering the necessary incantations to interact with the various projects is difficult and we're lazy. We can do better by standardizing an interface to our projects.
