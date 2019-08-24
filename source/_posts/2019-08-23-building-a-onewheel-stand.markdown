@@ -12,15 +12,15 @@ categories:
 - diy
 ---
 
-I've owned a [Onewheel XR](https://onewheel.com/products/xr) for about a year now. It is a super fun device for zipping around Chicago.
+I've owned a [Onewheel XR](https://onewheel.com/products/xr) for about a year now. It is a one-wheeled electric skateboard-like device that is super fun for zipping around Chicago.
 
-When I first got it, I cheaped out and instead of buying a stand made for the Onewheel, I purchased a [small guitar stand](https://amzn.to/31Z39Ez). It worked but it was always a bit finicky and I was never that satisfied with it. I had to put the Onewheel on it just the right way to have it stay on it without causing the legs of the stand to spread too wide.
+When I first got it, I purchased a [small guitar stand](https://amzn.to/31Z39Ez). It worked but it was always a bit finicky and I was never satisfied with it. I had to sit the Onewheel on it just right to have it stay on it without causing the legs of the stand to spread too wide.
 
 This resulted in me buying a [second guitar stand](https://amzn.to/2NrrGOI) and trying that out. This one was even worse.
 
-About a week ago I grew frustrated with these non-purpose built stands and started looking into purchasing a Onewheel stand. There are plenty of beautiful stands out there, both officially from [Future Motion](https://onewheel.com/collections/onewheel-xr-accessories/products/onewheel-deep-shack-rack) and from third party vendors like [The Float Life](https://float-supply.com/product-category/stands/).
+I grew frustrated with these non-purpose built stands and started looking into purchasing a Onewheel stand. There are plenty of beautiful stands out there, both officially from [Future Motion](https://onewheel.com/collections/onewheel-xr-accessories/products/onewheel-deep-shack-rack) and from third party vendors like [The Float Life](https://float-supply.com/product-category/stands/).
 
-Then I remembered that my old coworker, Tom Marsh built is own and put the [plans online](https://www.thingiverse.com/thing:3682716). This inspired me to go the DIY route.
+Then I remembered that my old coworker, Tom Marsh, built his own and put the [plans online](https://www.thingiverse.com/thing:3682716). This inspired me to go the DIY route.
 
 I thought that a stand made out of pipe would look pretty good and be easy to construct. It also gave me a good excuse to ride my Onewheel to Home Depot.
 
@@ -45,4 +45,4 @@ Here is the part list:
 
 I washed off the black coating using Goo Gone and then assembled the stand. This ups the risk of rust but I think that might actually look cool so I'm not too worried about it. You could optionally coat the pipes for some protection.
 
-Once you have the parts the assembly is very straight forward. The only additional work I might do soon is to put some rubber feet on the bottom to prevent scratches to my floor.
+Once you have the parts the assembly is very straight forward. The only additional work I might do is to put some rubber feet on the bottom to prevent scratches to my floor.
