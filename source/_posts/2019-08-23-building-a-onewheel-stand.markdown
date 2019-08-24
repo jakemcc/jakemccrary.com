@@ -1,13 +1,13 @@
 ---
 layout: post
-title: "Building a Onewheel stand"
-date: 2019-08-23 17:36:08 -0500
+title: Building a Onewheel stand
+date: 2019-08-23 20:34 -0500
 comments: true
-published: false
+published: true
 description: I've owned a Onewheel XR for a year. Here is how I built my own stand.
 image: images/onewheel-in-pipe-stand.png
 keywords: onewheel, stand, diy
-categories: 
+categories:
 - onewheel
 - diy
 ---
