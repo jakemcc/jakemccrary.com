@@ -21,6 +21,6 @@ The photo below is of the time I stayed more on the face and continued up near t
 ![Jake climbing The Rack](/images/jake-climbing-devils-lake.png)
 
 This trip was a ton of fun.
-We didn't climb for too long but the entire experience was amazing.
+We didn't climb for that long but the entire experience was amazing.
 
 Despite having lived in Chicago for my entire climbing career, this was my first time at Devil's Lake.
