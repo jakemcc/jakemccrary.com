@@ -9,13 +9,13 @@ description: This was a very unique experience. Through a friend, I've managed t
 ---
 
 This was really neat.
-Three of us flew from a suburb of Chicago to a nearby regional airport near Devil's Lake, Wisconsin.
+Three of us flew from a suburb of Chicago to the [Baraboo airport](https://www.airnav.com/airport/KDLL) airport near Devil's Lake, Wisconsin.
 
-![Flying to Devil's Lake](/images/flying-to-devils-lake.jpg)
+![Flying to Devil's Lake](/images/flying-to-devils-lake.png)
 
-We ended upsetting up a top rope over the climb [The Rack](https://www.mountainproject.com/route/105730388/the-rack).
-We then basically climbed up whatever variations we could to get to the top.
-One of the variations I did was up the arete, instead of following the crack.
+We set up a top rope over the climb [The Rack](https://www.mountainproject.com/route/105730388/the-rack).
+We then climbed up whatever variations we could to get to the top.
+One time, I followed the arete on the left instead of the crack.
 
 ![Jake climbing The Rack](/images/jake-climbing-devils-lake.png)
 
