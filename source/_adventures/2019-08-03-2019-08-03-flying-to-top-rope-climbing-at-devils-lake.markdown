@@ -15,7 +15,8 @@ Three of us flew from a suburb of Chicago to the [Baraboo airport](https://www.a
 
 We set up a top rope over the climb [The Rack](https://www.mountainproject.com/route/105730388/the-rack).
 We then climbed up whatever variations we could to get to the top.
-One time, I followed the arete on the left instead of the crack.
+The photo below is of the time I stayed more on the face and continued up near the arete higher up and to the left instead of following the crack (you can see the chalked up crack to the left of my helmet).
+
 
 ![Jake climbing The Rack](/images/jake-climbing-devils-lake.png)
 
