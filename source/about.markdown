@@ -10,10 +10,13 @@ I'm an experienced software developer.
 I enjoy coming up with simple solutions to seemingly complex problems.
 I've proven to be a reliable technology leader that can be depended on to understand business requirements, make technology choices, and make teams better through individual contributions and mentoring others.
 
-I currently work at [Coinbase](https://coinbase.com) and am helping build a world-class cryptocurrency exchange.
+I'm currently working at [Gemini](https://gemini.com).
+
+Prior to Gemini, I worked at [Coinbase](https://coinbase.com) in their short-lived Chicago office.
+The Chicago office was tasked with delivering a new high performance exchange.
 
 Previously, I worked at at [Outpace](http://outpace.com).
-There I mostly developed marketing tools that decided what material millions of people saw when interacting with large corporations.
+There I mostly developed marketing tools that decided what millions of people saw when interacting with large corporations through mostly electronic mediums.
 While at Outpace I lead a couple different teams including the one tasked with rewriting our core product.
 That lead to a significantly more flexible, understandable, and reliable product while being incredibly faster.
 
@@ -34,9 +37,8 @@ Topics have included developing serverless applications, distributed teams, mach
 
 I've worked professionally in more languages than I can remember.
 From 2014 to 2018, most my development has been in Clojure and ClojureScript.
-Prior to that I worked in Java, C#, C++, C, Q, Perl, Python, Ruby, JavaScript, Clojure, ClojureScript, Haskell, Emacs Lisp, Scala and VBA.
+Prior to that I worked in Java, C#, C++, C, Q, Perl, Python, Ruby, JavaScript, Clojure, ClojureScript, Scala, Haskell, Emacs Lisp, Scala and VBA.
 I've found writing in a functional style leads to easier to reason about code.
-Now that I'm at Coinbase I'm back to using a variety of languages.
 
 When not coding I try to be active, mostly focusing on rock climbing and sailing.
 I've hiked to the top of [Mount Kilimanjaro](/kili.html) and have sailed multiple times in the [Chicago to Mackinac](http://en.wikipedia.org/wiki/Chicago_to_Mackinac_Boat_Race) race.
