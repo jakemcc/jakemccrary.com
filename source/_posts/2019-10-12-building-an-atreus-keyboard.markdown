@@ -1,12 +1,13 @@
 ---
 layout: post
-title: "Building an Atreus keyboard"
-date: 2019-10-12 14:13:51 -0500
+title: Building an Atreus keyboard
+date: 2019-10-12 15:43 -0500
 comments: true
-published: false
+published: true
 description: I built an Atreus keyboard. Here are some details on the build.
 keywords: keyboard, diy, atreus
-categories: 
+image: images/atreus/atreus-done.jpg
+categories:
 - keyboard
 - diy
 ---
