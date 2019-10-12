@@ -18,7 +18,7 @@ Below is the photo of my result.
 ![My completed Atreus keyboard](/images/atreus/atreus-done.jpg)
 
 As you can see, it has a split layout and the keys are aligned vertically and staggered.
-Thanks to using Ergodox keyboards for five (verify this) years, I'm very used to this key layout and find it superior to traditional keyboards.
+Thanks to using Ergodox keyboards since 2014, I'm very used to this key layout and find it superior to traditional keyboards.
 
 The keyboard is very small.
 To give you an idea of how small it is, here is a photo of it next to one of my Ergodox keyboards and with a bit of my fingers in the shot.
