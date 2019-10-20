@@ -5,7 +5,7 @@ title: "A day trip to Devil's Lake"
 date: 2019-10-19 19:02:12 -0500
 start_date: 2019-10-14
 end_date: 2019-10-14
-description: PUT SUMMARY HERE
+description: This was a beautiful fall day spent flying and climbing in Wisconsin.
 ---
 
 On a beautiful October day I flew with Steve, Alex, and Moses to Devil's Lake for a day of top roping.
