@@ -10,6 +10,8 @@ description: This was a beautiful fall day spent flying and climbing in Wisconsi
 
 On a beautiful October day I flew with Steve, Alex, and Moses to Devil's Lake for a day of top roping.
 
+![Flying to Devil's Lake](/images/devils-lake/flying-to-devils-lake.jpeg)
+
 Once again, we took off from Waukegan Airport and flew into Baraboo, Wisconsin.
 The flight time to Baraboo took about an hour and ten minutes.
 We flew pretty low because of conditions and were flying against the wind.
@@ -18,6 +20,8 @@ The flight was smooth.
 
 We got to Baraboo and hopped into our rental car and took off to Devil's Lake.
 We made a pit stop at a Walmart to purchase water, snacks, and some hand warmers.
+
+![Setting up top rope anchors near the balanced rock](/images/devils-lake/devils-lake-balanced-rock.jpeg "Setting up top rope anchors near the balanced rock")
 
 We climbed in the Balance Rock area of Devil's Lake.
 The climbs weren't the tallest but the view was beautiful and we had sun shining on us.
@@ -35,6 +39,8 @@ Routes top roped were
 
 Fear and Trembling and Beer and Booty were probably not fully climb but combined together.
 There was a really interesting move at the beginning of these that involved moving into a neat undercling.
+
+![View looking over Devil's Lake](/images/devils-lake/devils-lake-view.jpeg "View looking over Devil's Lake")
 
 It was a comfortable day of climbing.
 I was never too cold while climbing nor too cold while belaying.
