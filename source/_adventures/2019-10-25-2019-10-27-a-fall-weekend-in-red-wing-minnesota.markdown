@@ -15,6 +15,7 @@ We stayed in a Super 8 in Red Wing and it was alright.
 We had a delicious breakfast on Saturday at Hanisch Bakery and Coffee Shop.
 At the bakery, we also picked up sandwiches for lunch and donuts for an afternoon snack.
 Either those donuts were amazing or donuts just taste great after hiking and climbing.
+We should have bought so many more donuts.
 
 We definitely didn't do early starts as we wanted to wait for the day to warm up.
 The weather on Saturday was pretty great as long as you were in the sun.
@@ -30,7 +31,7 @@ On Saturday we climbed:
 - [Danger High Boltage](https://www.mountainproject.com/route/105831469/danger-high-boltage), Annadonia Wall, 5.9-
 - [Frequent Flatulence](https://www.mountainproject.com/route/105825974/frequent-flatulence), New Vice Area, 5.10b
 
-Frequent Flatulence was the highlight route of Saturday.
+_Frequent Flatulence_ was the highlight route of Saturday.
 
 On Sunday we climbed:
 
