@@ -37,6 +37,6 @@ On Sunday we climbed:
 
 - [Pigeon Paranoia](https://www.mountainproject.com/route/105824459/pigeon-paranoia), Cyclops Area, 5.10b/c
 - [Sleeping Bat in a Ziplock Bag](https://www.mountainproject.com/route/105824443/sleeping-bat-in-a-ziplock-bag), Cyclops Area, 5.10a/b
-- [Sleeping Bat in a Ziplock Bag, Direct Finish](https://www.mountainproject.com/route/105824443/sleeping-bat-in-a-ziplock-bag), Cyclops Area, 11a variation
+- [Sleeping Bat in a Ziplock Bag, Direct Finish](https://www.mountainproject.com/route/105824443/sleeping-bat-in-a-ziplock-bag), Cyclops Area, 5.11a variation
 
 The _Sleeping Bat in a Ziplock Bag_ route was pretty fun.
