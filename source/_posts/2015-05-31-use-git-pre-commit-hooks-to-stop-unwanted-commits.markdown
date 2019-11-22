@@ -107,6 +107,8 @@ with a non-zero exit code. The first `tput` changes the output of the
 `echo` commands to colored red and the second `tput` changes output
 back to default.
 
+> Warning: I know many developers that love using this and have had no problems. I get the occasional report of it not working. If it doesn't work, and it seems like you've lost changes, you can find the patch file wherever mktemp creates files on your local machine. I'd still recommend testing it out on a small changeset so if something doesn't work on your machine you don't have to both debug why and recreate your changes.
+
 ### Using with a single repository
 
 To enable in a single repository you need to add the above code to a
