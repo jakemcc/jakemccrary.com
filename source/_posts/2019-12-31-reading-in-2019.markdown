@@ -1,0 +1,65 @@
+---
+layout: post
+title: "Reading in 2019"
+date: 2019-12-31 17:11:25 -0600
+comments: true
+published: false
+description: PUT SUMMARY HERE 
+keywords: 'csv, keywords, here'
+categories: 
+---
+
+At the beginning of every year I like to take the time to reflect on my previous year's reading.
+It gives me a time to correct my data and think about where I want my reading to go in the upcoming year.
+
+Here are links to my previous end-of-year reflections: [2013](/blog/2014/01/01/using-incanter-to-review-my-2013-reading/), [2014](/blog/2015/01/08/reading-in-2014/), [2015](/blog/2016/03/13/reading-in-2015/), [2016](/blog/2017/01/04/reading-in-2016/), [2017](/blog/2018/03/03/reading-in-2017/), and [201i8](/blog/2019/01/21/reading-in-2018/).
+
+I've continued to keep track of my reading using [Goodreads](http://goodreads.com).
+My [profile](https://www.goodreads.com/user/show/3431614-jake-mccrary) continues to have the full list of the books I've read since 2010.
+[Here](https://www.goodreads.com/review/list/3431614-jake-mccrary?read_at=2019) is my entire 2019 record.
+
+I slacked off a bit when writing reviews for all of my read books in Goodreads. I often didn't write a review until some time had passed after completing the book and, as a result, I think I did a worse job reviewing books. Some books don't even have a written review. I'm not a fan of this and will push myself some in 2019 to do a better job.
+
+## 2019 Goal
+
+> I have a stack of software and process books and I'd like to read through at least some of them (others are more reference books). I'm also going to bring over the 2018 goal of reading at least one book on writing. In a more general sense, I'm hoping to put some practices together that help me gain more from the books I'm reading. I'm still thinking through what that means. - Me last year
+
+That was my goal for 2019.
+In list form it looks like this:
+
+1. Read software or process books
+1. Read at least one book on writing
+1. Try to develop practices for getting more from what I read
+
+
+## 2019 Numbers
+
+## Highlights
+
+Here are my five star books from 2019.
+
+- [Sapiens: A Brief History of Humankind by Yuval Noah Harari](https://amzn.to/2TaFJZb) ([my review](https://www.goodreads.com/review/show/1679140092), [my highlights](https://www.goodreads.com/notes/20873740-sapiens/3431614-jake-mccrary))
+
+## Stats
+
+![Book and pages count by month](/images/2019-books-and-pages.svg "Book and pages count by month")
+
+Electronic books continue to make up the majority of the books I'm reading.
+
+```
+|           | 2019 | 2018 | 2017 | 2016 | 2015 |
+|-----------+------+------+------+------+------|
+| ebook     |      |   37 |   37 |   56 |   47 |
+| hardcover |      |    1 |    7 |    0 |    1 |
+| paperback |      |    5 |    5 |    3 |    3 |
+```
+
+```
+|             | Number of books |
+|-------------+-----------------|
+| fiction     |              29 |
+| non-fiction |              14 |
+```
+
+## 2020 Goals
+
