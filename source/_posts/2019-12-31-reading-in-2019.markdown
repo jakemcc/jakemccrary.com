@@ -12,15 +12,14 @@ categories:
 At the beginning of every year I like to take the time to reflect on my previous year's reading.
 It gives me a time to correct my data and think about where I want my reading to go in the upcoming year.
 
-Here are links to my previous end-of-year reflections: [2013](/blog/2014/01/01/using-incanter-to-review-my-2013-reading/), [2014](/blog/2015/01/08/reading-in-2014/), [2015](/blog/2016/03/13/reading-in-2015/), [2016](/blog/2017/01/04/reading-in-2016/), [2017](/blog/2018/03/03/reading-in-2017/), and [201i8](/blog/2019/01/21/reading-in-2018/).
+Here are links to my previous end-of-year reflections: [2013](/blog/2014/01/01/using-incanter-to-review-my-2013-reading/), [2014](/blog/2015/01/08/reading-in-2014/), [2015](/blog/2016/03/13/reading-in-2015/), [2016](/blog/2017/01/04/reading-in-2016/), [2017](/blog/2018/03/03/reading-in-2017/), and [2018](/blog/2019/01/21/reading-in-2018/).
 
 I've continued to keep track of my reading using [Goodreads](http://goodreads.com).
 My [profile](https://www.goodreads.com/user/show/3431614-jake-mccrary) continues to have the full list of the books I've read since 2010.
 [Here](https://www.goodreads.com/review/list/3431614-jake-mccrary?read_at=2019) is my entire 2019 record.
 
-I slacked off a bit when writing reviews for all of my read books in Goodreads. I often didn't write a review until some time had passed after completing the book and, as a result, I think I did a worse job reviewing books. Some books don't even have a written review. I'm not a fan of this and will push myself some in 2019 to do a better job.
-
 ## 2019 Goal
+
 
 > I have a stack of software and process books and I'd like to read through at least some of them (others are more reference books). I'm also going to bring over the 2018 goal of reading at least one book on writing. In a more general sense, I'm hoping to put some practices together that help me gain more from the books I'm reading. I'm still thinking through what that means. - Me last year
 
@@ -31,27 +30,134 @@ In list form it looks like this:
 1. Read at least one book on writing
 1. Try to develop practices for getting more from what I read
 
+I read ### books related to goal 1 and #### books related to goal 2.
+Both of those were solidly accomplished.
+
+I failed on 3.
+I didn't even really make an attempt at it.
 
 ## 2019 Numbers
 
 ## Highlights
 
-Here are my five star books from 2019.
+Here are my five star books from 2019.n
 
-- [Sapiens: A Brief History of Humankind by Yuval Noah Harari](https://amzn.to/2TaFJZb) ([my review](https://www.goodreads.com/review/show/1679140092), [my highlights](https://www.goodreads.com/notes/20873740-sapiens/3431614-jake-mccrary))
+- [Accelerate: Building and Scaling High-Performing Technology Organizations by Nicole Forsgren, Jez Humble, and Gene Kim](https://amzn.to/2QFelCv) ([my review](https://www.goodreads.com/review/show/2411886698))
+- [Elements of Clojure by Zachary Tellman](https://amzn.to/39BjDHx) ([my review](https://www.goodreads.com/review/show/2684688658))
+- [A Tour of C++ by Bjarne Stroustrup](https://amzn.to/2FdqV6n) ([my review](https://www.goodreads.com/review/show/2822201641))
+- [Developer Hegemony: The Future of Labor](https://amzn.to/2N5mLSL) ([my review](https://www.goodreads.com/review/show/2795008954))
+- [Digital Minimalism: Choosing a Focused Life in a Noisy World by Cal Newport](https://amzn.to/2MPwOed)
+- [Effective Java by Joshua Bloch](https://amzn.to/2QGW1Ja) ([my review](https://www.goodreads.com/review/show/2701581699))
+- [21 Lessons for the 21st Century by Yuval Noah Harari](https://amzn.to/2rOgd3g) ([my review](https://www.goodreads.com/review/show/2562286276))
+- [Draft No. 4: On the Writing Process by John McPhee](https://amzn.to/2toADQZ) ([my review](https://www.goodreads.com/review/show/2300752363))
+- [The Push: A Climber's Journey of Endurance, Risk and Going Beyond Limits by Tommy Caldwell](https://amzn.to/2MPuAeO) ([my review](https://www.goodreads.com/review/show/2200390288))
+- [The Nickel Boys by Colson Whitehead](https://amzn.to/2rONP0V)
+- [The Great Believers by Rebecca Makkai](https://amzn.to/37sUGMK) ([my review](https://www.goodreads.com/review/show/3020415147))
+- [The Bonfire of the Vanities by Tom Wolfe](https://amzn.to/2tr2eRi) ([my review](https://www.goodreads.com/review/show/2847590304))
+- [The Paper Menagerie and Other Stories by Ken Liu](https://amzn.to/2tljYOf) ([my review](https://www.goodreads.com/review/show/1827462108))
+- [Exhalation: Stories by Ted Chiang](https://amzn.to/36kyAvO) ([my review](https://www.goodreads.com/review/show/2804306157))
+- [Golden Son (Red Rising, #2) by Pierce Brown](https://amzn.to/36lAZGn)
+- [Morning Star (Red Rising Saga, #3) by Pierce Brown](https://amzn.to/2ZLAdjz)
+- [Iron Gold (Red Rising Saga, #4) by Pierce Brown](https://amzn.to/36fNKlU) ([my review](https://www.goodreads.com/review/show/2760320870))
+- [Dark Age (Red Rising Saga #5) by Pierce Brown](https://amzn.to/36mab95)
+- [Animal Farm by George Orwell](https://amzn.to/2MPkjQ1) ([my review](https://www.goodreads.com/review/show/2811868686))
+
+#### Accelerate: Building and Scaling High-Performing Technology Organizations by Nicole Forsgren, Jez Humble, and Gene Kim
+
+This is a stellar book on practices of technology organizations that help build high performing companies.
+If you work at a company that produces software in any capacity, I'd highly recommend this book.
+
+#### Elements of Clojure by Zachary Tellman
+
+This book has Clojure in the title but it is applicable to more than that language.
+
+#### A Tour of C++ by Bjarne Stroustrup
+
+I've written C++ off and on since I started programming nearly 20 years ago.
+As a result, I've seen the transformation of C++ as new features have been added with the modern releases.
+But I haven't been writing C++ in a dedicated fashion since about 2013 I've fallen behind on the new additions to the language.
+This book is a great refresher of the language and introduction to some of the newest features.
+There is no fluff in this book and it is full of useful information.
+
+#### Developer Hegemony: The Future of Labor
+
+This is a tough read.
+It isn't hard because the language is complicated.
+It is hard because it will make you depressed until you power through and reach the end.
+
+This book delivers a very cynical look at corporations.
+It provides guidelines for getting ahead and climbing the corporate ladder.
+
+Then the book promotes an alternate approach, that of doing your own thing and going independent.
+It makes a good case of it.
+
+Beware of this one, it might make you question what you are doing with your career and life.
+
+#### Digital Minimalism: Choosing a Focused Life in a Noisy World by Cal Newport
+
+There is definitely a common theme of awareness in a subset of the books I read and this book fits that theme.
+This book can help you become a more thoughtful user of technology.
+
+#### Effective Java by Joshua Bloch
+
+I've read earlier editions before and then decided to read a newer edition when it looked like I'd be back to writing Java.
+This book is still good and a must read if you work with Java.
+
+#### 21 Lessons for the 21st Century by Yuval Noah Harari
+
+This book covers a lot of ground.
+It hits many topics.
+
+Here is a quote from my friend [Steven Deobald](https://twitter.com/deobald) about this book.
+
+> Through stories and anecdotes woven into his almost unbelievably extensive research as a historian, "21 Lessons" is perhaps as entertaining and insightful as any other book I've read. It is accessible to anyone and the ideas presented regarding the fate of our species are stitched together beautifully. The arc of the 21 chapters has a progressive, almost orchestral, quality to it. Each chapter builds on all those which precede it and although some chapters have surprisingly variable writing styles, none feels like Harari is attempting to showboat or to force his medium into the overly artistic.
+
+#### Draft No. 4: On the Writing Process by John McPhee
+
+This was a pleasure to read.
+I like reading books about writing and this was a good one that talks about McPhee's approach towards creative non-fiction.
+
+#### The Push: A Climber's Journey of Endurance, Risk and Going Beyond Limits by Tommy Caldwell
+
+What can I say?
+I'm a sucker for books on climbing and learning more about the icons of the sport I love.
+If you've watched the movie [The Dawn Wall](https://www.imdb.com/title/tt7286916/) then some of this will be familar to you.
+
+#### The Nickel Boys by Colson Whitehead
+
+#### The Great Believers by Rebecca Makkai
+
+I had never heard of this book until a friend of mine handed it to me at the climbing gym.
+I'm very glad she gave me this book and I have already recommended it to others.
+This is a great piece of writing and tells a compelling story.
+I'm not surprised at all that it has won many awards.
+
+#### The Bonfire of the Vanities by Tom Wolfe
+
+#### The Paper Menagerie and Other Stories by Ken Liu
+
+#### Exhalation: Stories by Ted Chiang
+
+#### Golden Son (Red Rising, #2) by Pierce Brown
+#### Morning Star (Red Rising Saga, #3) by Pierce Brown
+#### Iron Gold (Red Rising Saga, #4) by Pierce Brown
+#### Dark Age (Red Rising Saga #5) by Pierce Brown
+
+#### Animal Farm by George Orwell
+
 
 ## Stats
 
 ![Book and pages count by month](/images/2019-books-and-pages.svg "Book and pages count by month")
 
-Electronic books continue to make up the majority of the books I'm reading.
+Unsurprisingly, electronic books continue to be the dominate format.
 
 ```
 |           | 2019 | 2018 | 2017 | 2016 | 2015 |
 |-----------+------+------+------+------+------|
-| ebook     |      |   37 |   37 |   56 |   47 |
-| hardcover |      |    1 |    7 |    0 |    1 |
-| paperback |      |    5 |    5 |    3 |    3 |
+| ebook     |   43 |   37 |   37 |   56 |   47 |
+| hardcover |    1 |    1 |    7 |    0 |    1 |
+| paperback |    7 |    5 |    5 |    3 |    3 |
 ```
 
 ```
