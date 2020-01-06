@@ -5,8 +5,9 @@ date: 2019-12-31 17:11:25 -0600
 comments: true
 published: false
 description: PUT SUMMARY HERE 
-keywords: 'csv, keywords, here'
+keywords: 'book, end of year review'
 categories: 
+- books
 ---
 
 At the beginning of every year I like to take the time to reflect on my previous year's reading.
@@ -40,7 +41,8 @@ I didn't even really make an attempt at it.
 
 ## Highlights
 
-Here are my five star books from 2019.n
+Here are my five star books from 2019.
+The titles are affiliate links to Amazon, so if you purchase post clicking one of those links I earn a small kickback.
 
 - [Accelerate: Building and Scaling High-Performing Technology Organizations by Nicole Forsgren, Jez Humble, and Gene Kim](https://amzn.to/2QFelCv) ([my review](https://www.goodreads.com/review/show/2411886698))
 - [Elements of Clojure by Zachary Tellman](https://amzn.to/39BjDHx) ([my review](https://www.goodreads.com/review/show/2684688658))
@@ -176,7 +178,9 @@ It was interesting reading it in 2019 and mapping back various in book behavior 
 
 ## Stats
 
-![Book and pages count by month](/images/2019-books-and-pages.svg "Book and pages count by month")
+The page count numbers for 2019 books are a bit screwed up so I'm only doing a books per month graph this year.
+
+![Book and pages count by month](/images/reading-by-month-2019.svg "Number of books in each omnth")
 
 Unsurprisingly, electronic books continue to be the dominate format.
 
@@ -188,12 +192,21 @@ Unsurprisingly, electronic books continue to be the dominate format.
 | paperback |    7 |    5 |    5 |    3 |    3 |
 ```
 
+This year I read a noticably higher amount of non-fiction books than in 2018.
+
 ```
-|             | Number of books |
-|-------------+-----------------|
-| fiction     |              29 |
-| non-fiction |              14 |
+|             | 2019 | 2018 |
+|-------------+------+------|
+| fiction     |   28 |   29 |
+| non-fiction |   23 |   14 |
 ```
 
 ## 2020 Goals
 
+I was encouraged by how many non-fiction books I read this year and how many of them ended up earning a five star rating.
+I'd like to continue that trend of reading high-quality non-fiction books.
+
+I've also been reading a lot of books but I haven't always been the best at trying to consciously apply the lessons from those books.
+I'm going to try to improve that this year.
+
+Those are pretty fuzzy goals but I'm alright with that.
