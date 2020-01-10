@@ -71,7 +71,7 @@ The titles are affiliate links to Amazon, so if you click one of those and make 
 
 This is a stellar book on practices of technology organizations that help build high performing companies.
 If you work at a company that produces software in any capacity, I'd highly recommend this book.
-This is a book that I've recommened to any coworker looking, and some not looking, for book recommendations.
+This is a book that I've recommended to any coworker looking, and some not looking, for book recommendations.
 
 #### Elements of Clojure by Zachary Tellman
 
@@ -83,7 +83,7 @@ The content clearly shows that Zach has put a lot of thought into the topic.
 
 I've written C++ off and on since I started programming nearly 20 years ago.
 Over those years, I've seen C++ transform as new versions were released.
-Earlier in 2019, I was starting to write some C++ again and this book was recommened by a coworker.
+Earlier in 2019, I was starting to write some C++ again and this book was recommended by a coworker.
 I had last written C++ back in 2013 and this book was a perfect way to refresh my stuck in early 2013 knowledge.
 There is no fluff in this book and it is full of useful information.
 
@@ -165,7 +165,7 @@ Both ways of reading this collection were excellent.
 #### Exhalation: Stories by Ted Chiang
 
 I absolutely loved Ted Chiang's _Stories of Your Life and Others_ and was excited when this collection of stories was published.
-I had high hopes for this collection and I was not disappointedxs.
+I had high hopes for this collection and I was not disappointed.
 
 Some of the stories I had read prior to them being included in this collection but that didn't matter.
 I enjoyed reading the new stories and revisiting the previously published ones.
@@ -249,7 +249,7 @@ I really enjoyed my friend [Dan's](https://www.goodreads.com/review/show/2240581
 
 The page count numbers for 2019 books are a bit screwed up so I'm only doing a books per month graph this year.
 
-![Book and pages count by month](/images/reading-by-month-2019.svg "Number of books in each omnth")
+![Book and pages count by month](/images/reading-by-month-2019.svg "Number of books in each month")
 
 Unsurprisingly, electronic books continue to be the dominate format.
 
@@ -261,7 +261,7 @@ Unsurprisingly, electronic books continue to be the dominate format.
 | paperback |    7 |    5 |    5 |    3 |    3 |
 ```
 
-This year I read a noticably higher amount of non-fiction books than in 2018.
+This year I read a noticeably higher amount of non-fiction books than in 2018.
 
 ```
 |             | 2019 | 2018 |
