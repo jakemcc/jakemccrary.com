@@ -4,13 +4,13 @@ title: "Reading in 2019"
 date: 2019-12-31 17:11:25 -0600
 comments: true
 published: false
-description: PUT SUMMARY HERE 
-keywords: 'book, end of year review'
+description: This is my yearly reflection on my previous year of reading
+keywords: '2019, books, book review, reading'
 categories: 
 - books
 ---
 
-At the beginning of every year I reflect on my past year of reading.
+At the beginning of every year I reflect on the previous year of reading.
 I take a look at my records, fix errors, and think about reading goals for the upcoming year.
 
 Here are links to my previous end-of-year reflections: [2013](/blog/2014/01/01/using-incanter-to-review-my-2013-reading/), [2014](/blog/2015/01/08/reading-in-2014/), [2015](/blog/2016/03/13/reading-in-2015/), [2016](/blog/2017/01/04/reading-in-2016/), [2017](/blog/2018/03/03/reading-in-2017/), and [2018](/blog/2019/01/21/reading-in-2018/).
@@ -27,18 +27,16 @@ My [profile](https://www.goodreads.com/user/show/3431614-jake-mccrary) has nearl
 That was my goal for 2019.
 In list form it looks like this:
 
-1. Read software or process books
+1. Read some software or process books
 1. Read at least one book on writing
-1. Try to develop practices for getting more from what I read
+1. Try to develop practices for getting more from books I've read
 
 I read eight books related to the first goal and two (or three if I count an iffy one) related to the second.
-That is enough where I feel pretty good about saying those first two goals were accomplished.
+That is enough where I feel pretty good about claiming I accomplished the first two goals.
 
-I mostly failed on goal 3.
+I mostly failed on the third goal.
 I was more aggressive about highlighting notes in my Kindle and I did occasionally look back at them.
 Beyond that I didn't do anything.
-
-## 2019 Numbers
 
 ## Highlights
 
@@ -83,7 +81,7 @@ The content clearly shows that Zach has put a lot of thought into the topic.
 
 I've written C++ off and on since I started programming nearly 20 years ago.
 Over those years, I've seen C++ transform as new versions were released.
-Earlier in 2019, I was starting to write some C++ again and this book was recommended by a coworker.
+Earlier in 2019, I was starting to write C++ again and this book was recommended by a coworker.
 I had last written C++ back in 2013 and this book was a perfect way to refresh my stuck in early 2013 knowledge.
 There is no fluff in this book and it is full of useful information.
 
@@ -96,22 +94,22 @@ It is tough because it makes you depressed until you power through and reach the
 This book delivers a very cynical look at corporations.
 It provides guidelines for getting ahead and climbing the corporate ladder.
 
-Then the book promotes an alternate approach, that of doing your own thing and going independent.
+Then the book promotes an alternative approach, that of doing your own thing and going independent.
 It makes a good case of it.
 
 Beware of this one, it might make you question what you are doing with your career and life.
 
 #### Digital Minimalism: Choosing a Focused Life in a Noisy World by Cal Newport
 
-There is a common theme of awareness throughout many of the books that I read and this book hits that theme.
+There is a common theme of awareness throughout many of the books I read and this book hits that theme.
 This book can help you become a more thoughtful user of technology.
 There are many useful recommendations in this book.
-One of them is to not hesitate to use social media and other technology differently than how the creators want you to use it.
-An [article](/blog/2019/04/30/how-i-use-social-media/) from earlier this year expands on this idea.
+One of them is the suggestion that you can use social media and other technology differently than how the creators want you to use it.
+In 2019 I wrote about how I use [social media](/blog/2019/04/30/how-i-use-social-media/) which shows how I apply this idea.
 
 #### Effective Java by Joshua Bloch
 
-I've read earlier editions before and then decided to read a newer edition when it looked like I'd be back to writing Java.
+I've read earlier editions in the past and decided to read the latest edition when it seemed like I'd be writing Java again.
 This book is still good and a must read if you work with Java.
 
 #### 21 Lessons for the 21st Century by Yuval Noah Harari
@@ -151,7 +149,7 @@ This book is great.
 The satire just drips off the pages.
 There are passages in this book where you can just _feel_ the anxiety of the characters.
 
-Everyone is despicable and it is wonderful.
+Every character is despicable and it is wonderful.
 
 #### The Paper Menagerie and Other Stories by Ken Liu
 
@@ -159,7 +157,7 @@ This was my second time reading this book.
 It is an excellent collection of short stories.
 
 The first time I read this book, in [2016](/blog/2017/01/04/reading-in-2016/), I read the stories in order.
-This time I took advantage of the Kindle's estimate of how long a chapter would take and I jumped around, picking out stories that fit how long I had to read.
+This time I took advantage of the Kindle's estimate of how long a chapter would take and I jumped around, picking out stories that fit how long I wanted to read.
 Both ways of reading this collection were excellent.
 
 #### Exhalation: Stories by Ted Chiang
@@ -172,27 +170,27 @@ I enjoyed reading the new stories and revisiting the previously published ones.
 
 > We don’t normally think of it as such, but writing is a technology, which means that a literate person is someone whose thought processes are technologically mediated. We became cognitive cyborgs as soon as we became fluent readers, and the consequences of that were profound.
 
-That is a quote from one of stories found in this collection.
+That is a quote from a story in this collection.
 It felt right to include it in an article about reading.
 
 #### Golden Son, Morning Star, Iron Gold, and Dark Age by Pierce Brown
 
 The four titles above are books two through five in Pierce Brown's _Red Rising_ saga.
 I also read the first book in the series, Red Rising, in 2019 but it only earned a four star rating from me.
-Even still, I obviously enjoyed this series and devoured it.
+I obviously enjoyed this series and devoured it.
 
 The books tell the story of a world full of inequality.
-There are rich snobs, fighting, space battles, dancing, and more.
+The world created is full of interesting characters and dilemmas.
 
 #### Animal Farm by George Orwell
 
 This was either my second or third time reading Animal Farm.
 It is still good.
-Reading it in 2019 and mapping back in book behavior to modern political climate was interesting.
+Reading it in 2019 and mapping in book behavior to the modern political climate was interesting.
 
 ### Non-Five Star highlights
 
-- [Irresistible: The Rise of Addictive Technology and the Business of Keeping Us Hooked by Adam Alter](https://amzn.to/2QFFkz5) ([my review](https://www.goodreads.com/review/show/1966643946)
+- [Irresistible: The Rise of Addictive Technology and the Business of Keeping Us Hooked by Adam Alter](https://amzn.to/2QFFkz5) ([my review](https://www.goodreads.com/review/show/1966643946))
 - [Permanent Record by Edward Snowden](https://amzn.to/2FDh9e1) ([my review](https://www.goodreads.com/review/show/2983575511))
 - [Atonement by Ian McEwan](https://amzn.to/2N9YYRC) ([my review](https://www.goodreads.com/review/show/1697924044))
 - [I Hear You by Michael S. Sorensen](https://amzn.to/2sRX9Sp) ([my review](https://www.goodreads.com/review/show/2923747300))
@@ -213,16 +211,17 @@ I consider myself fairly knowledgeable about Snowden and what he did but I still
 One part I particularly enjoyed was Snowden reflecting on what has changed since his actions.
 
 Another part I particularly enjoyed was Snowden's telling of the early Internet.
-The Internet where identities online weren't necessarily tied to a real identity.
+This was an Internet where identities online weren't necessarily tied to a real one.
 I'm approximately the same age as Snowden and had similar experiences with being a young person during the early Internet days.
-It was interesting to be reminded about them through reading this book.
+It was interesting to be reminded of that time while reading this book.
 
 I [highlighted](https://www.goodreads.com/notes/49833241-permanent-record/3431614-jake-mccrary?ref=bsop) a lot of passages and there are probably more I should have highlighted.
 
 #### Atonement by Ian McEwan
 
 This book was so close to being five stars.
-I picked this book up mistaking the title for that of a science fiction book. I'm glad I did.
+I started reading this book because I mistook the title for that of a science fiction book I've been intending to read.
+I'm glad I did.
 
 It took me a little while to get into the book but once I did I was hooked.
 
