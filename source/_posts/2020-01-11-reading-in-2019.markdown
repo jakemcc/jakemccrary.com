@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "Reading in 2019"
-date: 2019-12-31 17:11:25 -0600
+title: Reading in 2019
+date: 2020-01-11 12:32 -0600
 comments: true
-published: false
+published: true
 description: This is my yearly reflection on my previous year of reading
-keywords: '2019, books, book review, reading'
-categories: 
+keywords: 2019, books, book review, reading
+categories:
 - books
 ---
 
