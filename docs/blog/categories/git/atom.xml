@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: git | Jake McCrary]]></title>
+  <link href="https://jakemccrary.com/blog/categories/git/atom.xml" rel="self"/>
+  <link href="https://jakemccrary.com/"/>
+  <updated>2020-01-23T22:35:50-06:00</updated>
+  <id>https://jakemccrary.com/</id>
+  <author>
+    <name><![CDATA[Jake McCrary]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Use git pre-commit hooks to stop unwanted commits]]></title>
+    <link href="https://jakemccrary.com/blog/2015/05/31/use-git-pre-commit-hooks-to-stop-unwanted-commits/"/>
+    <updated>2015-05-31T11:51:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2015/05/31/use-git-pre-commit-hooks-to-stop-unwanted-commits</id>
+    <content type="html"><![CDATA[<p>Sometimes you&rsquo;ll make a change to some code and not want to commit it.
+You probably add a comment to the code and hope you&rsquo;ll either see the
+comment in the diff before committing or just remember not to check in
+the change. If you&rsquo;ve ever done this you&rsquo;ve probably also committed
+something you didn&rsquo;t mean to commit. I know I have.</p>
+
+<p>Luckily we can do better. Using git pre-commit
+<a href="https://git-scm.com/docs/githooks">hooks</a> we can make git stop us
+from committing. Below is a git pre-commit hook that searches for the
+text <em>nocommit</em> and if found rejects the commit. With it you can
+stick <em>nocommit</em> in a comment next to the change you don&rsquo;t want
+committed and know that it won&rsquo;t be committed.</p>
+
+<h3>The code</h3>
+
+<pre><code class="bash">#!/bin/sh
+
+# If you use a GUI for controlling git, you might want to comment out the `tput` commands.
+# Some users have had problems with those commands and whatever GUI they are using.
+
+if git rev-parse --verify HEAD &gt;/dev/null 2&gt;&amp;1
+then
+    against=HEAD
+else
+    # Initial commit: diff against an empty tree object
+    against=$(git hash-object -t tree /dev/null)
+fi
+
+patch_filename=$(mktemp -t commit_hook_changes.XXXXXXX)
+git diff --exit-code --binary --ignore-submodules --no-color &gt; "$patch_filename"
+has_unstaged_changes=$?
+
+if [ $has_unstaged_changes -ne 0 ]; then
+    # Unstaged changes have been found
+    if [ ! -f "$patch_filename" ]; then
+        echo "Failed to create a patch file"
+        exit 1
+    else
+        echo "Stashing unstaged changes in $patch_filename."
+        git checkout -- .
+    fi
+fi
+
+quit() {
+    if [ $has_unstaged_changes -ne 0 ]; then
+        git apply "$patch_filename"
+        if [ $? -ne 0 ]; then
+            git checkout -- .
+            git apply --whitespace=nowarm --ignore-whitespace "$patch_filename"
+        fi
+    fi
+
+    exit $1
+}
+
+
+# Redirect output to stderr.
+exec 1&gt;&amp;2
+
+files_with_nocommit=$(git diff --cached --name-only --diff-filter=ACM $against | xargs -I{} grep -i "nocommit" -l {} | tr '\n' ' ')
+
+if [ "x${files_with_nocommit}x" != "xx" ]; then
+    tput setaf 1
+    echo "File being committed with 'nocommit' in it:"
+    IFS=$'\n'
+    for f in $(git diff --cached --name-only --diff-filter=ACM $against | xargs -I{} grep -i "nocommit" -l {}); do
+        echo $f
+    done
+    tput sgr0
+    quit 1
+fi
+
+quit 0
+</code></pre>
+
+<p>Lines 3-10 figure out what revision to diff against. They can pretty
+much be ignored.</p>
+
+<p>Lines 11-30 are all about handling unstaged changes. They create a
+patch with these changes and revert these changes from the repository.
+Then, in the function <code>quit</code>, the unstaged changes are reapplied to
+the repository. All of this is done so that <em>nocommit</em> in a
+un-committed piece of text doesn&rsquo;t cause the committed changes to be
+rejected.</p>
+
+<p>Some online guides suggest using <code>git stash</code> to achieve what is
+described above. I started out using <code>git stash</code> but ran into problems
+where I&rsquo;d end up in weird states. Unfortunately I didn&rsquo;t take good
+notes and I&rsquo;m unable to describe the various bad things that happened.
+Trust me when I say bad things did happen and that this way (create
+patch, revert, apply patch) is much more successful.</p>
+
+<p>Line 36 figures out what files contain <em>nocommit</em>. Lines 38-44 report
+what files contain <em>nocommit</em> and then rejects the commit by exiting
+with a non-zero exit code. The first <code>tput</code> changes the output of the
+<code>echo</code> commands to colored red and the second <code>tput</code> changes output
+back to default.</p>
+
+<blockquote><p>Warning: I know many developers that love using this and have had no problems. I get the occasional report of it not working. If it doesn&rsquo;t work, and it seems like you&rsquo;ve lost changes, you can find the patch file wherever mktemp creates files on your local machine. I&rsquo;d still recommend testing it out on a small changeset so if something doesn&rsquo;t work on your machine you don&rsquo;t have to both debug why and recreate your changes.</p></blockquote>
+
+<h3>Using with a single repository</h3>
+
+<p>To enable in a single repository you need to add the above code to a
+<code>.git/hooks/pre-commit</code> file in your local repository and make that
+file executable. Once you&rsquo;ve done that try adding <em>nocommit</em> to a file
+and then try to commit it. The commit will be rejected if the
+pre-commit hook is setup properly.</p>
+
+<h3>Using with multiple repositories</h3>
+
+<p>I want this pre-commit hook enabled in all of my repositories. I use
+git init templates to do this. <code>git help init</code> or a
+Google search can help fill in the gaps with setting this up but below
+are the steps I ended up taking.</p>
+
+<ol>
+<li><code>git config --global init.templatedir ~/.git-templates</code></li>
+<li><code>mkdir -p ~/.git-templates/hooks</code></li>
+<li><code>touch ~/.git-templates/hooks/pre-commit</code></li>
+<li>Copy and paste the above code into
+<code>~/.git-templates/hooks/pre-commit</code></li>
+<li><code>chmod +x ~/.git-templates/hooks/pre-commit</code></li>
+</ol>
+
+
+<p>After following those steps any repository created by <code>git init</code> will
+contain the pre-commit hook. To add to an existing repository <code>cd</code> into
+the repo and run  <code>git init .</code>.</p>
+
+<h3>Example output</h3>
+
+<p>If you try to commit some text with <em>nocommit</em> in it you&rsquo;ll see
+something similar to the image below and the commit will be rejected.</p>
+
+<p><img src="/images/pre-commit-example.png" alt="Error message" /></p>
+
+<p>If you ever need to commit and want to ignore pre-commit hooks
+(example: If you are writing a blog post that is full of the text
+<em>nocommit</em>) then you can ignore pre-commit hooks by using <code>git commit
+--no-verify</code>.</p>
+
+<p>I&rsquo;ve found this pre-commit hook really useful. It has saved me from
+committing numerous times. I&rsquo;d recommend adopting it.</p>
+
+<h2>Errata</h2>
+
+<p><em>2015/12/23</em></p>
+
+<p>I&rsquo;m updated the code to be more portable. It was brought to my
+attention by a comment that the original code took advantage of some
+bash extensions and specific <code>mktemp</code> behavior found in OS X. The
+pre-commit code has now been tested works in OS X and Ubuntu 14.04.
+There may be minor changes you need to perform to get it to work on
+your system.</p>
+
+<p><em>2017/04/28</em></p>
+
+<p>Updated code to handle if <code>mktemp</code> fails and if whitespace changes
+between creating a patch and applying it. Also adds in a change that
+better handles whitespace in paths.</p>
+]]></content>
+  </entry>
+  
+</feed>

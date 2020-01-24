@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: tools | Jake McCrary]]></title>
+  <link href="https://jakemccrary.com/blog/categories/tools/atom.xml" rel="self"/>
+  <link href="https://jakemccrary.com/"/>
+  <updated>2020-01-23T22:35:50-06:00</updated>
+  <id>https://jakemccrary.com/</id>
+  <author>
+    <name><![CDATA[Jake McCrary]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[How to display a message to all tmux clients]]></title>
+    <link href="https://jakemccrary.com/blog/2019/01/27/how-to-display-a-message-to-all-tmux-clients/"/>
+    <updated>2019-01-27T17:03:00-06:00</updated>
+    <id>https://jakemccrary.com/blog/2019/01/27/how-to-display-a-message-to-all-tmux-clients</id>
+    <content type="html"><![CDATA[<!-- Estimated time: 30 minutes -->
+
+
+<!-- First Draft: 26 minutes -->
+
+
+<!-- First edits: 14 minutes -->
+
+
+<p>Lately, I&rsquo;ve been using <a href="https://github.com/tmux/tmux">tmux</a> a lot. This resulted in me figuring out how to get <a href="https://github.com/jakemcc/lein-test-refresh#notifications">lein-test-refresh</a> to send <a href="/blog/2019/01/06/notifications-with-tmux-and-lein-test-refresh/">notifications using tmux</a>.</p>
+
+<p>The setup linked above works great for when I&rsquo;m doing work all by myself. It showed a problem when using ssh and tmux to pair with another developer. Instead of both developers receiving a notification, only one did. One is better than none but not ideal.</p>
+
+<p>Below is a GIF showing the problem. Each window simulates a different developer.</p>
+
+<p><img src="/images/tmux-pair-fail.gif" alt="tmux only showing one developer a notification" /></p>
+
+<p>This wasn&rsquo;t too hard to fix. A little digging through the tmux manpage shows that <code>tmux display-message</code> takes an optional flag telling it which client receives the message. If we can get a list of all the clients then iterating over them and sending a message to each is straightforward.</p>
+
+<p><code>tmux list-clients</code> give us this list. Below is the output.</p>
+
+<pre><code>$ tmux list-clients
+/dev/ttys002: 0 [78x41 xterm-256color] (utf8)
+/dev/ttys006: 0 [78x42 xterm-256color] (utf8)
+</code></pre>
+
+<p>What we care about are the parts that look like <code>/dev/ttys002</code>. At first I used <code>cut</code> to grab these values but then I dug a bit deeper into the <code>tmux</code> manpage.</p>
+
+<p>It turns out that you can specify a format to <code>tmux list-clients</code>. Running <code>tmux list-clients -F "#{client_name}"</code> gives us the output we care about.</p>
+
+<pre><code>$ tmux list-clients -F "#{client_name}"
+/dev/ttys002
+/dev/ttys006
+</code></pre>
+
+<p>We can combine that with <code>xargs</code> to send a message to multiple clients.</p>
+
+<p><img src="/images/tmux-xargs-example.gif" alt="tmux xargs example" /></p>
+
+<p>That command is a bit much to put into <code>lein-test-refresh</code>&rsquo;s configuration so I shoved it in a script called <code>notify</code> and configured <code>lein-test-refresh</code> to use it. Script and GIF of that below. Now both you and your pair can get notifications.</p>
+
+<pre><code class="bash">#!/bin/bash
+
+USAGE="Usage: notify &lt;message&gt;
+
+example: notify 'Tests passed!'"
+
+if [ -z "$1" ]; then
+    echo "$USAGE"
+    exit 1
+fi
+
+message="$1"
+
+tmux list-clients -F "#{client_name}" \
+    | xargs -n1 -I{} tmux display-message -c {} "$message"
+</code></pre>
+
+<p><img src="/images/tmux-notify-script.gif" alt="Example using notify script" /></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Notifications with tmux and lein-test-refresh]]></title>
+    <link href="https://jakemccrary.com/blog/2019/01/06/notifications-with-tmux-and-lein-test-refresh/"/>
+    <updated>2019-01-06T16:55:00-06:00</updated>
+    <id>https://jakemccrary.com/blog/2019/01/06/notifications-with-tmux-and-lein-test-refresh</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve been using Emacs in a remote <a href="https://github.com/tmux/tmux">tmux</a> session lately and I&rsquo;ve been missing <a href="https://github.com/jakemcc/lein-test-refresh#notifications">lein-test-refresh</a> notifications when my Clojure tests pass or fail. Luckily, it only took me a little bit of searching to figure out a solution for when I&rsquo;m working inside of tmux.</p>
+
+<p>Below is a GIF of the notifications I get as my tests run and pass or fail.</p>
+
+<p><img src="/images/tmux-test-refresh.gif" title="tmux and test-refresh notifications" alt="tmux and test-refresh notifications" /></p>
+
+<p>With the above notifications, I can keep my focus on my code and only switch to the tmux window with <code>lein test-refresh</code> running when a test fails.</p>
+
+<p>This was pretty easy to setup. You can trigger a message in tmux by running <code>tmux display-message &lt;MESSAGE_HERE&gt;</code>. To configure <a href="https://github.com/jakemcc/lein-test-refresh#notifications">lein-test-refresh</a> to send notifications to tmux simply include the following in your <code>:test-refresh</code> section of your <code>project.clj</code> or <code>profiles.clj</code>.</p>
+
+<pre><code class="clojure">:test-refresh {:notify-command ["tmux" "display-message"]}
+</code></pre>
+
+<p>I hope you enjoy this. Its has made using a remote terminal with tmux and <a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a> more enjoyable.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Using comm to verify file content matches]]></title>
+    <link href="https://jakemccrary.com/blog/2017/05/29/using-comm-to-verify-matching-content/"/>
+    <updated>2017-05-29T10:45:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2017/05/29/using-comm-to-verify-matching-content</id>
+    <content type="html"><![CDATA[<p>I recently found myself in a situation where I needed to confirm that a process took in a tab separated file, did some processing, and then output a new file containing the original columns with some additional ones. The feature I was adding allowed the process to die and restart while processing the input file and pick up where it left off.</p>
+
+<p>I needed to confirm the output had data for every line in the input. I reached to the command line tool <code>comm</code>.</p>
+
+<p>Below is a made up input file.</p>
+
+<pre><code>UNIQUE_ID   USER
+1   38101838
+2   19183819
+3   19123811
+4   10348018
+5   19881911
+6   29182918
+</code></pre>
+
+<p>And here is some made up output.</p>
+
+<pre><code>UNIQUE_ID   USER    MESSAGE
+1   38101838    A01
+2   19183819    A05
+3   19123811    A02
+4   10348018    A01
+5   19881911    A02
+6   29182918    A05
+</code></pre>
+
+<p>With files this size, it would be easy enough to check visually. In my testing, I was dealing with files that had thousands of lines. This is too many to check by hand. It is a perfect amount for <code>comm</code>.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Comm">comm</a> reads two files as input and then outputs three columns. The first column contains lines found only in the first file, the second column contains lines only found in the second, and the last column contains lines in both. If it is easier for you to think about it as set operations, the first two columns are similar to performing two set differences and the third is similar to set intersection. Below is an example adapted from Wikipedia showing its behavior.</p>
+
+<pre><code>$ cat foo.txt
+apple
+banana
+eggplant
+$ cat bar.txt
+apple
+banana
+banana
+zucchini
+$ comm foo.txt bar.txt
+                  apple
+                  banana
+          banana
+eggplant
+          zucchini
+</code></pre>
+
+<p>So how is this useful? Well, you can also tell <code>comm</code> to suppress outputting specific columns.  If we send the common columns from the input and output file to <code>comm</code> and suppress <code>comm</code>&rsquo;s third column then anything printed to the screen is a problem. Anything printed to the screen was found in one of the files and not the other. We&rsquo;ll select the common columns using cut and, since comm expects input to be sorted, then sort using <code>sort</code>. Let&rsquo;s see what happens.</p>
+
+<pre><code>$ comm -3 &lt;(cut -f 1,2 input.txt | sort) &lt;(cut -f 1,2 output.txt | sort)
+$
+</code></pre>
+
+<p>Success! Nothing was printed to the console, so there is nothing unique in either file.</p>
+
+<p><code>comm</code> is a useful tool to have in your command line toolbox.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Better command history in your shell]]></title>
+    <link href="https://jakemccrary.com/blog/2016/09/28/better-command-history-in-your-shell/"/>
+    <updated>2016-09-28T11:42:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2016/09/28/better-command-history-in-your-shell</id>
+    <content type="html"><![CDATA[<p>My ideal command history would let me search the history of every
+shell but when I hit the up arrow it would only cycle through my
+current shell&rsquo;s history. In February, I was able to achieve this setup
+in large part because of a utility
+called <a href="https://github.com/dvorka/hstr">hstr</a>.</p>
+
+<h2>What is <code>hstr</code>?</h2>
+
+<p>hstr is a neat Bash and Zsh utility that lets you easily search, view,
+and manage your command history. hstr provides a tool named <code>hh</code> that
+provides a text interface for manipulating your command
+history. To see what it looks like check out
+the <a href="https://github.com/dvorka/hstr/blob/master/README.md">README</a> and
+this <a href="https://www.youtube.com/watch?v=sPF29NyXe2U">video</a> tutorial. If
+you are running OS X and use Homebrew you can install it by running <code>brew
+install hh</code>.</p>
+
+<h2>Making global history searchable but arrows cycle through local history</h2>
+
+<p>hstr is a neat tool but my favorite part of my setup is how the global
+command history is searchable but only a shell&rsquo;s local history is
+cycled through with the arrow keys. This is achieved by manipulating
+where history is written and tweaking some environment variables.</p>
+
+<p>The first step is to change your <code>$PROMPT_COMMAND</code> to append your
+shell&rsquo;s history to a global history file. Below is the snippet that
+does this from my <code>.bashrc</code> file.</p>
+
+<pre><code># Whenever a command is executed, write it to a global history
+PROMPT_COMMAND="history -a ~/.bash_history.global; $PROMPT_COMMAND"
+</code></pre>
+
+<p>The next step is to bind a keystroke to run <code>hh</code>, which is what hstr
+provides, with <code>$HISTFILE</code> pointing to <code>~/.bash_history.global</code>. I
+wanted to fully replace the default command history searching (and I
+use Emacs style keyboard shortcuts) so I&rsquo;ve bound these actions to ctrl-r.</p>
+
+<pre><code class="bash"># On C-r set HISTFILE and run hh
+bind -x '"\C-r": "HISTFILE=~/.bash_history.global hh"'
+</code></pre>
+
+<p>With those two additions to my <code>.bashrc</code> I&rsquo;ve achieved my ideal
+command history searching. When I hit ctrl-r I&rsquo;m searching all of my
+history and yet I only cycle through a shell&rsquo;s local history with the
+arrow keys. This small addition<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> made my command line productivity
+higher.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>My setup was inspired by <a href="https://unix.stackexchange.com/questions/200225/search-history-from-multiple-bash-session-only-when-ctrl-r-is-used-not-when-a">this</a> StackExchange post.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Managing windows in OS X using Phoenix]]></title>
+    <link href="https://jakemccrary.com/blog/2014/03/30/managing-windows-in-osx-using-phoenix/"/>
+    <updated>2014-03-30T18:30:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2014/03/30/managing-windows-in-osx-using-phoenix</id>
+    <content type="html"><![CDATA[<p><a href="http://jakemccrary.com/blog/2013/04/15/manage-your-workspace-with-grids-under-linux-osx-and-windows/">Last year</a>
+I wrote about how I managed my windows under OS X, Windows, and Linux.
+I&rsquo;m a big fan of having an orderly layout and try to use grid
+managers. Since then I&rsquo;ve changed jobs and now my main machine is an
+MacBook Pro running OS X Mavericks with two 27 inch cinema displays.
+As a result I&rsquo;ve started experimenting with more OS X window managers.
+After trying a few out I&rsquo;m going to stick with
+<a href="https://github.com/sdegutis/Phoenix">Phoenix</a>.</p>
+
+<h3>Before Phoenix</h3>
+
+<p>Last year I was satisfied using <a href="http://spectacleapp.com/">Spectacle</a>.
+It is (or at least was, I haven&rsquo;t used it in a while) easy to install
+and had good defaults. I&rsquo;d still recommend it for most people.</p>
+
+<p>At the recommendation from a reader, I switched to
+<a href="https://github.com/jigish/slate">Slate</a>. Slate has a ton of features
+and I barely scratched the surface in how I used it. I used it as a
+replacement for Spectacle and didn&rsquo;t touch any of the advanced
+features. Before I had the urge to explore the advanced features I
+ended up becoming dissatisfied with Slate. I ran into an issue where
+after running for a while (talking at least a week) it would start to
+respond slowly. I&rsquo;d try to move a window to another monitor and it
+wouldn&rsquo;t move. Eventually I&rsquo;d be in another process and the
+command would register sending whatever window I was currently focused
+on to another monitor.</p>
+
+<h3>Introducing Phoenix</h3>
+
+<p>I was looking for solutions to Slate&rsquo;s unresponsiveness when I
+stumbled on <a href="https://github.com/sdegutis/Phoenix">Phoenix</a>. I was
+drawn in by its stated goal; it &ldquo;aims for efficiency and a very small
+footprint.&rdquo; The fact that it is still being actively developed was
+also a huge selling point. Knowing that any bugs I find have a
+potential to be fixed is great.</p>
+
+<p>Phoenix provides a
+<a href="https://github.com/sdegutis/Phoenix/wiki/JavaScript-API-documentation">JavaScript API</a>
+that allows you to interact with your running applications or launch
+applications. It doesn&rsquo;t provide anything out of the box; it is up to
+you to make it useful by writing your own (or taking another persons)
+configuration.</p>
+
+<p>This is a double-edged sword. This means you get exactly the features
+you want. It also means you might spend significant amounts of time
+figuring out how to get the features you want.</p>
+
+<p>Luckily there are <a href="https://github.com/sdegutis/Phoenix/wiki">examples</a>
+that you can use as a starting point. Browsing through the examples is
+a great way of becoming familiar with what is possible and can be
+inspiring.</p>
+
+<p>My
+<a href="https://github.com/jakemcc/dotfiles/blob/17a73f89a2f3f7b2c9aa07a63d1928b86cc5425d/home/.phoenix.js">configuration</a>
+is relatively minimal. I&rsquo;ve written
+<a href="https://github.com/jakemcc/dotfiles/blob/17a73f89a2f3f7b2c9aa07a63d1928b86cc5425d/home/.phoenix.js#L42-L87">code</a>
+to move windows between monitors (rotating between three added some
+complexity to this),
+<a href="https://github.com/jakemcc/dotfiles/blob/17a73f89a2f3f7b2c9aa07a63d1928b86cc5425d/home/.phoenix.js#L90-L122">start or focus</a>
+certain applications, and
+<a href="https://github.com/jakemcc/dotfiles/blob/17a73f89a2f3f7b2c9aa07a63d1928b86cc5425d/home/.phoenix.js#L11-L37">resize</a>
+windows. This is enough for me to feel efficient.</p>
+
+<p>I encourage you to use a tool to help manage your windows. Personally
+I think Phoenix is pretty great and don&rsquo;t mind tinkering with my
+configuration and strongly recommend it. As a bonus it is a young
+project where the maintainer is open to suggestions. If you have an
+idea for a useful
+<a href="https://github.com/sdegutis/Phoenix/issues/18">feature</a> it has a
+possibility of being added pretty quickly.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: windows | Jake McCrary]]></title>
+  <link href="https://jakemccrary.com/blog/categories/windows/atom.xml" rel="self"/>
+  <link href="https://jakemccrary.com/"/>
+  <updated>2020-01-23T22:35:50-06:00</updated>
+  <id>https://jakemccrary.com/</id>
+  <author>
+    <name><![CDATA[Jake McCrary]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Manage your workspace with grids under Linux, OS X, and Windows]]></title>
+    <link href="https://jakemccrary.com/blog/2013/04/15/manage-your-workspace-with-grids-under-linux-osx-and-windows/"/>
+    <updated>2013-04-15T19:15:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2013/04/15/manage-your-workspace-with-grids-under-linux-osx-and-windows</id>
+    <content type="html"><![CDATA[<p>I&rsquo;m the type of computer user that wants an organized
+workspace. To me this means having my active applications organized
+into a grid. Efficiently doing this is important to me. Before I jump
+into what tools I use let me give a quick explanation of what
+organized into a grid means to me.</p>
+
+<p>Imagine that your screen is divided both vertically and
+horizontally. To me a good tool for managing windows lets you take
+your active application and move it so it fits in any rectangle formed
+by the edges of your screen and those two lines splitting your
+monitor. This means that with a keystroke you can make the active
+window take up the full screen, half screen, or quarter screen. Below
+I&rsquo;ve listed the tools that let me do that.</p>
+
+<h4>Linux</h4>
+
+<p>I&rsquo;ve switched to using <a href="http://i3wm.org/">i3</a>, a
+<a href="http://en.wikipedia.org/wiki/Tiling_window_manager">tiling window manager</a>
+instead of the default window manager on every distribution I use. When using
+i3 the tiling is done automatically. There are hotkeys for changing
+window layout and for moving focus between windows. The automatic tiling and
+shortcuts take a bit to get used to, but now that I am I can&rsquo;t believe
+I switched to using a tiling window manager sometime in the last eight
+months.</p>
+
+<h4>Windows</h4>
+
+<p>When developing under Windows I use
+<a href="http://winsplit-revolution.com/">Winsplit Revolution</a>. Unlike i3,
+Winsplit Revolution only provides hotkeys snapping windows to
+different locations. This is admittedly more approachable than i3 as
+the grid isn&rsquo;t forced on you. WinSplit Revolution is pretty flexible,
+you can change shortcuts and even define your own grid.</p>
+
+<p>I can&rsquo;t remember when I started using Winsplit Revolution but it has
+become a vital tool for when I&rsquo;m stuck doing development on a Windows
+machine.</p>
+
+<h4>OS X</h4>
+
+<p>My only OS X machine is my 13 inch MacBook Air. I always thought that
+with such a small screen being able to tile my windows wouldn&rsquo;t be as
+useful. I  was completely wrong. If anything it may be more useful
+because of the tiny screen real estate. The 13 inch screen is just wide
+enough to have an editor up on one half and documentation on the
+other.</p>
+
+<p>The tool I use to snap my windows to a grid is
+<a href="http://spectacleapp.com/">Spectacle</a>. Spectacle provides some
+sensible keystrokes for moving windows around. The hotkeys are
+similar to Winsplit Revolution&rsquo;s which makes switching between
+operating systems easy.</p>
+
+<p>If you haven&rsquo;t tried using a tool to help you organize your windows I
+highly recommend that you do. I&rsquo;ve introduced both technical and
+non-technical people to these tools and everyone has enjoyed them.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: reagent | Jake McCrary]]></title>
+  <link href="https://jakemccrary.com/blog/categories/reagent/atom.xml" rel="self"/>
+  <link href="https://jakemccrary.com/"/>
+  <updated>2020-01-23T22:35:50-06:00</updated>
+  <id>https://jakemccrary.com/</id>
+  <author>
+    <name><![CDATA[Jake McCrary]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Tracking changes to a Reagent atom]]></title>
+    <link href="https://jakemccrary.com/blog/2018/06/15/tracking-changes-to-a-reagent-atom/"/>
+    <updated>2018-06-15T09:05:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2018/06/15/tracking-changes-to-a-reagent-atom</id>
+    <content type="html"><![CDATA[<p>I was recently having some difficulty debugging a problem in a
+ClojureScript single page application. The SPA was implemented using
+<a href="https://reagent-project.github.io/">reagent</a><sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.</p>
+
+<p>This interface stores most of its state in a global
+<code>reagent.core/atom</code> called <code>db</code>. To debug the problem, I thought it
+would be useful to track how the global state changed as I interacted
+with the interface. How do we do that?</p>
+
+<p>For the rest of this article, pretend that <code>(require '[reagent.core
+:as reagent])</code> has been executed.</p>
+
+<p>First, let&rsquo;s define <code>db-history</code> in the same namespace as the global
+<code>reagent/atom</code>, <code>db</code>. This is where we&rsquo;ll collect the changes to <code>db</code>.</p>
+
+<pre><code class="clojure">(ns ui.data
+  (:require [reagent.core :as reagent]))
+
+(defonce db (reagent/atom {:app/current-page :offer-list}))
+
+(defonce db-history (atom []))
+</code></pre>
+
+<p>Next, let&rsquo;s write a function called <code>aggregate-state</code>. This function
+grabs the current value in <code>db</code> and <code>conj</code>s it onto <code>db-history</code>. It
+also limits the history to the most recent 101 states.</p>
+
+<pre><code class="clojure">(defn aggregate-state []
+  (let [d @db]
+    (swap! db-history (fn [hist]
+                        (-&gt; (take 100 hist)
+                            vec
+                            (conj d))))))
+</code></pre>
+
+<p>Now we need to invoke <code>aggregate-state</code> whenever <code>db</code> changes. We can
+do this using <code>reagent/track</code>. <code>reagent/track</code> takes a function and
+optional arguments and invokes that function whenever a <code>reagent/atom</code>
+that function depends on changes.</p>
+
+<p><code>reagent/track!</code> is similar except it immediately invokes the function
+instead of waiting for the first change. We can use it to cause
+<code>aggregate-state</code> to get called whenever <code>db</code> changes.</p>
+
+<pre><code class="clojure">(defonce db-history-logger (reagent/track! aggregate-state))
+</code></pre>
+
+<p>Now history of the global state is being tracked. But we need a way to
+access it. Below is what I ended up writing. When you call
+<code>ui.data.history()</code> in Chrome&rsquo;s JavaScript console, it returns an
+object you can click on to explore. If you pass in strings as
+arguments to <code>history</code> then it only selects some of the data from the
+global <code>db</code> and history.</p>
+
+<pre><code class="clojure">(defn ^:export history [&amp; args]
+  (let [d @db
+        k (if (seq args)
+            (map keyword args)
+            (keys d))]
+    (clj-&gt;js {:history (mapv (fn [x] (select-keys x k)) @db-history)
+              :current (select-keys d k)})))
+</code></pre>
+
+<p>It only took about fifteen lines of code to gain a view of our
+application&rsquo;s state changes over time. This view helped me solve my
+problem. Hopefully it will help you too.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>This particular project is nearly four years old and has had many hands on it over the years. Working in it reminds me of how useful re-frame is on larger applications like this one.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
+  
+</feed>

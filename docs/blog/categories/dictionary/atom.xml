@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: dictionary | Jake McCrary]]></title>
+  <link href="https://jakemccrary.com/blog/categories/dictionary/atom.xml" rel="self"/>
+  <link href="https://jakemccrary.com/"/>
+  <updated>2020-01-23T22:35:50-06:00</updated>
+  <id>https://jakemccrary.com/</id>
+  <author>
+    <name><![CDATA[Jake McCrary]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Releasing the Functional JavaScript Companion]]></title>
+    <link href="https://jakemccrary.com/blog/2013/07/09/releasing-the-functional-javascript-companion/"/>
+    <updated>2013-07-09T20:22:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2013/07/09/releasing-the-functional-javascript-companion</id>
+    <content type="html"><![CDATA[<p>You may have seen me <a href="https://twitter.com/jakemcc/status/352893242473328641">tweeting</a> <a href="https://twitter.com/jakemcc/status/349709102986969088">about</a> building custom Kindle dictionaries. A few months ago I made a
+<a href="http://gum.co/dune-dictionary">custom Kindle dictionary</a> for <a href="http://www.amazon.com/gp/product/B00B7NPRY8/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B00B7NPRY8&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=LC2NFEXWA7JXW57B">Dune</a> and my reading experience greatly improved. Being able to look up unknown terms as easily as English words was amazing. Ever since I&rsquo;ve been looking for other books that could benefit from having a custom dictionary. While reading Fogus&rsquo;s <a href="http://www.amazon.com/gp/product/B00D624AQO/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B00D624AQO&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=CUEYRNJIQSFNKUSM">Functional JavaScript</a> I saw the opportunity to make a another.</p>
+
+<p>I was taking my time reading Fogus&rsquo;s book and, as a result, found myself forgetting the implementation of functions defined earlier in the book. I wanted to be able to look up implementations easily and realized that a dictionary of function names to implementations would solve my problem.</p>
+
+<p>I found the book&rsquo;s <a href="https://github.com/funjs/book-source">repo</a> and confirmed the license would allow this. Then extracted the data (wrote a simple parser in Clojure, extracts functions that follow <a href="https://github.com/funjs/book-source/blob/dc6c2a97cb1099654f3179fda0794b188fc26f11/chapter03.js#L117">this</a> format) and made a dictionary.</p>
+
+<p>Steps to using my custom dictionary:</p>
+
+<ol>
+<li><a href="http://db.tt/eJzkIVfS">Download</a> the dictionary (titled <em>Functional JavaScript Companion</em>).</li>
+<li>Put it on your e-ink Kindle (transfer over USB or email it).</li>
+<li>Change your default English dictionary to <em>Functional JavaScript Companion</em>.</li>
+<li>Start reading <em>Functional JavaScript</em>. Look up function implementations the same way you would normal English words.</li>
+</ol>
+
+
+<p>You can change your Kindle&rsquo;s default dictionary by navigating to <code>Settings &gt; Device Options &gt; Language and Dictionaries</code>. You don&rsquo;t need to do this with all custom dictionaries but it is pretty much a requirement for this one. Many of the function names are English words and as a result if you don&rsquo;t change the default to <em>Functional JavaScript Companion</em> you&rsquo;ll end up looking up the definitions of standard English words.</p>
+
+<p>This dictionary isn&rsquo;t perfect but it did improve my reading experience. One example of where it fails is if you look up the function <code>partial1</code> it will look up <code>partial</code>. This is result of how the Kindle looks up words. Another minor issue is that the functions are often too large to fit in the pop-up window. The fix to both of these is to click the &ldquo;Show Full Definition&rdquo; button of the pop-up to be taken to the dictionary. Another issue is that the numerous functions defined by composition (example: <a href="https://github.com/funjs/book-source/blob/dc6c2a97cb1099654f3179fda0794b188fc26f11/chapter03.js#L125"><code>isOdd</code></a>) are not parsed by my parser and therefor not part of the dictionary.</p>
+
+<p>This was definitely a larger challenge than creating my custom <a href="http://gum.co/dune-dictionary">Dune dictionary</a>. It forced me to dive into the Amazon documentation a bit and figure out more of the markup language. I have notes on my experience creating Kindle dictionaries and sometime in the future will be writing a post with details about what I&rsquo;ve learned.</p>
+
+<p>I can&rsquo;t recommend Fogus&rsquo;s <a href="http://www.amazon.com/gp/product/B00D624AQO/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B00D624AQO&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=CUEYRNJIQSFNKUSM">Functional JavaScript</a> enough. If you do read it give my <a href="http://db.tt/eJzkIVfS">dictionary</a> a shot. I think it makes the reading experience a bit nicer.</p>
+]]></content>
+  </entry>
+  
+</feed>

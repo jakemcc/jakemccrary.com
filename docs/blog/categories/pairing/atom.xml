@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: pairing | Jake McCrary]]></title>
+  <link href="https://jakemccrary.com/blog/categories/pairing/atom.xml" rel="self"/>
+  <link href="https://jakemccrary.com/"/>
+  <updated>2020-01-23T22:35:50-06:00</updated>
+  <id>https://jakemccrary.com/</id>
+  <author>
+    <name><![CDATA[Jake McCrary]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Remote Pairing]]></title>
+    <link href="https://jakemccrary.com/blog/2015/01/24/remote-pairing/"/>
+    <updated>2015-01-24T15:19:00-06:00</updated>
+    <id>https://jakemccrary.com/blog/2015/01/24/remote-pairing</id>
+    <content type="html"><![CDATA[<p>Over a year ago I joined <a href="http://outpace.com">Outpace</a>. All of
+Outpace&rsquo;s developers are remote but we still practice pair
+programming. As a result I&rsquo;ve done a lot of remote pairing. I was
+skeptical before joining that it would work well and I&rsquo;m happy to
+report that I was wrong. Remote pairing works.</p>
+
+<h2>Why remote pairing?</h2>
+
+<p>The usual pair programming
+<a href="http://c2.com/cgi/wiki?PairProgrammingBenefits">benefits</a> apply to
+remote pairing; more people know the code, quality is higher, and
+it provides an opportunity for mentorship. Another benefit, more
+beneficial in a remote setting, is that it increases <strong>social
+interaction</strong>.</p>
+
+<p>The most common response I receive when I tell someone I work from my
+apartment is &ldquo;I&rsquo;d miss the interaction with co-workers.&rdquo; When you work
+remote you do miss out on the usual in office interaction. Pair
+programming helps replace some of this. It helps you build and
+maintain relationships with your remote colleagues.</p>
+
+<h2>Communication</h2>
+
+<p>Communication is an important part of pair programming. When you&rsquo;re
+pairing in person you use both physical and vocal communication. When
+remote pairing you primarily use vocal communication. You can pick up
+on some physical cues with video chat but it is hard. You will never
+notice your pair reaching for their keyboard.</p>
+
+<p>I&rsquo;ve used Google Hangouts, <a href="http://zoom.us">Zoom</a>, and Skype for
+communication. Currently I&rsquo;m primarily using Zoom. It offers high
+quality video and audio and usually doesn&rsquo;t consume too many
+resources.</p>
+
+<p>I recommend not using your computers built-in microphone. You should
+use headphones with a mic or a directional microphone. You&rsquo;ll sound
+better and you&rsquo;ll stop your pair from hearing themselves through your
+computer.</p>
+
+<p>I use
+<a href="http://www.amazon.com/gp/product/B005VAORH6/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B005VAORH6&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=3AX26BCB4ZHZWLC5">these headphones</a>.
+They are cheap, light, and open-eared but are wired. I&rsquo;ve been told I
+sound the best when I&rsquo;m using them. I also own these
+<a href="http://www.amazon.com/gp/product/B003VANOFY/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B003VANOFY&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=LDHRWNCUOO45B7G4">wireless headphones</a>.
+They are closed-ear, heavier, and wireless. The wireless is great but
+the closed-ear design causes me to talk differently and by the end of
+the day my throat is hoarse. Both of these headphones are widely used
+by my colleagues and I don&rsquo;t think you can go wrong with either one.</p>
+
+<p>Some people don&rsquo;t like wearing headphones all day. If you are one of
+those I&rsquo;d recommend picking up a directional microphone. Many of my
+colleagues use a
+<a href="http://www.amazon.com/gp/product/B002OO333Q/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B002OO333Q&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=XVNYHVNXTAC3J2RD">Snowball</a>.</p>
+
+<h2>Connecting the machines</h2>
+
+<p>So now you can communicate with your pair. It is time to deal with the
+main problem in remote pairing. How do you actually work on the same
+code with someone across the world?</p>
+
+<p>At Outpace we&rsquo;ve somewhat cheated and have standardized our
+development hardware. Everyone has a computer running OS X and, if
+they want it, at least one 27 inch monitor (mostly Apple 27 inch
+displays or a
+<a href="http://www.amazon.com/gp/product/B009H0XQQY/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B009H0XQQY&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=JJLKLYNESYPKCRKZ">Dell</a>)
+with a resolution of 2560x1440. Since everyone has nearly identical
+hardware and software we are able to pair using OS X&rsquo;s built-in screen
+sharing. This allows full sharing of the host&rsquo;s desktop. This full
+desktop sharing is the best way to emulate working physically next to
+your pair. This enable the use of any editor and lets you both look at
+the same browser windows (useful for testing UIs or reading reference
+material). With decent internet connections both programmers can write
+code with minimal lag. This is my preferred way of pairing.</p>
+
+<p>Another option that works well is <a href="http://tmate.io/">tmate</a>. tmate is
+a fork of tmux that makes remote pairing easy. It makes it dead simple
+to have remote developer connect to your machine and share your
+terminal. This means you are stuck using tools that work in a terminal
+and, if you are working on a user interface, you need to share that
+some other way. There generally is less lag when the remote developer
+is typing.</p>
+
+<p>A third option is to have the host programmer share their screen using
+screen sharing built-in to Google Hangouts or <a href="http://zoom.us">Zoom</a>.
+This is a quick way to share a screen and is my preferred way of
+sharing GUIs with more than one other person. With both Zoom and
+Google Hangouts the remote developer can control the host&rsquo;s machine
+but it isn&rsquo;t a great experience. If you are pairing this way the
+remote developer rarely touches the keyboard.</p>
+
+<h2>Soloing</h2>
+
+<p>It might seem weird to have a section on soloing in an article about
+remote pairing. Soloing happens and even in an environment that almost
+entirely pairs it is important. Not everyone can or wants to pair 100%
+of the time. Soloing can be recharging. It is important to be
+self-aware and recognize if you need solo time. Below are a few tips
+for getting that solo time.</p>
+
+<p>One way to introduce solo time is to take your lunch at a different
+time than your pair. This provides both of you and your pair with an
+opportunity to do a bit of soloing.</p>
+
+<p>Other short soloing opportunities happen because of meetings and
+interviews. It isn&rsquo;t uncommon for half of a pair to leave for a bit to
+join a meeting, give an interview, or jump over to help out another
+developer for a bit.</p>
+
+<p>Soloing also happens as a result of uneven team numbers. If your team
+is odd numbered than there are plenty of opportunities for being a solo
+developer. Try to volunteer to be the solo developer but be aware of
+becoming too isolated.</p>
+
+<h2>Conclusion</h2>
+
+<p>Remote pairing works. Working at <a href="http://outpace.com">Outpace</a> has
+shown me how well it can work. Reasonably fast Internet paired with
+modern tools can make it seem like you&rsquo;re almost in the same room as
+your pair.</p>
+]]></content>
+  </entry>
+  
+</feed>

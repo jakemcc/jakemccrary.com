@@ -1,0 +1,1640 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="iem7"><![endif]-->
+<!--[if lt IE 9]><html class="lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html lang="en"><!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <title>Jake McCrary</title>
+    <meta name="author" content="Jake McCrary">
+
+    
+    
+    
+    
+
+    <meta itemprop="name" content="Jake McCrary" />
+    <meta itemprop="description" content=" If you&rsquo;re writing Clojure in Emacs you should check out
+clj-refactor. It
+provides some neat functionality. Some examples include the ability to &hellip;" />
+
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@jakemcc" />
+    <meta name="twitter:title" content="Jake McCrary" />
+    <meta name="twitter:description" content=" If you&rsquo;re writing Clojure in Emacs you should check out
+clj-refactor. It
+provides some neat functionality. Some examples include the ability to &hellip;" />
+    <meta name="twitter:creator" content="@jakemcc" />
+    <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
+
+    <!-- Open Graph data -->
+    <meta property="og:site_name" content="The Blog of Jake McCrary" />
+    <meta property="og:url" content="https://jakemccrary.com/blog/6/" />
+    <meta property="og:title" content="Jake McCrary" />
+    <meta property="og:description" content=" If you&rsquo;re writing Clojure in Emacs you should check out
+clj-refactor. It
+provides some neat functionality. Some examples include the ability to &hellip;" />
+    <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
+    
+    
+
+    <meta name="description" content=" If you&rsquo;re writing Clojure in Emacs you should check out
+clj-refactor. It
+provides some neat functionality. Some examples include the ability to &hellip;">
+
+    
+
+    <!-- http://t.co/dKP3o1e -->
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https://jakemccrary.com/blog/6/">
+    <link href="/favicon.png" rel="icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <link href="http://feeds.feedburner.com/JakeMccrarysMusings" rel="alternate" title="Jake McCrary" type="application/atom+xml">
+    <link href="https://jakemccrary.com/feed.json" rel="alternate" title="Jake McCrary" type="application/json">
+
+    <!-- iOS scaling bug fix Rewritten version By @mathias, @cheeaun and @jdalton Source url: https://gist.github.com/901295 -->
+    <script type="text/javascript">
+     (function(doc) {
+       var addEvent = 'addEventListener',
+           type = 'gesturestart',
+           qsa = 'querySelectorAll',
+           scales = [1, 1],
+           meta = qsa in doc ? doc[qsa]('meta[name=viewport]') : [];
+       function fix() {
+         meta.content = 'width=device-width,minimum-scale=' + scales[0] + ',maximum-scale=' + scales[1];
+         doc.removeEventListener(type, fix, true);
+       }
+       if ((meta = meta[meta.length - 1]) && addEvent in doc) {
+         fix();
+         scales = [0.25, 1.6];
+         doc[addEvent](type, fix, true);
+       }
+     }(document));
+    </script>
+    
+<script>
+ var origin = window.location.origin;
+ if (!origin) {
+   origin = window.location.protocol + '//' + window.location.hostname + (window.location.port ? (':' + window.location.port) : '');
+ }
+ if (origin.indexOf('localhost') === -1) {
+   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+   ga('create', 'UA-19834208-2', 'auto');
+   ga('send', 'pageview');
+ }
+</script>
+
+
+  </head>
+
+<body  >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Jake McCrary</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul role=main-navigation>
+  <li><a href="/">Articles</a></li>
+  <li><a href="/adventures/">Adventures</a></li>
+  <li><a href="/about.html">About</a></li>
+  <li><a href="/blog/archives/">Archives</a></li>
+  <li><a href="http://feeds.feedburner.com/JakeMccrarysMusings" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+</ul>
+
+  <form action="https://google.com/search" method="get">
+    <fieldset role="search">
+      <input type="hidden" name="sitesearch" value="jakemccrary.com">
+      <input class="search" type="text" name="q" placeholder="Search"/>
+    </fieldset>
+  </form>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/06/18/emacs-automatically-require-common-namespaces/">Emacs: automatically require common namespaces</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-06-18T12:52:00-05:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:52 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>If you&rsquo;re writing Clojure in Emacs you should check out
+<a href="https://github.com/clojure-emacs/clj-refactor.el">clj-refactor</a>. It
+provides some neat functionality. Some examples include the ability to
+extract functions, introduce <code>let</code> forms, and inline symbols. It also
+has a feature called &ldquo;magic requires&rdquo; that automatically requires
+common namespaces when you type their short form.</p>
+
+<p>Out of the box five short forms are supported. They are <code>io</code> for
+<code>clojure.java.io</code>, <code>set</code> for <code>clojure.set</code>, <code>str</code> for
+<code>clojure.string</code>, <code>walk</code> for <code>clojure.walk</code>, and <code>zip</code> for
+<code>clojure.zip</code>. If you type <code>(str/</code> then <code>(:require
+[clojure.string :as str])</code> will be added to your <code>ns</code> form. It is
+pretty awesome. This feature is on by default but you can turn it off
+by adding <code>(setq cljr-magic-requires nil)</code> to your Emacs
+configuration.</p>
+
+<p>This feature is also extensible. You can add your own mappings of
+short form to namespace. The following snippet of elisp adds mappings
+for <code>maps</code>, <code>seqs</code>, and <code>string</code>.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>(dolist (mapping '(("maps" . "outpace.util.maps")
+</span><span class='line'>                   ("seqs" . "outpace.util.seqs")
+</span><span class='line'>                   ("string" . "clojure.string")))
+</span><span class='line'>  (add-to-list 'cljr-magic-require-namespaces mapping t))</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It doesn&rsquo;t take a lot of code but having it is awesome. If there are
+namespaces you frequently require I highly recommend setting this up.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/05/31/use-git-pre-commit-hooks-to-stop-unwanted-commits/">Use git pre-commit hooks to stop unwanted commits</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-05-31T11:51:00-05:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>11:51 am</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Sometimes you&rsquo;ll make a change to some code and not want to commit it.
+You probably add a comment to the code and hope you&rsquo;ll either see the
+comment in the diff before committing or just remember not to check in
+the change. If you&rsquo;ve ever done this you&rsquo;ve probably also committed
+something you didn&rsquo;t mean to commit. I know I have.</p>
+
+<p>Luckily we can do better. Using git pre-commit
+<a href="https://git-scm.com/docs/githooks">hooks</a> we can make git stop us
+from committing. Below is a git pre-commit hook that searches for the
+text <em>nocommit</em> and if found rejects the commit. With it you can
+stick <em>nocommit</em> in a comment next to the change you don&rsquo;t want
+committed and know that it won&rsquo;t be committed.</p>
+
+<h3>The code</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/sh</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># If you use a GUI for controlling git, you might want to comment out the `tput` commands.</span>
+</span><span class='line'><span class="c"># Some users have had problems with those commands and whatever GUI they are using.</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> git rev-parse --verify HEAD &gt;/dev/null 2&gt;<span class="p">&amp;</span>1
+</span><span class='line'><span class="k">then</span>
+</span><span class='line'>    <span class="nv">against</span><span class="o">=</span>HEAD
+</span><span class='line'><span class="k">else</span>
+</span><span class='line'>    <span class="c"># Initial commit: diff against an empty tree object</span>
+</span><span class='line'>    <span class="nv">against</span><span class="o">=</span><span class="k">$(</span>git <span class="nb">hash</span>-object -t tree /dev/null<span class="k">)</span>
+</span><span class='line'><span class="k">fi</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">patch_filename</span><span class="o">=</span><span class="k">$(</span>mktemp -t commit_hook_changes.XXXXXXX<span class="k">)</span>
+</span><span class='line'>git diff --exit-code --binary --ignore-submodules --no-color &gt; <span class="s2">&quot;$patch_filename&quot;</span>
+</span><span class='line'><span class="nv">has_unstaged_changes</span><span class="o">=</span><span class="nv">$?</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span> <span class="nv">$has_unstaged_changes</span> -ne <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>    <span class="c"># Unstaged changes have been found</span>
+</span><span class='line'>    <span class="k">if</span> <span class="o">[</span> ! -f <span class="s2">&quot;$patch_filename&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>        <span class="nb">echo</span> <span class="s2">&quot;Failed to create a patch file&quot;</span>
+</span><span class='line'>        <span class="nb">exit </span>1
+</span><span class='line'>    <span class="k">else</span>
+</span><span class='line'>        <span class="nb">echo</span> <span class="s2">&quot;Stashing unstaged changes in $patch_filename.&quot;</span>
+</span><span class='line'>        git checkout -- .
+</span><span class='line'>    <span class="k">fi</span>
+</span><span class='line'><span class="k">fi</span>
+</span><span class='line'>
+</span><span class='line'>quit<span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="o">[</span> <span class="nv">$has_unstaged_changes</span> -ne <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>        git apply <span class="s2">&quot;$patch_filename&quot;</span>
+</span><span class='line'>        <span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -ne <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>            git checkout -- .
+</span><span class='line'>            git apply --whitespace<span class="o">=</span>nowarm --ignore-whitespace <span class="s2">&quot;$patch_filename&quot;</span>
+</span><span class='line'>        <span class="k">fi</span>
+</span><span class='line'>    <span class="k">fi</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nb">exit</span> <span class="nv">$1</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Redirect output to stderr.</span>
+</span><span class='line'><span class="nb">exec </span>1&gt;<span class="p">&amp;</span>2
+</span><span class='line'>
+</span><span class='line'><span class="nv">files_with_nocommit</span><span class="o">=</span><span class="k">$(</span>git diff --cached --name-only --diff-filter<span class="o">=</span>ACM <span class="nv">$against</span> <span class="p">|</span> xargs -I<span class="o">{}</span> grep -i <span class="s2">&quot;nocommit&quot;</span> -l <span class="o">{}</span> <span class="p">|</span> tr <span class="s1">&#39;\n&#39;</span> <span class="s1">&#39; &#39;</span><span class="k">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;x${files_with_nocommit}x&quot;</span> !<span class="o">=</span> <span class="s2">&quot;xx&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>    tput setaf 1
+</span><span class='line'>    <span class="nb">echo</span> <span class="s2">&quot;File being committed with &#39;nocommit&#39; in it:&quot;</span>
+</span><span class='line'>    <span class="nv">IFS</span><span class="o">=</span><span class="s1">$&#39;\n&#39;</span>
+</span><span class='line'>    <span class="k">for</span> f in <span class="k">$(</span>git diff --cached --name-only --diff-filter<span class="o">=</span>ACM <span class="nv">$against</span> <span class="p">|</span> xargs -I<span class="o">{}</span> grep -i <span class="s2">&quot;nocommit&quot;</span> -l <span class="o">{}</span><span class="k">)</span><span class="p">;</span> <span class="k">do</span>
+</span><span class='line'>        <span class="nb">echo</span> <span class="nv">$f</span>
+</span><span class='line'>    <span class="k">done</span>
+</span><span class='line'>    tput sgr0
+</span><span class='line'>    quit 1
+</span><span class='line'><span class="k">fi</span>
+</span><span class='line'>
+</span><span class='line'>quit 0
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Lines 3-10 figure out what revision to diff against. They can pretty
+much be ignored.</p>
+
+<p>Lines 11-30 are all about handling unstaged changes. They create a
+patch with these changes and revert these changes from the repository.
+Then, in the function <code>quit</code>, the unstaged changes are reapplied to
+the repository. All of this is done so that <em>nocommit</em> in a
+un-committed piece of text doesn&rsquo;t cause the committed changes to be
+rejected.</p>
+
+<p>Some online guides suggest using <code>git stash</code> to achieve what is
+described above. I started out using <code>git stash</code> but ran into problems
+where I&rsquo;d end up in weird states. Unfortunately I didn&rsquo;t take good
+notes and I&rsquo;m unable to describe the various bad things that happened.
+Trust me when I say bad things did happen and that this way (create
+patch, revert, apply patch) is much more successful.</p>
+
+<p>Line 36 figures out what files contain <em>nocommit</em>. Lines 38-44 report
+what files contain <em>nocommit</em> and then rejects the commit by exiting
+with a non-zero exit code. The first <code>tput</code> changes the output of the
+<code>echo</code> commands to colored red and the second <code>tput</code> changes output
+back to default.</p>
+
+<blockquote><p>Warning: I know many developers that love using this and have had no problems. I get the occasional report of it not working. If it doesn&rsquo;t work, and it seems like you&rsquo;ve lost changes, you can find the patch file wherever mktemp creates files on your local machine. I&rsquo;d still recommend testing it out on a small changeset so if something doesn&rsquo;t work on your machine you don&rsquo;t have to both debug why and recreate your changes.</p></blockquote>
+
+<h3>Using with a single repository</h3>
+
+<p>To enable in a single repository you need to add the above code to a
+<code>.git/hooks/pre-commit</code> file in your local repository and make that
+file executable. Once you&rsquo;ve done that try adding <em>nocommit</em> to a file
+and then try to commit it. The commit will be rejected if the
+pre-commit hook is setup properly.</p>
+
+<h3>Using with multiple repositories</h3>
+
+<p>I want this pre-commit hook enabled in all of my repositories. I use
+git init templates to do this. <code>git help init</code> or a
+Google search can help fill in the gaps with setting this up but below
+are the steps I ended up taking.</p>
+
+<ol>
+<li><code>git config --global init.templatedir ~/.git-templates</code></li>
+<li><code>mkdir -p ~/.git-templates/hooks</code></li>
+<li><code>touch ~/.git-templates/hooks/pre-commit</code></li>
+<li>Copy and paste the above code into
+<code>~/.git-templates/hooks/pre-commit</code></li>
+<li><code>chmod +x ~/.git-templates/hooks/pre-commit</code></li>
+</ol>
+
+
+<p>After following those steps any repository created by <code>git init</code> will
+contain the pre-commit hook. To add to an existing repository <code>cd</code> into
+the repo and run  <code>git init .</code>.</p>
+
+<h3>Example output</h3>
+
+<p>If you try to commit some text with <em>nocommit</em> in it you&rsquo;ll see
+something similar to the image below and the commit will be rejected.</p>
+
+<p><img src="/images/pre-commit-example.png" alt="Error message" /></p>
+
+<p>If you ever need to commit and want to ignore pre-commit hooks
+(example: If you are writing a blog post that is full of the text
+<em>nocommit</em>) then you can ignore pre-commit hooks by using <code>git commit
+--no-verify</code>.</p>
+
+<p>I&rsquo;ve found this pre-commit hook really useful. It has saved me from
+committing numerous times. I&rsquo;d recommend adopting it.</p>
+
+<h2>Errata</h2>
+
+<p><em>2015/12/23</em></p>
+
+<p>I&rsquo;m updated the code to be more portable. It was brought to my
+attention by a comment that the original code took advantage of some
+bash extensions and specific <code>mktemp</code> behavior found in OS X. The
+pre-commit code has now been tested works in OS X and Ubuntu 14.04.
+There may be minor changes you need to perform to get it to work on
+your system.</p>
+
+<p><em>2017/04/28</em></p>
+
+<p>Updated code to handle if <code>mktemp</code> fails and if whitespace changes
+between creating a patch and applying it. Also adds in a change that
+better handles whitespace in paths.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/05/03/put-the-last-commands-run-time-in-your-bash-prompt/">Put the last command's run time in your Bash prompt</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-05-03T20:37:00-05:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>8:37 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&rsquo;m fairly certain the following scenario has happened to every
+terminal user. You run a command and, while it is running, realize you
+should have prefixed it <a href="http://linux.die.net/man/1/time"><code>time</code></a>. You
+momentarily struggle with the thought of killing the command and
+rerunning it with <code>time</code>. You decide not to and the command finishes
+without you knowing how long it took. You debate running it again.</p>
+
+<p>For the last year I&rsquo;ve lived in a world without this problem. Upon
+completion, a command&rsquo;s approximate run time is displayed in my
+prompt. It is awesome.</p>
+
+<h2>Overview</h2>
+
+<p>Most of the code below is from a post on
+<a href="http://stackoverflow.com/a/1862762/491871">Stack Overflow</a>. It has
+been slightly modified to support having multiple commands in your
+<code>$PROMPT_COMMAND</code> variable. Below is a minimal snippet that could be
+included in your <code>.bashrc</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="k">function</span> timer_start <span class="o">{</span>
+</span><span class='line'>  <span class="nv">timer</span><span class="o">=</span><span class="k">${</span><span class="nv">timer</span><span class="k">:-</span><span class="nv">$SECONDS</span><span class="k">}</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function</span> timer_stop <span class="o">{</span>
+</span><span class='line'>  <span class="nv">timer_show</span><span class="o">=</span><span class="k">$((</span><span class="nv">$SECONDS</span> <span class="o">-</span> <span class="nv">$timer</span><span class="k">))</span>
+</span><span class='line'>  <span class="nb">unset </span>timer
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">trap</span> <span class="s1">&#39;timer_start&#39;</span> DEBUG
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$PROMPT_COMMAND&quot;</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>  <span class="nv">PROMPT_COMMAND</span><span class="o">=</span><span class="s2">&quot;timer_stop&quot;</span>
+</span><span class='line'><span class="k">else</span>
+</span><span class='line'>  <span class="nv">PROMPT_COMMAND</span><span class="o">=</span><span class="s2">&quot;$PROMPT_COMMAND; timer_stop&quot;</span>
+</span><span class='line'><span class="k">fi</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">PS1</span><span class="o">=</span><span class="s1">&#39;[last: ${timer_show}s][\w]$ &#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Modify your <code>.bashrc</code> to include the above and you&rsquo;ll have a prompt
+that looks like the image below. It is a minimal prompt but it
+includes the time spent on the last command. This is great. No more
+wondering how long a command took.</p>
+
+<p><img src="/images/prompt-timings.png" alt="Example of prompt" /></p>
+
+<h2>The details</h2>
+
+<p><code>timer_start</code> is a function that sets <code>timer</code> to be its current value
+or, if <code>timer</code> is unset, sets it to the value of <code>$SECONDS</code>.
+<code>$SECONDS</code> is a special variable that contains the number of seconds
+since the shell was started. <code>timer_start</code> is invoked after every
+simple command as a result of <code>trap 'timer_start' DEBUG</code>.</p>
+
+<p><code>timer_stop</code> calculates the difference between <code>$SECONDS</code> and <code>timer</code>
+and stores it in <code>timer_show</code>. It also unsets <code>timer</code>. Next time
+<code>timer_start</code> is invoked <code>timer</code> will be set to the current value of
+<code>$SECONDS</code>. Because <code>timer_stop</code> is part of the <code>$PROMPT_COMMAND</code> it
+is executed prior to the prompt being printed.</p>
+
+<p>It is the interaction between <code>timer_start</code> and <code>timer_stop</code> that
+captures the run time of commands. It is important that <code>timer_stop</code>
+is the <strong>last</strong> command in the <code>$PROMPT_COMMAND</code>. If there are other
+commands after it then those will be executed and their execution
+might cause <code>timer_start</code> to be called. This results in you timing the
+length of time between the prior and current prompts being printed.</p>
+
+<h2>My prompt</h2>
+
+<p>My prompt is a bit more complicated. It shows the last exit code, last
+run time, time of day, directory, and git information. The run time of
+the last command is one of the more useful parts of my prompt. I
+highly recommend you add it to yours.</p>
+
+<p><img src="/images/my-prompt.png" alt="My prompt" /></p>
+
+<h2>Errata</h2>
+
+<p><em>2015/5/04</em></p>
+
+<p><a href="https://twitter.com/gfredericks_">Gary Fredericks</a> noticed that the
+original code sample broke if you didn&rsquo;t already have something set as
+your <code>$PROMPT_COMMAND</code>. I&rsquo;ve updated the original snippet to reflect
+his <a href="https://twitter.com/gfredericks_/status/595249998838800384">changes</a>.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/25/quieter-clojure-dot-test-output/">Quieter clojure.test output</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-25T15:40:00-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>3:40 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>If you use <code>clojure.test</code> then there is a good chance you&rsquo;ve been
+annoyed by all the
+<a href="https://github.com/jakemcc/lein-test-refresh/issues/33">output</a> when
+you run your tests in the terminal. When there is a test failure you
+have to scroll through pages of output to find the error.</p>
+
+<p>With release <code>0.9.0</code> of
+<a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a> you
+can minimize the output of <code>clojure.test</code> and <strong>only</strong> see failure and
+summary messages. To enable this feature add <code>:quiet true</code> to the
+<code>:test-refresh</code> configuration map in either your project.clj or
+profiles.clj file. If you configure <code>lein-test-refresh</code> in
+<code>~/.lein/profiles.clj</code> then turning on this feature looks like the
+following. <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">{</span><span class="ss">:user</span> <span class="p">{</span><span class="ss">:plugins</span> <span class="p">[[</span><span class="nv">com.jakemccrary/lein-test-refresh</span> <span class="s">&quot;0.9.0&quot;</span><span class="p">]]</span>
+</span><span class='line'>        <span class="ss">:test-refresh</span> <span class="p">{</span><span class="ss">:quiet</span> <span class="nv">true</span><span class="p">}}}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Setting up your profiles.clj like above allows you to move to Clojure
+project in your terminal, run <code>lein test-refresh</code>, and have your
+<code>clojure.test</code>s run whenever a file changes. In addition, your
+terminal won&rsquo;t show the usual <em>Testing a.namespace</em> output.</p>
+
+<p>Below is what you typically see when running <code>clojure.test</code> tests in a
+terminal. I had to cut most of the <em>Testing a.namespace</em> messages from
+the picture.</p>
+
+<p><img src="/images/not-quiet-test-output.png" alt="Normal view of test output" /></p>
+
+<p>The following picture is with quiet mode turned on in
+<code>lein-test-refresh</code>. No more <em>Testing a.namespace</em> messages! No more
+scrolling through all your namespaces to find the failure!</p>
+
+<p><img src="/images/minimal-test-output.png" alt="Minimal output in console" /></p>
+
+<p>I just released this feature so i haven&rsquo;t had a chance to use it too
+much. I imagine it may evolve to change the output more.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>More configuration options can be found <a href="https://github.com/jakemcc/lein-test-refresh/blob/master/sample.project.clj#L5-L24">here</a><a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/12/making-tmate-and-tmux-play-nice-with-os-x-terminal-notifier/">Making tmate and tmux play nice with OS X terminal-notifier</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-12T17:47:00-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:47 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>For nearly the last two years, I&rsquo;ve been doing most of my development
+in OS X. Most of that development has been done in Clojure and,
+whenever possible, using
+<a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a> with
+<a href="https://github.com/alloy/terminal-notifier">terminal-notifier</a> to
+have my tests automatically run and a notification shown with the
+status of the test run. Its a great work flow that gives me a quick
+feedback cycle and doesn&rsquo;t pull my attention in different directions.</p>
+
+<p>Recently I&rsquo;ve started using <a href="http://tmate.io/">tmate</a> for remote
+pairing. Unfortunately when I first started using it my quick feedback
+cycle was broken. <code>lein test-refresh</code> would run my tests but would
+become hung when sending a notification using <code>terminal-notifier</code>.
+This was terrible and, if I hadn&rsquo;t been able to fix it, would have
+stopped me from using <code>tmate</code>. After some searching I stumbled across
+<a href="https://github.com/alloy/terminal-notifier/issues/115">this</a> GitHub
+issue which helped solve the problem.</p>
+
+<p>To make <code>tmate</code> work nicely with <code>terminal-notifier</code> you&rsquo;ll need
+to install
+<a href="https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard">reattach-to-user-namespace</a>
+and change your <code>tmate</code> configuration to use it. If you use <code>brew</code> you
+can install by running <code>brew install --with-wrap-pbcopy-and-pbpaste
+reattach-to-user-namespace</code>. Then open your <code>.tmux.conf</code> or
+<code>.tmate.conf</code> file and add the line below.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>set-option -g default-command "which reattach-to-user-namespace &gt; /dev/null && reattach-to-user-namespace -l $SHELL || $SHELL"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The above tells <code>tmate</code> to use <code>reattach-to-user-namespace</code> if it is
+available. Now <code>terminal-notifier</code> no longer hangs when invoked inside
+<code>tmate</code>. Unsurprisingly, this change also makes <code>tmux</code> place nice with
+<code>terminal-notifier</code>.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/03/31/my-home-work-space/">My home work space</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-31T20:09:00-05:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>8:09 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&rsquo;ve been working remotely for about a year and a half. In that time,
+I&rsquo;ve worked from many locations but most of my time has been spent
+working from my apartment in Chicago. During this time I&rsquo;ve tweaked my
+environment by building a standing desk, building a keyboard, and
+changed my monitor stands. Below is a my desk (click for larger
+image).</p>
+
+<p><a href="/images/my-desk.png"><img src="/images/my-desk-small.png" title="Picture of my desk" alt="My Desk" /></a></p>
+
+<h2>The Desk</h2>
+
+<p>I built my own desk using the
+<a href="http://www.ikea.com/us/en/catalog/products/50106773/">Gerton</a> table
+top from Ikea and the
+<a href="http://www.ergoprise.com/s2s-height-adjustable-desk-base-new-improved/">S2S Height Adjustable Desk Base</a>
+from <a href="http://www.ergoprise.com/">Ergoprise</a>. I originally received a
+defective part from Ergoprise and after a couple emails I was sent a
+replacement part. Once I had working parts, attaching the legs to the
+table top was straightforward. The desk legs let me adjust the height
+of my desk so I can be sitting or standing comfortably.</p>
+
+<h2>The Monitors</h2>
+
+<p>I have two 27 inch Apple Cinema displays that are usually connected to
+a 15 inch MacBook Pro. The picture doesn&rsquo;t show it, but I actively use
+all the monitors.</p>
+
+<p>My laptop is raised by a
+<a href="http://www.amazon.com/gp/product/B000OOYECC/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B000OOYECC&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=L5THOTZHJ6FPJSAL">mStand Laptop Stand</a>.
+While I&rsquo;m sitting this stand puts the laptop at a comfortable height.
+I highly recommend getting one.</p>
+
+<p>The middle monitor, the one I use the most, has had the standard stand
+(you can see it in the right monitor) replaced with an
+<a href="http://www.amazon.com/gp/product/B00BZC05WU/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B00BZC05WU&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=ADQ435RJ65U5DK3C">ErgoTech Freedom Arm</a>.
+This lets me raise the monitor to a comfortable height when I&rsquo;m
+standing (as seen in this picture). It also allows me to rotate the
+monitor vertically, though I have only done that once since installing
+it. Installation of the arm wasn&rsquo;t trivial, but it wasn&rsquo;t that
+difficult.</p>
+
+<p>I&rsquo;ve been using the arm for four months now and I&rsquo;m enjoying it. If
+you bump the desk the monitor does wobble a bit but I don&rsquo;t notice it
+while I&rsquo;m typing. I haven&rsquo;t noticed any slippage; the monitor arm
+seems to hold the monitor in place.</p>
+
+<p>I&rsquo;ve decided against getting a second arm for my other monitor.
+Installing the monitor arm renders your monitor non-portable. It
+doesn&rsquo;t happen often, but sometimes I travel and stay at a place for
+long enough that I want to bring a large monitor.</p>
+
+<h2>The Chair</h2>
+
+<p>My desk chair is a Herman Miller <a href="http://amzn.to/1XNWKru">Setu</a>. It
+is a very comfortable chair that boasts only a single adjustment. You
+can only raise or lower it.</p>
+
+<p>I moved to this chair from a Herman Miller
+<a href="http://amzn.to/1tjeuxJ">Aeron</a>. The Aeron had been my primary chair
+for eight years prior to me buying the Setu.</p>
+
+<p>They are both great chairs. I haven&rsquo;t missed the extreme amount of
+customization the Aeron provides; its actually nice having fewer knobs
+to tweak. I also find the Setu more visually appealing. The Aeron is
+sort of a giant black monster of a chair; I prefer seeing the
+chartreuse Setu in my apartment.</p>
+
+<h2>The Keyboard and Mouse</h2>
+
+<p>I built my own keyboard. It is an ErgoDox with Cherry MX Blue
+key switches and DSA key caps. More details about my build can be found
+in an earlier <a href="/blog/2014/07/27/building-the-ergodox-keyboard/">post</a>.</p>
+
+<p>I&rsquo;ve been using this keyboard for about eight months. It has been rock
+solid. This is my first keyboard that has mechanical switches. They
+are nice. It feels great typing on this keyboard.</p>
+
+<p>The ErgoDox has six keys for each thumb. I originally thought I&rsquo;d be
+using the thumb clusters a lot but, in practice, I only actively use
+two or three keys per thumb.</p>
+
+<p>The ErgoDox also supports having multiple layers. This means that with
+the press of a key I can have an entirely different keyboard beneath
+my finger tips. It turns out this is another feature I don&rsquo;t frequently
+use. I really only use layers for controlling my music playback
+through media keys and for hitting function keys.</p>
+
+<p>If I were going to build a keyboard again I would not use
+<a href="http://deskthority.net/wiki/Cherry_MX_Blue">Cherry MX Blues</a> as the
+key switch. They are very satisfying to use but they are loud. You can
+hear me type in every room of my one bedroom apartment. When I&rsquo;m
+remote pairing with other developers, they can here me type through my
+microphone.</p>
+
+<p>For my mouse I use
+<a href="https://www.amazon.com/Apple-MC380Z-A-Magic-Trackpad/dp/B003XLYAWC/ref=as_sl_pc_ss_til?tag=jakemccrary08-20&amp;linkCode=w01&amp;linkId=7FVKQDGTRNAJ7BCL&amp;creativeASIN=B003XLYAWC">Apple&rsquo;s Magic Trackpad</a>.
+I definitely have problems doing precise mouse work (though I rarely
+find myself needing this) but I really enjoy the gestures in enables.
+I&rsquo;ve been using one of these trackpads for years now. I really don&rsquo;t
+want to go back to using a mouse.</p>
+
+<h2>Other Items</h2>
+
+<p>I&rsquo;m a fan of using pens and paper to keep track of notes. My tools of
+choice are
+<a href="http://www.amazon.com/gp/product/B00IYL90B2/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B00IYL90B2&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=VNOMEHJO7O2NBRKG">Leuchturm Whitelines</a>
+notebook with dotted paper and a
+<a href="http://www.amazon.com/gp/product/B00BT1BLRU/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B00BT1BLRU&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=EG7HCYOI2SNHO2OI">TWSBI 580</a>
+fountain pen with a fine nib. I&rsquo;ve been using fountain pens<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> for a
+couple years now and find them much more enjoyable to use than other
+pen styles. The way you glide across the page is amazing. I usually
+have my pen inked with
+<a href="http://www.amazon.com/gp/product/B00DJAKBAW/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B00DJAKBAW&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=WMW6D6HT3VGKGUW2">Noodler&rsquo;s 54th Massachusetts</a>.
+The ink is a beautiful blue black color and very permanent.</p>
+
+<p>No desk is complete without a few fun desk toys. My set of toys
+includes a bobble head of myself (this was a gift from a good friend),
+a 3d printed
+<a href="http://www.shapeways.com/product/MLX77XRTT/success-kid">Success Kid</a>,
+a
+<a href="http://www.amazon.com/gp/product/B00E71W4O8/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B00E71W4O8&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=JR3A5AXJUGQ2Z3AD">keyboard switch sampler</a>,
+a few more 3d printed objects, and some climbing related hand toys.</p>
+
+<h2>End</h2>
+
+<p>That pretty much covers my physical work space. I&rsquo;ve tweaked it enough
+where I don&rsquo;t feel like I need to experiment anymore. The monitor arm
+is my most recent addition and it really helped bring my environment
+to the next level. I think I&rsquo;ll have a hard time improving my physical
+setup.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>If you want to try out fountain pens I highly recommend the <a href="http://www.amazon.com/gp/product/B009X9Z2FW/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B009X9Z2FW&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=ZPSKZSRYGAQZ5ISB">Pilot Metropolitan</a>. It is widely regarded as the best introduction to fountain pens. The medium nib is about the same width as my fine. It is a great introduction to fountain pens. Another great intro pen (that includes a smiling face on the nib) is the <a href="http://www.amazon.com/gp/product/B00IOOOBU4/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B00IOOOBU4&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=WT2WE3JE675WCFCC">Pilot Kakuno</a>.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/03/24/advanced-leiningen-checkouts-configuring-what-ends-up-on-your-classpath/">Advanced Leiningen checkouts: configuring what ends up on your classpath</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-24T21:29:00-05:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:29 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://leiningen.org/">Leiningen</a> checkout dependencies are a useful
+feature. Checkout dependencies allow you to work on a library and consuming
+project at the same time. By setting up checkout dependencies you can
+skip running <code>lein install</code> in the library project; it appears on the
+classpath of the consuming project. An example of what this looks like
+can be found in the
+<a href="https://github.com/technomancy/leiningen/blob/master/doc/TUTORIAL.md#checkout-dependencies">Leiningen documentation</a>
+or in a
+<a href="http://jakemccrary.com/blog/2012/03/28/working-on-multiple-clojure-projects-at-once/">previous post</a>
+of mine.</p>
+
+<p>By default, Leiningen adds the <code>:source-paths</code>, <code>:test-paths</code>,
+<code>:resource-paths</code>, and <code>:compile-path</code> directories of the checkout
+projects to your consuming project&rsquo;s classpath. It also recurses and
+adds the checkouts of your checkouts (and keeps recursing).</p>
+
+<p>You can override what gets added to your classpath by
+<code>:checkout-deps-shares</code> to your project.clj. This key&rsquo;s value should
+be a vector of functions that when applied to your checkouts' project
+map return the paths that should be included on the classpath. The
+default values can be found
+<a href="https://github.com/technomancy/leiningen/blob/ff84da697249184874b528950048981621ac0b61/leiningen-core/src/leiningen/core/project.clj#L488-L492">here</a>
+and an example of overriding the default behavior can be found in the
+<a href="https://github.com/technomancy/leiningen/blob/ff84da697249184874b528950048981621ac0b61/sample.project.clj#L320-L321">sample.project.clj</a>.</p>
+
+<p>I ran into a situation this week where having my checkouts'
+<code>:test-paths</code> on the classpath caused issues my consuming project. My
+first pass at fixing this problem was to add <code>:checkout-deps-shares
+[:source-paths :resource-paths :compile-path]</code> to my project.clj. <strong>This
+didn&rsquo;t work</strong>. My project.clj looked like below.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defproject </span><span class="nv">example</span> <span class="s">&quot;1.2.3-SNAPSHOT&quot;</span>
+</span><span class='line'>  <span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">library</span> <span class="s">&quot;1.2.2&quot;</span><span class="p">]</span>
+</span><span class='line'>                 <span class="p">[</span><span class="nv">org.clojure/clojure</span> <span class="s">&quot;1.6.0&quot;</span><span class="p">]]</span>
+</span><span class='line'>  <span class="ss">:checkout-deps-shares</span> <span class="p">[</span><span class="ss">:source-paths</span> <span class="ss">:resource-paths</span> <span class="ss">:compile-path</span><span class="p">])</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Why didn&rsquo;t it work? It didn&rsquo;t work because of how Leiningen merges
+duplicate keys in the project map. When Leiningen merges the various
+configuration maps (from merging profiles, merging defaults, etc) and
+it encounters values that are collections it combines them (more
+details found in
+<a href="https://github.com/technomancy/leiningen/blob/master/doc/PROFILES.md#merging">documentation</a>).
+Using <code>lein pprint :checkout-deps-shares</code> shows what we end up with.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="gp">$</span> lein pprint :checkout-deps-shares
+</span><span class='line'><span class="go">(:source-paths</span>
+</span><span class='line'><span class="go"> :resource-paths</span>
+</span><span class='line'><span class="go"> :compile-path</span>
+</span><span class='line'><span class="go"> :source-paths</span>
+</span><span class='line'><span class="go"> :test-paths</span>
+</span><span class='line'><span class="go"> :resource-paths</span>
+</span><span class='line'><span class="go"> :compile-path</span>
+</span><span class='line'><span class="go"> #&lt;Var@43e3a075:</span>
+</span><span class='line'><span class="go">   #&lt;classpath$checkout_deps_paths leiningen.core.classpath$checkout_deps_paths@6761b44b&gt;&gt;)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We&rsquo;ve ended up with the default values and the values we specified in
+the project.clj. This isn&rsquo;t hard to fix. To tell Leiningen to replace
+the value instead of merging you add the <code>^:replace</code> metadata to the
+value. Below is the same project.clj but with <code>^:replace</code> added.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defproject </span><span class="nv">example</span> <span class="s">&quot;1.2.3-SNAPSHOT&quot;</span>
+</span><span class='line'>  <span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">library</span> <span class="s">&quot;1.2.2&quot;</span><span class="p">]</span>
+</span><span class='line'>                 <span class="p">[</span><span class="nv">org.clojure/clojure</span> <span class="s">&quot;1.6.0&quot;</span><span class="p">]]</span>
+</span><span class='line'>  <span class="ss">:checkout-deps-shares</span> <span class="o">^</span><span class="ss">:replace</span> <span class="p">[</span><span class="ss">:source-paths</span> <span class="ss">:resource-paths</span> <span class="ss">:compile-path</span><span class="p">])</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This solves the problem of <code>:test-paths</code> showing up on the classpath
+but it introduces another problem. Checkouts' checkout dependencies no
+longer show up on the classpath. This is because
+<code>leiningen.core.classpath/checkout-deps-paths</code> is no longer applied to
+the checkouts.</p>
+
+<p>Without <code>leiningen.core.classpath/checkout-deps-paths</code> Leiningen stops
+recursing and, as a result, no longer picks up checkouts' checkout
+dependencies. My first attempt at fixing this was to modify my
+project.clj so the <code>:checkout-deps-shares</code> section looked like below.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="ss">:checkout-deps-shares</span> <span class="o">^</span><span class="ss">:replace</span> <span class="p">[</span><span class="ss">:source-paths</span> <span class="ss">:resource-paths</span> <span class="ss">:compile-path</span>
+</span><span class='line'>                                 <span class="nv">leiningen.core.classpath/checkout-deps-paths</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The above fails. It runs but doesn&rsquo;t actually add the correct
+directories to the classpath. The next attempt is below.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="ss">:checkout-deps-shares</span> <span class="o">^</span><span class="ss">:replace</span> <span class="p">[</span><span class="ss">:source-paths</span> <span class="ss">:resource-paths</span> <span class="ss">:compile-path</span>
+</span><span class='line'>                                 <span class="o">#</span><span class="ss">&#39;leiningen.core.classpath/checkout-deps-paths</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This attempt failed quicker. Now an exception is thrown when trying to
+run Leiningen tasks.</p>
+
+<p>The next one works. It takes advantage of dynamic eval through
+<a href="https://github.com/technomancy/leiningen/blob/master/doc/PROFILES.md#dynamic-eval">read-eval</a>
+syntax. With the below snippet the checkouts' checkouts are added to
+the classpath.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="ss">:checkout-deps-shares</span> <span class="o">^</span><span class="ss">:replace</span> <span class="p">[</span><span class="ss">:source-paths</span> <span class="ss">:resource-paths</span> <span class="ss">:compile-path</span>
+</span><span class='line'>                                 <span class="o">#</span><span class="nv">=</span><span class="p">(</span><span class="nb">eval </span><span class="nv">leiningen.core.classpath/checkout-deps-paths</span><span class="p">)]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Hopefully this is useful to someone else. It took a bit of digging to
+figure it out and many incorrect attempts to get correct. The full
+example project.clj is below.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defproject </span><span class="nv">example</span> <span class="s">&quot;1.2.3-SNAPSHOT&quot;</span>
+</span><span class='line'>  <span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">library</span> <span class="s">&quot;1.2.2&quot;</span><span class="p">]</span>
+</span><span class='line'>                 <span class="p">[</span><span class="nv">org.clojure/clojure</span> <span class="s">&quot;1.6.0&quot;</span><span class="p">]]</span>
+</span><span class='line'>  <span class="ss">:checkout-deps-shares</span> <span class="o">^</span><span class="ss">:replace</span> <span class="p">[</span><span class="ss">:source-paths</span> <span class="ss">:resource-paths</span> <span class="ss">:compile-path</span>
+</span><span class='line'>                                   <span class="o">#</span><span class="nv">=</span><span class="p">(</span><span class="nb">eval </span><span class="nv">leiningen.core.classpath/checkout-deps-paths</span><span class="p">)])</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/24/remote-pairing/">Remote Pairing</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-01-24T15:19:00-06:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>3:19 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Over a year ago I joined <a href="http://outpace.com">Outpace</a>. All of
+Outpace&rsquo;s developers are remote but we still practice pair
+programming. As a result I&rsquo;ve done a lot of remote pairing. I was
+skeptical before joining that it would work well and I&rsquo;m happy to
+report that I was wrong. Remote pairing works.</p>
+
+<h2>Why remote pairing?</h2>
+
+<p>The usual pair programming
+<a href="http://c2.com/cgi/wiki?PairProgrammingBenefits">benefits</a> apply to
+remote pairing; more people know the code, quality is higher, and
+it provides an opportunity for mentorship. Another benefit, more
+beneficial in a remote setting, is that it increases <strong>social
+interaction</strong>.</p>
+
+<p>The most common response I receive when I tell someone I work from my
+apartment is &ldquo;I&rsquo;d miss the interaction with co-workers.&rdquo; When you work
+remote you do miss out on the usual in office interaction. Pair
+programming helps replace some of this. It helps you build and
+maintain relationships with your remote colleagues.</p>
+
+<h2>Communication</h2>
+
+<p>Communication is an important part of pair programming. When you&rsquo;re
+pairing in person you use both physical and vocal communication. When
+remote pairing you primarily use vocal communication. You can pick up
+on some physical cues with video chat but it is hard. You will never
+notice your pair reaching for their keyboard.</p>
+
+<p>I&rsquo;ve used Google Hangouts, <a href="http://zoom.us">Zoom</a>, and Skype for
+communication. Currently I&rsquo;m primarily using Zoom. It offers high
+quality video and audio and usually doesn&rsquo;t consume too many
+resources.</p>
+
+<p>I recommend not using your computers built-in microphone. You should
+use headphones with a mic or a directional microphone. You&rsquo;ll sound
+better and you&rsquo;ll stop your pair from hearing themselves through your
+computer.</p>
+
+<p>I use
+<a href="http://www.amazon.com/gp/product/B005VAORH6/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B005VAORH6&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=3AX26BCB4ZHZWLC5">these headphones</a>.
+They are cheap, light, and open-eared but are wired. I&rsquo;ve been told I
+sound the best when I&rsquo;m using them. I also own these
+<a href="http://www.amazon.com/gp/product/B003VANOFY/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B003VANOFY&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=LDHRWNCUOO45B7G4">wireless headphones</a>.
+They are closed-ear, heavier, and wireless. The wireless is great but
+the closed-ear design causes me to talk differently and by the end of
+the day my throat is hoarse. Both of these headphones are widely used
+by my colleagues and I don&rsquo;t think you can go wrong with either one.</p>
+
+<p>Some people don&rsquo;t like wearing headphones all day. If you are one of
+those I&rsquo;d recommend picking up a directional microphone. Many of my
+colleagues use a
+<a href="http://www.amazon.com/gp/product/B002OO333Q/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B002OO333Q&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=XVNYHVNXTAC3J2RD">Snowball</a>.</p>
+
+<h2>Connecting the machines</h2>
+
+<p>So now you can communicate with your pair. It is time to deal with the
+main problem in remote pairing. How do you actually work on the same
+code with someone across the world?</p>
+
+<p>At Outpace we&rsquo;ve somewhat cheated and have standardized our
+development hardware. Everyone has a computer running OS X and, if
+they want it, at least one 27 inch monitor (mostly Apple 27 inch
+displays or a
+<a href="http://www.amazon.com/gp/product/B009H0XQQY/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B009H0XQQY&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=JJLKLYNESYPKCRKZ">Dell</a>)
+with a resolution of 2560x1440. Since everyone has nearly identical
+hardware and software we are able to pair using OS X&rsquo;s built-in screen
+sharing. This allows full sharing of the host&rsquo;s desktop. This full
+desktop sharing is the best way to emulate working physically next to
+your pair. This enable the use of any editor and lets you both look at
+the same browser windows (useful for testing UIs or reading reference
+material). With decent internet connections both programmers can write
+code with minimal lag. This is my preferred way of pairing.</p>
+
+<p>Another option that works well is <a href="http://tmate.io/">tmate</a>. tmate is
+a fork of tmux that makes remote pairing easy. It makes it dead simple
+to have remote developer connect to your machine and share your
+terminal. This means you are stuck using tools that work in a terminal
+and, if you are working on a user interface, you need to share that
+some other way. There generally is less lag when the remote developer
+is typing.</p>
+
+<p>A third option is to have the host programmer share their screen using
+screen sharing built-in to Google Hangouts or <a href="http://zoom.us">Zoom</a>.
+This is a quick way to share a screen and is my preferred way of
+sharing GUIs with more than one other person. With both Zoom and
+Google Hangouts the remote developer can control the host&rsquo;s machine
+but it isn&rsquo;t a great experience. If you are pairing this way the
+remote developer rarely touches the keyboard.</p>
+
+<h2>Soloing</h2>
+
+<p>It might seem weird to have a section on soloing in an article about
+remote pairing. Soloing happens and even in an environment that almost
+entirely pairs it is important. Not everyone can or wants to pair 100%
+of the time. Soloing can be recharging. It is important to be
+self-aware and recognize if you need solo time. Below are a few tips
+for getting that solo time.</p>
+
+<p>One way to introduce solo time is to take your lunch at a different
+time than your pair. This provides both of you and your pair with an
+opportunity to do a bit of soloing.</p>
+
+<p>Other short soloing opportunities happen because of meetings and
+interviews. It isn&rsquo;t uncommon for half of a pair to leave for a bit to
+join a meeting, give an interview, or jump over to help out another
+developer for a bit.</p>
+
+<p>Soloing also happens as a result of uneven team numbers. If your team
+is odd numbered than there are plenty of opportunities for being a solo
+developer. Try to volunteer to be the solo developer but be aware of
+becoming too isolated.</p>
+
+<h2>Conclusion</h2>
+
+<p>Remote pairing works. Working at <a href="http://outpace.com">Outpace</a> has
+shown me how well it can work. Reasonably fast Internet paired with
+modern tools can make it seem like you&rsquo;re almost in the same room as
+your pair.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/11/overview-of-my-leiningen-profiles-dot-clj/">Overview of my Leiningen profiles.clj</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-01-11T22:12:00-06:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:12 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><strong>2017-08-27: I&rsquo;ve published an updated version <a href="/blog/2017/08/27/my-current-leiningen-profiles-dot-clj/">here</a>.</strong></p>
+
+<p><a href="https://github.com/technomancy/leiningen">Leiningen</a>, a Clojure build
+tool, has the concept of
+<a href="https://github.com/technomancy/leiningen/blob/master/doc/PROFILES.md">profiles</a>.
+One thing profiles are useful for is allowing you to have development
+tools available to a project without having them as dependencies when
+you release your project. An example of when you might want to do this
+is when you are using a testing library like
+<a href="https://github.com/jaycfields/expectations">expectations</a>.</p>
+
+<p>Some development tools, such as
+<a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a>, are
+useful to have across most of your Clojure projects. Rather nicely,
+Leiningen supports adding global profiles to <code>~/.lein/profiles.clj</code>.
+These profiles are available in all your projects.</p>
+
+<p>Below is most of my <code>profiles.clj</code>. I&rsquo;ve removed some sensitive
+settings and what is left are the development tools that I find
+useful.</p>
+
+<figure class='code'><figcaption><span>Entire :user profile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">{</span><span class="ss">:user</span> <span class="p">{</span><span class="ss">:plugin-repositories</span> <span class="p">[[</span><span class="s">&quot;private-plugins&quot;</span> <span class="p">{</span><span class="ss">:url</span> <span class="s">&quot;private repo url&quot;</span><span class="p">}]]</span>
+</span><span class='line'>        <span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">pjstadig/humane-test-output</span> <span class="s">&quot;0.6.0&quot;</span><span class="p">]]</span>
+</span><span class='line'>        <span class="ss">:injections</span> <span class="p">[(</span><span class="nf">require</span> <span class="ss">&#39;pjstadig.humane-test-output</span><span class="p">)</span>
+</span><span class='line'>                     <span class="p">(</span><span class="nf">pjstadig.humane-test-output/activate!</span><span class="p">)]</span>
+</span><span class='line'>        <span class="ss">:plugins</span> <span class="p">[[</span><span class="nv">cider/cider-nrepl</span> <span class="s">&quot;0.8.2&quot;</span><span class="p">]</span>
+</span><span class='line'>                  <span class="p">[</span><span class="nv">refactor-nrepl</span> <span class="s">&quot;0.2.2&quot;</span><span class="p">]</span>
+</span><span class='line'>                  <span class="p">[</span><span class="nv">com.jakemccrary/lein-test-refresh</span> <span class="s">&quot;0.5.5&quot;</span><span class="p">]</span>
+</span><span class='line'>                  <span class="p">[</span><span class="nv">lein-autoexpect</span> <span class="s">&quot;1.4.2&quot;</span><span class="p">]</span>
+</span><span class='line'>                  <span class="p">[</span><span class="nv">lein-ancient</span> <span class="s">&quot;0.5.5&quot;</span><span class="p">]</span>
+</span><span class='line'>                  <span class="p">[</span><span class="nv">jonase/eastwood</span> <span class="s">&quot;0.2.1&quot;</span><span class="p">]</span>
+</span><span class='line'>                  <span class="p">[</span><span class="nv">lein-kibit</span> <span class="s">&quot;0.0.8&quot;</span><span class="p">]</span>
+</span><span class='line'>                  <span class="p">[</span><span class="nv">lein-pprint</span> <span class="s">&quot;1.1.2&quot;</span><span class="p">]]</span>
+</span><span class='line'>        <span class="ss">:test-refresh</span> <span class="p">{</span><span class="ss">:notify-command</span> <span class="p">[</span><span class="s">&quot;terminal-notifier&quot;</span> <span class="s">&quot;-title&quot;</span> <span class="s">&quot;Tests&quot;</span> <span class="s">&quot;-message&quot;</span><span class="p">]}}}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>:plugin-repositories [["private-plugins" {:url "private repo url"}]]</code>
+sets a private plugin repository. This allows me to use
+<a href="http://outpace.com/">Outpace&rsquo;s</a> private Leiningen templates for
+setting up new projects for work.</p>
+
+<p>The next few lines are all related. They setup
+<a href="https://github.com/pjstadig/humane-test-output">humane-test-output</a>.
+<code>humane-test-output</code> makes <code>clojure.test</code> output more readable. It
+makes using <code>clojure.test</code> much more enjoyable. I highly recommend it.
+Sample output can be found in my
+<a href="/blog/2014/06/22/comparing-clojure-testing-libraries-output/">Comparing Clojure Testing Libraries</a>
+post.</p>
+
+<figure class='code'><figcaption><span>humane-test-output setup in the :user profile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">pjstadig/humane-test-output</span> <span class="s">&quot;0.6.0&quot;</span><span class="p">]]</span>
+</span><span class='line'><span class="ss">:injections</span> <span class="p">[(</span><span class="nf">require</span> <span class="ss">&#39;pjstadig.humane-test-output</span><span class="p">)</span>
+</span><span class='line'>             <span class="p">(</span><span class="nf">pjstadig.humane-test-output/activate!</span><span class="p">)]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Next we get to my <code>:plugins</code> section. This is the bulk of
+my <code>profiles.clj</code>.</p>
+
+<figure class='code'><figcaption><span>:plugins section of my :user profile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="ss">:plugins</span> <span class="p">[[</span><span class="nv">cider/cider-nrepl</span> <span class="s">&quot;0.8.2&quot;</span><span class="p">]</span>
+</span><span class='line'>          <span class="p">[</span><span class="nv">refactor-nrepl</span> <span class="s">&quot;0.2.2&quot;</span><span class="p">]</span>
+</span><span class='line'>          <span class="p">[</span><span class="nv">com.jakemccrary/lein-test-refresh</span> <span class="s">&quot;0.5.5&quot;</span><span class="p">]</span>
+</span><span class='line'>          <span class="p">[</span><span class="nv">lein-autoexpect</span> <span class="s">&quot;1.4.2&quot;</span><span class="p">]</span>
+</span><span class='line'>          <span class="p">[</span><span class="nv">lein-ancient</span> <span class="s">&quot;0.5.5&quot;</span><span class="p">]</span>
+</span><span class='line'>          <span class="p">[</span><span class="nv">jonase/eastwood</span> <span class="s">&quot;0.2.1&quot;</span><span class="p">]</span>
+</span><span class='line'>          <span class="p">[</span><span class="nv">lein-kibit</span> <span class="s">&quot;0.0.8&quot;</span><span class="p">]</span>
+</span><span class='line'>          <span class="p">[</span><span class="nv">lein-pprint</span> <span class="s">&quot;1.1.2&quot;</span><span class="p">]]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The first entry is for <code>cider/cider-nrepl</code>. I write Clojure using
+Emacs and <a href="https://github.com/clojure-emacs/cider">CIDER</a> and much of
+CIDER&rsquo;s functionality exists in nrepl middleware found in
+<code>cider/cider-nrepl</code>. This dependency is required for me to be
+effective while writing Clojure.</p>
+
+<p><code>refactor-nrepl</code> is next.
+<a href="https://github.com/clojure-emacs/clj-refactor.el">clj-refactor.el</a>
+requires it for some refactorings. I actually don&rsquo;t use any of those
+refactorings (I only use move to let, extract to let, and
+introduce let refactorings) but I still keep it around.</p>
+
+<p><code>com.jakemccrary/lein-test-refresh</code> is next. This lets me use
+<a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a>
+globally. <code>lein-test-refresh</code> runs your <code>clojure.test</code> tests whenever
+a file changes in your project. This is another key development tool
+in my process.</p>
+
+<p>Up next is <code>lein-autoexpect</code>. It was the first Leiningen plugin I
+wrote and it enables continuous testing with
+<a href="https://github.com/jaycfields/expectations">expectations</a>.</p>
+
+<p>Both <code>lein-autoexpect</code> and <code>lein-test-refresh</code> are projects I created
+and maintain. Writing <code>lein-autoexpect</code> was my first
+exposure to continuous testing and it changed how I develop code. I
+find it frustrating to develop without such a tool.</p>
+
+<p>Next up is <a href="https://github.com/xsc/lein-ancient">lein-ancient</a>. It
+checks your project.clj for outdated dependencies and plugins. It
+isn&rsquo;t something that gets used every day but it is super useful when
+you need it.</p>
+
+<p>The next two entries are for
+<a href="https://github.com/jonase/eastwood">jonase/eastwood</a> and
+<a href="https://github.com/jonase/kibit">lein-kibit</a>. They are both tools
+that look at your Clojure code and report common mistakes. I don&rsquo;t use
+either consistently but I do find them useful. I&rsquo;ve found bugs with eastwood.</p>
+
+<p>The final plugin is <code>lein-pprint</code>.
+<a href="https://github.com/technomancy/leiningen/tree/master/lein-pprint">lein-pprint</a>
+prints out your project map. It is useful for trying to grasp what is
+going on when messing around with various Leiningen options.</p>
+
+<p>The final part, seen below, of my <code>profiles.clj</code> is configuration for
+<code>lein-test-refresh.</code> It configures <code>lein-test-refresh</code> to use
+<a href="https://github.com/alloy/terminal-notifier">terminal-notifier</a> to
+notify me when my tests pass or fail. Using a continuous tester that
+allows flexible notification is useful. Not having to glance at a
+terminal to see if your tests are passing or failing is great.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="ss">:test-refresh</span> <span class="p">{</span><span class="ss">:notify-command</span> <span class="p">[</span><span class="s">&quot;terminal-notifier&quot;</span> <span class="s">&quot;-title&quot;</span> <span class="s">&quot;Tests&quot;</span> <span class="s">&quot;-message&quot;</span><span class="p">]}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>That is my <code>~/.lein/profiles.clj</code>. I don&rsquo;t think it contains anything
+mind blowing but it definitely contains a useful collection of Clojure
+development tools. I encourage you to check out them out and to think
+about what tools you should be putting into your global <code>:user</code>
+profile.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/08/reading-in-2014/">Reading in 2014</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-01-08T22:59:00-06:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:59 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>At the beginning of last year I took some time and
+<a href="http://jakemccrary.com/blog/2014/01/01/using-incanter-to-review-my-2013-reading/">reviewed</a>
+my 2013 reading using Clojure and Incanter to generate some stats. It
+was a useful exercise to reflect back on my reading and play around
+with Incanter again.</p>
+
+<p>Over the last couple of weeks I&rsquo;ve taken a similar look at my
+2014 reading. The rest of this post highlights some of the top books
+from the previous year and then posts some numbers at the end.</p>
+
+<p>I review every book I read using
+<a href="https://www.goodreads.com/">Goodreads</a>. If you want to see more of
+what I&rsquo;ve been reading you can find me
+<a href="https://www.goodreads.com/user/show/3431614-jake-mccrary">here</a>. I
+track and review every book I read and have found this practice to be
+extremely rewarding.</p>
+
+<h3>2014 Goals</h3>
+
+<p>I entered 2014 without a volume goal. Unlike 2013, I didn&rsquo;t have a
+page or book count goal. I entered 2014 with the desire to reread two
+specific books and the nebulous goal of reading more non-fiction.</p>
+
+<h3>2014 Results</h3>
+
+<p>I ended up setting a new volume record. I read 69 books for a total of
+almost 23,000 pages. I also read every week of
+<a href="http://www.amazon.com/gp/product/B00FDWVIHO/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B00FDWVIHO&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=S6TWD3DEAED3EDBF">Day One</a>,
+a weekly literary journal containing one short story and one poem from
+new authors. This doesn&rsquo;t count towards my page or book count but is
+reading I enjoy. It exposes me to many different styles.</p>
+
+<p>More than a third of my reading was non-fiction. I don&rsquo;t
+have numbers for 2013 but that feels like an increase. I consider my
+goal of reading more non-fiction achieved.</p>
+
+<p>I also reread the two books I had planned on rereading. I wanted to
+reread
+<a href="http://www.amazon.com/gp/product/B000S1M9LY/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B000S1M9LY&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=XEJIFRILDRUSJXWG">Infinite Jest</a>
+and
+<a href="http://www.amazon.com/Hard-Boiled-Wonderland-World-Haruki-Murakami-ebook/dp/B004AP9W1O/ref=sr_1_1?ie=UTF8&amp;qid=1420159468&amp;sr=8-1&amp;keywords=a+hard+boiled+wonderland">Hard-Boiled Wonderland and the End of the World</a>
+and succeeded in rereading both of them.</p>
+
+<h3>Recommendations</h3>
+
+<p>I awarded seven books a five out of five star rating. I&rsquo;ve listed them
+below in (in no particular order). Each book I&rsquo;d recommend without
+hesitation. Instead of reworking or copying my previous reviews I&rsquo;ve
+provided links to Goodreads. The titles link to Amazon.</p>
+
+<ul>
+<li><a href="http://www.amazon.com/gp/product/B00QS2HXUO/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B00QS2HXUO&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=RWTY2PCQBTCXMLOK">Working Effectively with Unit Tests</a> by Jay Fields (<a href="https://www.goodreads.com/review/show/984963558">my review</a>)</li>
+<li><a href="http://www.amazon.com/gp/product/B004J35LHQ/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B004J35LHQ&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=FP26VU2OR4JMMDOZ">The Secrets of Consulting</a> by Gerald Weinberg (<a href="https://www.goodreads.com/review/show/519452572">my review</a>)</li>
+<li><a href="http://www.amazon.com/gp/product/B00N1ZN6C0/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B00N1ZN6C0&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=LW3CLVNSZMRLBDVW">Extreme Programming Explained</a> by Kent Beck (<a href="https://www.goodreads.com/review/show/1119479193">my review</a>)</li>
+<li><a href="http://www.amazon.com/gp/product/B000FC1JAI/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B000FC1JAI&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=5TFM37LOXWLSBMUD">Meditations</a> by Marcus Aurelious and translated by Gregory Hays (<a href="https://www.goodreads.com/review/show/998010207">my review</a>)</li>
+<li><a href="http://www.amazon.com/gp/product/B000QUELZ4/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B000QUELZ4&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=56W5DEBPW3LU6XZX">A Man Without a Country</a> by Kurt Vonnegut (<a href="https://www.goodreads.com/review/show/93929432">my review</a>)</li>
+<li><a href="http://www.amazon.com/gp/product/B000S1M9LY/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B000S1M9LY&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=XEJIFRILDRUSJXWG">Infinite Jest</a> by David Foster Wallace (<a href="https://www.goodreads.com/review/show/509610965">my first review</a>, <a href="https://www.goodreads.com/review/show/880349659">second review</a>)</li>
+<li><a href="http://www.amazon.com/gp/product/B00IHMF9KE/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B00IHMF9KE&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=WPOULKSHDQDXKMLZ">The Bone Clocks</a> by David Mitchell (<a href="https://www.goodreads.com/review/show/1030027657">my review</a>)</li>
+</ul>
+
+
+<p>I&rsquo;m recommending a specific translation of <em>Meditations</em>. I attempted
+to read different one first and it was so painful to read I ended up
+giving up. The linked translation is modern and contains a useful
+forward giving you background information on the time.</p>
+
+<p>I only read one series this year but it was a good one.
+<a href="http://www.amazon.com/gp/bookseries/B00HUQBPWE/kindle/?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;linkCode=ur2&amp;tag=jakemccrary08-20&amp;linkId=ABX4JPELH5GKERZP">The Magicians</a>,
+by Lev Grossman, was recommended by a friend who described it as
+&ldquo;Harry Potter but with characters battling depression.&rdquo; I&rsquo;m not sure
+that fully captures the feel of the series but it is a start. The
+series introduces you to a world like our own but with magic. You
+follow cynical, self-absorbed students as they attend school,
+graduate, and grow up living in both the magical and non-magical
+world. The first book in the series is the weakest so if you read that
+and find it enjoyable you should definitely pick up the next two
+books.</p>
+
+<h3>2015 Goals</h3>
+
+<p>2015 isn&rsquo;t going to have an easily measured goal. I don&rsquo;t feel the
+need to set number of books or pages goals any more. I&rsquo;m hoping to
+increase the quality of my reading. This is a pretty unclear goal. To
+me this doesn&rsquo;t mean increasing the average rating of books I read but
+instead I want to get more out of what I read. I want to think a bit
+deeper about the subjects I&rsquo;m reading.</p>
+
+<h3>2014 Measurements</h3>
+
+<p>Below are some random measurements that are probably only interesting
+to me.</p>
+
+<p>This year I recorded the format of the books I read. This was the year
+of the ebook; over 90% of the books I read were electronic. I&rsquo;d guess
+that this is a higher percentage of ebooks than previous years. I wish
+I had recorded the formats read in previous years.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>| Binding   | Number of books |
+</span><span class='line'>|-----------+-----------------|
+</span><span class='line'>| Hardcover |               1 |
+</span><span class='line'>| Paperback |               4 |
+</span><span class='line'>| Kindle    |              64 |</span></code></pre></td></tr></table></div></figure>
+
+
+<p>My average rating has been going down over the last four years.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>| Year | Average Rating |
+</span><span class='line'>|------+----------------|
+</span><span class='line'>| 2011 | 3.84           |
+</span><span class='line'>| 2012 | 3.66           |
+</span><span class='line'>| 2013 | 3.67           |
+</span><span class='line'>| 2014 | 3.48           |</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In 2014, three authors composed nearly 25% of my reading (by page count). The
+top six authors by page count are below.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>| Author               | My Average Rating | Number of Books | Number of Pages | Percent of Total Page Count |
+</span><span class='line'>|----------------------+-------------------+-----------------+-----------------+-----------------------------|
+</span><span class='line'>| David Mitchell       |                 4 |               5 |            2334 |                      10.19% |
+</span><span class='line'>| David Foster Wallace |       4.333333333 |               3 |            1753 |                       7.65% |
+</span><span class='line'>| Lev Grossman         |       3.666666667 |               3 |            1244 |                       5.43% |
+</span><span class='line'>| Marisha Pessl        |               3.5 |               2 |            1153 |                       5.03% |
+</span><span class='line'>| Haruki Murakami      |               3.5 |               2 |             768 |                       3.35% |
+</span><span class='line'>| Cormac McCarthy      |               3.5 |               2 |             650 |                       2.84% |</span></code></pre></td></tr></table></div></figure>
+
+
+<p>My top six authors by average rating (with ties broken by number of
+books) are below.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>| Author               | My Average Rating | Number of Books | Number of Pages | Percent of Total Page Count |
+</span><span class='line'>|----------------------+-------------------+-----------------+-----------------+-----------------------------|
+</span><span class='line'>| Gerald M. Weinberg   |                 5 |               1 |             228 |                       1.00% |
+</span><span class='line'>| Kent Beck            |                 5 |               1 |             224 |                       0.98% |
+</span><span class='line'>| Jay Fields           |                 5 |               1 |             204 |                       0.89% |
+</span><span class='line'>| Kurt Vonnegut        |               4.5 |               2 |             377 |                       1.65% |
+</span><span class='line'>| David Foster Wallace |       4.333333333 |               3 |            1753 |                       7.65% |
+</span><span class='line'>| David Mitchell       |                 4 |               5 |            2334 |                      10.19% |</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I did top six for both of these because otherwise David Mitchell would
+not have been in the second one. I&rsquo;ve devoured his writing in the last
+year and a half for a reason. I&rsquo;m consistently rating his books
+highly.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog//7">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog//5">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/01/11/reading-in-2019/">Reading in 2019</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2019/10/12/building-an-atreus-keyboard/">Building an Atreus keyboard</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2019/08/23/building-a-onewheel-stand/">Building a Onewheel stand</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2019/08/15/switching-my-ergodox-to-qmk-firmware/">Switching my Ergodox to QMK firmware</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2019/04/30/how-i-use-social-media/">How I use social media</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2019/03/20/breaking-change-and-more-in-lein-test-refresh-0-dot-24-dot-0/">Breaking change and more in lein-test-refresh 0.24.1</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2019/02/13/testing-asynchronous-javascript-with-jasmine/">Testing asynchronous JavaScript with Jasmine</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2019/01/28/how-to-use-leiningen-test-selectors-to-filter-by-test-name/">How to use Leiningen test selectors to filter by test name</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2019/01/27/how-to-display-a-message-to-all-tmux-clients/">How to display a message to all tmux clients</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2019/01/21/reading-in-2018/">Reading in 2018</a>
+      </li>
+    
+  </ul>
+</section>
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  <a href="/disclosure-policy">Disclosure Policy</a><br/>
+  <a href="//www.iubenda.com/privacy-policy/509351" class="iubenda-nostyle iub-legal-only iubenda-embed" title="Privacy Policy">Privacy Policy</a><br/>
+<script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src = "//cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
+  Content licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/">Creative Commons Attribution-NonCommercial 3.0 Unported License</a>.
+</p>
+
+
+</footer>
+  
+
+
+</body>
+</html>

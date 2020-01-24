@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: osx | Jake McCrary]]></title>
+  <link href="https://jakemccrary.com/blog/categories/osx/atom.xml" rel="self"/>
+  <link href="https://jakemccrary.com/"/>
+  <updated>2020-01-23T22:35:50-06:00</updated>
+  <id>https://jakemccrary.com/</id>
+  <author>
+    <name><![CDATA[Jake McCrary]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Using comm to verify file content matches]]></title>
+    <link href="https://jakemccrary.com/blog/2017/05/29/using-comm-to-verify-matching-content/"/>
+    <updated>2017-05-29T10:45:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2017/05/29/using-comm-to-verify-matching-content</id>
+    <content type="html"><![CDATA[<p>I recently found myself in a situation where I needed to confirm that a process took in a tab separated file, did some processing, and then output a new file containing the original columns with some additional ones. The feature I was adding allowed the process to die and restart while processing the input file and pick up where it left off.</p>
+
+<p>I needed to confirm the output had data for every line in the input. I reached to the command line tool <code>comm</code>.</p>
+
+<p>Below is a made up input file.</p>
+
+<pre><code>UNIQUE_ID   USER
+1   38101838
+2   19183819
+3   19123811
+4   10348018
+5   19881911
+6   29182918
+</code></pre>
+
+<p>And here is some made up output.</p>
+
+<pre><code>UNIQUE_ID   USER    MESSAGE
+1   38101838    A01
+2   19183819    A05
+3   19123811    A02
+4   10348018    A01
+5   19881911    A02
+6   29182918    A05
+</code></pre>
+
+<p>With files this size, it would be easy enough to check visually. In my testing, I was dealing with files that had thousands of lines. This is too many to check by hand. It is a perfect amount for <code>comm</code>.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Comm">comm</a> reads two files as input and then outputs three columns. The first column contains lines found only in the first file, the second column contains lines only found in the second, and the last column contains lines in both. If it is easier for you to think about it as set operations, the first two columns are similar to performing two set differences and the third is similar to set intersection. Below is an example adapted from Wikipedia showing its behavior.</p>
+
+<pre><code>$ cat foo.txt
+apple
+banana
+eggplant
+$ cat bar.txt
+apple
+banana
+banana
+zucchini
+$ comm foo.txt bar.txt
+                  apple
+                  banana
+          banana
+eggplant
+          zucchini
+</code></pre>
+
+<p>So how is this useful? Well, you can also tell <code>comm</code> to suppress outputting specific columns.  If we send the common columns from the input and output file to <code>comm</code> and suppress <code>comm</code>&rsquo;s third column then anything printed to the screen is a problem. Anything printed to the screen was found in one of the files and not the other. We&rsquo;ll select the common columns using cut and, since comm expects input to be sorted, then sort using <code>sort</code>. Let&rsquo;s see what happens.</p>
+
+<pre><code>$ comm -3 &lt;(cut -f 1,2 input.txt | sort) &lt;(cut -f 1,2 output.txt | sort)
+$
+</code></pre>
+
+<p>Success! Nothing was printed to the console, so there is nothing unique in either file.</p>
+
+<p><code>comm</code> is a useful tool to have in your command line toolbox.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Making tmate and tmux play nice with OS X terminal-notifier]]></title>
+    <link href="https://jakemccrary.com/blog/2015/04/12/making-tmate-and-tmux-play-nice-with-os-x-terminal-notifier/"/>
+    <updated>2015-04-12T17:47:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2015/04/12/making-tmate-and-tmux-play-nice-with-os-x-terminal-notifier</id>
+    <content type="html"><![CDATA[<p>For nearly the last two years, I&rsquo;ve been doing most of my development
+in OS X. Most of that development has been done in Clojure and,
+whenever possible, using
+<a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a> with
+<a href="https://github.com/alloy/terminal-notifier">terminal-notifier</a> to
+have my tests automatically run and a notification shown with the
+status of the test run. Its a great work flow that gives me a quick
+feedback cycle and doesn&rsquo;t pull my attention in different directions.</p>
+
+<p>Recently I&rsquo;ve started using <a href="http://tmate.io/">tmate</a> for remote
+pairing. Unfortunately when I first started using it my quick feedback
+cycle was broken. <code>lein test-refresh</code> would run my tests but would
+become hung when sending a notification using <code>terminal-notifier</code>.
+This was terrible and, if I hadn&rsquo;t been able to fix it, would have
+stopped me from using <code>tmate</code>. After some searching I stumbled across
+<a href="https://github.com/alloy/terminal-notifier/issues/115">this</a> GitHub
+issue which helped solve the problem.</p>
+
+<p>To make <code>tmate</code> work nicely with <code>terminal-notifier</code> you&rsquo;ll need
+to install
+<a href="https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard">reattach-to-user-namespace</a>
+and change your <code>tmate</code> configuration to use it. If you use <code>brew</code> you
+can install by running <code>brew install --with-wrap-pbcopy-and-pbpaste
+reattach-to-user-namespace</code>. Then open your <code>.tmux.conf</code> or
+<code>.tmate.conf</code> file and add the line below.</p>
+
+<pre><code>set-option -g default-command "which reattach-to-user-namespace &gt; /dev/null &amp;&amp; reattach-to-user-namespace -l $SHELL || $SHELL"
+</code></pre>
+
+<p>The above tells <code>tmate</code> to use <code>reattach-to-user-namespace</code> if it is
+available. Now <code>terminal-notifier</code> no longer hangs when invoked inside
+<code>tmate</code>. Unsurprisingly, this change also makes <code>tmux</code> place nice with
+<code>terminal-notifier</code>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Managing windows in OS X using Phoenix]]></title>
+    <link href="https://jakemccrary.com/blog/2014/03/30/managing-windows-in-osx-using-phoenix/"/>
+    <updated>2014-03-30T18:30:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2014/03/30/managing-windows-in-osx-using-phoenix</id>
+    <content type="html"><![CDATA[<p><a href="http://jakemccrary.com/blog/2013/04/15/manage-your-workspace-with-grids-under-linux-osx-and-windows/">Last year</a>
+I wrote about how I managed my windows under OS X, Windows, and Linux.
+I&rsquo;m a big fan of having an orderly layout and try to use grid
+managers. Since then I&rsquo;ve changed jobs and now my main machine is an
+MacBook Pro running OS X Mavericks with two 27 inch cinema displays.
+As a result I&rsquo;ve started experimenting with more OS X window managers.
+After trying a few out I&rsquo;m going to stick with
+<a href="https://github.com/sdegutis/Phoenix">Phoenix</a>.</p>
+
+<h3>Before Phoenix</h3>
+
+<p>Last year I was satisfied using <a href="http://spectacleapp.com/">Spectacle</a>.
+It is (or at least was, I haven&rsquo;t used it in a while) easy to install
+and had good defaults. I&rsquo;d still recommend it for most people.</p>
+
+<p>At the recommendation from a reader, I switched to
+<a href="https://github.com/jigish/slate">Slate</a>. Slate has a ton of features
+and I barely scratched the surface in how I used it. I used it as a
+replacement for Spectacle and didn&rsquo;t touch any of the advanced
+features. Before I had the urge to explore the advanced features I
+ended up becoming dissatisfied with Slate. I ran into an issue where
+after running for a while (talking at least a week) it would start to
+respond slowly. I&rsquo;d try to move a window to another monitor and it
+wouldn&rsquo;t move. Eventually I&rsquo;d be in another process and the
+command would register sending whatever window I was currently focused
+on to another monitor.</p>
+
+<h3>Introducing Phoenix</h3>
+
+<p>I was looking for solutions to Slate&rsquo;s unresponsiveness when I
+stumbled on <a href="https://github.com/sdegutis/Phoenix">Phoenix</a>. I was
+drawn in by its stated goal; it &ldquo;aims for efficiency and a very small
+footprint.&rdquo; The fact that it is still being actively developed was
+also a huge selling point. Knowing that any bugs I find have a
+potential to be fixed is great.</p>
+
+<p>Phoenix provides a
+<a href="https://github.com/sdegutis/Phoenix/wiki/JavaScript-API-documentation">JavaScript API</a>
+that allows you to interact with your running applications or launch
+applications. It doesn&rsquo;t provide anything out of the box; it is up to
+you to make it useful by writing your own (or taking another persons)
+configuration.</p>
+
+<p>This is a double-edged sword. This means you get exactly the features
+you want. It also means you might spend significant amounts of time
+figuring out how to get the features you want.</p>
+
+<p>Luckily there are <a href="https://github.com/sdegutis/Phoenix/wiki">examples</a>
+that you can use as a starting point. Browsing through the examples is
+a great way of becoming familiar with what is possible and can be
+inspiring.</p>
+
+<p>My
+<a href="https://github.com/jakemcc/dotfiles/blob/17a73f89a2f3f7b2c9aa07a63d1928b86cc5425d/home/.phoenix.js">configuration</a>
+is relatively minimal. I&rsquo;ve written
+<a href="https://github.com/jakemcc/dotfiles/blob/17a73f89a2f3f7b2c9aa07a63d1928b86cc5425d/home/.phoenix.js#L42-L87">code</a>
+to move windows between monitors (rotating between three added some
+complexity to this),
+<a href="https://github.com/jakemcc/dotfiles/blob/17a73f89a2f3f7b2c9aa07a63d1928b86cc5425d/home/.phoenix.js#L90-L122">start or focus</a>
+certain applications, and
+<a href="https://github.com/jakemcc/dotfiles/blob/17a73f89a2f3f7b2c9aa07a63d1928b86cc5425d/home/.phoenix.js#L11-L37">resize</a>
+windows. This is enough for me to feel efficient.</p>
+
+<p>I encourage you to use a tool to help manage your windows. Personally
+I think Phoenix is pretty great and don&rsquo;t mind tinkering with my
+configuration and strongly recommend it. As a bonus it is a young
+project where the maintainer is open to suggestions. If you have an
+idea for a useful
+<a href="https://github.com/sdegutis/Phoenix/issues/18">feature</a> it has a
+possibility of being added pretty quickly.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Manage your workspace with grids under Linux, OS X, and Windows]]></title>
+    <link href="https://jakemccrary.com/blog/2013/04/15/manage-your-workspace-with-grids-under-linux-osx-and-windows/"/>
+    <updated>2013-04-15T19:15:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2013/04/15/manage-your-workspace-with-grids-under-linux-osx-and-windows</id>
+    <content type="html"><![CDATA[<p>I&rsquo;m the type of computer user that wants an organized
+workspace. To me this means having my active applications organized
+into a grid. Efficiently doing this is important to me. Before I jump
+into what tools I use let me give a quick explanation of what
+organized into a grid means to me.</p>
+
+<p>Imagine that your screen is divided both vertically and
+horizontally. To me a good tool for managing windows lets you take
+your active application and move it so it fits in any rectangle formed
+by the edges of your screen and those two lines splitting your
+monitor. This means that with a keystroke you can make the active
+window take up the full screen, half screen, or quarter screen. Below
+I&rsquo;ve listed the tools that let me do that.</p>
+
+<h4>Linux</h4>
+
+<p>I&rsquo;ve switched to using <a href="http://i3wm.org/">i3</a>, a
+<a href="http://en.wikipedia.org/wiki/Tiling_window_manager">tiling window manager</a>
+instead of the default window manager on every distribution I use. When using
+i3 the tiling is done automatically. There are hotkeys for changing
+window layout and for moving focus between windows. The automatic tiling and
+shortcuts take a bit to get used to, but now that I am I can&rsquo;t believe
+I switched to using a tiling window manager sometime in the last eight
+months.</p>
+
+<h4>Windows</h4>
+
+<p>When developing under Windows I use
+<a href="http://winsplit-revolution.com/">Winsplit Revolution</a>. Unlike i3,
+Winsplit Revolution only provides hotkeys snapping windows to
+different locations. This is admittedly more approachable than i3 as
+the grid isn&rsquo;t forced on you. WinSplit Revolution is pretty flexible,
+you can change shortcuts and even define your own grid.</p>
+
+<p>I can&rsquo;t remember when I started using Winsplit Revolution but it has
+become a vital tool for when I&rsquo;m stuck doing development on a Windows
+machine.</p>
+
+<h4>OS X</h4>
+
+<p>My only OS X machine is my 13 inch MacBook Air. I always thought that
+with such a small screen being able to tile my windows wouldn&rsquo;t be as
+useful. I  was completely wrong. If anything it may be more useful
+because of the tiny screen real estate. The 13 inch screen is just wide
+enough to have an editor up on one half and documentation on the
+other.</p>
+
+<p>The tool I use to snap my windows to a grid is
+<a href="http://spectacleapp.com/">Spectacle</a>. Spectacle provides some
+sensible keystrokes for moving windows around. The hotkeys are
+similar to Winsplit Revolution&rsquo;s which makes switching between
+operating systems easy.</p>
+
+<p>If you haven&rsquo;t tried using a tool to help you organize your windows I
+highly recommend that you do. I&rsquo;ve introduced both technical and
+non-technical people to these tools and everyone has enjoyed them.</p>
+]]></content>
+  </entry>
+  
+</feed>

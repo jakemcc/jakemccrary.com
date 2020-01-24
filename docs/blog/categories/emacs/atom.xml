@@ -1,0 +1,394 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: emacs | Jake McCrary]]></title>
+  <link href="https://jakemccrary.com/blog/categories/emacs/atom.xml" rel="self"/>
+  <link href="https://jakemccrary.com/"/>
+  <updated>2020-01-23T22:35:50-06:00</updated>
+  <id>https://jakemccrary.com/</id>
+  <author>
+    <name><![CDATA[Jake McCrary]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[My favorite clj-refactor features]]></title>
+    <link href="https://jakemccrary.com/blog/2015/06/30/my-favorite-clj-refactor-features/"/>
+    <updated>2015-06-30T08:40:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2015/06/30/my-favorite-clj-refactor-features</id>
+    <content type="html"><![CDATA[<p>If you write Clojure using Emacs you should check out
+<a href="https://github.com/clojure-emacs/clj-refactor.el">clj-refactor</a>. It
+is working better than ever and makes developing Clojure more
+enjoyable.</p>
+
+<p>I don&rsquo;t use all the features in clj-refactor. There are a lot of
+features I haven&rsquo;t had the need to use and many I just can&rsquo;t remember.
+Below are the features I use consistently.</p>
+
+<h3>Favorite Features</h3>
+
+<p>My favorite feature of clj-refactor is the
+<a href="/blog/2015/06/18/emacs-automatically-require-common-namespaces/">magic requires</a>.
+This feature lets you type a prefix (such as <code>(str/)</code>) and have the
+namespace automatically added to your <code>ns</code> form (in this example
+<code>[clojure.string :as str]</code>). It is awesome. You can also add
+<a href="/blog/2015/06/18/emacs-automatically-require-common-namespaces/">your own</a>
+prefix mappings.</p>
+
+<p>My other most frequently used refactorings are
+<a href="https://github.com/clojure-emacs/clj-refactor.el/wiki/cljr-introduce-let">introduce let</a>,
+<a href="https://github.com/clojure-emacs/clj-refactor.el/wiki/cljr-expand-let">expand let</a>,
+and
+<a href="https://github.com/clojure-emacs/clj-refactor.el/wiki/cljr-move-to-let">move to let</a>.
+These three are very complementary and are a quick way if introducing
+named locals.</p>
+
+<p><a href="https://github.com/clojure-emacs/clj-refactor.el/wiki/cljr-add-missing-libspec">Add missing libspec</a>
+is a recent discovery of mine. Have you ever paired with a developer
+who uses Intellij with Cursive and been a bit jealous of the
+auto-requiring? I have. This refactoring lets you do that. Type
+whatever symbol you want and clj-refactor tries to resolve it and then
+require the containing namespace with correct prefix. Recently I broke
+a massive namespace into a few smaller ones and this refactoring saved
+me a ton of time.</p>
+
+<p>I used to use
+<a href="https://github.com/clojure-emacs/clj-refactor.el/wiki/cljr-move-form">move form</a>
+when trying to reorganize namespaces but now I pretty much just cut
+and paste and use
+<a href="https://github.com/clojure-emacs/clj-refactor.el/wiki/cljr-add-missing-libspec">add missing libspec</a>
+to fix the requires. I want to use <strong>move form</strong> but I haven&rsquo;t had a
+ton of success with it. <strong>Add missing libspec</strong> plus cut and paste is
+a few more steps but my success rate has been much higher.</p>
+
+<p><a href="https://github.com/clojure-emacs/clj-refactor.el/wiki/cljr-sort-ns">Sort ns</a>
+does exactly what it says, it sorts your <code>ns</code> form. Once you get used
+to keeping your <code>ns</code> forms sorted you won&rsquo;t go back.</p>
+
+<p><a href="https://github.com/clojure-emacs/clj-refactor.el/wiki/cljr-extract-function">Extract function</a>
+is another refactoring I recently stumbled upon. I&rsquo;ve used it a few
+times since then and when it works it is pretty awesome. I&rsquo;ve had
+unexpected behavior a couple of times but it was unclear if that was
+my fault or it not handling macros well. If you&rsquo;re extracting a
+function you might as well give it a shot.</p>
+
+<p>The final feature is the
+<a href="https://github.com/clojure-emacs/clj-refactor.el/wiki#automatic-insertion-of-namespace-declaration">automatic insertion of namespace declarations</a>
+when you create a new Clojure file. I nearly forgot to highlight this
+feature because it requires no action on my side and it is amazing. If
+I never have to type a namespace symbol again I&rsquo;ll be happy.</p>
+
+<h3>Customization</h3>
+
+<p>Below is my entire clj-refactor setup from my Emacs init.el. It
+doesn&rsquo;t take much to get it to a state I like.</p>
+
+<pre><code class="elisp">(require 'clj-refactor)
+
+;; Add custom magic requires.
+(dolist (mapping '(("maps" . "outpace.util.maps")
+                   ("seqs" . "outpace.util.seqs")
+                   ("times" . "outpace.util.times")
+                   ("repl" . "outpace.util.repl")
+                   ("time" . "clj-time.core")
+                   ("string" . "clojure.string")))
+  (add-to-list 'cljr-magic-require-namespaces mapping t))
+
+(setq cljr-favor-prefix-notation nil)
+
+(add-hook 'clojure-mode-hook (lambda ()
+                               (clj-refactor-mode 1)
+                               (yas/minor-mode 1)
+                               (cljr-add-keybindings-with-prefix "C-c C-x")))
+</code></pre>
+
+<p>If you use Emacs and write Clojure you should check out clj-refactor.
+There are enough features that consistently work and help keep you in
+the flow that it is worth using.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Emacs: automatically require common namespaces]]></title>
+    <link href="https://jakemccrary.com/blog/2015/06/18/emacs-automatically-require-common-namespaces/"/>
+    <updated>2015-06-18T12:52:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2015/06/18/emacs-automatically-require-common-namespaces</id>
+    <content type="html"><![CDATA[<p>If you&rsquo;re writing Clojure in Emacs you should check out
+<a href="https://github.com/clojure-emacs/clj-refactor.el">clj-refactor</a>. It
+provides some neat functionality. Some examples include the ability to
+extract functions, introduce <code>let</code> forms, and inline symbols. It also
+has a feature called &ldquo;magic requires&rdquo; that automatically requires
+common namespaces when you type their short form.</p>
+
+<p>Out of the box five short forms are supported. They are <code>io</code> for
+<code>clojure.java.io</code>, <code>set</code> for <code>clojure.set</code>, <code>str</code> for
+<code>clojure.string</code>, <code>walk</code> for <code>clojure.walk</code>, and <code>zip</code> for
+<code>clojure.zip</code>. If you type <code>(str/</code> then <code>(:require
+[clojure.string :as str])</code> will be added to your <code>ns</code> form. It is
+pretty awesome. This feature is on by default but you can turn it off
+by adding <code>(setq cljr-magic-requires nil)</code> to your Emacs
+configuration.</p>
+
+<p>This feature is also extensible. You can add your own mappings of
+short form to namespace. The following snippet of elisp adds mappings
+for <code>maps</code>, <code>seqs</code>, and <code>string</code>.</p>
+
+<pre><code>(dolist (mapping '(("maps" . "outpace.util.maps")
+                   ("seqs" . "outpace.util.seqs")
+                   ("string" . "clojure.string")))
+  (add-to-list 'cljr-magic-require-namespaces mapping t))
+</code></pre>
+
+<p>It doesn&rsquo;t take a lot of code but having it is awesome. If there are
+namespaces you frequently require I highly recommend setting this up.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Using Emacs to Explore an HTTP API]]></title>
+    <link href="https://jakemccrary.com/blog/2014/07/04/using-emacs-to-explore-an-http-api/"/>
+    <updated>2014-07-04T13:05:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2014/07/04/using-emacs-to-explore-an-http-api</id>
+    <content type="html"><![CDATA[<p>Recently I rediscovered an Emacs package that allows you to interact
+with HTTP endpoints from the comfort of an Emacs buffer.
+<a href="https://github.com/pashky/restclient.el">restclient.el</a> provides
+<code>restclient-mode</code>. This mode allows you to write and execute HTTP
+requests in an Emacs buffer. This package can be found in
+<a href="http://melpa.milkbox.net/#/restclient">MELPA</a>.</p>
+
+<p>Below is an example buffer that touches the GitHub API.</p>
+
+<pre><code class="ruby">:github = https://api.github.com
+
+# get users orgs
+
+GET :github/users/jakemcc/orgs
+
+# rendor markdown
+
+POST :github/markdown
+
+{
+  "text" : "## Title"
+}
+
+# rendor markdown raw
+
+POST :github/markdown/raw
+Content-Type: text/plain
+
+Title
+-----
+</code></pre>
+
+<p>The example above has a few interesting snippets. <code>:github</code> is an
+example of a variable. Lines 8-14 show an example of posting json to
+an endpoint. You put the data you want to send below the query. The
+last POST shows how to set headers for a request.</p>
+
+<p>The location of your cursor decides what query to execute. Comments
+start with <code>#</code> and break your document into sections. The query in the
+same section as your cursor is the one that is executed. If the cursor
+is anywhere on lines 3-6 and I hit <code>C-c C-c</code> then Emacs queries GitHub
+for my organizations. Below is what pops up in a buffer.</p>
+
+<pre><code class="javascript">
+[
+    {
+        "avatar_url": "https:\/\/avatars.githubusercontent.com\/u\/1826953?",
+        "public_members_url": "https:\/\/api.github.com\/orgs\/speakerconf\/public_members{\/member}",
+        "members_url": "https:\/\/api.github.com\/orgs\/speakerconf\/members{\/member}",
+        "events_url": "https:\/\/api.github.com\/orgs\/speakerconf\/events",
+        "repos_url": "https:\/\/api.github.com\/orgs\/speakerconf\/repos",
+        "url": "https:\/\/api.github.com\/orgs\/speakerconf",
+        "id": 1826953,
+        "login": "speakerconf"
+    },
+    {
+        "avatar_url": "https:\/\/avatars.githubusercontent.com\/u\/4711436?",
+        "public_members_url": "https:\/\/api.github.com\/orgs\/outpace\/public_members{\/member}",
+        "members_url": "https:\/\/api.github.com\/orgs\/outpace\/members{\/member}",
+        "events_url": "https:\/\/api.github.com\/orgs\/outpace\/events",
+        "repos_url": "https:\/\/api.github.com\/orgs\/outpace\/repos",
+        "url": "https:\/\/api.github.com\/orgs\/outpace",
+        "id": 4711436,
+        "login": "outpace"
+    }
+]
+// HTTP/1.1 200 OK
+// Server: GitHub.com
+// Date: Fri, 04 Jul 2014 17:34:26 GMT
+// Content-Type: application/json; charset=utf-8
+// other headers removed for space consideration on blog
+</code></pre>
+
+<p><code>C-c C-c</code> triggers <code>restclient-http-send-current</code> which runs a query
+and pretty prints the result. I could have used <code>C-c C-r</code> to trigger
+<code>restclient-http-send-current-raw</code> which executes a query and shows
+the raw result.</p>
+
+<p>It isn&rsquo;t a perfect mode. One issue I&rsquo;ve come across is that queries
+targeting <code>localhost</code> fail. The solution is to query <code>127.0.0.1</code>.</p>
+
+<p><code>restclient-mode</code> makes Emacs a useful tool for exploring and
+testing HTTP APIs. Since it operates on a simple text
+format it allows you to easily share executable documentation with
+others. I highly recommend <strong>restclient.el</strong>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Emacs: Generating project shortcuts]]></title>
+    <link href="https://jakemccrary.com/blog/2014/04/27/emacs-generating-project-shortcuts/"/>
+    <updated>2014-04-27T16:38:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2014/04/27/emacs-generating-project-shortcuts</id>
+    <content type="html"><![CDATA[<p>I&rsquo;m now writing Clojure nearly 100% of my time and as a result am spending more
+time in Emacs. I&rsquo;m working in a few different projects and
+wanted a quicker way to jump between them. My first attempt at this
+ended with me defining many functions that looked like the following.</p>
+
+<pre><code class="cl">(defun b/test-refresh ()
+  (interactive)
+  (find-file "~/src/jakemcc/lein-test-refresh/test-refresh/project.clj"))
+</code></pre>
+
+<p>After writing a couple of these I decided the computer could do this
+better than I could and decided to write some code to automate it. A
+sample of my directory structure is shown below.</p>
+
+<pre><code class="bash">jakemcc/
+├── bookrobot
+│   └── project.clj
+└── lein-autoexpect
+    └── project.clj
+</code></pre>
+
+<p>Taking advantage of this structure I wrote some Emacs lisp to walk a
+directory and define functions that open up any found project.clj
+files.</p>
+
+<pre><code class="cl">;; -*- lexical-binding: t -*-
+
+(defun open-file-fn (file) 
+  (lambda ()
+    (interactive)
+    (find-file file)))
+
+(defun create-project-shortcuts (prefix base)
+  (dolist (elt (directory-files base))
+    (let ((project (concat base "/" elt "/project.clj")))
+      (when (file-exists-p project)
+        (fset (intern (concat prefix elt)) (open-file-fn project))))))
+</code></pre>
+
+<p><code>open-file-fn</code> creates an anonymous interactive function (meaning the function
+can be called interactively) that opens <code>file</code>. It takes advantage of
+the feature in Emacs 24 that enables lexical scoping by adding <code>;; -*-
+lexical-binding: t -*-</code> to the top of your Emacs lisp file. This lets
+the anonymous function capture <code>file</code>.</p>
+
+<p><code>create-project-shortcuts</code> takes in a <code>prefix</code> and a <code>base</code> directory.
+It searches <code>base</code> for directories that contain a
+project.clj file. For each found project.clj file a function is
+created (using <code>fset</code>) with the name of the containing directory
+prefixed by <code>prefix</code>.</p>
+
+<p>With those two functions defined all that is left is to call
+<code>create-project-shortcuts</code>.</p>
+
+<pre><code class="cl">(create-project-shortcuts "b/" "~/src/jakemcc")
+</code></pre>
+
+<p>Now <code>b/bookrobot</code> and <code>b/lein-autoexpect</code> are available after hitting
+<code>M-x</code>.</p>
+
+<p>I&rsquo;ve used this code to create quick
+shortcuts to all of my work and non-work projects. It has been
+immensely useful for jumping around projects.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Emacs: Capture shell command output in temporary buffer]]></title>
+    <link href="https://jakemccrary.com/blog/2013/08/10/emacs-capture-shell-command-output-in-temporary-buffer/"/>
+    <updated>2013-08-10T14:33:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2013/08/10/emacs-capture-shell-command-output-in-temporary-buffer</id>
+    <content type="html"><![CDATA[<p>My text editor of choice is Emacs. Its extensibility is a major
+contributor to this preference. The ease of adding additional
+functionality means you can customize it to your liking. You should
+not go overboard and change too much of the default behavior but you
+should feel free to add additional features.</p>
+
+<p>I recently found myself often editing a file in emacs and then
+switching to a terminal and running a bash script to see how the
+output changed. This is part of my work flow for shutting down or
+starting new server processes. Since this is something I&rsquo;ll be doing
+quite frequently in the future, I wrote some Emacs Lisp to run the
+shell script and display the output in a temporary buffer. With this
+function in place I no longer have to toggle to a terminal and run a
+command.</p>
+
+<p>I&rsquo;m picky and I wanted this output buffer to have the same behavior as
+the help buffer. That is, I wanted to be able to close the buffer by
+just hitting the letter <code>q</code>. It took me a while to figure out how to
+do this so I thought I would share it here in hopes it might benefit others.</p>
+
+<p>First I&rsquo;ll show the code and then I&rsquo;ll explain what it is doing.</p>
+
+<pre><code class="cl">(defun blog-example ()
+  (interactive)
+  (with-output-to-temp-buffer "*blog-example*"
+    (shell-command "echo This is an example"
+                   "*blog-example*"
+                   "*Messages*")
+    (pop-to-buffer "*blog-example*")))
+</code></pre>
+
+<p>The above snippet defines a function named <code>blog-example</code>. It takes no
+arguments and is interactive (as indicated by the second line calling
+<code>interactive</code>). This call to <code>interactive</code> makes <code>blog-example</code>
+available to be called interactively, meaning you can call it after
+triggering <code>M-x</code>. This is probably a simplification of what is
+actually does, so if you care the documentation is available
+<a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Using-Interactive.html">here</a>.</p>
+
+<p>After the call to <code>interactive</code> we hit the core of this function, the
+call to <code>with-output-to-temp-buffer</code>. This function a buffer name as a first argument
+and additional forms. The output of those forms is put into the named
+buffer.</p>
+
+<p>The form I&rsquo;m passing to <code>with-output-to-temp-buffer</code> is a call to
+<code>shell-command</code>. <code>shell-command</code> will run <code>echo This is an example</code>
+synchronously and redirect stdout to <code>*blog-example*</code> and stderr to
+<code>*Messages*</code>.</p>
+
+<p>The final line opens the buffer and switches focus to it. Now you can
+look at the output and when you are ready to return just hit <code>q</code>.</p>
+
+<p>This is a simplified example but it shows how easy it is to extend
+Emacs functionality. Doing something similar to this made a task I do
+frequently more pleasant.</p>
+
+<p>My use case is a bit more complicated and involves saving the buffer
+I&rsquo;m currently editing and then running a command against the saved
+file. Below is some sample code that does something similar.</p>
+
+<pre><code class="cl">(defun example2 ()
+  (interactive)
+  (when (and (buffer-modified-p)
+             (y-or-n-p (format "Save file %s? " (buffer-file-name))))
+    (save-buffer))
+  (with-output-to-temp-buffer "*blog-example*"
+    (shell-command (concat "wc -l"
+                           " "
+                           (expand-file-name (buffer-file-name)))
+                   "*blog-example*"
+                   "*Messages*")
+    (pop-to-buffer "*blog-example*")))
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

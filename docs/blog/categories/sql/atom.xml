@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: sql | Jake McCrary]]></title>
+  <link href="https://jakemccrary.com/blog/categories/sql/atom.xml" rel="self"/>
+  <link href="https://jakemccrary.com/"/>
+  <updated>2020-01-23T22:35:50-06:00</updated>
+  <id>https://jakemccrary.com/</id>
+  <author>
+    <name><![CDATA[Jake McCrary]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[SQL: Aggregate a set of values together]]></title>
+    <link href="https://jakemccrary.com/blog/2015/11/15/sql-aggregate-a-set-of-values-together/"/>
+    <updated>2015-11-15T19:45:00-06:00</updated>
+    <id>https://jakemccrary.com/blog/2015/11/15/sql-aggregate-a-set-of-values-together</id>
+    <content type="html"><![CDATA[<p>Lately I&rsquo;ve been working on projects that use
+<a href="http://www.postgresql.org/">Postgres</a> as our relational database.
+This has allowed us to simplify some of our Clojure code by leaning on
+some built-in features of Postgres. One SQL function supported by
+Postgres which has greatly simplified our code is the <code>array_agg</code>
+<a href="http://www.postgresql.org/docs/9.4/static/functions-aggregate.html">aggregate</a>
+function.</p>
+
+<h2>What is <code>array_agg</code>?</h2>
+
+<p>The <code>array_agg</code> function takes an argument and returns an array of the
+argument type. That sentence will make more sense after an example.
+The snippet below shows a simplified schema for a blog&rsquo;s database.
+There is a table called <code>blog_posts</code> that contains details about
+posts, a table called <code>categories</code> that has labels that can be applied
+to blog posts, and a join table called <code>post_categories</code> that links
+the two previous tables together.</p>
+
+<pre><code class="sql">blog=# select id, title from blog_posts;
+ id |    title
+----+--------------
+  1 | SQL Post
+  2 | Clojure Post
+
+blog=# select * from categories;
+ id |   name
+----+----------
+  1 | sql
+  2 | emacs
+  3 | clojure
+  4 | postgres
+
+blog=# select * from post_categories;
+ blog_post_id | category_id
+--------------+-------------
+            1 |           1
+            2 |           2
+            1 |           4
+            2 |           3
+</code></pre>
+
+<p>Before I learned about <code>array_agg</code>, if I wanted to know how each blog
+post had been categorized I might have written the following query.</p>
+
+<pre><code>select title, name as category
+  from blog_posts bp
+  join post_categories pc on pc.blog_post_id = bp.id
+  join categories c on c.id = pc.category_id
+  order by title;
+
+
+    title     | category
+--------------+----------
+ Clojure Post | emacs
+ Clojure Post | clojure
+ SQL Post     | sql
+ SQL Post     | postgres
+</code></pre>
+
+<p>The result is readable but as the number of posts and categories grow
+it becomes harder to read. The query also doesn&rsquo;t answer the question,
+&ldquo;How are my posts categorized?&rdquo;, well. The ideal answer is a single
+row per post that shows the post&rsquo;s categories. You can use <code>array_agg</code>
+to get that ideal answer.</p>
+
+<pre><code class="sql">select title, array_agg(name) as categories
+  from blog_posts bp
+  join post_categories pc on pc.blog_post_id = bp.id
+  join categories c on c.id = pc.category_id
+  group by title;
+
+    title     |   categories
+--------------+-----------------
+ SQL Post     | {sql,postgres}
+ Clojure Post | {emacs,clojure}
+</code></pre>
+
+<p>I find the <code>array_agg</code> version much nicer to read. The result answers
+the question in a very direct fashion and the query expresses the
+question well. Everything about the query expresses the question, you
+no longer have an extra <code>order by</code> clause to make the result more
+readable by human eyes.</p>
+
+<h2>How did it make my Clojure code simpler?</h2>
+
+<p>The above is great and it makes everything more readable for a human.
+Most of the time I&rsquo;m not querying a SQL database so that a human can
+directly read the results; instead I&rsquo;m using Clojure to manipulate
+results of a query. Fortunately, <code>array_agg</code> simplifies my Clojure
+code as well.</p>
+
+<p>I&rsquo;m working with a schema that has many relationships similar to the
+above relationship. Continuing with the example from above the snippet
+below shows the data shape we&rsquo;d get back from <code>clojure.java.jdbc</code>
+prior to using <code>array_agg</code>. The data shape we actually want follows.</p>
+
+<pre><code class="clojure">;; data shape you get from the non-array_agg query.
+[{:title "Clojure Post" :category "emacs"}
+ {:title "SQL Post" :category "sql"}
+ {:title "Clojure Post" :category "clojure"}
+ {:title "SQL Post" :category "postgres"}]
+
+;; data shape you want
+[{:title "Clojure Post" :categories ["emacs" "clojure"]}
+ {:title "SQL Post" :categories ["sql" "postgres"]}]
+</code></pre>
+
+<p>Since we&rsquo;re not getting data in our desired shape we need to write
+code that combines rows. One way of doing that is to use <code>reduce</code> and <code>map</code>.</p>
+
+<pre><code class="clojure">(defn squash-by-title [rows]
+  (-&gt;&gt; rows
+       (reduce (fn [r row] (update r (:title row) conj (:category row))) {})
+       (map (fn [[title categories]] {:title title :categories categories}))))
+</code></pre>
+
+<p>I&rsquo;ve been writing Clojure for a long time and when I see code like
+above it still takes me a bit of time to figure out what is happening.
+Not only that, but eventually your project has different squash
+operations depending on what data you&rsquo;re pulling back from the
+database. They are probably mostly similar and eventually you abstract
+the differences and feel great. Then you come back months later and
+have to figure out how it all works. Luckily, if you&rsquo;re using a
+database that supports <code>array_agg</code>, there is a better way.</p>
+
+<p>The first step is to change your queries to use <code>array_agg</code>. The
+second step is to extend the <code>clojure.java.jdbc/IResultSetReadColumn</code>
+protocol to the type returned by your jdbc driver. For my project that
+looks like the following code:</p>
+
+<pre><code class="clojure">;; clojure.java.jdbc has been required as jdbc
+
+(extend-protocol jdbc/IResultSetReadColumn
+  org.postgresql.jdbc4.Jdbc4Array
+  (result-set-read-column [pgobj metadata i]
+    (vec (.getArray pgobj))))
+</code></pre>
+
+<p>By changing my queries to use <code>array_agg</code> and adding those four lines
+of code I&rsquo;m able to delete all of my squashing functions and get data
+from my database in the shape I want. I also end up with easier to
+understand code and more expressive queries. Awesome.</p>
+
+<p><em>Thanks to <a href="http://timothypratley.blogspot.com/">Timothy Pratley</a> for
+providing feedback on earlier versions of this post.</em></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Creating a SQL table with a composite primary key in Clojure]]></title>
+    <link href="https://jakemccrary.com/blog/2011/01/19/creating-sql-table-with-composite-key-in-clojure/"/>
+    <updated>2011-01-19T00:00:00-06:00</updated>
+    <id>https://jakemccrary.com/blog/2011/01/19/creating-sql-table-with-composite-key-in-clojure</id>
+    <content type="html"><![CDATA[<p>I was interacting with a SQL database using Clojure and needed to create a table so I turned to <code>create-table</code> from <a href="http://clojure.github.com/clojure-contrib/sql-api.html">clojure.contrib.sql</a>. Looking at the <a href="http://clojure.github.com/clojure-contrib/sql-api.html#clojure.contrib.sql/create-table">docs</a> for <code>create-table</code> it seemed pretty straight forward. To create a table with columns <em>date</em>, <em>id</em>, <em>symbol</em>, <em>price</em>, and <em>quantity</em> you would write the following.</p>
+
+<pre><code class="clojure">    (create-table "orders"
+                  [:date     "date"]
+                  [:id       "integer"]
+                  [:symbol   "char(10)"]
+                  [:price    "integer"]
+                  [:quantity "integer"])
+</code></pre>
+
+<p>The above works. I also wanted to specify that columns <em>date</em> and <em>id</em> to form a composite primary key. I wasn&rsquo;t sure how to specify a composite primary key with <code>create-table</code> and ended up diving into its <a href="https://github.com/clojure/clojure-contrib/blob/b8d2743d3a89e13fc9deb2844ca2167b34aaa9b6/src/main/clojure/clojure/contrib/sql.clj#L103">code</a>.</p>
+
+<pre><code class="clojure">    (defn create-table
+      "Creates a table on the open database connection given a table name and
+      specs. Each spec is either a column spec: a vector containing a column
+      name and optionally a type and other constraints, or a table-level
+      constraint: a vector containing words that express the constraint. All
+      words used to describe the table may be supplied as strings or keywords."
+      [name &amp; specs]
+      (do-commands                                              
+       (format "CREATE TABLE %s (%s)"                           
+               (as-str name)
+               (apply str                                       
+                 (map as-str                                    
+                  (apply concat                                 
+                   (interpose [", "]                            
+                    (map (partial interpose " ") specs))))))))  
+</code></pre>
+
+<p>Looking at <code>create-table</code> we can see it creates a SQL statement which is then executed by <code>do-commands</code>. In order to have a composite key we need <code>do-commands</code> to execute a SQL statement that looks similar to below.</p>
+
+<pre><code class="sql">    CREATE TABLE track(
+      date date,
+      id integer,
+      symbol char(10),
+      price integer,
+      quantity integer,
+      PRIMARY KEY (date, id)
+    )
+</code></pre>
+
+<p>Let&rsquo;s break down <code>create-table</code> to figure out what we need to pass it to make <code>do-commands</code> run the above statement. The code for <code>create-table</code> is repeated below with comments pointing out what step lines up the code.</p>
+
+<pre><code class="clojure">    (defn create-table
+      [name &amp; specs]
+      (do-commands                                              ; step 7
+       (format "CREATE TABLE %s (%s)"                           ; step 6
+               (as-str name)
+               (apply str                                       ; step 5
+                 (map as-str                                    ; step 4
+                  (apply concat                                 ; step 3
+                   (interpose [", "]                            ; step 2
+                    (map (partial interpose " ") specs))))))))  ; step 1
+</code></pre>
+
+<ol>
+<li>First <code>create-table</code> takes the sequences in <code>specs</code> and puts a space between each element in each sequence.</li>
+<li>The result of step 1 then has a vector containing a comma and a space interposed between each element of it.</li>
+<li><code>concat</code> combined with <code>apply</code> is used to combine each element of the result of step 2 into a single sequence.</li>
+<li><code>as-str</code> (from <a href="http://clojure.github.com/clojure-contrib/string-api.html#clojure.contrib.string/as-str">c.c.string</a>) is mapped over the result of step 3 to make sure every element is a string.</li>
+<li><code>str</code> is used to make one string out of the sequence of strings from step 4.</li>
+<li><code>format</code> is used to substitute in <code>name</code> and the result of step 5 to create the SQL statement.</li>
+<li><code>do-commands</code> executes the statement created in step 6.</li>
+</ol>
+
+
+<p>Knowing how <code>create-table</code> works now allows us to specify the arguments that will create the orders table with the composite primary key of <em>date</em> and <em>id</em>.</p>
+
+<pre><code class="clojure">    (create-table "orders"
+                  [:date     "date"]
+                  [:id       "integer"]
+                  [:symbol   "char(10)"]
+                  [:price    "integer"]
+                  [:quantity "integer"]
+                  ["PRIMARY KEY" "(date, id)")
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

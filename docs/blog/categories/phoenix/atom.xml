@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: phoenix | Jake McCrary]]></title>
+  <link href="https://jakemccrary.com/blog/categories/phoenix/atom.xml" rel="self"/>
+  <link href="https://jakemccrary.com/"/>
+  <updated>2020-01-23T22:35:50-06:00</updated>
+  <id>https://jakemccrary.com/</id>
+  <author>
+    <name><![CDATA[Jake McCrary]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Managing windows in OS X using Phoenix]]></title>
+    <link href="https://jakemccrary.com/blog/2014/03/30/managing-windows-in-osx-using-phoenix/"/>
+    <updated>2014-03-30T18:30:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2014/03/30/managing-windows-in-osx-using-phoenix</id>
+    <content type="html"><![CDATA[<p><a href="http://jakemccrary.com/blog/2013/04/15/manage-your-workspace-with-grids-under-linux-osx-and-windows/">Last year</a>
+I wrote about how I managed my windows under OS X, Windows, and Linux.
+I&rsquo;m a big fan of having an orderly layout and try to use grid
+managers. Since then I&rsquo;ve changed jobs and now my main machine is an
+MacBook Pro running OS X Mavericks with two 27 inch cinema displays.
+As a result I&rsquo;ve started experimenting with more OS X window managers.
+After trying a few out I&rsquo;m going to stick with
+<a href="https://github.com/sdegutis/Phoenix">Phoenix</a>.</p>
+
+<h3>Before Phoenix</h3>
+
+<p>Last year I was satisfied using <a href="http://spectacleapp.com/">Spectacle</a>.
+It is (or at least was, I haven&rsquo;t used it in a while) easy to install
+and had good defaults. I&rsquo;d still recommend it for most people.</p>
+
+<p>At the recommendation from a reader, I switched to
+<a href="https://github.com/jigish/slate">Slate</a>. Slate has a ton of features
+and I barely scratched the surface in how I used it. I used it as a
+replacement for Spectacle and didn&rsquo;t touch any of the advanced
+features. Before I had the urge to explore the advanced features I
+ended up becoming dissatisfied with Slate. I ran into an issue where
+after running for a while (talking at least a week) it would start to
+respond slowly. I&rsquo;d try to move a window to another monitor and it
+wouldn&rsquo;t move. Eventually I&rsquo;d be in another process and the
+command would register sending whatever window I was currently focused
+on to another monitor.</p>
+
+<h3>Introducing Phoenix</h3>
+
+<p>I was looking for solutions to Slate&rsquo;s unresponsiveness when I
+stumbled on <a href="https://github.com/sdegutis/Phoenix">Phoenix</a>. I was
+drawn in by its stated goal; it &ldquo;aims for efficiency and a very small
+footprint.&rdquo; The fact that it is still being actively developed was
+also a huge selling point. Knowing that any bugs I find have a
+potential to be fixed is great.</p>
+
+<p>Phoenix provides a
+<a href="https://github.com/sdegutis/Phoenix/wiki/JavaScript-API-documentation">JavaScript API</a>
+that allows you to interact with your running applications or launch
+applications. It doesn&rsquo;t provide anything out of the box; it is up to
+you to make it useful by writing your own (or taking another persons)
+configuration.</p>
+
+<p>This is a double-edged sword. This means you get exactly the features
+you want. It also means you might spend significant amounts of time
+figuring out how to get the features you want.</p>
+
+<p>Luckily there are <a href="https://github.com/sdegutis/Phoenix/wiki">examples</a>
+that you can use as a starting point. Browsing through the examples is
+a great way of becoming familiar with what is possible and can be
+inspiring.</p>
+
+<p>My
+<a href="https://github.com/jakemcc/dotfiles/blob/17a73f89a2f3f7b2c9aa07a63d1928b86cc5425d/home/.phoenix.js">configuration</a>
+is relatively minimal. I&rsquo;ve written
+<a href="https://github.com/jakemcc/dotfiles/blob/17a73f89a2f3f7b2c9aa07a63d1928b86cc5425d/home/.phoenix.js#L42-L87">code</a>
+to move windows between monitors (rotating between three added some
+complexity to this),
+<a href="https://github.com/jakemcc/dotfiles/blob/17a73f89a2f3f7b2c9aa07a63d1928b86cc5425d/home/.phoenix.js#L90-L122">start or focus</a>
+certain applications, and
+<a href="https://github.com/jakemcc/dotfiles/blob/17a73f89a2f3f7b2c9aa07a63d1928b86cc5425d/home/.phoenix.js#L11-L37">resize</a>
+windows. This is enough for me to feel efficient.</p>
+
+<p>I encourage you to use a tool to help manage your windows. Personally
+I think Phoenix is pretty great and don&rsquo;t mind tinkering with my
+configuration and strongly recommend it. As a bonus it is a young
+project where the maintainer is open to suggestions. If you have an
+idea for a useful
+<a href="https://github.com/sdegutis/Phoenix/issues/18">feature</a> it has a
+possibility of being added pretty quickly.</p>
+]]></content>
+  </entry>
+  
+</feed>

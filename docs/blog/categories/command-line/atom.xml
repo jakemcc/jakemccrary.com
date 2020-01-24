@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: command-line | Jake McCrary]]></title>
+  <link href="https://jakemccrary.com/blog/categories/command-line/atom.xml" rel="self"/>
+  <link href="https://jakemccrary.com/"/>
+  <updated>2020-01-23T22:35:50-06:00</updated>
+  <id>https://jakemccrary.com/</id>
+  <author>
+    <name><![CDATA[Jake McCrary]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[A more helpful makefile]]></title>
+    <link href="https://jakemccrary.com/blog/2018/12/27/a-more-helpful-makefile/"/>
+    <updated>2018-12-27T21:21:00-06:00</updated>
+    <id>https://jakemccrary.com/blog/2018/12/27/a-more-helpful-makefile</id>
+    <content type="html"><![CDATA[<p>In an <a href="/blog/2016/11/30/unify-your-project-interfaces/">older article</a> of mine I extolled the virtues of having unified interfaces for interacting with your projects. I recently started working at Coinbase and the group I&rsquo;m working with is mostly using makefiles as that common interface. We still have some more work to do to unify the makefile targets of the various projects but I&rsquo;ve picked up one tip that makes switching between projects easier.</p>
+
+<p>That tip is to have the default target of your makefile be one that prints out a helpful message. This looks like the following.</p>
+
+<pre><code>.PHONY: help
+help:
+    @grep -E '^[0-9a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
+     sort | \
+     awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+</code></pre>
+
+<p>There is a lot going on there but it basically looks through your makefile targets and finds the ones that have a comment starting with <code>##</code> after the target dependencies. Those targets are printed to the console along with the comment.</p>
+
+<p>As an example, the makefile for my website looks similar to the below file.</p>
+
+<pre><code>.PHONY: help
+help:
+    @grep -E '^[0-9a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
+     sort | \
+     awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+
+.PHONY: watch
+watch: ## Watch for changes and serve preview of site with drafts
+    bundle exec rake clean
+    bundle exec rake preview
+
+.PHONY: develop
+develop: ## Serve a preview of the site without drafts and refresh changes
+    bundle exec rake clean
+    bundle exec rake develop
+
+.PHONY: new_adventure
+new_adventure: ## Start a new adventure post
+    bundle exec rake new_adventure
+
+.PHONY: new_post
+new_post: ## Start a new post
+    bundle exec rake new_post 
+
+.PHONY: deploy
+deploy: ## deploy
+    ./deploy.sh
+</code></pre>
+
+<p>When this file, when I run <code>make</code> in this websites source, I get the following output.</p>
+
+<pre><code>0 [last: 0s] 21:11:50 ~/src/jakemcc/blog (master)
+$ make
+deploy                         deploy
+develop                        Serve a preview of the site without drafts and refresh changes
+new_adventure                  Start a new adventure post
+new_post                       Start a new post
+watch                          Watch for changes and serve preview of site with drafts
+</code></pre>
+
+<p>This is super useful when you&rsquo;re starting doing work in a new project. With this feature you can get a quick list of useful targets and a description. It allows you to quickly see what can be done in a project.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Unify your project interfaces]]></title>
+    <link href="https://jakemccrary.com/blog/2016/11/30/unify-your-project-interfaces/"/>
+    <updated>2016-11-30T17:51:00-06:00</updated>
+    <id>https://jakemccrary.com/blog/2016/11/30/unify-your-project-interfaces</id>
+    <content type="html"><![CDATA[<p>Jeff Ramnani wrote an <a href="https://jefframnani.com/project-build-protocol/">article</a> about unifying your command line interactions across programming projects. I recommend that you read it. The basic gist is that we often find ourselves working on multiple projects at a time. Frequently these projects are in different languages and use different build tools. Remembering the necessary incantations to interact with the various projects is difficult and we&rsquo;re lazy. We can do better by standardizing an interface to our projects.</p>
+
+<p>This interface can take many forms. One option is to have a <code>bin</code> or <code>scripts</code> directory in each project and then consistently name the scripts you put in there (examples: <code>run</code>, <code>test</code>, and <code>build</code>). Another option is to use Makefiles with consistently named targets. Either way, your projects now have a standard way of interacting with them. This frees you from having to remember all the various commands and makes onboarding new developers easier.</p>
+
+<p>I&rsquo;ve been using a similar approach to Jeff Ramnani for years and highly recommend it. I&rsquo;m a fan of the Makefile approach but either approach works. The unified targets I use across projects are the following:</p>
+
+<ul>
+<li><code>up</code> - Brings the system up</li>
+<li><code>status</code> - Is the system up and running?</li>
+<li><code>logs</code> - Show me the logs</li>
+<li><code>local-db</code> - Connect to my local database</li>
+<li><code>build</code> - Build the project</li>
+<li><code>test</code> - Run the tests</li>
+</ul>
+
+
+<p>If you haven&rsquo;t created a common interface for your projects I recommend that you do it. It definitely makes moving between projects easier.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Better command history in your shell]]></title>
+    <link href="https://jakemccrary.com/blog/2016/09/28/better-command-history-in-your-shell/"/>
+    <updated>2016-09-28T11:42:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2016/09/28/better-command-history-in-your-shell</id>
+    <content type="html"><![CDATA[<p>My ideal command history would let me search the history of every
+shell but when I hit the up arrow it would only cycle through my
+current shell&rsquo;s history. In February, I was able to achieve this setup
+in large part because of a utility
+called <a href="https://github.com/dvorka/hstr">hstr</a>.</p>
+
+<h2>What is <code>hstr</code>?</h2>
+
+<p>hstr is a neat Bash and Zsh utility that lets you easily search, view,
+and manage your command history. hstr provides a tool named <code>hh</code> that
+provides a text interface for manipulating your command
+history. To see what it looks like check out
+the <a href="https://github.com/dvorka/hstr/blob/master/README.md">README</a> and
+this <a href="https://www.youtube.com/watch?v=sPF29NyXe2U">video</a> tutorial. If
+you are running OS X and use Homebrew you can install it by running <code>brew
+install hh</code>.</p>
+
+<h2>Making global history searchable but arrows cycle through local history</h2>
+
+<p>hstr is a neat tool but my favorite part of my setup is how the global
+command history is searchable but only a shell&rsquo;s local history is
+cycled through with the arrow keys. This is achieved by manipulating
+where history is written and tweaking some environment variables.</p>
+
+<p>The first step is to change your <code>$PROMPT_COMMAND</code> to append your
+shell&rsquo;s history to a global history file. Below is the snippet that
+does this from my <code>.bashrc</code> file.</p>
+
+<pre><code># Whenever a command is executed, write it to a global history
+PROMPT_COMMAND="history -a ~/.bash_history.global; $PROMPT_COMMAND"
+</code></pre>
+
+<p>The next step is to bind a keystroke to run <code>hh</code>, which is what hstr
+provides, with <code>$HISTFILE</code> pointing to <code>~/.bash_history.global</code>. I
+wanted to fully replace the default command history searching (and I
+use Emacs style keyboard shortcuts) so I&rsquo;ve bound these actions to ctrl-r.</p>
+
+<pre><code class="bash"># On C-r set HISTFILE and run hh
+bind -x '"\C-r": "HISTFILE=~/.bash_history.global hh"'
+</code></pre>
+
+<p>With those two additions to my <code>.bashrc</code> I&rsquo;ve achieved my ideal
+command history searching. When I hit ctrl-r I&rsquo;m searching all of my
+history and yet I only cycle through a shell&rsquo;s local history with the
+arrow keys. This small addition<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> made my command line productivity
+higher.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>My setup was inspired by <a href="https://unix.stackexchange.com/questions/200225/search-history-from-multiple-bash-session-only-when-ctrl-r-is-used-not-when-a">this</a> StackExchange post.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Change volume from the command line]]></title>
+    <link href="https://jakemccrary.com/blog/2013/03/31/change-volume-from-the-command-line/"/>
+    <updated>2013-03-31T16:17:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2013/03/31/change-volume-from-the-command-line</id>
+    <content type="html"><![CDATA[<p>On my Ubuntu desktop the volume at 100% is often too quiet. With Ubuntu&rsquo;s default window manager I could open up the graphical &ldquo;Sound Preferences&rdquo; and bump the volume to above 100%. After using <a href="http://i3wm.org/">i3 window manager</a> for a while I found myself missing this and took the time to figure out how to do it from the command line.</p>
+
+<p>Ubuntu uses <a href="http://www.freedesktop.org/wiki/Software/PulseAudio">PulseAudio</a> to handle sound related tasks. The tool <a href="http://linux.die.net/man/1/pacmd">pacmd</a> allows you to change PulseAudio settings, such as volume, on the fly. The command is <code>pacmd set-sink-volume &lt;sink-index&gt; &lt;sink-volume&gt;</code> where <code>&lt;sink-index&gt;</code> is an identifier for your output device and <code>&lt;sink-volume&gt;</code> is an integer greater than or equal to zero. Zero represents muted and 65536 represents 100% volume. <code>&lt;sink-index&gt;</code> is the index found in the output from the <code>pacmd list-sinks</code> for your output card. In my case it is 0.</p>
+
+<p>The below script makes changing volume with <code>pacmd</code> straightforward. I&rsquo;m using Perl convert a percentage into the proper units for the <sink-volume> argument. Using this script if you want to pull a <a href="http://www.youtube.com/watch?v=EbVKWCpNFhY">Spinal Tap</a> and go above 100% you simply pass in a number greater than 100.</p>
+
+<pre><code class="bash">    #!/bin/bash
+
+    if [ "$1" == "" ]; then
+      echo "Need to supply a percentage"
+      exit 1
+    fi
+
+    vol=$(perl -e "print int(65536 * ($1 / 100))")
+    echo "Setting volume to $1 ($vol)"
+    pacmd set-sink-volume 0 $vol
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Maintaining Directory Layout When Selectively Copying Files]]></title>
+    <link href="https://jakemccrary.com/blog/2013/02/03/maintaining-directory-layout-when-selectively-copying-files/"/>
+    <updated>2013-02-03T12:24:00-06:00</updated>
+    <id>https://jakemccrary.com/blog/2013/02/03/maintaining-directory-layout-when-selectively-copying-files</id>
+    <content type="html"><![CDATA[<p>Ran into a situation where I needed to replace certain files in a directory tree with files from a similarly shaped directory tree. The other files in each tree needed to remain untouched. Below is an example of the directory structure.</p>
+
+<pre><code class="bash">    root-dir
+    ├── target-dir
+    │   ├── 20121230
+    │   │   ├── data.csv
+    │   │   └── instruments.csv
+    │   └── 20121231
+    │       ├── data.csv
+    │       └── instruments.csv
+    └── other-dir
+        ├── 20121230
+        │   ├── data.csv
+        │   └── instruments.csv
+        └── 20121231
+            ├── data.csv
+            └── instruments.csv
+</code></pre>
+
+<p>Goal is to copy <strong>instruments.csv</strong> from the sub-directories of <strong>other-dir</strong> to the matching sub-directories of <strong>target-dir</strong>. In the past I&rsquo;ve solved this by being in the <strong>other-dir</strong> directory and banging out a <code>for</code> loop at the command line (<code>other-dir$</code> is the bash prompt).</p>
+
+<pre><code class="bash">    other-dir$ for d in $(ls); do cp $d/instruments.txt ../target-dir/$d/; done
+</code></pre>
+
+<p>One feature (or issue) with this approach is that if a sub-directory exists in <strong>other-dir</strong> but not in <strong>target-dir</strong> that sub-directory will not be created in <strong>target-dir</strong>.</p>
+
+<p>I took a bit of time to explore other ways of accomplishing this task and stopped after coming up with two additional ways.</p>
+
+<pre><code class="bash">    other-dir$ find . -name "instruments.txt" | xargs -I {} cp {} ../target-dir/{} 
+</code></pre>
+
+<p>The above is basically the same as the first solution. It uses <code>find</code> to generate the list of files and then constructs <code>cp</code> commands. It also doesn&rsquo;t create sub-directories in <strong>target-dir</strong>.</p>
+
+<p>The next example has different behavior from the above <code>cp</code> solutions. Like the second solution, it generates a list of files to copy using <code>find</code> but then uses <code>rsync</code> with the <code>--files-from</code> flag to mirror those files under <strong>target-dir</strong>. Unlike the <code>cp</code> based solutions, sub-directories of <strong>other-dir</strong> that do not exist in <strong>target-dir</strong> will be created.</p>
+
+<pre><code>    other-dir$ find . -name "instruments.txt" | rsync --files-from=- . ../target-dir
+</code></pre>
+
+<p>I&rsquo;m sure there are many more ways of accomplishing this task. Figuring out the three above was enough for me. They are fairly straight forward and don&rsquo;t depend on esoteric command line flags. The solution I use in the future will depend on whether or not I need sub-directories created in the target directory.</p>
+]]></content>
+  </entry>
+  
+</feed>

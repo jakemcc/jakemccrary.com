@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: javascript | Jake McCrary]]></title>
+  <link href="https://jakemccrary.com/blog/categories/javascript/atom.xml" rel="self"/>
+  <link href="https://jakemccrary.com/"/>
+  <updated>2020-01-23T22:35:50-06:00</updated>
+  <id>https://jakemccrary.com/</id>
+  <author>
+    <name><![CDATA[Jake McCrary]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Testing asynchronous JavaScript with Jasmine]]></title>
+    <link href="https://jakemccrary.com/blog/2019/02/13/testing-asynchronous-javascript-with-jasmine/"/>
+    <updated>2019-02-13T17:46:00-06:00</updated>
+    <id>https://jakemccrary.com/blog/2019/02/13/testing-asynchronous-javascript-with-jasmine</id>
+    <content type="html"><![CDATA[<p>I was recently adding a feature to an internal web UI that caught all unhandled JavaScript errors and reported them to the backend service. The implementation went smoothly with most of the effort spent figuring out how to test the code that was reporting the errors.</p>
+
+<p>If the error reporting failed, I didn&rsquo;t want to trigger reporting another error or completely lose that error. I decided to log a reporting error to the console. I wanted to write a test showing that errors reporting errors were handled so that a future me, or another developer, didn&rsquo;t accidentally remove this special error handling and enable a never ending cycle of of reporting failed reporting attempts.</p>
+
+<p>It took me a while to figure out how to do this. I searched the web and found various articles about using <a href="https://jasmine.github.io/">Jasmine</a> to do async tests. They were helpful but I also wanted to mock out a function, <code>console.error</code>, and assert that it was called. None of the examples I found were explicit about doing something like this. I forget how many different approaches I tried, but it took a while to figure out the below solution.</p>
+
+<p>Here is the code I wanted to test.</p>
+
+<pre><code class="javascript">function reportEvent(event) {
+  return fetch('/report-event', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({name: 'ui name', ...event})
+  }).catch(function(e) { console.error('Problem reporting event:', e)});
+}
+</code></pre>
+
+<p>It takes an incoming <code>event</code> object and merges it with a default value and posts that to the backing service. <code>fetch</code> returns a Promise and the code handles errors by calling <code>catch</code> on it and logging.</p>
+
+<p>Below is what I eventually came up with for testing the error handling feature of <code>reportEvent</code>.</p>
+
+<pre><code class="javascript">describe('reporting events', function() {
+  it('logs errors', (done) =&gt; {
+    spyOn(console, 'error').and.callFake(() =&gt; {
+      expect(console.error).toHaveBeenCalled();
+      done();
+    });
+    spyOn(window, 'fetch').and.returnValue(Promise.reject('error!'));
+    reportEvent({level: 'WARN', msg: 'ERROR!'});
+  });
+});
+</code></pre>
+
+<p>This uses <code>spyOn</code> to mock out <code>fetch</code> and <code>console.error</code>. The <code>fetch</code> call is told to return a rejected Promise. The <code>console.error</code> spy is a bit more interesting.</p>
+
+<p>The <code>console.error</code> spy is told to call a fake function. That function asserts that the <code>console.error</code> spy has been called. More importantly, it also calls a <code>done</code> function. That <code>done</code> function is a callback passed to your test by Jasmine. Calling <code>done</code> signals that your async work is completed.</p>
+
+<p>If <code>done</code> is never called then Jasmine will fail the test after some amount of time. By calling <code>done</code> in our <code>console.error</code> fake, we&rsquo;re able to signal to Jasmine that we&rsquo;ve handled the rejected promise.</p>
+
+<p>You don&rsquo;t actually need the <code>expect(console.error).toHaveBeenCalled();</code> as <code>done</code> won&rsquo;t be called unless <code>console.error</code> has been called. If you don&rsquo;t have it though then Jasmine will complain there are no assertions in the test.</p>
+
+<p>So there we have it, an example of using some of Jasmine&rsquo;s asynchronous test features with spies. I wish I had found an article like this when I started this task. Hopefully it saves you, and future me, some time.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Book review: Serverless Single Page Apps]]></title>
+    <link href="https://jakemccrary.com/blog/2016/04/08/book-review-serverless-single-page-apps/"/>
+    <updated>2016-04-08T10:15:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2016/04/08/book-review-serverless-single-page-apps</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve read Ben Rady&rsquo;s
+<a href="https://pragprog.com/book/brapps/serverless-single-page-apps">Serverless Single Page Apps</a>
+twice now. As an early technical reviewer, I was able to watch and
+take part in the book&rsquo;s evolution. The early draft was good but the
+most recent near-final draft was better.</p>
+
+<p><em>Serverless Single Page Apps</em> walks you through building a low-cost,
+highly-available, serverless single page web application. It does this
+on top of various Amazon web services (DynamoDB, Cognito, Lambda, API
+Gateway, S3). If you follow along you&rsquo;ll end up with a simple web
+application with authentication.</p>
+
+<p>The book is very enjoyable. The examples are clear and the book is
+well written. The book uses JavaScript to implement the serverless
+application. For the user interface it uses plain JavaScript with a
+bit of jQuery and for the AWS Lambda functions you dip into some
+Node.js. <em>Serverless</em> doesn&rsquo;t distract you from learning about
+serverless applications by forcing you to learn new JavaScript
+frameworks or libraries.</p>
+
+<p>One of my favorite parts of the book is Ben&rsquo;s use of test driven
+development. The examples provided give the reader a decent taste of
+the benefits of test-first development. Having the tests helped me
+when I made some silly mistakes in later parts of the book.</p>
+
+<p>Overall I&rsquo;d recommend this book to developers who are interested in
+learning what a serverless application might look like. If you follow
+along you&rsquo;ll know how to build one by the end and will have a good
+starting point for diving deeper into the topic.</p>
+]]></content>
+  </entry>
+  
+</feed>

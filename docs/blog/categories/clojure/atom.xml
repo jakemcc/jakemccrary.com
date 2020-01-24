@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: clojure | Jake McCrary]]></title>
+  <link href="https://jakemccrary.com/blog/categories/clojure/atom.xml" rel="self"/>
+  <link href="https://jakemccrary.com/"/>
+  <updated>2020-01-23T22:35:50-06:00</updated>
+  <id>https://jakemccrary.com/</id>
+  <author>
+    <name><![CDATA[Jake McCrary]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Breaking change and more in lein-test-refresh 0.24.1]]></title>
+    <link href="https://jakemccrary.com/blog/2019/03/20/breaking-change-and-more-in-lein-test-refresh-0-dot-24-dot-0/"/>
+    <updated>2019-03-20T21:30:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2019/03/20/breaking-change-and-more-in-lein-test-refresh-0-dot-24-dot-0</id>
+    <content type="html"><![CDATA[<p>Today I released <a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a> <code>0.24.1</code><sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>. I don&rsquo;t always announce new lein-test-refresh versions with an article but this release breaks some existing behavior so I thought it was worth it.</p>
+
+<p>Each of these changes is the direct result of interacting with four different <code>lein-test-refresh</code> users. Some of this took place on GitHub and others through email. Thanks to all of you for taking the time to think about improvements and notice oddities and bring them to my attention.</p>
+
+<h3>Breaking change: Monitoring keystrokes to perform actions</h3>
+
+<p>Prior to this release, if you hit Ctrl-D then STDIN reads an EOF and <code>test-refresh</code> would quit. With version 0.24.1, <code>test-refresh</code> no longer does that. Instead, it stops monitoring for input and just keeps running tests. Since it stops monitoring for input it no longer notices when you hit Enter to cause your tests to rerun. You can still stop <code>lein test-refresh</code> by sending a SIGINT with Ctrl-C.</p>
+
+<p>This change was made because there is some combination of environments where if <code>test-refresh</code> execs <code>/bin/bash</code> then it receives an EOF on STDIN. Before this change, that means <code>test-refresh</code> would quit unexpectedly. Now it will keep going.</p>
+
+<p>Thanks <a href="https://github.com/cloojure">Alan Thompson</a> for bringing this to my attention and taking the time to help diagnose the problem.</p>
+
+<h3>You can supply your own narrowing test selector</h3>
+
+<p>Being able to tell <code>test-refresh</code> to narrow its focus by adding <code>:test-refresh/focus</code> as metadata on a test or namespace has quickly become a favorite feature of many users. Now you can configure a shorter keyword by specifying configuration in your profile. See the <a href="https://github.com/jakemcc/lein-test-refresh/blob/1b5165660d9e40d9394809a95b148ec758a6d56b/sample.project.clj#L61-L65">sample project.clj</a> for how to set this up.</p>
+
+<p>Thanks <a href="https://github.com/metametadata">Yuri Govorushchenko</a> for the suggestion.</p>
+
+<h3>Experimental: Run in a repl</h3>
+
+<p>I&rsquo;ve turned down this feature in the past but a narrower request came up and I thought it seemed useful. <code>test-refresh</code> now exposes a function you can call in a repl to run <code>test-refresh</code> in that repl. This makes the repl useless for any other task. To do this, first add <code>lein-test-refresh</code> as a dependency instead of a plugin to your project.clj. Then, require the namespace and call the function passing in one or more paths to your test directories. Example below.</p>
+
+<pre><code class="clojure">user=&gt; (require 'com.jakemccrary.test-refresh)
+nil
+user=&gt; (com.jakemccrary.test-refresh/run-in-repl "test")
+*********************************************
+*************** Running tests ***************
+</code></pre>
+
+<p><a href="https://github.com/jakemcc/lein-test-refresh/issues/80">This request</a> was done so that you can run it in Cursive&rsquo;s repl and gain the ability to click on stacktraces. Thanks <a href="https://github.com/klauswuestefeld">Klaus Wuestefeld</a> for bringing this up again with a really solid and focused use case.</p>
+
+<h3>Better output on exceptions while reloading</h3>
+
+<p>This was a <a href="https://github.com/jakemcc/lein-test-refresh/pull/81">pull request</a> from <a href="https://github.com/minhtuannguyen">Minh Tuan Nguyen</a>. Now figuring out where to look for the error will be a little easier.</p>
+
+<h2>Thank you</h2>
+
+<p>Thanks to all the users of lein-test-refresh. I&rsquo;ve found it to be very valuable to the way I work and I&rsquo;m very happy that others do as well.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>This was originally 0.24.0 but that had a bug in it. Sorry about that.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to use Leiningen test selectors to filter by test name]]></title>
+    <link href="https://jakemccrary.com/blog/2019/01/28/how-to-use-leiningen-test-selectors-to-filter-by-test-name/"/>
+    <updated>2019-01-28T21:27:00-06:00</updated>
+    <id>https://jakemccrary.com/blog/2019/01/28/how-to-use-leiningen-test-selectors-to-filter-by-test-name</id>
+    <content type="html"><![CDATA[<!-- Estimate: 30 minutes -->
+
+
+<!-- First draft: 38 minutes -->
+
+
+<!-- First edit: 13 minutes -->
+
+
+<!-- Second edit: 8 minutes -->
+
+
+<p>Leiningen test selectors are great. They allow you to filter what tests run by applying a function to the test&rsquo;s metadata. If that function returns a truthy value then that test will run. <a href="https://github.com/jakemcc/lein-test-refresh/blob/master/CHANGES.md#040">lein-test-refresh</a> supports them and even includes a built in one for its <a href="https://github.com/jakemcc/lein-test-refresh#built-in-test-narrowing-test-selector">focus feature</a>.</p>
+
+<p>I was recently <a href="https://github.com/jakemcc/lein-test-refresh/issues/78">asked</a> if test-refresh could support filtering tests using a regular expression against the name of a namespace or test. Lucky for me, test-refresh already supports this because of its support of test selectors.</p>
+
+<p>Most of the examples of Leiningen test selectors show very simple functions that look for the existence of a keyword in the metadata. We can do more than that. We can write a predicate that does whatever we want with the metadata.</p>
+
+<p>To take a look at a test&rsquo;s metadata, I generated a new project and looked at the generated default test file.</p>
+
+<pre><code class="clojure">(ns selector.core-test
+  (:require [clojure.test :refer :all]
+            [selector.core :refer :all]))
+
+(deftest a-test
+  (testing "FIXME, I fail."
+    (is (= 0 1))))
+</code></pre>
+
+<p>I then used my repl and to see what metadata was on the test.</p>
+
+<pre><code class="clojure">selector.core-test&gt; (meta #'a-test)
+{:test #function[selector.core-test/fn--17267],
+ :line 5,
+ :column 1,
+ :file "/Users/jake/src/jakemcc/blog-examples/selector/test/selector/core_test.clj",
+ :name a-test,
+ :ns #namespace[selector.core-test]}
+</code></pre>
+
+<p>Given the metadata above, I wrote the selector below which lets us select only integration tests.</p>
+
+<pre><code class="clojure">:test-selectors {:integration (fn [m]
+                                (or (clojure.string/includes? (str (:ns m))
+                                                              "integration")
+                                    (clojure.string/includes? (str (:name m))
+                                                              "integration")))}
+</code></pre>
+
+<p>You could write the above code is many different ways. Whatever you write, it needs to look for the existence of <code>integration</code> in either the test&rsquo;s name or namespace.</p>
+
+<p>If you wanted to make <code>lein test</code> or <code>lein test-refresh</code> only run non-integration tests you can add a default test selector to the project.clj.</p>
+
+<pre><code class="clojure">:test-selectors {:default (fn [m]
+                            (not (or (clojure.string/includes? (str (:ns m))
+                                                               "integration")
+                                     (clojure.string/includes? (str (:name m))
+                                                               "integration"))))
+                 :integration (fn [m]
+                                (or (clojure.string/includes? (str (:ns m))
+                                                              "integration")
+                                    (clojure.string/includes? (str (:name m))
+                                                              "integration")))}
+</code></pre>
+
+<p>Enjoy! I hope this example helps you run a subset<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> of your Clojure tests through Leiningen test selectors.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Running a subset of your tests can be helpful and test-refresh has a few features that help you do that. If you can, I&rsquo;d still recommend making all your tests fast enough to run them all the time.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Notifications with tmux and lein-test-refresh]]></title>
+    <link href="https://jakemccrary.com/blog/2019/01/06/notifications-with-tmux-and-lein-test-refresh/"/>
+    <updated>2019-01-06T16:55:00-06:00</updated>
+    <id>https://jakemccrary.com/blog/2019/01/06/notifications-with-tmux-and-lein-test-refresh</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve been using Emacs in a remote <a href="https://github.com/tmux/tmux">tmux</a> session lately and I&rsquo;ve been missing <a href="https://github.com/jakemcc/lein-test-refresh#notifications">lein-test-refresh</a> notifications when my Clojure tests pass or fail. Luckily, it only took me a little bit of searching to figure out a solution for when I&rsquo;m working inside of tmux.</p>
+
+<p>Below is a GIF of the notifications I get as my tests run and pass or fail.</p>
+
+<p><img src="/images/tmux-test-refresh.gif" title="tmux and test-refresh notifications" alt="tmux and test-refresh notifications" /></p>
+
+<p>With the above notifications, I can keep my focus on my code and only switch to the tmux window with <code>lein test-refresh</code> running when a test fails.</p>
+
+<p>This was pretty easy to setup. You can trigger a message in tmux by running <code>tmux display-message &lt;MESSAGE_HERE&gt;</code>. To configure <a href="https://github.com/jakemcc/lein-test-refresh#notifications">lein-test-refresh</a> to send notifications to tmux simply include the following in your <code>:test-refresh</code> section of your <code>project.clj</code> or <code>profiles.clj</code>.</p>
+
+<pre><code class="clojure">:test-refresh {:notify-command ["tmux" "display-message"]}
+</code></pre>
+
+<p>I hope you enjoy this. Its has made using a remote terminal with tmux and <a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a> more enjoyable.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Built-in test narrowing with lein-test-refresh]]></title>
+    <link href="https://jakemccrary.com/blog/2018/07/16/built-in-test-narrowing-with-lein-test-refresh/"/>
+    <updated>2018-07-16T14:47:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2018/07/16/built-in-test-narrowing-with-lein-test-refresh</id>
+    <content type="html"><![CDATA[<p>If you follow my work you probably know that I value fast feedback cycles. Most of the open-source I maintain was developed to enable faster feedback cycles. This is why <a href="https://github.com/jakemcc/lein-test-refresh/">lein-test-refresh</a> and <a href="https://github.com/clojure-expectations/lein-autoexpect">lein-autoexpect</a> were originally created.</p>
+
+<p>Leiningen supports <a href="https://github.com/technomancy/leiningen/blob/master/doc/TUTORIAL.md#tests">test selectors</a> and lein-test-refresh <a href="https://github.com/jakemcc/lein-test-refresh/blob/master/CHANGES.md#040">does as well</a>. This lets you start-up a testing session and only run tests or namespaces with certain metadata on them. This is a super useful feature as it lets you narrow your testing scope to one (or a handful) of tests while working on solving a specific problem.</p>
+
+<p>lein-test-refresh now has built-in functionality that allows you to focus your test scope without restarting the Leiningen test process. If lein-test-refresh sees a <code>deftest</code> or <code>ns</code> form marked with <code>:test-refresh/focus true</code> in its metadata, then it will only run tests marked with <code>:test-refresh/focus</code>.</p>
+
+<p>Below is an example of what this looks like.</p>
+
+<pre><code class="clojure">(deftest ^:test-refresh/focus test-addition
+  (is (= 2 (+ 1 1))))
+</code></pre>
+
+<p>This functionality has only been available for a short period of time and I&rsquo;ve already found it useful. I think you will too. Enjoy.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Preventing duplicate long-running invocations in Clojure]]></title>
+    <link href="https://jakemccrary.com/blog/2018/06/14/clojure-prevent-multiple-simultaneous-invocations/"/>
+    <updated>2018-06-14T09:47:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2018/06/14/clojure-prevent-multiple-simultaneous-invocations</id>
+    <content type="html"><![CDATA[<p>A couple months ago I was looking into a problem and noticed that
+there was a situation where an expensive operation could be running
+simultaneously multiple times. This was wasteful.</p>
+
+<p>This operation happened on a timer and could also be triggered by a power
+user through the UI. A power user could accidentally (or purposefully)
+mash on a UI button and cause the instance they&rsquo;re interacting with
+to grind to a halt<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.</p>
+
+<p>It was pretty easy to prevent. All I needed to introduce was an
+<code>atom</code> and lean on <code>compare-and-set!</code>. <code>compare-and-set!</code> is a pretty
+neat function (and concept found in many languages). Here is the docstring:</p>
+
+<blockquote><p>Atomically sets the value of atom to newval if and only if the
+current value of the atom is identical to oldval. Returns true if
+set happened, else false</p></blockquote>
+
+<p>Basically, <code>compare-and-set!</code> changes the value of an atom only if it
+starts from a specified value and returns a boolean letting you know
+if it did.</p>
+
+<p>To prevent an operation from running multiple times, introduce an atom
+and wrap calling the operation in a conditional using
+<code>compare-and-set!</code>.  After doing the work, be sure to <code>reset!</code> your
+atom back to the starting value.</p>
+
+<p>Below is the code.</p>
+
+<pre><code class="clojure">(defonce running? (atom false))
+
+(defn- expensive-operation!' []
+  ;; do work
+  )
+
+(defn expensive-operation! []
+  (when (compare-and-set! running? false true)
+    (try
+      (expensive-operation!')
+      (finally
+        (reset! running? false)))))
+</code></pre>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>OK, not really grind to a halt, but consume unnecessary resources.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
+  
+</feed>

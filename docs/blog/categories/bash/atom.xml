@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: bash | Jake McCrary]]></title>
+  <link href="https://jakemccrary.com/blog/categories/bash/atom.xml" rel="self"/>
+  <link href="https://jakemccrary.com/"/>
+  <updated>2020-01-23T22:35:50-06:00</updated>
+  <id>https://jakemccrary.com/</id>
+  <author>
+    <name><![CDATA[Jake McCrary]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Send a push notification when your external IP address changes]]></title>
+    <link href="https://jakemccrary.com/blog/2017/05/15/send-a-push-notification-when-your-external-ip-address-changes/"/>
+    <updated>2017-05-15T22:15:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2017/05/15/send-a-push-notification-when-your-external-ip-address-changes</id>
+    <content type="html"><![CDATA[<p>I need to know when my external IP address changes. Whenever it changes, I need to update an IP whitelist and need to re-login to a few sites. I sometimes don&rsquo;t notice for a couple of days and, during that time, some automatic processes fail.</p>
+
+<p>After the last time this happened, I whipped up a script that sends me a push notification when my IP address changes.</p>
+
+<p>The script uses <a href="https://pushover.net/">Pushover</a> to send the push notification. Pushover is great. I have used it for years to get notifications from my headless computers. If you use the below script, replace <code>${PUSHOVER_TOKEN}</code> and <code>${PUSHOVER_USER}</code> with your own details.</p>
+
+<pre><code class="bash">#!/bin/bash
+
+set -e
+
+previous_file="${HOME}/.previous-external-ip"
+
+if [ ! -e "${previous_file}" ]; then
+    dig +short myip.opendns.com @resolver1.opendns.com &gt; "${previous_file}"
+fi
+
+current_ip=$(dig +short myip.opendns.com @resolver1.opendns.com)
+
+previous_ip=$(cat "${previous_file}")
+
+if [ "${current_ip}" != "${previous_ip}" ]; then
+    echo "external ip changed"
+    curl -s --form-string "token=${PUSHOVER_TOKEN}" \
+         --form-string "user=${PUSHOVER_USER}" \
+         --form-string "title=External IP address changed" \
+         --form-string "message='${previous_ip}' =&gt; '${current_ip}'" \
+         https://api.pushover.net/1/messages.json
+fi
+
+echo "${current_ip}" &gt; "${previous_file}"
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Better command history in your shell]]></title>
+    <link href="https://jakemccrary.com/blog/2016/09/28/better-command-history-in-your-shell/"/>
+    <updated>2016-09-28T11:42:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2016/09/28/better-command-history-in-your-shell</id>
+    <content type="html"><![CDATA[<p>My ideal command history would let me search the history of every
+shell but when I hit the up arrow it would only cycle through my
+current shell&rsquo;s history. In February, I was able to achieve this setup
+in large part because of a utility
+called <a href="https://github.com/dvorka/hstr">hstr</a>.</p>
+
+<h2>What is <code>hstr</code>?</h2>
+
+<p>hstr is a neat Bash and Zsh utility that lets you easily search, view,
+and manage your command history. hstr provides a tool named <code>hh</code> that
+provides a text interface for manipulating your command
+history. To see what it looks like check out
+the <a href="https://github.com/dvorka/hstr/blob/master/README.md">README</a> and
+this <a href="https://www.youtube.com/watch?v=sPF29NyXe2U">video</a> tutorial. If
+you are running OS X and use Homebrew you can install it by running <code>brew
+install hh</code>.</p>
+
+<h2>Making global history searchable but arrows cycle through local history</h2>
+
+<p>hstr is a neat tool but my favorite part of my setup is how the global
+command history is searchable but only a shell&rsquo;s local history is
+cycled through with the arrow keys. This is achieved by manipulating
+where history is written and tweaking some environment variables.</p>
+
+<p>The first step is to change your <code>$PROMPT_COMMAND</code> to append your
+shell&rsquo;s history to a global history file. Below is the snippet that
+does this from my <code>.bashrc</code> file.</p>
+
+<pre><code># Whenever a command is executed, write it to a global history
+PROMPT_COMMAND="history -a ~/.bash_history.global; $PROMPT_COMMAND"
+</code></pre>
+
+<p>The next step is to bind a keystroke to run <code>hh</code>, which is what hstr
+provides, with <code>$HISTFILE</code> pointing to <code>~/.bash_history.global</code>. I
+wanted to fully replace the default command history searching (and I
+use Emacs style keyboard shortcuts) so I&rsquo;ve bound these actions to ctrl-r.</p>
+
+<pre><code class="bash"># On C-r set HISTFILE and run hh
+bind -x '"\C-r": "HISTFILE=~/.bash_history.global hh"'
+</code></pre>
+
+<p>With those two additions to my <code>.bashrc</code> I&rsquo;ve achieved my ideal
+command history searching. When I hit ctrl-r I&rsquo;m searching all of my
+history and yet I only cycle through a shell&rsquo;s local history with the
+arrow keys. This small addition<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> made my command line productivity
+higher.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>My setup was inspired by <a href="https://unix.stackexchange.com/questions/200225/search-history-from-multiple-bash-session-only-when-ctrl-r-is-used-not-when-a">this</a> StackExchange post.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Put the last command's run time in your Bash prompt]]></title>
+    <link href="https://jakemccrary.com/blog/2015/05/03/put-the-last-commands-run-time-in-your-bash-prompt/"/>
+    <updated>2015-05-03T20:37:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2015/05/03/put-the-last-commands-run-time-in-your-bash-prompt</id>
+    <content type="html"><![CDATA[<p>I&rsquo;m fairly certain the following scenario has happened to every
+terminal user. You run a command and, while it is running, realize you
+should have prefixed it <a href="http://linux.die.net/man/1/time"><code>time</code></a>. You
+momentarily struggle with the thought of killing the command and
+rerunning it with <code>time</code>. You decide not to and the command finishes
+without you knowing how long it took. You debate running it again.</p>
+
+<p>For the last year I&rsquo;ve lived in a world without this problem. Upon
+completion, a command&rsquo;s approximate run time is displayed in my
+prompt. It is awesome.</p>
+
+<h2>Overview</h2>
+
+<p>Most of the code below is from a post on
+<a href="http://stackoverflow.com/a/1862762/491871">Stack Overflow</a>. It has
+been slightly modified to support having multiple commands in your
+<code>$PROMPT_COMMAND</code> variable. Below is a minimal snippet that could be
+included in your <code>.bashrc</code>.</p>
+
+<pre><code class="bash">function timer_start {
+  timer=${timer:-$SECONDS}
+}
+
+function timer_stop {
+  timer_show=$(($SECONDS - $timer))
+  unset timer
+}
+
+trap 'timer_start' DEBUG
+
+if [ "$PROMPT_COMMAND" == "" ]; then
+  PROMPT_COMMAND="timer_stop"
+else
+  PROMPT_COMMAND="$PROMPT_COMMAND; timer_stop"
+fi
+
+PS1='[last: ${timer_show}s][\w]$ '
+</code></pre>
+
+<p>Modify your <code>.bashrc</code> to include the above and you&rsquo;ll have a prompt
+that looks like the image below. It is a minimal prompt but it
+includes the time spent on the last command. This is great. No more
+wondering how long a command took.</p>
+
+<p><img src="/images/prompt-timings.png" alt="Example of prompt" /></p>
+
+<h2>The details</h2>
+
+<p><code>timer_start</code> is a function that sets <code>timer</code> to be its current value
+or, if <code>timer</code> is unset, sets it to the value of <code>$SECONDS</code>.
+<code>$SECONDS</code> is a special variable that contains the number of seconds
+since the shell was started. <code>timer_start</code> is invoked after every
+simple command as a result of <code>trap 'timer_start' DEBUG</code>.</p>
+
+<p><code>timer_stop</code> calculates the difference between <code>$SECONDS</code> and <code>timer</code>
+and stores it in <code>timer_show</code>. It also unsets <code>timer</code>. Next time
+<code>timer_start</code> is invoked <code>timer</code> will be set to the current value of
+<code>$SECONDS</code>. Because <code>timer_stop</code> is part of the <code>$PROMPT_COMMAND</code> it
+is executed prior to the prompt being printed.</p>
+
+<p>It is the interaction between <code>timer_start</code> and <code>timer_stop</code> that
+captures the run time of commands. It is important that <code>timer_stop</code>
+is the <strong>last</strong> command in the <code>$PROMPT_COMMAND</code>. If there are other
+commands after it then those will be executed and their execution
+might cause <code>timer_start</code> to be called. This results in you timing the
+length of time between the prior and current prompts being printed.</p>
+
+<h2>My prompt</h2>
+
+<p>My prompt is a bit more complicated. It shows the last exit code, last
+run time, time of day, directory, and git information. The run time of
+the last command is one of the more useful parts of my prompt. I
+highly recommend you add it to yours.</p>
+
+<p><img src="/images/my-prompt.png" alt="My prompt" /></p>
+
+<h2>Errata</h2>
+
+<p><em>2015/5/04</em></p>
+
+<p><a href="https://twitter.com/gfredericks_">Gary Fredericks</a> noticed that the
+original code sample broke if you didn&rsquo;t already have something set as
+your <code>$PROMPT_COMMAND</code>. I&rsquo;ve updated the original snippet to reflect
+his <a href="https://twitter.com/gfredericks_/status/595249998838800384">changes</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Maintaining Directory Layout When Selectively Copying Files]]></title>
+    <link href="https://jakemccrary.com/blog/2013/02/03/maintaining-directory-layout-when-selectively-copying-files/"/>
+    <updated>2013-02-03T12:24:00-06:00</updated>
+    <id>https://jakemccrary.com/blog/2013/02/03/maintaining-directory-layout-when-selectively-copying-files</id>
+    <content type="html"><![CDATA[<p>Ran into a situation where I needed to replace certain files in a directory tree with files from a similarly shaped directory tree. The other files in each tree needed to remain untouched. Below is an example of the directory structure.</p>
+
+<pre><code class="bash">    root-dir
+    ├── target-dir
+    │   ├── 20121230
+    │   │   ├── data.csv
+    │   │   └── instruments.csv
+    │   └── 20121231
+    │       ├── data.csv
+    │       └── instruments.csv
+    └── other-dir
+        ├── 20121230
+        │   ├── data.csv
+        │   └── instruments.csv
+        └── 20121231
+            ├── data.csv
+            └── instruments.csv
+</code></pre>
+
+<p>Goal is to copy <strong>instruments.csv</strong> from the sub-directories of <strong>other-dir</strong> to the matching sub-directories of <strong>target-dir</strong>. In the past I&rsquo;ve solved this by being in the <strong>other-dir</strong> directory and banging out a <code>for</code> loop at the command line (<code>other-dir$</code> is the bash prompt).</p>
+
+<pre><code class="bash">    other-dir$ for d in $(ls); do cp $d/instruments.txt ../target-dir/$d/; done
+</code></pre>
+
+<p>One feature (or issue) with this approach is that if a sub-directory exists in <strong>other-dir</strong> but not in <strong>target-dir</strong> that sub-directory will not be created in <strong>target-dir</strong>.</p>
+
+<p>I took a bit of time to explore other ways of accomplishing this task and stopped after coming up with two additional ways.</p>
+
+<pre><code class="bash">    other-dir$ find . -name "instruments.txt" | xargs -I {} cp {} ../target-dir/{} 
+</code></pre>
+
+<p>The above is basically the same as the first solution. It uses <code>find</code> to generate the list of files and then constructs <code>cp</code> commands. It also doesn&rsquo;t create sub-directories in <strong>target-dir</strong>.</p>
+
+<p>The next example has different behavior from the above <code>cp</code> solutions. Like the second solution, it generates a list of files to copy using <code>find</code> but then uses <code>rsync</code> with the <code>--files-from</code> flag to mirror those files under <strong>target-dir</strong>. Unlike the <code>cp</code> based solutions, sub-directories of <strong>other-dir</strong> that do not exist in <strong>target-dir</strong> will be created.</p>
+
+<pre><code>    other-dir$ find . -name "instruments.txt" | rsync --files-from=- . ../target-dir
+</code></pre>
+
+<p>I&rsquo;m sure there are many more ways of accomplishing this task. Figuring out the three above was enough for me. They are fairly straight forward and don&rsquo;t depend on esoteric command line flags. The solution I use in the future will depend on whether or not I need sub-directories created in the target directory.</p>
+]]></content>
+  </entry>
+  
+</feed>

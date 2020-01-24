@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: github | Jake McCrary]]></title>
+  <link href="https://jakemccrary.com/blog/categories/github/atom.xml" rel="self"/>
+  <link href="https://jakemccrary.com/"/>
+  <updated>2020-01-23T22:35:50-06:00</updated>
+  <id>https://jakemccrary.com/</id>
+  <author>
+    <name><![CDATA[Jake McCrary]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[GitHub Code Reviews]]></title>
+    <link href="https://jakemccrary.com/blog/2015/07/03/github-code-reviews/"/>
+    <updated>2015-07-03T11:22:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2015/07/03/github-code-reviews</id>
+    <content type="html"><![CDATA[<p>Last December I wrote about the
+<a href="/blog/2014/12/09/an-effective-code-review-process/">effective code review process</a>
+I started at Outpace. The process works well; participants say it is
+the most effective review process they&rsquo;ve experienced. The rest of
+this post is a summary of the process with a bit of an enhancement
+around setting up the code for review. I&rsquo;d recommend you read the
+original
+<a href="/blog/2014/12/09/an-effective-code-review-process/">post</a>
+for a bit more color on the process.</p>
+
+<h3>Steps for GitHub code review</h3>
+
+<ol>
+<li>Select the code to review.</li>
+<li>About a week before the review, create a branch and delete the code
+you&rsquo;re reviewing.</li>
+<li>Push this branch to GitHub and open a pull request. This pull
+request provides a location where comments can be made on every
+line of code.</li>
+<li>Schedule the code review meeting. Make sure participants have two
+to three days to asynchronously review the code in the pull
+request.</li>
+<li>Have the code review. Get everyone together (video chat or in person)
+and go through the comments on the pull request and discuss. Add
+action items as a comment. The leader of the code review keeps
+discussion moving.</li>
+</ol>
+
+
+<p>It&rsquo;s a lightweight process. If you&rsquo;re already using GitHub it doesn&rsquo;t
+bring in any other tools and, unlike some dedicated code review
+software I&rsquo;ve used, the GitHub pull request interface has good
+performance.</p>
+
+<p>One complaint about this process is that the code you&rsquo;re reviewing
+appears as deleted in the pull request. It is a superficial complaint
+but seeing the entire code base as deleted can feel a bit weird.</p>
+
+<p>For the most recent code review, I figured out how to have all the
+code appear as added. The snippet below contains the steps and example
+commands.</p>
+
+<pre><code class="console">
+# cd to the repository you are reviewing.
+cd blog
+
+# Make a new branch.
+git checkout -b empty-repo
+
+# Copy all files in repo to a temporary directory.
+rm -rf /tmp/repo &amp;&amp; mkdir /tmp/repo &amp;&amp; cp -R * /tmp/repo
+
+# Remove all files from repository, commit, and push to GitHub.
+rm -rf *
+git commit -am 'remove all files'
+git push origin empty-repo
+
+# Create a new branch with the empty-repo as the parent.
+git checkout -b code-review
+
+# Copy back in the files and add the files you want to review.
+# Commit and push to GitHub.
+cp -R /tmp/repo/* .
+git add files-to-review
+git commit -m 'adding files for review'
+git push origin code-review
+
+# Now, go to project on GitHub and switch to the code-review branch.
+# Open a pull request comparing the empty-repo and the code-review
+# branch.
+</code></pre>
+
+<p>Voila, you now have a pull request with every line under review marked
+as added instead of deleted! It takes a little more than two times the
+number steps required to open a pull request with the code deleted but
+you might find it worth it. Seeing code as added instead of removed is
+a minor thing but minor things can make a process more enjoyable. It
+is nice to know it is possible.</p>
+
+<p>If you aren&rsquo;t doing code reviews or have found them useless in the
+past, I recommend you try out this process. This post is the
+abbreviated version but it gives you enough to get started. If you
+haven&rsquo;t done one in this style before, I&rsquo;d highly recommend reading
+the longer <a href="/blog/2014/12/09/an-effective-code-review-process/">post</a>
+as it gives some details that I&rsquo;ve left out here.</p>
+]]></content>
+  </entry>
+  
+</feed>
