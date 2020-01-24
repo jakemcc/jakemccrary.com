@@ -1,0 +1,31 @@
+---
+layout: default
+---
+<div class="blog-index">
+  {% assign index = true %}
+  <ul class="timeline">
+    {% assign adventures = site.adventures | sort: 'start_date' | reverse %}
+    {% for post in adventures %}
+      <li class="timeline-event">
+        <label class="timeline-event-icon"></label>
+        <div class="timeline-event-copy">
+          <p class="timeline-event-thumbnail">{{post.start_date | date: "%B %-d, %Y" }}{% if post.end_date %} to {{post.end_date | date: "%B %-d, %Y" }}{% endif %}</p>
+          <h3>{{ post.title }}</h3>
+          <p>{{ post.description }}</p>
+          {% if post.content.size > 10 %}
+            <a href="{{root_url}}{{post.url}}" class="timeline-read-more">Read more</a>
+          {% endif %}
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+
+
+</div>
+<aside class="sidebar">
+  {% if site.blog_index_asides.size %}
+    {% include_array blog_index_asides %}
+  {% else %}
+    {% include_array default_asides %}
+  {% endif %}
+</aside>
