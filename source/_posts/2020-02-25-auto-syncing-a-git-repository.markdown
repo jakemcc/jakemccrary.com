@@ -1,12 +1,13 @@
 ---
 layout: post
-title: "Auto-syncing a git repository"
-date: 2020-02-25 18:50:10 -0600
+title: Auto-syncing a git repository
+date: 2020-02-25 21:09 -0600
 comments: true
-published: false
-description: Here is a mostly automated way of syncing a directory using git whenever a file changes.
-keywords: 'git, notes, bash, org-mode'
-categories: 
+published: true
+description: Here is a mostly automated way of syncing a directory using git whenever
+  a file changes.
+keywords: git, notes, bash, org-mode
+categories:
 - bash
 - utilities
 - tools
