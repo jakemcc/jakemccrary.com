@@ -15,7 +15,7 @@ categories:
 ---
 
 Off and on I've experimented with keeping notes in a plain text format.
-Most recently this has been me keeping track of notes using [org-mode]().
+Most recently this has been me keeping track of notes using [Org mode](https://orgmode.org/).
 
 I keep my notes in a git repository in my home directory, `~/org/`.
 I want those notes to be synced between my various machines.
@@ -83,5 +83,3 @@ while true; do
     fi
 done
 ```
-
-[org-mode]: 
