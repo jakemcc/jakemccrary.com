@@ -246,7 +246,7 @@ committed and know that it won&rsquo;t be committed.</p>
 </span><span class='line'>        git apply <span class="s2">&quot;$patch_filename&quot;</span>
 </span><span class='line'>        <span class="k">if</span> <span class="o">[</span> <span class="nv">$?</span> -ne <span class="m">0</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
 </span><span class='line'>            git checkout -- .
-</span><span class='line'>            git apply --whitespace<span class="o">=</span>nowarm --ignore-whitespace <span class="s2">&quot;$patch_filename&quot;</span>
+</span><span class='line'>            git apply --whitespace<span class="o">=</span>nowarn --ignore-whitespace <span class="s2">&quot;$patch_filename&quot;</span>
 </span><span class='line'>        <span class="k">fi</span>
 </span><span class='line'>    <span class="k">fi</span>
 </span><span class='line'>
@@ -431,6 +431,10 @@ better handles whitespace in paths.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/02/25/auto-syncing-a-git-repository/">Auto-syncing a git repository</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/01/11/reading-in-2019/">Reading in 2019</a>
       </li>
     
@@ -464,10 +468,6 @@ better handles whitespace in paths.</p>
     
       <li class="post">
         <a href="/blog/2019/01/27/how-to-display-a-message-to-all-tmux-clients/">How to display a message to all tmux clients</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/01/21/reading-in-2018/">Reading in 2018</a>
       </li>
     
   </ul>

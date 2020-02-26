@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | Jake McCrary]]></title>
   <link href="https://jakemccrary.com/blog/categories/linux/atom.xml" rel="self"/>
   <link href="https://jakemccrary.com/"/>
-  <updated>2020-01-23T22:35:50-06:00</updated>
+  <updated>2020-02-25T21:19:12-06:00</updated>
   <id>https://jakemccrary.com/</id>
   <author>
     <name><![CDATA[Jake McCrary]]></name>
@@ -12,6 +12,84 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Auto-syncing a git repository]]></title>
+    <link href="https://jakemccrary.com/blog/2020/02/25/auto-syncing-a-git-repository/"/>
+    <updated>2020-02-25T21:09:00-06:00</updated>
+    <id>https://jakemccrary.com/blog/2020/02/25/auto-syncing-a-git-repository</id>
+    <content type="html"><![CDATA[<p>I&rsquo;m currently keep notes on my computer using plain text and <a href="https://orgmode.org/">Org mode</a>.</p>
+
+<p>I keep my notes in a git repository in my home directory, <code>~/org/</code>.
+I want my notes to be synced between my computers without me thinking about it.
+Historically, I&rsquo;ve reached for something like Google Drive or Dropbox to do this but this time I reached for git and GitHub.</p>
+
+<p>Below is the script that I ended up cobbling together from various sources found online.
+The script pushes and pulls changes from a remote repository and works on my macOS and linux machines.</p>
+
+<p>The loop starting on line 38 does the work.
+Whenever a file-watcher notices a change or 10 minutes passes, the loop pulls changes from a remote repository, commits any local changes, and pushes to the remote repository.
+The lines before this are mostly checking that needed programs exist on the host.</p>
+
+<p>I keep this running in a background terminal and I check periodically to confirm it is still running.
+I could do something fancier but this isn&rsquo;t a critical system and the overhead of checking every couple days is nearly zero.
+Most of the time checking happens by accident when I accidentally maximize the terminal that runs the script.</p>
+
+<p>I&rsquo;ve been using this script for a long time now and I&rsquo;ve found it quite useful. I hope you do too.</p>
+
+<pre><code class="bash">#!/bin/bash
+
+set -e
+
+TARGETDIR="$HOME/org/"
+
+stderr () {
+    echo "$1" &gt;&amp;2
+}
+
+is_command() {
+    command -v "$1" &amp;&gt;/dev/null
+}
+
+if [ "$(uname)" != "Darwin" ]; then
+    INW="inotifywait";
+    EVENTS="close_write,move,delete,create";
+    INCOMMAND="\"$INW\" -qr -e \"$EVENTS\" --exclude \"\.git\" \"$TARGETDIR\""
+else # if Mac, use fswatch
+    INW="fswatch";
+    # default events specified via a mask, see
+    # https://emcrisostomo.github.io/fswatch/doc/1.14.0/fswatch.html/Invoking-fswatch.html#Numeric-Event-Flags
+    # default of 414 = MovedTo + MovedFrom + Renamed + Removed + Updated + Created
+    #                = 256 + 128+ 16 + 8 + 4 + 2
+    EVENTS="--event=414"
+    INCOMMAND="\"$INW\" --recursive \"$EVENTS\" --exclude \"\.git\" --one-event \"$TARGETDIR\""
+fi
+
+for cmd in "git" "$INW" "timeout"; do
+    # in OSX: `timeout` =&gt; brew install coreutils
+    # in OSX: `fswatch` =&gt; brew install fswatch
+    is_command "$cmd" || { stderr "Error: Required command '$cmd' not found"; exit 1; }
+done
+
+cd "$TARGETDIR"
+echo "$INCOMMAND"
+
+while true; do
+    eval "timeout 600 $INCOMMAND" || true
+    git pull
+    sleep 5
+    STATUS=$(git status -s)
+    if [ -n "$STATUS" ]; then
+        echo "$STATUS"
+        echo "commit!"
+        git add .
+        git commit -m "autocommit"
+        git push origin
+    fi
+done
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Using comm to verify file content matches]]></title>
@@ -210,33 +288,6 @@ non-technical people to these tools and everyone has enjoyed them.</p>
 </code></pre>
 
 <p>I&rsquo;m sure there are many more ways of accomplishing this task. Figuring out the three above was enough for me. They are fairly straight forward and don&rsquo;t depend on esoteric command line flags. The solution I use in the future will depend on whether or not I need sub-directories created in the target directory.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Utilities I like: autojump]]></title>
-    <link href="https://jakemccrary.com/blog/2011/07/25/utilities-i-like-autojump/"/>
-    <updated>2011-07-25T00:00:00-05:00</updated>
-    <id>https://jakemccrary.com/blog/2011/07/25/utilities-i-like-autojump</id>
-    <content type="html"><![CDATA[<p><a href="https://github.com/joelthelion/autojump">autojump</a> is a nifty command line tool that enables quicker jumping between directories. I&rsquo;ve been using it for a few months now and miss it when I work other machines.</p>
-
-<p>To jump to a directory you type <code>j SUBSTRING_OF_DIR</code>. Example:</p>
-
-<pre><code class="bash">    $ pwd
-    /Users/jmccrary
-    $ j jake
-    /Users/jmccrary/src/github/jakemcc/jakemccrary.com
-    $ pwd
-    /Users/jmccrary/src/github/jakemcc/jakemccrary.com
-</code></pre>
-
-<p>Above I jumped from my home directory to the root of this website&rsquo;s code. Being able to jump between directories by just remembering a name (or part of a name) is great. This frees me from having to remember full paths or set up aliases.</p>
-
-<p>autojump works by keeping a database of &ldquo;time&rdquo; spent in directories and jumps to the most frequently visited one that match <code>SUBSTRING_OF_DIR</code>. If you are curious as to what that database looks like the tool <code>jumpstat</code> will give you a view.</p>
-
-<p>I used to set up aliases for jumping between projects but now that I&rsquo;ve trained myself to use autojump I don&rsquo;t think I&rsquo;ll ever go back. Not having to do any extra work besides simply entering the root directory of new projects to setup efficient directory movement is great. I think that if you give it a shot for a while you&rsquo;ll find the same benefits.</p>
-
-<p>If you are on a Mac and use <a href="https://github.com/mxcl/homebrew">homebrew</a> you can install by doing <code>brew install autojump</code>. For other platforms check out the <a href="https://github.com/joelthelion/autojump">github</a> page.</p>
 ]]></content>
   </entry>
   
