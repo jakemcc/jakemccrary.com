@@ -14,22 +14,24 @@ categories:
 - linux
 ---
 
-Off and on I've experimented with keeping notes in a plain text format.
-Most recently this has been me keeping track of notes using [Org mode](https://orgmode.org/).
+I'm currently keep notes on my computer using plain text and [Org mode](https://orgmode.org/).
 
 I keep my notes in a git repository in my home directory, `~/org/`.
-I want those notes to be synced between my various machines.
-Historically I've reached for something like Google drive or Dropbox to do this but this time I reached for git and GitHub.
+I want my notes to be synced between my computers without me thinking about it.
+Historically, I've reached for something like Google Drive or Dropbox to do this but this time I reached for git and GitHub.
 
 Below is the script that I ended up cobbling together from various sources found online.
-It works on my macOS and linux machines.
+The script pushes and pulls changes from a remote repository and works on my macOS and linux machines.
 
-The important lines of the program are the lines in the last loop.
+The loop starting on line 38 does the work.
 Whenever a file-watcher notices a change or 10 minutes passes, the loop pulls changes from a remote repository, commits any local changes, and pushes to the remote repository.
+The lines before this are mostly checking that needed programs exist on the host.
 
 I keep this running in a background terminal and I check periodically to confirm it is still running.
 I could do something fancier but this isn't a critical system and the overhead of checking every couple days is nearly zero.
-Most of the time checking happens by accident when I accidentally maximize the terminal this runs this.
+Most of the time checking happens by accident when I accidentally maximize the terminal that runs the script.
+
+I've been using this script for a long time now and I've found it quite useful. I hope you do too.
 
 ```bash
 #!/bin/bash
