@@ -54,10 +54,10 @@ Even if you can't have a dedicated table or desk and have to resort to a couch, 
 [^2]: I used a table like this for years in college and when working an internship.
 
 Beyond a dedicated space to work, make sure you have a reliable internet connection.
-If you can, use ethernet as it is generally better than WiFi.
-I've never had a situation where I could use ethernet and have found that having a good router is enough to make my WiFi reliable.
+If you can, use Ethernet as it is generally better than WiFi.
+I've never had a situation where I could use Ethernet and have found that having a good router is enough to make my WiFi reliable.
 
-### Discuss boundries and expectations with your cohabitants
+### Discuss boundaries and expectations with your cohabitants
 
 If you live with others that will be at home while you need to work, you should have a discussion with them about boundaries.
 You are at home to do work and that expectation needs to be set.
@@ -81,7 +81,7 @@ This doesn't have to be time on your calendar.
 Instead, when it is time for you to take a break or you feel yourself losing focus on work tasks, set a timer for five or ten minutes and spend that time accomplishing a small task around the house.
 When the timer is up, go back to work.
 
-I've often found that finishing a short, simple household task can actually jumpstart finishing more complicated work tasks.
+I've often found that finishing a short, simple household task can actually jump-start finishing more complicated work tasks.
 Using that momentum from the household chore can make accomplishing work tasks easier.
 
 ### Having difficulty starting a work task?
@@ -103,7 +103,7 @@ I don't follow those steps strictly and mostly use the trick of setting a timer 
 If at the end of the timer, I feel like continuing, I'll reset the timer.
 If I need a break, I'll set the timer for a short period of time and take a break.
 
-It was sort of mentioned above, but sometimes doing a small, easy task can jumpstart knocking out TODOs.
+It was sort of mentioned above, but sometimes doing a small, easy task can jump-start knocking out TODOs.
 This small, easy task could be something work related or some simple chore around the house.
 
 ### Be mindful of your communication
@@ -112,7 +112,7 @@ Text communication is hard.
 It is often taken more negative than intended.
 Be mindful of that.
 
-Try to take what your coworkers write in the most postive way possible.
+Try to take what your coworkers write in the most positive way possible.
 
 Try to be careful with your own written communication.
 It sounds ridiculous but emojis can help make you look like less of a jerk and set a friendly tone.
@@ -158,7 +158,7 @@ As far as I can tell, [Zoom](http://zoom.us/) is still the winner in terms of vi
 
 ### Use a dedicated microphone or headset with mic for talking through your computer
 
-I almost alway use a cheap headset with boom mic for talking to poeple through my computer.
+I almost always use a cheap headset with boom mic for talking to people through my computer.
 It is much better than using the built-in mic and speakers on your computer or monitor.
 
 ## End
