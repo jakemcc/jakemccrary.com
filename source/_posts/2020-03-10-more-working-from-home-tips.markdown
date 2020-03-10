@@ -1,12 +1,13 @@
 ---
 layout: post
-title: "More working from home tips"
-date: 2020-03-10 08:43:41 -0500
+title: More working from home tips
+date: 2020-03-10 12:42 -0500
 comments: true
-published: false
-description: Working from home can be very productive. Here are some tips for making it better.
-keywords: 'working from home, remote work, remote, tips'
-categories: 
+published: true
+description: Working from home can be very productive. Here are some tips for making
+  it better.
+keywords: working from home, remote work, remote, tips
+categories:
 - remote
 ---
 
