@@ -46,27 +46,24 @@ This probably means you don't want to find a home with a dedicated office and yo
 
 Whatever your living arrangement is, I'd encourage you to figure a way to have a regular spot to work at while you are working.
 If you are entering a more permanent or regular working from home situation, you should dedicate some space to setting up a permanent solution.
-Having a dedicated spot will help you switch between work and non-work modes.
-
 This space could be as basic as a [tv tray](https://www.amazon.com/Folding-Holder-Height-Adjustments-Original/dp/B01LZPMFW9/) or [folding table](https://www.amazon.com/Lifetime-80251-Adjustable-Folding-Granite/dp/B0074HYWFG/)[^2] with a chair.
 These aren't ideal working spaces but, if you expect your situation to be temporary, then they are better than just sitting on a couch or a bed with your laptop resting on your lap.
+Even if you can't have a dedicated table or desk and have to resort to a couch, using the same spot for work will help you switch between work and non-work modes.
+
 
 [^2]: I used a table like this for years in college and when working an internship.
 
-Having a physical space to work at helps switch your mind into work mode.
-It also helps signal to others in your household that you are working.
-Try to do all your work from that location.
-
-Make sure you have a reliable internet connection wherever you are working.
-Ethernet is typically better than Wifi.
-Even so, I've never used ethernet and have probably almost a years worth of video calls in the approximately years I worked remotely and it was never a serious problem that I always used Wifi.
+Beyond a dedicated space to work, make sure you have a reliable internet connection.
+If you can, use ethernet as it is generally better than WiFi.
+I've never had a situation where I could use ethernet and have found that having a good router is enough to make my WiFi reliable.
 
 ### Discuss boundries and expectations with your cohabitants
 
 If you live with others that will be at home while you need to work, you should have a discussion with them about boundaries.
 You are at home to do work and that expectation needs to be set.
+You may be able to do some household chores during breaks or take other breaks with cohabitants but you need to set the expectation that you are at home to work.
 
-If you have children that might have a particularly hard time with this, it can be useful to use some sort of physical signaling device (a closed door, a light bulb being on, a closed curtain, etc) that you should not be interrupted.
+If you have children that might have a particularly hard time with this, it can be useful to use some sort of physical signaling device (examples: a closed door, a light bulb being on, a closed curtain, headphones on) that you should not be interrupted.
 
 ### Minimize distractions
 
@@ -75,8 +72,7 @@ Don't try to sit on your couch with the TV on and do work.
 
 If your home is loud and you have difficulty in a loud space, wear some ear plugs or noise canceling headphones.
 
-If you have family/roommates/friends that are also in your home, try to set expectations that they'll give you space (and you give them space) to focus on work.
-This can be challenging to completely block cohabitants out.
+If your cohabitants are distractions, refer to the above section and have that discussion with them about needing space.
 One useful technique can be to schedule time to spend time with others that are at your home.
 You can use these scheduled times as breaks through out your working day.
 
@@ -86,7 +82,7 @@ Instead, when it is time for you to take a break or you feel yourself losing foc
 When the timer is up, go back to work.
 
 I've often found that finishing a short, simple household task can actually jumpstart finishing more complicated work tasks.
-Being able to feel like you are on a roll accomplishing things can make it easier to accomplish the next task.
+Using that momentum from the household chore can make accomplishing work tasks easier.
 
 ### Having difficulty starting a work task?
 
@@ -94,7 +90,7 @@ Sometimes it is hard to start a task.
 It can be especially hard if you are new to working at home and not used to working in your environment.
 
 One technique I've found useful is the Pomodoro technique.
-The steps to this technique are
+The steps to this technique are below.
 
 1. Pick a task.
 1. Set and start a timer (usually for 25 minutes).
@@ -103,10 +99,12 @@ The steps to this technique are
 1. If you have fewer than four marks on the paper, take a 5 minute break and then go back to step 2.
 1. If you have four marks on the paper, then take a 15 minute break and go back to step 1.
 
-I'll sometimes do a variation of the technique where I'll set the timer for 50 minutes and take a break for ten and just keep repeating that.
+I don't follow those steps strictly and mostly use the trick of setting a timer for focused work.
+If at the end of the timer, I feel like continuing, I'll reset the timer.
+If I need a break, I'll set the timer for a short period of time and take a break.
 
-Another trick for jumpstarting work is to accomplish a small household task and then immediately start working.
-The momentum of taking out the trash sometimes transfers over to starting the work you've been putting off.
+It was sort of mentioned above, but sometimes doing a small, easy task can jumpstart knocking out TODOs.
+This small, easy task could be something work related or some simple chore around the house.
 
 ### Be mindful of your communication
 
@@ -126,32 +124,33 @@ The downside is the communication isn't persistent so be sure to write down outc
 ### Sync up with your team
 
 Try to sync up with your team (if you don't have a team, sync up with someone else from the company) at a regular interval.
-This should probably be at least once every couple days but probably more regularly.
+This should probably be at least once every couple days but it can be more regularly.
 
 It can be easy to feel like an island when you are part of a remote group.
 Regular sync-ups help reduce that feeling.
 
 ### Collaborate remotely
 
-Many video conference software allows you to share your screen to others.
-Some of them even allow others to take control of your machine.
-There are also other ways of remotely controlling someones machine that are even better.
+Most video conference software allows you to share your screen with others.
+Some of them even allow others to take control of your machine or treat your screen as a whiteboard.
 
-Take advantage of this.
-You can still [pair](/blog/2015/01/24/remote-pairing/) with people on remote team.
+Take advantage of these features.
+After learning how to use them, these features can often make remote collaboration as productive as in-person collaboration.
+
+Using technology, you can even still [pair program](/blog/2015/01/24/remote-pairing/) with someone from another city.
 
 There are also other options, such as Google Docs, for doing remote collaboration.
-Some of the best meetings I have ever been a part of where meetings where every attendee was collaborating on a shared Google Doc.
+The best meetings I have been part of were meetings where every attendee was collaborating on a shared Google Doc.
 
 ### Video Meetings
 
 When possible, have video meetings over voice only conference calls.
-Video makes a huge difference when communicating with people.
+The addition of body language through video makes remote conversations much better.
 
-You might want to introduce hand gestures for signaling during video (or really, in-person as well) meetings.
-For example, one team I lead had the practice of raising a finger[^3] when you wanted to speak.
-This practice helped prevent people from interrupting and attempting to speak over each other.
-It also let more quiet people jump in conversations easier.
+You might want to introduce hand gestures for signaling during video meetings (or really, in-person meetings as well).
+On one team I lead, we had the practice of raising a finger[^3] when you wanted to speak.
+This practice helped prevent people from interrupting and speaking over each other.
+It also let quieter people jump into conversations easier.
 
 [^3]: No, not the middle finger.
 
@@ -161,3 +160,10 @@ As far as I can tell, [Zoom](http://zoom.us/) is still the winner in terms of vi
 
 I almost alway use a cheap headset with boom mic for talking to poeple through my computer.
 It is much better than using the built-in mic and speakers on your computer or monitor.
+
+## End
+
+It can be difficult to get good at working from home.
+It is definitely a skill that is learned through experience and reflection.
+
+Working from home can be a great experience.
