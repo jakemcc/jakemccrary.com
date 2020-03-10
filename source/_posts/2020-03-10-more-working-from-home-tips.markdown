@@ -4,9 +4,10 @@ title: "More working from home tips"
 date: 2020-03-10 08:43:41 -0500
 comments: true
 published: false
-description: PUT SUMMARY HERE 
-keywords: 'csv, keywords, here'
+description: Working from home can be very productive. Here are some tips for making it better.
+keywords: 'working from home, remote work, remote, tips'
 categories: 
+- remote
 ---
 
 With the the new coronavirus spreading through the world, more people are either choosing or are being forced to work from home.
@@ -15,8 +16,9 @@ For the rest of my professional career, 2007 to 2013 and 2018 to now (March 2020
 
 I've managed to be very effective at it and I think others can be as well.
 
-After years of working in an office, transitioning to working from home isn't always easy.
-I've mentored quite a few people on the transition and I think most people will be able to be effective at home, assuming their workplace is supportive.
+After years of working in an office, transitioning to working from home isn't easy.
+I had difficulty with the transition and people I've mentored have as well.
+I think most people will be able to be effective at home, assuming their workplace is supportive, if they try to get better at it.
 With a supportive company or team, once you get used to working from home you probably find yourself getting more done.
 
 The key word in the sentence "I'm working from home" is **working**.
@@ -26,12 +28,12 @@ Physically switching to an office environment can help switch your brain into wo
 Don't worry, it might feel rough in the beginning but you will get better at it.
 
 I've written more articles about working [remotely](/blog/categories/remote/) and I'd recommend you read those as well.
-This article is going to be primarily targeted at the person not making a permanent change in their work from home status.
+This article is primarily targeted at the person not making a permanent change in their work from home status.
 My [Guide to Distributed Work](/blog/2017/10/31/a-guide-to-distributed-work/) is a bit more targeted at someone that is permanently choosing to work at home or in a position of power to influence work from home policies at a company.
-I'd recommend that you read it as well as many of the subjects it talks about are also applicable to temporary working from home people.
+I'd recommend that you read it as well as many of the subjects it talks about are generally applicable.
 It steps through some of the pros and cons of remote work and links to other writing on the topic.
 
-Below are some tips for working from home.
+Below is a hodgepodge of tips for working from home.
 
 ### Setup a home workspace
 
@@ -45,13 +47,15 @@ This probably means you don't want to find a home with a dedicated office and yo
 [^1]: A desk can be any table that you can work on that is comfortable for a reasonable amount of time. It doesn't have to be what someone would typically think of as a desk.
 
 Whatever your living arrangement is, I'd encourage you to figure a way to have a regular spot to work at while you are working.
-If you are entering a more permanent or regular working from home situation, you should dedicate some space to setting up a permanent solution.
-This space could be as basic as a [tv tray](https://www.amazon.com/Folding-Holder-Height-Adjustments-Original/dp/B01LZPMFW9/) or [folding table](https://www.amazon.com/Lifetime-80251-Adjustable-Folding-Granite/dp/B0074HYWFG/)[^2] with a chair.
-These aren't ideal working spaces but, if you expect your situation to be temporary, then they are better than just sitting on a couch or a bed with your laptop resting on your lap.
-Even if you can't have a dedicated table or desk and have to resort to a couch, using the same spot for work will help you switch between work and non-work modes.
+Having a regular spot to work from will help your brain turn on and off from work mode.
 
+Setting up a home workspace can be as low cost as using a [tv tray](https://www.amazon.com/Folding-Holder-Height-Adjustments-Original/dp/B01LZPMFW9/) or [folding table](https://www.amazon.com/Lifetime-80251-Adjustable-Folding-Granite/dp/B0074HYWFG/)[^2] with a chair.
+Your setup could be as elaborate as getting a height adjustable desk with large monitors.
+It could be something else entirely.
 
 [^2]: I used a table like this for years in college and when working an internship.
+
+Find something that works for you and stick with it.
 
 Beyond a dedicated space to work, make sure you have a reliable internet connection.
 If you can, use Ethernet as it is generally better than WiFi.
@@ -61,25 +65,25 @@ I've never had a situation where I could use Ethernet and have found that having
 
 If you live with others that will be at home while you need to work, you should have a discussion with them about boundaries.
 You are at home to do work and that expectation needs to be set.
-You may be able to do some household chores during breaks or take other breaks with cohabitants but you need to set the expectation that you are at home to work.
+You may be able to do some household chores during breaks or take other breaks with cohabitants but everyone in your living area needs to understand you are at home to work.
 
 If you have children that might have a particularly hard time with this, it can be useful to use some sort of physical signaling device (examples: a closed door, a light bulb being on, a closed curtain, headphones on) that you should not be interrupted.
 
 ### Minimize distractions
 
-This one is obvious but minimize distractions.
+This one is obvious but try to minimize distractions.
 Don't try to sit on your couch with the TV on and do work.
+You won't be doing great work.
 
 If your home is loud and you have difficulty in a loud space, wear some ear plugs or noise canceling headphones.
 
-If your cohabitants are distractions, refer to the above section and have that discussion with them about needing space.
-One useful technique can be to schedule time to spend time with others that are at your home.
+If cohabitants are distractions, refer to the above section and have that discussion with them about needing space.
+One technique for dealing with interrupting cohabitants is to schedule time throughout your day for them.
 You can use these scheduled times as breaks through out your working day.
 
 If you try to get some household chores done while working at home, make sure you schedule time for doing them.
-This doesn't have to be time on your calendar.
-Instead, when it is time for you to take a break or you feel yourself losing focus on work tasks, set a timer for five or ten minutes and spend that time accomplishing a small task around the house.
-When the timer is up, go back to work.
+This could be putting the time on your calendar or simply setting a timer when taking a break.
+Regardless of the method, when your time is up, get back to work.
 
 I've often found that finishing a short, simple household task can actually jump-start finishing more complicated work tasks.
 Using that momentum from the household chore can make accomplishing work tasks easier.
@@ -100,10 +104,10 @@ The steps to this technique are below.
 1. If you have four marks on the paper, then take a 15 minute break and go back to step 1.
 
 I don't follow those steps strictly and mostly use the trick of setting a timer for focused work.
-If at the end of the timer, I feel like continuing, I'll reset the timer.
+If at the end of the timer I feel like continuing, I'll reset the timer.
 If I need a break, I'll set the timer for a short period of time and take a break.
 
-It was sort of mentioned above, but sometimes doing a small, easy task can jump-start knocking out TODOs.
+It was mentioned above, but sometimes doing a small, easy task can jump-start knocking out TODOs.
 This small, easy task could be something work related or some simple chore around the house.
 
 ### Be mindful of your communication
@@ -125,6 +129,7 @@ The downside is the communication isn't persistent so be sure to write down outc
 
 Try to sync up with your team (if you don't have a team, sync up with someone else from the company) at a regular interval.
 This should probably be at least once every couple days but it can be more regularly.
+I usually once a day.
 
 It can be easy to feel like an island when you are part of a remote group.
 Regular sync-ups help reduce that feeling.
@@ -137,33 +142,34 @@ Some of them even allow others to take control of your machine or treat your scr
 Take advantage of these features.
 After learning how to use them, these features can often make remote collaboration as productive as in-person collaboration.
 
-Using technology, you can even still [pair program](/blog/2015/01/24/remote-pairing/) with someone from another city.
+Using technology, you can even [pair program](/blog/2015/01/24/remote-pairing/) with someone from another city.
 
-There are also other options, such as Google Docs, for doing remote collaboration.
-The best meetings I have been part of were meetings where every attendee was collaborating on a shared Google Doc.
+Google Docs is another great remote collaboration tool.
+The best meetings I have been part of were meetings where every attendee was editing a shared Google Doc.
 
 ### Video Meetings
 
 When possible, have video meetings over voice only conference calls.
 The addition of body language through video makes remote conversations much better.
 
-You might want to introduce hand gestures for signaling during video meetings (or really, in-person meetings as well).
-On one team I lead, we had the practice of raising a finger[^3] when you wanted to speak.
+You might want to introduce hand gestures for signaling during video meetings[^3].
+On a former team, we had the practice of raising a finger[^4] when you wanted to speak.
 This practice helped prevent people from interrupting and speaking over each other.
 It also let quieter people jump into conversations easier.
 
-[^3]: No, not the middle finger.
+[^3]: These are also useful for in-person meetings.
+
+[^4]: No, not the middle finger.
 
 As far as I can tell, [Zoom](http://zoom.us/) is still the winner in terms of video conferencing.
 
-### Use a dedicated microphone or headset with mic for talking through your computer
-
-I almost always use a cheap headset with boom mic for talking to people through my computer.
-It is much better than using the built-in mic and speakers on your computer or monitor.
+I also recommend using a headset with dedicated microphone for talking through your computer.
+The sound quality is usually better than using the built-in microphone.
 
 ## End
 
 It can be difficult to get good at working from home.
 It is definitely a skill that is learned through experience and reflection.
+If you have any questions about working remotely, feel free to reach out on [twitter](https://twitter.com/jakemcc) or through [email](mailto:jake@jakemccrary.com).
 
 Working from home can be a great experience.
