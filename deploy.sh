@@ -1,5 +1,6 @@
 #!/bin/bash
 bundle exec rake clean gen_deploy
+cp -R public/* docs/
 
 confirm() {
     # call with a prompt string or use a default

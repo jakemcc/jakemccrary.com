@@ -14,13 +14,13 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" At the beginning of every year I like to take the time to reflect on my previous year&rsquo;s reading. It gives me a time to correct my data and &hellip;" />
+    <meta itemprop="description" content=" Lately, I&rsquo;ve been using tmux a lot. This resulted in me figuring out how to get lein-test-refresh to send notifications using tmux. The setup &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" At the beginning of every year I like to take the time to reflect on my previous year&rsquo;s reading. It gives me a time to correct my data and &hellip;" />
+    <meta name="twitter:description" content=" Lately, I&rsquo;ve been using tmux a lot. This resulted in me figuring out how to get lein-test-refresh to send notifications using tmux. The setup &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -28,12 +28,12 @@
     <meta property="og:site_name" content="The Blog of Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/2/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" At the beginning of every year I like to take the time to reflect on my previous year&rsquo;s reading. It gives me a time to correct my data and &hellip;" />
+    <meta property="og:description" content=" Lately, I&rsquo;ve been using tmux a lot. This resulted in me figuring out how to get lein-test-refresh to send notifications using tmux. The setup &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" At the beginning of every year I like to take the time to reflect on my previous year&rsquo;s reading. It gives me a time to correct my data and &hellip;">
+    <meta name="description" content=" Lately, I&rsquo;ve been using tmux a lot. This resulted in me figuring out how to get lein-test-refresh to send notifications using tmux. The setup &hellip;">
 
     
 
@@ -114,6 +114,114 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2019/01/27/how-to-display-a-message-to-all-tmux-clients/">How to display a message to all tmux clients</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2019-01-27T17:03:00-06:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2019</span></span> <span class='time'>5:03 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><!-- Estimated time: 30 minutes -->
+
+
+<!-- First Draft: 26 minutes -->
+
+
+<!-- First edits: 14 minutes -->
+
+
+<p>Lately, I&rsquo;ve been using <a href="https://github.com/tmux/tmux">tmux</a> a lot. This resulted in me figuring out how to get <a href="https://github.com/jakemcc/lein-test-refresh#notifications">lein-test-refresh</a> to send <a href="/blog/2019/01/06/notifications-with-tmux-and-lein-test-refresh/">notifications using tmux</a>.</p>
+
+<p>The setup linked above works great for when I&rsquo;m doing work all by myself. It showed a problem when using ssh and tmux to pair with another developer. Instead of both developers receiving a notification, only one did. One is better than none but not ideal.</p>
+
+<p>Below is a GIF showing the problem. Each window simulates a different developer.</p>
+
+<p><img src="/images/tmux-pair-fail.gif" alt="tmux only showing one developer a notification" /></p>
+
+<p>This wasn&rsquo;t too hard to fix. A little digging through the tmux manpage shows that <code>tmux display-message</code> takes an optional flag telling it which client receives the message. If we can get a list of all the clients then iterating over them and sending a message to each is straightforward.</p>
+
+<p><code>tmux list-clients</code> give us this list. Below is the output.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ tmux list-clients
+</span><span class='line'>/dev/ttys002: 0 [78x41 xterm-256color] (utf8)
+</span><span class='line'>/dev/ttys006: 0 [78x42 xterm-256color] (utf8)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>What we care about are the parts that look like <code>/dev/ttys002</code>. At first I used <code>cut</code> to grab these values but then I dug a bit deeper into the <code>tmux</code> manpage.</p>
+
+<p>It turns out that you can specify a format to <code>tmux list-clients</code>. Running <code>tmux list-clients -F "#{client_name}"</code> gives us the output we care about.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ tmux list-clients -F "#{client_name}"
+</span><span class='line'>/dev/ttys002
+</span><span class='line'>/dev/ttys006</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We can combine that with <code>xargs</code> to send a message to multiple clients.</p>
+
+<p><img src="/images/tmux-xargs-example.gif" alt="tmux xargs example" /></p>
+
+<p>That command is a bit much to put into <code>lein-test-refresh</code>&rsquo;s configuration so I shoved it in a script called <code>notify</code> and configured <code>lein-test-refresh</code> to use it. Script and GIF of that below. Now both you and your pair can get notifications.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">USAGE</span><span class="o">=</span><span class="s2">&quot;Usage: notify &lt;message&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="s2">example: notify &#39;Tests passed!&#39;&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;$1&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>    <span class="nb">echo</span> <span class="s2">&quot;$USAGE&quot;</span>
+</span><span class='line'>    <span class="nb">exit </span>1
+</span><span class='line'><span class="k">fi</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">message</span><span class="o">=</span><span class="s2">&quot;$1&quot;</span>
+</span><span class='line'>
+</span><span class='line'>tmux list-clients -F <span class="s2">&quot;#{client_name}&quot;</span> <span class="se">\</span>
+</span><span class='line'>    <span class="p">|</span> xargs -n1 -I<span class="o">{}</span> tmux display-message -c <span class="o">{}</span> <span class="s2">&quot;$message&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><img src="/images/tmux-notify-script.gif" alt="Example using notify script" /></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1259,90 +1367,6 @@ an area where this, or something similar to it, would help.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/11/26/parsing-multiple-date-formats/">Parsing multiple date formats with clj-time</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2017-11-26T09:52:00-06:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>9:52 am</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I recently needed to optimize the speed of some Clojure code. After investigating, I identified that a huge number of exceptions were being thrown and handling these was slowing down the process.</p>
-
-<p>The code throwing the exceptions was parsing strings into Joda-Time DateTime objects using the <a href="https://github.com/clj-time/clj-time">clj-time</a> library.</p>
-
-<p>The code was calling <a href="https://github.com/clj-time/clj-time/blob/cce58248937bc05452ebfc8b65134961227a554e/src/clj_time/coerce.clj#L33-L38">clj-time.coerce/from-string</a> which calls <a href="https://github.com/clj-time/clj-time/blob/cce58248937bc05452ebfc8b65134961227a554e/src/clj_time/format.clj#L156-L165">clj-time.format/parse</a>. <code>format/parse</code> iterates through up to approximately 50 formatters in an attempt to parse whatever string you pass it. If one of these formatters doesn’t parse the string, it throws an exception which <code>format/parse</code> catches and ignores before attempting the next formatter.</p>
-
-<p>This was pretty wasteful. This was especially wasteful in the code I was working in since it only needed to handle two different date formats.</p>
-
-<p>Luckily, Joda-Time has a way to build a formatter that handles multiple formats and clj-time provides access to it. Below is code that creates a formatter that handles two different formats.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">ns </span><span class="nv">multiple-dates.core</span>
-</span><span class='line'>  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">clj-time.core</span> <span class="ss">:as</span> <span class="nv">time</span><span class="p">]</span>
-</span><span class='line'>            <span class="p">[</span><span class="nv">clj-time.format</span> <span class="ss">:as</span> <span class="nv">time-format</span><span class="p">]))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="k">def </span><span class="nv">multi-format</span>
-</span><span class='line'>  <span class="p">(</span><span class="nf">time-format/formatter</span> <span class="nv">time/utc</span>
-</span><span class='line'>                         <span class="s">&quot;YYYY-MM-dd&quot;</span>
-</span><span class='line'>                         <span class="s">&quot;YYYY-MM-dd&#39;T&#39;HH:mm:ss.SSSZ&quot;</span><span class="p">))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nb">parse </span><span class="p">[</span><span class="nv">s</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nf">time-format/parse</span> <span class="nv">multi-format</span> <span class="nv">s</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>And below are some examples of using it in the repl.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nv">multiple-dates.core&gt;</span> <span class="p">(</span><span class="nb">parse </span><span class="s">&quot;2017-09-04&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="o">#</span><span class="nv">object</span><span class="p">[</span><span class="nv">org.joda.time.DateTime</span> <span class="mi">0</span><span class="nv">x5d5e4cd7</span> <span class="s">&quot;2017-09-04T00:00:00.000Z&quot;</span><span class="p">]</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">multiple-dates.core&gt;</span> <span class="p">(</span><span class="nb">parse </span><span class="s">&quot;2017-09-04T12:11:02.123Z&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="o">#</span><span class="nv">object</span><span class="p">[</span><span class="nv">org.joda.time.DateTime</span> <span class="mi">0</span><span class="nv">x174f3a5c</span> <span class="s">&quot;2017-09-04T12:11:02.123Z&quot;</span><span class="p">]</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">multiple-dates.core&gt;</span> <span class="p">(</span><span class="nb">parse </span><span class="s">&quot;2017-09-04-12:11:02.123Z&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="nv">IllegalArgumentException</span> <span class="nv">Invalid</span> <span class="nv">format</span><span class="err">:</span> <span class="s">&quot;2017-09-04-12:11:02.123Z&quot;</span> <span class="nv">is</span> <span class="nv">malformed</span> <span class="nv">at</span> <span class="s">&quot;-12:11:02.123Z&quot;</span>  <span class="nv">org.joda.time.format.DateTimeFormatter.parseDateTime</span> <span class="p">(</span><span class="nf">DateTimeFormatter.java</span><span class="ss">:945</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Looking back at that code, it seems pretty straightforward. I’ll admit that it took me and my pair a while to figure out how to do this using <code>clj-time</code>. I ended up looking at Joda-Time&rsquo;s documentation and implemented this using Java interop before I cracked how to use <code>clj-time.format/formatter</code> to do the same thing.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//3">&larr; Older</a>
@@ -1358,6 +1382,10 @@ an area where this, or something similar to it, would help.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/03/10/more-working-from-home-tips/">More working from home tips</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2020/02/25/auto-syncing-a-git-repository/">Auto-syncing a git repository</a>
@@ -1393,10 +1421,6 @@ an area where this, or something similar to it, would help.</p>
     
       <li class="post">
         <a href="/blog/2019/01/28/how-to-use-leiningen-test-selectors-to-filter-by-test-name/">How to use Leiningen test selectors to filter by test name</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/01/27/how-to-display-a-message-to-all-tmux-clients/">How to display a message to all tmux clients</a>
       </li>
     
   </ul>
