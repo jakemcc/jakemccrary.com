@@ -72,7 +72,7 @@ Here is how previous teams I've worked with setup Trello for remote retrospectiv
 First, make a Trello board and make sure everyone has an invite to view and edit the board.
 Second, add the following columns to the board.
 
-**image with four empty columns**
+![First three columns before any cards](/images/remote-retros/retros-first-three-columns.png "First three columns before any cards")
 
 The first column is for use in Step 2 of the process and is there to remind everyone why we're all spending time in this meeting.
 
@@ -80,6 +80,8 @@ Columns two and three are used in this step.
 During the time period allotted individuals add cards to these columns.
 If anyone notices duplicates during this time frame, move them near each other by dragging them up or down in the column.
 If you notice someone else has already put a card that you'd put up there, don't bother putting it down again (this differs from the in-person meeting).
+
+![First three columns with cards before voting](/images/remote-retros/first-three-before-voting.png)
 
 #### [remote only] Step 3.5: Vote on cards
 
@@ -95,13 +97,13 @@ This sticks their avatar on the card (in Trello speak, I believe this is called 
 You can either restrict folks to a certain number of votes, say 3, or let them go wild and vote as many times as they want.
 I haven't found the outcomes to be much different and find infinite votes more fun.
 
-**image of voted on cards**
-
 [^1]: The alternative method I'm aware of is to use a Trello Power-up to enable voting on cards. But why bother doing this when you can just stick faces on cards.
+
+![First three columns with votes](/images/remote-retros/first-three-columns-with-votes.png)
 
 Once voting is finished (again, timer or when it seems to have reached an end), have one person sort the cards by number of votes with the highest votes at the top of the list.
 
-**imae of sorted list**
+![First three columns with cards sorted by votes](/images/remote-retros/first-three-columns-votes-sorted.png)
 
 ### Step 4: Discuss the answers
 
@@ -123,10 +125,15 @@ The above is generic advice for remote or in-person retros.
 When you're running a remote retro using Trello, it can be useful to do the following as well.
 
 You should add two more columns, Next Steps and Discussed, to the right of the "What needs improvement?" column.
+
+![Additional columns added to board](/images/remote-retros/last-three-columns-before-discussion.png)
+
 Since your cards are sorted in the "What needs improvement?" column, you'll always be talking about the top card.
 As discussion finishes, move it from the top of the "What needs improvement?" column the Discussed column.
 As next steps are discovered, add cards to the "Next Steps" column and assign the people responsible for following up to the card.
 Below is an example of those three columns after discussing two cards.
+
+![Final state of last three columns](/images/remote-retros/final-three-columns-post-discussion.png)
 
 ## End
 
