@@ -31,6 +31,7 @@ If you are a remote team, or have remote folks on your team, then this is gather
 
 Preferably everyone in the retro is communicating in same way.
 This means if **anyone** is remote, it is preferable that **everyone** join the video conference from their own computer instead of using a single screen and video from a shared conference room.
+My earlier article about [tips for remote meetings](/blog/2016/06/28/seven-tips-for-successful-remote-meetings/) goes into more details on this topic.
 
 This puts everyone on the same page and dramatically improves the experience for the remote folks.
 As we'll see in step 3, this also makes the experience better for the in-person folks as well.
