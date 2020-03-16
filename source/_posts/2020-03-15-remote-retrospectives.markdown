@@ -34,7 +34,7 @@ This means if **anyone** is remote, it is preferable that **everyone** join the 
 My earlier article about [tips for remote meetings](/blog/2016/06/28/seven-tips-for-successful-remote-meetings/) goes into more details on this topic.
 
 This puts everyone on the same page and dramatically improves the experience for the remote folks.
-As we'll see in step 3, this also makes the experience better for the in-person folks as well.
+As we'll see in step 3, this also makes the experience better for the in-person folks as well as they'll need to individually use the remote collaboration tooling to interact with the entire team.
 
 ### Step 2: Set the stage
 
