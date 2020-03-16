@@ -14,7 +14,7 @@ categories:
 [Retrospectives](https://retrospectivewiki.org/index.php?title=Agile_Retrospective_Resource_Wiki) can be a useful meeting to have occasionally with your team.
 There are many different [formats](https://retrospectivewiki.org/index.php?title=Retrospective_Plans) of retrospectives.
 
-One of them can be summarized as the following steps:
+One of them can be summarized in the following steps:
 
 1. Gather the team together
 1. Set the stage by reminding attendees that the meeting is to try to improve as a group through this collaborative meeting.
