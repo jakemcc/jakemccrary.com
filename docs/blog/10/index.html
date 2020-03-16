@@ -14,13 +14,13 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" This post is now out of date. The library recommended by this post is now a contrib library. Check out tools.cli for great documentation about &hellip;" />
+    <meta itemprop="description" content=" I&rsquo;m guessing that software you write connects to some other server. I&rsquo;m also guessing that how it handles disconnects is tested (if ever &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" This post is now out of date. The library recommended by this post is now a contrib library. Check out tools.cli for great documentation about &hellip;" />
+    <meta name="twitter:description" content=" I&rsquo;m guessing that software you write connects to some other server. I&rsquo;m also guessing that how it handles disconnects is tested (if ever &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -28,12 +28,12 @@
     <meta property="og:site_name" content="The Blog of Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/10/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" This post is now out of date. The library recommended by this post is now a contrib library. Check out tools.cli for great documentation about &hellip;" />
+    <meta property="og:description" content=" I&rsquo;m guessing that software you write connects to some other server. I&rsquo;m also guessing that how it handles disconnects is tested (if ever &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" This post is now out of date. The library recommended by this post is now a contrib library. Check out tools.cli for great documentation about &hellip;">
+    <meta name="description" content=" I&rsquo;m guessing that software you write connects to some other server. I&rsquo;m also guessing that how it handles disconnects is tested (if ever &hellip;">
 
     
 
@@ -114,6 +114,42 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/06/28/a-simple-way-of-testing-disconnect-logic/">A simple way of testing disconnect logic</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2011-06-28T00:00:00-05:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2011</span></span> <span class='time'>12:00 am</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&rsquo;m guessing that software you write connects to some other server. I&rsquo;m also guessing that how it handles disconnects is tested (if ever tested) by either killing the process it connects to or by pulling out your network cable. I recently stumbled across a nifty Linux command line tool that makes causing disconnects significantly easier.</p>
+
+<p>This tool is <a href="http://linux.die.net/man/8/tcpkill">tcpkill</a>. To use <code>tcpkill</code> you specify an interface and a <a href="http://linux.die.net/man/8/tcpdump">tcpdump</a> style filter and it kills traffic on that interface that matches the filter.</p>
+
+<p>For example, if your application has a connection to 192.168.1.130, then to force a disconnect you would execute <code>tcpkill -i eth0 host 192.168.1.130</code>.</p>
+
+<p><code>tcpkill</code> can be used for more than forcing disconnects. It can also be used as a simple website filter. If <a href="http://stackoverflow.com">Stack Overflow</a> wastes too much of your time then you could simply leave <code>tcpkill -i eth0 host stackoverflow.com</code> running and enjoy your increased productivity.</p>
+
+<p><code>tcpkill</code> is a pretty useful tool. If you want to install it in Ubuntu it is found in the dsniff package (<code>apt-get install dsniff</code>).</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1042,6 +1078,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/03/16/a-retrospective-format/">A retrospective format for remote or co-located teams</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/03/10/more-working-from-home-tips/">More working from home tips</a>
       </li>
     
@@ -1075,10 +1115,6 @@
     
       <li class="post">
         <a href="/blog/2019/02/13/testing-asynchronous-javascript-with-jasmine/">Testing asynchronous JavaScript with Jasmine</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/01/28/how-to-use-leiningen-test-selectors-to-filter-by-test-name/">How to use Leiningen test selectors to filter by test name</a>
       </li>
     
   </ul>
