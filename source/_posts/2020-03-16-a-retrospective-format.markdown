@@ -1,12 +1,13 @@
 ---
 layout: post
-title: "Remote retrospectives"
-date: 2020-03-15 21:34:41 -0500
+title: A retrospective format for remote or co-located teams
+date: 2020-03-16 12:52 -0500
 comments: true
-published: false
-description: PUT SUMMARY HERE 
-keywords: 'retrospectives, remote, wfh, work from home'
-categories: 
+published: true
+description: Retrospectives are useful regardless of being located in an office or
+  working remotely. Here is a simple format for running remote or in-person retros
+keywords: retrospectives, remote, wfh, work from home
+categories:
 - remote
 - meetings
 ---
@@ -21,7 +22,7 @@ One of them can be summarized in the following steps:
 1. Brainstorm answers to the questions `What went well?` and `What needs improvement?`
 1. Discuss the answers
 
-Let's talk about each step and see how each works with an colocated or remote team.
+Let's talk about each step and see how each works with an co-located or remote team.
 
 ### Step 1: Gather the team
 
