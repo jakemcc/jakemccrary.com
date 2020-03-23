@@ -4,7 +4,7 @@
   <title><![CDATA[Category: code review | Jake McCrary]]></title>
   <link href="https://jakemccrary.com/blog/categories/code-review/atom.xml" rel="self"/>
   <link href="https://jakemccrary.com/"/>
-  <updated>2020-03-16T12:53:49-05:00</updated>
+  <updated>2020-03-23T17:55:25-05:00</updated>
   <id>https://jakemccrary.com/</id>
   <author>
     <name><![CDATA[Jake McCrary]]></name>
@@ -111,7 +111,9 @@ as it gives some details that I&rsquo;ve left out here.</p>
     <link href="https://jakemccrary.com/blog/2014/12/09/an-effective-code-review-process/"/>
     <updated>2014-12-09T20:44:00-06:00</updated>
     <id>https://jakemccrary.com/blog/2014/12/09/an-effective-code-review-process</id>
-    <content type="html"><![CDATA[<p><a href="https://twitter.com/searls/status/540603801955471360"><img class="center" src="/images/justin-searls-code-reviews-harmful.png" title="The way most organizations implement code reviews in teams is usually more harmful than helpful. I generally recommend going without them. - Justin Searls" ></a></p>
+    <content type="html"><![CDATA[<blockquote><p>See all of my remote/working-from-home <a href="/blog/categories/remote/">articles here</a>.</p></blockquote>
+
+<p><a href="https://twitter.com/searls/status/540603801955471360"><img class="center" src="/images/justin-searls-code-reviews-harmful.png" title="The way most organizations implement code reviews in teams is usually more harmful than helpful. I generally recommend going without them. - Justin Searls" ></a></p>
 
 <p>The above was tweeted <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> recently and it resulted in some decent
 discussion about code reviews. In the past six months at

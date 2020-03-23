@@ -4,7 +4,7 @@
   <title><![CDATA[Category: pairing | Jake McCrary]]></title>
   <link href="https://jakemccrary.com/blog/categories/pairing/atom.xml" rel="self"/>
   <link href="https://jakemccrary.com/"/>
-  <updated>2020-03-16T12:53:49-05:00</updated>
+  <updated>2020-03-23T17:55:25-05:00</updated>
   <id>https://jakemccrary.com/</id>
   <author>
     <name><![CDATA[Jake McCrary]]></name>
@@ -18,7 +18,9 @@
     <link href="https://jakemccrary.com/blog/2015/01/24/remote-pairing/"/>
     <updated>2015-01-24T15:19:00-06:00</updated>
     <id>https://jakemccrary.com/blog/2015/01/24/remote-pairing</id>
-    <content type="html"><![CDATA[<p>Over a year ago I joined <a href="http://outpace.com">Outpace</a>. All of
+    <content type="html"><![CDATA[<blockquote><p>See all of my remote/working-from-home <a href="/blog/categories/remote/">articles here</a>.</p></blockquote>
+
+<p>Over a year ago I joined <a href="http://outpace.com">Outpace</a>. All of
 Outpace&rsquo;s developers are remote but we still practice pair
 programming. As a result I&rsquo;ve done a lot of remote pairing. I was
 skeptical before joining that it would work well and I&rsquo;m happy to
