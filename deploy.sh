@@ -15,6 +15,10 @@ confirm() {
     esac
 }
 
+git add docs
+git commit -am 'deploy'
+git push
+
 if [ "x${CLOUDFLARE_AUTH_KEY}x" != "xx" ]; then
     confirm "Do you want to clear Cloudflare's cache of the main files? [y/N]" && \
     curl -X DELETE "https://api.cloudflare.com/client/v4/zones/05e4518e68577e8be55ec1039e4ff3f4/purge_cache" \
