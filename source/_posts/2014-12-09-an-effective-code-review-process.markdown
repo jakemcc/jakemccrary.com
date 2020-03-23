@@ -10,6 +10,8 @@ categories:
 - remote
 ---
 
+> See all of my remote/working-from-home [articles here](/blog/categories/remote/).
+
 [{% img center /images/justin-searls-code-reviews-harmful.png The way most organizations implement code reviews in teams is usually more harmful than helpful. I generally recommend going without them. - Justin Searls %}](https://twitter.com/searls/status/540603801955471360)
 
 The above was tweeted [^1] recently and it resulted in some decent

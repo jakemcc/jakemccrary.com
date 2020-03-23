@@ -12,6 +12,8 @@ categories:
 - remote
 ---
 
+> See all of my remote/working-from-home [articles here](/blog/categories/remote/).
+
 Whether it is working as the one remote employee at a traditional company or being one of many at a distributed company, remote work is becoming an option for many of us.
 
 The number of employees that work remotely is growing[^1]. Technology improvements, pervasive Internet, and mindset changes are some of the drivers for this change.

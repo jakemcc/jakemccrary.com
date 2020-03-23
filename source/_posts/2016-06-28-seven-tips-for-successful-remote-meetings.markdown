@@ -11,6 +11,8 @@ categories:
 - meetings
 ---
 
+> See all of my remote/working-from-home [articles here](/blog/categories/remote/).
+
 As mentioned in my
 [tips for working from home](/blog/2016/06/14/tips-for-working-from-home/)
 article, I've been working remotely for nearly three years. In those

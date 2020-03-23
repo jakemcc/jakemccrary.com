@@ -11,6 +11,8 @@ categories:
 - remote
 ---
 
+> See all of my remote/working-from-home [articles here](/blog/categories/remote/).
+
 I've been working remotely since October 2013. I can barely believe
 that nearly three years have passed and I've probably spent about two
 weeks in a traditional office.

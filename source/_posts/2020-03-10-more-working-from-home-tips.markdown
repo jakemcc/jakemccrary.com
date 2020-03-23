@@ -11,6 +11,8 @@ categories:
 - remote
 ---
 
+> See all of my remote/working-from-home [articles here](/blog/categories/remote/).
+
 With the the new coronavirus spreading through the world, more people are either choosing or are being forced to work from home.
 From 2013 to 2018, the companies I worked for were entirely remote.
 For the rest of my professional career, 2007 to 2013 and 2018 to now (March 2020), I've also frequently worked from home.

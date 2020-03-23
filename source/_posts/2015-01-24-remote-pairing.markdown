@@ -9,6 +9,8 @@ categories:
 - remote
 ---
 
+> See all of my remote/working-from-home [articles here](/blog/categories/remote/).
+
 Over a year ago I joined [Outpace](http://outpace.com). All of
 Outpace's developers are remote but we still practice pair
 programming. As a result I've done a lot of remote pairing. I was

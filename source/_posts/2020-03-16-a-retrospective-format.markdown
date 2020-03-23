@@ -12,6 +12,8 @@ categories:
 - meetings
 ---
 
+> See all of my remote/working-from-home [articles here](/blog/categories/remote/).
+
 [Retrospectives](https://retrospectivewiki.org/index.php?title=Agile_Retrospective_Resource_Wiki) are a useful type of meeting to have periodically with your team.
 There are many different [formats](https://retrospectivewiki.org/index.php?title=Retrospective_Plans) of retrospectives.
 
