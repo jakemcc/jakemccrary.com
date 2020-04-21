@@ -4,7 +4,7 @@
   <title><![CDATA[Category: command-line | Jake McCrary]]></title>
   <link href="https://jakemccrary.com/blog/categories/command-line/atom.xml" rel="self"/>
   <link href="https://jakemccrary.com/"/>
-  <updated>2020-04-21T18:23:07-05:00</updated>
+  <updated>2020-04-21T18:29:19-05:00</updated>
   <id>https://jakemccrary.com/</id>
   <author>
     <name><![CDATA[Jake McCrary]]></name>
@@ -236,7 +236,9 @@ higher.</p>
     <link href="https://jakemccrary.com/blog/2015/05/03/put-the-last-commands-run-time-in-your-bash-prompt/"/>
     <updated>2015-05-03T20:37:00-05:00</updated>
     <id>https://jakemccrary.com/blog/2015/05/03/put-the-last-commands-run-time-in-your-bash-prompt</id>
-    <content type="html"><![CDATA[<p>I&rsquo;m fairly certain the following scenario has happened to every
+    <content type="html"><![CDATA[<blockquote><p>An updated version of this post can be found <a href="/blog/2020/04/21/using-bash-preexec-for-monitoring-the-runtime-of-your-last-command/">here</a></p></blockquote>
+
+<p>I&rsquo;m fairly certain the following scenario has happened to every
 terminal user. You run a command and, while it is running, realize you
 should have prefixed it with <a href="http://linux.die.net/man/1/time"><code>time</code></a>. You
 momentarily struggle with the thought of killing the command and
