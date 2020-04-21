@@ -11,6 +11,8 @@ categories:
 - command-line
 ---
 
+> An updated version of this post can be found [here](/blog/2020/04/21/using-bash-preexec-for-monitoring-the-runtime-of-your-last-command/)
+
 I'm fairly certain the following scenario has happened to every
 terminal user. You run a command and, while it is running, realize you
 should have prefixed it with [`time`](http://linux.die.net/man/1/time). You
