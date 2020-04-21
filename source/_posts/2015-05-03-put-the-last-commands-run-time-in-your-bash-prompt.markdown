@@ -10,7 +10,7 @@ categories:
 
 I'm fairly certain the following scenario has happened to every
 terminal user. You run a command and, while it is running, realize you
-should have prefixed it [`time`](http://linux.die.net/man/1/time). You
+should have prefixed it with [`time`](http://linux.die.net/man/1/time). You
 momentarily struggle with the thought of killing the command and
 rerunning it with `time`. You decide not to and the command finishes
 without you knowing how long it took. You debate running it again.
