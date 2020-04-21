@@ -1,11 +1,12 @@
 ---
 layout: post
-title: "Using Bash-Preexec for monitoring the runtime of your last command"
-date: 2020-04-20 17:46:41 -0500
+title: Using Bash-Preexec for monitoring the runtime of your last command
+date: 2020-04-21 18:22 -0500
 comments: true
-published: false
-description: Put the runtime of your previous command in your terminal prompt using Bash-Preexec
-keywords: 'bash, bash-preexec, time your last command'
+published: true
+description: Put the runtime of your previous command in your terminal prompt using
+  Bash-Preexec
+keywords: bash, bash-preexec, time your last command
 categories:
 - bash
 - linux
