@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | Jake McCrary]]></title>
   <link href="https://jakemccrary.com/blog/categories/linux/atom.xml" rel="self"/>
   <link href="https://jakemccrary.com/"/>
-  <updated>2020-04-13T18:42:29-05:00</updated>
+  <updated>2020-04-21T18:23:07-05:00</updated>
   <id>https://jakemccrary.com/</id>
   <author>
     <name><![CDATA[Jake McCrary]]></name>
@@ -12,6 +12,73 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Using Bash-Preexec for monitoring the runtime of your last command]]></title>
+    <link href="https://jakemccrary.com/blog/2020/04/21/using-bash-preexec-for-monitoring-the-runtime-of-your-last-command/"/>
+    <updated>2020-04-21T18:22:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2020/04/21/using-bash-preexec-for-monitoring-the-runtime-of-your-last-command</id>
+    <content type="html"><![CDATA[<p>My article on <a href="/blog/2015/05/03/put-the-last-commands-run-time-in-your-bash-prompt/">putting the runtime of your last command into your bash prompt</a> is one of my most surfaced-by-google articles.
+Why is this a great to your prompt?
+To quote my previous article:</p>
+
+<blockquote><p>I’m fairly certain the following scenario has happened to every terminal user. You run a command and, while it is running, realize you should have prefixed it with <code>time</code>. You momentarily struggle with the thought of killing the command and rerunning it with <code>time</code>. You decide not to and the command finishes without you knowing how long it took. You debate running it again.</p>
+
+<p>For the last year I’ve lived in a world without this problem. Upon completion, a command’s approximate run time is displayed in my prompt. It is awesome.</p></blockquote>
+
+<p>I&rsquo;ve been living without the above problem since sometime in 2014 and not having that problem is still awesome.</p>
+
+<p>I have made some changes since 2014.</p>
+
+<p>One change was switching to using <a href="https://github.com/rcaloras/bash-preexec">Bash-Preexec</a> instead of directly using <code>trap</code> and <code>$PROMPT_COMMAND</code> for calling functions to start and stop tracking runtime.
+Bash-Preexec lets you trigger a function (or multiple) right after a command has been read and right before each prompt.</p>
+
+<p>The usage is pretty straight forward.
+In the most basic case, you source <code>bash-preexec.sh</code> and then provide functions named <code>preexec</code>, which is invoked right before a command is executed, and/or <code>precmd</code>, which is invoked just before each prompt.
+<code>bash-preexec.sh</code> can be downloaded from <a href="https://github.com/rcaloras/bash-preexec/">its repo</a>.
+The changes required to move to Bash-Preexec pretty <a href="https://github.com/jakemcc/dotfiles/commit/46fc3dc9d4d7d0d73152c77b7383645af42b3d5d">pretty minimal</a>.</p>
+
+<p>The other change was introducing the script, <a href="https://github.com/jakemcc/dotfiles/blob/9c8c0315f35b55df6cef7e21261e3dcbbfac86e1/home/.bin/format-duration#L3-L4">format-duration</a> by <a href="https://twitter.com/gfredericks_">Gary Fredericks</a>, to humanely format the time.
+This script converts seconds into a more readable string (example: 310 to <code>5m10s</code>)</p>
+
+<p>Here is a screenshot of everything in action (with a reduced prompt, my normal one includes git and other info).</p>
+
+<p><img src="/images/runtime-humane-example.png" width="320" height="150" title="&ldquo;Command line prompt showing runtimes of previous commands&rdquo; &ldquo;Command line prompt showing runtimes of previous commands&rdquo;" ></p>
+
+<p>Below is a simplified snippet from my <code>.bashrc</code> that provides runtimes using both of these additions.</p>
+
+<pre><code class="bash">function preexec {
+  if [ "UNSET" == "${timer}" ]; then
+    timer=$SECONDS
+  else 
+    timer=${timer:-$SECONDS}
+  fi 
+}
+
+function precmd {
+  if [ "UNSET" == "${timer}" ]; then
+     timer_show="0s"
+  else 
+    the_seconds=$((SECONDS - timer))
+    # use format-duration to make time more human readable
+    timer_show="$(format-duration seconds $the_seconds)" 
+  fi
+  timer="UNSET"
+}
+
+# Add $last_show to the prompt.
+PS1='[last: ${timer_show}s][\w]$ '
+
+# a bunch more lines until the end of my .bashrc
+# where I include .bash-preexec.sh
+[ -f "$HOME/.bash-preexec.sh" ] &amp;&amp; source "$HOME/.bash-preexec.sh"
+</code></pre>
+
+<p>No more wondering about the runtime of commands is great.
+Introducing <code>format-duration</code> made reading the time easier while Bash-Preexec made reading the implementation easier.
+I highly recommend setting up something similar for your shell.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Auto-syncing a git repository]]></title>
@@ -156,6 +223,98 @@ $
   </entry>
   
   <entry>
+    <title type="html"><![CDATA[Put the last command's run time in your Bash prompt]]></title>
+    <link href="https://jakemccrary.com/blog/2015/05/03/put-the-last-commands-run-time-in-your-bash-prompt/"/>
+    <updated>2015-05-03T20:37:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2015/05/03/put-the-last-commands-run-time-in-your-bash-prompt</id>
+    <content type="html"><![CDATA[<p>I&rsquo;m fairly certain the following scenario has happened to every
+terminal user. You run a command and, while it is running, realize you
+should have prefixed it with <a href="http://linux.die.net/man/1/time"><code>time</code></a>. You
+momentarily struggle with the thought of killing the command and
+rerunning it with <code>time</code>. You decide not to and the command finishes
+without you knowing how long it took. You debate running it again.</p>
+
+<p>For the last year I&rsquo;ve lived in a world without this problem. Upon
+completion, a command&rsquo;s approximate run time is displayed in my
+prompt. It is awesome.</p>
+
+<h2>Overview</h2>
+
+<p>Most of the code below is from a post on
+<a href="http://stackoverflow.com/a/1862762/491871">Stack Overflow</a>. It has
+been slightly modified to support having multiple commands in your
+<code>$PROMPT_COMMAND</code> variable. Below is a minimal snippet that could be
+included in your <code>.bashrc</code>.</p>
+
+<pre><code class="bash">function timer_start {
+  timer=${timer:-$SECONDS}
+}
+
+function timer_stop {
+  timer_show=$(($SECONDS - $timer))
+  unset timer
+}
+
+trap 'timer_start' DEBUG
+
+if [ "$PROMPT_COMMAND" == "" ]; then
+  PROMPT_COMMAND="timer_stop"
+else
+  PROMPT_COMMAND="$PROMPT_COMMAND; timer_stop"
+fi
+
+PS1='[last: ${timer_show}s][\w]$ '
+</code></pre>
+
+<p>Modify your <code>.bashrc</code> to include the above and you&rsquo;ll have a prompt
+that looks like the image below. It is a minimal prompt but it
+includes the time spent on the last command. This is great. No more
+wondering how long a command took.</p>
+
+<p><img src="/images/prompt-timings.png" alt="Example of prompt" /></p>
+
+<h2>The details</h2>
+
+<p><code>timer_start</code> is a function that sets <code>timer</code> to be its current value
+or, if <code>timer</code> is unset, sets it to the value of <code>$SECONDS</code>.
+<code>$SECONDS</code> is a special variable that contains the number of seconds
+since the shell was started. <code>timer_start</code> is invoked after every
+simple command as a result of <code>trap 'timer_start' DEBUG</code>.</p>
+
+<p><code>timer_stop</code> calculates the difference between <code>$SECONDS</code> and <code>timer</code>
+and stores it in <code>timer_show</code>. It also unsets <code>timer</code>. Next time
+<code>timer_start</code> is invoked <code>timer</code> will be set to the current value of
+<code>$SECONDS</code>. Because <code>timer_stop</code> is part of the <code>$PROMPT_COMMAND</code> it
+is executed prior to the prompt being printed.</p>
+
+<p>It is the interaction between <code>timer_start</code> and <code>timer_stop</code> that
+captures the run time of commands. It is important that <code>timer_stop</code>
+is the <strong>last</strong> command in the <code>$PROMPT_COMMAND</code>. If there are other
+commands after it then those will be executed and their execution
+might cause <code>timer_start</code> to be called. This results in you timing the
+length of time between the prior and current prompts being printed.</p>
+
+<h2>My prompt</h2>
+
+<p>My prompt is a bit more complicated. It shows the last exit code, last
+run time, time of day, directory, and git information. The run time of
+the last command is one of the more useful parts of my prompt. I
+highly recommend you add it to yours.</p>
+
+<p><img src="/images/my-prompt.png" alt="My prompt" /></p>
+
+<h2>Errata</h2>
+
+<p><em>2015/5/04</em></p>
+
+<p><a href="https://twitter.com/gfredericks_">Gary Fredericks</a> noticed that the
+original code sample broke if you didn&rsquo;t already have something set as
+your <code>$PROMPT_COMMAND</code>. I&rsquo;ve updated the original snippet to reflect
+his <a href="https://twitter.com/gfredericks_/status/595249998838800384">changes</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Manage your workspace with grids under Linux, OS X, and Windows]]></title>
     <link href="https://jakemccrary.com/blog/2013/04/15/manage-your-workspace-with-grids-under-linux-osx-and-windows/"/>
     <updated>2013-04-15T19:15:00-05:00</updated>
@@ -216,78 +375,6 @@ operating systems easy.</p>
 <p>If you haven&rsquo;t tried using a tool to help you organize your windows I
 highly recommend that you do. I&rsquo;ve introduced both technical and
 non-technical people to these tools and everyone has enjoyed them.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Change volume from the command line]]></title>
-    <link href="https://jakemccrary.com/blog/2013/03/31/change-volume-from-the-command-line/"/>
-    <updated>2013-03-31T16:17:00-05:00</updated>
-    <id>https://jakemccrary.com/blog/2013/03/31/change-volume-from-the-command-line</id>
-    <content type="html"><![CDATA[<p>On my Ubuntu desktop the volume at 100% is often too quiet. With Ubuntu&rsquo;s default window manager I could open up the graphical &ldquo;Sound Preferences&rdquo; and bump the volume to above 100%. After using <a href="http://i3wm.org/">i3 window manager</a> for a while I found myself missing this and took the time to figure out how to do it from the command line.</p>
-
-<p>Ubuntu uses <a href="http://www.freedesktop.org/wiki/Software/PulseAudio">PulseAudio</a> to handle sound related tasks. The tool <a href="http://linux.die.net/man/1/pacmd">pacmd</a> allows you to change PulseAudio settings, such as volume, on the fly. The command is <code>pacmd set-sink-volume &lt;sink-index&gt; &lt;sink-volume&gt;</code> where <code>&lt;sink-index&gt;</code> is an identifier for your output device and <code>&lt;sink-volume&gt;</code> is an integer greater than or equal to zero. Zero represents muted and 65536 represents 100% volume. <code>&lt;sink-index&gt;</code> is the index found in the output from the <code>pacmd list-sinks</code> for your output card. In my case it is 0.</p>
-
-<p>The below script makes changing volume with <code>pacmd</code> straightforward. I&rsquo;m using Perl convert a percentage into the proper units for the <sink-volume> argument. Using this script if you want to pull a <a href="http://www.youtube.com/watch?v=EbVKWCpNFhY">Spinal Tap</a> and go above 100% you simply pass in a number greater than 100.</p>
-
-<pre><code class="bash">    #!/bin/bash
-
-    if [ "$1" == "" ]; then
-      echo "Need to supply a percentage"
-      exit 1
-    fi
-
-    vol=$(perl -e "print int(65536 * ($1 / 100))")
-    echo "Setting volume to $1 ($vol)"
-    pacmd set-sink-volume 0 $vol
-</code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Maintaining Directory Layout When Selectively Copying Files]]></title>
-    <link href="https://jakemccrary.com/blog/2013/02/03/maintaining-directory-layout-when-selectively-copying-files/"/>
-    <updated>2013-02-03T12:24:00-06:00</updated>
-    <id>https://jakemccrary.com/blog/2013/02/03/maintaining-directory-layout-when-selectively-copying-files</id>
-    <content type="html"><![CDATA[<p>Ran into a situation where I needed to replace certain files in a directory tree with files from a similarly shaped directory tree. The other files in each tree needed to remain untouched. Below is an example of the directory structure.</p>
-
-<pre><code class="bash">    root-dir
-    ├── target-dir
-    │   ├── 20121230
-    │   │   ├── data.csv
-    │   │   └── instruments.csv
-    │   └── 20121231
-    │       ├── data.csv
-    │       └── instruments.csv
-    └── other-dir
-        ├── 20121230
-        │   ├── data.csv
-        │   └── instruments.csv
-        └── 20121231
-            ├── data.csv
-            └── instruments.csv
-</code></pre>
-
-<p>Goal is to copy <strong>instruments.csv</strong> from the sub-directories of <strong>other-dir</strong> to the matching sub-directories of <strong>target-dir</strong>. In the past I&rsquo;ve solved this by being in the <strong>other-dir</strong> directory and banging out a <code>for</code> loop at the command line (<code>other-dir$</code> is the bash prompt).</p>
-
-<pre><code class="bash">    other-dir$ for d in $(ls); do cp $d/instruments.txt ../target-dir/$d/; done
-</code></pre>
-
-<p>One feature (or issue) with this approach is that if a sub-directory exists in <strong>other-dir</strong> but not in <strong>target-dir</strong> that sub-directory will not be created in <strong>target-dir</strong>.</p>
-
-<p>I took a bit of time to explore other ways of accomplishing this task and stopped after coming up with two additional ways.</p>
-
-<pre><code class="bash">    other-dir$ find . -name "instruments.txt" | xargs -I {} cp {} ../target-dir/{} 
-</code></pre>
-
-<p>The above is basically the same as the first solution. It uses <code>find</code> to generate the list of files and then constructs <code>cp</code> commands. It also doesn&rsquo;t create sub-directories in <strong>target-dir</strong>.</p>
-
-<p>The next example has different behavior from the above <code>cp</code> solutions. Like the second solution, it generates a list of files to copy using <code>find</code> but then uses <code>rsync</code> with the <code>--files-from</code> flag to mirror those files under <strong>target-dir</strong>. Unlike the <code>cp</code> based solutions, sub-directories of <strong>other-dir</strong> that do not exist in <strong>target-dir</strong> will be created.</p>
-
-<pre><code>    other-dir$ find . -name "instruments.txt" | rsync --files-from=- . ../target-dir
-</code></pre>
-
-<p>I&rsquo;m sure there are many more ways of accomplishing this task. Figuring out the three above was enough for me. They are fairly straight forward and don&rsquo;t depend on esoteric command line flags. The solution I use in the future will depend on whether or not I need sub-directories created in the target directory.</p>
 ]]></content>
   </entry>
   

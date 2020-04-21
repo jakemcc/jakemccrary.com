@@ -14,17 +14,17 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" Over the last couple of years I&rsquo;ve desired quicker feedback from my
-Clojure tests. This has resulted in the development of
-lein-autoexpect and &hellip;" />
+    <meta itemprop="description" content=" I recently became interested in how Clojure testing libraries help you
+when there is a test failure. This interest resulted in me
+exploring different &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" Over the last couple of years I&rsquo;ve desired quicker feedback from my
-Clojure tests. This has resulted in the development of
-lein-autoexpect and &hellip;" />
+    <meta name="twitter:description" content=" I recently became interested in how Clojure testing libraries help you
+when there is a test failure. This interest resulted in me
+exploring different &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -32,16 +32,16 @@ lein-autoexpect and &hellip;" />
     <meta property="og:site_name" content="The Blog of Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/8/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" Over the last couple of years I&rsquo;ve desired quicker feedback from my
-Clojure tests. This has resulted in the development of
-lein-autoexpect and &hellip;" />
+    <meta property="og:description" content=" I recently became interested in how Clojure testing libraries help you
+when there is a test failure. This interest resulted in me
+exploring different &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" Over the last couple of years I&rsquo;ve desired quicker feedback from my
-Clojure tests. This has resulted in the development of
-lein-autoexpect and &hellip;">
+    <meta name="description" content=" I recently became interested in how Clojure testing libraries help you
+when there is a test failure. This interest resulted in me
+exploring different &hellip;">
 
     
 
@@ -122,6 +122,856 @@ lein-autoexpect and &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/06/22/comparing-clojure-testing-libraries-output/">Comparing Clojure Testing Libraries: Output</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-06-22T21:16:00-05:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>22</span><span class='date-suffix'>nd</span>, <span class='date-year'>2014</span></span> <span class='time'>9:16 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I recently became interested in how Clojure testing libraries help you
+when there is a test failure. This interest resulted in me
+<a href="https://github.com/jakemcc/clojure-test-bed">exploring</a> different
+Clojure testing libraries. I created the same tests using <strong>clojure.test</strong>
+(with and without
+<a href="https://github.com/pjstadig/humane-test-output">humane-test-output</a>),
+<a href="http://jayfields.com/expectations/">expectations</a>,
+<a href="https://github.com/marick/Midje">Midje</a>, and
+<a href="http://speclj.com/">Speclj</a> and looked at the output.</p>
+
+<p>I ran all of these examples using Leiningen. <strong>Midje</strong>, <strong>Speclj</strong>, and
+<strong>expectations</strong> color their output but I&rsquo;m not going to try to reproduce
+that here. The color added by <strong>Midje</strong> and <strong>expectations</strong> is useful. <strong>Speclj</strong>
+color hurt its readability. I use a dark colored terminal and <strong>Speclj</strong>
+colors the line that tells where the failure occurs
+black. This made it hard to read.</p>
+
+<p>I&rsquo;m not going to show what the tests look like for each testing
+library past the first comparison. How a test in expressed is
+important but not what I want to focus on in this post.</p>
+
+<h2>Comparing Strings</h2>
+
+<p>Going to start off with a basic string comparison. The failing test
+compares two strings that only differ by one character.</p>
+
+<h5>clojure.test</h5>
+
+<p>Most (hopefully all) Clojure programmers should be familiar with
+<strong>clojure.test</strong>. It is the testing library that is included with Clojure.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">ns </span><span class="nv">example.string-test</span>
+</span><span class='line'>  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">clojure.test</span> <span class="ss">:refer</span> <span class="ss">:all</span><span class="p">]))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">deftest</span> <span class="nv">string-comparisons</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="s">&quot;strings equal&quot;</span> <span class="s">&quot;strings equal&quot;</span><span class="p">))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="s">&quot;space&quot;</span> <span class="s">&quot;spice&quot;</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The output below is what you get when the above test runs. Even in
+this simple example it isn&rsquo;t the easiest to read. It doesn&rsquo;t make it
+easy to find the expected or actual values.</p>
+
+<figure class='code'><figcaption><span>clojure.test output</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">FAIL in (string-comparisons) (string_test.clj:6)</span>
+</span><span class='line'><span class="go">expected: (= &quot;space&quot; &quot;spice&quot;)</span>
+</span><span class='line'><span class="go">  actual: (not (= &quot;space&quot; &quot;spice&quot;))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Below is the same test but with <strong>humane-test-output</strong> enabled. It is easy
+to read the output and see the expected and actual value. It even
+provides a diff between them although in this situation it isn&rsquo;t that useful.</p>
+
+<figure class='code'><figcaption><span>clojure.test with humane-test-output</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">FAIL in (string-comparisons) (string_test.clj:6)</span>
+</span><span class='line'><span class="go">expected: &quot;space&quot;</span>
+</span><span class='line'><span class="go">  actual: &quot;spice&quot;</span>
+</span><span class='line'><span class="go">    diff: - &quot;space&quot;</span>
+</span><span class='line'><span class="go">          + &quot;spice&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h5>expectations</h5>
+
+<p>Another testing library is Jay Field&rsquo;s
+<a href="http://jayfields.com/expectations/">expectations</a>. You can see from
+the example that it has a fairly minimal syntax.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">ns </span><span class="nv">example.string-expectations</span>
+</span><span class='line'>  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">expectations</span> <span class="ss">:refer</span> <span class="ss">:all</span><span class="p">]))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">expect</span> <span class="s">&quot;strings equal&quot;</span> <span class="s">&quot;strings equal&quot;</span><span class="p">)</span>
+</span><span class='line'><span class="p">(</span><span class="nf">expect</span> <span class="s">&quot;space&quot;</span> <span class="s">&quot;spice&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>expectations output</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">failure in (string_expectations.clj:5) : example.string-expectations</span>
+</span><span class='line'><span class="go">(expect &quot;space&quot; &quot;spice&quot;)</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">           expected: &quot;space&quot;</span>
+</span><span class='line'><span class="go">                was: &quot;spice&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">           matches: &quot;sp&quot;</span>
+</span><span class='line'><span class="go">           diverges: &quot;ace&quot;</span>
+</span><span class='line'><span class="go">                  &amp;: &quot;ice&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The output from <strong>expectations</strong> is very readable. You can easily pick out
+the expected and actual values. It also shows you where the
+string starts to diverge.</p>
+
+<h5>Speclj</h5>
+
+<p>Before writing this post I had zero experience with Micah Martin&rsquo;s
+<a href="http://speclj.com/">Speclj</a>. Below is my translation of the failing
+string test and its output.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">ns </span><span class="nv">example.string-spec</span>
+</span><span class='line'>  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">speclj.core</span> <span class="ss">:refer</span> <span class="ss">:all</span><span class="p">]))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">describe</span> <span class="s">&quot;String comparisons&quot;</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">it</span> <span class="s">&quot;have nice error message&quot;</span>
+</span><span class='line'>      <span class="p">(</span><span class="nf">should=</span> <span class="s">&quot;space&quot;</span> <span class="s">&quot;spice&quot;</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>Speclj</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">  9) String comparisons have nice error message</span>
+</span><span class='line'><span class="go">     Expected: &quot;space&quot;</span>
+</span><span class='line'><span class="go">          got: &quot;spice&quot; (using =)</span>
+</span><span class='line'><span class="go">     /Users/jake/src/jakemcc/example/spec/example/string_spec.clj:7</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Speclj</strong>&rsquo;s test output above is an improvement over <strong>clojure.test</strong>. You
+can easily find the expected and actual values. It doesn&rsquo;t provide any
+help with diagnosing how those values are different.</p>
+
+<h5>Midje</h5>
+
+<p>I have a little bit of experience with Brian Marick&rsquo;s
+<a href="https://github.com/marick/Midje">Midje</a>. Unlike the other libraries
+it switches up the assertion syntax. In <strong>Midje</strong> the expected value is on
+the right side of <code>=&gt;</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">ns </span><span class="nv">example.string-test</span>
+</span><span class='line'>  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">midje.sweet</span> <span class="ss">:refer</span> <span class="ss">:all</span><span class="p">]))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">fact</span> <span class="s">&quot;strings are equal&quot;</span>
+</span><span class='line'>  <span class="s">&quot;string is equal&quot;</span> <span class="nv">=&gt;</span> <span class="s">&quot;string is equal&quot;</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">fact</span> <span class="s">&quot;strings not equal&quot;</span>
+</span><span class='line'>   <span class="s">&quot;spice&quot;</span> <span class="nv">=&gt;</span> <span class="s">&quot;space&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>Midje</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">FAIL &quot;strings not equal&quot; at (string_test.clj:8)</span>
+</span><span class='line'><span class="go">    Expected: &quot;space&quot;</span>
+</span><span class='line'><span class="go">      Actual: &quot;spice&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Midje</strong>&rsquo;s output is similar to <strong>Speclj</strong>&rsquo;s. You can quickly find the
+expected and actual values but it doesn&rsquo;t help you spot the
+difference.</p>
+
+<h3>String Comparison Winner</h3>
+
+<p><strong>expectations</strong> wins for best output. You can easily spot the expected
+and actual values and it also helps you find the difference between
+the strings.</p>
+
+<p>The worst output comes from <strong>clojure.test</strong>. It doesn&rsquo;t make it easy to
+spot the difference or even find the expected and actual values.</p>
+
+<h2>Comparing Maps</h2>
+
+<p>For maps I&rsquo;ve setup three assertions. The first has an extra key-value
+pair in the actual value. The second has an extra in the expected
+value. The final assertion has a different value for the <code>:cheese</code>
+key. The <strong>clojure.test</strong> example is below.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">deftest</span> <span class="nv">map-comparisons</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="p">{</span><span class="ss">:sheep</span> <span class="mi">1</span><span class="p">}</span> <span class="p">{</span><span class="ss">:cheese</span> <span class="mi">1</span> <span class="ss">:sheep</span> <span class="mi">1</span><span class="p">}))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="p">{</span><span class="ss">:sheep</span> <span class="mi">1</span> <span class="ss">:cheese</span> <span class="mi">1</span><span class="p">}</span> <span class="p">{</span><span class="ss">:sheep</span> <span class="mi">1</span><span class="p">}))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="p">{</span><span class="ss">:sheep</span> <span class="mi">1</span> <span class="ss">:cheese</span> <span class="mi">1</span><span class="p">}</span> <span class="p">{</span><span class="ss">:sheep</span> <span class="mi">1</span> <span class="ss">:cheese</span> <span class="mi">5</span><span class="p">})))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>clojure.test</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">FAIL in (map-comparisons) (map_test.clj:5)</span>
+</span><span class='line'><span class="go">expected: (= {:sheep 1} {:cheese 1, :sheep 1})</span>
+</span><span class='line'><span class="go">  actual: (not (= {:sheep 1} {:cheese 1, :sheep 1}))</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">FAIL in (map-comparisons) (map_test.clj:6)</span>
+</span><span class='line'><span class="go">expected: (= {:sheep 1, :cheese 1} {:sheep 1})</span>
+</span><span class='line'><span class="go">  actual: (not (= {:cheese 1, :sheep 1} {:sheep 1}))</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">FAIL in (map-comparisons) (map_test.clj:7)</span>
+</span><span class='line'><span class="go">expected: (= {:sheep 1, :cheese 1} {:sheep 1, :cheese 5})</span>
+</span><span class='line'><span class="go">  actual: (not (= {:cheese 1, :sheep 1} {:cheese 5, :sheep 1}))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Unsurprisingly the default <strong>clojure.test</strong> output for maps suffers from
+the same problems found in the string comparisons. To find the
+actual and expected values you need to manually parse the output.</p>
+
+<figure class='code'><figcaption><span>clojure.test with humane-test-output</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">FAIL in (map-comparisons) (map_test.clj:5)</span>
+</span><span class='line'><span class="go">expected: {:sheep 1}</span>
+</span><span class='line'><span class="go">  actual: {:cheese 1, :sheep 1}</span>
+</span><span class='line'><span class="go">    diff: + {:cheese 1}</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">FAIL in (map-comparisons) (map_test.clj:6)</span>
+</span><span class='line'><span class="go">expected: {:cheese 1, :sheep 1}</span>
+</span><span class='line'><span class="go">  actual: {:sheep 1}</span>
+</span><span class='line'><span class="go">    diff: - {:cheese 1}</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">FAIL in (map-comparisons) (map_test.clj:7)</span>
+</span><span class='line'><span class="go">expected: {:cheese 1, :sheep 1}</span>
+</span><span class='line'><span class="go">  actual: {:cheese 5, :sheep 1}</span>
+</span><span class='line'><span class="go">    diff: - {:cheese 1}</span>
+</span><span class='line'><span class="go">          + {:cheese 5}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Above is the output of using <strong>clojure.test</strong> with <strong>humane-test-output</strong>. It
+is a big improvement over the default <strong>clojure.test</strong>. You can quickly
+see the expected and actual values. Unlike with the string assertions
+the diff view is actually helpful. The diffs do a good job of helping
+you identify the error.</p>
+
+<figure class='code'><figcaption><span>expectations</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">failure in (map_expectations.clj:6) : example.map-expectations</span>
+</span><span class='line'><span class="go">(expect {:sheep 1} {:sheep 1, :cheese 1})</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">           expected: {:sheep 1}</span>
+</span><span class='line'><span class="go">                was: {:cheese 1, :sheep 1}</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">           in expected, not actual: null</span>
+</span><span class='line'><span class="go">           in actual, not expected: {:cheese 1}</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">failure in (map_expectations.clj:7) : example.map-expectations</span>
+</span><span class='line'><span class="go">(expect {:sheep 1, :cheese 1} {:sheep 1})</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">           expected: {:cheese 1, :sheep 1}</span>
+</span><span class='line'><span class="go">                was: {:sheep 1}</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">           in expected, not actual: {:cheese 1}</span>
+</span><span class='line'><span class="go">           in actual, not expected: null</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">failure in (map_expectations.clj:8) : example.map-expectations</span>
+</span><span class='line'><span class="go">(expect {:sheep 1, :cheese 5} {:sheep 1, :cheese 1})</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">           expected: {:cheese 5, :sheep 1}</span>
+</span><span class='line'><span class="go">                was: {:cheese 1, :sheep 1}</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">           in expected, not actual: {:cheese 5}</span>
+</span><span class='line'><span class="go">           in actual, not expected: {:cheese 1}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>expectations</strong> does a pretty good job helping you as well. As before,
+you can clearly read the expected and actual values. <strong>expectations</strong> also
+provides some hint as to what is different between the maps. I find
+the English descriptions a bit easier to read than
+<strong>humane-test-output</strong>&rsquo;s diff view. Still seeing lines like line 7 (<code>in
+expected, not actual: null</code>) is a bit confusing and the output would
+be improved if it was suppressed.</p>
+
+<p>I&rsquo;m just going to lump <strong>Speclj</strong> and <strong>Midje</strong> together. The output for each
+is below. They both improve over <strong>clojure.test</strong> by making it easy to see
+the expected and actual value. They both don&rsquo;t do anything beyond that.</p>
+
+<figure class='code'><figcaption><span>Speclj</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">  4) map comparisons have nice error messages when extra entries keys present</span>
+</span><span class='line'><span class="go">     Expected: {:sheep 1}</span>
+</span><span class='line'><span class="go">          got: {:cheese 1, :sheep 1} (using =)</span>
+</span><span class='line'><span class="go">     /Users/jake/src/jakemcc/example/spec/example/map_spec.clj:7</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">  5) map comparisons have nice error messages when missing an entry</span>
+</span><span class='line'><span class="go">     Expected: {:cheese 1, :sheep 1}</span>
+</span><span class='line'><span class="go">          got: {:sheep 1} (using =)</span>
+</span><span class='line'><span class="go">     /Users/jake/src/jakemcc/example/spec/example/map_spec.clj:9</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">  6) map comparisons have nice error messages when mismatched values</span>
+</span><span class='line'><span class="go">     Expected: {:cheese 5, :sheep 1}</span>
+</span><span class='line'><span class="go">          got: {:cheese 1, :sheep 1} (using =)</span>
+</span><span class='line'><span class="go">     /Users/jake/src/jakemcc/example/spec/example/map_spec.clj:11</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>Midje</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">FAIL &quot;map is missing an entry&quot; at (map_test.clj:5)</span>
+</span><span class='line'><span class="go">    Expected: {:cheese 1, :sheep 1}</span>
+</span><span class='line'><span class="go">      Actual: {:sheep 1}</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">FAIL &quot;map has an extra entry&quot; at (map_test.clj:8)</span>
+</span><span class='line'><span class="go">    Expected: {:sheep 1}</span>
+</span><span class='line'><span class="go">      Actual: {:cheese 1, :sheep 1}</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">FAIL &quot;map has a different value&quot; at (map_test.clj:11)</span>
+</span><span class='line'><span class="go">    Expected: {:cheese 5, :sheep 1}</span>
+</span><span class='line'><span class="go">      Actual: {:cheese 1, :sheep 1}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Map Comparison Winner</h3>
+
+<p>Tie between <strong>humane-test-output</strong> and <strong>expectations</strong>. Both do a
+good job of helping the reader spot the difference.</p>
+
+<h2>Comparing Sets</h2>
+
+<p>Next up are sets. Only two assertions for this section. One
+with the actual value having an extra member and one test where it is
+missing a member.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">ns </span><span class="nv">example.set-test</span>
+</span><span class='line'>  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">clojure.test</span> <span class="ss">:refer</span> <span class="ss">:all</span><span class="p">]))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">deftest</span> <span class="nv">set-comparisons</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="o">#</span><span class="p">{</span><span class="ss">:a</span> <span class="ss">:b</span><span class="p">}</span> <span class="o">#</span><span class="p">{</span><span class="ss">:a</span> <span class="ss">:b</span> <span class="ss">:c</span><span class="p">}))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="o">#</span><span class="p">{</span><span class="ss">:a</span> <span class="ss">:b</span> <span class="ss">:c</span><span class="p">}</span> <span class="o">#</span><span class="p">{</span><span class="ss">:a</span> <span class="ss">:b</span><span class="p">})))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>First up is the basic <strong>clojure.test</strong> output. It suffers from the same
+problem it has suffered this entire time. It doesn&rsquo;t make it easy to
+read the expected and actual values.</p>
+
+<figure class='code'><figcaption><span>clojure.test</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">FAIL in (set-comparisons) (set_test.clj:5)</span>
+</span><span class='line'><span class="go">expected: (= #{:b :a} #{:c :b :a})</span>
+</span><span class='line'><span class="go">  actual: (not (= #{:b :a} #{:c :b :a}))</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">FAIL in (set-comparisons) (set_test.clj:6)</span>
+</span><span class='line'><span class="go">expected: (= #{:c :b :a} #{:b :a})</span>
+</span><span class='line'><span class="go">  actual: (not (= #{:c :b :a} #{:b :a}))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>No surprises with <strong>humane-test-output</strong>. It improves the <strong>clojure.test</strong>
+output by making it easy to read the expected and actual values. The
+diff view also helps figure out what is causing the assertion to fail.</p>
+
+<figure class='code'><figcaption><span>clojure.test with humane-test-output</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">FAIL in (set-comparisons) (set_test.clj:5)</span>
+</span><span class='line'><span class="go">expected: #{:b :a}</span>
+</span><span class='line'><span class="go">  actual: #{:c :b :a}</span>
+</span><span class='line'><span class="go">    diff: + #{:c}</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">FAIL in (set-comparisons) (set_test.clj:6)</span>
+</span><span class='line'><span class="go">expected: #{:c :b :a}</span>
+</span><span class='line'><span class="go">  actual: #{:b :a}</span>
+</span><span class='line'><span class="go">    diff: - #{:c}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>expectations</strong> once again delivers nice output. It continues to be easy
+to find the expected and actual values and helps you spot the
+differences with a diff view.</p>
+
+<figure class='code'><figcaption><span>expectations</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">failure in (set_expectations.clj:4) : example.set-expectations</span>
+</span><span class='line'><span class="go">(expect #{:b :a} #{:c :b :a})</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">           expected: #{:b :a}</span>
+</span><span class='line'><span class="go">                was: #{:c :b :a}</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">           in expected, not actual: null</span>
+</span><span class='line'><span class="go">           in actual, not expected: #{:c}</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">failure in (set_expectations.clj:5) : example.set-expectations</span>
+</span><span class='line'><span class="go">(expect #{:c :b :a} #{:b :a})</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">           expected: #{:c :b :a}</span>
+</span><span class='line'><span class="go">                was: #{:b :a}</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">           in expected, not actual: #{:c}</span>
+</span><span class='line'><span class="go">           in actual, not expected: null</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Speclj</strong> and <strong>Midje</strong> both have better output than the basic <strong>clojure.test</strong>.</p>
+
+<figure class='code'><figcaption><span>Speclj</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">  7) set comparisons have nice error messages when missing item</span>
+</span><span class='line'><span class="go">     Expected: #{:b :a}</span>
+</span><span class='line'><span class="go">          got: #{:c :b :a} (using =)</span>
+</span><span class='line'><span class="go">     /Users/jake/src/jakemcc/example/spec/example/set_spec.clj:9</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">  8) set comparisons have nice error messages when more items</span>
+</span><span class='line'><span class="go">     Expected: #{:c :b :a}</span>
+</span><span class='line'><span class="go">          got: #{:b :a} (using =)</span>
+</span><span class='line'><span class="go">     /Users/jake/src/jakemcc/example/spec/example/set_spec.clj:11</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>Midje</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">FAIL &quot;set is superset of expected&quot; at (set_test.clj:5)</span>
+</span><span class='line'><span class="go">    Expected: #{:a :b}</span>
+</span><span class='line'><span class="go">      Actual: #{:a :b :c}</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">FAIL &quot;set is subset of expected&quot; at (set_test.clj:8)</span>
+</span><span class='line'><span class="go">    Expected: #{:a :b :c}</span>
+</span><span class='line'><span class="go">      Actual: #{:a :b}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Set Comparison Winner</h3>
+
+<p>Similar to the winner of the map comparisons I&rsquo;m going to split the
+victory between <strong>expectations</strong> and <strong>humane-test-output</strong>.</p>
+
+<h2>Comparing Lists</h2>
+
+<p>Next up we compare lists (and lists to vectors). There are three
+comparisons; one with an extra element, one with same length but a
+mismatched element, and one comparing a vector and list with drastically
+different contents.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">ns </span><span class="nv">example.seq-test</span>
+</span><span class='line'>  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">clojure.test</span> <span class="ss">:refer</span> <span class="ss">:all</span><span class="p">]))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">deftest</span> <span class="nv">list-comparisons</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="o">&#39;</span><span class="p">(</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">)</span> <span class="o">&#39;</span><span class="p">(</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">)))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="o">&#39;</span><span class="p">(</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">4</span><span class="p">)</span> <span class="o">&#39;</span><span class="p">(</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">)))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="o">&#39;</span><span class="p">(</span><span class="mi">9</span> <span class="mi">8</span> <span class="mi">7</span><span class="p">)</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">])))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>First up <strong>clojure.test</strong>. Same issues as with all the previous
+comparisons.</p>
+
+<figure class='code'><figcaption><span>clojure.test</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">FAIL in (list-comparisons) (seq_test.clj:5)</span>
+</span><span class='line'><span class="go">expected: (= (quote (1 2 3)) (quote (1 2 3 4)))</span>
+</span><span class='line'><span class="go">  actual: (not (= (1 2 3) (1 2 3 4)))</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">FAIL in (list-comparisons) (seq_test.clj:6)</span>
+</span><span class='line'><span class="go">expected: (= (quote (1 2 4)) (quote (1 2 3)))</span>
+</span><span class='line'><span class="go">  actual: (not (= (1 2 4) (1 2 3)))</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">FAIL in (list-comparisons) (seq_test.clj:7)</span>
+</span><span class='line'><span class="go">expected: (= (quote (9 8 7)) [1 2 3])</span>
+</span><span class='line'><span class="go">  actual: (not (= (9 8 7) [1 2 3]))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Once again <strong>humane-test-output</strong> improves upon <strong>clojure.test</strong>. Only
+interesting difference from previous comparisons is that the diff view
+ends up having <code>nil</code> values in it where the elements are the same.</p>
+
+<figure class='code'><figcaption><span>clojure.test with humane-test-output</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">FAIL in (list-comparisons) (seq_test.clj:5)</span>
+</span><span class='line'><span class="go">expected: (1 2 3)</span>
+</span><span class='line'><span class="go">  actual: (1 2 3 4)</span>
+</span><span class='line'><span class="go">    diff: + [nil nil nil 4]</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">FAIL in (list-comparisons) (seq_test.clj:6)</span>
+</span><span class='line'><span class="go">expected: (1 2 4)</span>
+</span><span class='line'><span class="go">  actual: (1 2 3)</span>
+</span><span class='line'><span class="go">    diff: - [nil nil 4]</span>
+</span><span class='line'><span class="go">          + [nil nil 3]</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">FAIL in (list-comparisons) (seq_test.clj:7)</span>
+</span><span class='line'><span class="go">expected: (9 8 7)</span>
+</span><span class='line'><span class="go">  actual: [1 2 3]</span>
+</span><span class='line'><span class="go">    diff: - [9 8 7]</span>
+</span><span class='line'><span class="go">          + [1 2 3]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>expectations</strong> continues to have good output. It tries to help you out
+as well. You&rsquo;ll notice that it also has <code>nil</code> values inserted
+where the lists are the same.</p>
+
+<figure class='code'><figcaption><span>expectations</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">failure in (list_expectations.clj:4) : example.list-expectations</span>
+</span><span class='line'><span class="go">(expect &#39;(1 2 3) &#39;(1 2 3 4))</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">           expected: (1 2 3)</span>
+</span><span class='line'><span class="go">                was: (1 2 3 4)</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">           in expected, not actual: null</span>
+</span><span class='line'><span class="go">           in actual, not expected: [nil nil nil 4]</span>
+</span><span class='line'><span class="go">           actual is larger than expected</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">failure in (list_expectations.clj:5) : example.list-expectations</span>
+</span><span class='line'><span class="go">(expect &#39;(1 2 4) &#39;(1 2 3))</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">           expected: (1 2 4)</span>
+</span><span class='line'><span class="go">                was: (1 2 3)</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">           in expected, not actual: [nil nil 4]</span>
+</span><span class='line'><span class="go">           in actual, not expected: [nil nil 3]</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">failure in (list_expectations.clj:6) : example.list-expectations</span>
+</span><span class='line'><span class="go">(expect &#39;(9 8 7) [1 2 3])</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">           expected: (9 8 7)</span>
+</span><span class='line'><span class="go">                was: [1 2 3]</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">           in expected, not actual: [9 8 7]</span>
+</span><span class='line'><span class="go">           in actual, not expected: [1 2 3]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Unsurprisingly, <strong>Speclj</strong> and <strong>Midje</strong> are better than <strong>clojure.test</strong> but
+again don&rsquo;t go beyond making easy to find the expected and actual
+values.</p>
+
+<figure class='code'><figcaption><span>Speclj</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">  1) List/vector comparisons when there is an extra element</span>
+</span><span class='line'><span class="go">     Expected: (1 2 3)</span>
+</span><span class='line'><span class="go">          got: (1 2 3 4) (using =)</span>
+</span><span class='line'><span class="go">     /Users/jake/src/jakemcc/example/spec/example/string_spec.clj:7</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">  2) List/vector comparisons when there is a mismatched element</span>
+</span><span class='line'><span class="go">     Expected: (1 2 4)</span>
+</span><span class='line'><span class="go">          got: (1 2 3) (using =)</span>
+</span><span class='line'><span class="go">     /Users/jake/src/jakemcc/example/spec/example/string_spec.clj:9</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">  3) List/vector comparisons when comparing different types</span>
+</span><span class='line'><span class="go">     Expected: (9 8 7)</span>
+</span><span class='line'><span class="go">          got: [1 2 3] (using =)</span>
+</span><span class='line'><span class="go">     /Users/jake/src/jakemcc/example/spec/example/string_spec.clj:11</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>Midje</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">FAIL &quot;lists are different sizes&quot; at (seq_test.clj:5)</span>
+</span><span class='line'><span class="go">    Expected: (1 2 3)</span>
+</span><span class='line'><span class="go">      Actual: (1 2 3 4)</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">FAIL &quot;lists have different entries&quot; at (seq_test.clj:8)</span>
+</span><span class='line'><span class="go">    Expected: (1 2 4)</span>
+</span><span class='line'><span class="go">      Actual: (1 2 3)</span>
+</span><span class='line'>
+</span><span class='line'><span class="go">FAIL &quot;compare very different list like values&quot; at (seq_test.clj:14)</span>
+</span><span class='line'><span class="go">    Expected: (9 8 7)</span>
+</span><span class='line'><span class="go">      Actual: [1 2 3]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>List Comparison Winner</h3>
+
+<p>I find the <strong>clojure.test</strong> with <strong>humane-test-output</strong> to be a bit easier to
+read than <strong>expectations</strong>. Both have better output than the basic
+<strong>clojure.test</strong>, <strong>Speclj</strong>, and <strong>Midje</strong>.</p>
+
+<h2>Overall Winner</h2>
+
+<p>If I were picking a testing library based entirely on what a failing
+test looks like I would use <strong>expectations</strong>. My second pick would be
+<strong>clojure.test</strong> with <strong>humane-test-output</strong>.</p>
+
+<p>It is great that Clojure ships with <strong>clojure.test</strong>. It is unfortunate
+that it does so little to help you read a failing test. Every library
+I tried has better output than <strong>clojure.test</strong>.</p>
+
+<h3>Addendum</h3>
+
+<p><em>Added 2014/06/23</em></p>
+
+<p>Colin Jones
+<a href="http://jakemccrary.com/blog/2014/06/22/comparing-clojure-testing-libraries-output/#comment-1449451549">points out</a>
+that Speclj provides <code>should==</code>. <code>should==</code> checks that the expected
+and actual value have the same contents. He provided a
+<a href="https://gist.github.com/trptcolin/7e1ece5179581085730f">gist</a> that
+shows the difference.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1094,127 +1944,6 @@ has made using <code>clojure.test</code> much more enjoyable.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/08/10/emacs-capture-shell-command-output-in-temporary-buffer/">Emacs: Capture shell command output in temporary buffer</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2013-08-10T14:33:00-05:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2013</span></span> <span class='time'>2:33 pm</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>My text editor of choice is Emacs. Its extensibility is a major
-contributor to this preference. The ease of adding additional
-functionality means you can customize it to your liking. You should
-not go overboard and change too much of the default behavior but you
-should feel free to add additional features.</p>
-
-<p>I recently found myself often editing a file in emacs and then
-switching to a terminal and running a bash script to see how the
-output changed. This is part of my work flow for shutting down or
-starting new server processes. Since this is something I&rsquo;ll be doing
-quite frequently in the future, I wrote some Emacs Lisp to run the
-shell script and display the output in a temporary buffer. With this
-function in place I no longer have to toggle to a terminal and run a
-command.</p>
-
-<p>I&rsquo;m picky and I wanted this output buffer to have the same behavior as
-the help buffer. That is, I wanted to be able to close the buffer by
-just hitting the letter <code>q</code>. It took me a while to figure out how to
-do this so I thought I would share it here in hopes it might benefit others.</p>
-
-<p>First I&rsquo;ll show the code and then I&rsquo;ll explain what it is doing.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">blog-example</span> <span class="p">()</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">with-output-to-temp-buffer</span> <span class="s">&quot;*blog-example*&quot;</span>
-</span><span class='line'>    <span class="p">(</span><span class="nv">shell-command</span> <span class="s">&quot;echo This is an example&quot;</span>
-</span><span class='line'>                   <span class="s">&quot;*blog-example*&quot;</span>
-</span><span class='line'>                   <span class="s">&quot;*Messages*&quot;</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">(</span><span class="nv">pop-to-buffer</span> <span class="s">&quot;*blog-example*&quot;</span><span class="p">)))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The above snippet defines a function named <code>blog-example</code>. It takes no
-arguments and is interactive (as indicated by the second line calling
-<code>interactive</code>). This call to <code>interactive</code> makes <code>blog-example</code>
-available to be called interactively, meaning you can call it after
-triggering <code>M-x</code>. This is probably a simplification of what is
-actually does, so if you care the documentation is available
-<a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Using-Interactive.html">here</a>.</p>
-
-<p>After the call to <code>interactive</code> we hit the core of this function, the
-call to <code>with-output-to-temp-buffer</code>. This function a buffer name as a first argument
-and additional forms. The output of those forms is put into the named
-buffer.</p>
-
-<p>The form I&rsquo;m passing to <code>with-output-to-temp-buffer</code> is a call to
-<code>shell-command</code>. <code>shell-command</code> will run <code>echo This is an example</code>
-synchronously and redirect stdout to <code>*blog-example*</code> and stderr to
-<code>*Messages*</code>.</p>
-
-<p>The final line opens the buffer and switches focus to it. Now you can
-look at the output and when you are ready to return just hit <code>q</code>.</p>
-
-<p>This is a simplified example but it shows how easy it is to extend
-Emacs functionality. Doing something similar to this made a task I do
-frequently more pleasant.</p>
-
-<p>My use case is a bit more complicated and involves saving the buffer
-I&rsquo;m currently editing and then running a command against the saved
-file. Below is some sample code that does something similar.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">example2</span> <span class="p">()</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">and</span> <span class="p">(</span><span class="nv">buffer-modified-p</span><span class="p">)</span>
-</span><span class='line'>             <span class="p">(</span><span class="nb">y-or-n-p</span> <span class="p">(</span><span class="nb">format</span> <span class="s">&quot;Save file %s? &quot;</span> <span class="p">(</span><span class="nv">buffer-file-name</span><span class="p">))))</span>
-</span><span class='line'>    <span class="p">(</span><span class="nv">save-buffer</span><span class="p">))</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">with-output-to-temp-buffer</span> <span class="s">&quot;*blog-example*&quot;</span>
-</span><span class='line'>    <span class="p">(</span><span class="nv">shell-command</span> <span class="p">(</span><span class="nv">concat</span> <span class="s">&quot;wc -l&quot;</span>
-</span><span class='line'>                           <span class="s">&quot; &quot;</span>
-</span><span class='line'>                           <span class="p">(</span><span class="nv">expand-file-name</span> <span class="p">(</span><span class="nv">buffer-file-name</span><span class="p">)))</span>
-</span><span class='line'>                   <span class="s">&quot;*blog-example*&quot;</span>
-</span><span class='line'>                   <span class="s">&quot;*Messages*&quot;</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">(</span><span class="nv">pop-to-buffer</span> <span class="s">&quot;*blog-example*&quot;</span><span class="p">)))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//9">&larr; Older</a>
@@ -1230,6 +1959,10 @@ file. Below is some sample code that does something similar.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/04/21/using-bash-preexec-for-monitoring-the-runtime-of-your-last-command/">Using Bash-Preexec for monitoring the runtime of your last command</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2020/03/16/a-retrospective-format/">A retrospective format for remote or co-located teams</a>
@@ -1265,10 +1998,6 @@ file. Below is some sample code that does something similar.</p>
     
       <li class="post">
         <a href="/blog/2019/03/20/breaking-change-and-more-in-lein-test-refresh-0-dot-24-dot-0/">Breaking change and more in lein-test-refresh 0.24.1</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/02/13/testing-asynchronous-javascript-with-jasmine/">Testing asynchronous JavaScript with Jasmine</a>
       </li>
     
   </ul>

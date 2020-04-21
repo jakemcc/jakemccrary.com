@@ -4,7 +4,7 @@
   <title><![CDATA[Category: osx | Jake McCrary]]></title>
   <link href="https://jakemccrary.com/blog/categories/osx/atom.xml" rel="self"/>
   <link href="https://jakemccrary.com/"/>
-  <updated>2020-04-13T18:42:29-05:00</updated>
+  <updated>2020-04-21T18:23:07-05:00</updated>
   <id>https://jakemccrary.com/</id>
   <author>
     <name><![CDATA[Jake McCrary]]></name>
@@ -12,6 +12,73 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Using Bash-Preexec for monitoring the runtime of your last command]]></title>
+    <link href="https://jakemccrary.com/blog/2020/04/21/using-bash-preexec-for-monitoring-the-runtime-of-your-last-command/"/>
+    <updated>2020-04-21T18:22:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2020/04/21/using-bash-preexec-for-monitoring-the-runtime-of-your-last-command</id>
+    <content type="html"><![CDATA[<p>My article on <a href="/blog/2015/05/03/put-the-last-commands-run-time-in-your-bash-prompt/">putting the runtime of your last command into your bash prompt</a> is one of my most surfaced-by-google articles.
+Why is this a great to your prompt?
+To quote my previous article:</p>
+
+<blockquote><p>I’m fairly certain the following scenario has happened to every terminal user. You run a command and, while it is running, realize you should have prefixed it with <code>time</code>. You momentarily struggle with the thought of killing the command and rerunning it with <code>time</code>. You decide not to and the command finishes without you knowing how long it took. You debate running it again.</p>
+
+<p>For the last year I’ve lived in a world without this problem. Upon completion, a command’s approximate run time is displayed in my prompt. It is awesome.</p></blockquote>
+
+<p>I&rsquo;ve been living without the above problem since sometime in 2014 and not having that problem is still awesome.</p>
+
+<p>I have made some changes since 2014.</p>
+
+<p>One change was switching to using <a href="https://github.com/rcaloras/bash-preexec">Bash-Preexec</a> instead of directly using <code>trap</code> and <code>$PROMPT_COMMAND</code> for calling functions to start and stop tracking runtime.
+Bash-Preexec lets you trigger a function (or multiple) right after a command has been read and right before each prompt.</p>
+
+<p>The usage is pretty straight forward.
+In the most basic case, you source <code>bash-preexec.sh</code> and then provide functions named <code>preexec</code>, which is invoked right before a command is executed, and/or <code>precmd</code>, which is invoked just before each prompt.
+<code>bash-preexec.sh</code> can be downloaded from <a href="https://github.com/rcaloras/bash-preexec/">its repo</a>.
+The changes required to move to Bash-Preexec pretty <a href="https://github.com/jakemcc/dotfiles/commit/46fc3dc9d4d7d0d73152c77b7383645af42b3d5d">pretty minimal</a>.</p>
+
+<p>The other change was introducing the script, <a href="https://github.com/jakemcc/dotfiles/blob/9c8c0315f35b55df6cef7e21261e3dcbbfac86e1/home/.bin/format-duration#L3-L4">format-duration</a> by <a href="https://twitter.com/gfredericks_">Gary Fredericks</a>, to humanely format the time.
+This script converts seconds into a more readable string (example: 310 to <code>5m10s</code>)</p>
+
+<p>Here is a screenshot of everything in action (with a reduced prompt, my normal one includes git and other info).</p>
+
+<p><img src="/images/runtime-humane-example.png" width="320" height="150" title="&ldquo;Command line prompt showing runtimes of previous commands&rdquo; &ldquo;Command line prompt showing runtimes of previous commands&rdquo;" ></p>
+
+<p>Below is a simplified snippet from my <code>.bashrc</code> that provides runtimes using both of these additions.</p>
+
+<pre><code class="bash">function preexec {
+  if [ "UNSET" == "${timer}" ]; then
+    timer=$SECONDS
+  else 
+    timer=${timer:-$SECONDS}
+  fi 
+}
+
+function precmd {
+  if [ "UNSET" == "${timer}" ]; then
+     timer_show="0s"
+  else 
+    the_seconds=$((SECONDS - timer))
+    # use format-duration to make time more human readable
+    timer_show="$(format-duration seconds $the_seconds)" 
+  fi
+  timer="UNSET"
+}
+
+# Add $last_show to the prompt.
+PS1='[last: ${timer_show}s][\w]$ '
+
+# a bunch more lines until the end of my .bashrc
+# where I include .bash-preexec.sh
+[ -f "$HOME/.bash-preexec.sh" ] &amp;&amp; source "$HOME/.bash-preexec.sh"
+</code></pre>
+
+<p>No more wondering about the runtime of commands is great.
+Introducing <code>format-duration</code> made reading the time easier while Bash-Preexec made reading the implementation easier.
+I highly recommend setting up something similar for your shell.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Auto-syncing a git repository]]></title>
@@ -156,6 +223,98 @@ $
   </entry>
   
   <entry>
+    <title type="html"><![CDATA[Put the last command's run time in your Bash prompt]]></title>
+    <link href="https://jakemccrary.com/blog/2015/05/03/put-the-last-commands-run-time-in-your-bash-prompt/"/>
+    <updated>2015-05-03T20:37:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2015/05/03/put-the-last-commands-run-time-in-your-bash-prompt</id>
+    <content type="html"><![CDATA[<p>I&rsquo;m fairly certain the following scenario has happened to every
+terminal user. You run a command and, while it is running, realize you
+should have prefixed it with <a href="http://linux.die.net/man/1/time"><code>time</code></a>. You
+momentarily struggle with the thought of killing the command and
+rerunning it with <code>time</code>. You decide not to and the command finishes
+without you knowing how long it took. You debate running it again.</p>
+
+<p>For the last year I&rsquo;ve lived in a world without this problem. Upon
+completion, a command&rsquo;s approximate run time is displayed in my
+prompt. It is awesome.</p>
+
+<h2>Overview</h2>
+
+<p>Most of the code below is from a post on
+<a href="http://stackoverflow.com/a/1862762/491871">Stack Overflow</a>. It has
+been slightly modified to support having multiple commands in your
+<code>$PROMPT_COMMAND</code> variable. Below is a minimal snippet that could be
+included in your <code>.bashrc</code>.</p>
+
+<pre><code class="bash">function timer_start {
+  timer=${timer:-$SECONDS}
+}
+
+function timer_stop {
+  timer_show=$(($SECONDS - $timer))
+  unset timer
+}
+
+trap 'timer_start' DEBUG
+
+if [ "$PROMPT_COMMAND" == "" ]; then
+  PROMPT_COMMAND="timer_stop"
+else
+  PROMPT_COMMAND="$PROMPT_COMMAND; timer_stop"
+fi
+
+PS1='[last: ${timer_show}s][\w]$ '
+</code></pre>
+
+<p>Modify your <code>.bashrc</code> to include the above and you&rsquo;ll have a prompt
+that looks like the image below. It is a minimal prompt but it
+includes the time spent on the last command. This is great. No more
+wondering how long a command took.</p>
+
+<p><img src="/images/prompt-timings.png" alt="Example of prompt" /></p>
+
+<h2>The details</h2>
+
+<p><code>timer_start</code> is a function that sets <code>timer</code> to be its current value
+or, if <code>timer</code> is unset, sets it to the value of <code>$SECONDS</code>.
+<code>$SECONDS</code> is a special variable that contains the number of seconds
+since the shell was started. <code>timer_start</code> is invoked after every
+simple command as a result of <code>trap 'timer_start' DEBUG</code>.</p>
+
+<p><code>timer_stop</code> calculates the difference between <code>$SECONDS</code> and <code>timer</code>
+and stores it in <code>timer_show</code>. It also unsets <code>timer</code>. Next time
+<code>timer_start</code> is invoked <code>timer</code> will be set to the current value of
+<code>$SECONDS</code>. Because <code>timer_stop</code> is part of the <code>$PROMPT_COMMAND</code> it
+is executed prior to the prompt being printed.</p>
+
+<p>It is the interaction between <code>timer_start</code> and <code>timer_stop</code> that
+captures the run time of commands. It is important that <code>timer_stop</code>
+is the <strong>last</strong> command in the <code>$PROMPT_COMMAND</code>. If there are other
+commands after it then those will be executed and their execution
+might cause <code>timer_start</code> to be called. This results in you timing the
+length of time between the prior and current prompts being printed.</p>
+
+<h2>My prompt</h2>
+
+<p>My prompt is a bit more complicated. It shows the last exit code, last
+run time, time of day, directory, and git information. The run time of
+the last command is one of the more useful parts of my prompt. I
+highly recommend you add it to yours.</p>
+
+<p><img src="/images/my-prompt.png" alt="My prompt" /></p>
+
+<h2>Errata</h2>
+
+<p><em>2015/5/04</em></p>
+
+<p><a href="https://twitter.com/gfredericks_">Gary Fredericks</a> noticed that the
+original code sample broke if you didn&rsquo;t already have something set as
+your <code>$PROMPT_COMMAND</code>. I&rsquo;ve updated the original snippet to reflect
+his <a href="https://twitter.com/gfredericks_/status/595249998838800384">changes</a>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Making tmate and tmux play nice with OS X terminal-notifier]]></title>
     <link href="https://jakemccrary.com/blog/2015/04/12/making-tmate-and-tmux-play-nice-with-os-x-terminal-notifier/"/>
     <updated>2015-04-12T17:47:00-05:00</updated>
@@ -193,148 +352,6 @@ reattach-to-user-namespace</code>. Then open your <code>.tmux.conf</code> or
 available. Now <code>terminal-notifier</code> no longer hangs when invoked inside
 <code>tmate</code>. Unsurprisingly, this change also makes <code>tmux</code> place nice with
 <code>terminal-notifier</code>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Managing windows in OS X using Phoenix]]></title>
-    <link href="https://jakemccrary.com/blog/2014/03/30/managing-windows-in-osx-using-phoenix/"/>
-    <updated>2014-03-30T18:30:00-05:00</updated>
-    <id>https://jakemccrary.com/blog/2014/03/30/managing-windows-in-osx-using-phoenix</id>
-    <content type="html"><![CDATA[<p><a href="http://jakemccrary.com/blog/2013/04/15/manage-your-workspace-with-grids-under-linux-osx-and-windows/">Last year</a>
-I wrote about how I managed my windows under OS X, Windows, and Linux.
-I&rsquo;m a big fan of having an orderly layout and try to use grid
-managers. Since then I&rsquo;ve changed jobs and now my main machine is an
-MacBook Pro running OS X Mavericks with two 27 inch cinema displays.
-As a result I&rsquo;ve started experimenting with more OS X window managers.
-After trying a few out I&rsquo;m going to stick with
-<a href="https://github.com/sdegutis/Phoenix">Phoenix</a>.</p>
-
-<h3>Before Phoenix</h3>
-
-<p>Last year I was satisfied using <a href="http://spectacleapp.com/">Spectacle</a>.
-It is (or at least was, I haven&rsquo;t used it in a while) easy to install
-and had good defaults. I&rsquo;d still recommend it for most people.</p>
-
-<p>At the recommendation from a reader, I switched to
-<a href="https://github.com/jigish/slate">Slate</a>. Slate has a ton of features
-and I barely scratched the surface in how I used it. I used it as a
-replacement for Spectacle and didn&rsquo;t touch any of the advanced
-features. Before I had the urge to explore the advanced features I
-ended up becoming dissatisfied with Slate. I ran into an issue where
-after running for a while (talking at least a week) it would start to
-respond slowly. I&rsquo;d try to move a window to another monitor and it
-wouldn&rsquo;t move. Eventually I&rsquo;d be in another process and the
-command would register sending whatever window I was currently focused
-on to another monitor.</p>
-
-<h3>Introducing Phoenix</h3>
-
-<p>I was looking for solutions to Slate&rsquo;s unresponsiveness when I
-stumbled on <a href="https://github.com/sdegutis/Phoenix">Phoenix</a>. I was
-drawn in by its stated goal; it &ldquo;aims for efficiency and a very small
-footprint.&rdquo; The fact that it is still being actively developed was
-also a huge selling point. Knowing that any bugs I find have a
-potential to be fixed is great.</p>
-
-<p>Phoenix provides a
-<a href="https://github.com/sdegutis/Phoenix/wiki/JavaScript-API-documentation">JavaScript API</a>
-that allows you to interact with your running applications or launch
-applications. It doesn&rsquo;t provide anything out of the box; it is up to
-you to make it useful by writing your own (or taking another persons)
-configuration.</p>
-
-<p>This is a double-edged sword. This means you get exactly the features
-you want. It also means you might spend significant amounts of time
-figuring out how to get the features you want.</p>
-
-<p>Luckily there are <a href="https://github.com/sdegutis/Phoenix/wiki">examples</a>
-that you can use as a starting point. Browsing through the examples is
-a great way of becoming familiar with what is possible and can be
-inspiring.</p>
-
-<p>My
-<a href="https://github.com/jakemcc/dotfiles/blob/17a73f89a2f3f7b2c9aa07a63d1928b86cc5425d/home/.phoenix.js">configuration</a>
-is relatively minimal. I&rsquo;ve written
-<a href="https://github.com/jakemcc/dotfiles/blob/17a73f89a2f3f7b2c9aa07a63d1928b86cc5425d/home/.phoenix.js#L42-L87">code</a>
-to move windows between monitors (rotating between three added some
-complexity to this),
-<a href="https://github.com/jakemcc/dotfiles/blob/17a73f89a2f3f7b2c9aa07a63d1928b86cc5425d/home/.phoenix.js#L90-L122">start or focus</a>
-certain applications, and
-<a href="https://github.com/jakemcc/dotfiles/blob/17a73f89a2f3f7b2c9aa07a63d1928b86cc5425d/home/.phoenix.js#L11-L37">resize</a>
-windows. This is enough for me to feel efficient.</p>
-
-<p>I encourage you to use a tool to help manage your windows. Personally
-I think Phoenix is pretty great and don&rsquo;t mind tinkering with my
-configuration and strongly recommend it. As a bonus it is a young
-project where the maintainer is open to suggestions. If you have an
-idea for a useful
-<a href="https://github.com/sdegutis/Phoenix/issues/18">feature</a> it has a
-possibility of being added pretty quickly.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Manage your workspace with grids under Linux, OS X, and Windows]]></title>
-    <link href="https://jakemccrary.com/blog/2013/04/15/manage-your-workspace-with-grids-under-linux-osx-and-windows/"/>
-    <updated>2013-04-15T19:15:00-05:00</updated>
-    <id>https://jakemccrary.com/blog/2013/04/15/manage-your-workspace-with-grids-under-linux-osx-and-windows</id>
-    <content type="html"><![CDATA[<p>I&rsquo;m the type of computer user that wants an organized
-workspace. To me this means having my active applications organized
-into a grid. Efficiently doing this is important to me. Before I jump
-into what tools I use let me give a quick explanation of what
-organized into a grid means to me.</p>
-
-<p>Imagine that your screen is divided both vertically and
-horizontally. To me a good tool for managing windows lets you take
-your active application and move it so it fits in any rectangle formed
-by the edges of your screen and those two lines splitting your
-monitor. This means that with a keystroke you can make the active
-window take up the full screen, half screen, or quarter screen. Below
-I&rsquo;ve listed the tools that let me do that.</p>
-
-<h4>Linux</h4>
-
-<p>I&rsquo;ve switched to using <a href="http://i3wm.org/">i3</a>, a
-<a href="http://en.wikipedia.org/wiki/Tiling_window_manager">tiling window manager</a>
-instead of the default window manager on every distribution I use. When using
-i3 the tiling is done automatically. There are hotkeys for changing
-window layout and for moving focus between windows. The automatic tiling and
-shortcuts take a bit to get used to, but now that I am I can&rsquo;t believe
-I switched to using a tiling window manager sometime in the last eight
-months.</p>
-
-<h4>Windows</h4>
-
-<p>When developing under Windows I use
-<a href="http://winsplit-revolution.com/">Winsplit Revolution</a>. Unlike i3,
-Winsplit Revolution only provides hotkeys snapping windows to
-different locations. This is admittedly more approachable than i3 as
-the grid isn&rsquo;t forced on you. WinSplit Revolution is pretty flexible,
-you can change shortcuts and even define your own grid.</p>
-
-<p>I can&rsquo;t remember when I started using Winsplit Revolution but it has
-become a vital tool for when I&rsquo;m stuck doing development on a Windows
-machine.</p>
-
-<h4>OS X</h4>
-
-<p>My only OS X machine is my 13 inch MacBook Air. I always thought that
-with such a small screen being able to tile my windows wouldn&rsquo;t be as
-useful. I  was completely wrong. If anything it may be more useful
-because of the tiny screen real estate. The 13 inch screen is just wide
-enough to have an editor up on one half and documentation on the
-other.</p>
-
-<p>The tool I use to snap my windows to a grid is
-<a href="http://spectacleapp.com/">Spectacle</a>. Spectacle provides some
-sensible keystrokes for moving windows around. The hotkeys are
-similar to Winsplit Revolution&rsquo;s which makes switching between
-operating systems easy.</p>
-
-<p>If you haven&rsquo;t tried using a tool to help you organize your windows I
-highly recommend that you do. I&rsquo;ve introduced both technical and
-non-technical people to these tools and everyone has enjoyed them.</p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Jake McCrary]]></title>
   <link href="https://jakemccrary.com/atom.xml" rel="self"/>
   <link href="https://jakemccrary.com/"/>
-  <updated>2020-04-13T18:42:29-05:00</updated>
+  <updated>2020-04-21T18:23:07-05:00</updated>
   <id>https://jakemccrary.com/</id>
   <author>
     <name><![CDATA[Jake McCrary]]></name>
@@ -12,6 +12,99 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Using Bash-Preexec for monitoring the runtime of your last command]]></title>
+    <link href="https://jakemccrary.com/blog/2020/04/21/using-bash-preexec-for-monitoring-the-runtime-of-your-last-command/"/>
+    <updated>2020-04-21T18:22:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2020/04/21/using-bash-preexec-for-monitoring-the-runtime-of-your-last-command</id>
+    <content type="html"><![CDATA[<p>My article on <a href="https://jakemccrary.com/blog/2015/05/03/put-the-last-commands-run-time-in-your-bash-prompt/">putting the runtime of your last command into your bash prompt</a> is one of my most surfaced-by-google articles.
+Why is this a great to your prompt?
+To quote my previous article:</p>
+
+<blockquote><p>I’m fairly certain the following scenario has happened to every terminal user. You run a command and, while it is running, realize you should have prefixed it with <code>time</code>. You momentarily struggle with the thought of killing the command and rerunning it with <code>time</code>. You decide not to and the command finishes without you knowing how long it took. You debate running it again.</p>
+
+<p>For the last year I’ve lived in a world without this problem. Upon completion, a command’s approximate run time is displayed in my prompt. It is awesome.</p></blockquote>
+
+<p>I&rsquo;ve been living without the above problem since sometime in 2014 and not having that problem is still awesome.</p>
+
+<p>I have made some changes since 2014.</p>
+
+<p>One change was switching to using <a href="https://github.com/rcaloras/bash-preexec">Bash-Preexec</a> instead of directly using <code>trap</code> and <code>$PROMPT_COMMAND</code> for calling functions to start and stop tracking runtime.
+Bash-Preexec lets you trigger a function (or multiple) right after a command has been read and right before each prompt.</p>
+
+<p>The usage is pretty straight forward.
+In the most basic case, you source <code>bash-preexec.sh</code> and then provide functions named <code>preexec</code>, which is invoked right before a command is executed, and/or <code>precmd</code>, which is invoked just before each prompt.
+<code>bash-preexec.sh</code> can be downloaded from <a href="https://github.com/rcaloras/bash-preexec/">its repo</a>.
+The changes required to move to Bash-Preexec pretty <a href="https://github.com/jakemcc/dotfiles/commit/46fc3dc9d4d7d0d73152c77b7383645af42b3d5d">pretty minimal</a>.</p>
+
+<p>The other change was introducing the script, <a href="https://github.com/jakemcc/dotfiles/blob/9c8c0315f35b55df6cef7e21261e3dcbbfac86e1/home/.bin/format-duration#L3-L4">format-duration</a> by <a href="https://twitter.com/gfredericks_">Gary Fredericks</a>, to humanely format the time.
+This script converts seconds into a more readable string (example: 310 to <code>5m10s</code>)</p>
+
+<p>Here is a screenshot of everything in action (with a reduced prompt, my normal one includes git and other info).</p>
+
+<p><img src="https://jakemccrary.com/images/runtime-humane-example.png" width="320" height="150" title="Command line prompt showing runtimes of previous commands" alt="Command line prompt showing runtimes of previous commands"></p>
+
+<p>Below is a simplified snippet from my <code>.bashrc</code> that provides runtimes using both of these additions.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="k">function</span> preexec <span class="o">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;UNSET&quot;</span> <span class="o">==</span> <span class="s2">&quot;${timer}&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>    <span class="nv">timer</span><span class="o">=</span><span class="nv">$SECONDS</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>    <span class="nv">timer</span><span class="o">=</span><span class="k">${</span><span class="nv">timer</span><span class="k">:-</span><span class="nv">$SECONDS</span><span class="k">}</span>
+</span><span class='line'>  <span class="k">fi</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function</span> precmd <span class="o">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;UNSET&quot;</span> <span class="o">==</span> <span class="s2">&quot;${timer}&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>     <span class="nv">timer_show</span><span class="o">=</span><span class="s2">&quot;0s&quot;</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>    <span class="nv">the_seconds</span><span class="o">=</span><span class="k">$((</span>SECONDS <span class="o">-</span> timer<span class="k">))</span>
+</span><span class='line'>    <span class="c"># use format-duration to make time more human readable</span>
+</span><span class='line'>    <span class="nv">timer_show</span><span class="o">=</span><span class="s2">&quot;$(format-duration seconds $the_seconds)&quot;</span>
+</span><span class='line'>  <span class="k">fi</span>
+</span><span class='line'>  <span class="nv">timer</span><span class="o">=</span><span class="s2">&quot;UNSET&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Add $last_show to the prompt.</span>
+</span><span class='line'><span class="nv">PS1</span><span class="o">=</span><span class="s1">&#39;[last: ${timer_show}s][\w]$ &#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># a bunch more lines until the end of my .bashrc</span>
+</span><span class='line'><span class="c"># where I include .bash-preexec.sh</span>
+</span><span class='line'><span class="o">[</span> -f <span class="s2">&quot;$HOME/.bash-preexec.sh&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">source</span> <span class="s2">&quot;$HOME/.bash-preexec.sh&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>No more wondering about the runtime of commands is great.
+Introducing <code>format-duration</code> made reading the time easier while Bash-Preexec made reading the implementation easier.
+I highly recommend setting up something similar for your shell.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[A retrospective format for remote or co-located teams]]></title>
@@ -2035,27 +2128,6 @@ atom back to the starting value.</p>
 <p>Unfortunately, this periodical has ended after years of publishing once a week. I&rsquo;m bummed. I really enjoyed receiving a short story and poem once a week.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
 </ol>
 </div>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Creating serverless applications with ClojureScript and Firebase]]></title>
-    <link href="https://jakemccrary.com/blog/2018/02/20/creating-serverless-applications-with-clojurescript-and-firebase/"/>
-    <updated>2018-02-20T11:30:00-06:00</updated>
-    <id>https://jakemccrary.com/blog/2018/02/20/creating-serverless-applications-with-clojurescript-and-firebase</id>
-    <content type="html"><![CDATA[<p>Earlier this year, I traveled to India and gave a presentation at
-<a href="http://inclojure.org">IN/Clojure</a>. I talked about building serverless
-ClojureScript applications that use <a href="https://firebase.com">Firebase</a>
-to persist and sync data between clients.</p>
-
-<p>I was pretty pleased with how the talk went. The people who talked to
-me after seemed to enjoy the presentation and were inspired to try out
-some of the techniques and tools I mentioned.</p>
-
-<p>Here is the talk. I hope you enjoy it. It was fun to give.</p>
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/rMqo3lgxe7o" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
 
 ]]></content>
   </entry>

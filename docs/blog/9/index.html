@@ -14,19 +14,17 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" Put together a new release of
-lein-autoexpect today.
-lein-autoexpect is a plugin for Leiningen
-that monitors your source directories for changes and &hellip;" />
+    <meta itemprop="description" content=" My text editor of choice is Emacs. Its extensibility is a major
+contributor to this preference. The ease of adding additional
+functionality means you &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" Put together a new release of
-lein-autoexpect today.
-lein-autoexpect is a plugin for Leiningen
-that monitors your source directories for changes and &hellip;" />
+    <meta name="twitter:description" content=" My text editor of choice is Emacs. Its extensibility is a major
+contributor to this preference. The ease of adding additional
+functionality means you &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -34,18 +32,16 @@ that monitors your source directories for changes and &hellip;" />
     <meta property="og:site_name" content="The Blog of Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/9/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" Put together a new release of
-lein-autoexpect today.
-lein-autoexpect is a plugin for Leiningen
-that monitors your source directories for changes and &hellip;" />
+    <meta property="og:description" content=" My text editor of choice is Emacs. Its extensibility is a major
+contributor to this preference. The ease of adding additional
+functionality means you &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" Put together a new release of
-lein-autoexpect today.
-lein-autoexpect is a plugin for Leiningen
-that monitors your source directories for changes and &hellip;">
+    <meta name="description" content=" My text editor of choice is Emacs. Its extensibility is a major
+contributor to this preference. The ease of adding additional
+functionality means you &hellip;">
 
     
 
@@ -126,6 +122,127 @@ that monitors your source directories for changes and &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/08/10/emacs-capture-shell-command-output-in-temporary-buffer/">Emacs: Capture shell command output in temporary buffer</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2013-08-10T14:33:00-05:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2013</span></span> <span class='time'>2:33 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>My text editor of choice is Emacs. Its extensibility is a major
+contributor to this preference. The ease of adding additional
+functionality means you can customize it to your liking. You should
+not go overboard and change too much of the default behavior but you
+should feel free to add additional features.</p>
+
+<p>I recently found myself often editing a file in emacs and then
+switching to a terminal and running a bash script to see how the
+output changed. This is part of my work flow for shutting down or
+starting new server processes. Since this is something I&rsquo;ll be doing
+quite frequently in the future, I wrote some Emacs Lisp to run the
+shell script and display the output in a temporary buffer. With this
+function in place I no longer have to toggle to a terminal and run a
+command.</p>
+
+<p>I&rsquo;m picky and I wanted this output buffer to have the same behavior as
+the help buffer. That is, I wanted to be able to close the buffer by
+just hitting the letter <code>q</code>. It took me a while to figure out how to
+do this so I thought I would share it here in hopes it might benefit others.</p>
+
+<p>First I&rsquo;ll show the code and then I&rsquo;ll explain what it is doing.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">blog-example</span> <span class="p">()</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">with-output-to-temp-buffer</span> <span class="s">&quot;*blog-example*&quot;</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">shell-command</span> <span class="s">&quot;echo This is an example&quot;</span>
+</span><span class='line'>                   <span class="s">&quot;*blog-example*&quot;</span>
+</span><span class='line'>                   <span class="s">&quot;*Messages*&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">pop-to-buffer</span> <span class="s">&quot;*blog-example*&quot;</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The above snippet defines a function named <code>blog-example</code>. It takes no
+arguments and is interactive (as indicated by the second line calling
+<code>interactive</code>). This call to <code>interactive</code> makes <code>blog-example</code>
+available to be called interactively, meaning you can call it after
+triggering <code>M-x</code>. This is probably a simplification of what is
+actually does, so if you care the documentation is available
+<a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Using-Interactive.html">here</a>.</p>
+
+<p>After the call to <code>interactive</code> we hit the core of this function, the
+call to <code>with-output-to-temp-buffer</code>. This function a buffer name as a first argument
+and additional forms. The output of those forms is put into the named
+buffer.</p>
+
+<p>The form I&rsquo;m passing to <code>with-output-to-temp-buffer</code> is a call to
+<code>shell-command</code>. <code>shell-command</code> will run <code>echo This is an example</code>
+synchronously and redirect stdout to <code>*blog-example*</code> and stderr to
+<code>*Messages*</code>.</p>
+
+<p>The final line opens the buffer and switches focus to it. Now you can
+look at the output and when you are ready to return just hit <code>q</code>.</p>
+
+<p>This is a simplified example but it shows how easy it is to extend
+Emacs functionality. Doing something similar to this made a task I do
+frequently more pleasant.</p>
+
+<p>My use case is a bit more complicated and involves saving the buffer
+I&rsquo;m currently editing and then running a command against the saved
+file. Below is some sample code that does something similar.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">example2</span> <span class="p">()</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">and</span> <span class="p">(</span><span class="nv">buffer-modified-p</span><span class="p">)</span>
+</span><span class='line'>             <span class="p">(</span><span class="nb">y-or-n-p</span> <span class="p">(</span><span class="nb">format</span> <span class="s">&quot;Save file %s? &quot;</span> <span class="p">(</span><span class="nv">buffer-file-name</span><span class="p">))))</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">save-buffer</span><span class="p">))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">with-output-to-temp-buffer</span> <span class="s">&quot;*blog-example*&quot;</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">shell-command</span> <span class="p">(</span><span class="nv">concat</span> <span class="s">&quot;wc -l&quot;</span>
+</span><span class='line'>                           <span class="s">&quot; &quot;</span>
+</span><span class='line'>                           <span class="p">(</span><span class="nv">expand-file-name</span> <span class="p">(</span><span class="nv">buffer-file-name</span><span class="p">)))</span>
+</span><span class='line'>                   <span class="s">&quot;*blog-example*&quot;</span>
+</span><span class='line'>                   <span class="s">&quot;*Messages*&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">pop-to-buffer</span> <span class="s">&quot;*blog-example*&quot;</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -732,59 +849,6 @@ non-technical people to these tools and everyone has enjoyed them.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/07/25/utilities-i-like-autojump/">Utilities I like: autojump</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2011-07-25T00:00:00-05:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2011</span></span> <span class='time'>12:00 am</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="https://github.com/joelthelion/autojump">autojump</a> is a nifty command line tool that enables quicker jumping between directories. I&rsquo;ve been using it for a few months now and miss it when I work other machines.</p>
-
-<p>To jump to a directory you type <code>j SUBSTRING_OF_DIR</code>. Example:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">pwd</span>
-</span><span class='line'>/Users/jmccrary
-</span><span class='line'><span class="nv">$ </span>j jake
-</span><span class='line'>/Users/jmccrary/src/github/jakemcc/jakemccrary.com
-</span><span class='line'><span class="nv">$ </span><span class="nb">pwd</span>
-</span><span class='line'>/Users/jmccrary/src/github/jakemcc/jakemccrary.com
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Above I jumped from my home directory to the root of this website&rsquo;s code. Being able to jump between directories by just remembering a name (or part of a name) is great. This frees me from having to remember full paths or set up aliases.</p>
-
-<p>autojump works by keeping a database of &ldquo;time&rdquo; spent in directories and jumps to the most frequently visited one that match <code>SUBSTRING_OF_DIR</code>. If you are curious as to what that database looks like the tool <code>jumpstat</code> will give you a view.</p>
-
-<p>I used to set up aliases for jumping between projects but now that I&rsquo;ve trained myself to use autojump I don&rsquo;t think I&rsquo;ll ever go back. Not having to do any extra work besides simply entering the root directory of new projects to setup efficient directory movement is great. I think that if you give it a shot for a while you&rsquo;ll find the same benefits.</p>
-
-<p>If you are on a Mac and use <a href="https://github.com/mxcl/homebrew">homebrew</a> you can install by doing <code>brew install autojump</code>. For other platforms check out the <a href="https://github.com/joelthelion/autojump">github</a> page.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//10">&larr; Older</a>
@@ -800,6 +864,10 @@ non-technical people to these tools and everyone has enjoyed them.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/04/21/using-bash-preexec-for-monitoring-the-runtime-of-your-last-command/">Using Bash-Preexec for monitoring the runtime of your last command</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2020/03/16/a-retrospective-format/">A retrospective format for remote or co-located teams</a>
@@ -835,10 +903,6 @@ non-technical people to these tools and everyone has enjoyed them.</p>
     
       <li class="post">
         <a href="/blog/2019/03/20/breaking-change-and-more-in-lein-test-refresh-0-dot-24-dot-0/">Breaking change and more in lein-test-refresh 0.24.1</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/02/13/testing-asynchronous-javascript-with-jasmine/">Testing asynchronous JavaScript with Jasmine</a>
       </li>
     
   </ul>

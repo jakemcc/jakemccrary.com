@@ -14,13 +14,13 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" Leiningen test selectors are great. They allow you to filter what tests run by applying a function to the test&rsquo;s metadata. If that function &hellip;" />
+    <meta itemprop="description" content=" I was recently adding a feature to an internal web UI that caught all unhandled JavaScript errors and reported them to the backend service. The &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" Leiningen test selectors are great. They allow you to filter what tests run by applying a function to the test&rsquo;s metadata. If that function &hellip;" />
+    <meta name="twitter:description" content=" I was recently adding a feature to an internal web UI that caught all unhandled JavaScript errors and reported them to the backend service. The &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -28,12 +28,12 @@
     <meta property="og:site_name" content="The Blog of Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/2/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" Leiningen test selectors are great. They allow you to filter what tests run by applying a function to the test&rsquo;s metadata. If that function &hellip;" />
+    <meta property="og:description" content=" I was recently adding a feature to an internal web UI that caught all unhandled JavaScript errors and reported them to the backend service. The &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" Leiningen test selectors are great. They allow you to filter what tests run by applying a function to the test&rsquo;s metadata. If that function &hellip;">
+    <meta name="description" content=" I was recently adding a feature to an internal web UI that caught all unhandled JavaScript errors and reported them to the backend service. The &hellip;">
 
     
 
@@ -114,6 +114,94 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2019/02/13/testing-asynchronous-javascript-with-jasmine/">Testing asynchronous JavaScript with Jasmine</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2019-02-13T17:46:00-06:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2019</span></span> <span class='time'>5:46 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I was recently adding a feature to an internal web UI that caught all unhandled JavaScript errors and reported them to the backend service. The implementation went smoothly with most of the effort spent figuring out how to test the code that was reporting the errors.</p>
+
+<p>If the error reporting failed, I didn&rsquo;t want to trigger reporting another error or completely lose that error. I decided to log a reporting error to the console. I wanted to write a test showing that errors reporting errors were handled so that a future me, or another developer, didn&rsquo;t accidentally remove this special error handling and enable a never ending cycle of of reporting failed reporting attempts.</p>
+
+<p>It took me a while to figure out how to do this. I searched the web and found various articles about using <a href="https://jasmine.github.io/">Jasmine</a> to do async tests. They were helpful but I also wanted to mock out a function, <code>console.error</code>, and assert that it was called. None of the examples I found were explicit about doing something like this. I forget how many different approaches I tried, but it took a while to figure out the below solution.</p>
+
+<p>Here is the code I wanted to test.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">reportEvent</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">return</span> <span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;/report-event&#39;</span><span class="p">,</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">method</span><span class="o">:</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">headers</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">},</span>
+</span><span class='line'>    <span class="nx">body</span><span class="o">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;ui name&#39;</span><span class="p">,</span> <span class="p">...</span><span class="nx">event</span><span class="p">})</span>
+</span><span class='line'>  <span class="p">}).</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Problem reporting event:&#39;</span><span class="p">,</span> <span class="nx">e</span><span class="p">)});</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It takes an incoming <code>event</code> object and merges it with a default value and posts that to the backing service. <code>fetch</code> returns a Promise and the code handles errors by calling <code>catch</code> on it and logging.</p>
+
+<p>Below is what I eventually came up with for testing the error handling feature of <code>reportEvent</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;reporting events&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;logs errors&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">spyOn</span><span class="p">(</span><span class="nx">console</span><span class="p">,</span> <span class="s1">&#39;error&#39;</span><span class="p">).</span><span class="nx">and</span><span class="p">.</span><span class="nx">callFake</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+</span><span class='line'>      <span class="nx">expect</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">).</span><span class="nx">toHaveBeenCalled</span><span class="p">();</span>
+</span><span class='line'>      <span class="nx">done</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>    <span class="nx">spyOn</span><span class="p">(</span><span class="nb">window</span><span class="p">,</span> <span class="s1">&#39;fetch&#39;</span><span class="p">).</span><span class="nx">and</span><span class="p">.</span><span class="nx">returnValue</span><span class="p">(</span><span class="nx">Promise</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="s1">&#39;error!&#39;</span><span class="p">));</span>
+</span><span class='line'>    <span class="nx">reportEvent</span><span class="p">({</span><span class="nx">level</span><span class="o">:</span> <span class="s1">&#39;WARN&#39;</span><span class="p">,</span> <span class="nx">msg</span><span class="o">:</span> <span class="s1">&#39;ERROR!&#39;</span><span class="p">});</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This uses <code>spyOn</code> to mock out <code>fetch</code> and <code>console.error</code>. The <code>fetch</code> call is told to return a rejected Promise. The <code>console.error</code> spy is a bit more interesting.</p>
+
+<p>The <code>console.error</code> spy is told to call a fake function. That function asserts that the <code>console.error</code> spy has been called. More importantly, it also calls a <code>done</code> function. That <code>done</code> function is a callback passed to your test by Jasmine. Calling <code>done</code> signals that your async work is completed.</p>
+
+<p>If <code>done</code> is never called then Jasmine will fail the test after some amount of time. By calling <code>done</code> in our <code>console.error</code> fake, we&rsquo;re able to signal to Jasmine that we&rsquo;ve handled the rejected promise.</p>
+
+<p>You don&rsquo;t actually need the <code>expect(console.error).toHaveBeenCalled();</code> as <code>done</code> won&rsquo;t be called unless <code>console.error</code> has been called. If you don&rsquo;t have it though then Jasmine will complain there are no assertions in the test.</p>
+
+<p>So there we have it, an example of using some of Jasmine&rsquo;s asynchronous test features with spies. I wish I had found an article like this when I started this task. Hopefully it saves you, and future me, some time.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1170,46 +1258,6 @@ atom back to the starting value.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2018/02/20/creating-serverless-applications-with-clojurescript-and-firebase/">Creating serverless applications with ClojureScript and Firebase</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2018-02-20T11:30:00-06:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2018</span></span> <span class='time'>11:30 am</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Earlier this year, I traveled to India and gave a presentation at
-<a href="http://inclojure.org">IN/Clojure</a>. I talked about building serverless
-ClojureScript applications that use <a href="https://firebase.com">Firebase</a>
-to persist and sync data between clients.</p>
-
-<p>I was pretty pleased with how the talk went. The people who talked to
-me after seemed to enjoy the presentation and were inspired to try out
-some of the techniques and tools I mentioned.</p>
-
-<p>Here is the talk. I hope you enjoy it. It was fun to give.</p>
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/rMqo3lgxe7o" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//3">&larr; Older</a>
@@ -1225,6 +1273,10 @@ some of the techniques and tools I mentioned.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/04/21/using-bash-preexec-for-monitoring-the-runtime-of-your-last-command/">Using Bash-Preexec for monitoring the runtime of your last command</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2020/03/16/a-retrospective-format/">A retrospective format for remote or co-located teams</a>
@@ -1260,10 +1312,6 @@ some of the techniques and tools I mentioned.</p>
     
       <li class="post">
         <a href="/blog/2019/03/20/breaking-change-and-more-in-lein-test-refresh-0-dot-24-dot-0/">Breaking change and more in lein-test-refresh 0.24.1</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/02/13/testing-asynchronous-javascript-with-jasmine/">Testing asynchronous JavaScript with Jasmine</a>
       </li>
     
   </ul>

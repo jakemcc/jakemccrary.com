@@ -120,6 +120,118 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2020/04/21/using-bash-preexec-for-monitoring-the-runtime-of-your-last-command/">Using Bash-Preexec for monitoring the runtime of your last command</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2020-04-21T18:22:00-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2020</span></span> <span class='time'>6:22 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>My article on <a href="/blog/2015/05/03/put-the-last-commands-run-time-in-your-bash-prompt/">putting the runtime of your last command into your bash prompt</a> is one of my most surfaced-by-google articles.
+Why is this a great to your prompt?
+To quote my previous article:</p>
+
+<blockquote><p>I’m fairly certain the following scenario has happened to every terminal user. You run a command and, while it is running, realize you should have prefixed it with <code>time</code>. You momentarily struggle with the thought of killing the command and rerunning it with <code>time</code>. You decide not to and the command finishes without you knowing how long it took. You debate running it again.</p>
+
+<p>For the last year I’ve lived in a world without this problem. Upon completion, a command’s approximate run time is displayed in my prompt. It is awesome.</p></blockquote>
+
+<p>I&rsquo;ve been living without the above problem since sometime in 2014 and not having that problem is still awesome.</p>
+
+<p>I have made some changes since 2014.</p>
+
+<p>One change was switching to using <a href="https://github.com/rcaloras/bash-preexec">Bash-Preexec</a> instead of directly using <code>trap</code> and <code>$PROMPT_COMMAND</code> for calling functions to start and stop tracking runtime.
+Bash-Preexec lets you trigger a function (or multiple) right after a command has been read and right before each prompt.</p>
+
+<p>The usage is pretty straight forward.
+In the most basic case, you source <code>bash-preexec.sh</code> and then provide functions named <code>preexec</code>, which is invoked right before a command is executed, and/or <code>precmd</code>, which is invoked just before each prompt.
+<code>bash-preexec.sh</code> can be downloaded from <a href="https://github.com/rcaloras/bash-preexec/">its repo</a>.
+The changes required to move to Bash-Preexec pretty <a href="https://github.com/jakemcc/dotfiles/commit/46fc3dc9d4d7d0d73152c77b7383645af42b3d5d">pretty minimal</a>.</p>
+
+<p>The other change was introducing the script, <a href="https://github.com/jakemcc/dotfiles/blob/9c8c0315f35b55df6cef7e21261e3dcbbfac86e1/home/.bin/format-duration#L3-L4">format-duration</a> by <a href="https://twitter.com/gfredericks_">Gary Fredericks</a>, to humanely format the time.
+This script converts seconds into a more readable string (example: 310 to <code>5m10s</code>)</p>
+
+<p>Here is a screenshot of everything in action (with a reduced prompt, my normal one includes git and other info).</p>
+
+<p><img src="/images/runtime-humane-example.png" width="320" height="150" title="Command line prompt showing runtimes of previous commands" alt="Command line prompt showing runtimes of previous commands"></p>
+
+<p>Below is a simplified snippet from my <code>.bashrc</code> that provides runtimes using both of these additions.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="k">function</span> preexec <span class="o">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;UNSET&quot;</span> <span class="o">==</span> <span class="s2">&quot;${timer}&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>    <span class="nv">timer</span><span class="o">=</span><span class="nv">$SECONDS</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>    <span class="nv">timer</span><span class="o">=</span><span class="k">${</span><span class="nv">timer</span><span class="k">:-</span><span class="nv">$SECONDS</span><span class="k">}</span>
+</span><span class='line'>  <span class="k">fi</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function</span> precmd <span class="o">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;UNSET&quot;</span> <span class="o">==</span> <span class="s2">&quot;${timer}&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>     <span class="nv">timer_show</span><span class="o">=</span><span class="s2">&quot;0s&quot;</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>    <span class="nv">the_seconds</span><span class="o">=</span><span class="k">$((</span>SECONDS <span class="o">-</span> timer<span class="k">))</span>
+</span><span class='line'>    <span class="c"># use format-duration to make time more human readable</span>
+</span><span class='line'>    <span class="nv">timer_show</span><span class="o">=</span><span class="s2">&quot;$(format-duration seconds $the_seconds)&quot;</span>
+</span><span class='line'>  <span class="k">fi</span>
+</span><span class='line'>  <span class="nv">timer</span><span class="o">=</span><span class="s2">&quot;UNSET&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># Add $last_show to the prompt.</span>
+</span><span class='line'><span class="nv">PS1</span><span class="o">=</span><span class="s1">&#39;[last: ${timer_show}s][\w]$ &#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># a bunch more lines until the end of my .bashrc</span>
+</span><span class='line'><span class="c"># where I include .bash-preexec.sh</span>
+</span><span class='line'><span class="o">[</span> -f <span class="s2">&quot;$HOME/.bash-preexec.sh&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">source</span> <span class="s2">&quot;$HOME/.bash-preexec.sh&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>No more wondering about the runtime of commands is great.
+Introducing <code>format-duration</code> made reading the time easier while Bash-Preexec made reading the implementation easier.
+I highly recommend setting up something similar for your shell.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2020/03/16/a-retrospective-format/">A retrospective format for remote or co-located teams</a></h1>
     
     
@@ -1359,94 +1471,6 @@ I look forward to customizing the firmware to make the key layout fit my usage.<
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2019/02/13/testing-asynchronous-javascript-with-jasmine/">Testing asynchronous JavaScript with Jasmine</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2019-02-13T17:46:00-06:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2019</span></span> <span class='time'>5:46 pm</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I was recently adding a feature to an internal web UI that caught all unhandled JavaScript errors and reported them to the backend service. The implementation went smoothly with most of the effort spent figuring out how to test the code that was reporting the errors.</p>
-
-<p>If the error reporting failed, I didn&rsquo;t want to trigger reporting another error or completely lose that error. I decided to log a reporting error to the console. I wanted to write a test showing that errors reporting errors were handled so that a future me, or another developer, didn&rsquo;t accidentally remove this special error handling and enable a never ending cycle of of reporting failed reporting attempts.</p>
-
-<p>It took me a while to figure out how to do this. I searched the web and found various articles about using <a href="https://jasmine.github.io/">Jasmine</a> to do async tests. They were helpful but I also wanted to mock out a function, <code>console.error</code>, and assert that it was called. None of the examples I found were explicit about doing something like this. I forget how many different approaches I tried, but it took a while to figure out the below solution.</p>
-
-<p>Here is the code I wanted to test.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">function</span> <span class="nx">reportEvent</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">return</span> <span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;/report-event&#39;</span><span class="p">,</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">method</span><span class="o">:</span> <span class="s1">&#39;POST&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nx">headers</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;Content-Type&#39;</span><span class="o">:</span> <span class="s1">&#39;application/json&#39;</span><span class="p">},</span>
-</span><span class='line'>    <span class="nx">body</span><span class="o">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;ui name&#39;</span><span class="p">,</span> <span class="p">...</span><span class="nx">event</span><span class="p">})</span>
-</span><span class='line'>  <span class="p">}).</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Problem reporting event:&#39;</span><span class="p">,</span> <span class="nx">e</span><span class="p">)});</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>It takes an incoming <code>event</code> object and merges it with a default value and posts that to the backing service. <code>fetch</code> returns a Promise and the code handles errors by calling <code>catch</code> on it and logging.</p>
-
-<p>Below is what I eventually came up with for testing the error handling feature of <code>reportEvent</code>.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">describe</span><span class="p">(</span><span class="s1">&#39;reporting events&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>  <span class="nx">it</span><span class="p">(</span><span class="s1">&#39;logs errors&#39;</span><span class="p">,</span> <span class="p">(</span><span class="nx">done</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nx">spyOn</span><span class="p">(</span><span class="nx">console</span><span class="p">,</span> <span class="s1">&#39;error&#39;</span><span class="p">).</span><span class="nx">and</span><span class="p">.</span><span class="nx">callFake</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
-</span><span class='line'>      <span class="nx">expect</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">).</span><span class="nx">toHaveBeenCalled</span><span class="p">();</span>
-</span><span class='line'>      <span class="nx">done</span><span class="p">();</span>
-</span><span class='line'>    <span class="p">});</span>
-</span><span class='line'>    <span class="nx">spyOn</span><span class="p">(</span><span class="nb">window</span><span class="p">,</span> <span class="s1">&#39;fetch&#39;</span><span class="p">).</span><span class="nx">and</span><span class="p">.</span><span class="nx">returnValue</span><span class="p">(</span><span class="nx">Promise</span><span class="p">.</span><span class="nx">reject</span><span class="p">(</span><span class="s1">&#39;error!&#39;</span><span class="p">));</span>
-</span><span class='line'>    <span class="nx">reportEvent</span><span class="p">({</span><span class="nx">level</span><span class="o">:</span> <span class="s1">&#39;WARN&#39;</span><span class="p">,</span> <span class="nx">msg</span><span class="o">:</span> <span class="s1">&#39;ERROR!&#39;</span><span class="p">});</span>
-</span><span class='line'>  <span class="p">});</span>
-</span><span class='line'><span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This uses <code>spyOn</code> to mock out <code>fetch</code> and <code>console.error</code>. The <code>fetch</code> call is told to return a rejected Promise. The <code>console.error</code> spy is a bit more interesting.</p>
-
-<p>The <code>console.error</code> spy is told to call a fake function. That function asserts that the <code>console.error</code> spy has been called. More importantly, it also calls a <code>done</code> function. That <code>done</code> function is a callback passed to your test by Jasmine. Calling <code>done</code> signals that your async work is completed.</p>
-
-<p>If <code>done</code> is never called then Jasmine will fail the test after some amount of time. By calling <code>done</code> in our <code>console.error</code> fake, we&rsquo;re able to signal to Jasmine that we&rsquo;ve handled the rejected promise.</p>
-
-<p>You don&rsquo;t actually need the <code>expect(console.error).toHaveBeenCalled();</code> as <code>done</code> won&rsquo;t be called unless <code>console.error</code> has been called. If you don&rsquo;t have it though then Jasmine will complain there are no assertions in the test.</p>
-
-<p>So there we have it, an example of using some of Jasmine&rsquo;s asynchronous test features with spies. I wish I had found an article like this when I started this task. Hopefully it saves you, and future me, some time.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//2">&larr; Older</a>
@@ -1460,6 +1484,10 @@ I look forward to customizing the firmware to make the key layout fit my usage.<
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/04/21/using-bash-preexec-for-monitoring-the-runtime-of-your-last-command/">Using Bash-Preexec for monitoring the runtime of your last command</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2020/03/16/a-retrospective-format/">A retrospective format for remote or co-located teams</a>
@@ -1495,10 +1523,6 @@ I look forward to customizing the firmware to make the key layout fit my usage.<
     
       <li class="post">
         <a href="/blog/2019/03/20/breaking-change-and-more-in-lein-test-refresh-0-dot-24-dot-0/">Breaking change and more in lein-test-refresh 0.24.1</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/02/13/testing-asynchronous-javascript-with-jasmine/">Testing asynchronous JavaScript with Jasmine</a>
       </li>
     
   </ul>
