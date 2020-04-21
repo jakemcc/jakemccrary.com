@@ -6,6 +6,9 @@ comments: true
 published: true
 categories:
 - bash
+- linux
+- osx
+- command-line
 ---
 
 I'm fairly certain the following scenario has happened to every
