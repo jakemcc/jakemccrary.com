@@ -28,16 +28,19 @@ The system also had quite a bit of movement to it.
 
 I read some more online and saw a photo somewhere of someone that used hooks to hang their board off the pull up bar itself.
 This moves the hangboard so your weight is more under the bar.
+Here is how you do it.
 
-To do this, go buy a 2x10 or larger and cut it so that it spans the width of your doorway.
-Mount your hangboard onto the board.
-Then, take a bunch of hooks typically used for hanging bicycles up in a garage and screw them into the top of your 2x10.
-Adjust the hooks so that they are all pulling on the pull-up bar crossing your doorway.
-Next, find some padding, I used towels, and put the padding between the pull-up bar and 2x10 and the door trim.
-This is to protect the trim from being crushed.
+1. Buy a 2x10 word board (or other 2 by something that is big enough for whatever you want to attach to it).
+1. Cut the board so it spans the width of your doorway plus a few extra inches
+1. Mount your hangboard onto the board.
+1. Take a [bunch of hooks](https://www.homedepot.com/p/Everbilt-Screw-in-Steel-Bicycle-Hook-with-Vinyl-Coating-25-lbs-21407/206585761) typically used for hanging bicycles up in a garage and screw them into the top of your 2x10.
+1. Adjust the hooks so that they are all pulling on the pull-up bar crossing your doorway.
+1. Find some padding, I used towels, and put the padding between the pull-up bar and 2x10 and the door trim.
+1. Hang on your hangboard and get stronger.
 
+The padding is to protect the door trim from the hard surfaces of the pull-up bar and wood.
 This board and hook method was much easier to construct than the other pull-up bar method and feels much more solid.
 I'm not going to trust this setup for doing heavy, two-handed weighted hangs but it is plenty solid for pulling hard with one arm or hanging with my body weight off of two.
 
-INSERT IMAGE
+![Hangboard mounted using hooks and a pull-up bar](/images/hangboard.png)
 
