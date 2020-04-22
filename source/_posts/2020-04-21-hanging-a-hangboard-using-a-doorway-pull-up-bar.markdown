@@ -29,11 +29,11 @@ The system also had quite a bit of movement to it.
 I read some more online and saw a photo somewhere of someone that used hooks to hang their board off the pull up bar itself.
 This moves the hangboard so your weight is more under the bar.
 
-To do this, go buy a 2x6 or larger and cut it so that it spans the width of your doorway.
+To do this, go buy a 2x10 or larger and cut it so that it spans the width of your doorway.
 Mount your hangboard onto the board.
-Then, take a bunch of hooks typically used for hanging bicycles up in a garage and screw them into the top of your 2x6.
+Then, take a bunch of hooks typically used for hanging bicycles up in a garage and screw them into the top of your 2x10.
 Adjust the hooks so that they are all pulling on the pull-up bar crossing your doorway.
-Next, find some padding, I used towels, and put the padding between the pull-up bar and 2x6 and the door trim.
+Next, find some padding, I used towels, and put the padding between the pull-up bar and 2x10 and the door trim.
 This is to protect the trim from being crushed.
 
 This board and hook method was much easier to construct than the other pull-up bar method and feels much more solid.
