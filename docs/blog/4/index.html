@@ -14,13 +14,13 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" I need to know when my external IP address changes. Whenever it changes, I need to update an IP whitelist and need to re-login to a few sites. I &hellip;" />
+    <meta itemprop="description" content=" I recently found myself in a situation where I needed to confirm that a process took in a tab separated file, did some processing, and then output a &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" I need to know when my external IP address changes. Whenever it changes, I need to update an IP whitelist and need to re-login to a few sites. I &hellip;" />
+    <meta name="twitter:description" content=" I recently found myself in a situation where I needed to confirm that a process took in a tab separated file, did some processing, and then output a &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -28,12 +28,12 @@
     <meta property="og:site_name" content="The Blog of Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/4/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" I need to know when my external IP address changes. Whenever it changes, I need to update an IP whitelist and need to re-login to a few sites. I &hellip;" />
+    <meta property="og:description" content=" I recently found myself in a situation where I needed to confirm that a process took in a tab separated file, did some processing, and then output a &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" I need to know when my external IP address changes. Whenever it changes, I need to update an IP whitelist and need to re-login to a few sites. I &hellip;">
+    <meta name="description" content=" I recently found myself in a situation where I needed to confirm that a process took in a tab separated file, did some processing, and then output a &hellip;">
 
     
 
@@ -114,6 +114,120 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/05/29/using-comm-to-verify-matching-content/">Using comm to verify file content matches</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-05-29T10:45:00-05:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>10:45 am</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I recently found myself in a situation where I needed to confirm that a process took in a tab separated file, did some processing, and then output a new file containing the original columns with some additional ones. The feature I was adding allowed the process to die and restart while processing the input file and pick up where it left off.</p>
+
+<p>I needed to confirm the output had data for every line in the input. I reached to the command line tool <code>comm</code>.</p>
+
+<p>Below is a made up input file.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>UNIQUE_ID    USER
+</span><span class='line'>1 38101838
+</span><span class='line'>2 19183819
+</span><span class='line'>3 19123811
+</span><span class='line'>4 10348018
+</span><span class='line'>5 19881911
+</span><span class='line'>6 29182918</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And here is some made up output.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>UNIQUE_ID    USER    MESSAGE
+</span><span class='line'>1 38101838    A01
+</span><span class='line'>2 19183819    A05
+</span><span class='line'>3 19123811    A02
+</span><span class='line'>4 10348018    A01
+</span><span class='line'>5 19881911    A02
+</span><span class='line'>6 29182918    A05</span></code></pre></td></tr></table></div></figure>
+
+
+<p>With files this size, it would be easy enough to check visually. In my testing, I was dealing with files that had thousands of lines. This is too many to check by hand. It is a perfect amount for <code>comm</code>.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Comm">comm</a> reads two files as input and then outputs three columns. The first column contains lines found only in the first file, the second column contains lines only found in the second, and the last column contains lines in both. If it is easier for you to think about it as set operations, the first two columns are similar to performing two set differences and the third is similar to set intersection. Below is an example adapted from Wikipedia showing its behavior.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cat foo.txt
+</span><span class='line'>apple
+</span><span class='line'>banana
+</span><span class='line'>eggplant
+</span><span class='line'>$ cat bar.txt
+</span><span class='line'>apple
+</span><span class='line'>banana
+</span><span class='line'>banana
+</span><span class='line'>zucchini
+</span><span class='line'>$ comm foo.txt bar.txt
+</span><span class='line'>                  apple
+</span><span class='line'>                  banana
+</span><span class='line'>          banana
+</span><span class='line'>eggplant
+</span><span class='line'>          zucchini</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So how is this useful? Well, you can also tell <code>comm</code> to suppress outputting specific columns.  If we send the common columns from the input and output file to <code>comm</code> and suppress <code>comm</code>&rsquo;s third column then anything printed to the screen is a problem. Anything printed to the screen was found in one of the files and not the other. We&rsquo;ll select the common columns using cut and, since comm expects input to be sorted, then sort using <code>sort</code>. Let&rsquo;s see what happens.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ comm -3 &lt;(cut -f 1,2 input.txt | sort) &lt;(cut -f 1,2 output.txt | sort)
+</span><span class='line'>$</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Success! Nothing was printed to the console, so there is nothing unique in either file.</p>
+
+<p><code>comm</code> is a useful tool to have in your command line toolbox.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1568,72 +1682,6 @@ higher.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/08/28/better-code-reloading-in-a-cloure-web-server/">Better code reloading in a Clojure web server</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-08-28T17:20:00-05:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>5:20 pm</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>A couple weeks ago I released
-<a href="https://github.com/jakemcc/reload">com.jakemccrary/reload</a>. This tiny
-library provides a ring middleware that uses
-<a href="https://github.com/clojure/tools.namespace">org.clojure/tools.namespace</a>
- to reload changed Clojure code on incoming http requests.</p>
-
-<p>This middleware was created because my team was running into problems
-using ring&rsquo;s <code>wrap-reload</code> middleware. Unfortunately these problems
-happened about nine months ago and, since I didn&rsquo;t write this post
-back then, I&rsquo;ve since forgotten these problems. Regardless, this
-project has been used since the beginning of this year and has helped
-make my team&rsquo;s development workflow smoother. If you are running into
-problems it might help you too.</p>
-
-<h3>Usage</h3>
-
-<p>If you&rsquo;d like to give it a shot, then add the <a href="https://clojars.org/com.jakemccrary/reload">latest version</a> (at the time of writing <code>[com.jakemccrary/reload "0.1.0"]</code>) to your project.clj.</p>
-
-<p>Require <code>com.jakemccrary.middleware.reload</code> and wrap your handler with <code>wrap-reload</code>.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">ns </span><span class="nv">example</span>
-</span><span class='line'>  <span class="p">(</span><span class="ss">:require</span>
-</span><span class='line'>   <span class="c1">;; more deps</span>
-</span><span class='line'>   <span class="p">[</span><span class="nv">com.jakemccrary.middleware.reload</span> <span class="ss">:as</span> <span class="nv">reload</span><span class="p">]))</span>
-</span><span class='line'>
-</span><span class='line'><span class="c1">;; wherever you are setting up your middleware stack</span>
-</span><span class='line'><span class="p">(</span><span class="nf">reload/wrap-reload</span> <span class="nv">routes</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>reload/wrap-reload</code> optionally takes a list of directories to monitor
-as a second parameter. By default it reloads the <code>src</code> directory.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//5">&larr; Older</a>
@@ -1649,6 +1697,10 @@ as a second parameter. By default it reloads the <code>src</code> directory.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/04/26/hanging-a-hangboard-using-a-doorway-pull-up-bar/">How to hang a hangboard using a doorway pull-up bar</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2020/04/21/using-bash-preexec-for-monitoring-the-runtime-of-your-last-command/">Using Bash-Preexec for monitoring the runtime of your last command</a>
@@ -1684,10 +1736,6 @@ as a second parameter. By default it reloads the <code>src</code> directory.</p>
     
       <li class="post">
         <a href="/blog/2019/04/30/how-i-use-social-media/">How I use social media</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/03/20/breaking-change-and-more-in-lein-test-refresh-0-dot-24-dot-0/">Breaking change and more in lein-test-refresh 0.24.1</a>
       </li>
     
   </ul>

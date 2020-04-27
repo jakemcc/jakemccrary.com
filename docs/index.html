@@ -120,6 +120,75 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2020/04/26/hanging-a-hangboard-using-a-doorway-pull-up-bar/">How to hang a hangboard using a doorway pull-up bar</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2020-04-26T20:42:00-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>26</span><span class='date-suffix'>th</span>, <span class='date-year'>2020</span></span> <span class='time'>8:42 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>If you&rsquo;ve browsed the <a href="/adventure">adventure</a> section of my website you know I&rsquo;m a climber.
+Currently, the climbing gyms in Chicago are closed due to COVID-19 concerns.
+This has put a damper on my training but I own a hangboard and have been able to keep training my fingers at home.</p>
+
+<p>A hangboard allows you to apply stress to your fingers in a measured and controlled fashion.
+It is a vital tool for a climber who is serious about getting stronger.
+It is also a great rehab tool for coming back from injuries.</p>
+
+<p>Below is my hangboard.</p>
+
+<p><img src="/images/hangboard.png" alt="Hangboard mounted using hooks and a pull-up bar" /></p>
+
+<p>As you can see from the photo, I&rsquo;ve hung mine using a doorway pull-up bar and a bunch of hooks.
+This lets me easily take it down and causes no permanent damage to anything in my apartment.
+The towels are there to make sure the door frame isn&rsquo;t crushed by any of the hard pieces.</p>
+
+<p>Originally, I followed <a href="https://www.youtube.com/watch?v=Cu-MrncHpJo">this video</a> to mount it using some pipe and shoving the pipe into the pull-up bar.
+This setup made me uncomfortable as the forces on the pull-up bar were far away from the intended location.
+This resulted in a lot of flexing and I was concerned about how the pull-up bar was acting on the frame.</p>
+
+<p>I searched online for other ideas and saw a setup that used hooks.
+This was appealing to me as it moves your weight under the bar.
+A quick trip to Home Depot and a bit of easy construction and now I can keep up my finger strength when stuck at home.
+Here are the steps to build one.</p>
+
+<ol>
+<li>Buy a 2 inch x 10 inch wood board (or some other 2 inch x N inch board that is big enough for whatever you want to attach to it).</li>
+<li>Cut the board so it spans the width of your doorway plus a few extra inches. Home Depot can do this for you.</li>
+<li>Mount your hangboard to the board.</li>
+<li>Take <a href="https://www.homedepot.com/p/Everbilt-Screw-in-Steel-Bicycle-Hook-with-Vinyl-Coating-25-lbs-21407/206585761">hooks</a>, typically used for hanging bicycles up in a garage, and screw them into the top of your 2-in x 10-in.</li>
+<li>Hang the hooks over the pull-up bar. Adjust the hooks so each is pulling on the bar.</li>
+<li>Find some padding, I used towels, and put the padding between the door trim and other hard surfaces.</li>
+<li>Hang on your hangboard and get stronger.</li>
+</ol>
+
+
+<p>The board and hook method was much easier to construct than the other pull-up bar method and feels much more solid.
+The pull-up bar isn&rsquo;t rated for too much weight, so I&rsquo;m not going to do any super heavy, two-handed hangs but it is plenty solid for other hangboard exercises.</p>
+
+<p>If you&rsquo;re a climber and don&rsquo;t want to permanently mount a handboard, I&rsquo;d highly recommend this.
+If you don&rsquo;t own a hangboard, I pick up something from <a href="https://www.tensionclimbing.com/hangboards/">Tension Climbing</a>.
+Their wooden boards are easy on the finger tips and have all the edge sizes you&rsquo;ll need.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2020/04/21/using-bash-preexec-for-monitoring-the-runtime-of-your-last-command/">Using Bash-Preexec for monitoring the runtime of your last command</a></h1>
     
     
@@ -1392,85 +1461,6 @@ I look forward to customizing the firmware to make the key layout fit my usage.<
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2019/03/20/breaking-change-and-more-in-lein-test-refresh-0-dot-24-dot-0/">Breaking change and more in lein-test-refresh 0.24.1</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2019-03-20T21:30:00-05:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2019</span></span> <span class='time'>9:30 pm</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Today I released <a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a> <code>0.24.1</code><sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>. I don&rsquo;t always announce new lein-test-refresh versions with an article but this release breaks some existing behavior so I thought it was worth it.</p>
-
-<p>Each of these changes is the direct result of interacting with four different <code>lein-test-refresh</code> users. Some of this took place on GitHub and others through email. Thanks to all of you for taking the time to think about improvements and notice oddities and bring them to my attention.</p>
-
-<h3>Breaking change: Monitoring keystrokes to perform actions</h3>
-
-<p>Prior to this release, if you hit Ctrl-D then STDIN reads an EOF and <code>test-refresh</code> would quit. With version 0.24.1, <code>test-refresh</code> no longer does that. Instead, it stops monitoring for input and just keeps running tests. Since it stops monitoring for input it no longer notices when you hit Enter to cause your tests to rerun. You can still stop <code>lein test-refresh</code> by sending a SIGINT with Ctrl-C.</p>
-
-<p>This change was made because there is some combination of environments where if <code>test-refresh</code> execs <code>/bin/bash</code> then it receives an EOF on STDIN. Before this change, that means <code>test-refresh</code> would quit unexpectedly. Now it will keep going.</p>
-
-<p>Thanks <a href="https://github.com/cloojure">Alan Thompson</a> for bringing this to my attention and taking the time to help diagnose the problem.</p>
-
-<h3>You can supply your own narrowing test selector</h3>
-
-<p>Being able to tell <code>test-refresh</code> to narrow its focus by adding <code>:test-refresh/focus</code> as metadata on a test or namespace has quickly become a favorite feature of many users. Now you can configure a shorter keyword by specifying configuration in your profile. See the <a href="https://github.com/jakemcc/lein-test-refresh/blob/1b5165660d9e40d9394809a95b148ec758a6d56b/sample.project.clj#L61-L65">sample project.clj</a> for how to set this up.</p>
-
-<p>Thanks <a href="https://github.com/metametadata">Yuri Govorushchenko</a> for the suggestion.</p>
-
-<h3>Experimental: Run in a repl</h3>
-
-<p>I&rsquo;ve turned down this feature in the past but a narrower request came up and I thought it seemed useful. <code>test-refresh</code> now exposes a function you can call in a repl to run <code>test-refresh</code> in that repl. This makes the repl useless for any other task. To do this, first add <code>lein-test-refresh</code> as a dependency instead of a plugin to your project.clj. Then, require the namespace and call the function passing in one or more paths to your test directories. Example below.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nv">user=&gt;</span> <span class="p">(</span><span class="nf">require</span> <span class="ss">&#39;com.jakemccrary.test-refresh</span><span class="p">)</span>
-</span><span class='line'><span class="nv">nil</span>
-</span><span class='line'><span class="nv">user=&gt;</span> <span class="p">(</span><span class="nf">com.jakemccrary.test-refresh/run-in-repl</span> <span class="s">&quot;test&quot;</span><span class="p">)</span>
-</span><span class='line'><span class="nv">*********************************************</span>
-</span><span class='line'><span class="nv">***************</span> <span class="nv">Running</span> <span class="nv">tests</span> <span class="nv">***************</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><a href="https://github.com/jakemcc/lein-test-refresh/issues/80">This request</a> was done so that you can run it in Cursive&rsquo;s repl and gain the ability to click on stacktraces. Thanks <a href="https://github.com/klauswuestefeld">Klaus Wuestefeld</a> for bringing this up again with a really solid and focused use case.</p>
-
-<h3>Better output on exceptions while reloading</h3>
-
-<p>This was a <a href="https://github.com/jakemcc/lein-test-refresh/pull/81">pull request</a> from <a href="https://github.com/minhtuannguyen">Minh Tuan Nguyen</a>. Now figuring out where to look for the error will be a little easier.</p>
-
-<h2>Thank you</h2>
-
-<p>Thanks to all the users of lein-test-refresh. I&rsquo;ve found it to be very valuable to the way I work and I&rsquo;m very happy that others do as well.</p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>This was originally 0.24.0 but that had a bug in it. Sorry about that.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//2">&larr; Older</a>
@@ -1484,6 +1474,10 @@ I look forward to customizing the firmware to make the key layout fit my usage.<
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/04/26/hanging-a-hangboard-using-a-doorway-pull-up-bar/">How to hang a hangboard using a doorway pull-up bar</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2020/04/21/using-bash-preexec-for-monitoring-the-runtime-of-your-last-command/">Using Bash-Preexec for monitoring the runtime of your last command</a>
@@ -1519,10 +1513,6 @@ I look forward to customizing the firmware to make the key layout fit my usage.<
     
       <li class="post">
         <a href="/blog/2019/04/30/how-i-use-social-media/">How I use social media</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/03/20/breaking-change-and-more-in-lein-test-refresh-0-dot-24-dot-0/">Breaking change and more in lein-test-refresh 0.24.1</a>
       </li>
     
   </ul>

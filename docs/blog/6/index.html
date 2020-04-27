@@ -14,19 +14,17 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" I was recently inspired by a post on a mailing list to make the TDD
-cycle with clojure.test and
-lein-test-refresh even
-faster. lein-test-refresh is a &hellip;" />
+    <meta itemprop="description" content=" Recently my team deployed a new version of our ClojureScript UI and it
+had a minor bug. It was trivial to fix the problem, a ClojureScript
+build &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" I was recently inspired by a post on a mailing list to make the TDD
-cycle with clojure.test and
-lein-test-refresh even
-faster. lein-test-refresh is a &hellip;" />
+    <meta name="twitter:description" content=" Recently my team deployed a new version of our ClojureScript UI and it
+had a minor bug. It was trivial to fix the problem, a ClojureScript
+build &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -34,18 +32,16 @@ faster. lein-test-refresh is a &hellip;" />
     <meta property="og:site_name" content="The Blog of Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/6/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" I was recently inspired by a post on a mailing list to make the TDD
-cycle with clojure.test and
-lein-test-refresh even
-faster. lein-test-refresh is a &hellip;" />
+    <meta property="og:description" content=" Recently my team deployed a new version of our ClojureScript UI and it
+had a minor bug. It was trivial to fix the problem, a ClojureScript
+build &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" I was recently inspired by a post on a mailing list to make the TDD
-cycle with clojure.test and
-lein-test-refresh even
-faster. lein-test-refresh is a &hellip;">
+    <meta name="description" content=" Recently my team deployed a new version of our ClojureScript UI and it
+had a minor bug. It was trivial to fix the problem, a ClojureScript
+build &hellip;">
 
     
 
@@ -126,6 +122,103 @@ faster. lein-test-refresh is a &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/12/19/clojurescript-treat-warnings-as-errors/">ClojureScript: Treat warnings as errors</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-12-19T17:09:00-06:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>19</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:09 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Recently my team deployed a new version of our ClojureScript UI and it
+had a minor bug. It was trivial to fix the problem, a ClojureScript
+build warning pointed us to the cause. As a result we started thinking
+it would be nice to have build warnings count as errors and fail our
+ClojureScript build.</p>
+
+<p>We use <a href="http://leiningen.org/">Leiningen</a> (version 2.5.3) and
+<a href="https://github.com/emezeske/lein-cljsbuild">lein-cljsbuild</a> (version
+1.1.1). After some searching we found that lein-cljsbuild supports
+<a href="https://github.com/emezeske/lein-cljsbuild#custom-warning-handlers">specifying custom warning handlers</a>
+as the value to the <code>:warning-handlers</code> key. The lein-cljsbuild README even
+provides an example, which we took and added a <code>(System/exit 1)</code> to
+the end of it. This resulted in a build configuration that looked similar to below.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">{</span><span class="ss">:id</span> <span class="s">&quot;prod&quot;</span>
+</span><span class='line'> <span class="ss">:warning-handlers</span> <span class="p">[(</span><span class="k">fn </span><span class="p">[</span><span class="nv">warning-type</span> <span class="nv">env</span> <span class="nv">extra</span><span class="p">]</span>
+</span><span class='line'>                      <span class="p">(</span><span class="nb">when-let </span><span class="p">[</span><span class="nv">s</span> <span class="p">(</span><span class="nf">cljs.analyzer/error-message</span> <span class="nv">warning-type</span> <span class="nv">extra</span><span class="p">)]</span>
+</span><span class='line'>                        <span class="p">(</span><span class="nb">binding </span><span class="p">[</span><span class="nv">*out*</span> <span class="nv">*err*</span><span class="p">]</span>
+</span><span class='line'>                          <span class="p">(</span><span class="nb">println </span><span class="s">&quot;WARNING:&quot;</span> <span class="p">(</span><span class="nf">cljs.analyzer/message</span> <span class="nv">env</span> <span class="nv">s</span><span class="p">)))</span>
+</span><span class='line'>                        <span class="p">(</span><span class="nf">System/exit</span> <span class="mi">1</span><span class="p">)))]</span>
+</span><span class='line'> <span class="ss">:source-paths</span> <span class="p">[</span><span class="s">&quot;src/cljc&quot;</span> <span class="s">&quot;src/cljs&quot;</span><span class="p">]</span>
+</span><span class='line'> <span class="ss">:compiler</span> <span class="p">{</span><span class="ss">:output-to</span> <span class="s">&quot;resources/public/js/compiled/ui.js&quot;</span>
+</span><span class='line'>            <span class="ss">:externs</span> <span class="p">[</span><span class="s">&quot;resources/intercom-externs.js&quot;</span>
+</span><span class='line'>                      <span class="s">&quot;resources/mixpanel-externs.js&quot;</span><span class="p">]</span>
+</span><span class='line'>            <span class="ss">:optimizations</span> <span class="ss">:advanced</span><span class="p">}}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This worked! Well, it sort of worked. Our build failed whenever there
+was a warning but now we were seeing spurious warnings. We saw &ldquo;Use of
+undeclared Var&rdquo; warnings when functions created in a <code>letfn</code> where
+calling each other. Definitely not a situation that warrants a warning
+and definitely not a build failure.</p>
+
+<p>We weren&rsquo;t seeing this warning before so we opened ClojureScript&rsquo;s
+source and found the
+<a href="https://github.com/clojure/clojurescript/blob/452edf43927566cc0ea0a3846706c0294cef235d/src/main/clojure/cljs/analyzer.cljc#L360-L366">default warning handler</a>.
+The default handler checks that <code>warning-type</code> has a truthy value in
+the map <code>*cljs-warnings*</code>. Inspired by the default handler we added
+the same check to the start of our warning handler.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="ss">:warning-handlers</span> <span class="p">[(</span><span class="k">fn </span><span class="p">[</span><span class="nv">warning-type</span> <span class="nv">env</span> <span class="nv">extra</span><span class="p">]</span>
+</span><span class='line'>                     <span class="p">(</span><span class="nb">when </span><span class="p">(</span><span class="nf">warning-type</span> <span class="nv">cljs.analyzer/*cljs-warnings*</span><span class="p">)</span>
+</span><span class='line'>                       <span class="p">(</span><span class="nb">when-let </span><span class="p">[</span><span class="nv">s</span> <span class="p">(</span><span class="nf">cljs.analyzer/error-message</span> <span class="nv">warning-type</span> <span class="nv">extra</span><span class="p">)]</span>
+</span><span class='line'>                         <span class="p">(</span><span class="nb">binding </span><span class="p">[</span><span class="nv">*out*</span> <span class="nv">*err*</span><span class="p">]</span>
+</span><span class='line'>                           <span class="p">(</span><span class="nb">println </span><span class="s">&quot;WARNING:&quot;</span> <span class="p">(</span><span class="nf">cljs.analyzer/message</span> <span class="nv">env</span> <span class="nv">s</span><span class="p">)))</span>
+</span><span class='line'>                         <span class="p">(</span><span class="nf">System/exit</span> <span class="mi">1</span><span class="p">))))]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Success! Now we no longer get incorrect warnings when compiling our
+<code>letfn</code> form and our build still fails if a warning occurs. Now we can
+build and deploy with a little more confidence.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1302,171 +1395,6 @@ available. Now <code>terminal-notifier</code> no longer hangs when invoked insid
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/03/31/my-home-work-space/">My home work space</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-03-31T20:09:00-05:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2015</span></span> <span class='time'>8:09 pm</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&rsquo;ve been working remotely for about a year and a half. In that time,
-I&rsquo;ve worked from many locations but most of my time has been spent
-working from my apartment in Chicago. During this time I&rsquo;ve tweaked my
-environment by building a standing desk, building a keyboard, and
-changed my monitor stands. Below is a my desk (click for larger
-image).</p>
-
-<p><a href="/images/my-desk.png"><img src="/images/my-desk-small.png" title="Picture of my desk" alt="My Desk" /></a></p>
-
-<h2>The Desk</h2>
-
-<p>I built my own desk using the
-<a href="http://www.ikea.com/us/en/catalog/products/50106773/">Gerton</a> table
-top from Ikea and the
-<a href="http://www.ergoprise.com/s2s-height-adjustable-desk-base-new-improved/">S2S Height Adjustable Desk Base</a>
-from <a href="http://www.ergoprise.com/">Ergoprise</a>. I originally received a
-defective part from Ergoprise and after a couple emails I was sent a
-replacement part. Once I had working parts, attaching the legs to the
-table top was straightforward. The desk legs let me adjust the height
-of my desk so I can be sitting or standing comfortably.</p>
-
-<h2>The Monitors</h2>
-
-<p>I have two 27 inch Apple Cinema displays that are usually connected to
-a 15 inch MacBook Pro. The picture doesn&rsquo;t show it, but I actively use
-all the monitors.</p>
-
-<p>My laptop is raised by a
-<a href="http://www.amazon.com/gp/product/B000OOYECC/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B000OOYECC&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=L5THOTZHJ6FPJSAL">mStand Laptop Stand</a>.
-While I&rsquo;m sitting this stand puts the laptop at a comfortable height.
-I highly recommend getting one.</p>
-
-<p>The middle monitor, the one I use the most, has had the standard stand
-(you can see it in the right monitor) replaced with an
-<a href="http://www.amazon.com/gp/product/B00BZC05WU/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B00BZC05WU&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=ADQ435RJ65U5DK3C">ErgoTech Freedom Arm</a>.
-This lets me raise the monitor to a comfortable height when I&rsquo;m
-standing (as seen in this picture). It also allows me to rotate the
-monitor vertically, though I have only done that once since installing
-it. Installation of the arm wasn&rsquo;t trivial, but it wasn&rsquo;t that
-difficult.</p>
-
-<p>I&rsquo;ve been using the arm for four months now and I&rsquo;m enjoying it. If
-you bump the desk the monitor does wobble a bit but I don&rsquo;t notice it
-while I&rsquo;m typing. I haven&rsquo;t noticed any slippage; the monitor arm
-seems to hold the monitor in place.</p>
-
-<p>I&rsquo;ve decided against getting a second arm for my other monitor.
-Installing the monitor arm renders your monitor non-portable. It
-doesn&rsquo;t happen often, but sometimes I travel and stay at a place for
-long enough that I want to bring a large monitor.</p>
-
-<h2>The Chair</h2>
-
-<p>My desk chair is a Herman Miller <a href="http://amzn.to/1XNWKru">Setu</a>. It
-is a very comfortable chair that boasts only a single adjustment. You
-can only raise or lower it.</p>
-
-<p>I moved to this chair from a Herman Miller
-<a href="http://amzn.to/1tjeuxJ">Aeron</a>. The Aeron had been my primary chair
-for eight years prior to me buying the Setu.</p>
-
-<p>They are both great chairs. I haven&rsquo;t missed the extreme amount of
-customization the Aeron provides; its actually nice having fewer knobs
-to tweak. I also find the Setu more visually appealing. The Aeron is
-sort of a giant black monster of a chair; I prefer seeing the
-chartreuse Setu in my apartment.</p>
-
-<h2>The Keyboard and Mouse</h2>
-
-<p>I built my own keyboard. It is an ErgoDox with Cherry MX Blue
-key switches and DSA key caps. More details about my build can be found
-in an earlier <a href="/blog/2014/07/27/building-the-ergodox-keyboard/">post</a>.</p>
-
-<p>I&rsquo;ve been using this keyboard for about eight months. It has been rock
-solid. This is my first keyboard that has mechanical switches. They
-are nice. It feels great typing on this keyboard.</p>
-
-<p>The ErgoDox has six keys for each thumb. I originally thought I&rsquo;d be
-using the thumb clusters a lot but, in practice, I only actively use
-two or three keys per thumb.</p>
-
-<p>The ErgoDox also supports having multiple layers. This means that with
-the press of a key I can have an entirely different keyboard beneath
-my finger tips. It turns out this is another feature I don&rsquo;t frequently
-use. I really only use layers for controlling my music playback
-through media keys and for hitting function keys.</p>
-
-<p>If I were going to build a keyboard again I would not use
-<a href="http://deskthority.net/wiki/Cherry_MX_Blue">Cherry MX Blues</a> as the
-key switch. They are very satisfying to use but they are loud. You can
-hear me type in every room of my one bedroom apartment. When I&rsquo;m
-remote pairing with other developers, they can here me type through my
-microphone.</p>
-
-<p>For my mouse I use
-<a href="https://www.amazon.com/Apple-MC380Z-A-Magic-Trackpad/dp/B003XLYAWC/ref=as_sl_pc_ss_til?tag=jakemccrary08-20&amp;linkCode=w01&amp;linkId=7FVKQDGTRNAJ7BCL&amp;creativeASIN=B003XLYAWC">Apple&rsquo;s Magic Trackpad</a>.
-I definitely have problems doing precise mouse work (though I rarely
-find myself needing this) but I really enjoy the gestures in enables.
-I&rsquo;ve been using one of these trackpads for years now. I really don&rsquo;t
-want to go back to using a mouse.</p>
-
-<h2>Other Items</h2>
-
-<p>I&rsquo;m a fan of using pens and paper to keep track of notes. My tools of
-choice are
-<a href="http://www.amazon.com/gp/product/B00IYL90B2/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B00IYL90B2&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=VNOMEHJO7O2NBRKG">Leuchturm Whitelines</a>
-notebook with dotted paper and a
-<a href="http://www.amazon.com/gp/product/B00BT1BLRU/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B00BT1BLRU&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=EG7HCYOI2SNHO2OI">TWSBI 580</a>
-fountain pen with a fine nib. I&rsquo;ve been using fountain pens<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> for a
-couple years now and find them much more enjoyable to use than other
-pen styles. The way you glide across the page is amazing. I usually
-have my pen inked with
-<a href="http://www.amazon.com/gp/product/B00DJAKBAW/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B00DJAKBAW&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=WMW6D6HT3VGKGUW2">Noodler&rsquo;s 54th Massachusetts</a>.
-The ink is a beautiful blue black color and very permanent.</p>
-
-<p>No desk is complete without a few fun desk toys. My set of toys
-includes a bobble head of myself (this was a gift from a good friend),
-a 3d printed
-<a href="http://www.shapeways.com/product/MLX77XRTT/success-kid">Success Kid</a>,
-a
-<a href="http://www.amazon.com/gp/product/B00E71W4O8/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B00E71W4O8&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=JR3A5AXJUGQ2Z3AD">keyboard switch sampler</a>,
-a few more 3d printed objects, and some climbing related hand toys.</p>
-
-<h2>End</h2>
-
-<p>That pretty much covers my physical work space. I&rsquo;ve tweaked it enough
-where I don&rsquo;t feel like I need to experiment anymore. The monitor arm
-is my most recent addition and it really helped bring my environment
-to the next level. I think I&rsquo;ll have a hard time improving my physical
-setup.</p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>If you want to try out fountain pens I highly recommend the <a href="http://www.amazon.com/gp/product/B009X9Z2FW/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B009X9Z2FW&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=ZPSKZSRYGAQZ5ISB">Pilot Metropolitan</a>. It is widely regarded as the best introduction to fountain pens. The medium nib is about the same width as my fine. It is a great introduction to fountain pens. Another great intro pen (that includes a smiling face on the nib) is the <a href="http://www.amazon.com/gp/product/B00IOOOBU4/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B00IOOOBU4&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=WT2WE3JE675WCFCC">Pilot Kakuno</a>.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//7">&larr; Older</a>
@@ -1482,6 +1410,10 @@ setup.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/04/26/hanging-a-hangboard-using-a-doorway-pull-up-bar/">How to hang a hangboard using a doorway pull-up bar</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2020/04/21/using-bash-preexec-for-monitoring-the-runtime-of-your-last-command/">Using Bash-Preexec for monitoring the runtime of your last command</a>
@@ -1517,10 +1449,6 @@ setup.</p>
     
       <li class="post">
         <a href="/blog/2019/04/30/how-i-use-social-media/">How I use social media</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/03/20/breaking-change-and-more-in-lein-test-refresh-0-dot-24-dot-0/">Breaking change and more in lein-test-refresh 0.24.1</a>
       </li>
     
   </ul>

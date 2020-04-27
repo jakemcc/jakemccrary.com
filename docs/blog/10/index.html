@@ -14,13 +14,13 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" autojump is a nifty command line tool that enables quicker jumping between directories. I&rsquo;ve been using it for a few months now and miss it &hellip;" />
+    <meta itemprop="description" content=" I&rsquo;ve recently started using Jay Fields' Clojure testing library, expectations. I&rsquo;m not going to explain expectations, Jay already did a &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" autojump is a nifty command line tool that enables quicker jumping between directories. I&rsquo;ve been using it for a few months now and miss it &hellip;" />
+    <meta name="twitter:description" content=" I&rsquo;ve recently started using Jay Fields' Clojure testing library, expectations. I&rsquo;m not going to explain expectations, Jay already did a &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -28,12 +28,12 @@
     <meta property="og:site_name" content="The Blog of Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/10/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" autojump is a nifty command line tool that enables quicker jumping between directories. I&rsquo;ve been using it for a few months now and miss it &hellip;" />
+    <meta property="og:description" content=" I&rsquo;ve recently started using Jay Fields' Clojure testing library, expectations. I&rsquo;m not going to explain expectations, Jay already did a &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" autojump is a nifty command line tool that enables quicker jumping between directories. I&rsquo;ve been using it for a few months now and miss it &hellip;">
+    <meta name="description" content=" I&rsquo;ve recently started using Jay Fields' Clojure testing library, expectations. I&rsquo;m not going to explain expectations, Jay already did a &hellip;">
 
     
 
@@ -114,6 +114,80 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/12/16/continuous-testing-with-clojure-and-expectations/">Continuous testing with Clojure and expectations</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2011-12-16T09:30:00-06:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2011</span></span> <span class='time'>9:30 am</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&rsquo;ve recently started using <a href="http://jayfields.com/">Jay Fields'</a> Clojure testing library, <a href="https://github.com/jaycfields/expectations"><code>expectations</code></a>. I&rsquo;m not going to explain <code>expectations</code>, Jay already did a great job on his <a href="http://blog.jayfields.com/2011/11/clojure-expectations-introduction.html">blog</a>, but I will quote its <a href="https://github.com/jaycfields/expectations">Github</a> page.</p>
+
+<blockquote><p>expectations is a minimalist&rsquo;s testing framework</p></blockquote>
+
+<p>The above quote is absolutely true, which is one of the major reasons I&rsquo;m liking <code>expectations</code>. It hasn&rsquo;t been all sunshine though, when I first started using it I had a major problem. It slowed down my usual Clojure workflow.</p>
+
+<p>Up until this point I had stuck to using <code>clojure.test</code>. Combined with emacs, slime, swank, and <code>clojure-test-mode</code> I found the time between making a change to code and running tests to be minimal.</p>
+
+<p>When I switched to <code>expectations</code> the time it took between making a code change and running tests increased. With <code>expectations</code> I couldn&rsquo;t reevaluate my buffer to get the new tests in my repl environment. Doing so caused the new tests to be there along with the old tests. This meant I needed to switch to the command line to run my tests. This caused me to incur the startup costs of the jvm simply to run my expectations (tests). This was a huge cost compared to what I was used to before.</p>
+
+<h2>Introducing <code>lein-autoexpect</code></h2>
+
+<p>To fix my problem I wrote <a href="https://github.com/jakemcc/lein-autoexpect"><code>lein-autoexpect</code></a>. <code>lein-autoexpect</code> is a <a href="https://github.com/technomancy/leiningen/"><code>Leiningen</code></a> plugin that monitors a project&rsquo;s source and test directory and when a Clojure file changes it reloads the affected namespaces and runs all the expectations. Using this plugin my turn around time from modifying code to running all of my expectations is practically nothing. Without the cost of the jvm startup there is practically no time wasted between when code is saved and tests are run.</p>
+
+<p>To use <code>lein-autoexpect</code> simply add <code>[lein-autoexpect "0.0.2"]</code> to your <code>project.clj</code> file and fetch the dependency. Then at the command line run <code>lein autoexpect</code>. You&rsquo;ll see your tests run and then it will just hang there, eagerly waiting for code to change.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>lein autoexpect
+</span><span class='line'>*********************************************
+</span><span class='line'>*************** Running tests ***************
+</span><span class='line'>Ran <span class="m">3</span> tests containing <span class="m">3</span> assertions in <span class="m">16</span> msecs
+</span><span class='line'><span class="m">0</span> failures, <span class="m">0</span> errors.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Next time you end up saving you&rsquo;ll see your tests run again and the following example output appears.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>*********************************************
+</span><span class='line'>*************** Running tests ***************
+</span><span class='line'>Ran <span class="m">4</span> tests containing <span class="m">4</span> assertions in <span class="m">3</span> msecs
+</span><span class='line'><span class="m">0</span> failures, <span class="m">0</span> errors.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>lein-autoexpect</code> tries to clearly delimit each test session with the banner made of <code>*</code>. This helps keep different runs separate when scrolling through your terminal.</p>
+
+<p>This style of testing is called <a href="http://blog.objectmentor.com/articles/2007/09/20/continuous-testing-explained">continuous testing</a>. If you haven&rsquo;t tried it, I would highly recommend giving it a shot. Even just using it for the last few days changed how I think testing should be done.</p>
+
+<p>Source can be found on <a href="https://github.com/jakemcc/lein-autoexpect">Github</a>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1131,6 +1205,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2020/04/26/hanging-a-hangboard-using-a-doorway-pull-up-bar/">How to hang a hangboard using a doorway pull-up bar</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/04/21/using-bash-preexec-for-monitoring-the-runtime-of-your-last-command/">Using Bash-Preexec for monitoring the runtime of your last command</a>
       </li>
     
@@ -1164,10 +1242,6 @@
     
       <li class="post">
         <a href="/blog/2019/04/30/how-i-use-social-media/">How I use social media</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/03/20/breaking-change-and-more-in-lein-test-refresh-0-dot-24-dot-0/">Breaking change and more in lein-test-refresh 0.24.1</a>
       </li>
     
   </ul>

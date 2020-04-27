@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>https://jakemccrary.com/blog/2020/04/26/hanging-a-hangboard-using-a-doorway-pull-up-bar/</loc>
+<lastmod>2020-04-26T20:42:00-05:00</lastmod>
+</url>
+<url>
 <loc>https://jakemccrary.com/blog/2020/04/21/using-bash-preexec-for-monitoring-the-runtime-of-your-last-command/</loc>
 <lastmod>2020-04-21T18:22:00-05:00</lastmod>
 </url>
@@ -590,6 +594,9 @@
 </url>
 <url>
 <loc>https://jakemccrary.com/blog/categories/diy/</loc>
+</url>
+<url>
+<loc>https://jakemccrary.com/blog/categories/climbing/</loc>
 </url>
 <url>
 <loc>https://jakemccrary.com/blog/2/</loc>
