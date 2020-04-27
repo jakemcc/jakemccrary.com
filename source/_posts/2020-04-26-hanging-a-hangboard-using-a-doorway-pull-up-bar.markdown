@@ -1,12 +1,13 @@
 ---
 layout: post
-title: "How to hang a hangboard using a doorway pull-up bar"
-date: 2020-04-21 20:03:10 -0500
+title: How to hang a hangboard using a doorway pull-up bar
+date: 2020-04-26 20:42 -0500
 comments: true
-published: false
-description: Follow these instructions for hanging a hangboard with a doorway pull-up bar
-keywords: 'climbing, hangboard, diy, pull-up bar, fingerboard'
-categories: 
+published: true
+description: Follow these instructions for hanging a hangboard with a doorway pull-up
+  bar
+keywords: climbing, hangboard, diy, pull-up bar, fingerboard
+categories:
 - climbing
 - diy
 ---
