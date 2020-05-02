@@ -68,7 +68,7 @@ PS1='[last: ${timer_show}s][\w]$ '
 
 # a bunch more lines until the end of my .bashrc
 # where I include .bash-preexec.sh
-[ -f "$HOME/.bash-preexec.sh" ] && source "$HOME/.bash-preexec.sh"
+[[ -f "$HOME/.bash-preexec.sh" ]] && source "$HOME/.bash-preexec.sh"
 ```
 
 No more wondering about the runtime of commands is great.
