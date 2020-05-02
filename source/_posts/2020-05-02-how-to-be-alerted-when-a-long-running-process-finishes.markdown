@@ -13,8 +13,8 @@ categories:
 ---
 
 Unfortunately, I'm frequently running commands that take a long time to finish.
-Just sitting there, staring at the running command is mindnumbingly boring so I frequently use that time to check Slack, continue reading an article, or plan what I'm going to do next.
-Doing these activities results in me not noticing the command has finished and taking action on the result or performing the next action as quickly as possible.
+I can only eagerly wait for completion, thinking about my next move, so many times before I get distracted by Slack or the Internet.
+Turning to Slack or the Internet makes the waiting less painful, but then I don't notice the command finishing resulting in delays before taking my next action.
 
 I recently made it so that my computer uses `say` to tell me when a command finishes after takes longer than 30 seconds.
 This allows me to squeeze in other activities while slow commands run and continue with my next step as soon as the command finishes.
