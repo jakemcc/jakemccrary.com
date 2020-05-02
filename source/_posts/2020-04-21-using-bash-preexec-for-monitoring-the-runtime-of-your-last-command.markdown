@@ -44,7 +44,7 @@ Here is a screenshot of everything in action (with a reduced prompt, my normal o
 Below is a simplified snippet from my `.bashrc` that provides runtimes using both of these additions.
 
 ```bash
-function preexec {
+preexec() {
   if [ "UNSET" == "${timer}" ]; then
     timer=$SECONDS
   else 
@@ -52,7 +52,7 @@ function preexec {
   fi 
 }
 
-function precmd {
+precmd() {
   if [ "UNSET" == "${timer}" ]; then
      timer_show="0s"
   else 
