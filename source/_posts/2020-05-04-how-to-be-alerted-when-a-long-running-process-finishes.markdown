@@ -1,12 +1,13 @@
 ---
 layout: post
-title: "How to be notified when long running processes finish"
-date: 2020-05-02 17:11:02 -0500
+title: How to be notified when long running processes finish
+date: 2020-05-04 20:35 -0500
 comments: true
-published: false
-description: I get distracted when running slow processes. Here is how I get notified when they are done.
-keywords: 'bash, osx, command line'
-categories: 
+published: true
+description: I get distracted when running slow processes. Here is how I get notified
+  when they are done.
+keywords: bash, osx, command line
+categories:
 - bash
 - osx
 - command-line
