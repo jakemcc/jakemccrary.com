@@ -14,17 +14,17 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" Recently I rediscovered an Emacs package that allows you to interact
-with HTTP endpoints from the comfort of an Emacs buffer.
-restclient.el provides &hellip;" />
+    <meta itemprop="description" content=" Recently I&rsquo;ve been working on adding authentication and authorization
+to a Clojure web service. The project uses
+compojure for routing and &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" Recently I rediscovered an Emacs package that allows you to interact
-with HTTP endpoints from the comfort of an Emacs buffer.
-restclient.el provides &hellip;" />
+    <meta name="twitter:description" content=" Recently I&rsquo;ve been working on adding authentication and authorization
+to a Clojure web service. The project uses
+compojure for routing and &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -32,16 +32,16 @@ restclient.el provides &hellip;" />
     <meta property="og:site_name" content="The Blog of Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/8/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" Recently I rediscovered an Emacs package that allows you to interact
-with HTTP endpoints from the comfort of an Emacs buffer.
-restclient.el provides &hellip;" />
+    <meta property="og:description" content=" Recently I&rsquo;ve been working on adding authentication and authorization
+to a Clojure web service. The project uses
+compojure for routing and &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" Recently I rediscovered an Emacs package that allows you to interact
-with HTTP endpoints from the comfort of an Emacs buffer.
-restclient.el provides &hellip;">
+    <meta name="description" content=" Recently I&rsquo;ve been working on adding authentication and authorization
+to a Clojure web service. The project uses
+compojure for routing and &hellip;">
 
     
 
@@ -122,6 +122,713 @@ restclient.el provides &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/12/21/restricting-access-to-certain-routes/">Restricting access to certain routes</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-12-21T16:48:00-06:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>21</span><span class='date-suffix'>st</span>, <span class='date-year'>2014</span></span> <span class='time'>4:48 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Recently I&rsquo;ve been working on adding authentication and authorization
+to a Clojure web service. The project uses
+<a href="https://github.com/weavejester/compojure">compojure</a> for routing and
+<a href="https://github.com/cemerick/friend">friend</a> for authentication and
+authorization. My pair and I wanted to restrict access to specific
+routes while leaving some routes completely public. It took a few
+tries until we figured out how to do this in a way that made us happy.</p>
+
+<p>The rest of this post shows the approximate path we took to our
+current solution. It focuses on using friend to restrict access to
+specific routes. It does not go into details about adding
+authentication to your web service.</p>
+
+<p>Below is an example of the routes before adding authorization checks.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">ns </span><span class="nv">example.server</span>
+</span><span class='line'>  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">compojure.core</span> <span class="ss">:refer</span> <span class="p">[</span><span class="nv">GET</span> <span class="nv">defroutes</span><span class="p">]</span> <span class="ss">:as</span> <span class="nv">compojure</span><span class="p">]</span>
+</span><span class='line'>            <span class="p">[</span><span class="nv">compojure.route</span> <span class="ss">:as</span> <span class="nv">route</span><span class="p">]))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">defroutes</span> <span class="nv">app</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">GET</span> <span class="s">&quot;/status&quot;</span> <span class="nv">_</span> <span class="p">(</span><span class="nf">status</span><span class="p">))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">GET</span> <span class="s">&quot;/cars&quot;</span> <span class="nv">_</span> <span class="p">(</span><span class="nf">fetch-cars</span><span class="p">))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">GET</span> <span class="s">&quot;/attributes&quot;</span> <span class="nv">_</span> <span class="p">(</span><span class="nf">fetch-attributes</span><span class="p">))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">GET</span> <span class="s">&quot;/drivers&quot;</span> <span class="nv">_</span> <span class="p">(</span><span class="nf">fetch-drivers</span><span class="p">))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">route/not-found</span> <span class="s">&quot;NOT FOUND&quot;</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We wanted to make <code>/cars</code>, <code>/attributes</code>, and <code>/drivers</code> require that
+the request satisfies the <code>:example.server/user</code> role. Requesting
+<code>/status</code> should not require authorization. The first attempt left us
+with the following code.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">ns </span><span class="nv">example.server</span>
+</span><span class='line'>  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">compojure.core</span> <span class="ss">:refer</span> <span class="p">[</span><span class="nv">GET</span> <span class="nv">defroutes</span><span class="p">]</span> <span class="ss">:as</span> <span class="nv">compojure</span><span class="p">]</span>
+</span><span class='line'>            <span class="p">[</span><span class="nv">compojure.route</span> <span class="ss">:as</span> <span class="nv">route</span><span class="p">]</span>
+</span><span class='line'>            <span class="p">[</span><span class="nv">cemerick.friend</span> <span class="ss">:as</span> <span class="nv">friend</span><span class="p">]))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">defroutes</span> <span class="nv">app</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">GET</span> <span class="s">&quot;/status&quot;</span> <span class="nv">_</span> <span class="p">(</span><span class="nf">status</span><span class="p">))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">GET</span> <span class="s">&quot;/cars&quot;</span> <span class="nv">_</span>
+</span><span class='line'>       <span class="p">(</span><span class="nf">friend/authorize</span> <span class="o">#</span><span class="p">{</span><span class="ss">::user</span><span class="p">}</span>
+</span><span class='line'>                         <span class="p">(</span><span class="nf">fetch-cars</span><span class="p">)))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">GET</span> <span class="s">&quot;/attributes&quot;</span> <span class="nv">_</span>
+</span><span class='line'>       <span class="p">(</span><span class="nf">friend/authorize</span> <span class="o">#</span><span class="p">{</span><span class="ss">::user</span><span class="p">}</span>
+</span><span class='line'>                         <span class="p">(</span><span class="nf">fetch-attributes</span><span class="p">)))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">GET</span> <span class="s">&quot;/drivers&quot;</span> <span class="nv">_</span>
+</span><span class='line'>       <span class="p">(</span><span class="nf">friend/authorize</span> <span class="o">#</span><span class="p">{</span><span class="ss">::user</span><span class="p">}</span>
+</span><span class='line'>                         <span class="p">(</span><span class="nf">fetch-drivers</span><span class="p">)))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">route/not-found</span> <span class="s">&quot;NOT FOUND&quot;</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The above works but it suffers from repetition. You could write a
+macro to minimize the repetition but we thought there must be a better
+way.</p>
+
+<p>After reading more of <a href="https://github.com/cemerick/friend">friend</a>&rsquo;s
+documentation we discovered <code>friend/wrap-authorize</code>. This is
+middleware that only allows requests through if the request
+satisfies the required roles. Our first pass at using
+<code>friend/wrap-authorize</code> looked like the following example.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">ns </span><span class="nv">example.server</span>
+</span><span class='line'>  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">compojure.core</span> <span class="ss">:refer</span> <span class="p">[</span><span class="nv">GET</span> <span class="nv">defroutes</span><span class="p">]</span> <span class="ss">:as</span> <span class="nv">compojure</span><span class="p">]</span>
+</span><span class='line'>            <span class="p">[</span><span class="nv">compojure.route</span> <span class="ss">:as</span> <span class="nv">route</span><span class="p">]</span>
+</span><span class='line'>            <span class="p">[</span><span class="nv">cemerick.friend</span> <span class="ss">:as</span> <span class="nv">friend</span><span class="p">]))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">defroutes</span> <span class="nv">protected-routes</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">GET</span> <span class="s">&quot;/cars&quot;</span> <span class="nv">_</span> <span class="p">(</span><span class="nf">fetch-cars</span><span class="p">))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">GET</span> <span class="s">&quot;/attributes&quot;</span> <span class="nv">_</span> <span class="p">(</span><span class="nf">fetch-attributes</span><span class="p">))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">GET</span> <span class="s">&quot;/drivers&quot;</span> <span class="nv">_</span> <span class="p">(</span><span class="nf">fetch-drivers</span><span class="p">)))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">defroutes</span> <span class="nv">app</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">GET</span> <span class="s">&quot;/status&quot;</span> <span class="nv">_</span> <span class="p">(</span><span class="nf">status</span><span class="p">))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">friend/wrap-authorize</span> <span class="nv">protected-routes</span> <span class="o">#</span><span class="p">{</span><span class="ss">::user</span><span class="p">})</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">route/not-found</span> <span class="s">&quot;NOT FOUND&quot;</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is much nicer. The repetition is removed by extracting routes
+that require authorization into a separate <code>defroutes</code> and wrapping it
+with <code>friend/wrap-authorize</code>.</p>
+
+<p>This introduces a subtle bug. A response with status code 404 is no
+longer returned if a non-existent resource is requested and the
+request is unauthorized. This is because the authorization check
+happens <em>before</em> matching a route. friend&rsquo;s documentation warns
+against this and suggests using <code>compojure/context</code> to scope usage of
+<code>friend/wrap-authorize</code>. This doesn&rsquo;t solve the problem but it at
+least narrows its scope. We can do better.</p>
+
+<p>Compojure
+<a href="https://github.com/weavejester/compojure/blob/master/HISTORY.md">1.2.0</a>
+introduced the function <code>wrap-routes</code>. <code>wrap-routes</code> applies
+middleware <em>after</em> a route is matched. By using this we can have all
+of the benefits of using <code>friend/wrap-authorize</code> without breaking
+returning 404 responses.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">ns </span><span class="nv">example.server</span>
+</span><span class='line'>  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">compojure.core</span> <span class="ss">:refer</span> <span class="p">[</span><span class="nv">GET</span> <span class="nv">defroutes</span><span class="p">]</span> <span class="ss">:as</span> <span class="nv">compojure</span><span class="p">]</span>
+</span><span class='line'>            <span class="p">[</span><span class="nv">compojure.route</span> <span class="ss">:as</span> <span class="nv">route</span><span class="p">]</span>
+</span><span class='line'>            <span class="p">[</span><span class="nv">cemerick.friend</span> <span class="ss">:as</span> <span class="nv">friend</span><span class="p">]))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">defroutes</span> <span class="nv">protected-routes</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">GET</span> <span class="s">&quot;/cars&quot;</span> <span class="nv">_</span> <span class="p">(</span><span class="nf">fetch-cars</span><span class="p">))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">GET</span> <span class="s">&quot;/attributes&quot;</span> <span class="nv">_</span> <span class="p">(</span><span class="nf">fetch-attributes</span><span class="p">))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">GET</span> <span class="s">&quot;/drivers&quot;</span> <span class="nv">_</span> <span class="p">(</span><span class="nf">fetch-drivers</span><span class="p">)))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">defroutes</span> <span class="nv">app</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">GET</span> <span class="s">&quot;/status&quot;</span> <span class="nv">_</span> <span class="p">(</span><span class="nf">status</span><span class="p">))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">compojure/wrap-routes</span> <span class="nv">protected-routes</span>
+</span><span class='line'>                         <span class="nv">friend/wrap-authorize</span>
+</span><span class='line'>                         <span class="o">#</span><span class="p">{</span><span class="ss">::user</span><span class="p">})</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">route/not-found</span> <span class="s">&quot;NOT FOUND&quot;</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There we have it. A solution without duplication that still responds
+properly to requests for non-existent resources.
+<code>compojure/wrap-routes</code> is a useful function to know about.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/12/09/an-effective-code-review-process/">An Effective Code Review Process</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-12-09T20:44:00-06:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>8:44 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><blockquote><p>See all of my remote/working-from-home <a href="/blog/categories/remote/">articles here</a>.</p></blockquote>
+
+<p><a href="https://twitter.com/searls/status/540603801955471360"><img class="center" src="/images/justin-searls-code-reviews-harmful.png" title="The way most organizations implement code reviews in teams is usually more harmful than helpful. I generally recommend going without them. - Justin Searls" ></a></p>
+
+<p>The above was tweeted <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> recently and it resulted in some decent
+discussion about code reviews. In the past six months at
+<a href="http://www.outpace.com">Outpace</a>, I&rsquo;ve been part of a handful of code
+review sessions that have been extremely productive. After the reviews
+many developers have expressed shock at the effectiveness of the process.
+A tweet-sized overview of the process we&rsquo;ve followed can be found in
+<a href="https://twitter.com/gigasquid">Carin Meier</a>&rsquo;s
+<a href="https://twitter.com/gigasquid/status/540606002547425281">responses</a> to
+the above tweet. Since you can&rsquo;t fit details into tweets the rest of
+this post expands on our code review process.</p>
+
+<p>Some background before we dive into the details.
+<a href="http://www.outpace.com">Outpace</a> is a software company that
+practices, despite every programmer working remotely, nearly 100% pair
+programming. In addition, the team Carin and I are on do most of our
+work through GitHub pull requests. Before merging with master, the
+pull requests are reviewed by other teammates. Between pairing and
+pull requests many eyes see every line of code as changes are made.</p>
+
+<p>Even with all this, we&rsquo;ve found value in having more traditional code
+reviews. We&rsquo;ve found that different feedback and action items emerge
+from reviewing code that we already have than from reviews of code
+changes (e.g., pull requests).</p>
+
+<p>In addition to working for the team described above, the process below
+has been successfully used to review an internal library where the
+reviewers where mostly interested users with a couple contributors. It
+has also been successful on teams that were not adherent to doing work
+through reviewed pull requests.</p>
+
+<h3>The Code Review Process</h3>
+
+<h4>Step 1: Select the code to review</h4>
+
+<p>Typically we do this between a week and two weeks before the code
+review. Here we identify the code we want to review and create a
+two-hour meeting on a Friday at the end of day.</p>
+
+<p>Having the meeting late on Friday helps create a relaxed environment.
+The review becomes a time to unwind, enjoy a beverage of choice, and
+talk about code. I haven&rsquo;t met a developer that doesn&rsquo;t enjoy
+discussing how to make code better and this lets everyone finish the
+week doing just that. The code review becomes an uplifting way to
+finish a week.</p>
+
+<h4>Step 2: Open the code review</h4>
+
+<p>A few days (typically late Tuesday or early Wednesday) before the
+Friday code review meeting we start the review. We do this by opening
+a <a href="https://github.com">GitHub</a> pull request. The following steps will
+create a pull request where you can comment every line of code being
+reviewed.</p>
+
+<ol>
+<li>Create a local branch.</li>
+<li>Delete the code being reviewed and commit locally.</li>
+<li>Push the branch to GitHub.</li>
+<li>Open a pull request.</li>
+</ol>
+
+
+<p>These steps are necessary because GitHub pull requests only let you
+view code that has changed. This process marks every line as deleted,
+which causes every line to appear the <em>Files changed</em> tab.</p>
+
+<p>Opening the pull request a few days before the review meeting provides
+a location for pre-meeting comments to be added. This lets reviewers
+spend a couple days thinking about and commenting on the code.
+Comments on the pull request indicate a conversation should happen
+during the code review meeting.</p>
+
+<h4>Step 3: The code review meeting</h4>
+
+<p>Its finally Friday and time to review the code as a group. Everyone
+joins a video conference and someone volunteers to lead the code
+review. At least one other person volunteers to be a note taker.</p>
+
+<p>The leader directs the code review and keeps it moving forward. To do
+this the leader shares their screen with the video conference and
+scrolls through the <em>Files changed</em> view of the pull request. When a
+comment appears on screen the leader stops scrolling and discussion
+starts.</p>
+
+<p>The comments are read (often silently) and discussion happens. The
+leader tries to recognize when a conclusion has been reached or when
+further discussion, outside of the code review, needs to happen. When
+a conclusion is reached someone (often the leader) states a quick
+summary and a note taker records the next steps. The next steps are
+added as additional comments in the comment thread being discussed. As
+the next steps are recorded the leader moves on to the next comment.</p>
+
+<p>This continues until either time runs out or the group runs out of
+things to discuss.</p>
+
+<p>After the code review a volunteer turns the next steps comments into
+Trello cards and we take care of the code review items as part of our
+usual work.</p>
+
+<h3>Results</h3>
+
+<p>We&rsquo;ve seen impressive improvements to code quality in the projects
+that have undergone this style of code review. Both small and large
+changes have happened as a result. Code has become simpler, clearer,
+and better understood. Additionally, the feeling of collective code
+ownership has increased.</p>
+
+<p>Teammates have been surprised at how well this process has worked.
+More than a couple have said that historically they have not found
+code reviews useful but that these were.</p>
+
+<p>This style of code review has worked in a few different settings and I
+encourage you to give it a shot.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Reading through the discussion on Twitter after this tweet can give some hints as to what it takes to have an effective code review.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/09/07/ergodox-turn-on-led-when-not-on-the-main-layer/">ErgoDox: Turn on an LED When Not on the Main Layer</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-09-07T17:35:00-05:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>5:35 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The
+<a href="http://jakemccrary.com/blog/2014/07/27/building-the-ergodox-keyboard/">ErgoDox</a>
+is a great keyboard. One its appeals is that you can build your own
+firmware. This makes it possible to rearrange the keys however you
+want and tweak other functionality. The firmware is fairly advanced
+and allows you to have multiple layers to your keyboard.</p>
+
+<p>Multiple layers allow the ErgoDox to have fewer physical keys than
+traditional keyboards. How often do you use an F key? If you are like
+me the answer is almost never. Why bother having a dedicated key?</p>
+
+<p>Another benefit of multiple layers is that your keyboard is multiple
+keyboards in one. Do you use the Dvorak layout and your roommate use
+Qwerty? Program both a Dvorak layer and a Qwerty layer into your
+keyboard and switch between them with the push of a button.</p>
+
+<p>The only downside I&rsquo;ve noticed of multiple layers is that I&rsquo;ll switch
+between them by accident. This is frustrating as all of a sudden your
+keyboard works differently and there is no indication that you are on a
+different layer.</p>
+
+<p>The ErgoDox has a
+<a href="https://github.com/benblazak/ergodox-firmware/blob/513b82d585fdc7175db736163340af3ed6c6f38b/src/main.c#L124-L133">few LEDs</a>
+in it that I have never used. I don&rsquo;t even have the needed keys as
+part of my keyboard layout (Caps lock? Who uses caps lock? I
+don&rsquo;t need to shout that often). I decided to repurpose the num lock
+LED as an indicator that I&rsquo;m off the main layer.</p>
+
+<p>This was a straight forward change. In the firmware there is a
+<a href="https://github.com/benblazak/ergodox-firmware/blob/513b82d585fdc7175db736163340af3ed6c6f38b/src/main.c#L171">variable</a>
+that holds what keyboard layer is active. All I had to do to get the
+num lock LED on when I changed layers was to move the <code>layers_head</code>
+variable higher in <code>main.c</code> and then change the conditional to turn on
+the num lock LED when <code>layers_head != 0</code>.
+<a href="https://github.com/jakemcc/ergodox-firmware/commit/383f16a3f091b4e2dd031d098007c4289cc1a261">This</a>
+is the commit that does this change. It could have been done as a
+three line change.</p>
+
+<p>I highly recommend making this change. Now I just need to find a
+transparent DSA keycaps so I can see the LED easier.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/09/01/book-review-haskell-data-analysis-cookbook/">Book Review: Haskell Data Analysis Cookbook</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-09-01T13:49:00-05:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2014</span></span> <span class='time'>1:49 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Packt Publishing recently asked me to write a review of the book
+<a href="http://bit.ly/X0YQaL">Haskell Data Analysis Cookbook</a> by Nishant
+Shukla. The book is broken into small sections that show you how to do
+a particular task related to data analysis. These tasks vary from
+reading a csv file or parsing json to listening to a stream of tweets.</p>
+
+<p>I&rsquo;m not a Haskell programmer. My Haskell experience is limited to
+reading some books
+(<a href="http://learnyouahaskell.com/">Learn You a Haskell for Great Good</a>
+and most of <a href="http://realworldhaskell.org/">Real World Haskell</a>) and
+solving some toy problems. All of reading and programming happened
+years ago though so I&rsquo;m out of practice.</p>
+
+<p>This book is not for a programmer that is unfamiliar with Haskell. If
+you&rsquo;ve never studied it before you&rsquo;ll find yourself turning towards
+documentation. If you enter this book with a solid understanding of
+functional programming you can get by with a smaller understanding of
+Haskell but you will not get much from the book.</p>
+
+<p>I&rsquo;ve only read a few cookbook style books and this one followed the
+usual format. It will be more useful as a quick reference than as
+something you would read through. It doesn&rsquo;t dive deep into any topic
+but does point you toward libraries for various tasks and shows a
+short example of using them.</p>
+
+<p>A common critic I have of most code examples applies to this book.
+Most examples do not do qualified imports of namespaces or selective
+imports of functions from namespaces. This is especially useful when
+your examples might be read by people who are not be familiar with the
+languages standard libraries. Reading code and immediately knowing
+where a function comes from is incredibly useful to understanding.</p>
+
+<p>The code for this book is available on
+<a href="https://github.com/BinRoot/Haskell-Data-Analysis-Cookbook">GitHub</a>.
+It is useful to look at the full example for a section. The examples
+in the book are broken into parts with English explanations and I
+found that made it hard to fully understand how the code fit together.
+Looking at the examples in the GitHub repo helped.</p>
+
+<h4>Recommendation</h4>
+
+<p>I&rsquo;d recommend this book for Haskell programmers who find the table of
+contents interesting. If you read the table of contents and think it
+would be useful to have a shallow introduction to the topics listed
+then you&rsquo;ll find this book useful. It doesn&rsquo;t give a detailed dive
+into anything but at least gives you a starting point.</p>
+
+<p>If you either learning Haskell or using Haskell then this book doesn&rsquo;t
+have much to offer you.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/07/27/building-the-ergodox-keyboard/">Building the ErgoDox Keyboard</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-07-27T21:05:00-05:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>9:05 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Earlier this year I built an
+<a href="https://deskthority.net/wiki/ErgoDox">ErgoDox</a>. The ErgoDox is a split
+hand mechanical keyboard whose design has been released under the GNU
+GPLv3. There are a few standard <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> ways of getting the parts. It
+basically comes down to sourcing all the parts yourself or buying a
+bundle from <a href="https://www.massdrop.com/buy/ergodox">Massdrop</a>. I opted
+to wait until Massdrop was selling them and bought a kit from them.</p>
+
+<p><img src="/images/my-keyboard.jpg" title="My ErgoDox" alt="My ErgoDox" /></p>
+
+<h3>Why?</h3>
+
+<ol>
+<li>I&rsquo;ve used an ergonomic keyboard for years and was intrigued by the split hand design.</li>
+<li>I wanted to try out Cherry MX key switches.</li>
+<li>Using your thumb for more than just space bar made a lot of sense to me.</li>
+<li>The firmware lets you have multiple layers. I thought this could be really useful.</li>
+<li>The project sounded fun. I used to make physical devices and this
+seemed like a good way to do that again.</li>
+</ol>
+
+
+<h3>Buying</h3>
+
+<p>As mentioned earlier I bought my parts from Massdrop. In the buy I
+participated in I had the option of a full hand case or the
+traditional case and I opted for the full hand. As part of the buy I
+also bought additional aluminum top layers, a blank set of DSA <sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>
+keycaps, and Cherry MX blue key switches.</p>
+
+<p>If I were doing it again I would not buy the extra aluminum top
+layer. I built one of my hands using the aluminum and the other with
+the basic acrylic top. I enjoy both the look and feel of the acrylic
+hand better.</p>
+
+<p>I would also not buy the set of DSA keycaps from Massdrop. It was
+convenient and a bit cheaper to buy from them but had I known I could
+get different
+<a href="http://keyshop.pimpmykeyboard.com/products/full-keysets/dsa-blank-sets-1">colors</a>
+from <a href="http://www.keycapsdirect.com/">Signature Plastics</a> I would have done that.</p>
+
+<p>I also bought eight &ldquo;deep-dish&rdquo; DSA keys direct from Signature
+Plastics. These keys feel different which lets me know when my fingers
+are above the home row. I&rsquo;d recommend doing this. You can order from
+<a href="http://www.keycapsdirect.com/key-capsinventory.php">this</a> page.</p>
+
+<p>For key switches I bought Cherry MX Blues through Massdrop. Blues are
+extremely clicky. You can easily hear me typing in every room of my
+apartment. It is very satisfying.</p>
+
+<p>After using the keyboard for about a week I also ended up buying some
+<a href="http://www.amazon.com/gp/product/B00897D3OQ/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B00897D3OQ&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=HTBBKS475FGFIG2M">pads</a>
+for my wrists. I occasionally rest my wrists on the keyboard and the
+keyboard&rsquo;s edge would dig into me.</p>
+
+<h3>Building</h3>
+
+<p>I followed Massdrop&rsquo;s step-by-step
+<a href="https://www.massdrop.com/ext/ergodox/assembly.php">guide</a> and
+<a href="https://www.youtube.com/watch?v=x1irVrAl3Ts">this</a> YouTube video.
+Another great resource is the community at
+<a href="http://geekhack.org/index.php?topic=22780.0">GeekHack</a>. I&rsquo;d recommend
+reading and watching as much as possible before starting your build.</p>
+
+<p>I built this using a cheap soldering iron I&rsquo;ve had for years, very
+thin solder, solder wick, and a multimeter. I don&rsquo;t know if this would
+have been easier with better tools or not but those got the job done.</p>
+
+<p>While soldering the surface mount diodes I was in the zone and
+soldered a few locations that didn&rsquo;t actually need to be soldered.
+When you are soldering the diodes you should only be soldering them to
+the locations that have the key silk screen.</p>
+
+<p>My system for minimizing errors while soldering the diodes is the
+following five steps.</p>
+
+<ol>
+<li>Lay down some solder on one of the pads.</li>
+<li>Put the correct end of the diode on top of that solder, reheat and
+push down.</li>
+<li>Test the connection with a multimeter.</li>
+<li>Solder the other half of the diode.</li>
+<li>Test the connection.</li>
+</ol>
+
+
+<p>I batched up the steps. I&rsquo;d do a whole row of the first step, then
+move to the second for the entire row, then do the third, etc. Being
+rigorous about testing every connection is important. Catching
+mistakes early makes it easier to fix the mistakes.</p>
+
+<p>If you solder a diode on the wrong way there is a huge difference (at
+least for me using solder wick) between the difficulty of fixing the
+error when only one pad has been soldered versus two pads. I soldered
+more than one diode backwards and a mistake noticed after soldering
+only one pad was easy to fix. After soldering both pads it took
+serious effort.</p>
+
+<p>Eventually you&rsquo;ll need to cut open a USB cable. I ended up removing
+the plastic housing using a Dremel. When soldering the wires to the
+USB holes I was too concerned with it looking pretty and did not leave
+plenty of wire. This made it harder to solder and as a result I ended
+up doing a poor job that resulted in a short. After desoldering and
+destroying another cable, but leaving more wire, I managed to do a
+better job. I originally noticed the short because I kept getting
+warnings from my computer about my USB Keyboard drawing too much
+power.</p>
+
+<p>I&rsquo;ve
+<a href="https://www.evernote.com/shard/s68/sh/4f51c3b2-b50b-47d3-8219-ea155cf5fef5/df239167726bcebf06cc2b5101ac8e42/">annotated a copy</a>
+of Massdrop&rsquo;s instructions using Evernote. It contains the above tips
+inline.</p>
+
+<h3>Firmware</h3>
+
+<p>After you physically build your keyboard you need to build the
+firmware. There are a few different firmwares that can work and you
+can discover those on GeekHack. I&rsquo;m using a fork of what Massdrop&rsquo;s
+<a href="https://www.massdrop.com/ext/ergodox">graphical configuration</a> tool
+uses. It is based off
+<a href="https://github.com/benblazak/ergodox-firmware">benblazak/ergodox-firmware</a>.</p>
+
+<p>One of the exciting things about the ErgoDox is tweaking the firmware.
+I took the base firmware and modified it to have media key support and
+<a href="https://github.com/jakemcc/ergodox-firmware/commit/383f16a3f091b4e2dd031d098007c4289cc1a261">light up the LEDs</a>
+when I&rsquo;m on any layer besides the base. Some people have added the
+ability to record keyboard macros and other neat features. I encourage
+you to take a look at the source even if you use the graphical
+configuration tool. I haven&rsquo;t explored beyond
+<a href="https://github.com/benblazak/ergodox-firmware">benblazak/ergodox-firmware</a>
+so I can&rsquo;t compare it to other firmwares.</p>
+
+<h3>Conclusion</h3>
+
+<p>I really enjoy it. Building it was both fun and frustrating <sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>.</p>
+
+<p>After using the keyboard for a few months I&rsquo;ve found that I really
+only use three (on each hand) of the thumb cluster keys. I also don&rsquo;t
+use the keyboard layers too often. I have three layers programmed and
+I always stay on the main one unless I want to hit a media key.</p>
+
+<p>Would I recommend building your own ErgoDox? If you already can or are
+willing to learn to solder and this sounds at all interesting to you I
+would recommend it. The project can be frustrating but the result is
+great.</p>
+
+<h3>The Future</h3>
+
+<p>There is still a lot left to explore in the custom keyboard space.
+Even so I have no plans on leaving the ErgoDox anytime soon. In terms
+of improving my ErgoDox, I plan on poking around the different
+firmwares at some point. I&rsquo;d also like to explore
+<a href="http://geekhack.org/index.php?topic=22780.msg1405792#msg1405792">tenting</a>
+<a href="https://github.com/adereth/ergodox-tent">options</a>.</p>
+
+<h3>Resources</h3>
+
+<ul>
+<li><a href="http://geekhack.org/index.php?topic=22780.0">GeekHack ErgoDox thread</a></li>
+<li><a href="http://geekhack.org/index.php?topic=40501.0">GeekHack FAQ</a>
+Useful for general information about keyboard topics.</li>
+<li><a href="http://geekhack.org/index.php?topic=40501.0#post_DD">GeekHack Cherry actuation forces</a></li>
+<li><a href="https://www.massdrop.com/buy/ergodox">Massdrop Buy</a></li>
+<li><a href="https://www.massdrop.com/ext/ergodox">Massdrop Configuration Tool</a></li>
+<li><a href="https://github.com/benblazak/ergodox-firmware">benblazak/ergodox-firmware</a></li>
+<li><a href="http://geekhack.org/index.php?topic=48106.0">TMK firmware for ErgoDox</a>
+One of the alternative firmwares.</li>
+</ul>
+
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>I feel a bit odd using the word standard to describe acquiring parts to build a keyboard.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p><a href="http://keycapsdirect.com/key-caps.php">This</a> page has diagrams that shows the different keycap families.<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+<li id="fn:3">
+<p>Those surface mount diodes are so tiny.<a href="#fnref:3" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1406,634 +2113,6 @@ immensely useful for jumping around projects.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/03/30/managing-windows-in-osx-using-phoenix/">Managing windows in OS X using Phoenix</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-03-30T18:30:00-05:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>6:30 pm</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://jakemccrary.com/blog/2013/04/15/manage-your-workspace-with-grids-under-linux-osx-and-windows/">Last year</a>
-I wrote about how I managed my windows under OS X, Windows, and Linux.
-I&rsquo;m a big fan of having an orderly layout and try to use grid
-managers. Since then I&rsquo;ve changed jobs and now my main machine is an
-MacBook Pro running OS X Mavericks with two 27 inch cinema displays.
-As a result I&rsquo;ve started experimenting with more OS X window managers.
-After trying a few out I&rsquo;m going to stick with
-<a href="https://github.com/sdegutis/Phoenix">Phoenix</a>.</p>
-
-<h3>Before Phoenix</h3>
-
-<p>Last year I was satisfied using <a href="http://spectacleapp.com/">Spectacle</a>.
-It is (or at least was, I haven&rsquo;t used it in a while) easy to install
-and had good defaults. I&rsquo;d still recommend it for most people.</p>
-
-<p>At the recommendation from a reader, I switched to
-<a href="https://github.com/jigish/slate">Slate</a>. Slate has a ton of features
-and I barely scratched the surface in how I used it. I used it as a
-replacement for Spectacle and didn&rsquo;t touch any of the advanced
-features. Before I had the urge to explore the advanced features I
-ended up becoming dissatisfied with Slate. I ran into an issue where
-after running for a while (talking at least a week) it would start to
-respond slowly. I&rsquo;d try to move a window to another monitor and it
-wouldn&rsquo;t move. Eventually I&rsquo;d be in another process and the
-command would register sending whatever window I was currently focused
-on to another monitor.</p>
-
-<h3>Introducing Phoenix</h3>
-
-<p>I was looking for solutions to Slate&rsquo;s unresponsiveness when I
-stumbled on <a href="https://github.com/sdegutis/Phoenix">Phoenix</a>. I was
-drawn in by its stated goal; it &ldquo;aims for efficiency and a very small
-footprint.&rdquo; The fact that it is still being actively developed was
-also a huge selling point. Knowing that any bugs I find have a
-potential to be fixed is great.</p>
-
-<p>Phoenix provides a
-<a href="https://github.com/sdegutis/Phoenix/wiki/JavaScript-API-documentation">JavaScript API</a>
-that allows you to interact with your running applications or launch
-applications. It doesn&rsquo;t provide anything out of the box; it is up to
-you to make it useful by writing your own (or taking another persons)
-configuration.</p>
-
-<p>This is a double-edged sword. This means you get exactly the features
-you want. It also means you might spend significant amounts of time
-figuring out how to get the features you want.</p>
-
-<p>Luckily there are <a href="https://github.com/sdegutis/Phoenix/wiki">examples</a>
-that you can use as a starting point. Browsing through the examples is
-a great way of becoming familiar with what is possible and can be
-inspiring.</p>
-
-<p>My
-<a href="https://github.com/jakemcc/dotfiles/blob/17a73f89a2f3f7b2c9aa07a63d1928b86cc5425d/home/.phoenix.js">configuration</a>
-is relatively minimal. I&rsquo;ve written
-<a href="https://github.com/jakemcc/dotfiles/blob/17a73f89a2f3f7b2c9aa07a63d1928b86cc5425d/home/.phoenix.js#L42-L87">code</a>
-to move windows between monitors (rotating between three added some
-complexity to this),
-<a href="https://github.com/jakemcc/dotfiles/blob/17a73f89a2f3f7b2c9aa07a63d1928b86cc5425d/home/.phoenix.js#L90-L122">start or focus</a>
-certain applications, and
-<a href="https://github.com/jakemcc/dotfiles/blob/17a73f89a2f3f7b2c9aa07a63d1928b86cc5425d/home/.phoenix.js#L11-L37">resize</a>
-windows. This is enough for me to feel efficient.</p>
-
-<p>I encourage you to use a tool to help manage your windows. Personally
-I think Phoenix is pretty great and don&rsquo;t mind tinkering with my
-configuration and strongly recommend it. As a bonus it is a young
-project where the maintainer is open to suggestions. If you have an
-idea for a useful
-<a href="https://github.com/sdegutis/Phoenix/issues/18">feature</a> it has a
-possibility of being added pretty quickly.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/02/02/flexible-notification-of-clojure-tests-failing/">Flexible notification of Clojure tests failing</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-02-02T18:11:00-06:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2014</span></span> <span class='time'>6:11 pm</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a> has
-always supported notifying you of your tests' status through growl.
-With the release of version 0.3.4 it now will notify you using
-whatever program you want.</p>
-
-<p>To make my Mac whisper my the results of running my tests I can use
-the following project.clj</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defproject </span><span class="nv">sample</span> <span class="s">&quot;1.2.3&quot;</span>
-</span><span class='line'>  <span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">org.clojure/clojure</span> <span class="s">&quot;1.5.1&quot;</span><span class="p">]]</span>
-</span><span class='line'>  <span class="ss">:profiles</span> <span class="p">{</span><span class="ss">:dev</span> <span class="p">{</span><span class="ss">:plugins</span> <span class="p">[[</span><span class="nv">com.jakemccrary/lein-test-refresh</span> <span class="s">&quot;0.3.4&quot;</span><span class="p">]]}}</span>
-</span><span class='line'>  <span class="ss">:test-refresh</span> <span class="p">{</span><span class="ss">:notify-command</span> <span class="p">[</span><span class="s">&quot;say&quot;</span> <span class="s">&quot;-v&quot;</span> <span class="s">&quot;Whisper&quot;</span><span class="p">]})</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The specification of the command is found in the <code>:test-refresh
-{:notify-command ["say" "-v" "Whisper"]}</code> entry in the above
-project.clj. After running your tests
-<a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a> will
-pass a (usually) short summary message as the final parameter to the
-specified command.</p>
-
-<p>Now you can finally have the results of running
-your tests whispered to you.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/01/12/releasing-lein-test-refresh-0-dot-3-0/">Releasing lein-test-refresh 0.3.0</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-01-12T20:12:00-06:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>8:12 pm</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>At the suggestion of my coworker <a href="http://www.xpteam.com/">Jeff Bay</a>
-you can now hit a single keystroke to cause
-<a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a> to
-rerun your tests. Now you can hit enter in the terminal running <code>lein
-test-refresh</code> to cause your tests to be run.</p>
-
-<p>Add the below text to your project.clj to start using
-<code>lein-test-refresh</code> today.
-<img src="https://clojars.org/com.jakemccrary/lein-test-refresh/latest-version.svg" alt="Clojars generated dependency vector" /></p>
-
-<p>As a reminder if you call you can pass the argument <code>:growl</code> to
-lein-test-refresh. If you pass <code>:growl</code> as an argument then you&rsquo;ll be
-notified of test success and failures through
-<a href="http://growl.info/">growl</a>. On top of the quick feedback cycles that
-<a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a> (and
-<a href="https://github.com/jakemcc/lein-autoexpect">lein-autoexpect</a>)
-provides the growl notification is my favorite feature. I&rsquo;d highly
-recommend giving it a shot.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/01/01/using-incanter-to-review-my-2013-reading/">Using Incanter to review my 2013 reading</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-01-01T17:31:00-06:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2014</span></span> <span class='time'>5:31 pm</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I use <a href="https://goodreads.com">goodreads</a> to keep track of
-<a href="https://www.goodreads.com/user/show/3431614-jake-mccrary">my reading</a>
-and have since early 2010. I find very useful for capturing what I
-want to read and reminding me of how I felt about books I&rsquo;ve read. I
-thought it would be fun to take a closer look at what I read in 2013.
-I&rsquo;m doing this using <a href="http://clojure.org/">Clojure</a> with
-<a href="http://incanter.org/">Incanter</a>. I haven&rsquo;t used Incanter since I
-wrote
-<a href="http://jakemccrary.com/blog/2010/02/21/plotting-time-series-data-with-incanter/">this</a>
-post and thought this would be a good opportunity to visit it again.</p>
-
-<p>First I need to get my data out of goodreads. I&rsquo;ve worked with the
-Goodreads API before <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> but am not going to use it for this
-exercise. Instead I&rsquo;m using the goodreads export functionality (at
-goodreads follow the links: My Books > import/export) to export a csv
-file. Having the csv file also lets me cleanup some of the data since
-some of the book&rsquo;s page counts were missing <sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>.</p>
-
-<p>Now that I have data it is time to start playing with it. Run <code>lein new goodreads-summary</code> and edit the <code>project.clj</code> file to have a dependency on Incanter.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defproject </span><span class="nv">goodreads-summary</span> <span class="s">&quot;0.1.0-SNAPSHOT&quot;</span>
-</span><span class='line'>  <span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">org.clojure/clojure</span> <span class="s">&quot;1.5.1&quot;</span><span class="p">]</span>
-</span><span class='line'>                 <span class="p">[</span><span class="nv">org.clojure/data.csv</span> <span class="s">&quot;0.1.2&quot;</span><span class="p">]</span>
-</span><span class='line'>                 <span class="p">[</span><span class="nv">incanter</span> <span class="s">&quot;1.5.4&quot;</span><span class="p">]</span>
-</span><span class='line'>                 <span class="p">[</span><span class="nv">clj-time</span> <span class="s">&quot;0.6.0&quot;</span><span class="p">]])</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Next I&rsquo;m going to take the csv file and transform it into an Incanter
-dataset. This is easily done with
-<a href="http://liebke.github.io/incanter/io-api.html#incanter.io/read-dataset">incanter.io/read-dataset</a>.
-It isn&rsquo;t well documented but by passing <code>:keyword-headers false</code> to
-<code>read-dataset</code> the headers from the csv are not converted to keywords.
-I&rsquo;m doing this because some of the goodreads headers contain spaces
-and dealing with spaces in keywords is a pain. The snippet below has
-all of the necessary requires for the remainder of the examples.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">ns </span><span class="nv">goodreads-summary.core</span>
-</span><span class='line'>  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">clojure.data.csv</span> <span class="ss">:as</span> <span class="nv">csv</span><span class="p">]</span>
-</span><span class='line'>            <span class="p">[</span><span class="nv">clojure.string</span> <span class="ss">:as</span> <span class="nv">str</span><span class="p">]</span>
-</span><span class='line'>            <span class="p">[</span><span class="nv">incanter.core</span> <span class="ss">:as</span> <span class="nv">incanter</span><span class="p">]</span>
-</span><span class='line'>            <span class="p">[</span><span class="nv">incanter.io</span> <span class="ss">:as</span> <span class="nv">io</span><span class="p">]</span>
-</span><span class='line'>            <span class="p">[</span><span class="nv">incanter.charts</span> <span class="ss">:as</span> <span class="nv">charts</span><span class="p">]</span>
-</span><span class='line'>            <span class="p">[</span><span class="nv">clj-time.core</span> <span class="ss">:as</span> <span class="nv">tc</span><span class="p">]</span>
-</span><span class='line'>            <span class="p">[</span><span class="nv">clj-time.format</span> <span class="ss">:as</span> <span class="nv">tf</span><span class="p">]))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">read-csv</span> <span class="p">[</span><span class="nv">filepath</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nf">io/read-dataset</span> <span class="nv">filepath</span> <span class="ss">:header</span> <span class="nv">true</span> <span class="ss">:keyword-headers</span> <span class="nv">false</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Calling <code>read-csv</code> with the path to the exported goodreads data
-results in dataset. If you want to view the data use
-<a href="http://liebke.github.io/incanter/core-api.html#incanter.core/view">incanter.core/view</a>.
-Running <code>(incanter/view (read-csv "goodreads_export.csv"))</code> pops up a
-grid of with all the data. I don&rsquo;t care about most of the columns so
-lets define a function that selects out the few I care about.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">select-columns</span> <span class="p">[</span><span class="nv">dataset</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nf">incanter/sel</span> <span class="nv">dataset</span> <span class="ss">:cols</span> <span class="p">[</span><span class="s">&quot;Number of Pages&quot;</span> <span class="s">&quot;Date Read&quot;</span> <span class="s">&quot;Bookshelves&quot;</span> <span class="s">&quot;Exclusive Shelf&quot;</span><span class="p">]))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Selecting columns is done with
-<a href="http://liebke.github.io/incanter/core-api.html#incanter.core/sel">incanter.core/sel</a>.
-Like most Incanter functions it has many overloads. One way to use it
-is to pass a dataset with a vector of columns you want to select.</p>
-
-<p>Filtering a dataset is done using
-<a href="http://liebke.github.io/incanter/core-api.html#incanter.core/$where">incanter.core/$where</a>.
-Goodreads has three default shelves <strong>to-read</strong>,
-<strong>currently-reading</strong>, and <strong>read</strong>. To select all your read books you
-filter of the <strong>Exclusive Shelf</strong> column for <strong>read</strong> books.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">finished</span> <span class="p">[</span><span class="nv">dataset</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nf">incanter/$where</span> <span class="p">{</span><span class="s">&quot;Exclusive Shelf&quot;</span> <span class="s">&quot;read&quot;</span><span class="p">}</span> <span class="nv">dataset</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Filtering for books read in 2013 is a bit more complicated. First I
-convert the <strong>Date Read</strong> column from a string to a
-<code>org.joda.time.DateTime</code>. This is done with the combination of
-<code>transform-date-read-column</code> and <code>parse-date</code>. Some of the my data is missing a <strong>Date Read</strong> value. I&rsquo;m choosing to handle this by treating missing data as the result of <code>(clj-time.core/date-time 0)</code>.</p>
-
-<p>The <code>$where</code> in <code>books-read-in-2013</code> is a bit more complicated than
-the filtering in <code>finished</code>. Here I&rsquo;m providing a predicate to
-use instead of just doing an equality comparison.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">parse-date</span> <span class="p">[</span><span class="nv">date-str</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">if </span><span class="nv">date-str</span>
-</span><span class='line'>    <span class="p">(</span><span class="nf">tf/parse</span> <span class="p">(</span><span class="nf">tf/formatter</span> <span class="s">&quot;yyyy/MM/dd&quot;</span><span class="p">)</span> <span class="nv">date-str</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">(</span><span class="nf">tc/date-time</span> <span class="mi">0</span><span class="p">)))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">transform-date-read-column</span> <span class="p">[</span><span class="nv">dataset</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nf">incanter/transform-col</span> <span class="nv">dataset</span> <span class="s">&quot;Date Read&quot;</span> <span class="nv">parse-date</span><span class="p">))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">date-greater-than-pred</span> <span class="p">[</span><span class="nv">date</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">challenger</span><span class="p">]</span>
-</span><span class='line'>    <span class="p">(</span><span class="nb">&gt; </span><span class="p">(</span><span class="nf">.compareTo</span> <span class="nv">challenger</span> <span class="nv">date</span><span class="p">)</span> <span class="mi">0</span><span class="p">)))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">books-read-in-2013</span> <span class="p">[</span><span class="nv">dataset</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">finished</span> <span class="p">(</span><span class="nf">finished</span> <span class="p">(</span><span class="nf">select-columns</span> <span class="nv">dataset</span><span class="p">))</span>
-</span><span class='line'>        <span class="nv">with-dates</span> <span class="p">(</span><span class="nf">incanter/$where</span> <span class="p">{</span><span class="s">&quot;Date Read&quot;</span> <span class="p">{</span><span class="ss">:fn</span> <span class="nv">identity</span><span class="p">}}</span> <span class="nv">finished</span><span class="p">)</span>
-</span><span class='line'>        <span class="nv">with-date-objects</span> <span class="p">(</span><span class="nf">transform-date-read-column</span> <span class="nv">with-dates</span><span class="p">)]</span>
-</span><span class='line'>    <span class="p">(</span><span class="nf">incanter/$where</span> <span class="p">{</span><span class="s">&quot;Date Read&quot;</span> <span class="p">{</span><span class="ss">:fn</span> <span class="p">(</span><span class="nf">date-greater-than-pred</span> <span class="p">(</span><span class="nf">parse-date</span> <span class="s">&quot;2012/12/31&quot;</span><span class="p">))}}</span>
-</span><span class='line'>                     <span class="nv">with-date-objects</span><span class="p">)))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now we have a dataset that that contains only books read in 2013
-(well, until I read a book in 2014 and the filter above also grabs
-books in 2014). Now to generate some analytic for each month. First
-lets add a <strong>Month</strong> column to our data. Originally I wrote the
-function below. It uses <code>incanter.core/$map</code> to generate the data,
-makes a dataset with the new data, and then adds that to the original
-dataset.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">add-month-read-column</span> <span class="p">[</span><span class="nv">dataset</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">month-read</span> <span class="p">(</span><span class="nf">incanter/$map</span> <span class="nv">tc/month</span> <span class="s">&quot;Date Read&quot;</span> <span class="nv">dataset</span><span class="p">)</span>
-</span><span class='line'>        <span class="nv">month-dataset</span> <span class="p">(</span><span class="nf">incanter/dataset</span> <span class="p">[</span><span class="s">&quot;Month&quot;</span><span class="p">]</span> <span class="nv">month-read</span><span class="p">)</span>
-</span><span class='line'>        <span class="nv">with-month-read</span> <span class="p">(</span><span class="nf">incanter/conj-cols</span> <span class="nv">dataset</span> <span class="nv">month-dataset</span><span class="p">)]</span>
-</span><span class='line'>    <span class="nv">with-month-read</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>When I wrote the above code it seemed like there should be a better
-way. While writing this post I stumbled across
-<a href="http://liebke.github.io/incanter/core-api.html#incanter.core/add-derived-column">incanter.core/add-derived-column</a>.
-Switching to <code>add-derived-column</code> makes <code>add-month-read-column</code> almost trivial.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">add-month-read-column</span> <span class="p">[</span><span class="nv">dataset</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nf">incanter/add-derived-column</span> <span class="s">&quot;Month&quot;</span> <span class="p">[</span><span class="s">&quot;Date Read&quot;</span><span class="p">]</span> <span class="nv">tc/month</span> <span class="nv">dataset</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now that we have <code>add-month-read-column</code>  we can now start aggregating
-some stats. Lets write code for calculating the pages read per month.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">pages-by-month</span> <span class="p">[</span><span class="nv">dataset</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">with-month-read</span> <span class="p">(</span><span class="nf">add-month-read-column</span> <span class="nv">dataset</span><span class="p">)]</span>
-</span><span class='line'>    <span class="p">(</span><span class="nf">-&gt;&gt;</span> <span class="p">(</span><span class="nf">incanter/$rollup</span> <span class="ss">:sum</span> <span class="s">&quot;Number of Pages&quot;</span> <span class="s">&quot;Month&quot;</span> <span class="nv">with-month-read</span><span class="p">)</span>
-</span><span class='line'>         <span class="p">(</span><span class="nf">incanter/$order</span> <span class="s">&quot;Month&quot;</span> <span class="ss">:asc</span><span class="p">))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>That was pretty easy. Lets write a function to count the number of books read per month.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">book-count-by-month</span> <span class="p">[</span><span class="nv">dataset</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">with-month-read</span> <span class="p">(</span><span class="nf">add-month-read-column</span> <span class="nv">dataset</span><span class="p">)]</span>
-</span><span class='line'>    <span class="p">(</span><span class="nf">-&gt;&gt;</span> <span class="p">(</span><span class="nf">incanter/$rollup</span> <span class="ss">:count</span> <span class="s">&quot;Number of books&quot;</span> <span class="s">&quot;Month&quot;</span> <span class="nv">with-month-read</span><span class="p">)</span>
-</span><span class='line'>         <span class="p">(</span><span class="nf">incanter/$order</span> <span class="s">&quot;Month&quot;</span> <span class="ss">:asc</span><span class="p">))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>pages-by-month</code> and <code>book-count-by-month</code> are very similar. Each uses <a href="http://liebke.github.io/incanter/core-api.html#incanter.core/$rollup">incanter.core/$rollup</a> to calculate per month stats. The first argument to <code>$rollup</code> can be a function that takes a sequence of values or one of the supported magical &ldquo;function identifier keywords&rdquo;.</p>
-
-<p>Next lets combine the data together so we can print out a nice table. While we are at it lets add another column.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">stats-by-month</span> <span class="p">[</span><span class="nv">dataset</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nf">-&gt;&gt;</span> <span class="p">(</span><span class="nf">incanter/$join</span> <span class="p">[</span><span class="s">&quot;Month&quot;</span> <span class="s">&quot;Month&quot;</span><span class="p">]</span>
-</span><span class='line'>                     <span class="p">(</span><span class="nf">pages-by-month</span> <span class="nv">dataset</span><span class="p">)</span>
-</span><span class='line'>                     <span class="p">(</span><span class="nf">book-count-by-month</span> <span class="nv">dataset</span><span class="p">))</span>
-</span><span class='line'>       <span class="p">(</span><span class="nf">incanter/rename-cols</span> <span class="p">{</span><span class="s">&quot;Number of Pages&quot;</span> <span class="s">&quot;Page Count&quot;</span>
-</span><span class='line'>                              <span class="s">&quot;Number of books&quot;</span> <span class="s">&quot;Book Count&quot;</span><span class="p">})</span>
-</span><span class='line'>       <span class="p">(</span><span class="nf">incanter/add-derived-column</span> <span class="s">&quot;Pages/Books&quot;</span>
-</span><span class='line'>                                  <span class="p">[</span><span class="s">&quot;Page Count&quot;</span> <span class="s">&quot;Book Count&quot;</span><span class="p">]</span>
-</span><span class='line'>                                  <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">p</span> <span class="nv">b</span><span class="p">]</span> <span class="p">(</span><span class="nf">Math/round</span> <span class="p">(</span><span class="nb">double </span><span class="p">(</span><span class="nb">/ </span><span class="nv">p</span> <span class="nv">b</span><span class="p">)))))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>stats-by-month</code> returns a dataset which when printed looks like the following table. It joins the data, renames columns, and adds a derived column.</p>
-
-<pre><code>| Month | Book Count | Page Count | Pages/Books |
-|-------+------------+------------+-------------|
-|     1 |          6 |       1279 |         213 |
-|     2 |          2 |       1251 |         626 |
-|     3 |          8 |       2449 |         306 |
-|     4 |          5 |       1667 |         333 |
-|     5 |          6 |       2447 |         408 |
-|     6 |          5 |       1609 |         322 |
-|     7 |          5 |       1445 |         289 |
-|     8 |          5 |       2229 |         446 |
-|     9 |          2 |        963 |         482 |
-|    10 |          5 |       1202 |         240 |
-|    11 |          5 |       2248 |         450 |
-|    12 |          7 |       1716 |         245 |
-</code></pre>
-
-<p>Great. Now we have a little ascii table. Lets get graphical and make some bar charts.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">chart-column-by-month</span> <span class="p">[</span><span class="nv">column</span> <span class="nv">dataset</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nb">select </span><span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">column</span><span class="p">]</span> <span class="p">(</span><span class="nf">incanter/sel</span> <span class="nv">dataset</span> <span class="ss">:cols</span> <span class="nv">column</span><span class="p">))</span>
-</span><span class='line'>        <span class="nv">months</span> <span class="p">(</span><span class="nb">select </span><span class="s">&quot;Month&quot;</span><span class="p">)]</span>
-</span><span class='line'>    <span class="p">(</span><span class="nf">charts/bar-chart</span> <span class="nv">months</span> <span class="p">(</span><span class="nb">select </span><span class="nv">column</span><span class="p">)</span>
-</span><span class='line'>                      <span class="ss">:y-label</span> <span class="nv">column</span> <span class="ss">:x-label</span> <span class="s">&quot;Month&quot;</span><span class="p">)))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">chart-page-count-by-month</span> <span class="p">[</span><span class="nv">dataset</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nf">chart-column-by-month</span> <span class="s">&quot;Page Count&quot;</span> <span class="nv">dataset</span><span class="p">))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">chart-book-count-by-month</span> <span class="p">[</span><span class="nv">dataset</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nf">chart-column-by-month</span> <span class="s">&quot;Book Count&quot;</span> <span class="nv">dataset</span><span class="p">))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">view-page-count-chart</span> <span class="p">[]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nf">read-csv</span> <span class="s">&quot;goodreads_export.csv&quot;</span><span class="p">)</span>
-</span><span class='line'>      <span class="nv">books-read-in-2013</span>
-</span><span class='line'>      <span class="nv">stats-by-month</span>
-</span><span class='line'>      <span class="nv">chart-page-count-by-month</span>
-</span><span class='line'>      <span class="nv">incanter/view</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Running the snippet <code>view-page-count-chart</code> produces a pop-up with the
-below bar chart. The chart actually surprises me as I fully expected
-to have higher page counts during the winter months than the summer
-months. This chart and analysis is pretty useless though without
-knowing the difficulty of the pages read. For example, last February I
-read
-<a href="http://www.amazon.com/gp/product/0316920045/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=0316920045&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=RTXH5NFJLAODUEBP">Infinite Jest</a>.
-Knowing that I don&rsquo;t feel like having a low page count in that month
-is slacking at all.</p>
-
-<p><img src="/images/page-count-by-month.png" title="Bar chart of total page count by month" alt="Bar chart of total page count by month" /></p>
-
-<h3>2013 Summary</h3>
-
-<p>2013 was a pretty big year of reading. I read more books this past
-year than all other years that I have data. I also read some of the
-best books I&rsquo;ve ever read. Not only that but I actually created
-multiple <sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup> custom Kindle dictionaries to help improve my (and
-others) reading experience.</p>
-
-<p>Summary table <sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup>:</p>
-
-<pre><code>|   :shelf | :books | :pages |
-|----------+--------+--------|
-| non-tech |     51 |  17798 |
-|     tech |     10 |   2707 |
-|     read |     61 |  20505 |
-</code></pre>
-
-<h3>Plans for 2014</h3>
-
-<p>I&rsquo;m planning on reading a similar amount in this upcoming year but
-will probably have a bit more non-fiction books. First step towards doing
-that is to start classifying my books as non-fiction or fiction. I&rsquo;m
-also planning on rereading at least two books that I&rsquo;ve read in the
-last few years. This is unusual for me because I don&rsquo;t often reread
-books that quickly.</p>
-
-<p>If you have any book recommendations feel free to leave them in the
-comments or contact me through twitter or email.</p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>A project on Heroku that takes your to-read list from goodreads and queries the Chicago Public Library to see if books are available. Someday I&rsquo;ll give it some love and make it usable by others.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-<li id="fn:2">
-<p>I&rsquo;ve also applied to be a goodreads librarian so I can actually fix their data as well.<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
-<li id="fn:3">
-<p>One for <a href="http://jakemccrary.com/blog/2013/07/09/releasing-the-functional-javascript-companion/">Functional JavaScript</a> and another for <a href="http://gum.co/dune-dictionary">Dune</a>. If you want a custom Kindle dictionary made feel free to reach out.<a href="#fnref:3" rev="footnote">&#8617;</a></p></li>
-<li id="fn:4">
-<p>tech shelf only includes programming books.<a href="#fnref:4" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/12/14/book-review-clojure-high-performance-programming/">Book Review: Clojure High Performance Programming</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2013-12-14T16:39:00-06:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2013</span></span> <span class='time'>4:39 pm</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I was recently approached by Packt Publishing asking if I&rsquo;d review
-Shantanu Kuma&rsquo;s book
-<a href="http://www.packtpub.com/clojure-high-performance-programming/book">Clojure High Performance Programming</a>
-. It sounded interesting so I took them up on
-their offer for a free copy and read it over two flights.</p>
-
-<p>Unsurprisingly the
-<a href="http://www.packtpub.com/clojure-high-performance-programming/book#chapter_1">table of contents</a>
-does a good job describing the book. This book doesn&rsquo;t
-dive too deep into any one topic but instead gives you a taste of
-each.</p>
-
-<p>Overall the book was pretty good. It provides interesting examples of
-real world Clojure code that solve specific performance problems. It
-talks about host performance, both JVM and hardware, concerns which are
-both areas that shouldn&rsquo;t be overlooked. I thought the book was best
-when showing examples of well performing code from libraries.</p>
-
-<p>I&rsquo;d recommend this book for developers who aren&rsquo;t past the beginning
-stages of writing performant code. It does a good job introducing the
-topics you&rsquo;ll want to think about when trying to craft well performing
-programs.</p>
-
-<p>It isn&rsquo;t for the developer who has spent years optimizing code for
-performance. Those developers are already going to be familiar with
-the language and concerns of writing high performance code.</p>
-
-<p>If I could add anything to the book it would be a chapter about
-measuring performance in production. If you are writing high
-performance programs it has been my experience that you <strong>must</strong>
-measure in production. This is easiest to do if you build measuring in
-from the very beginning.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//9">&larr; Older</a>
@@ -2049,6 +2128,10 @@ from the very beginning.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/05/02/how-to-be-alerted-when-a-long-running-process-finishes/">How to be notified when long running processes finish</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2020/04/26/hanging-a-hangboard-using-a-doorway-pull-up-bar/">How to hang a hangboard using a doorway pull-up bar</a>
@@ -2071,6 +2154,10 @@ from the very beginning.</p>
       </li>
     
       <li class="post">
+        <a href="/blog/2020/01/11/books-that-changed-my-life/">Books that changed my life</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2020/01/11/reading-in-2019/">Reading in 2019</a>
       </li>
     
@@ -2079,15 +2166,7 @@ from the very beginning.</p>
       </li>
     
       <li class="post">
-        <a href="/blog/2019/08/23/building-a-onewheel-stand/">Building a Onewheel stand</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/08/15/switching-my-ergodox-to-qmk-firmware/">Switching my Ergodox to QMK firmware</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/04/30/how-i-use-social-media/">How I use social media</a>
+        <a href="/blog/2019/10/08/fast-feedback-is-important/">Fast feedback is important</a>
       </li>
     
   </ul>

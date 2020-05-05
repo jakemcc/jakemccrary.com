@@ -4,7 +4,7 @@
   <title><![CDATA[Jake McCrary]]></title>
   <link href="https://jakemccrary.com/atom.xml" rel="self"/>
   <link href="https://jakemccrary.com/"/>
-  <updated>2020-04-29T22:02:48-05:00</updated>
+  <updated>2020-05-04T20:31:49-05:00</updated>
   <id>https://jakemccrary.com/</id>
   <author>
     <name><![CDATA[Jake McCrary]]></name>
@@ -12,6 +12,122 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[How to be notified when long running processes finish]]></title>
+    <link href="https://jakemccrary.com/blog/2020/05/02/how-to-be-alerted-when-a-long-running-process-finishes/"/>
+    <updated>2020-05-02T17:11:02-05:00</updated>
+    <id>https://jakemccrary.com/blog/2020/05/02/how-to-be-alerted-when-a-long-running-process-finishes</id>
+    <content type="html"><![CDATA[<p>Let me set the stage.
+I kick off the compilation of a large Scala codebase.
+This will take minutes to finish, so I switch to Slack and catch up on what coworkers have posted.
+Someone posted an interesting link and I follow it to an article.
+Fifteen minutes later, I notice the compilation finished twelve minutes ago.
+I silently grumble at myself, disappointed that I didn&rsquo;t start the next step twelve minutes ago.</p>
+
+<p>Has some variation of the above happened to you?</p>
+
+<p>It doesn&rsquo;t happen to me anymore because now my computer tells me when any long running process finishes.
+This might sound annoying but it is great.
+I no longer feel guilty for dropping into Slack and can immediately get back to the task at hand as soon the process finishes.</p>
+
+<p>I&rsquo;ve done this by enhancing on my setup for showing the <a href="https://jakemccrary.com/blog/2020/04/21/using-bash-preexec-for-monitoring-the-runtime-of-your-last-command/">runtime of the previous command in my prompt</a>.
+You don&rsquo;t have to read that article for the rest of this one to make sense, but you should because it shows you how to add a very useful feature to your prompt.</p>
+
+<p>Below is the code that causes my computer to tell me when it finishes running commands that takes longer than 30 seconds.
+It is found in my <code>~/.bashrc</code>.
+An explanation follows the code snippet.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># Using https://github.com/rcaloras/bash-preexec</span>
+</span><span class='line'>preexec<span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>  <span class="nv">_last_command</span><span class="o">=</span><span class="nv">$1</span>
+</span><span class='line'>  <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;UNSET&quot;</span> <span class="o">==</span> <span class="s2">&quot;${_timer}&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>    <span class="nv">_timer</span><span class="o">=</span><span class="nv">$SECONDS</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>    <span class="nv">_timer</span><span class="o">=</span><span class="k">${</span><span class="nv">_timer</span><span class="k">:-</span><span class="nv">$SECONDS</span><span class="k">}</span>
+</span><span class='line'>  <span class="k">fi</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>_maybe_speak<span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>    <span class="nb">local </span><span class="nv">elapsed_seconds</span><span class="o">=</span><span class="nv">$1</span>
+</span><span class='line'>    <span class="k">if</span> <span class="o">((</span> elapsed_seconds &gt; <span class="m">30</span> <span class="o">))</span><span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>        <span class="nb">local </span>c
+</span><span class='line'>        <span class="nv">c</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">&quot;${_last_command}&quot;</span> <span class="p">|</span> cut -d<span class="s1">&#39; &#39;</span> -f1<span class="k">)</span>
+</span><span class='line'>        <span class="o">(</span> say <span class="s2">&quot;finished ${c}&quot;</span> <span class="p">&amp;</span> <span class="o">)</span>
+</span><span class='line'>    <span class="k">fi</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>precmd<span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;UNSET&quot;</span> <span class="o">==</span> <span class="s2">&quot;${_timer}&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>     <span class="nv">timer_show</span><span class="o">=</span><span class="s2">&quot;0s&quot;</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>    <span class="nv">elapsed_seconds</span><span class="o">=</span><span class="k">$((</span>SECONDS <span class="o">-</span> _timer<span class="k">))</span>
+</span><span class='line'>    _maybe_speak <span class="k">${</span><span class="nv">elapsed_seconds</span><span class="k">}</span>
+</span><span class='line'>    <span class="nv">timer_show</span><span class="o">=</span><span class="s2">&quot;$(format-duration seconds $elapsed_seconds)&quot;</span>
+</span><span class='line'>  <span class="k">fi</span>
+</span><span class='line'>  <span class="nv">_timer</span><span class="o">=</span><span class="s2">&quot;UNSET&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># put at the bottom of my .bashrc</span>
+</span><span class='line'><span class="o">[[</span> -f <span class="s2">&quot;$HOME/.bash-preexec.sh&quot;</span> <span class="o">]]</span> <span class="o">&amp;&amp;</span> <span class="nb">source</span> <span class="s2">&quot;$HOME/.bash-preexec.sh&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="https://github.com/rcaloras/bash-preexec">Bash-Preexec</a> triggers the <code>preexec</code>, immediately before a command is execute, and <code>precmd</code> functions, immediately before the shell prompt reappears.
+Those two functions are enough to figure out how much time has elapsed while a command ran.
+You setup Bash-Preexec by downloading <a href="https://github.com/rcaloras/bash-preexec/blob/master/bash-preexec.sh">bash-preexec.sh</a> and sourcing it in your <code>~/.bashrc</code>.</p>
+
+<p><code>preexec</code> is passed the command being ran and it captures it in <code>_last_command</code>.
+It also captures the current number of seconds the shell has been running as <code>_timer</code>.</p>
+
+<p><code>precmd</code> uses the value in <code>_timer</code> to calculate the elapsed time in seconds and then calls the function <code>_maybe_speak</code> with this as an argument.
+It also does the work required for showing the elapsed time in my prompt.</p>
+
+<p>If the elapsed time is greater than 30 seconds then <code>_maybe_speak</code> uses <code>cut</code> to discard the arguments of captured command, leaving me with the command itself.
+It then uses <code>say</code> to produce an audible alert of what command just finished.
+I discard the arguments because otherwise the <code>say</code> command can go on for a long time.</p>
+
+<p><code>say</code> is a tool that ships with macOS.
+I haven&rsquo;t gotten around to it yet but I&rsquo;ll need to use something else on my Linux machines.</p>
+
+<p>You may have noticed that I run <code>say</code> in the background and in a subshell.
+Running it in the background lets me continue interacting with my shell while <code>say</code> finishes executing and running it in a subshell prevents text from appearing in my shell when the background job finishes.</p>
+
+<p>With this setup, I can kick off a slow compile or test run and not feel so bad about dropping into Slack or reading Reddit. It is wonderful and I&rsquo;d recommend it (though, I&rsquo;d more strongly recommend not having commands that take a while to run).</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[How to hang a hangboard using a doorway pull-up bar]]></title>
@@ -122,7 +238,7 @@ This script converts seconds into a more readable string (example: 310 to <code>
 <span class='line-number'>23</span>
 <span class='line-number'>24</span>
 <span class='line-number'>25</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="k">function</span> preexec <span class="o">{</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>preexec<span class="o">()</span> <span class="o">{</span>
 </span><span class='line'>  <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;UNSET&quot;</span> <span class="o">==</span> <span class="s2">&quot;${timer}&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
 </span><span class='line'>    <span class="nv">timer</span><span class="o">=</span><span class="nv">$SECONDS</span>
 </span><span class='line'>  <span class="k">else</span>
@@ -130,7 +246,7 @@ This script converts seconds into a more readable string (example: 310 to <code>
 </span><span class='line'>  <span class="k">fi</span>
 </span><span class='line'><span class="o">}</span>
 </span><span class='line'>
-</span><span class='line'><span class="k">function</span> precmd <span class="o">{</span>
+</span><span class='line'>precmd<span class="o">()</span> <span class="o">{</span>
 </span><span class='line'>  <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;UNSET&quot;</span> <span class="o">==</span> <span class="s2">&quot;${timer}&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
 </span><span class='line'>     <span class="nv">timer_show</span><span class="o">=</span><span class="s2">&quot;0s&quot;</span>
 </span><span class='line'>  <span class="k">else</span>
@@ -146,7 +262,7 @@ This script converts seconds into a more readable string (example: 310 to <code>
 </span><span class='line'>
 </span><span class='line'><span class="c"># a bunch more lines until the end of my .bashrc</span>
 </span><span class='line'><span class="c"># where I include .bash-preexec.sh</span>
-</span><span class='line'><span class="o">[</span> -f <span class="s2">&quot;$HOME/.bash-preexec.sh&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nb">source</span> <span class="s2">&quot;$HOME/.bash-preexec.sh&quot;</span>
+</span><span class='line'><span class="o">[[</span> -f <span class="s2">&quot;$HOME/.bash-preexec.sh&quot;</span> <span class="o">]]</span> <span class="o">&amp;&amp;</span> <span class="nb">source</span> <span class="s2">&quot;$HOME/.bash-preexec.sh&quot;</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -628,6 +744,27 @@ Most of the time checking happens by accident when I accidentally maximize the t
   </entry>
   
   <entry>
+    <title type="html"><![CDATA[Books that changed my life]]></title>
+    <link href="https://jakemccrary.com/blog/2020/01/11/books-that-changed-my-life/"/>
+    <updated>2020-01-11T13:21:19-06:00</updated>
+    <id>https://jakemccrary.com/blog/2020/01/11/books-that-changed-my-life</id>
+    <content type="html"><![CDATA[<p>Meditations - Marcus Aurelius
+Letters from a Stoic - Seneca
+Capital in the Twenty-First Century - Piketty
+The 4-Hour body - Tim Ferris
+Moral Tribes
+Working Effectively With Unit Tests - Jay Fields
+Extreme Programming Explained - Kent Beck
+The Sense of Style: The Thinking Person&rsquo;s Guide to Writing in the 21st Century - Steven Pinker
+Being Mortal: Medicine and What Matters in the End - Atul Gawande
+Lying - Sam Harris
+Stoner - John Williams
+Structure and Interpretation of Computer Programs - Abelson
+Stranger in a Strange Land - Heinlein</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Reading in 2019]]></title>
     <link href="https://jakemccrary.com/blog/2020/01/11/reading-in-2019/"/>
     <updated>2020-01-11T12:32:00-06:00</updated>
@@ -972,6 +1109,52 @@ I look forward to customizing the firmware to make the key layout fit my usage.<
   </entry>
   
   <entry>
+    <title type="html"><![CDATA[Fast feedback is important]]></title>
+    <link href="https://jakemccrary.com/blog/2019/10/08/fast-feedback-is-important/"/>
+    <updated>2019-10-08T18:10:02-05:00</updated>
+    <id>https://jakemccrary.com/blog/2019/10/08/fast-feedback-is-important</id>
+    <content type="html"><![CDATA[<p>I was asked last year what I would focus on if I were leading a technology group.
+My response was that I would focus on developing software with a focus on having fast feedback cycles.</p>
+
+<p>Fast feedback cycles enable so much.</p>
+
+<p>If you are working in a language that has a compile step and your compilation takes 100 milliseconds, you are going to feel free to compile all the time.
+You&rsquo;ll get that feedback you&rsquo;ve screwed something up super fast.
+If you project takes 30 minutes to compile, you definitely will not be compiling all the time.
+As a result, you&rsquo;ll write more code between compilation attempts.
+More code written leads to more areas where there could be a problem.
+Instead of getting feedback extremely close to when you first wrote a chunk of code, now you are getting it much later.
+Getting the feedback much later puts a higher cognitive load on you as now you need to recall what you were attempting to do there and it has been minutes (or tens of minutes or an hour) since you&rsquo;ve written that code.</p>
+
+<p>When you are developing a new feature or fixing a bug having a quick feedback cycle from writing code to seeing tests pass or fail allows you to develop code faster with confidence.
+As soon as that time to get feedback from running tests passes some threshold, all of a sudden you are not going to run tests all the time.
+As a result you start writing more code between running your tests.
+Now you have more areas where a problem could be introduced.</p>
+
+<p>Lets make a diagram of the various steps of code through a developement lifecycle.</p>
+
+<p>|Local Development| -> |Build Server| -> |Deploy to production| -> |Learn from deployed code|</p>
+
+<p>Local Development is a series of</p>
+
+<p>1) Write Code
+2) Compile
+3) Run tests
+4) Push code to shared repository</p>
+
+<p>Each step can cycle back to Step 1 (even Step 1).</p>
+
+<p>Why is focusing on fast feedback cycles important?</p>
+
+<p>Fast feedback cycles let you iterate on ideas faster. This lets you evolve quicker.</p>
+
+<p>Slowness in any step lets distraction get it. It also encourages larger batches.</p>
+
+<p>Larger batches of changes brings more risk.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Building a Onewheel stand]]></title>
     <link href="https://jakemccrary.com/blog/2019/08/23/building-a-onewheel-stand/"/>
     <updated>2019-08-23T20:34:00-05:00</updated>
@@ -1085,6 +1268,35 @@ I look forward to customizing the firmware to make the key layout fit my usage.<
   </entry>
   
   <entry>
+    <title type="html"><![CDATA[Identifying similar text documents]]></title>
+    <link href="https://jakemccrary.com/blog/2019/05/30/identifying-similar-text-documents/"/>
+    <updated>2019-05-30T13:40:35-05:00</updated>
+    <id>https://jakemccrary.com/blog/2019/05/30/identifying-similar-text-documents</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve infrequently wondered how repetative I am in the various articles I write on my website.</p>
+
+<p>Luckily, this curiousity lines up with one of the problems we solved at Lumanu. At the time, Lumanu was indexing online articles we crawled and helping people do better content marketing. Part of that was allowing people to search and see articles that were relevant to that search. It was important to us to not show a bunch of very similar articles to any given search.</p>
+
+<p>We did this at Lumanu by</p>
+
+<p>Years ago, I was heading up the technology team at a small content marketing startup. In one version of our product, we crawled the web for articles and used that data to connect clients to authors. It also functioned as a search engine over the content we crawled.</p>
+
+<p>One way we made our search better was to identify similar articles and only display one article instead of all the very similar results. This was a much nicer user experience.</p>
+
+<p>We did this by using <a href="https://en.wikipedia.org/wiki/Locality-sensitive_hashing">locality-sensitive hashing</a>. Locality-sensitive hashing is a category of hashing where collisions are maximized. Similar items will hash to similar values.</p>
+
+<p>More specifically we used the <a href="https://en.wikipedia.org/wiki/SimHash">simhash</a> technique for finding near duplicate articles.</p>
+
+<h1>What is cosine similarity?</h1>
+
+<h1>What is simhash?</h1>
+
+<h1>Applying it to articles on this website</h1>
+
+<h1>End</h1>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[How I use social media]]></title>
     <link href="https://jakemccrary.com/blog/2019/04/30/how-i-use-social-media/"/>
     <updated>2019-04-30T17:50:00-05:00</updated>
@@ -1165,6 +1377,56 @@ I look forward to customizing the firmware to make the key layout fit my usage.<
 <p>Ignoring LinkedIn and Goodreads, I think Facebook and Twitter were the only social media platforms I used back then.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
 </ol>
 </div>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Reading from a Zipfile in Clojure]]></title>
+    <link href="https://jakemccrary.com/blog/2019/04/22/reading-from-a-zipfile-in-clojure/"/>
+    <updated>2019-04-22T22:14:24-05:00</updated>
+    <id>https://jakemccrary.com/blog/2019/04/22/reading-from-a-zipfile-in-clojure</id>
+    <content type="html"><![CDATA[<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">entry</span> <span class="p">[</span><span class="nv">zipfile-stream</span> <span class="nv">filename</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">-&gt;&gt;</span> <span class="p">(</span><span class="nf">repeatedly</span> <span class="o">#</span><span class="p">(</span><span class="nf">.getNextEntry</span> <span class="nv">zipfile-stream</span><span class="p">))</span>
+</span><span class='line'>       <span class="p">(</span><span class="nb">take-while </span><span class="nv">identity</span><span class="p">)</span>
+</span><span class='line'>       <span class="p">(</span><span class="nb">drop-while </span><span class="o">#</span><span class="p">(</span><span class="nb">not= </span><span class="p">(</span><span class="nf">.getName</span> <span class="nv">%</span><span class="p">)</span> <span class="nv">filename</span><span class="p">))</span>
+</span><span class='line'>       <span class="nv">first</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">read-file</span>
+</span><span class='line'>  <span class="p">[</span><span class="nb">path </span><span class="nv">path-in-zip</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">with-open </span><span class="p">[</span><span class="nv">zipfile</span> <span class="p">(</span><span class="nf">ZipInputStream.</span> <span class="p">(</span><span class="nf">io/input-stream</span> <span class="nb">path </span><span class="c1">; maybe?</span>
+</span><span class='line'>                                                        <span class="p">))]</span>
+</span><span class='line'>    <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">entry</span> <span class="p">(</span><span class="nf">entry</span> <span class="nv">zipfile</span> <span class="nv">path</span><span class="p">)</span>
+</span><span class='line'>          <span class="nv">length</span> <span class="p">(</span><span class="nf">.getSize</span> <span class="nv">entry</span><span class="p">)</span>
+</span><span class='line'>          <span class="nv">buf</span> <span class="p">(</span><span class="nf">byte-array</span> <span class="nv">length</span><span class="p">)]</span>
+</span><span class='line'>      <span class="p">(</span><span class="k">loop </span><span class="p">[</span><span class="nv">offset</span> <span class="mi">0</span><span class="p">]</span>
+</span><span class='line'>        <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">bytes-read</span> <span class="p">(</span><span class="nf">.read</span> <span class="nv">zipfile</span> <span class="nv">buf</span> <span class="nv">offset</span> <span class="p">(</span><span class="nb">- </span><span class="nv">length</span> <span class="nv">offset</span><span class="p">))]</span>
+</span><span class='line'>          <span class="p">(</span><span class="nb">when </span><span class="p">(</span><span class="nb">and </span><span class="p">(</span><span class="nb">not= </span><span class="nv">bytes-read</span> <span class="mi">-1</span><span class="p">)</span>
+</span><span class='line'>                     <span class="p">(</span><span class="nb">&lt; </span><span class="p">(</span><span class="nb">+ </span><span class="nv">offset</span> <span class="nv">bytes-read</span><span class="p">)</span> <span class="nv">length</span><span class="p">))</span>
+</span><span class='line'>            <span class="p">(</span><span class="nf">recur</span> <span class="p">(</span><span class="nb">+ </span><span class="nv">offset</span> <span class="nv">bytes-read</span><span class="p">)))))</span>
+</span><span class='line'>      <span class="p">(</span><span class="nb">with-open </span><span class="p">(</span><span class="nf">r</span> <span class="p">(</span><span class="nf">io/reader</span> <span class="nv">buf</span><span class="p">))</span>
+</span><span class='line'>        <span class="p">(</span><span class="nb">doall </span><span class="p">(</span><span class="nf">json/parse-stream</span> <span class="nv">r</span> <span class="nv">keyword</span><span class="p">))))))</span>
+</span></code></pre></td></tr></table></div></figure>
 
 ]]></content>
   </entry>
@@ -1698,333 +1960,6 @@ I look forward to customizing the firmware to make the key layout fit my usage.<
 <ol>
 <li id="fn:1">
 <p>In the beginning of 2019 I also read Harari&rsquo;s &ldquo;21 lessons for the 21st Century.&rdquo; Spoiler alert: this book will end up in my 2019 reading summary post.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Notifications with tmux and lein-test-refresh]]></title>
-    <link href="https://jakemccrary.com/blog/2019/01/06/notifications-with-tmux-and-lein-test-refresh/"/>
-    <updated>2019-01-06T16:55:00-06:00</updated>
-    <id>https://jakemccrary.com/blog/2019/01/06/notifications-with-tmux-and-lein-test-refresh</id>
-    <content type="html"><![CDATA[<p>I&rsquo;ve been using Emacs in a remote <a href="https://github.com/tmux/tmux">tmux</a> session lately and I&rsquo;ve been missing <a href="https://github.com/jakemcc/lein-test-refresh#notifications">lein-test-refresh</a> notifications when my Clojure tests pass or fail. Luckily, it only took me a little bit of searching to figure out a solution for when I&rsquo;m working inside of tmux.</p>
-
-<p>Below is a GIF of the notifications I get as my tests run and pass or fail.</p>
-
-<p><img src="https://jakemccrary.com/images/tmux-test-refresh.gif" title="tmux and test-refresh notifications" alt="tmux and test-refresh notifications" /></p>
-
-<p>With the above notifications, I can keep my focus on my code and only switch to the tmux window with <code>lein test-refresh</code> running when a test fails.</p>
-
-<p>This was pretty easy to setup. You can trigger a message in tmux by running <code>tmux display-message &lt;MESSAGE_HERE&gt;</code>. To configure <a href="https://github.com/jakemcc/lein-test-refresh#notifications">lein-test-refresh</a> to send notifications to tmux simply include the following in your <code>:test-refresh</code> section of your <code>project.clj</code> or <code>profiles.clj</code>.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="ss">:test-refresh</span> <span class="p">{</span><span class="ss">:notify-command</span> <span class="p">[</span><span class="s">&quot;tmux&quot;</span> <span class="s">&quot;display-message&quot;</span><span class="p">]}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I hope you enjoy this. Its has made using a remote terminal with tmux and <a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a> more enjoyable.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[A more helpful makefile]]></title>
-    <link href="https://jakemccrary.com/blog/2018/12/27/a-more-helpful-makefile/"/>
-    <updated>2018-12-27T21:21:00-06:00</updated>
-    <id>https://jakemccrary.com/blog/2018/12/27/a-more-helpful-makefile</id>
-    <content type="html"><![CDATA[<p>In an <a href="https://jakemccrary.com/blog/2016/11/30/unify-your-project-interfaces/">older article</a> of mine I extolled the virtues of having unified interfaces for interacting with your projects. I recently started working at Coinbase and the group I&rsquo;m working with is mostly using makefiles as that common interface. We still have some more work to do to unify the makefile targets of the various projects but I&rsquo;ve picked up one tip that makes switching between projects easier.</p>
-
-<p>That tip is to have the default target of your makefile be one that prints out a helpful message. This looks like the following.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>.PHONY: help
-</span><span class='line'>help:
-</span><span class='line'>  @grep -E '^[0-9a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
-</span><span class='line'>   sort | \
-</span><span class='line'>   awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'</span></code></pre></td></tr></table></div></figure>
-
-
-<p>There is a lot going on there but it basically looks through your makefile targets and finds the ones that have a comment starting with <code>##</code> after the target dependencies. Those targets are printed to the console along with the comment.</p>
-
-<p>As an example, the makefile for my website looks similar to the below file.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>.PHONY: help
-</span><span class='line'>help:
-</span><span class='line'>  @grep -E '^[0-9a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
-</span><span class='line'>   sort | \
-</span><span class='line'>   awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
-</span><span class='line'>
-</span><span class='line'>.PHONY: watch
-</span><span class='line'>watch: ## Watch for changes and serve preview of site with drafts
-</span><span class='line'>  bundle exec rake clean
-</span><span class='line'>  bundle exec rake preview
-</span><span class='line'>
-</span><span class='line'>.PHONY: develop
-</span><span class='line'>develop: ## Serve a preview of the site without drafts and refresh changes
-</span><span class='line'>  bundle exec rake clean
-</span><span class='line'>  bundle exec rake develop
-</span><span class='line'>
-</span><span class='line'>.PHONY: new_adventure
-</span><span class='line'>new_adventure: ## Start a new adventure post
-</span><span class='line'>  bundle exec rake new_adventure
-</span><span class='line'>
-</span><span class='line'>.PHONY: new_post
-</span><span class='line'>new_post: ## Start a new post
-</span><span class='line'>  bundle exec rake new_post 
-</span><span class='line'>
-</span><span class='line'>.PHONY: deploy
-</span><span class='line'>deploy: ## deploy
-</span><span class='line'>  ./deploy.sh</span></code></pre></td></tr></table></div></figure>
-
-
-<p>When this file, when I run <code>make</code> in this websites source, I get the following output.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>0 [last: 0s] 21:11:50 ~/src/jakemcc/blog (master)
-</span><span class='line'>$ make
-</span><span class='line'>deploy                         deploy
-</span><span class='line'>develop                        Serve a preview of the site without drafts and refresh changes
-</span><span class='line'>new_adventure                  Start a new adventure post
-</span><span class='line'>new_post                       Start a new post
-</span><span class='line'>watch                          Watch for changes and serve preview of site with drafts</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This is super useful when you&rsquo;re starting doing work in a new project. With this feature you can get a quick list of useful targets and a description. It allows you to quickly see what can be done in a project.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Built-in test narrowing with lein-test-refresh]]></title>
-    <link href="https://jakemccrary.com/blog/2018/07/16/built-in-test-narrowing-with-lein-test-refresh/"/>
-    <updated>2018-07-16T14:47:00-05:00</updated>
-    <id>https://jakemccrary.com/blog/2018/07/16/built-in-test-narrowing-with-lein-test-refresh</id>
-    <content type="html"><![CDATA[<p>If you follow my work you probably know that I value fast feedback cycles. Most of the open-source I maintain was developed to enable faster feedback cycles. This is why <a href="https://github.com/jakemcc/lein-test-refresh/">lein-test-refresh</a> and <a href="https://github.com/clojure-expectations/lein-autoexpect">lein-autoexpect</a> were originally created.</p>
-
-<p>Leiningen supports <a href="https://github.com/technomancy/leiningen/blob/master/doc/TUTORIAL.md#tests">test selectors</a> and lein-test-refresh <a href="https://github.com/jakemcc/lein-test-refresh/blob/master/CHANGES.md#040">does as well</a>. This lets you start-up a testing session and only run tests or namespaces with certain metadata on them. This is a super useful feature as it lets you narrow your testing scope to one (or a handful) of tests while working on solving a specific problem.</p>
-
-<p>lein-test-refresh now has built-in functionality that allows you to focus your test scope without restarting the Leiningen test process. If lein-test-refresh sees a <code>deftest</code> or <code>ns</code> form marked with <code>:test-refresh/focus true</code> in its metadata, then it will only run tests marked with <code>:test-refresh/focus</code>.</p>
-
-<p>Below is an example of what this looks like.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">deftest</span> <span class="o">^</span><span class="ss">:test-refresh/focus</span> <span class="nv">test-addition</span>
-</span><span class='line'>  <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="mi">2</span> <span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="mi">1</span><span class="p">))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This functionality has only been available for a short period of time and I&rsquo;ve already found it useful. I think you will too. Enjoy.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Tracking changes to a Reagent atom]]></title>
-    <link href="https://jakemccrary.com/blog/2018/06/15/tracking-changes-to-a-reagent-atom/"/>
-    <updated>2018-06-15T09:05:00-05:00</updated>
-    <id>https://jakemccrary.com/blog/2018/06/15/tracking-changes-to-a-reagent-atom</id>
-    <content type="html"><![CDATA[<p>I was recently having some difficulty debugging a problem in a
-ClojureScript single page application. The SPA was implemented using
-<a href="https://reagent-project.github.io/">reagent</a><sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.</p>
-
-<p>This interface stores most of its state in a global
-<code>reagent.core/atom</code> called <code>db</code>. To debug the problem, I thought it
-would be useful to track how the global state changed as I interacted
-with the interface. How do we do that?</p>
-
-<p>For the rest of this article, pretend that <code>(require '[reagent.core
-:as reagent])</code> has been executed.</p>
-
-<p>First, let&rsquo;s define <code>db-history</code> in the same namespace as the global
-<code>reagent/atom</code>, <code>db</code>. This is where we&rsquo;ll collect the changes to <code>db</code>.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">ns </span><span class="nv">ui.data</span>
-</span><span class='line'>  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">reagent.core</span> <span class="ss">:as</span> <span class="nv">reagent</span><span class="p">]))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defonce </span><span class="nv">db</span> <span class="p">(</span><span class="nf">reagent/atom</span> <span class="p">{</span><span class="ss">:app/current-page</span> <span class="ss">:offer-list</span><span class="p">}))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defonce </span><span class="nv">db-history</span> <span class="p">(</span><span class="nf">atom</span> <span class="p">[]))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Next, let&rsquo;s write a function called <code>aggregate-state</code>. This function
-grabs the current value in <code>db</code> and <code>conj</code>s it onto <code>db-history</code>. It
-also limits the history to the most recent 101 states.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">aggregate-state</span> <span class="p">[]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">d</span> <span class="o">@</span><span class="nv">db</span><span class="p">]</span>
-</span><span class='line'>    <span class="p">(</span><span class="nf">swap!</span> <span class="nv">db-history</span> <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">hist</span><span class="p">]</span>
-</span><span class='line'>                        <span class="p">(</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nb">take </span><span class="mi">100</span> <span class="nv">hist</span><span class="p">)</span>
-</span><span class='line'>                            <span class="nv">vec</span>
-</span><span class='line'>                            <span class="p">(</span><span class="nb">conj </span><span class="nv">d</span><span class="p">))))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now we need to invoke <code>aggregate-state</code> whenever <code>db</code> changes. We can
-do this using <code>reagent/track</code>. <code>reagent/track</code> takes a function and
-optional arguments and invokes that function whenever a <code>reagent/atom</code>
-that function depends on changes.</p>
-
-<p><code>reagent/track!</code> is similar except it immediately invokes the function
-instead of waiting for the first change. We can use it to cause
-<code>aggregate-state</code> to get called whenever <code>db</code> changes.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defonce </span><span class="nv">db-history-logger</span> <span class="p">(</span><span class="nf">reagent/track!</span> <span class="nv">aggregate-state</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now history of the global state is being tracked. But we need a way to
-access it. Below is what I ended up writing. When you call
-<code>ui.data.history()</code> in Chrome&rsquo;s JavaScript console, it returns an
-object you can click on to explore. If you pass in strings as
-arguments to <code>history</code> then it only selects some of the data from the
-global <code>db</code> and history.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="o">^</span><span class="ss">:export</span> <span class="nv">history</span> <span class="p">[</span><span class="o">&amp;</span> <span class="nv">args</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">d</span> <span class="o">@</span><span class="nv">db</span>
-</span><span class='line'>        <span class="nv">k</span> <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">seq </span><span class="nv">args</span><span class="p">)</span>
-</span><span class='line'>            <span class="p">(</span><span class="nb">map keyword </span><span class="nv">args</span><span class="p">)</span>
-</span><span class='line'>            <span class="p">(</span><span class="nb">keys </span><span class="nv">d</span><span class="p">))]</span>
-</span><span class='line'>    <span class="p">(</span><span class="nf">clj-&gt;js</span> <span class="p">{</span><span class="ss">:history</span> <span class="p">(</span><span class="nf">mapv</span> <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">x</span><span class="p">]</span> <span class="p">(</span><span class="nb">select-keys </span><span class="nv">x</span> <span class="nv">k</span><span class="p">))</span> <span class="o">@</span><span class="nv">db-history</span><span class="p">)</span>
-</span><span class='line'>              <span class="ss">:current</span> <span class="p">(</span><span class="nb">select-keys </span><span class="nv">d</span> <span class="nv">k</span><span class="p">)})))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>It only took about fifteen lines of code to gain a view of our
-application&rsquo;s state changes over time. This view helped me solve my
-problem. Hopefully it will help you too.</p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>This particular project is nearly four years old and has had many hands on it over the years. Working in it reminds me of how useful re-frame is on larger applications like this one.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Preventing duplicate long-running invocations in Clojure]]></title>
-    <link href="https://jakemccrary.com/blog/2018/06/14/clojure-prevent-multiple-simultaneous-invocations/"/>
-    <updated>2018-06-14T09:47:00-05:00</updated>
-    <id>https://jakemccrary.com/blog/2018/06/14/clojure-prevent-multiple-simultaneous-invocations</id>
-    <content type="html"><![CDATA[<p>A couple months ago I was looking into a problem and noticed that
-there was a situation where an expensive operation could be running
-simultaneously multiple times. This was wasteful.</p>
-
-<p>This operation happened on a timer and could also be triggered by a power
-user through the UI. A power user could accidentally (or purposefully)
-mash on a UI button and cause the instance they&rsquo;re interacting with
-to grind to a halt<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.</p>
-
-<p>It was pretty easy to prevent. All I needed to introduce was an
-<code>atom</code> and lean on <code>compare-and-set!</code>. <code>compare-and-set!</code> is a pretty
-neat function (and concept found in many languages). Here is the docstring:</p>
-
-<blockquote><p>Atomically sets the value of atom to newval if and only if the
-current value of the atom is identical to oldval. Returns true if
-set happened, else false</p></blockquote>
-
-<p>Basically, <code>compare-and-set!</code> changes the value of an atom only if it
-starts from a specified value and returns a boolean letting you know
-if it did.</p>
-
-<p>To prevent an operation from running multiple times, introduce an atom
-and wrap calling the operation in a conditional using
-<code>compare-and-set!</code>.  After doing the work, be sure to <code>reset!</code> your
-atom back to the starting value.</p>
-
-<p>Below is the code.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defonce </span><span class="nv">running?</span> <span class="p">(</span><span class="nf">atom</span> <span class="nv">false</span><span class="p">))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defn- </span><span class="nv">expensive-operation!</span><span class="o">&#39;</span> <span class="p">[]</span>
-</span><span class='line'>  <span class="c1">;; do work</span>
-</span><span class='line'>  <span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">expensive-operation!</span> <span class="p">[]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">when </span><span class="p">(</span><span class="nf">compare-and-set!</span> <span class="nv">running?</span> <span class="nv">false</span> <span class="nv">true</span><span class="p">)</span>
-</span><span class='line'>    <span class="p">(</span><span class="nf">try</span>
-</span><span class='line'>      <span class="p">(</span><span class="nf">expensive-operation!</span><span class="o">&#39;</span><span class="p">)</span>
-</span><span class='line'>      <span class="p">(</span><span class="nf">finally</span>
-</span><span class='line'>        <span class="p">(</span><span class="nf">reset!</span> <span class="nv">running?</span> <span class="nv">false</span><span class="p">)))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>OK, not really grind to a halt, but consume unnecessary resources.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
 </ol>
 </div>
 
