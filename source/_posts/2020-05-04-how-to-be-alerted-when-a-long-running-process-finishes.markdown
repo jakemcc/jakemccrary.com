@@ -24,7 +24,9 @@ Has some variation of the above happened to you?
 
 It doesn't happen to me anymore because now my computer tells me when any long running process finishes.
 This might sound annoying but it is great.
-I no longer feel guilty for dropping into Slack and can immediately get back to the task at hand as soon the process finishes.
+I no longer feel guilty[^1] for dropping into Slack and can immediately get back to the task at hand as soon the process finishes.
+
+[^1]: I still feel a little guilty as doing so will break any momentum/flow I had going on, but that flow was already broken by the slowness of the command.
 
 I've done this by enhancing on my setup for showing the [runtime of the previous command in my prompt](/blog/2020/04/21/using-bash-preexec-for-monitoring-the-runtime-of-your-last-command/).
 You don't have to read that article for the rest of this one to make sense, but you should because it shows you how to add a very useful feature to your prompt.
