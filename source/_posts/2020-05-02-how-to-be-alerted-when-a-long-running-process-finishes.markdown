@@ -36,10 +36,10 @@ An explanation follows the code snippet
 # Using https://github.com/rcaloras/bash-preexec
 preexec() {
   _last_command=$1
-  if [ "UNSET" == "${timer}" ]; then
-    timer=$SECONDS
+  if [ "UNSET" == "${_timer}" ]; then
+    _timer=$SECONDS
   else 
-    timer=${timer:-$SECONDS}
+    _timer=${_timer:-$SECONDS}
   fi 
 }
 
@@ -53,14 +53,14 @@ _maybe_speak() {
 }
 
 precmd() {
-  if [ "UNSET" == "${timer}" ]; then
+  if [ "UNSET" == "${_timer}" ]; then
      timer_show="0s"
   else 
-    elapsed_seconds=$((SECONDS - timer))
+    elapsed_seconds=$((SECONDS - _timer))
     _maybe_speak ${elapsed_seconds}
     timer_show="$(format-duration seconds $elapsed_seconds)"
   fi
-  timer="UNSET"
+  _timer="UNSET"
 }
 
 # put at the bottom of my .bashrc
