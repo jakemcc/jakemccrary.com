@@ -1,6 +1,6 @@
 ---
 layout: post
-title: How to be notified when long running processes finish
+title: How to be automatically notified when long running processes finish
 date: 2020-05-04 20:35 -0500
 comments: true
 published: true
