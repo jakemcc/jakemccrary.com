@@ -21,16 +21,16 @@ I silently grumble at myself, disappointed that I didn't start the next step twe
 
 Has some variation of the above happened to you?
 
-It doesn't happen to me anymore because now my computer yells at me when long running processes finish.
+It doesn't happen to me anymore because now my computer tells me when any long running process finishes.
 This might sound annoying but it is great.
-I no longer feel guilty for dropping into Slack and can immediately get back to the task at hand when the process I'm waiting for finishes.
+I no longer feel guilty for dropping into Slack and can immediately get back to the task at hand as soon the process finishes.
 
-I've done this by building on my setup for showing the [runtime of the previous command in my prompt](/blog/2020/04/21/using-bash-preexec-for-monitoring-the-runtime-of-your-last-command/).
+I've done this by enhancing on my setup for showing the [runtime of the previous command in my prompt](/blog/2020/04/21/using-bash-preexec-for-monitoring-the-runtime-of-your-last-command/).
 You don't have to read that article for the rest of this one to make sense, but you should because it shows you how to add a very useful feature to your prompt.
 
-Below is the code that makes my computer tell me when it finishes any command that takes longer than 30 seconds.
+Below is the code that causes my computer to tell me when it finishes running commands that takes longer than 30 seconds.
 It is found in my `~/.bashrc`.
-An explanation follows the code snippet
+An explanation follows the code snippet.
 
 ```bash
 # Using https://github.com/rcaloras/bash-preexec
@@ -74,16 +74,18 @@ You setup Bash-Preexec by downloading [bash-preexec.sh](https://github.com/rcalo
 
 
 `preexec` is passed the command being ran and it captures it in `_last_command`.
-It also captures the current number of seconds the shell has been running.
+It also captures the current number of seconds the shell has been running as `_timer`.
 
-`precmd` calculates the elapsed time in seconds and then calls the function `_maybe_speak` with this as an argument.
+`precmd` uses the value in `_timer` to calculate the elapsed time in seconds and then calls the function `_maybe_speak` with this as an argument.
 It also does the work required for showing the elapsed time in my prompt.
 
 If the elapsed time is greater than 30 seconds then `_maybe_speak` uses `cut` to discard the arguments of captured command and then runs `say` in a subshell to give me an audible alert of what command just finished.
 I discard the arguments because otherwise the `say` command can go on for a long time.
+`say` is a tool that ships with macOS.
+I haven't gotten around to it yet but I'll need to use something else on my Linux machines.
 
 I run `say` in the background and in a subshell.
-Running it in the background lets me continue interacting with my shell before `say` finishes executing.
+Running it in the background lets me continue interacting with my shell while `say` finishes executing.
 Running it in a subshell prevents text from appearing in my shell when the background job finishes.
 
-With this setup, I can kick off a slow compile or test run and not feel so bad about dropping into Slack or reading Reddit. It is wonderful, though not as wonderful as not having slow feedback, and I'd recommend it.
+With this setup, I can kick off a slow compile or test run and not feel so bad about dropping into Slack or reading Reddit. It is wonderful and I'd recommend it (though, I'd more strongly recommend not having commands that take a while to run).
