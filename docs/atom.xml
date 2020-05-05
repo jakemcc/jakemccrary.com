@@ -4,7 +4,7 @@
   <title><![CDATA[Jake McCrary]]></title>
   <link href="https://jakemccrary.com/atom.xml" rel="self"/>
   <link href="https://jakemccrary.com/"/>
-  <updated>2020-05-04T21:28:48-05:00</updated>
+  <updated>2020-05-05T11:50:11-05:00</updated>
   <id>https://jakemccrary.com/</id>
   <author>
     <name><![CDATA[Jake McCrary]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[How to be notified when long running processes finish]]></title>
+    <title type="html"><![CDATA[How to be automatically notified when long running processes finish]]></title>
     <link href="https://jakemccrary.com/blog/2020/05/04/how-to-be-alerted-when-a-long-running-process-finishes/"/>
     <updated>2020-05-04T20:35:00-05:00</updated>
     <id>https://jakemccrary.com/blog/2020/05/04/how-to-be-alerted-when-a-long-running-process-finishes</id>
