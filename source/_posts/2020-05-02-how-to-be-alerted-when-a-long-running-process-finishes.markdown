@@ -14,8 +14,8 @@ categories:
 
 Let me set the stage.
 I kick off the compilation of a large Scala codebase.
-I know this will take minutes, so I switch to Slack and catch up on what coworkers have posted.
-I follow a link in Slack to an interesting article.
+This will take minutes to finish, so I switch to Slack and catch up on what coworkers have posted.
+Someone posted an interesting link and I follow it to an article.
 Fifteen minutes later, I notice the compilation finished twelve minutes ago.
 I silently grumble at myself, disappointed that I didn't start the next step twelve minutes ago.
 
@@ -67,11 +67,9 @@ precmd() {
 [[ -f "$HOME/.bash-preexec.sh" ]] && source "$HOME/.bash-preexec.sh"
 ```
 
-I'm using [Bash-Preexec](https://github.com/rcaloras/bash-preexec) to trigger the `preexec` and `precmd` functions.
-Bash-Preexec triggers `preexec` immediately before commands are executed and `precmd` immediately before the shell prompt reappears.
+[Bash-Preexec](https://github.com/rcaloras/bash-preexec) triggers the `preexec`, immediately before a command is execute, and `precmd` functions, immediately before the shell prompt reappears.
+Those two functions are enough to figure out how much time has elapsed while a command ran.
 You setup Bash-Preexec by downloading [bash-preexec.sh](https://github.com/rcaloras/bash-preexec/blob/master/bash-preexec.sh) and sourcing it in your `~/.bashrc`.
-
-
 
 `preexec` is passed the command being ran and it captures it in `_last_command`.
 It also captures the current number of seconds the shell has been running as `_timer`.
@@ -79,13 +77,14 @@ It also captures the current number of seconds the shell has been running as `_t
 `precmd` uses the value in `_timer` to calculate the elapsed time in seconds and then calls the function `_maybe_speak` with this as an argument.
 It also does the work required for showing the elapsed time in my prompt.
 
-If the elapsed time is greater than 30 seconds then `_maybe_speak` uses `cut` to discard the arguments of captured command and then runs `say` in a subshell to give me an audible alert of what command just finished.
+If the elapsed time is greater than 30 seconds then `_maybe_speak` uses `cut` to discard the arguments of captured command, leaving me with the command itself.
+It then uses `say` to produce an audible alert of what command just finished.
 I discard the arguments because otherwise the `say` command can go on for a long time.
+
 `say` is a tool that ships with macOS.
 I haven't gotten around to it yet but I'll need to use something else on my Linux machines.
 
-I run `say` in the background and in a subshell.
-Running it in the background lets me continue interacting with my shell while `say` finishes executing.
-Running it in a subshell prevents text from appearing in my shell when the background job finishes.
+You may have noticed that I run `say` in the background and in a subshell.
+Running it in the background lets me continue interacting with my shell while `say` finishes executing and running it in a subshell prevents text from appearing in my shell when the background job finishes.
 
 With this setup, I can kick off a slow compile or test run and not feel so bad about dropping into Slack or reading Reddit. It is wonderful and I'd recommend it (though, I'd more strongly recommend not having commands that take a while to run).
