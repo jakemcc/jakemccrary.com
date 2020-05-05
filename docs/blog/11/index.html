@@ -14,13 +14,13 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" Recently I was writing some data mining Clojure code which needed to parse a log file and do some transforms of the data. Some of the transforms were &hellip;" />
+    <meta itemprop="description" content=" Recently I found myself wanting to plot some time series data and wanted to do this in Clojure. Unfortunately Incanter, a good statistical and &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" Recently I was writing some data mining Clojure code which needed to parse a log file and do some transforms of the data. Some of the transforms were &hellip;" />
+    <meta name="twitter:description" content=" Recently I found myself wanting to plot some time series data and wanted to do this in Clojure. Unfortunately Incanter, a good statistical and &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -28,12 +28,12 @@
     <meta property="og:site_name" content="The Blog of Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/11/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" Recently I was writing some data mining Clojure code which needed to parse a log file and do some transforms of the data. Some of the transforms were &hellip;" />
+    <meta property="og:description" content=" Recently I found myself wanting to plot some time series data and wanted to do this in Clojure. Unfortunately Incanter, a good statistical and &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" Recently I was writing some data mining Clojure code which needed to parse a log file and do some transforms of the data. Some of the transforms were &hellip;">
+    <meta name="description" content=" Recently I found myself wanting to plot some time series data and wanted to do this in Clojure. Unfortunately Incanter, a good statistical and &hellip;">
 
     
 
@@ -114,466 +114,6 @@
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/01/18/generating-test-cases-in-clojure/">Generating test cases in Clojure</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2011-01-18T00:00:00-06:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2011</span></span> <span class='time'>12:00 am</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Recently I was writing some data mining Clojure code which needed to parse a log file and do some transforms of the data. Some of the transforms were dependent on data found across multiple lines. There was no ordering or proximity guarantees to these lines.</p>
-
-<p>This required the code to handle a variety of situations. After writing a couple simple tests and getting those passing I wanted to more extensively test my solution. I was lazy though and did not want to hand code all of the potential orderings.  Enter <code>permutations</code>.</p>
-
-<p><code>permutations</code> is a function out of <a href="http://clojure.github.com/clojure-contrib/combinatorics-api.html">clojure.contrib.combinatorics</a>. As the name suggests, you give it a collection and it returns a lazy sequence containing all the different permutations of the elements in that collection. An example is below.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nv">user&gt;</span><span class="p">(</span><span class="kd">ns </span><span class="nv">generate</span><span class="p">)</span>
-</span><span class='line'><span class="nv">generate&gt;</span><span class="p">(</span><span class="nf">use</span> <span class="o">&#39;</span><span class="p">[</span><span class="nv">clojure.contrib.combinatorics</span> <span class="ss">:only</span> <span class="p">[</span><span class="nv">permutations</span><span class="p">]])</span>
-</span><span class='line'><span class="nv">nil</span>
-</span><span class='line'><span class="nv">generate&gt;</span> <span class="p">(</span><span class="nf">permutations</span> <span class="p">[</span><span class="ss">:a</span> <span class="ss">:b</span> <span class="ss">:c</span><span class="p">])</span>
-</span><span class='line'><span class="p">((</span><span class="ss">:a</span> <span class="ss">:b</span> <span class="ss">:c</span><span class="p">)</span> <span class="p">(</span><span class="ss">:a</span> <span class="ss">:c</span> <span class="ss">:b</span><span class="p">)</span> <span class="p">(</span><span class="ss">:b</span> <span class="ss">:a</span> <span class="ss">:c</span><span class="p">)</span> <span class="p">(</span><span class="ss">:b</span> <span class="ss">:c</span> <span class="ss">:a</span><span class="p">)</span> <span class="p">(</span><span class="ss">:c</span> <span class="ss">:a</span> <span class="ss">:b</span><span class="p">)</span> <span class="p">(</span><span class="ss">:c</span> <span class="ss">:b</span> <span class="ss">:a</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>You can already see where this is going. I was able to use <code>permutations</code> to generate all the potential different orderings of the input. This saved me the trouble of having to do that by hand.</p>
-
-<p>One difficulty of generating test inputs pragmatically is telling what sort of inputs caused it to fail. To get around this I used the rarely used (at least in code I&rsquo;m working on) second argument of <a href="http://clojure.github.com/clojure/clojure.test-api.html#clojure.test/is">clojure.test&rsquo;s</a> <code>is</code>. This second argument is a message that prints on a failure.</p>
-
-<p>Below is a contrived example of using <code>permutations</code> to test an obviously wrong <code>silly-add</code> function. <code>silly-add</code> is defined below.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nv">generate&gt;</span> <span class="p">(</span><span class="kd">defn </span><span class="nv">silly-add</span>
-</span><span class='line'>              <span class="p">[</span><span class="nv">x</span> <span class="o">&amp;</span> <span class="nv">xs</span><span class="p">]</span>
-</span><span class='line'>              <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">zero? </span><span class="nv">x</span><span class="p">)</span>
-</span><span class='line'>                  <span class="p">(</span><span class="nb">apply + </span><span class="mi">40</span> <span class="nv">xs</span><span class="p">)</span>
-</span><span class='line'>                  <span class="p">(</span><span class="nb">apply + </span><span class="nv">x</span> <span class="nv">xs</span><span class="p">)))</span>
-</span><span class='line'><span class="o">#</span><span class="ss">&#39;generate/silly-add</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Below is a test that uses <code>permutations</code> to exercise <code>silly-add</code> with all the potential orderings three input numbers. Note that it takes advantage of the second argument to <code>is</code>. Without this we would not know what input caused the failure.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nv">generate&gt;</span> <span class="p">(</span><span class="nf">use</span> <span class="ss">&#39;clojure.test</span><span class="p">)</span>
-</span><span class='line'><span class="nv">nil</span>
-</span><span class='line'><span class="nv">generate&gt;</span> <span class="p">(</span><span class="nf">deftest</span> <span class="nv">generate-some-tests</span>
-</span><span class='line'>            <span class="p">(</span><span class="nb">doseq </span><span class="p">[</span><span class="nv">input</span> <span class="p">(</span><span class="nf">permutations</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">9</span><span class="p">])]</span>
-</span><span class='line'>                   <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="mi">10</span> <span class="p">(</span><span class="nb">apply </span><span class="nv">silly-add</span> <span class="nv">input</span><span class="p">))</span>
-</span><span class='line'>                       <span class="p">(</span><span class="nb">str </span><span class="s">&quot;Failed on input: &quot;</span> <span class="p">(</span><span class="nb">seq </span><span class="nv">input</span><span class="p">)))))</span>
-</span><span class='line'><span class="o">#</span><span class="ss">&#39;generate/generate-some-tests</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Running the test we see that there is clearly an error.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nv">generate&gt;</span> <span class="p">(</span><span class="nf">run-tests</span><span class="p">)</span>
-</span><span class='line'><span class="nv">Testing</span> <span class="nv">generate</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">FAIL</span> <span class="nv">in</span> <span class="p">(</span><span class="nf">generate-some-tests</span><span class="p">)</span> <span class="p">(</span><span class="nf">NO_SOURCE_FILE</span><span class="ss">:1</span><span class="p">)</span>
-</span><span class='line'><span class="nv">Failed</span> <span class="nv">on</span> <span class="nv">input</span><span class="err">:</span> <span class="p">(</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">9</span><span class="p">)</span>
-</span><span class='line'><span class="nv">expected</span><span class="err">:</span> <span class="p">(</span><span class="nb">= </span><span class="mi">10</span> <span class="p">(</span><span class="nb">apply </span><span class="nv">silly-add</span> <span class="nv">input</span><span class="p">))</span>
-</span><span class='line'>  <span class="nv">actual</span><span class="err">:</span> <span class="p">(</span><span class="nb">not </span><span class="p">(</span><span class="nb">= </span><span class="mi">10</span> <span class="mi">50</span><span class="p">))</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">FAIL</span> <span class="nv">in</span> <span class="p">(</span><span class="nf">generate-some-tests</span><span class="p">)</span> <span class="p">(</span><span class="nf">NO_SOURCE_FILE</span><span class="ss">:1</span><span class="p">)</span>
-</span><span class='line'><span class="nv">Failed</span> <span class="nv">on</span> <span class="nv">input</span><span class="err">:</span> <span class="p">(</span><span class="mi">0</span> <span class="mi">9</span> <span class="mi">1</span><span class="p">)</span>
-</span><span class='line'><span class="nv">expected</span><span class="err">:</span> <span class="p">(</span><span class="nb">= </span><span class="mi">10</span> <span class="p">(</span><span class="nb">apply </span><span class="nv">silly-add</span> <span class="nv">input</span><span class="p">))</span>
-</span><span class='line'>  <span class="nv">actual</span><span class="err">:</span> <span class="p">(</span><span class="nb">not </span><span class="p">(</span><span class="nb">= </span><span class="mi">10</span> <span class="mi">50</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>permutations</code> saved me a bit of time and let me test some situations that I otherwise would not have tested. This actually exposed a subtle bug in my code. Hopefully it can do the same for you.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2010/12/07/quickily-starting-a-powerful-clojure-repl/">Quickly starting a powerful Clojure REPL</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2010-12-07T00:00:00-06:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2010</span></span> <span class='time'>12:00 am</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I often find myself browsing the Internet and then suddenly I want to have a Clojure REPL at my fingertips. As I&rsquo;ve become better with emacs and <a href="http://www.emacswiki.org/ParEdit">paredit</a> I&rsquo;ve become dependent on the powerful editing this combo affords. The rest of this post details how I changed my five step process into a two step process. It does not explain basic emacs/slime setup but rather explains how I cut a few steps out of a suboptimal workflow for getting a powerful Clojure REPL up and running in emacs.</p>
-
-<p>My previous workflow was the following:</p>
-
-<ol>
-<li>Open a terminal</li>
-<li>Change to the root of Clojure project where I use <a href="https://github.com/technomancy/leiningen">Leiningen</a> and have swank-clojure as a dependency.</li>
-<li>Run the command <code>lein swank</code></li>
-<li>Start emacs</li>
-<li>Run <code>M-x slime-connect</code></li>
-</ol>
-
-
-<p>This five step process was terrible. From me seeing something interesting to try to having a REPL open took too much time.</p>
-
-<p>Today I changed my process so it on takes two steps. They are:</p>
-
-<ol>
-<li>Start emacs</li>
-<li>Run <code>M-x clojure-swank</code></li>
-</ol>
-
-
-<p>This is a much better. I&rsquo;ll admit had a lot of room for improvement so it wasn&rsquo;t too hard to make it better. Below are the steps I took to cut three steps.</p>
-
-<p>First, using Leiningen 1.4.0, I ran <code>lein install swank-clojure 1.3.0-SNAPSHOT</code>. This installed a script called swank-clojure into $HOME/.lein/bin. When run, this script starts a swank server waiting for connections on port 4005.</p>
-
-<p>Next I wrote a function in <a href="http://en.wikipedia.org/wiki/Emacs_Lisp">elisp</a> that gives emacs the ability to call the newly installed swank-clojure script, wait for the swank server to start, and then connect to it. This function, <code>clojure-swank</code>, can be seen below. It creates a buffer named <code>*clojure-swank*</code>, runs the newly installed script, and captures the output in the freshly created buffer. When the &ldquo;Connection opened&rdquo; line appears <code>slime-connect</code> is called, connecting emacs to the freshly started swank server. After this we are at the REPL with all the advantages that emacs and paredit give us.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">clojure-swank</span> <span class="p">()</span>
-</span><span class='line'>  <span class="s">&quot;Launch swank-clojure from users homedir/.lein/bin&quot;</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">buffer</span> <span class="p">(</span><span class="nv">get-buffer-create</span> <span class="s">&quot;*clojure-swank*&quot;</span><span class="p">)))</span>
-</span><span class='line'>    <span class="p">(</span><span class="k">flet</span> <span class="p">((</span><span class="nv">display-buffer</span> <span class="p">(</span><span class="nv">buffer-or-name</span> <span class="k">&amp;optional</span> <span class="nv">not-this-window</span> <span class="nv">frame</span><span class="p">)</span> <span class="no">nil</span><span class="p">))</span>
-</span><span class='line'>          <span class="p">(</span><span class="nv">bury-buffer</span> <span class="nv">buffer</span><span class="p">)</span>
-</span><span class='line'>          <span class="p">(</span><span class="nv">shell-command</span> <span class="s">&quot;~/.lein/bin/swank-clojure &amp;&quot;</span> <span class="nv">buffer</span><span class="p">))</span>
-</span><span class='line'>    <span class="p">(</span><span class="nv">set-process-filter</span> <span class="p">(</span><span class="nv">get-buffer-process</span> <span class="nv">buffer</span><span class="p">)</span>
-</span><span class='line'>                        <span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="nv">process</span> <span class="nv">output</span><span class="p">)</span>
-</span><span class='line'>                           <span class="p">(</span><span class="nv">with-current-buffer</span> <span class="s">&quot;*clojure-swank*&quot;</span> <span class="p">(</span><span class="nv">insert</span> <span class="nv">output</span><span class="p">))</span>
-</span><span class='line'>                           <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nv">string-match</span> <span class="s">&quot;Connection opened on local port +\\([0-9]+\\)&quot;</span> <span class="nv">output</span><span class="p">)</span>
-</span><span class='line'>                             <span class="p">(</span><span class="nv">slime-connect</span> <span class="s">&quot;localhost&quot;</span> <span class="p">(</span><span class="nv">match-string</span> <span class="mi">1</span> <span class="nv">output</span><span class="p">))</span>
-</span><span class='line'>                             <span class="p">(</span><span class="nv">set-process-filter</span> <span class="nv">process</span> <span class="no">nil</span><span class="p">))))</span>
-</span><span class='line'>    <span class="p">(</span><span class="nv">message</span> <span class="s">&quot;Starting swank.. &quot;</span><span class="p">)))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I&rsquo;ve also written a <code>clojure-kill-swank</code> function for stopping the swank server.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">clojure-kill-swank</span> <span class="p">()</span>
-</span><span class='line'>  <span class="s">&quot;Kill swank process started by lein swank.&quot;</span>
-</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">process</span> <span class="p">(</span><span class="nv">get-buffer-process</span> <span class="s">&quot;*clojure-swank*&quot;</span><span class="p">)))</span>
-</span><span class='line'>    <span class="p">(</span><span class="nb">when</span> <span class="nv">process</span>
-</span><span class='line'>      <span class="p">(</span><span class="nb">ignore-errors</span> <span class="p">(</span><span class="nv">slime-quit-lisp</span><span class="p">))</span>
-</span><span class='line'>      <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">timeout</span> <span class="mi">10</span><span class="p">))</span>
-</span><span class='line'>        <span class="p">(</span><span class="nv">while</span> <span class="p">(</span><span class="nb">and</span> <span class="p">(</span><span class="nb">&gt;</span> <span class="nv">timeout</span> <span class="mi">0</span><span class="p">)</span>
-</span><span class='line'>                    <span class="p">(</span><span class="nb">eql</span> <span class="ss">&#39;run</span> <span class="p">(</span><span class="nv">process-status</span> <span class="nv">process</span><span class="p">)))</span>
-</span><span class='line'>          <span class="p">(</span><span class="nv">sit-for</span> <span class="mi">1</span><span class="p">)</span>
-</span><span class='line'>          <span class="p">(</span><span class="nb">decf</span> <span class="nv">timeout</span><span class="p">)))</span>
-</span><span class='line'>      <span class="p">(</span><span class="nb">ignore-errors</span> <span class="p">(</span><span class="nv">kill-buffer</span> <span class="s">&quot;*clojure-swank*&quot;</span><span class="p">)))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Both of those functions need to be added to a location where they will get defined on emacs start-up. Once this is done the powerful REPL you are used to emacs providing can be at your finger tips in practically no time at all.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2010/12/06/trampolining-through-mutual-recursion/">Trampolining through mutual recursion with Clojure</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2010-12-06T00:00:00-06:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2010</span></span> <span class='time'>12:00 am</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>The other day I stumbled across some <a href="http://clojure.org">Clojure</a> code that used <a href="http://en.wikipedia.org/wiki/Mutual_recursion">mutual recursion</a>. Mutual recursion can be a valuable tool when solving a problem. Unfortunately because of the lack of <a href="http://en.wikipedia.org/wiki/Tail_call">tail call optimization</a> on the JVM this can be a dangerous technique when writing Clojure code. It can be easy to forget about this limitation and end up writing code that blows the stack.</p>
-
-<p>Take the classic even/odd checking code from the <a href="http://en.wikipedia.org/wiki/Mutual_recursion">Wikipedia</a> page. If we just translate it to Clojure it will cause a <a href="http://en.wikipedia.org/wiki/Stack_overflow">stack overflow</a> error when we pass in a large number. The massive number of function calls require before returning causes too much memory to be consumed.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">declare </span><span class="nv">my-odd?</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">my-even?</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">zero? </span><span class="nv">n</span><span class="p">)</span>
-</span><span class='line'>    <span class="nv">true</span>
-</span><span class='line'>    <span class="p">(</span><span class="nf">my-odd?</span> <span class="p">(</span><span class="nb">dec </span><span class="p">(</span><span class="nf">Math/abs</span> <span class="nv">n</span><span class="p">)))))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">my-odd?</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">zero? </span><span class="nv">n</span><span class="p">)</span>
-</span><span class='line'>    <span class="nv">false</span>
-</span><span class='line'>    <span class="p">(</span><span class="nf">my-even?</span> <span class="p">(</span><span class="nb">dec </span><span class="p">(</span><span class="nf">Math/abs</span> <span class="nv">n</span><span class="p">)))))</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">user&gt;</span> <span class="p">(</span><span class="nf">my-even?</span> <span class="mi">1000000</span><span class="p">)</span>
-</span><span class='line'><span class="c1">; Evaluation aborted. &lt;- this is a result of java.util.StackOverflowError</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Luckily since Clojure 1.0 there has been a useful function for dealing with this. <code>trampoline</code>, with minor modifications to your code, can be used to get around the lack of tail call optimizations (<a href="http://clojure.github.com/clojure/clojure.core-api.html#clojure.core/trampoline">docs here</a>).</p>
-
-<p><code>trampoline</code> takes a function (and, if needed, arguments to pass into the function) and calls it. If the function returns a function then <code>trampoline</code> calls that. As long as functions are returned <code>trampoline</code> will continue calling them. When a non-function value is returned <code>trampoline</code> returns, passing through the value.</p>
-
-<p>To make our sample code work with <code>trampoline</code> we simply change our functions to return a closure which wraps the call that was previously being executed. This just entails putting a <code>#</code> before the final s-exp. This takes advantage of Clojure&rsquo;s anonymous function syntax to change the function call into a closure which is returned.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">my-even?</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">zero? </span><span class="nv">n</span><span class="p">)</span>
-</span><span class='line'>    <span class="nv">true</span>
-</span><span class='line'>    <span class="o">#</span><span class="p">(</span><span class="nf">my-odd?</span> <span class="p">(</span><span class="nb">dec </span><span class="p">(</span><span class="nf">Math/abs</span> <span class="nv">n</span><span class="p">)))))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">my-odd?</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">zero? </span><span class="nv">n</span><span class="p">)</span>
-</span><span class='line'>    <span class="nv">false</span>
-</span><span class='line'>    <span class="o">#</span><span class="p">(</span><span class="nf">my-even?</span> <span class="p">(</span><span class="nb">dec </span><span class="p">(</span><span class="nf">Math/abs</span> <span class="nv">n</span><span class="p">)))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>By doing this we&rsquo;ve changed how the caller interacts with <code>my-even?</code> and <code>my-odd?</code>. It now needs to be called by <code>trampoline</code>.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nv">user&gt;</span> <span class="p">(</span><span class="nf">trampoline</span> <span class="nv">my-even?</span> <span class="mi">1000000</span><span class="p">)</span>
-</span><span class='line'><span class="nv">true</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now we no longer suffer from the stack overflow error.</p>
-
-<p>I think we can still do better though, because now the caller of <code>my-even?</code> and <code>my-odd?</code> suffers since they are forced to remember to use <code>trampoline</code>. By forcing this on the caller, we&rsquo;ve pushed what should be hidden implementations details into the callers code. We can fix this by pushing the use of <code>trampoline</code> into our functions.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">my-even?</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nf">letfn</span> <span class="p">[(</span><span class="nf">e?</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
-</span><span class='line'>              <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">zero? </span><span class="nv">n</span><span class="p">)</span>
-</span><span class='line'>                <span class="nv">true</span>
-</span><span class='line'>                <span class="o">#</span><span class="p">(</span><span class="nf">o?</span> <span class="p">(</span><span class="nb">dec </span><span class="p">(</span><span class="nf">Math/abs</span> <span class="nv">n</span><span class="p">)))))</span>
-</span><span class='line'>          <span class="p">(</span><span class="nf">o?</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
-</span><span class='line'>              <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">zero? </span><span class="nv">n</span><span class="p">)</span>
-</span><span class='line'>                <span class="nv">false</span>
-</span><span class='line'>                <span class="o">#</span><span class="p">(</span><span class="nf">e?</span> <span class="p">(</span><span class="nb">dec </span><span class="p">(</span><span class="nf">Math/abs</span> <span class="nv">n</span><span class="p">)))))]</span>
-</span><span class='line'>    <span class="p">(</span><span class="nf">trampoline</span> <span class="nv">e?</span> <span class="nv">n</span><span class="p">)))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">my-odd?</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">not </span><span class="p">(</span><span class="nf">my-even?</span> <span class="nv">n</span><span class="p">)))</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">user&gt;</span> <span class="p">(</span><span class="nf">my-even?</span> <span class="mi">1000000</span><span class="p">)</span>
-</span><span class='line'><span class="nv">true</span>
-</span><span class='line'><span class="nv">user&gt;</span> <span class="p">(</span><span class="nf">my-odd?</span> <span class="mi">1000000</span><span class="p">)</span>
-</span><span class='line'><span class="nv">false</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now we have the best of both worlds. Mutual recursion without the worry of a stack overflow and functions that don&rsquo;t force the caller to be aware of the implementation details.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2010/06/06/inserting-values-into-a-nested-map-in-clojure/">Inserting values into a nested map in Clojure</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2010-06-06'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2010</span></span> <span class='time'>12:00 am</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Recently I was writing some Clojure with a coworker and we needed to insert values into a nested map structure. Our first solution (and example of using it at the repl) looked something like this.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">add-to-cache</span> <span class="p">[</span><span class="nv">cache</span> <span class="nv">key1</span> <span class="nv">key2</span> <span class="nv">data</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">entry</span> <span class="p">(</span><span class="nb">get </span><span class="nv">cache</span> <span class="nv">key1</span> <span class="p">{})</span>
-</span><span class='line'>        <span class="nv">new-entry</span> <span class="p">(</span><span class="nb">assoc </span><span class="nv">entry</span> <span class="nv">key2</span> <span class="nv">data</span><span class="p">)]</span>
-</span><span class='line'>    <span class="p">(</span><span class="nb">assoc </span><span class="nv">cache</span> <span class="nv">key1</span> <span class="nv">new-entry</span><span class="p">)))</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">user&gt;</span> <span class="p">(</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nf">add-to-cache</span> <span class="p">{}</span> <span class="ss">:chicago</span> <span class="ss">:lakeview</span> <span class="ss">:jake</span><span class="p">)</span>
-</span><span class='line'>          <span class="p">(</span><span class="nf">add-to-cache</span> <span class="ss">:sf</span> <span class="ss">:mission</span> <span class="ss">:dan</span><span class="p">)</span>
-</span><span class='line'>          <span class="p">(</span><span class="nf">add-to-cache</span> <span class="ss">:chicago</span> <span class="ss">:wickerpark</span> <span class="ss">:alex</span><span class="p">))</span>
-</span><span class='line'><span class="p">{</span><span class="ss">:sf</span> <span class="p">{</span><span class="ss">:mission</span> <span class="ss">:dan</span><span class="p">}</span>, <span class="ss">:chicago</span> <span class="p">{</span><span class="ss">:wickerpark</span> <span class="ss">:alex</span>, <span class="ss">:lakeview</span> <span class="ss">:jake</span><span class="p">}}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This worked but seemed overly verbose for doing what (in our minds) should have been a simple operation. After some digging around in the docs we found the function <code>assoc-in</code>. This useful function allowed us to greatly simplify the code.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">add-to-cache</span> <span class="p">[</span><span class="nv">cache</span> <span class="nv">key1</span> <span class="nv">key2</span> <span class="nv">data</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nf">assoc-in</span> <span class="nv">cache</span> <span class="p">[</span><span class="nv">key1</span> <span class="nv">key2</span><span class="p">]</span> <span class="nv">data</span><span class="p">))</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">user&gt;</span> <span class="p">(</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nf">add-to-cache</span> <span class="p">{}</span> <span class="ss">:chicago</span> <span class="ss">:lakeview</span> <span class="ss">:jake</span><span class="p">)</span>
-</span><span class='line'>          <span class="p">(</span><span class="nf">add-to-cache</span> <span class="ss">:sf</span> <span class="ss">:mission</span> <span class="ss">:dan</span><span class="p">)</span>
-</span><span class='line'>          <span class="p">(</span><span class="nf">add-to-cache</span> <span class="ss">:chicago</span> <span class="ss">:wickerpark</span> <span class="ss">:alex</span><span class="p">))</span>
-</span><span class='line'><span class="p">{</span><span class="ss">:sf</span> <span class="p">{</span><span class="ss">:mission</span> <span class="ss">:dan</span><span class="p">}</span>, <span class="ss">:chicago</span> <span class="p">{</span><span class="ss">:wickerpark</span> <span class="ss">:alex</span>, <span class="ss">:lakeview</span> <span class="ss">:jake</span><span class="p">}}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Much simpler and easier to read. The next person to look at the code will be able to quickly skim and tell what the code is doing.</p>
-
-<p><code>assoc-in</code> can also be used with nested associative structures like vectors.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nv">user&gt;</span> <span class="p">(</span><span class="nf">assoc-in</span> <span class="p">[[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span> <span class="p">[</span><span class="ss">:a</span> <span class="ss">:b</span><span class="p">]]</span> <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span> <span class="ss">:z</span><span class="p">)</span>
-</span><span class='line'><span class="p">[[</span><span class="mi">0</span> <span class="ss">:z</span><span class="p">]</span> <span class="p">[</span><span class="ss">:a</span> <span class="ss">:b</span><span class="p">]]</span>
-</span><span class='line'><span class="nv">user&gt;</span> <span class="p">(</span><span class="nf">assoc-in</span> <span class="p">[[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span> <span class="p">[</span><span class="ss">:a</span> <span class="ss">:b</span><span class="p">]]</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">1</span><span class="p">]</span> <span class="ss">:z</span><span class="p">)</span>
-</span><span class='line'><span class="p">[[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span> <span class="p">[</span><span class="ss">:a</span> <span class="ss">:z</span><span class="p">]]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Hopefully this post makes searching for how to insert into nested maps slighly easier for the next person who thinks there must be a better way for doing this.</p>
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -681,7 +221,7 @@
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2020/05/02/how-to-be-alerted-when-a-long-running-process-finishes/">How to be notified when long running processes finish</a>
+        <a href="/blog/2020/05/04/how-to-be-alerted-when-a-long-running-process-finishes/">How to be notified when long running processes finish</a>
       </li>
     
       <li class="post">
@@ -705,10 +245,6 @@
       </li>
     
       <li class="post">
-        <a href="/blog/2020/01/11/books-that-changed-my-life/">Books that changed my life</a>
-      </li>
-    
-      <li class="post">
         <a href="/blog/2020/01/11/reading-in-2019/">Reading in 2019</a>
       </li>
     
@@ -717,7 +253,11 @@
       </li>
     
       <li class="post">
-        <a href="/blog/2019/10/08/fast-feedback-is-important/">Fast feedback is important</a>
+        <a href="/blog/2019/08/23/building-a-onewheel-stand/">Building a Onewheel stand</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2019/08/15/switching-my-ergodox-to-qmk-firmware/">Switching my Ergodox to QMK firmware</a>
       </li>
     
   </ul>

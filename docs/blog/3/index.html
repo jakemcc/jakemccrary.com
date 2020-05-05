@@ -14,13 +14,17 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" I&rsquo;ve been using Emacs in a remote tmux session lately and I&rsquo;ve been missing lein-test-refresh notifications when my Clojure tests pass or &hellip;" />
+    <meta itemprop="description" content=" A couple months ago I was looking into a problem and noticed that
+there was a situation where an expensive operation could be running
+simultaneously &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" I&rsquo;ve been using Emacs in a remote tmux session lately and I&rsquo;ve been missing lein-test-refresh notifications when my Clojure tests pass or &hellip;" />
+    <meta name="twitter:description" content=" A couple months ago I was looking into a problem and noticed that
+there was a situation where an expensive operation could be running
+simultaneously &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -28,12 +32,16 @@
     <meta property="og:site_name" content="The Blog of Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/3/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" I&rsquo;ve been using Emacs in a remote tmux session lately and I&rsquo;ve been missing lein-test-refresh notifications when my Clojure tests pass or &hellip;" />
+    <meta property="og:description" content=" A couple months ago I was looking into a problem and noticed that
+there was a situation where an expensive operation could be running
+simultaneously &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" I&rsquo;ve been using Emacs in a remote tmux session lately and I&rsquo;ve been missing lein-test-refresh notifications when my Clojure tests pass or &hellip;">
+    <meta name="description" content=" A couple months ago I was looking into a problem and noticed that
+there was a situation where an expensive operation could be running
+simultaneously &hellip;">
 
     
 
@@ -114,339 +122,6 @@
     <div id="content">
       <div class="blog-index">
   
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2019/01/06/notifications-with-tmux-and-lein-test-refresh/">Notifications with tmux and lein-test-refresh</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2019-01-06T16:55:00-06:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2019</span></span> <span class='time'>4:55 pm</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&rsquo;ve been using Emacs in a remote <a href="https://github.com/tmux/tmux">tmux</a> session lately and I&rsquo;ve been missing <a href="https://github.com/jakemcc/lein-test-refresh#notifications">lein-test-refresh</a> notifications when my Clojure tests pass or fail. Luckily, it only took me a little bit of searching to figure out a solution for when I&rsquo;m working inside of tmux.</p>
-
-<p>Below is a GIF of the notifications I get as my tests run and pass or fail.</p>
-
-<p><img src="/images/tmux-test-refresh.gif" title="tmux and test-refresh notifications" alt="tmux and test-refresh notifications" /></p>
-
-<p>With the above notifications, I can keep my focus on my code and only switch to the tmux window with <code>lein test-refresh</code> running when a test fails.</p>
-
-<p>This was pretty easy to setup. You can trigger a message in tmux by running <code>tmux display-message &lt;MESSAGE_HERE&gt;</code>. To configure <a href="https://github.com/jakemcc/lein-test-refresh#notifications">lein-test-refresh</a> to send notifications to tmux simply include the following in your <code>:test-refresh</code> section of your <code>project.clj</code> or <code>profiles.clj</code>.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="ss">:test-refresh</span> <span class="p">{</span><span class="ss">:notify-command</span> <span class="p">[</span><span class="s">&quot;tmux&quot;</span> <span class="s">&quot;display-message&quot;</span><span class="p">]}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I hope you enjoy this. Its has made using a remote terminal with tmux and <a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a> more enjoyable.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2018/12/27/a-more-helpful-makefile/">A more helpful makefile</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2018-12-27T21:21:00-06:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2018</span></span> <span class='time'>9:21 pm</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>In an <a href="/blog/2016/11/30/unify-your-project-interfaces/">older article</a> of mine I extolled the virtues of having unified interfaces for interacting with your projects. I recently started working at Coinbase and the group I&rsquo;m working with is mostly using makefiles as that common interface. We still have some more work to do to unify the makefile targets of the various projects but I&rsquo;ve picked up one tip that makes switching between projects easier.</p>
-
-<p>That tip is to have the default target of your makefile be one that prints out a helpful message. This looks like the following.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>.PHONY: help
-</span><span class='line'>help:
-</span><span class='line'>  @grep -E '^[0-9a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
-</span><span class='line'>   sort | \
-</span><span class='line'>   awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'</span></code></pre></td></tr></table></div></figure>
-
-
-<p>There is a lot going on there but it basically looks through your makefile targets and finds the ones that have a comment starting with <code>##</code> after the target dependencies. Those targets are printed to the console along with the comment.</p>
-
-<p>As an example, the makefile for my website looks similar to the below file.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>.PHONY: help
-</span><span class='line'>help:
-</span><span class='line'>  @grep -E '^[0-9a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
-</span><span class='line'>   sort | \
-</span><span class='line'>   awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
-</span><span class='line'>
-</span><span class='line'>.PHONY: watch
-</span><span class='line'>watch: ## Watch for changes and serve preview of site with drafts
-</span><span class='line'>  bundle exec rake clean
-</span><span class='line'>  bundle exec rake preview
-</span><span class='line'>
-</span><span class='line'>.PHONY: develop
-</span><span class='line'>develop: ## Serve a preview of the site without drafts and refresh changes
-</span><span class='line'>  bundle exec rake clean
-</span><span class='line'>  bundle exec rake develop
-</span><span class='line'>
-</span><span class='line'>.PHONY: new_adventure
-</span><span class='line'>new_adventure: ## Start a new adventure post
-</span><span class='line'>  bundle exec rake new_adventure
-</span><span class='line'>
-</span><span class='line'>.PHONY: new_post
-</span><span class='line'>new_post: ## Start a new post
-</span><span class='line'>  bundle exec rake new_post 
-</span><span class='line'>
-</span><span class='line'>.PHONY: deploy
-</span><span class='line'>deploy: ## deploy
-</span><span class='line'>  ./deploy.sh</span></code></pre></td></tr></table></div></figure>
-
-
-<p>When this file, when I run <code>make</code> in this websites source, I get the following output.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>0 [last: 0s] 21:11:50 ~/src/jakemcc/blog (master)
-</span><span class='line'>$ make
-</span><span class='line'>deploy                         deploy
-</span><span class='line'>develop                        Serve a preview of the site without drafts and refresh changes
-</span><span class='line'>new_adventure                  Start a new adventure post
-</span><span class='line'>new_post                       Start a new post
-</span><span class='line'>watch                          Watch for changes and serve preview of site with drafts</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This is super useful when you&rsquo;re starting doing work in a new project. With this feature you can get a quick list of useful targets and a description. It allows you to quickly see what can be done in a project.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2018/07/16/built-in-test-narrowing-with-lein-test-refresh/">Built-in test narrowing with lein-test-refresh</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2018-07-16T14:47:00-05:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2018</span></span> <span class='time'>2:47 pm</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>If you follow my work you probably know that I value fast feedback cycles. Most of the open-source I maintain was developed to enable faster feedback cycles. This is why <a href="https://github.com/jakemcc/lein-test-refresh/">lein-test-refresh</a> and <a href="https://github.com/clojure-expectations/lein-autoexpect">lein-autoexpect</a> were originally created.</p>
-
-<p>Leiningen supports <a href="https://github.com/technomancy/leiningen/blob/master/doc/TUTORIAL.md#tests">test selectors</a> and lein-test-refresh <a href="https://github.com/jakemcc/lein-test-refresh/blob/master/CHANGES.md#040">does as well</a>. This lets you start-up a testing session and only run tests or namespaces with certain metadata on them. This is a super useful feature as it lets you narrow your testing scope to one (or a handful) of tests while working on solving a specific problem.</p>
-
-<p>lein-test-refresh now has built-in functionality that allows you to focus your test scope without restarting the Leiningen test process. If lein-test-refresh sees a <code>deftest</code> or <code>ns</code> form marked with <code>:test-refresh/focus true</code> in its metadata, then it will only run tests marked with <code>:test-refresh/focus</code>.</p>
-
-<p>Below is an example of what this looks like.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">deftest</span> <span class="o">^</span><span class="ss">:test-refresh/focus</span> <span class="nv">test-addition</span>
-</span><span class='line'>  <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="mi">2</span> <span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="mi">1</span><span class="p">))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This functionality has only been available for a short period of time and I&rsquo;ve already found it useful. I think you will too. Enjoy.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2018/06/15/tracking-changes-to-a-reagent-atom/">Tracking changes to a Reagent atom</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2018-06-15T09:05:00-05:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2018</span></span> <span class='time'>9:05 am</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I was recently having some difficulty debugging a problem in a
-ClojureScript single page application. The SPA was implemented using
-<a href="https://reagent-project.github.io/">reagent</a><sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.</p>
-
-<p>This interface stores most of its state in a global
-<code>reagent.core/atom</code> called <code>db</code>. To debug the problem, I thought it
-would be useful to track how the global state changed as I interacted
-with the interface. How do we do that?</p>
-
-<p>For the rest of this article, pretend that <code>(require '[reagent.core
-:as reagent])</code> has been executed.</p>
-
-<p>First, let&rsquo;s define <code>db-history</code> in the same namespace as the global
-<code>reagent/atom</code>, <code>db</code>. This is where we&rsquo;ll collect the changes to <code>db</code>.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">ns </span><span class="nv">ui.data</span>
-</span><span class='line'>  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">reagent.core</span> <span class="ss">:as</span> <span class="nv">reagent</span><span class="p">]))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defonce </span><span class="nv">db</span> <span class="p">(</span><span class="nf">reagent/atom</span> <span class="p">{</span><span class="ss">:app/current-page</span> <span class="ss">:offer-list</span><span class="p">}))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defonce </span><span class="nv">db-history</span> <span class="p">(</span><span class="nf">atom</span> <span class="p">[]))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Next, let&rsquo;s write a function called <code>aggregate-state</code>. This function
-grabs the current value in <code>db</code> and <code>conj</code>s it onto <code>db-history</code>. It
-also limits the history to the most recent 101 states.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">aggregate-state</span> <span class="p">[]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">d</span> <span class="o">@</span><span class="nv">db</span><span class="p">]</span>
-</span><span class='line'>    <span class="p">(</span><span class="nf">swap!</span> <span class="nv">db-history</span> <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">hist</span><span class="p">]</span>
-</span><span class='line'>                        <span class="p">(</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nb">take </span><span class="mi">100</span> <span class="nv">hist</span><span class="p">)</span>
-</span><span class='line'>                            <span class="nv">vec</span>
-</span><span class='line'>                            <span class="p">(</span><span class="nb">conj </span><span class="nv">d</span><span class="p">))))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now we need to invoke <code>aggregate-state</code> whenever <code>db</code> changes. We can
-do this using <code>reagent/track</code>. <code>reagent/track</code> takes a function and
-optional arguments and invokes that function whenever a <code>reagent/atom</code>
-that function depends on changes.</p>
-
-<p><code>reagent/track!</code> is similar except it immediately invokes the function
-instead of waiting for the first change. We can use it to cause
-<code>aggregate-state</code> to get called whenever <code>db</code> changes.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defonce </span><span class="nv">db-history-logger</span> <span class="p">(</span><span class="nf">reagent/track!</span> <span class="nv">aggregate-state</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now history of the global state is being tracked. But we need a way to
-access it. Below is what I ended up writing. When you call
-<code>ui.data.history()</code> in Chrome&rsquo;s JavaScript console, it returns an
-object you can click on to explore. If you pass in strings as
-arguments to <code>history</code> then it only selects some of the data from the
-global <code>db</code> and history.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="o">^</span><span class="ss">:export</span> <span class="nv">history</span> <span class="p">[</span><span class="o">&amp;</span> <span class="nv">args</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">d</span> <span class="o">@</span><span class="nv">db</span>
-</span><span class='line'>        <span class="nv">k</span> <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">seq </span><span class="nv">args</span><span class="p">)</span>
-</span><span class='line'>            <span class="p">(</span><span class="nb">map keyword </span><span class="nv">args</span><span class="p">)</span>
-</span><span class='line'>            <span class="p">(</span><span class="nb">keys </span><span class="nv">d</span><span class="p">))]</span>
-</span><span class='line'>    <span class="p">(</span><span class="nf">clj-&gt;js</span> <span class="p">{</span><span class="ss">:history</span> <span class="p">(</span><span class="nf">mapv</span> <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">x</span><span class="p">]</span> <span class="p">(</span><span class="nb">select-keys </span><span class="nv">x</span> <span class="nv">k</span><span class="p">))</span> <span class="o">@</span><span class="nv">db-history</span><span class="p">)</span>
-</span><span class='line'>              <span class="ss">:current</span> <span class="p">(</span><span class="nb">select-keys </span><span class="nv">d</span> <span class="nv">k</span><span class="p">)})))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>It only took about fifteen lines of code to gain a view of our
-application&rsquo;s state changes over time. This view helped me solve my
-problem. Hopefully it will help you too.</p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>This particular project is nearly four years old and has had many hands on it over the years. Working in it reminds me of how useful re-frame is on larger applications like this one.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-</div>
-  
-  
-
-
-    </article>
   
   
     <article>
@@ -1623,6 +1298,444 @@ an area where this, or something similar to it, would help.</p>
 
     </article>
   
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/09/29/measure-aggregate-performance/">Measuring aggregate performance in Clojure</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-09-29T08:48:01-05:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>8:48 am</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Last time I needed to speed up some code, I wrote a Clojure macro that recorded the aggregate time spent executing the code wrapped by the macro. Aggregate timings were useful since the same functions were called multiple times in the code path we were trying to optimize. Seeing total times made it easier to identify where we should spend our time.</p>
+
+<p>Below is the namespace I temporarily introduced into our codebase.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">ns </span><span class="nv">metrics</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">msec-str</span>
+</span><span class='line'>  <span class="s">&quot;Returns a human readable version of milliseconds based upon scale&quot;</span>
+</span><span class='line'>  <span class="p">[</span><span class="nv">msecs</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">s</span> <span class="mi">1000</span>
+</span><span class='line'>        <span class="nv">m</span> <span class="p">(</span><span class="nb">* </span><span class="mi">60</span> <span class="nv">s</span><span class="p">)</span>
+</span><span class='line'>        <span class="nv">h</span> <span class="p">(</span><span class="nb">* </span><span class="mi">60</span> <span class="nv">m</span><span class="p">)]</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">condp</span> <span class="nb">&gt;= </span><span class="nv">msecs</span>
+</span><span class='line'>      <span class="mi">1</span> <span class="p">(</span><span class="nf">format</span> <span class="s">&quot;%.5f msecs&quot;</span> <span class="p">(</span><span class="nb">float </span><span class="nv">msecs</span><span class="p">))</span>
+</span><span class='line'>      <span class="nv">s</span> <span class="p">(</span><span class="nf">format</span> <span class="s">&quot;%.1f msecs&quot;</span> <span class="p">(</span><span class="nb">float </span><span class="nv">msecs</span><span class="p">))</span>
+</span><span class='line'>      <span class="nv">m</span> <span class="p">(</span><span class="nf">format</span> <span class="s">&quot;%.1f seconds&quot;</span> <span class="p">(</span><span class="nb">float </span><span class="p">(</span><span class="nb">/ </span><span class="nv">msecs</span> <span class="nv">s</span><span class="p">)))</span>
+</span><span class='line'>      <span class="nv">h</span> <span class="p">(</span><span class="nf">format</span> <span class="s">&quot;%02dm:%02ds&quot;</span> <span class="p">(</span><span class="nb">int </span><span class="p">(</span><span class="nb">/ </span><span class="nv">msecs</span> <span class="nv">m</span><span class="p">))</span>
+</span><span class='line'>                <span class="p">(</span><span class="nf">mod</span> <span class="p">(</span><span class="nb">int </span><span class="p">(</span><span class="nb">/ </span><span class="nv">msecs</span> <span class="nv">s</span><span class="p">))</span> <span class="mi">60</span><span class="p">))</span>
+</span><span class='line'>      <span class="p">(</span><span class="nf">format</span> <span class="s">&quot;%dh:%02dm&quot;</span> <span class="p">(</span><span class="nb">int </span><span class="p">(</span><span class="nb">/ </span><span class="nv">msecs</span> <span class="nv">h</span><span class="p">))</span>
+</span><span class='line'>              <span class="p">(</span><span class="nf">mod</span> <span class="p">(</span><span class="nb">int </span><span class="p">(</span><span class="nb">/ </span><span class="nv">msecs</span> <span class="nv">m</span><span class="p">))</span> <span class="mi">60</span><span class="p">)))))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="k">def </span><span class="nv">aggregates</span> <span class="p">(</span><span class="nf">atom</span> <span class="p">{}))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defmacro </span><span class="nv">record-aggregate</span>
+</span><span class='line'>  <span class="s">&quot;Records the total time spent executing body across invocations.&quot;</span>
+</span><span class='line'>  <span class="p">[</span><span class="nv">label</span> <span class="o">&amp;</span> <span class="nv">body</span><span class="p">]</span>
+</span><span class='line'>  <span class="o">`</span><span class="p">(</span><span class="nf">do</span>
+</span><span class='line'>     <span class="p">(</span><span class="nb">when-not </span><span class="p">(</span><span class="nb">contains? </span><span class="o">@</span><span class="nv">aggregates</span> <span class="o">~</span><span class="nv">label</span><span class="p">)</span>
+</span><span class='line'>       <span class="p">(</span><span class="nf">swap!</span> <span class="nv">aggregates</span> <span class="nb">assoc </span><span class="o">~</span><span class="nv">label</span> <span class="p">{</span><span class="ss">:order</span> <span class="p">(</span><span class="nb">inc </span><span class="p">(</span><span class="nb">count </span><span class="o">@</span><span class="nv">aggregates</span><span class="p">))}))</span>
+</span><span class='line'>     <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">start-time#</span> <span class="p">(</span><span class="nf">System/nanoTime</span><span class="p">)</span>
+</span><span class='line'>           <span class="nv">result#</span> <span class="p">(</span><span class="k">do </span><span class="o">~@</span><span class="nv">body</span><span class="p">)</span>
+</span><span class='line'>           <span class="nv">result#</span> <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">and </span><span class="p">(</span><span class="nb">seq? </span><span class="nv">result#</span><span class="p">)</span>
+</span><span class='line'>                            <span class="p">(</span><span class="nb">instance? </span><span class="nv">clojure.lang.IPending</span> <span class="nv">result#</span><span class="p">)</span>
+</span><span class='line'>                            <span class="p">(</span><span class="nb">not </span><span class="p">(</span><span class="nf">realized?</span> <span class="nv">result#</span><span class="p">)))</span>
+</span><span class='line'>                     <span class="p">(</span><span class="nb">doall </span><span class="nv">result#</span><span class="p">)</span>
+</span><span class='line'>                     <span class="nv">result#</span><span class="p">)</span>
+</span><span class='line'>           <span class="nv">end-time#</span> <span class="p">(</span><span class="nf">System/nanoTime</span><span class="p">)]</span>
+</span><span class='line'>       <span class="p">(</span><span class="nf">swap!</span> <span class="nv">aggregates</span>
+</span><span class='line'>              <span class="nv">update-in</span>
+</span><span class='line'>              <span class="p">[</span><span class="o">~</span><span class="nv">label</span> <span class="ss">:msecs</span><span class="p">]</span>
+</span><span class='line'>              <span class="p">(</span><span class="nf">fnil</span> <span class="nb">+ </span><span class="mi">0</span><span class="p">)</span>
+</span><span class='line'>              <span class="p">(</span><span class="nb">/ </span><span class="p">(</span><span class="nb">double </span><span class="p">(</span><span class="nb">- </span><span class="nv">end-time#</span> <span class="nv">start-time#</span><span class="p">))</span> <span class="mf">1000000.0</span><span class="p">))</span>
+</span><span class='line'>       <span class="nv">result#</span><span class="p">)))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">log-times</span>
+</span><span class='line'>  <span class="s">&quot;Logs time recorded by record-aggregate and resets the aggregate times.&quot;</span>
+</span><span class='line'>  <span class="p">[]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">doseq </span><span class="p">[[</span><span class="nv">label</span> <span class="nv">data</span><span class="p">]</span> <span class="p">(</span><span class="nb">sort-by </span><span class="p">(</span><span class="nb">comp </span><span class="ss">:order</span> <span class="nv">second</span><span class="p">)</span> <span class="o">@</span><span class="nv">aggregates</span><span class="p">)</span>
+</span><span class='line'>          <span class="ss">:let</span> <span class="p">[</span><span class="nv">msecs</span> <span class="p">(</span><span class="ss">:msecs</span> <span class="nv">data</span><span class="p">)]]</span>
+</span><span class='line'>    <span class="p">(</span><span class="nb">println </span><span class="s">&quot;Executing&quot;</span> <span class="nv">label</span> <span class="s">&quot;took:&quot;</span> <span class="p">(</span><span class="nf">msec-str</span> <span class="nv">msecs</span><span class="p">)))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">reset!</span> <span class="nv">aggregates</span> <span class="p">{}))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>record-aggregate</code> takes a label and code and times how long that code takes to run. If the executed code returns an unrealized lazy sequence, it also evaluates the sequence<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.</p>
+
+<p>Below is an example of using the above code. When we used it, we looked at the code path we needed to optimize and wrapped chunks of it in <code>record-aggregate</code>. At the end of the calculations, we inserted a call to <code>log-times</code> so timing data would show up in our logs.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">ns </span><span class="nv">work</span>
+</span><span class='line'>  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">metrics</span> <span class="ss">:as</span> <span class="nv">m</span><span class="p">]))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">calculation</span> <span class="p">[</span><span class="nv">x</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">m/record-aggregate</span> <span class="ss">::calculation</span>
+</span><span class='line'>                      <span class="p">(</span><span class="nf">Thread/sleep</span> <span class="p">(</span><span class="nb">+ </span><span class="mi">300</span> <span class="p">(</span><span class="nb">rand-int </span><span class="mi">60</span><span class="p">)))</span>
+</span><span class='line'>                      <span class="nv">x</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">work</span> <span class="p">[</span><span class="nv">x</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">m/record-aggregate</span> <span class="ss">::work</span>
+</span><span class='line'>                      <span class="p">(</span><span class="nf">repeatedly</span> <span class="mi">10</span> <span class="p">(</span><span class="k">fn </span><span class="p">[]</span>
+</span><span class='line'>                                       <span class="p">(</span><span class="nf">Thread/sleep</span> <span class="mi">5</span><span class="p">)</span>
+</span><span class='line'>                                       <span class="nv">x</span><span class="p">))))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">process-rows</span> <span class="p">[</span><span class="nv">rows</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">rows</span> <span class="p">(</span><span class="nf">m/record-aggregate</span> <span class="ss">::process-rows</span>
+</span><span class='line'>                                 <span class="p">(</span><span class="nf">-&gt;&gt;</span> <span class="nv">rows</span>
+</span><span class='line'>                                      <span class="p">(</span><span class="nf">mapv</span> <span class="nv">calculation</span><span class="p">)</span>
+</span><span class='line'>                                      <span class="p">(</span><span class="nb">mapcat </span><span class="nv">work</span><span class="p">)))]</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">m/log-times</span><span class="p">)</span>
+</span><span class='line'>    <span class="nv">rows</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now, when <code>(process-rows [:a :a])</code> is called output similar to below is printed.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nv">Executing</span> <span class="ss">:work/process-rows</span> <span class="nv">took</span><span class="err">:</span> <span class="mf">780.9</span> <span class="nv">msecs</span>
+</span><span class='line'><span class="nv">Executing</span> <span class="ss">:work/calculation</span> <span class="nv">took</span><span class="err">:</span> <span class="mf">664.6</span> <span class="nv">msecs</span>
+</span><span class='line'><span class="nv">Executing</span> <span class="ss">:work/work</span> <span class="nv">took</span><span class="err">:</span> <span class="mf">115.8</span> <span class="nv">msecs</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Using this technique, we were able to identify slow parts of our process and were able to optimize those chunks of our code. There are potential flaws with measuring time like this, but they were not a problem in our situation<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>See <a href="/blog/2016/12/31/measure-what-you-intended-to-measure/">Measure what you intend to measure</a><a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>See <a href="https://shipilev.net/blog/2014/nanotrusting-nanotime/">Nanotrusting the Nanotime</a><a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/08/27/my-current-leiningen-profiles-dot-clj/">My current Leiningen profiles.clj</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-08-27T19:06:00-05:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>7:06 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Nearly three years ago I wrote an overview of my <a href="/blog/2015/01/11/overview-of-my-leiningen-profiles-dot-clj/">Leiningen profiles.clj</a>. That post is one of my most visited articles, so I thought I&rsquo;d give an update on what I currently keep in <code>~/.lein/profiles.clj</code>.</p>
+
+<figure class='code'><figcaption><span>profiles.clj</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">{</span><span class="ss">:user</span> <span class="p">{</span><span class="ss">:plugin-repositories</span> <span class="p">[[</span><span class="s">&quot;private-plugins&quot;</span> <span class="p">{</span><span class="ss">:url</span> <span class="s">&quot;private url&quot;</span><span class="p">}]]</span>
+</span><span class='line'>        <span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">pjstadig/humane-test-output</span> <span class="s">&quot;0.8.2&quot;</span><span class="p">]]</span>
+</span><span class='line'>        <span class="ss">:injections</span> <span class="p">[(</span><span class="nf">require</span> <span class="ss">&#39;pjstadig.humane-test-output</span><span class="p">)</span>
+</span><span class='line'>                     <span class="p">(</span><span class="nf">pjstadig.humane-test-output/activate!</span><span class="p">)]</span>
+</span><span class='line'>        <span class="ss">:plugins</span> <span class="p">[[</span><span class="nv">io.sattvik/lein-ancient</span> <span class="s">&quot;0.6.11&quot;</span><span class="p">]</span>
+</span><span class='line'>                  <span class="p">[</span><span class="nv">lein-pprint</span> <span class="s">&quot;1.1.2&quot;</span><span class="p">]</span>
+</span><span class='line'>                  <span class="p">[</span><span class="nv">com.jakemccrary/lein-test-refresh</span> <span class="s">&quot;0.21.1&quot;</span><span class="p">]</span>
+</span><span class='line'>                  <span class="p">[</span><span class="nv">lein-autoexpect</span> <span class="s">&quot;1.9.0&quot;</span><span class="p">]]</span>
+</span><span class='line'>        <span class="ss">:signing</span> <span class="p">{</span><span class="ss">:gpg-key</span> <span class="s">&quot;B38C2F8C&quot;</span><span class="p">}</span>
+</span><span class='line'>        <span class="ss">:test-refresh</span> <span class="p">{</span><span class="ss">:notify-command</span> <span class="p">[</span><span class="s">&quot;terminal-notifier&quot;</span> <span class="s">&quot;-title&quot;</span> <span class="s">&quot;Tests&quot;</span> <span class="s">&quot;-message&quot;</span><span class="p">]</span>
+</span><span class='line'>                       <span class="ss">:quiet</span> <span class="nv">true</span>
+</span><span class='line'>                       <span class="ss">:changes-only</span> <span class="nv">true</span><span class="p">}}}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The biggest difference between my <code>profiles.clj</code> from early 2015 and now is that I&rsquo;ve removed all of the CIDER related plugins. I still use CIDER, but CIDER no longer requires you to list its dependencies explicitly.</p>
+
+<p>I’ve also removed Eastwood and Kibit from my toolchain. I love static analysis, but these tools fail too frequently with my projects. As a result, I rarely used them and I’ve removed them. Instead, I’ve started using <a href="https://github.com/candid82/joker">joker</a> for some basic static analysis and am really enjoying it. It is fast, and it has made refactoring in Emacs noticeably better.</p>
+
+<p><a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a>, <a href="https://github.com/clojure-expectations/lein-autoexpect">lein-autoexpect</a>, and <a href="https://github.com/pjstadig/humane-test-output">humane-test-output</a> have stuck around and have been updated to the latest versions. These tools make testing Clojure much nicer.</p>
+
+<p>I&rsquo;m also taking advantage of some new features that <a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a> provides. These settings enable the most reliable, fastest feedback possible while writing tests. My <a href="/blog/2016/06/20/my-recommended-clojure-testing-setup/">recommended testing setup</a> article goes into more details.</p>
+
+<p><code>lein-ancient</code> and <code>lein-pprint</code> have stuck around. I rarely use <code>lein-pprint</code> but it comes in handy when debugging project.clj problems. <code>lein-ancient</code> is great for helping you keep your project&rsquo;s dependencies up to date. I use a forked version that contains some changes I need to work with my company&rsquo;s private repository.</p>
+
+<p>And there you have it. My updated profiles.clj<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Some of you might wonder why I don&rsquo;t just link to this file in version control somewhere? Well, it is kept encrypted in a git repository because it also contains some secrets that should not be public that I&rsquo;ve removed for this post.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/07/28/using-my-phones-voice-control-for-a-month/">Using my phone's voice control for a month</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-07-28T09:06:00-05:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>9:06 am</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>From May 6th to June 2nd the screen of my phone had a crack. I have an Android phone, and the crack was through the software buttons at the bottom of the screen. As a result, I could not touch the back, home, or overview (app switching) buttons. For nearly a month I never saw my home screen, couldn&rsquo;t go back, or switch apps through touching my phone. I was very reliant on arriving notifications giving me an opportunity to open apps.</p>
+
+<p>It took me some time, but I realized I could use voice commands to replace some of the missing functionality. Using voice commands, I could open apps and no longer be at the whim of notifications.</p>
+
+<p>Here is an example of my phone usage during this month. My thoughts are in [brackets]. <em>Italics</em> indicate actions. Talking is wrapped in “ ”.</p>
+
+<ol>
+<li>[Alright, I want to open Instagram] &ldquo;Ok Google, open Instagram.&rdquo;</li>
+<li>[Sweet, it worked] <em>scrolls through feed</em></li>
+<li><em>WhatsApp notification happens</em> [Great, a notification, I can click it to open WhatsApp]</li>
+<li><em>I read messages in WhatsApp.</em></li>
+<li>[Time to go back to Instagram] &ldquo;Ok Google, open Instagram&rdquo;</li>
+<li>[sigh, voice command failed, lets try again] &ldquo;Ok Google, open Instagram&rdquo;</li>
+<li><em>Instagram opens</em> [Great, time to scroll through more pictures]</li>
+</ol>
+
+
+<p>As you can see, it is a bit more painful than clicking buttons to switch between different apps. Voice commands fail sometimes and, at least for me, generally take more effort than tapping the screen. That’s ok though; I was determined to embrace voice commands and experience what a future of only voice commands might feel like.</p>
+
+<p>Below are some observations from using my voice to control my phone for a month.</p>
+
+<h3>It is awkward in public</h3>
+
+<p>My phone usage in public went way down. There was something about having to talk to your phone to open an app that made me not want to pull out my phone.</p>
+
+<p>It is much more obvious you are using your phone when you use your voice to control it. It makes casual glances at your phone while hanging out with a group impossible. You can’t sneak a quick look at Instagram when you need to say “Ok Google, open Instagram” without completely letting everyone around you know you are no longer paying attention.</p>
+
+<p>This also stopped me from using my phone in Ubers/Lyfts/cabs. I often talk to the driver or other passengers anyway, but this cemented that. I realize it is completely normal to ignore the other people in a car but I felt like a (small) asshole audibly calling out that I&rsquo;m ignoring other people in the car.</p>
+
+<h3>You become more conscious of what apps you use</h3>
+
+<p>When you have to say “Okay Google, open Instagram” every time you want to open Instagram, you become way more aware of how often you use Instagram. Using your voice instead of tapping a button on your screen is a much bigger hurdle between having the urge to open something and actually opening it. It gives you more time to observe what you are doing.</p>
+
+<h3>You become more conscious of using your phone</h3>
+
+<p>Using your phone becomes a lot harder. This increased difficulty helped highlight when I was using my phone. My phone’s functionality dropped drastically and, as a result, I stopped reaching for it as much.</p>
+
+<p>This reminded me of when I used a dumb (feature) phone for a couple of months a few years ago. Using a non-smartphone after using a smartphone for years was weird. It helped me reign in my usage<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.</p>
+
+<h3>Voice control can be pretty convenient</h3>
+
+<p>Even after repairing my screen, I still find myself using some voice commands. While making my morning coffee, I often ask my phone for the weather forecast. This is more convenient than opening an app and it lets me continue to use both hands while making coffee.</p>
+
+<p>Setting alarms, starting countdown timers, adding reminders, and checking the weather are all things I do through voice commands now.</p>
+
+<h3>I wish it worked all the time</h3>
+
+<p>I suppose this is an argument for getting a <a href="https://store.google.com/us/product/google_home?hl=en-US">Google Home</a> or <a href="http://amzn.to/2vctz9A">Amazon Echo</a>. I have to wake up my phone to use voice commands with it. This limits the usefulness of voice commands since I need be within reach of my phone.</p>
+
+<h3>I wish it could do more</h3>
+
+<p>At some point, I got used to asking my phone to do things. Then I started giving it more complicated commands, and it would fail. I found myself giving it multi-stage commands such as “Ok Google, turn on Bluetooth and play my playlist Chill on Spotify.” That doesn&rsquo;t work but it would be amazing if it did.</p>
+
+<h2>Recommendations</h2>
+
+<p>I recommend that you force yourself to use voice commands for some period of time. Pretend your home button is broken and you have to use voice control to move around your phone. You’ll become more aware of your phone usage and you&rsquo;ll learn some useful voice commands that will make your technology usage nicer.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>My non-smartphone experiment four years ago is what resulted in me no longer using Facebook or Twitter on my phone. It also is the reason I silenced most notifications, including email, on my phone.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/06/30/speeding-up-site-by-optionally-loading-disqus-comments/">Speeding up this site by optionally loading Disqus comments</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-06-30T19:37:00-05:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>7:37 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Earlier this month I took another look at what was required for reading an article on this site. What <a href="/blog/2016/04/30/speeding-up-my-blog/">else</a> could I do to make this site load faster?</p>
+
+<p>To do this, I loaded up <a href="http://webpagetest.org/">WebPageTest</a> and pointed it towards one of my <a href="/blog/2017/05/30/adding-a-json-feed-to-octopress-slash-jekyll/">posts</a>. To my shock, it took 113 requests for a total of 721 KB to load a single post. This took WebPageTest 6.491 seconds. The document complete event triggered after 15 requests (103 KB, 1.6 seconds).</p>
+
+<p>113 requests to load a static article was ridiculous. Most of those requests happened as a result of loading the Disqus javascript. I find comments valuable and want to continue including them on my site. Because of this, I couldn&rsquo;t remove Disqus. Instead, I made loading Disqus optional.</p>
+
+<p>After making the required changes, it only takes 11 requests for 61 KB of data to fully load the test post. The document complete event only required 8 requests for 51 KB of data. Optionally loading the Disqus javascript resulted in a massive reduction of data transferred.</p>
+
+<p>How did I do it? The template that generates my articles now only inserts the Disqus javascript when a reader clicks a button. My <a href="https://github.com/jakemcc/jakemccrary.com/blob/74f4232ce7263ba3de48497d0c0d10a8fa1a73f9/source/_includes/disqus.html">final template</a> is at the bottom of this post.</p>
+
+<p>The template adds an <code>insertDisqus</code> function that inserts a <code>&lt;script&gt;</code> element when a reader clicks a button. This element contains the original JavaScript that loads Disqus. When the <code>&lt;script&gt;</code> element is inserted into the page, the Disqus javascript is loaded and the comments appear.</p>
+
+<p>My exact template might not work for you, but I&rsquo;d encourage you to think about optionally loading Disqus and other non-required JavaScript. Your readers will thank you.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>{% if site.disqus_short_name and page.comments == true %}
+</span><span class='line'>  <span class="nt">&lt;noscript&gt;</span>Please enable JavaScript to view the <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://disqus.com/?ref_noscript&quot;</span><span class="nt">&gt;</span>comments powered by Disqus.<span class="nt">&lt;/a&gt;&lt;/noscript&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;disqus_target&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;script&gt;</span>
+</span><span class='line'>     <span class="kd">var</span> <span class="nx">insertDisqus</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>       <span class="kd">var</span> <span class="nx">elem</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;script&#39;</span><span class="p">);</span>
+</span><span class='line'>       <span class="nx">elem</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span>  <span class="s2">&quot;var disqus_shortname = &#39;{{ site.disqus_short_name }}&#39;; var disqus_identifier = &#39;{{ site.url }}{{ page.url }}&#39;; var disqus_url = &#39;{{ site.url }}{{ page.url }}&#39;; (function () {var dsq = document.createElement(&#39;script&#39;); dsq.type = &#39;text/javascript&#39;; dsq.async = true; dsq.src = &#39;//&#39; + disqus_shortname + &#39;.disqus.com/embed.js&#39;; (document.getElementsByTagName(&#39;head&#39;)[0] || document.getElementsByTagName(&#39;body&#39;)[0]).appendChild(dsq);}());&quot;</span>
+</span><span class='line'>       <span class="kd">var</span> <span class="nx">target</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;disqus_target&#39;</span><span class="p">);</span>
+</span><span class='line'>       <span class="nx">target</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">replaceChild</span><span class="p">(</span><span class="nx">elem</span><span class="p">,</span> <span class="nx">target</span><span class="p">);</span>
+</span><span class='line'>     <span class="p">}</span>
+</span><span class='line'>    <span class="nt">&lt;/script&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">&quot;comment-button&quot;</span> <span class="na">onclick=</span><span class="s">&quot;insertDisqus()&quot;</span><span class="nt">&gt;&lt;span&gt;</span>ENABLE COMMENTS AND RECOMMENDED ARTICLES<span class="nt">&lt;/span&gt;&lt;/button&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>{% endif %}
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
   <div class="pagination">
     
       <a class="prev" href="/blog//4">&larr; Older</a>
@@ -1640,7 +1753,7 @@ an area where this, or something similar to it, would help.</p>
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/blog/2020/05/02/how-to-be-alerted-when-a-long-running-process-finishes/">How to be notified when long running processes finish</a>
+        <a href="/blog/2020/05/04/how-to-be-alerted-when-a-long-running-process-finishes/">How to be notified when long running processes finish</a>
       </li>
     
       <li class="post">
@@ -1664,10 +1777,6 @@ an area where this, or something similar to it, would help.</p>
       </li>
     
       <li class="post">
-        <a href="/blog/2020/01/11/books-that-changed-my-life/">Books that changed my life</a>
-      </li>
-    
-      <li class="post">
         <a href="/blog/2020/01/11/reading-in-2019/">Reading in 2019</a>
       </li>
     
@@ -1676,7 +1785,11 @@ an area where this, or something similar to it, would help.</p>
       </li>
     
       <li class="post">
-        <a href="/blog/2019/10/08/fast-feedback-is-important/">Fast feedback is important</a>
+        <a href="/blog/2019/08/23/building-a-onewheel-stand/">Building a Onewheel stand</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2019/08/15/switching-my-ergodox-to-qmk-firmware/">Switching my Ergodox to QMK firmware</a>
       </li>
     
   </ul>
