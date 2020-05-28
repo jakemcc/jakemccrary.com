@@ -1,4 +1,0 @@
-This is a Brave Rewards publisher verification file.
-
-Domain: jakemccrary.com
-Token: 08a3c0c58ee3633a83293dd064df23d93971155ddfe1caab0128033db76f3376
