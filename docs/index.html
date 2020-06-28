@@ -121,6 +121,75 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2020/06/28/using-bazel-to-help-fix-flaky-tests/">Using Bazel to help fix flaky tests</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2020-06-28T18:28:00-05:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2020</span></span> <span class='time'>6:28 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Flaky tests are terrible.
+These are tests that pass or fail without anything changing in the code.
+They often pass the majority of the time and fail rarely.
+This makes them hard to detect and cause developers to often just run the tests again.</p>
+
+<p>Flaky tests erode your team&rsquo;s confidence in your system.
+They cause folks to get in the habit of not trusting the output of tests.
+This discourages people from writing tests as they stop seeing them as something that improves quality and instead view them as a drag on productivity.</p>
+
+<p>Flaky tests are often hard to fix.
+If they were easy to fix, they wouldn&rsquo;t have been flaky in the first place.
+One difficulty in fixing them is that the failures are often hard to reproduce.</p>
+
+<p>Often, the first step in fixing a flaky test is to write a script to run the tests multiple times in a row.
+If you are using <a href="https://bazel.build/">Bazel</a> as your build tool you don&rsquo;t need to write this.</p>
+
+<p>Here is an example <code>bazel</code><sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> command for helping you recreate flaky test failures.</p>
+
+<p><code>bazel test --test_strategy=exclusive --test_output=errors --runs_per_test=50 -t- //...</code></p>
+
+<p>The above command is running all the test targets in a workspace and each flag is important.</p>
+
+<ul>
+<li><code>--runs_per_test=50</code> is telling Bazel to run each test 50 times.</li>
+<li><code>--test_output=errors</code> is telling Bazel to only print errors to your console.</li>
+<li><code>-t-</code> is a shortcut for <code>--nocache_test_results</code> (or <code>--cache_test_results=no</code>).
+This flag tells Bazel to <strong>not</strong> cache the test results.</li>
+<li><code>--test_strategy=exclusive</code> will cause tests to be run serially.
+Without this, Bazel could run your test targets concurrently and if your tests aren&rsquo;t designed for this you may run into other failures.</li>
+</ul>
+
+
+<p>Flaky tests are terrible and you should try not to have them.
+Try your best to have reliable tests.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>I&rsquo;ve written this while using Bazel 3.2.0. If you are reading this far in the future the flags may have changed.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2020/05/04/how-to-be-alerted-when-a-long-running-process-finishes/">How to be automatically notified when long running processes finish</a></h1>
     
     
@@ -1414,93 +1483,6 @@ I look forward to customizing the firmware to make the key layout fit my usage.<
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2019/08/15/switching-my-ergodox-to-qmk-firmware/">Switching my Ergodox to QMK firmware</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2019-08-15T19:07:00-05:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2019</span></span> <span class='time'>7:07 pm</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Last fall I started to work in an office again. I&rsquo;ve used a hand-built Ergodox for years now and really prefer working on it. This meant I needed another ergodox for the office. Luckily, now you don&rsquo;t have to build your own. I bought an <a href="https://ergodox-ez.com">Ergodox EZ</a><sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.</p>
-
-<p>The Ergodox EZ uses the <a href="https://github.com/qmk/qmk_firmware">QMK</a> firmware. This has a lot of fancier options than the firmware I had been using on my hand-built ergodox.</p>
-
-<p>This mostly didn&rsquo;t matter and I just configured the Ergodox EZ to match my original Ergodox&rsquo;s layout. Then I started a new job and found myself programming in Scala using IntelliJ IDEA.</p>
-
-<p>Shockingly, after not using IntelliJ for years, I still remembered many of the keyboard shortcuts. This was great! Unfortunately, in my years since last using IntelliJ, I created some conflicting keyboard shortcuts for managing my window layout. These were mostly shortcuts that involved holding Command + Alt and pushing an arrow key. Luckily, the QMK firmware supports a <em>Meh</em> key.</p>
-
-<p>What is the <em>Meh</em> key? It is a key that presses Control + Alt + Shift all at the same time.</p>
-
-<p>This is great for setting up shortcuts that don&rsquo;t conflict with ones found in most normal programs. This let me <a href="https://github.com/jakemcc/cljs-phoenix/commit/fa2186589d99a4763c7bf79e1f795cb910063a4e">change my window manger</a> shortcuts to use the <em>Meh</em> key and I was then conflict free.</p>
-
-<p>I can&rsquo;t handle having different shortcuts across different machines with the same OS, so I needed to needed to update my original Ergodox to use the QMK firmware so I could also have a <em>Meh</em> key at home. Luckily, the QMK firmware also works on it and, maybe even more luckily, the Ergodox EZ firmware just works with my original Ergodox.</p>
-
-<p>This actually means I can simply take the compiled Ergodox EZ firmware and flash it straight to my Ergodox. Any time I&rsquo;ve done this the keyboard keeps working.</p>
-
-<p>Unfortunately, the LEDs in my original Ergodox are mostly hidden by non-translucent keys. These LEDs indicate when I&rsquo;m not main layer and I find them really useful. I only have a single translucent keycap and would prefer only that LED to be used.</p>
-
-<p>Here are the steps I took to make that change.</p>
-
-<ol>
-<li>Use the <a href="https://config.qmk.fm/#/ergodox_ez/LAYOUT_ergodox">graphical QMK Configurator</a> to visually configure my keyboard layout. In the <strong>Keymap Name</strong> field, put <code>jakemcc</code>.</li>
-<li>Click the <strong>Compile</strong> button in the above configurator.</li>
-<li>Download the full source.</li>
-<li>Unzip the source and edit <code>qmk_firmware/keyboards/ergodox_ez/keymaps/jakemcc/keymap.c</code> to include snippet of code below this list.</li>
-<li>In <code>qmk_firmware</code> run <code>make ergodox_ez:jakemcc</code>.</li>
-<li>Find <code>ergodox_ez_jakemcc.hex</code> and flash my original Ergodox.</li>
-</ol>
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="kt">uint32_t</span> <span class="nf">layer_state_set_user</span><span class="p">(</span><span class="kt">uint32_t</span> <span class="n">state</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">biton32</span><span class="p">(</span><span class="n">state</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">ergodox_right_led_1_off</span><span class="p">();</span>
-</span><span class='line'>  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span><span class='line'>    <span class="n">ergodox_right_led_1_on</span><span class="p">();</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="k">return</span> <span class="n">state</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This snippet gets added to the bottom of the <code>keymap.c</code>. It only turns on led 1, which is the one under my translucent key, whenever my keyboard isn&rsquo;t on layer 0.</p>
-
-<p>Now, I can use the fancy <em>Meh</em> key to be conflict free and easily tell when I&rsquo;m not on my main layer. This is wonderful.</p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>I bought one with Cherry MX Clear switches. I&rsquo;ve since switched them to Cherry MX Browns. The clears were too firm for me. I did not get Cherry MX Blues because I didn&rsquo;t want my fellow coworkers to be annoyed by the glorious clickty-clack of those switches.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//2">&larr; Older</a>
@@ -1514,6 +1496,10 @@ I look forward to customizing the firmware to make the key layout fit my usage.<
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/06/28/using-bazel-to-help-fix-flaky-tests/">Using Bazel to help fix flaky tests</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2020/05/04/how-to-be-alerted-when-a-long-running-process-finishes/">How to be automatically notified when long running processes finish</a>
@@ -1549,10 +1535,6 @@ I look forward to customizing the firmware to make the key layout fit my usage.<
     
       <li class="post">
         <a href="/blog/2019/08/23/building-a-onewheel-stand/">Building a Onewheel stand</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/08/15/switching-my-ergodox-to-qmk-firmware/">Switching my Ergodox to QMK firmware</a>
       </li>
     
   </ul>

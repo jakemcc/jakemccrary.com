@@ -4,7 +4,7 @@
   <title><![CDATA[Jake McCrary]]></title>
   <link href="https://jakemccrary.com/atom.xml" rel="self"/>
   <link href="https://jakemccrary.com/"/>
-  <updated>2020-05-12T18:13:25-05:00</updated>
+  <updated>2020-06-28T18:29:11-05:00</updated>
   <id>https://jakemccrary.com/</id>
   <author>
     <name><![CDATA[Jake McCrary]]></name>
@@ -12,6 +12,56 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Using Bazel to help fix flaky tests]]></title>
+    <link href="https://jakemccrary.com/blog/2020/06/28/using-bazel-to-help-fix-flaky-tests/"/>
+    <updated>2020-06-28T18:28:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2020/06/28/using-bazel-to-help-fix-flaky-tests</id>
+    <content type="html"><![CDATA[<p>Flaky tests are terrible.
+These are tests that pass or fail without anything changing in the code.
+They often pass the majority of the time and fail rarely.
+This makes them hard to detect and cause developers to often just run the tests again.</p>
+
+<p>Flaky tests erode your team&rsquo;s confidence in your system.
+They cause folks to get in the habit of not trusting the output of tests.
+This discourages people from writing tests as they stop seeing them as something that improves quality and instead view them as a drag on productivity.</p>
+
+<p>Flaky tests are often hard to fix.
+If they were easy to fix, they wouldn&rsquo;t have been flaky in the first place.
+One difficulty in fixing them is that the failures are often hard to reproduce.</p>
+
+<p>Often, the first step in fixing a flaky test is to write a script to run the tests multiple times in a row.
+If you are using <a href="https://bazel.build/">Bazel</a> as your build tool you don&rsquo;t need to write this.</p>
+
+<p>Here is an example <code>bazel</code><sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> command for helping you recreate flaky test failures.</p>
+
+<p><code>bazel test --test_strategy=exclusive --test_output=errors --runs_per_test=50 -t- //...</code></p>
+
+<p>The above command is running all the test targets in a workspace and each flag is important.</p>
+
+<ul>
+<li><code>--runs_per_test=50</code> is telling Bazel to run each test 50 times.</li>
+<li><code>--test_output=errors</code> is telling Bazel to only print errors to your console.</li>
+<li><code>-t-</code> is a shortcut for <code>--nocache_test_results</code> (or <code>--cache_test_results=no</code>).
+This flag tells Bazel to <strong>not</strong> cache the test results.</li>
+<li><code>--test_strategy=exclusive</code> will cause tests to be run serially.
+Without this, Bazel could run your test targets concurrently and if your tests aren&rsquo;t designed for this you may run into other failures.</li>
+</ul>
+
+
+<p>Flaky tests are terrible and you should try not to have them.
+Try your best to have reliable tests.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>I&rsquo;ve written this while using Bazel 3.2.0. If you are reading this far in the future the flags may have changed.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[How to be automatically notified when long running processes finish]]></title>
@@ -1976,112 +2026,6 @@ I look forward to customizing the firmware to make the key layout fit my usage.<
 
 
 <p>This functionality has only been available for a short period of time and I&rsquo;ve already found it useful. I think you will too. Enjoy.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Tracking changes to a Reagent atom]]></title>
-    <link href="https://jakemccrary.com/blog/2018/06/15/tracking-changes-to-a-reagent-atom/"/>
-    <updated>2018-06-15T09:05:00-05:00</updated>
-    <id>https://jakemccrary.com/blog/2018/06/15/tracking-changes-to-a-reagent-atom</id>
-    <content type="html"><![CDATA[<p>I was recently having some difficulty debugging a problem in a
-ClojureScript single page application. The SPA was implemented using
-<a href="https://reagent-project.github.io/">reagent</a><sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.</p>
-
-<p>This interface stores most of its state in a global
-<code>reagent.core/atom</code> called <code>db</code>. To debug the problem, I thought it
-would be useful to track how the global state changed as I interacted
-with the interface. How do we do that?</p>
-
-<p>For the rest of this article, pretend that <code>(require '[reagent.core
-:as reagent])</code> has been executed.</p>
-
-<p>First, let&rsquo;s define <code>db-history</code> in the same namespace as the global
-<code>reagent/atom</code>, <code>db</code>. This is where we&rsquo;ll collect the changes to <code>db</code>.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">ns </span><span class="nv">ui.data</span>
-</span><span class='line'>  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">reagent.core</span> <span class="ss">:as</span> <span class="nv">reagent</span><span class="p">]))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defonce </span><span class="nv">db</span> <span class="p">(</span><span class="nf">reagent/atom</span> <span class="p">{</span><span class="ss">:app/current-page</span> <span class="ss">:offer-list</span><span class="p">}))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defonce </span><span class="nv">db-history</span> <span class="p">(</span><span class="nf">atom</span> <span class="p">[]))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Next, let&rsquo;s write a function called <code>aggregate-state</code>. This function
-grabs the current value in <code>db</code> and <code>conj</code>s it onto <code>db-history</code>. It
-also limits the history to the most recent 101 states.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">aggregate-state</span> <span class="p">[]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">d</span> <span class="o">@</span><span class="nv">db</span><span class="p">]</span>
-</span><span class='line'>    <span class="p">(</span><span class="nf">swap!</span> <span class="nv">db-history</span> <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">hist</span><span class="p">]</span>
-</span><span class='line'>                        <span class="p">(</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nb">take </span><span class="mi">100</span> <span class="nv">hist</span><span class="p">)</span>
-</span><span class='line'>                            <span class="nv">vec</span>
-</span><span class='line'>                            <span class="p">(</span><span class="nb">conj </span><span class="nv">d</span><span class="p">))))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now we need to invoke <code>aggregate-state</code> whenever <code>db</code> changes. We can
-do this using <code>reagent/track</code>. <code>reagent/track</code> takes a function and
-optional arguments and invokes that function whenever a <code>reagent/atom</code>
-that function depends on changes.</p>
-
-<p><code>reagent/track!</code> is similar except it immediately invokes the function
-instead of waiting for the first change. We can use it to cause
-<code>aggregate-state</code> to get called whenever <code>db</code> changes.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defonce </span><span class="nv">db-history-logger</span> <span class="p">(</span><span class="nf">reagent/track!</span> <span class="nv">aggregate-state</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now history of the global state is being tracked. But we need a way to
-access it. Below is what I ended up writing. When you call
-<code>ui.data.history()</code> in Chrome&rsquo;s JavaScript console, it returns an
-object you can click on to explore. If you pass in strings as
-arguments to <code>history</code> then it only selects some of the data from the
-global <code>db</code> and history.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="o">^</span><span class="ss">:export</span> <span class="nv">history</span> <span class="p">[</span><span class="o">&amp;</span> <span class="nv">args</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">d</span> <span class="o">@</span><span class="nv">db</span>
-</span><span class='line'>        <span class="nv">k</span> <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">seq </span><span class="nv">args</span><span class="p">)</span>
-</span><span class='line'>            <span class="p">(</span><span class="nb">map keyword </span><span class="nv">args</span><span class="p">)</span>
-</span><span class='line'>            <span class="p">(</span><span class="nb">keys </span><span class="nv">d</span><span class="p">))]</span>
-</span><span class='line'>    <span class="p">(</span><span class="nf">clj-&gt;js</span> <span class="p">{</span><span class="ss">:history</span> <span class="p">(</span><span class="nf">mapv</span> <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">x</span><span class="p">]</span> <span class="p">(</span><span class="nb">select-keys </span><span class="nv">x</span> <span class="nv">k</span><span class="p">))</span> <span class="o">@</span><span class="nv">db-history</span><span class="p">)</span>
-</span><span class='line'>              <span class="ss">:current</span> <span class="p">(</span><span class="nb">select-keys </span><span class="nv">d</span> <span class="nv">k</span><span class="p">)})))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>It only took about fifteen lines of code to gain a view of our
-application&rsquo;s state changes over time. This view helped me solve my
-problem. Hopefully it will help you too.</p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>This particular project is nearly four years old and has had many hands on it over the years. Working in it reminds me of how useful re-frame is on larger applications like this one.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
 ]]></content>
   </entry>
   

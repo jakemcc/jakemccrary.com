@@ -14,13 +14,13 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" This past fall I took part in Stanford&rsquo;s online learning experiment. For those of you who are not aware, Stanford gave anyone with Internet &hellip;" />
+    <meta itemprop="description" content=" Very few coders would debate the wisdom of breaking a project into smaller libraries. One complaint about breaking a project into tinier libraries is &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" This past fall I took part in Stanford&rsquo;s online learning experiment. For those of you who are not aware, Stanford gave anyone with Internet &hellip;" />
+    <meta name="twitter:description" content=" Very few coders would debate the wisdom of breaking a project into smaller libraries. One complaint about breaking a project into tinier libraries is &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -28,12 +28,12 @@
     <meta property="og:site_name" content="The Blog of Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/10/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" This past fall I took part in Stanford&rsquo;s online learning experiment. For those of you who are not aware, Stanford gave anyone with Internet &hellip;" />
+    <meta property="og:description" content=" Very few coders would debate the wisdom of breaking a project into smaller libraries. One complaint about breaking a project into tinier libraries is &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" This past fall I took part in Stanford&rsquo;s online learning experiment. For those of you who are not aware, Stanford gave anyone with Internet &hellip;">
+    <meta name="description" content=" Very few coders would debate the wisdom of breaking a project into smaller libraries. One complaint about breaking a project into tinier libraries is &hellip;">
 
     
 
@@ -115,6 +115,90 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/03/28/working-on-multiple-clojure-projects-at-once/">Working on multiple Clojure projects at once</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2012-03-28T21:18:00-05:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2012</span></span> <span class='time'>9:18 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Very few coders would debate the wisdom of breaking a project into smaller libraries. One complaint about breaking a project into tinier libraries is the added hassle of making changes simultaneously to multiple projects at once. Constantly releasing a library so another project can pick up changes is annoying and slows you down. Luckily for us in a <a href="http://clojure.org">Clojure</a> project using <a href="https://github.com/technomancy/leiningen">Leiningen</a> it is simple to make changes to a library and then use those changes without needing to perform a release.</p>
+
+<p>This is accomplished by using the <code>checkouts</code> directory feature of Leiningen. This is a feature that, despite being listed in the Leiningen FAQ, I only recently discovered. To make your Clojure project (from now on calling this the main project) depend on the source of another project simply make a <code>checkouts</code> directory in your main project&rsquo;s root directory and then in <code>checkouts</code> link to the root of the library&rsquo;s project. This causes the library to be added to the main project&rsquo;s classpath. Now you can make changes to the main project and its dependencies without going through the hassle of releasing new versions of the library for every change.</p>
+
+<p>In case the above paragraph isn&rsquo;t clear, here is an example of the main projects directory structure.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span><span class="nb">pwd</span>
+</span><span class='line'>src/main-project
+</span><span class='line'><span class="nv">$ </span>tree
+</span><span class='line'>.
+</span><span class='line'>├── checkouts
+</span><span class='line'>│   └── subproject -&gt; /Users/jmccrary/src/temp/subproject/
+</span><span class='line'>├── project.clj
+</span><span class='line'>├── src
+</span><span class='line'>│   └── main_project
+</span><span class='line'>│       └── core.clj
+</span><span class='line'>└── <span class="nb">test</span>
+</span><span class='line'>    └── main_project
+</span><span class='line'>        └── core_test.clj
+</span><span class='line'><span class="nv">$ </span>ls checkouts/subproject/
+</span><span class='line'>README project.clj src <span class="nb">test</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Running a <code>lein classpath</code> in the main project directory and we can see the classpath has the subproject in it. I&rsquo;ve edited the <code>lein classpath</code> output to remove most entries not related to subproject and to make it easier to read. As the example shows the subproject has been added to the classpath.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>lein classpath
+</span><span class='line'>...:
+</span><span class='line'>src/main-project/checkouts/subproject/src
+</span><span class='line'>src/main-project/checkouts/subproject/classes
+</span><span class='line'>src/main-project/checkouts/subproject/resources
+</span><span class='line'>src/main-project/lib/clojure-1.3.0.jar
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The Leiningen checkouts directory option is pretty useful. This feature isn&rsquo;t there to discourage you from releasing versions of a library, but instead is there to facilitate quicker development cycles. I&rsquo;d encourage you to experiment with it and figure out of it makes you more effective.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1085,91 +1169,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2010/06/06/inserting-values-into-a-nested-map-in-clojure/">Inserting values into a nested map in Clojure</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2010-06-06'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2010</span></span> <span class='time'>12:00 am</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Recently I was writing some Clojure with a coworker and we needed to insert values into a nested map structure. Our first solution (and example of using it at the repl) looked something like this.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">add-to-cache</span> <span class="p">[</span><span class="nv">cache</span> <span class="nv">key1</span> <span class="nv">key2</span> <span class="nv">data</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">entry</span> <span class="p">(</span><span class="nb">get </span><span class="nv">cache</span> <span class="nv">key1</span> <span class="p">{})</span>
-</span><span class='line'>        <span class="nv">new-entry</span> <span class="p">(</span><span class="nb">assoc </span><span class="nv">entry</span> <span class="nv">key2</span> <span class="nv">data</span><span class="p">)]</span>
-</span><span class='line'>    <span class="p">(</span><span class="nb">assoc </span><span class="nv">cache</span> <span class="nv">key1</span> <span class="nv">new-entry</span><span class="p">)))</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">user&gt;</span> <span class="p">(</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nf">add-to-cache</span> <span class="p">{}</span> <span class="ss">:chicago</span> <span class="ss">:lakeview</span> <span class="ss">:jake</span><span class="p">)</span>
-</span><span class='line'>          <span class="p">(</span><span class="nf">add-to-cache</span> <span class="ss">:sf</span> <span class="ss">:mission</span> <span class="ss">:dan</span><span class="p">)</span>
-</span><span class='line'>          <span class="p">(</span><span class="nf">add-to-cache</span> <span class="ss">:chicago</span> <span class="ss">:wickerpark</span> <span class="ss">:alex</span><span class="p">))</span>
-</span><span class='line'><span class="p">{</span><span class="ss">:sf</span> <span class="p">{</span><span class="ss">:mission</span> <span class="ss">:dan</span><span class="p">}</span>, <span class="ss">:chicago</span> <span class="p">{</span><span class="ss">:wickerpark</span> <span class="ss">:alex</span>, <span class="ss">:lakeview</span> <span class="ss">:jake</span><span class="p">}}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This worked but seemed overly verbose for doing what (in our minds) should have been a simple operation. After some digging around in the docs we found the function <code>assoc-in</code>. This useful function allowed us to greatly simplify the code.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">add-to-cache</span> <span class="p">[</span><span class="nv">cache</span> <span class="nv">key1</span> <span class="nv">key2</span> <span class="nv">data</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nf">assoc-in</span> <span class="nv">cache</span> <span class="p">[</span><span class="nv">key1</span> <span class="nv">key2</span><span class="p">]</span> <span class="nv">data</span><span class="p">))</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">user&gt;</span> <span class="p">(</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nf">add-to-cache</span> <span class="p">{}</span> <span class="ss">:chicago</span> <span class="ss">:lakeview</span> <span class="ss">:jake</span><span class="p">)</span>
-</span><span class='line'>          <span class="p">(</span><span class="nf">add-to-cache</span> <span class="ss">:sf</span> <span class="ss">:mission</span> <span class="ss">:dan</span><span class="p">)</span>
-</span><span class='line'>          <span class="p">(</span><span class="nf">add-to-cache</span> <span class="ss">:chicago</span> <span class="ss">:wickerpark</span> <span class="ss">:alex</span><span class="p">))</span>
-</span><span class='line'><span class="p">{</span><span class="ss">:sf</span> <span class="p">{</span><span class="ss">:mission</span> <span class="ss">:dan</span><span class="p">}</span>, <span class="ss">:chicago</span> <span class="p">{</span><span class="ss">:wickerpark</span> <span class="ss">:alex</span>, <span class="ss">:lakeview</span> <span class="ss">:jake</span><span class="p">}}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Much simpler and easier to read. The next person to look at the code will be able to quickly skim and tell what the code is doing.</p>
-
-<p><code>assoc-in</code> can also be used with nested associative structures like vectors.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nv">user&gt;</span> <span class="p">(</span><span class="nf">assoc-in</span> <span class="p">[[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span> <span class="p">[</span><span class="ss">:a</span> <span class="ss">:b</span><span class="p">]]</span> <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span> <span class="ss">:z</span><span class="p">)</span>
-</span><span class='line'><span class="p">[[</span><span class="mi">0</span> <span class="ss">:z</span><span class="p">]</span> <span class="p">[</span><span class="ss">:a</span> <span class="ss">:b</span><span class="p">]]</span>
-</span><span class='line'><span class="nv">user&gt;</span> <span class="p">(</span><span class="nf">assoc-in</span> <span class="p">[[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span> <span class="p">[</span><span class="ss">:a</span> <span class="ss">:b</span><span class="p">]]</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">1</span><span class="p">]</span> <span class="ss">:z</span><span class="p">)</span>
-</span><span class='line'><span class="p">[[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">]</span> <span class="p">[</span><span class="ss">:a</span> <span class="ss">:z</span><span class="p">]]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Hopefully this post makes searching for how to insert into nested maps slighly easier for the next person who thinks there must be a better way for doing this.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//11">&larr; Older</a>
@@ -1185,6 +1184,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/06/28/using-bazel-to-help-fix-flaky-tests/">Using Bazel to help fix flaky tests</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2020/05/04/how-to-be-alerted-when-a-long-running-process-finishes/">How to be automatically notified when long running processes finish</a>
@@ -1220,10 +1223,6 @@
     
       <li class="post">
         <a href="/blog/2019/08/23/building-a-onewheel-stand/">Building a Onewheel stand</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/08/15/switching-my-ergodox-to-qmk-firmware/">Switching my Ergodox to QMK firmware</a>
       </li>
     
   </ul>

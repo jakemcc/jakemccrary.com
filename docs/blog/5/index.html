@@ -14,17 +14,17 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" My ideal command history would let me search the history of every
-shell but when I hit the up arrow it would only cycle through my
-current shell& &hellip;" />
+    <meta itemprop="description" content=" For a bit more than a year I worked on a project that crawled the web
+and indexed articles. Two of our sources of data were articles shared
+on &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" My ideal command history would let me search the history of every
-shell but when I hit the up arrow it would only cycle through my
-current shell& &hellip;" />
+    <meta name="twitter:description" content=" For a bit more than a year I worked on a project that crawled the web
+and indexed articles. Two of our sources of data were articles shared
+on &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -32,16 +32,16 @@ current shell& &hellip;" />
     <meta property="og:site_name" content="The Blog of Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/5/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" My ideal command history would let me search the history of every
-shell but when I hit the up arrow it would only cycle through my
-current shell& &hellip;" />
+    <meta property="og:description" content=" For a bit more than a year I worked on a project that crawled the web
+and indexed articles. Two of our sources of data were articles shared
+on &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" My ideal command history would let me search the history of every
-shell but when I hit the up arrow it would only cycle through my
-current shell& &hellip;">
+    <meta name="description" content=" For a bit more than a year I worked on a project that crawled the web
+and indexed articles. Two of our sources of data were articles shared
+on &hellip;">
 
     
 
@@ -123,6 +123,104 @@ current shell& &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/10/28/html-markup-for-better-sharing-on-social-media/">HTML markup for better sharing on social media</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-10-28T10:05:00-05:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>10:05 am</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>For a bit more than a year I worked on a project that crawled the web
+and indexed articles. Two of our sources of data were articles shared
+on Facebook and Twitter. After seeing hundreds of article previews on
+these two social networks, I decided to improve how my own articles were
+previewed.</p>
+
+<p>I thought figuring out the markup I needed to add would be a painless
+experience. Unfortunately, when you search for this information you
+end up at various SEO optimization and other similar sites where you
+get the pleasure of experiencing full screen pop-overs trying to get
+you to sign up for mailing lists and other annoying features of the
+modern web. Probably unsurprisingly, the least annoying source for
+this information turned out to be the social networks themselves.</p>
+
+<p>Below is what you will want to add to the <code>&lt;head&gt;</code> section of
+your articles' markup. Items in all caps should be values that make
+sense for your articles. Most fields are pretty self-evident, but
+check <a href="https://dev.twitter.com/cards/markup">Twitter&rsquo;s</a>
+and
+<a href="https://developers.facebook.com/docs/sharing/webmasters#markup">Facebook&rsquo;s</a> documentation
+for more details. The <a href="http://ogp.me/">Open Graph</a> documentation has
+more details as well.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!-- Twitter Card data --&gt;</span>
+</span><span class='line'><span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;twitter:card&quot;</span> <span class="na">content=</span><span class="s">&quot;SUMMARY&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;twitter:site&quot;</span> <span class="na">content=</span><span class="s">&quot;TWITTER HANDLE OF SITE (@jakemcc for this site)&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;twitter:creator&quot;</span> <span class="na">content=</span><span class="s">&quot;YOUR TWITTER HANDLE&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;twitter:title&quot;</span> <span class="na">content=</span><span class="s">&quot;ARTICLE TITLE&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;twitter:description&quot;</span> <span class="na">content=</span><span class="s">&quot;SHORT DESCRIPTION OF CONTENT&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;twitter:image&quot;</span> <span class="na">content=</span><span class="s">&quot;IMAGE THAT SHOWS UP WITH PREVIEW&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">&lt;!-- Open Graph data --&gt;</span>
+</span><span class='line'><span class="nt">&lt;meta</span> <span class="na">property=</span><span class="s">&quot;og:site_name&quot;</span> <span class="na">content=</span><span class="s">&quot;SITE TITLE&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;meta</span> <span class="na">property=</span><span class="s">&quot;og:url&quot;</span> <span class="na">content=</span><span class="s">&quot;CANONICAL URL&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;meta</span> <span class="na">property=</span><span class="s">&quot;og:title&quot;</span> <span class="na">content=</span><span class="s">&quot;ARTICLE TITLE&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;meta</span> <span class="na">property=</span><span class="s">&quot;og:description&quot;</span> <span class="na">content=</span><span class="s">&quot;SHORT DESCRIPTION OF CONTENT&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;meta</span> <span class="na">property=</span><span class="s">&quot;og:image&quot;</span> <span class="na">content=</span><span class="s">&quot;IMAGE THAT SHOWS UP WITH PREVIEW&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;meta</span> <span class="na">property=</span><span class="s">&quot;og:type&quot;</span> <span class="na">content=</span><span class="s">&quot;article&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'><span class="nt">&lt;meta</span> <span class="na">property=</span><span class="s">&quot;article:published_time&quot;</span> <span class="na">content=</span><span class="s">&quot;PUBLISHED DATETIME&quot;</span> <span class="nt">/&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you have control of your site&rsquo;s markup and want better previews of
+your articles on the various social networks then you should add this
+markup to your web site <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>. Hopefully this article has saved you
+from having a full screen pop-over prompt you to join yet another
+mailing list.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>You can actually remove the <code>twitter:title</code>, <code>twitter:description</code>, and <code>twitter:image</code> lines since Twitter will fallback to the equivalent Open Graph markup if they missing.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1173,62 +1271,6 @@ quite useful. It has a place in every Clojure developer&rsquo;s toolbox.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/04/08/book-review-serverless-single-page-apps/">Book review: Serverless Single Page Apps</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-04-08T10:15:00-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>10:15 am</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&rsquo;ve read Ben Rady&rsquo;s
-<a href="https://pragprog.com/book/brapps/serverless-single-page-apps">Serverless Single Page Apps</a>
-twice now. As an early technical reviewer, I was able to watch and
-take part in the book&rsquo;s evolution. The early draft was good but the
-most recent near-final draft was better.</p>
-
-<p><em>Serverless Single Page Apps</em> walks you through building a low-cost,
-highly-available, serverless single page web application. It does this
-on top of various Amazon web services (DynamoDB, Cognito, Lambda, API
-Gateway, S3). If you follow along you&rsquo;ll end up with a simple web
-application with authentication.</p>
-
-<p>The book is very enjoyable. The examples are clear and the book is
-well written. The book uses JavaScript to implement the serverless
-application. For the user interface it uses plain JavaScript with a
-bit of jQuery and for the AWS Lambda functions you dip into some
-Node.js. <em>Serverless</em> doesn&rsquo;t distract you from learning about
-serverless applications by forcing you to learn new JavaScript
-frameworks or libraries.</p>
-
-<p>One of my favorite parts of the book is Ben&rsquo;s use of test driven
-development. The examples provided give the reader a decent taste of
-the benefits of test-first development. Having the tests helped me
-when I made some silly mistakes in later parts of the book.</p>
-
-<p>Overall I&rsquo;d recommend this book to developers who are interested in
-learning what a serverless application might look like. If you follow
-along you&rsquo;ll know how to build one by the end and will have a good
-starting point for diving deeper into the topic.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//6">&larr; Older</a>
@@ -1244,6 +1286,10 @@ starting point for diving deeper into the topic.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/06/28/using-bazel-to-help-fix-flaky-tests/">Using Bazel to help fix flaky tests</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2020/05/04/how-to-be-alerted-when-a-long-running-process-finishes/">How to be automatically notified when long running processes finish</a>
@@ -1279,10 +1325,6 @@ starting point for diving deeper into the topic.</p>
     
       <li class="post">
         <a href="/blog/2019/08/23/building-a-onewheel-stand/">Building a Onewheel stand</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/08/15/switching-my-ergodox-to-qmk-firmware/">Switching my Ergodox to QMK firmware</a>
       </li>
     
   </ul>

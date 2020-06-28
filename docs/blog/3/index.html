@@ -14,17 +14,17 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" A couple months ago I was looking into a problem and noticed that
-there was a situation where an expensive operation could be running
-simultaneously &hellip;" />
+    <meta itemprop="description" content=" I was recently having some difficulty debugging a problem in a
+ClojureScript single page application. The SPA was implemented using
+reagent1. This &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" A couple months ago I was looking into a problem and noticed that
-there was a situation where an expensive operation could be running
-simultaneously &hellip;" />
+    <meta name="twitter:description" content=" I was recently having some difficulty debugging a problem in a
+ClojureScript single page application. The SPA was implemented using
+reagent1. This &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -32,16 +32,16 @@ simultaneously &hellip;" />
     <meta property="og:site_name" content="The Blog of Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/3/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" A couple months ago I was looking into a problem and noticed that
-there was a situation where an expensive operation could be running
-simultaneously &hellip;" />
+    <meta property="og:description" content=" I was recently having some difficulty debugging a problem in a
+ClojureScript single page application. The SPA was implemented using
+reagent1. This &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" A couple months ago I was looking into a problem and noticed that
-there was a situation where an expensive operation could be running
-simultaneously &hellip;">
+    <meta name="description" content=" I was recently having some difficulty debugging a problem in a
+ClojureScript single page application. The SPA was implemented using
+reagent1. This &hellip;">
 
     
 
@@ -123,6 +123,131 @@ simultaneously &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2018/06/15/tracking-changes-to-a-reagent-atom/">Tracking changes to a Reagent atom</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2018-06-15T09:05:00-05:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2018</span></span> <span class='time'>9:05 am</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I was recently having some difficulty debugging a problem in a
+ClojureScript single page application. The SPA was implemented using
+<a href="https://reagent-project.github.io/">reagent</a><sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.</p>
+
+<p>This interface stores most of its state in a global
+<code>reagent.core/atom</code> called <code>db</code>. To debug the problem, I thought it
+would be useful to track how the global state changed as I interacted
+with the interface. How do we do that?</p>
+
+<p>For the rest of this article, pretend that <code>(require '[reagent.core
+:as reagent])</code> has been executed.</p>
+
+<p>First, let&rsquo;s define <code>db-history</code> in the same namespace as the global
+<code>reagent/atom</code>, <code>db</code>. This is where we&rsquo;ll collect the changes to <code>db</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">ns </span><span class="nv">ui.data</span>
+</span><span class='line'>  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">reagent.core</span> <span class="ss">:as</span> <span class="nv">reagent</span><span class="p">]))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defonce </span><span class="nv">db</span> <span class="p">(</span><span class="nf">reagent/atom</span> <span class="p">{</span><span class="ss">:app/current-page</span> <span class="ss">:offer-list</span><span class="p">}))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defonce </span><span class="nv">db-history</span> <span class="p">(</span><span class="nf">atom</span> <span class="p">[]))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Next, let&rsquo;s write a function called <code>aggregate-state</code>. This function
+grabs the current value in <code>db</code> and <code>conj</code>s it onto <code>db-history</code>. It
+also limits the history to the most recent 101 states.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">aggregate-state</span> <span class="p">[]</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">d</span> <span class="o">@</span><span class="nv">db</span><span class="p">]</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">swap!</span> <span class="nv">db-history</span> <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">hist</span><span class="p">]</span>
+</span><span class='line'>                        <span class="p">(</span><span class="nb">-&gt; </span><span class="p">(</span><span class="nb">take </span><span class="mi">100</span> <span class="nv">hist</span><span class="p">)</span>
+</span><span class='line'>                            <span class="nv">vec</span>
+</span><span class='line'>                            <span class="p">(</span><span class="nb">conj </span><span class="nv">d</span><span class="p">))))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now we need to invoke <code>aggregate-state</code> whenever <code>db</code> changes. We can
+do this using <code>reagent/track</code>. <code>reagent/track</code> takes a function and
+optional arguments and invokes that function whenever a <code>reagent/atom</code>
+that function depends on changes.</p>
+
+<p><code>reagent/track!</code> is similar except it immediately invokes the function
+instead of waiting for the first change. We can use it to cause
+<code>aggregate-state</code> to get called whenever <code>db</code> changes.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defonce </span><span class="nv">db-history-logger</span> <span class="p">(</span><span class="nf">reagent/track!</span> <span class="nv">aggregate-state</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now history of the global state is being tracked. But we need a way to
+access it. Below is what I ended up writing. When you call
+<code>ui.data.history()</code> in Chrome&rsquo;s JavaScript console, it returns an
+object you can click on to explore. If you pass in strings as
+arguments to <code>history</code> then it only selects some of the data from the
+global <code>db</code> and history.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="o">^</span><span class="ss">:export</span> <span class="nv">history</span> <span class="p">[</span><span class="o">&amp;</span> <span class="nv">args</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">d</span> <span class="o">@</span><span class="nv">db</span>
+</span><span class='line'>        <span class="nv">k</span> <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">seq </span><span class="nv">args</span><span class="p">)</span>
+</span><span class='line'>            <span class="p">(</span><span class="nb">map keyword </span><span class="nv">args</span><span class="p">)</span>
+</span><span class='line'>            <span class="p">(</span><span class="nb">keys </span><span class="nv">d</span><span class="p">))]</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">clj-&gt;js</span> <span class="p">{</span><span class="ss">:history</span> <span class="p">(</span><span class="nf">mapv</span> <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">x</span><span class="p">]</span> <span class="p">(</span><span class="nb">select-keys </span><span class="nv">x</span> <span class="nv">k</span><span class="p">))</span> <span class="o">@</span><span class="nv">db-history</span><span class="p">)</span>
+</span><span class='line'>              <span class="ss">:current</span> <span class="p">(</span><span class="nb">select-keys </span><span class="nv">d</span> <span class="nv">k</span><span class="p">)})))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It only took about fifteen lines of code to gain a view of our
+application&rsquo;s state changes over time. This view helped me solve my
+problem. Hopefully it will help you too.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>This particular project is nearly four years old and has had many hands on it over the years. Working in it reminds me of how useful re-frame is on larger applications like this one.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1664,79 +1789,6 @@ an area where this, or something similar to it, would help.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/06/30/speeding-up-site-by-optionally-loading-disqus-comments/">Speeding up this site by optionally loading Disqus comments</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2017-06-30T19:37:00-05:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>7:37 pm</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Earlier this month I took another look at what was required for reading an article on this site. What <a href="/blog/2016/04/30/speeding-up-my-blog/">else</a> could I do to make this site load faster?</p>
-
-<p>To do this, I loaded up <a href="http://webpagetest.org/">WebPageTest</a> and pointed it towards one of my <a href="/blog/2017/05/30/adding-a-json-feed-to-octopress-slash-jekyll/">posts</a>. To my shock, it took 113 requests for a total of 721 KB to load a single post. This took WebPageTest 6.491 seconds. The document complete event triggered after 15 requests (103 KB, 1.6 seconds).</p>
-
-<p>113 requests to load a static article was ridiculous. Most of those requests happened as a result of loading the Disqus javascript. I find comments valuable and want to continue including them on my site. Because of this, I couldn&rsquo;t remove Disqus. Instead, I made loading Disqus optional.</p>
-
-<p>After making the required changes, it only takes 11 requests for 61 KB of data to fully load the test post. The document complete event only required 8 requests for 51 KB of data. Optionally loading the Disqus javascript resulted in a massive reduction of data transferred.</p>
-
-<p>How did I do it? The template that generates my articles now only inserts the Disqus javascript when a reader clicks a button. My <a href="https://github.com/jakemcc/jakemccrary.com/blob/74f4232ce7263ba3de48497d0c0d10a8fa1a73f9/source/_includes/disqus.html">final template</a> is at the bottom of this post.</p>
-
-<p>The template adds an <code>insertDisqus</code> function that inserts a <code>&lt;script&gt;</code> element when a reader clicks a button. This element contains the original JavaScript that loads Disqus. When the <code>&lt;script&gt;</code> element is inserted into the page, the Disqus javascript is loaded and the comments appear.</p>
-
-<p>My exact template might not work for you, but I&rsquo;d encourage you to think about optionally loading Disqus and other non-required JavaScript. Your readers will thank you.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'>{% if site.disqus_short_name and page.comments == true %}
-</span><span class='line'>  <span class="nt">&lt;noscript&gt;</span>Please enable JavaScript to view the <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://disqus.com/?ref_noscript&quot;</span><span class="nt">&gt;</span>comments powered by Disqus.<span class="nt">&lt;/a&gt;&lt;/noscript&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;disqus_target&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;script&gt;</span>
-</span><span class='line'>     <span class="kd">var</span> <span class="nx">insertDisqus</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>       <span class="kd">var</span> <span class="nx">elem</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;script&#39;</span><span class="p">);</span>
-</span><span class='line'>       <span class="nx">elem</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span>  <span class="s2">&quot;var disqus_shortname = &#39;{{ site.disqus_short_name }}&#39;; var disqus_identifier = &#39;{{ site.url }}{{ page.url }}&#39;; var disqus_url = &#39;{{ site.url }}{{ page.url }}&#39;; (function () {var dsq = document.createElement(&#39;script&#39;); dsq.type = &#39;text/javascript&#39;; dsq.async = true; dsq.src = &#39;//&#39; + disqus_shortname + &#39;.disqus.com/embed.js&#39;; (document.getElementsByTagName(&#39;head&#39;)[0] || document.getElementsByTagName(&#39;body&#39;)[0]).appendChild(dsq);}());&quot;</span>
-</span><span class='line'>       <span class="kd">var</span> <span class="nx">target</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;disqus_target&#39;</span><span class="p">);</span>
-</span><span class='line'>       <span class="nx">target</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">replaceChild</span><span class="p">(</span><span class="nx">elem</span><span class="p">,</span> <span class="nx">target</span><span class="p">);</span>
-</span><span class='line'>     <span class="p">}</span>
-</span><span class='line'>    <span class="nt">&lt;/script&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">&quot;comment-button&quot;</span> <span class="na">onclick=</span><span class="s">&quot;insertDisqus()&quot;</span><span class="nt">&gt;&lt;span&gt;</span>ENABLE COMMENTS AND RECOMMENDED ARTICLES<span class="nt">&lt;/span&gt;&lt;/button&gt;</span>
-</span><span class='line'>  <span class="nt">&lt;/div&gt;</span>
-</span><span class='line'>{% endif %}
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//4">&larr; Older</a>
@@ -1752,6 +1804,10 @@ an area where this, or something similar to it, would help.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/06/28/using-bazel-to-help-fix-flaky-tests/">Using Bazel to help fix flaky tests</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2020/05/04/how-to-be-alerted-when-a-long-running-process-finishes/">How to be automatically notified when long running processes finish</a>
@@ -1787,10 +1843,6 @@ an area where this, or something similar to it, would help.</p>
     
       <li class="post">
         <a href="/blog/2019/08/23/building-a-onewheel-stand/">Building a Onewheel stand</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/08/15/switching-my-ergodox-to-qmk-firmware/">Switching my Ergodox to QMK firmware</a>
       </li>
     
   </ul>
