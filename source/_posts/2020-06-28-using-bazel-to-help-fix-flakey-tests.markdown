@@ -11,33 +11,37 @@ categories:
 ---
 
 Flaky tests are terrible.
-These are the tests that pass or fail without anything changing in the code.
-Often, they pass the majority of the time and fail rarely.
+These are tests that pass or fail without anything changing in the code.
+They often pass the majority of the time and fail rarely.
 This makes them hard to detect and cause developers to often just run the tests again.
 
 Flaky tests erode your team's confidence in your system.
-These tests discourage testing as folks stop seeing tests as something that improves quality and reduces feedback cycles.
-With enough flaky tests, the output of test runs starts being ignored as it frequently fails without actual code breakage.
+They cause folks to get in the habit of not trusting the output of tests.
+This discourages people from writing tests as they stop seeing them as something that improves quality and instead view them as a drag on productivity.
 
-These tests are often hard to fix.
-If they were easy to fix then they wouldn't have been flaky in the first place.
-The failures are also hard to reproduce, they do not fail consistently.
+Flaky tests are often hard to fix.
+If they were easy to fix than they wouldn't have been flaky in the first place.
+One difficulty in fixing them is that the failures are often hard to reproduce.
 
-When you find yourself trying to fix a flaky test you often write a little script to run your tests multiple times in row.
+Often, the first step in fixing a flaky test is to write a script to run the tests multiple times in row.
 If you are using [Bazel](https://bazel.build/) as your build tool you don't need to this.
 
 Here is an example `bazel`[^1] command for helping you recreate flaky test failures.
 
 [^1]: I've written this while using Bazel 3.2.0. If you are reading this far in the future the flags may have changed.
 
-```bash
-bazel test --test_strategy=exclusive --test_output=errors --runs_per_test=50 -t- //...
-```
 
-The above command is running all the test targets in a workspace.
-`--runs_per_test=50` is telling Bazel to run each test 50 times.
-`--test_output=errors` is telling Bazel to only print errors to your console.
-`-t-` is a shortcut for `--nocache_test_results` (or `--cache_test_results=no`).
+`bazel test --test_strategy=exclusive --test_output=errors --runs_per_test=50 -t- //...`
+
+
+The above command is running all the test targets in a workspace and each flag is important.
+
+- `--runs_per_test=50` is telling Bazel to run each test 50 times.
+- `--test_output=errors` is telling Bazel to only print errors to your console.
+- `-t-` is a shortcut for `--nocache_test_results` (or `--cache_test_results=no`).
 This flag tells Bazel to **not** cache the test results.
-`--test_strategy=exclusive` will cause tests to be ran serially.
+- `--test_strategy=exclusive` will cause tests to be ran serially.
 Without this, Bazel could run your test targets concurrently and if your tests aren't designed for this you may run into other failures.
+
+Flaky tests are terrible and you should try not to have them.
+If you find one and are using Bazel than the above command is quite helpful.
