@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "Using Bazel to help fix flaky tests"
-date: 2020-06-28 15:36:13 -0500
+title: Using Bazel to help fix flaky tests
+date: 2020-06-28 18:28 -0500
 comments: true
-published: false
+published: true
 description: Here is a way to use Bazel to help fix flaky tests.
-keywords: 'bazel, test, flaky tests'
-categories: 
+keywords: bazel, test, flaky tests
+categories:
 - bazel
 ---
 
