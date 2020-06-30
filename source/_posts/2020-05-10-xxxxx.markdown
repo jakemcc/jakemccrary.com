@@ -1,0 +1,44 @@
+---
+layout: post
+title: "Introducing Photo Fit"
+date: 2020-05-10 20:59:05 -0500
+comments: true
+published: false
+description: Introducing Photo Fit, a TypeScript web app that makes your landscape photos work well with your vertical phone.
+keywords: 'csv, keywords, here'
+categories: 
+---
+
+Earlier this year, I wanted to make a photo the new background on my phone.
+Unfortunately, the photo was taken in landscape mode on my phone.
+The next photo isn't the actual photo but it will demonstrate the point.
+
+{% img center /images/photo-fit/keyboard-new-keycaps.jpg "Landscape image of my keyboard" "Landscape image of my keyboard" %}
+
+This meant that when I went to to put it as my background, my phone[^1] zoomed in to make it fit the portrait orientation of the phone.
+
+[^1]: A Samsung S8 running Android 9 
+
+{% img center /images/photo-fit/phone-background-before.jpg "Screenshot of phone with zoomed in keyboard photo" "Screenshot of phone with zoomed in keyboard photo" %}
+
+This is not great.
+I don't want a zoomed in version of the photo that fits my vertical phone.
+I want to see the whole photo but with black bars surrounding it.
+
+I searched for a way to add these bars while on my phone.
+I couldn't find a way.
+This happened last time I had this problem too.
+
+The reasonable action to take would have been transferring the photo to my computer, editing it, and transferring it back to my phone.
+Instead, I wrote a tiny little TypeScript[^2] web app that you open on your phone, select an image, and then download that image with newly added black bars.
+
+
+{% img center /images/photo-fit/phone-background-after.jpg "Screenshot of phone with properly fitting image" "Screenshot of phone with properly fitting image" %}
+
+I haven't been much JavaScript for the last year or two and this was the first TypeScript I've written outside of learning it so this was the long approach to getting my photo the right size.
+
+This took much longer than a handful of minutes but now the world benefits from this tool existing and, next time I need to do this, I'll spend 20 seconds getting it done.
+
+
+[^2]: I recently learned some TypeScript through [Execute Program](https:www.executeprogram.com). Execute program is a really need application of spaced repetition for learning programming concepts.
+
