@@ -10,12 +10,11 @@ categories:
 ---
 
 Earlier this year, I wanted to make a photo the new background on my phone.
-Unfortunately, the photo was taken in landscape mode on my phone.
-The next photo isn't the actual photo but it will demonstrate the point.
+The photo was taken in landscape mode on my phone, similar to the photo of my keyboard below.
 
 {% img center /images/photo-fit/keyboard-new-keycaps.jpg "Landscape image of my keyboard" "Landscape image of my keyboard" %}
 
-This meant that when I went to to put it as my background, my phone[^1] zoomed in to make it fit the portrait orientation of the phone.
+When I made it my background, my phone[^1] zoomed in to make it fit the portrait orientation of the phone.
 
 [^1]: A Samsung S8 running Android 9 
 
@@ -23,22 +22,24 @@ This meant that when I went to to put it as my background, my phone[^1] zoomed i
 
 This is not great.
 I don't want a zoomed in version of the photo that fits my vertical phone.
-I want to see the whole photo but with black bars surrounding it.
+I want to see the whole photo with black bars at the top and bottom
 
-I searched for a way to add these bars while on my phone.
-I couldn't find a way.
-This happened last time I had this problem too.
+I tried to find a way to add these bars using my phone.
+I couldn't find an easy way.
 
-The reasonable action to take would have been transferring the photo to my computer, editing it, and transferring it back to my phone.
-Instead, I wrote a tiny little TypeScript[^2] web app that you open on your phone, select an image, and then download that image with newly added black bars.
-
+At this point, a reasonable action would be to transfer the photo to a computer, edit it, and transfer it back to my phone.
+I didn't do that.
+Instead, I wrote a tiny little TypeScript[^2] web app that adds the bars for you.
+You open the website on your phone, select an image, and then download a properly sized image.
 
 {% img center /images/photo-fit/phone-background-after.jpg "Screenshot of phone with properly fitting image" "Screenshot of phone with properly fitting image" %}
 
-I haven't been much JavaScript for the last year or two and this was the first TypeScript I've written outside of learning it so this was the long approach to getting my photo the right size.
+The tool uses the canvas API and does all of the work in the browser itself.
+It was a fun, bite-sized project and it gave me an excuse to write some TypeScript and do some web programming.
+I haven't written much JavaScript in the last year and this was the first TypeScript I've written since I first learned it.
 
-This took much longer than a handful of minutes but now the world benefits from this tool existing and, next time I need to do this, I'll spend 20 seconds getting it done.
-
+This was definitely the long approach to getting the image as my background.
+But, now the tool exists and the next time I, or anyone else, needs to do this it will take all of twenty seconds.
 
 [^2]: I recently learned some TypeScript through [Execute Program](https:www.executeprogram.com). Execute program is a really need application of spaced repetition for learning programming concepts.
 
