@@ -4,7 +4,7 @@
   <title><![CDATA[Jake McCrary]]></title>
   <link href="https://jakemccrary.com/atom.xml" rel="self"/>
   <link href="https://jakemccrary.com/"/>
-  <updated>2020-07-03T18:36:10-05:00</updated>
+  <updated>2020-07-03T18:38:55-05:00</updated>
   <id>https://jakemccrary.com/</id>
   <author>
     <name><![CDATA[Jake McCrary]]></name>
@@ -12,6 +12,58 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Introducing Photo Fit]]></title>
+    <link href="https://jakemccrary.com/blog/2020/07/03/introducing-photo-fit/"/>
+    <updated>2020-07-03T18:37:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2020/07/03/introducing-photo-fit</id>
+    <content type="html"><![CDATA[<p>Earlier this year, I wanted to use a landscape photo as my background on my phone.
+It wasn&rsquo;t the photo below but we can use it as an example.</p>
+
+<p><img class="center" src="https://jakemccrary.com/images/photo-fit/keyboard-new-keycaps.jpg" title="Landscape image of my keyboard" alt="Landscape image of my keyboard"></p>
+
+<p>When I made it my background, my phone<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> zoomed in to make it fit the portrait orientation of the phone.</p>
+
+<p><img class="center" src="https://jakemccrary.com/images/photo-fit/phone-background-before.jpg" title="Screenshot of phone with zoomed in keyboard photo" alt="Screenshot of phone with zoomed in keyboard photo"></p>
+
+<p>This is not great.
+I don&rsquo;t want a zoomed in version that fits my vertical phone.
+I want to see the whole photo with black bars at the top and bottom</p>
+
+<p>I tried to find a way to add these bars using my phone.
+I couldn&rsquo;t find an easy way.</p>
+
+<p>At this point, a reasonable solution would have been transferring the photo to a computer, editing it, and transferring it back to my phone.
+I didn&rsquo;t do that.
+Instead, I wrote a little TypeScript<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup> web app that adds the bars for you.
+You open the website on your phone, select an image, and then download a properly sized image.</p>
+
+<p><img class="center" src="https://jakemccrary.com/images/photo-fit/phone-background-after.jpg" title="Screenshot of phone with properly fitting image" alt="Screenshot of phone with properly fitting image"></p>
+
+<p>The tool uses the canvas API and does all of the work in the browser itself.
+It was a fun, bite-sized project and it gave me an excuse to write some TypeScript and do some web programming.
+This was the first time I&rsquo;ve written TypeScript since learning it and I haven&rsquo;t done any web programming in a while.</p>
+
+<p>Making <a href="https://jakemccrary.com/experiments/photo-fit/">Photo Fit</a> was not a fast approach to changing my phone&rsquo;s background.
+But, now the tool exists and anyone, including future me, can quickly resize their photo from the comfort of their own phone.</p>
+
+<p><a href="https://jakemccrary.com/experiments/photo-fit/">Photo Fit</a> is live and available for others to use.
+I&rsquo;ve only tested it on my own phone and desktop browsers.
+It might not work!
+If you do try it and something weird happens, plese let me know.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>A Samsung S8 running Android 9 <a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>I recently learned some TypeScript through <a href="https:www.executeprogram.com">Execute Program</a>. Execute program is a really need application of spaced repetition for learning programming concepts.<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Using Bazel to help fix flaky tests]]></title>
@@ -2002,30 +2054,6 @@ I look forward to customizing the firmware to make the key layout fit my usage.<
 
 
 <p>This is super useful when you&rsquo;re starting doing work in a new project. With this feature you can get a quick list of useful targets and a description. It allows you to quickly see what can be done in a project.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Built-in test narrowing with lein-test-refresh]]></title>
-    <link href="https://jakemccrary.com/blog/2018/07/16/built-in-test-narrowing-with-lein-test-refresh/"/>
-    <updated>2018-07-16T14:47:00-05:00</updated>
-    <id>https://jakemccrary.com/blog/2018/07/16/built-in-test-narrowing-with-lein-test-refresh</id>
-    <content type="html"><![CDATA[<p>If you follow my work you probably know that I value fast feedback cycles. Most of the open-source I maintain was developed to enable faster feedback cycles. This is why <a href="https://github.com/jakemcc/lein-test-refresh/">lein-test-refresh</a> and <a href="https://github.com/clojure-expectations/lein-autoexpect">lein-autoexpect</a> were originally created.</p>
-
-<p>Leiningen supports <a href="https://github.com/technomancy/leiningen/blob/master/doc/TUTORIAL.md#tests">test selectors</a> and lein-test-refresh <a href="https://github.com/jakemcc/lein-test-refresh/blob/master/CHANGES.md#040">does as well</a>. This lets you start-up a testing session and only run tests or namespaces with certain metadata on them. This is a super useful feature as it lets you narrow your testing scope to one (or a handful) of tests while working on solving a specific problem.</p>
-
-<p>lein-test-refresh now has built-in functionality that allows you to focus your test scope without restarting the Leiningen test process. If lein-test-refresh sees a <code>deftest</code> or <code>ns</code> form marked with <code>:test-refresh/focus true</code> in its metadata, then it will only run tests marked with <code>:test-refresh/focus</code>.</p>
-
-<p>Below is an example of what this looks like.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">deftest</span> <span class="o">^</span><span class="ss">:test-refresh/focus</span> <span class="nv">test-addition</span>
-</span><span class='line'>  <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="mi">2</span> <span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="mi">1</span><span class="p">))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This functionality has only been available for a short period of time and I&rsquo;ve already found it useful. I think you will too. Enjoy.</p>
 ]]></content>
   </entry>
   

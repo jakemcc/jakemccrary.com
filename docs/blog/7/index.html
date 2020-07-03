@@ -14,19 +14,15 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" If you use clojure.test then there is a good chance you&rsquo;ve been
-annoyed by all the
-output when
-you run your tests in the terminal. When there &hellip;" />
+    <meta itemprop="description" content=" An updated version of this post can be found here I&rsquo;m fairly certain the following scenario has happened to every
+terminal user. You run a &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" If you use clojure.test then there is a good chance you&rsquo;ve been
-annoyed by all the
-output when
-you run your tests in the terminal. When there &hellip;" />
+    <meta name="twitter:description" content=" An updated version of this post can be found here I&rsquo;m fairly certain the following scenario has happened to every
+terminal user. You run a &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -34,18 +30,14 @@ you run your tests in the terminal. When there &hellip;" />
     <meta property="og:site_name" content="The Blog of Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/7/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" If you use clojure.test then there is a good chance you&rsquo;ve been
-annoyed by all the
-output when
-you run your tests in the terminal. When there &hellip;" />
+    <meta property="og:description" content=" An updated version of this post can be found here I&rsquo;m fairly certain the following scenario has happened to every
+terminal user. You run a &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" If you use clojure.test then there is a good chance you&rsquo;ve been
-annoyed by all the
-output when
-you run your tests in the terminal. When there &hellip;">
+    <meta name="description" content=" An updated version of this post can be found here I&rsquo;m fairly certain the following scenario has happened to every
+terminal user. You run a &hellip;">
 
     
 
@@ -127,6 +119,138 @@ you run your tests in the terminal. When there &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/05/03/put-the-last-commands-run-time-in-your-bash-prompt/">Put the last command's run time in your Bash prompt</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-05-03T20:37:00-05:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>8:37 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><blockquote><p>An updated version of this post can be found <a href="/blog/2020/04/21/using-bash-preexec-for-monitoring-the-runtime-of-your-last-command/">here</a></p></blockquote>
+
+<p>I&rsquo;m fairly certain the following scenario has happened to every
+terminal user. You run a command and, while it is running, realize you
+should have prefixed it with <a href="http://linux.die.net/man/1/time"><code>time</code></a>. You
+momentarily struggle with the thought of killing the command and
+rerunning it with <code>time</code>. You decide not to and the command finishes
+without you knowing how long it took. You debate running it again.</p>
+
+<p>For the last year I&rsquo;ve lived in a world without this problem. Upon
+completion, a command&rsquo;s approximate run time is displayed in my
+prompt. It is awesome.</p>
+
+<h2>Overview</h2>
+
+<p>Most of the code below is from a post on
+<a href="http://stackoverflow.com/a/1862762/491871">Stack Overflow</a>. It has
+been slightly modified to support having multiple commands in your
+<code>$PROMPT_COMMAND</code> variable. Below is a minimal snippet that could be
+included in your <code>.bashrc</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="k">function</span> timer_start <span class="o">{</span>
+</span><span class='line'>  <span class="nv">timer</span><span class="o">=</span><span class="k">${</span><span class="nv">timer</span><span class="k">:-</span><span class="nv">$SECONDS</span><span class="k">}</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function</span> timer_stop <span class="o">{</span>
+</span><span class='line'>  <span class="nv">timer_show</span><span class="o">=</span><span class="k">$((</span><span class="nv">$SECONDS</span> <span class="o">-</span> <span class="nv">$timer</span><span class="k">))</span>
+</span><span class='line'>  <span class="nb">unset </span>timer
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">trap</span> <span class="s1">&#39;timer_start&#39;</span> DEBUG
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$PROMPT_COMMAND&quot;</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>  <span class="nv">PROMPT_COMMAND</span><span class="o">=</span><span class="s2">&quot;timer_stop&quot;</span>
+</span><span class='line'><span class="k">else</span>
+</span><span class='line'>  <span class="nv">PROMPT_COMMAND</span><span class="o">=</span><span class="s2">&quot;$PROMPT_COMMAND; timer_stop&quot;</span>
+</span><span class='line'><span class="k">fi</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">PS1</span><span class="o">=</span><span class="s1">&#39;[last: ${timer_show}s][\w]$ &#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Modify your <code>.bashrc</code> to include the above and you&rsquo;ll have a prompt
+that looks like the image below. It is a minimal prompt but it
+includes the time spent on the last command. This is great. No more
+wondering how long a command took.</p>
+
+<p><img src="/images/prompt-timings.png" alt="Example of prompt" /></p>
+
+<h2>The details</h2>
+
+<p><code>timer_start</code> is a function that sets <code>timer</code> to be its current value
+or, if <code>timer</code> is unset, sets it to the value of <code>$SECONDS</code>.
+<code>$SECONDS</code> is a special variable that contains the number of seconds
+since the shell was started. <code>timer_start</code> is invoked after every
+simple command as a result of <code>trap 'timer_start' DEBUG</code>.</p>
+
+<p><code>timer_stop</code> calculates the difference between <code>$SECONDS</code> and <code>timer</code>
+and stores it in <code>timer_show</code>. It also unsets <code>timer</code>. Next time
+<code>timer_start</code> is invoked <code>timer</code> will be set to the current value of
+<code>$SECONDS</code>. Because <code>timer_stop</code> is part of the <code>$PROMPT_COMMAND</code> it
+is executed prior to the prompt being printed.</p>
+
+<p>It is the interaction between <code>timer_start</code> and <code>timer_stop</code> that
+captures the run time of commands. It is important that <code>timer_stop</code>
+is the <strong>last</strong> command in the <code>$PROMPT_COMMAND</code>. If there are other
+commands after it then those will be executed and their execution
+might cause <code>timer_start</code> to be called. This results in you timing the
+length of time between the prior and current prompts being printed.</p>
+
+<h2>My prompt</h2>
+
+<p>My prompt is a bit more complicated. It shows the last exit code, last
+run time, time of day, directory, and git information. The run time of
+the last command is one of the more useful parts of my prompt. I
+highly recommend you add it to yours.</p>
+
+<p><img src="/images/my-prompt.png" alt="My prompt" /></p>
+
+<h2>Errata</h2>
+
+<p><em>2015/5/04</em></p>
+
+<p><a href="https://twitter.com/gfredericks_">Gary Fredericks</a> noticed that the
+original code sample broke if you didn&rsquo;t already have something set as
+your <code>$PROMPT_COMMAND</code>. I&rsquo;ve updated the original snippet to reflect
+his <a href="https://twitter.com/gfredericks_/status/595249998838800384">changes</a>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1488,73 +1612,6 @@ encourage you to give it a shot.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/09/07/ergodox-turn-on-led-when-not-on-the-main-layer/">ErgoDox: Turn on an LED When Not on the Main Layer</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-09-07T17:35:00-05:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>5:35 pm</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>The
-<a href="http://jakemccrary.com/blog/2014/07/27/building-the-ergodox-keyboard/">ErgoDox</a>
-is a great keyboard. One its appeals is that you can build your own
-firmware. This makes it possible to rearrange the keys however you
-want and tweak other functionality. The firmware is fairly advanced
-and allows you to have multiple layers to your keyboard.</p>
-
-<p>Multiple layers allow the ErgoDox to have fewer physical keys than
-traditional keyboards. How often do you use an F key? If you are like
-me the answer is almost never. Why bother having a dedicated key?</p>
-
-<p>Another benefit of multiple layers is that your keyboard is multiple
-keyboards in one. Do you use the Dvorak layout and your roommate use
-Qwerty? Program both a Dvorak layer and a Qwerty layer into your
-keyboard and switch between them with the push of a button.</p>
-
-<p>The only downside I&rsquo;ve noticed of multiple layers is that I&rsquo;ll switch
-between them by accident. This is frustrating as all of a sudden your
-keyboard works differently and there is no indication that you are on a
-different layer.</p>
-
-<p>The ErgoDox has a
-<a href="https://github.com/benblazak/ergodox-firmware/blob/513b82d585fdc7175db736163340af3ed6c6f38b/src/main.c#L124-L133">few LEDs</a>
-in it that I have never used. I don&rsquo;t even have the needed keys as
-part of my keyboard layout (Caps lock? Who uses caps lock? I
-don&rsquo;t need to shout that often). I decided to repurpose the num lock
-LED as an indicator that I&rsquo;m off the main layer.</p>
-
-<p>This was a straight forward change. In the firmware there is a
-<a href="https://github.com/benblazak/ergodox-firmware/blob/513b82d585fdc7175db736163340af3ed6c6f38b/src/main.c#L171">variable</a>
-that holds what keyboard layer is active. All I had to do to get the
-num lock LED on when I changed layers was to move the <code>layers_head</code>
-variable higher in <code>main.c</code> and then change the conditional to turn on
-the num lock LED when <code>layers_head != 0</code>.
-<a href="https://github.com/jakemcc/ergodox-firmware/commit/383f16a3f091b4e2dd031d098007c4289cc1a261">This</a>
-is the commit that does this change. It could have been done as a
-three line change.</p>
-
-<p>I highly recommend making this change. Now I just need to find a
-transparent DSA keycaps so I can see the LED easier.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//8">&larr; Older</a>
@@ -1570,6 +1627,10 @@ transparent DSA keycaps so I can see the LED easier.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/07/03/introducing-photo-fit/">Introducing Photo Fit</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2020/06/28/using-bazel-to-help-fix-flaky-tests/">Using Bazel to help fix flaky tests</a>
@@ -1605,10 +1666,6 @@ transparent DSA keycaps so I can see the LED easier.</p>
     
       <li class="post">
         <a href="/blog/2019/10/12/building-an-atreus-keyboard/">Building an Atreus keyboard</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/08/23/building-a-onewheel-stand/">Building a Onewheel stand</a>
       </li>
     
   </ul>

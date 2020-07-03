@@ -14,13 +14,13 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" Very few coders would debate the wisdom of breaking a project into smaller libraries. One complaint about breaking a project into tinier libraries is &hellip;" />
+    <meta itemprop="description" content=" Ran into a situation where I needed to replace certain files in a directory tree with files from a similarly shaped directory tree. The other files &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" Very few coders would debate the wisdom of breaking a project into smaller libraries. One complaint about breaking a project into tinier libraries is &hellip;" />
+    <meta name="twitter:description" content=" Ran into a situation where I needed to replace certain files in a directory tree with files from a similarly shaped directory tree. The other files &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -28,12 +28,12 @@
     <meta property="og:site_name" content="The Blog of Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/10/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" Very few coders would debate the wisdom of breaking a project into smaller libraries. One complaint about breaking a project into tinier libraries is &hellip;" />
+    <meta property="og:description" content=" Ran into a situation where I needed to replace certain files in a directory tree with files from a similarly shaped directory tree. The other files &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" Very few coders would debate the wisdom of breaking a project into smaller libraries. One complaint about breaking a project into tinier libraries is &hellip;">
+    <meta name="description" content=" Ran into a situation where I needed to replace certain files in a directory tree with files from a similarly shaped directory tree. The other files &hellip;">
 
     
 
@@ -115,6 +115,94 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/02/03/maintaining-directory-layout-when-selectively-copying-files/">Maintaining Directory Layout When Selectively Copying Files</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2013-02-03T12:24:00-06:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2013</span></span> <span class='time'>12:24 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Ran into a situation where I needed to replace certain files in a directory tree with files from a similarly shaped directory tree. The other files in each tree needed to remain untouched. Below is an example of the directory structure.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>root-dir
+</span><span class='line'>├── target-dir
+</span><span class='line'>│   ├── 20121230
+</span><span class='line'>│   │   ├── data.csv
+</span><span class='line'>│   │   └── instruments.csv
+</span><span class='line'>│   └── 20121231
+</span><span class='line'>│       ├── data.csv
+</span><span class='line'>│       └── instruments.csv
+</span><span class='line'>└── other-dir
+</span><span class='line'>    ├── 20121230
+</span><span class='line'>    │   ├── data.csv
+</span><span class='line'>    │   └── instruments.csv
+</span><span class='line'>    └── 20121231
+</span><span class='line'>        ├── data.csv
+</span><span class='line'>        └── instruments.csv
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Goal is to copy <strong>instruments.csv</strong> from the sub-directories of <strong>other-dir</strong> to the matching sub-directories of <strong>target-dir</strong>. In the past I&rsquo;ve solved this by being in the <strong>other-dir</strong> directory and banging out a <code>for</code> loop at the command line (<code>other-dir$</code> is the bash prompt).</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>other-dir<span class="nv">$ </span><span class="k">for</span> d in <span class="k">$(</span>ls<span class="k">)</span><span class="p">;</span> <span class="k">do</span> cp <span class="nv">$d</span>/instruments.txt ../target-dir/<span class="nv">$d</span>/<span class="p">;</span> <span class="k">done</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>One feature (or issue) with this approach is that if a sub-directory exists in <strong>other-dir</strong> but not in <strong>target-dir</strong> that sub-directory will not be created in <strong>target-dir</strong>.</p>
+
+<p>I took a bit of time to explore other ways of accomplishing this task and stopped after coming up with two additional ways.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>other-dir<span class="nv">$ </span>find . -name <span class="s2">&quot;instruments.txt&quot;</span> <span class="p">|</span> xargs -I <span class="o">{}</span> cp <span class="o">{}</span> ../target-dir/<span class="o">{}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The above is basically the same as the first solution. It uses <code>find</code> to generate the list of files and then constructs <code>cp</code> commands. It also doesn&rsquo;t create sub-directories in <strong>target-dir</strong>.</p>
+
+<p>The next example has different behavior from the above <code>cp</code> solutions. Like the second solution, it generates a list of files to copy using <code>find</code> but then uses <code>rsync</code> with the <code>--files-from</code> flag to mirror those files under <strong>target-dir</strong>. Unlike the <code>cp</code> based solutions, sub-directories of <strong>other-dir</strong> that do not exist in <strong>target-dir</strong> will be created.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>other-dir<span class="nv">$ </span>find . -name <span class="s2">&quot;instruments.txt&quot;</span> <span class="p">|</span> rsync --files-from<span class="o">=</span>- . ../target-dir
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I&rsquo;m sure there are many more ways of accomplishing this task. Figuring out the three above was enough for me. They are fairly straight forward and don&rsquo;t depend on esoteric command line flags. The solution I use in the future will depend on whether or not I need sub-directories created in the target directory.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1027,148 +1115,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2010/12/06/trampolining-through-mutual-recursion/">Trampolining through mutual recursion with Clojure</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2010-12-06T00:00:00-06:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2010</span></span> <span class='time'>12:00 am</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>The other day I stumbled across some <a href="http://clojure.org">Clojure</a> code that used <a href="http://en.wikipedia.org/wiki/Mutual_recursion">mutual recursion</a>. Mutual recursion can be a valuable tool when solving a problem. Unfortunately because of the lack of <a href="http://en.wikipedia.org/wiki/Tail_call">tail call optimization</a> on the JVM this can be a dangerous technique when writing Clojure code. It can be easy to forget about this limitation and end up writing code that blows the stack.</p>
-
-<p>Take the classic even/odd checking code from the <a href="http://en.wikipedia.org/wiki/Mutual_recursion">Wikipedia</a> page. If we just translate it to Clojure it will cause a <a href="http://en.wikipedia.org/wiki/Stack_overflow">stack overflow</a> error when we pass in a large number. The massive number of function calls require before returning causes too much memory to be consumed.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">declare </span><span class="nv">my-odd?</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">my-even?</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">zero? </span><span class="nv">n</span><span class="p">)</span>
-</span><span class='line'>    <span class="nv">true</span>
-</span><span class='line'>    <span class="p">(</span><span class="nf">my-odd?</span> <span class="p">(</span><span class="nb">dec </span><span class="p">(</span><span class="nf">Math/abs</span> <span class="nv">n</span><span class="p">)))))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">my-odd?</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">zero? </span><span class="nv">n</span><span class="p">)</span>
-</span><span class='line'>    <span class="nv">false</span>
-</span><span class='line'>    <span class="p">(</span><span class="nf">my-even?</span> <span class="p">(</span><span class="nb">dec </span><span class="p">(</span><span class="nf">Math/abs</span> <span class="nv">n</span><span class="p">)))))</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">user&gt;</span> <span class="p">(</span><span class="nf">my-even?</span> <span class="mi">1000000</span><span class="p">)</span>
-</span><span class='line'><span class="c1">; Evaluation aborted. &lt;- this is a result of java.util.StackOverflowError</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Luckily since Clojure 1.0 there has been a useful function for dealing with this. <code>trampoline</code>, with minor modifications to your code, can be used to get around the lack of tail call optimizations (<a href="http://clojure.github.com/clojure/clojure.core-api.html#clojure.core/trampoline">docs here</a>).</p>
-
-<p><code>trampoline</code> takes a function (and, if needed, arguments to pass into the function) and calls it. If the function returns a function then <code>trampoline</code> calls that. As long as functions are returned <code>trampoline</code> will continue calling them. When a non-function value is returned <code>trampoline</code> returns, passing through the value.</p>
-
-<p>To make our sample code work with <code>trampoline</code> we simply change our functions to return a closure which wraps the call that was previously being executed. This just entails putting a <code>#</code> before the final s-exp. This takes advantage of Clojure&rsquo;s anonymous function syntax to change the function call into a closure which is returned.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">my-even?</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">zero? </span><span class="nv">n</span><span class="p">)</span>
-</span><span class='line'>    <span class="nv">true</span>
-</span><span class='line'>    <span class="o">#</span><span class="p">(</span><span class="nf">my-odd?</span> <span class="p">(</span><span class="nb">dec </span><span class="p">(</span><span class="nf">Math/abs</span> <span class="nv">n</span><span class="p">)))))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">my-odd?</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">zero? </span><span class="nv">n</span><span class="p">)</span>
-</span><span class='line'>    <span class="nv">false</span>
-</span><span class='line'>    <span class="o">#</span><span class="p">(</span><span class="nf">my-even?</span> <span class="p">(</span><span class="nb">dec </span><span class="p">(</span><span class="nf">Math/abs</span> <span class="nv">n</span><span class="p">)))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>By doing this we&rsquo;ve changed how the caller interacts with <code>my-even?</code> and <code>my-odd?</code>. It now needs to be called by <code>trampoline</code>.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nv">user&gt;</span> <span class="p">(</span><span class="nf">trampoline</span> <span class="nv">my-even?</span> <span class="mi">1000000</span><span class="p">)</span>
-</span><span class='line'><span class="nv">true</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now we no longer suffer from the stack overflow error.</p>
-
-<p>I think we can still do better though, because now the caller of <code>my-even?</code> and <code>my-odd?</code> suffers since they are forced to remember to use <code>trampoline</code>. By forcing this on the caller, we&rsquo;ve pushed what should be hidden implementations details into the callers code. We can fix this by pushing the use of <code>trampoline</code> into our functions.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">my-even?</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nf">letfn</span> <span class="p">[(</span><span class="nf">e?</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
-</span><span class='line'>              <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">zero? </span><span class="nv">n</span><span class="p">)</span>
-</span><span class='line'>                <span class="nv">true</span>
-</span><span class='line'>                <span class="o">#</span><span class="p">(</span><span class="nf">o?</span> <span class="p">(</span><span class="nb">dec </span><span class="p">(</span><span class="nf">Math/abs</span> <span class="nv">n</span><span class="p">)))))</span>
-</span><span class='line'>          <span class="p">(</span><span class="nf">o?</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
-</span><span class='line'>              <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">zero? </span><span class="nv">n</span><span class="p">)</span>
-</span><span class='line'>                <span class="nv">false</span>
-</span><span class='line'>                <span class="o">#</span><span class="p">(</span><span class="nf">e?</span> <span class="p">(</span><span class="nb">dec </span><span class="p">(</span><span class="nf">Math/abs</span> <span class="nv">n</span><span class="p">)))))]</span>
-</span><span class='line'>    <span class="p">(</span><span class="nf">trampoline</span> <span class="nv">e?</span> <span class="nv">n</span><span class="p">)))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">my-odd?</span> <span class="p">[</span><span class="nv">n</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">not </span><span class="p">(</span><span class="nf">my-even?</span> <span class="nv">n</span><span class="p">)))</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">user&gt;</span> <span class="p">(</span><span class="nf">my-even?</span> <span class="mi">1000000</span><span class="p">)</span>
-</span><span class='line'><span class="nv">true</span>
-</span><span class='line'><span class="nv">user&gt;</span> <span class="p">(</span><span class="nf">my-odd?</span> <span class="mi">1000000</span><span class="p">)</span>
-</span><span class='line'><span class="nv">false</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now we have the best of both worlds. Mutual recursion without the worry of a stack overflow and functions that don&rsquo;t force the caller to be aware of the implementation details.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//11">&larr; Older</a>
@@ -1184,6 +1130,10 @@
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/07/03/introducing-photo-fit/">Introducing Photo Fit</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2020/06/28/using-bazel-to-help-fix-flaky-tests/">Using Bazel to help fix flaky tests</a>
@@ -1219,10 +1169,6 @@
     
       <li class="post">
         <a href="/blog/2019/10/12/building-an-atreus-keyboard/">Building an Atreus keyboard</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/08/23/building-a-onewheel-stand/">Building a Onewheel stand</a>
       </li>
     
   </ul>

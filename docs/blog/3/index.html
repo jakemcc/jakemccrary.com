@@ -14,17 +14,13 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" I was recently having some difficulty debugging a problem in a
-ClojureScript single page application. The SPA was implemented using
-reagent1. This &hellip;" />
+    <meta itemprop="description" content=" If you follow my work you probably know that I value fast feedback cycles. Most of the open-source I maintain was developed to enable faster feedback &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" I was recently having some difficulty debugging a problem in a
-ClojureScript single page application. The SPA was implemented using
-reagent1. This &hellip;" />
+    <meta name="twitter:description" content=" If you follow my work you probably know that I value fast feedback cycles. Most of the open-source I maintain was developed to enable faster feedback &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -32,16 +28,12 @@ reagent1. This &hellip;" />
     <meta property="og:site_name" content="The Blog of Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/3/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" I was recently having some difficulty debugging a problem in a
-ClojureScript single page application. The SPA was implemented using
-reagent1. This &hellip;" />
+    <meta property="og:description" content=" If you follow my work you probably know that I value fast feedback cycles. Most of the open-source I maintain was developed to enable faster feedback &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" I was recently having some difficulty debugging a problem in a
-ClojureScript single page application. The SPA was implemented using
-reagent1. This &hellip;">
+    <meta name="description" content=" If you follow my work you probably know that I value fast feedback cycles. Most of the open-source I maintain was developed to enable faster feedback &hellip;">
 
     
 
@@ -123,6 +115,49 @@ reagent1. This &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2018/07/16/built-in-test-narrowing-with-lein-test-refresh/">Built-in test narrowing with lein-test-refresh</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2018-07-16T14:47:00-05:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2018</span></span> <span class='time'>2:47 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>If you follow my work you probably know that I value fast feedback cycles. Most of the open-source I maintain was developed to enable faster feedback cycles. This is why <a href="https://github.com/jakemcc/lein-test-refresh/">lein-test-refresh</a> and <a href="https://github.com/clojure-expectations/lein-autoexpect">lein-autoexpect</a> were originally created.</p>
+
+<p>Leiningen supports <a href="https://github.com/technomancy/leiningen/blob/master/doc/TUTORIAL.md#tests">test selectors</a> and lein-test-refresh <a href="https://github.com/jakemcc/lein-test-refresh/blob/master/CHANGES.md#040">does as well</a>. This lets you start-up a testing session and only run tests or namespaces with certain metadata on them. This is a super useful feature as it lets you narrow your testing scope to one (or a handful) of tests while working on solving a specific problem.</p>
+
+<p>lein-test-refresh now has built-in functionality that allows you to focus your test scope without restarting the Leiningen test process. If lein-test-refresh sees a <code>deftest</code> or <code>ns</code> form marked with <code>:test-refresh/focus true</code> in its metadata, then it will only run tests marked with <code>:test-refresh/focus</code>.</p>
+
+<p>Below is an example of what this looks like.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">deftest</span> <span class="o">^</span><span class="ss">:test-refresh/focus</span> <span class="nv">test-addition</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="mi">2</span> <span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="mi">1</span><span class="p">))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This functionality has only been available for a short period of time and I&rsquo;ve already found it useful. I think you will too. Enjoy.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1698,97 +1733,6 @@ an area where this, or something similar to it, would help.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/07/28/using-my-phones-voice-control-for-a-month/">Using my phone's voice control for a month</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2017-07-28T09:06:00-05:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>9:06 am</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>From May 6th to June 2nd the screen of my phone had a crack. I have an Android phone, and the crack was through the software buttons at the bottom of the screen. As a result, I could not touch the back, home, or overview (app switching) buttons. For nearly a month I never saw my home screen, couldn&rsquo;t go back, or switch apps through touching my phone. I was very reliant on arriving notifications giving me an opportunity to open apps.</p>
-
-<p>It took me some time, but I realized I could use voice commands to replace some of the missing functionality. Using voice commands, I could open apps and no longer be at the whim of notifications.</p>
-
-<p>Here is an example of my phone usage during this month. My thoughts are in [brackets]. <em>Italics</em> indicate actions. Talking is wrapped in “ ”.</p>
-
-<ol>
-<li>[Alright, I want to open Instagram] &ldquo;Ok Google, open Instagram.&rdquo;</li>
-<li>[Sweet, it worked] <em>scrolls through feed</em></li>
-<li><em>WhatsApp notification happens</em> [Great, a notification, I can click it to open WhatsApp]</li>
-<li><em>I read messages in WhatsApp.</em></li>
-<li>[Time to go back to Instagram] &ldquo;Ok Google, open Instagram&rdquo;</li>
-<li>[sigh, voice command failed, lets try again] &ldquo;Ok Google, open Instagram&rdquo;</li>
-<li><em>Instagram opens</em> [Great, time to scroll through more pictures]</li>
-</ol>
-
-
-<p>As you can see, it is a bit more painful than clicking buttons to switch between different apps. Voice commands fail sometimes and, at least for me, generally take more effort than tapping the screen. That’s ok though; I was determined to embrace voice commands and experience what a future of only voice commands might feel like.</p>
-
-<p>Below are some observations from using my voice to control my phone for a month.</p>
-
-<h3>It is awkward in public</h3>
-
-<p>My phone usage in public went way down. There was something about having to talk to your phone to open an app that made me not want to pull out my phone.</p>
-
-<p>It is much more obvious you are using your phone when you use your voice to control it. It makes casual glances at your phone while hanging out with a group impossible. You can’t sneak a quick look at Instagram when you need to say “Ok Google, open Instagram” without completely letting everyone around you know you are no longer paying attention.</p>
-
-<p>This also stopped me from using my phone in Ubers/Lyfts/cabs. I often talk to the driver or other passengers anyway, but this cemented that. I realize it is completely normal to ignore the other people in a car but I felt like a (small) asshole audibly calling out that I&rsquo;m ignoring other people in the car.</p>
-
-<h3>You become more conscious of what apps you use</h3>
-
-<p>When you have to say “Okay Google, open Instagram” every time you want to open Instagram, you become way more aware of how often you use Instagram. Using your voice instead of tapping a button on your screen is a much bigger hurdle between having the urge to open something and actually opening it. It gives you more time to observe what you are doing.</p>
-
-<h3>You become more conscious of using your phone</h3>
-
-<p>Using your phone becomes a lot harder. This increased difficulty helped highlight when I was using my phone. My phone’s functionality dropped drastically and, as a result, I stopped reaching for it as much.</p>
-
-<p>This reminded me of when I used a dumb (feature) phone for a couple of months a few years ago. Using a non-smartphone after using a smartphone for years was weird. It helped me reign in my usage<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.</p>
-
-<h3>Voice control can be pretty convenient</h3>
-
-<p>Even after repairing my screen, I still find myself using some voice commands. While making my morning coffee, I often ask my phone for the weather forecast. This is more convenient than opening an app and it lets me continue to use both hands while making coffee.</p>
-
-<p>Setting alarms, starting countdown timers, adding reminders, and checking the weather are all things I do through voice commands now.</p>
-
-<h3>I wish it worked all the time</h3>
-
-<p>I suppose this is an argument for getting a <a href="https://store.google.com/us/product/google_home?hl=en-US">Google Home</a> or <a href="http://amzn.to/2vctz9A">Amazon Echo</a>. I have to wake up my phone to use voice commands with it. This limits the usefulness of voice commands since I need be within reach of my phone.</p>
-
-<h3>I wish it could do more</h3>
-
-<p>At some point, I got used to asking my phone to do things. Then I started giving it more complicated commands, and it would fail. I found myself giving it multi-stage commands such as “Ok Google, turn on Bluetooth and play my playlist Chill on Spotify.” That doesn&rsquo;t work but it would be amazing if it did.</p>
-
-<h2>Recommendations</h2>
-
-<p>I recommend that you force yourself to use voice commands for some period of time. Pretend your home button is broken and you have to use voice control to move around your phone. You’ll become more aware of your phone usage and you&rsquo;ll learn some useful voice commands that will make your technology usage nicer.</p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>My non-smartphone experiment four years ago is what resulted in me no longer using Facebook or Twitter on my phone. It also is the reason I silenced most notifications, including email, on my phone.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//4">&larr; Older</a>
@@ -1804,6 +1748,10 @@ an area where this, or something similar to it, would help.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/07/03/introducing-photo-fit/">Introducing Photo Fit</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2020/06/28/using-bazel-to-help-fix-flaky-tests/">Using Bazel to help fix flaky tests</a>
@@ -1839,10 +1787,6 @@ an area where this, or something similar to it, would help.</p>
     
       <li class="post">
         <a href="/blog/2019/10/12/building-an-atreus-keyboard/">Building an Atreus keyboard</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/08/23/building-a-onewheel-stand/">Building a Onewheel stand</a>
       </li>
     
   </ul>

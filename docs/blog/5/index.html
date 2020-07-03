@@ -14,17 +14,13 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" For a bit more than a year I worked on a project that crawled the web
-and indexed articles. Two of our sources of data were articles shared
-on &hellip;" />
+    <meta itemprop="description" content=" Jeff Ramnani wrote an article about unifying your command line interactions across programming projects. I recommend that you read it. The basic gist &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" For a bit more than a year I worked on a project that crawled the web
-and indexed articles. Two of our sources of data were articles shared
-on &hellip;" />
+    <meta name="twitter:description" content=" Jeff Ramnani wrote an article about unifying your command line interactions across programming projects. I recommend that you read it. The basic gist &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -32,16 +28,12 @@ on &hellip;" />
     <meta property="og:site_name" content="The Blog of Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/5/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" For a bit more than a year I worked on a project that crawled the web
-and indexed articles. Two of our sources of data were articles shared
-on &hellip;" />
+    <meta property="og:description" content=" Jeff Ramnani wrote an article about unifying your command line interactions across programming projects. I recommend that you read it. The basic gist &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" For a bit more than a year I worked on a project that crawled the web
-and indexed articles. Two of our sources of data were articles shared
-on &hellip;">
+    <meta name="description" content=" Jeff Ramnani wrote an article about unifying your command line interactions across programming projects. I recommend that you read it. The basic gist &hellip;">
 
     
 
@@ -123,6 +115,50 @@ on &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/11/30/unify-your-project-interfaces/">Unify your project interfaces</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-11-30T17:51:00-06:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>5:51 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Jeff Ramnani wrote an <a href="https://jefframnani.com/project-build-protocol/">article</a> about unifying your command line interactions across programming projects. I recommend that you read it. The basic gist is that we often find ourselves working on multiple projects at a time. Frequently these projects are in different languages and use different build tools. Remembering the necessary incantations to interact with the various projects is difficult and we&rsquo;re lazy. We can do better by standardizing an interface to our projects.</p>
+
+<p>This interface can take many forms. One option is to have a <code>bin</code> or <code>scripts</code> directory in each project and then consistently name the scripts you put in there (examples: <code>run</code>, <code>test</code>, and <code>build</code>). Another option is to use Makefiles with consistently named targets. Either way, your projects now have a standard way of interacting with them. This frees you from having to remember all the various commands and makes onboarding new developers easier.</p>
+
+<p>I&rsquo;ve been using a similar approach to Jeff Ramnani for years and highly recommend it. I&rsquo;m a fan of the Makefile approach but either approach works. The unified targets I use across projects are the following:</p>
+
+<ul>
+<li><code>up</code> - Brings the system up</li>
+<li><code>status</code> - Is the system up and running?</li>
+<li><code>logs</code> - Show me the logs</li>
+<li><code>local-db</code> - Connect to my local database</li>
+<li><code>build</code> - Build the project</li>
+<li><code>test</code> - Run the tests</li>
+</ul>
+
+
+<p>If you haven&rsquo;t created a common interface for your projects I recommend that you do it. It definitely makes moving between projects easier.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1096,181 +1132,6 @@ mobile and 96/100 for desktop.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/04/10/the-usefulness-of-clojures-cond-arrow/">The usefulness of Clojure's cond-></a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-04-10T18:45:00-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>10</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>6:45 pm</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Clojure&rsquo;s
-<a href="https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/cond-%3E"><code>cond-&gt;</code></a>
-(and <code>cond-&gt;&gt;</code>) is a versatile macro. It isn&rsquo;t a new macro, it
-has been around since version 1.5, but I finally discovered and
-started using it sometime last year. It isn&rsquo;t a workhorse macro,
-you won&rsquo;t be using it everyday, but it comes in handy.</p>
-
-<h3>What is <code>cond-&gt;</code>?</h3>
-
-<p>Let&rsquo;s start by looking at the docstring.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Usage: (cond-&gt; expr & clauses)
-</span><span class='line'>
-</span><span class='line'>Takes an expression and a set of test/form pairs. Threads expr (via -&gt;)
-</span><span class='line'>through each form for which the corresponding test
-</span><span class='line'>expression is true. Note that, unlike cond branching, cond-&gt; threading does
-</span><span class='line'>not short circuit after the first true test expression.</span></code></pre></td></tr></table></div></figure>
-
-
-<p>So what does the docstring mean? Let&rsquo;s break it down with an example.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">cond-&gt;</span> <span class="mi">10</span>
-</span><span class='line'>  <span class="nv">false</span> <span class="nv">inc</span><span class="p">)</span>
-</span><span class='line'><span class="nv">=&gt;</span> <span class="mi">10</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>In the above example <code>10</code> is the <code>expr</code> mentioned in the docstring and
-everything after it are the <code>clauses</code>. Each clause is a pair made up
-of a test and a form. In this example there is a single clause with
-the value <code>false</code> as the test the function <code>inc</code> as the form. Since
-the test evaluates to a false value the expression is not threaded
-into the form. As a result the original expression, <code>10</code>, is returned.</p>
-
-<p>Let&rsquo;s look at an example with a truthy test.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">cond-&gt;</span> <span class="mi">10</span>
-</span><span class='line'>  <span class="nv">true</span> <span class="p">(</span><span class="nb">- </span><span class="mi">2</span><span class="p">)</span>
-</span><span class='line'><span class="nv">=&gt;</span> <span class="mi">8</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Once again, <code>10</code> is the starting expression. The single clause has a
-test that evaluates to true so the expression is threaded into the
-first position of the form <code>(- 2)</code>. The result is <code>8</code> and this is
-returned.</p>
-
-<p>Next is an example of a <code>cond-&gt;</code> with multiple clauses. Explanations
-are inline with the code.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">cond-&gt;</span> <span class="mi">10</span> <span class="c1">; start with 10</span>
-</span><span class='line'>  <span class="c1">;; test evaluates to true, so apply inc to 10. Current value is now 11.</span>
-</span><span class='line'>  <span class="nv">true</span> <span class="nv">inc</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">;; (zero? 1) evaluates to false, do not perform action. Current value stays 11.</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">zero? </span><span class="mi">1</span><span class="p">)</span> <span class="p">(</span><span class="nb">+ </span><span class="mi">2</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'>  <span class="c1">;; (pos? 4) evaluates to true, thread 11 into first position of form.</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">pos? </span><span class="mi">4</span><span class="p">)</span> <span class="p">(</span><span class="nb">- </span><span class="mi">5</span><span class="p">))</span>
-</span><span class='line'><span class="nv">=&gt;</span> <span class="mi">6</span> <span class="c1">; The result of (- 11 5) is 6.</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If you understand the above example then you have a good grasp of
-<code>cond-&gt;</code>. But when is this functionality useful?</p>
-
-<h3>When do I use cond->?</h3>
-
-<p>Looking through the codebases I work on, I almost primarily see
-<code>cond-&gt;</code> being used with the initial expression being a hash-map. It
-is being used in situations where we want to selectively
-<code>assoc</code>, <code>update</code>, or <code>dissoc</code> something from a map.</p>
-
-<p>If <code>cond-&gt;</code> did not exist you would accomplish those selective
-modifications with code similar to below.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nf">some-pred?</span> <span class="nv">q</span><span class="p">)</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">assoc </span><span class="nv">m</span> <span class="ss">:a-key</span> <span class="ss">:a-value</span><span class="p">)</span>
-</span><span class='line'>  <span class="nv">m</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>You can rewrite the above with <code>cond-&gt;</code>.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">cond-&gt;</span> <span class="nv">m</span>
-</span><span class='line'>  <span class="p">(</span><span class="nf">some-pred?</span> <span class="nv">q</span><span class="p">)</span> <span class="p">(</span><span class="nb">assoc </span><span class="ss">:a-key</span> <span class="ss">:a-value</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If you&rsquo;re not used to seeing <code>cond-&gt;</code> the above transformation might
-seem like a step backwards. I know it felt that way to me when I first
-saw <code>cond-&gt;</code>. Give yourself time to get familiar with it and you&rsquo;ll be
-glad you&rsquo;re using it.</p>
-
-<p>A meatier example of using <code>cond-&gt;</code> is demonstrated below. Here we&rsquo;re
-manipulating data structures designed for use with
-<a href="https://github.com/jkk/honeysql">honeysql</a> to generate SQL
-statements. We start with a <code>base-query</code> and selectively modify it
-based on incoming parameters.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">query</span> <span class="p">[</span><span class="nv">req-params</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">and-clause</span> <span class="p">(</span><span class="nf">fnil</span> <span class="nb">conj </span><span class="p">[</span><span class="ss">:and</span><span class="p">])</span>
-</span><span class='line'>        <span class="nv">base-query</span> <span class="p">{</span><span class="ss">:select</span> <span class="p">[</span><span class="ss">:name</span> <span class="ss">:job</span><span class="p">]</span>
-</span><span class='line'>                    <span class="ss">:from</span> <span class="p">[</span><span class="ss">:person</span><span class="p">]}]</span>
-</span><span class='line'>    <span class="p">(</span><span class="nf">cond-&gt;</span> <span class="nv">base-query</span>
-</span><span class='line'>      <span class="p">(</span><span class="ss">:job</span> <span class="nv">req-params</span><span class="p">)</span> <span class="p">(</span><span class="nf">update</span> <span class="ss">:where</span> <span class="nv">and-clause</span> <span class="p">[</span><span class="ss">:=</span> <span class="ss">:job</span> <span class="p">(</span><span class="ss">:job</span> <span class="nv">req-params</span><span class="p">)])</span>
-</span><span class='line'>      <span class="p">(</span><span class="ss">:name</span> <span class="nv">req-params</span><span class="p">)</span> <span class="p">(</span><span class="nf">update</span> <span class="ss">:where</span> <span class="nv">and-clause</span> <span class="p">[</span><span class="ss">:=</span> <span class="ss">:name</span> <span class="p">(</span><span class="ss">:name</span> <span class="nv">req-params</span><span class="p">)])</span>
-</span><span class='line'>      <span class="p">(</span><span class="ss">:min-age</span> <span class="nv">req-params</span><span class="p">)</span> <span class="p">(</span><span class="nf">update</span> <span class="ss">:where</span> <span class="nv">and-clause</span> <span class="p">[</span><span class="ss">:&gt;</span> <span class="ss">:age</span> <span class="p">(</span><span class="ss">:min-age</span> <span class="nv">req-params</span><span class="p">)]))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Hopefully this gives you a taste of <code>cond-&gt;</code>. I&rsquo;ve found it to be
-quite useful. It has a place in every Clojure developer&rsquo;s toolbox.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//6">&larr; Older</a>
@@ -1286,6 +1147,10 @@ quite useful. It has a place in every Clojure developer&rsquo;s toolbox.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/07/03/introducing-photo-fit/">Introducing Photo Fit</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2020/06/28/using-bazel-to-help-fix-flaky-tests/">Using Bazel to help fix flaky tests</a>
@@ -1321,10 +1186,6 @@ quite useful. It has a place in every Clojure developer&rsquo;s toolbox.</p>
     
       <li class="post">
         <a href="/blog/2019/10/12/building-an-atreus-keyboard/">Building an Atreus keyboard</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/08/23/building-a-onewheel-stand/">Building a Onewheel stand</a>
       </li>
     
   </ul>

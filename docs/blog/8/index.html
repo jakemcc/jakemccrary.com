@@ -14,17 +14,19 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" Packt Publishing recently asked me to write a review of the book
-Haskell Data Analysis Cookbook by Nishant
-Shukla. The book is broken into small &hellip;" />
+    <meta itemprop="description" content=" The
+ErgoDox
+is a great keyboard. One its appeals is that you can build your own
+firmware. This makes it possible to rearrange the keys however you &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" Packt Publishing recently asked me to write a review of the book
-Haskell Data Analysis Cookbook by Nishant
-Shukla. The book is broken into small &hellip;" />
+    <meta name="twitter:description" content=" The
+ErgoDox
+is a great keyboard. One its appeals is that you can build your own
+firmware. This makes it possible to rearrange the keys however you &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -32,16 +34,18 @@ Shukla. The book is broken into small &hellip;" />
     <meta property="og:site_name" content="The Blog of Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/8/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" Packt Publishing recently asked me to write a review of the book
-Haskell Data Analysis Cookbook by Nishant
-Shukla. The book is broken into small &hellip;" />
+    <meta property="og:description" content=" The
+ErgoDox
+is a great keyboard. One its appeals is that you can build your own
+firmware. This makes it possible to rearrange the keys however you &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" Packt Publishing recently asked me to write a review of the book
-Haskell Data Analysis Cookbook by Nishant
-Shukla. The book is broken into small &hellip;">
+    <meta name="description" content=" The
+ErgoDox
+is a great keyboard. One its appeals is that you can build your own
+firmware. This makes it possible to rearrange the keys however you &hellip;">
 
     
 
@@ -123,6 +127,73 @@ Shukla. The book is broken into small &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/09/07/ergodox-turn-on-led-when-not-on-the-main-layer/">ErgoDox: Turn on an LED When Not on the Main Layer</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-09-07T17:35:00-05:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>7</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>5:35 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The
+<a href="http://jakemccrary.com/blog/2014/07/27/building-the-ergodox-keyboard/">ErgoDox</a>
+is a great keyboard. One its appeals is that you can build your own
+firmware. This makes it possible to rearrange the keys however you
+want and tweak other functionality. The firmware is fairly advanced
+and allows you to have multiple layers to your keyboard.</p>
+
+<p>Multiple layers allow the ErgoDox to have fewer physical keys than
+traditional keyboards. How often do you use an F key? If you are like
+me the answer is almost never. Why bother having a dedicated key?</p>
+
+<p>Another benefit of multiple layers is that your keyboard is multiple
+keyboards in one. Do you use the Dvorak layout and your roommate use
+Qwerty? Program both a Dvorak layer and a Qwerty layer into your
+keyboard and switch between them with the push of a button.</p>
+
+<p>The only downside I&rsquo;ve noticed of multiple layers is that I&rsquo;ll switch
+between them by accident. This is frustrating as all of a sudden your
+keyboard works differently and there is no indication that you are on a
+different layer.</p>
+
+<p>The ErgoDox has a
+<a href="https://github.com/benblazak/ergodox-firmware/blob/513b82d585fdc7175db736163340af3ed6c6f38b/src/main.c#L124-L133">few LEDs</a>
+in it that I have never used. I don&rsquo;t even have the needed keys as
+part of my keyboard layout (Caps lock? Who uses caps lock? I
+don&rsquo;t need to shout that often). I decided to repurpose the num lock
+LED as an indicator that I&rsquo;m off the main layer.</p>
+
+<p>This was a straight forward change. In the firmware there is a
+<a href="https://github.com/benblazak/ergodox-firmware/blob/513b82d585fdc7175db736163340af3ed6c6f38b/src/main.c#L171">variable</a>
+that holds what keyboard layer is active. All I had to do to get the
+num lock LED on when I changed layers was to move the <code>layers_head</code>
+variable higher in <code>main.c</code> and then change the conditional to turn on
+the num lock LED when <code>layers_head != 0</code>.
+<a href="https://github.com/jakemcc/ergodox-firmware/commit/383f16a3f091b4e2dd031d098007c4289cc1a261">This</a>
+is the commit that does this change. It could have been done as a
+three line change.</p>
+
+<p>I highly recommend making this change. Now I just need to find a
+transparent DSA keycaps so I can see the LED easier.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1843,51 +1914,6 @@ your tests whispered to you.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/01/12/releasing-lein-test-refresh-0-dot-3-0/">Releasing lein-test-refresh 0.3.0</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-01-12T20:12:00-06:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>8:12 pm</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>At the suggestion of my coworker <a href="http://www.xpteam.com/">Jeff Bay</a>
-you can now hit a single keystroke to cause
-<a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a> to
-rerun your tests. Now you can hit enter in the terminal running <code>lein
-test-refresh</code> to cause your tests to be run.</p>
-
-<p>Add the below text to your project.clj to start using
-<code>lein-test-refresh</code> today.
-<img src="https://clojars.org/com.jakemccrary/lein-test-refresh/latest-version.svg" alt="Clojars generated dependency vector" /></p>
-
-<p>As a reminder if you call you can pass the argument <code>:growl</code> to
-lein-test-refresh. If you pass <code>:growl</code> as an argument then you&rsquo;ll be
-notified of test success and failures through
-<a href="http://growl.info/">growl</a>. On top of the quick feedback cycles that
-<a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a> (and
-<a href="https://github.com/jakemcc/lein-autoexpect">lein-autoexpect</a>)
-provides the growl notification is my favorite feature. I&rsquo;d highly
-recommend giving it a shot.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//9">&larr; Older</a>
@@ -1903,6 +1929,10 @@ recommend giving it a shot.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/07/03/introducing-photo-fit/">Introducing Photo Fit</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2020/06/28/using-bazel-to-help-fix-flaky-tests/">Using Bazel to help fix flaky tests</a>
@@ -1938,10 +1968,6 @@ recommend giving it a shot.</p>
     
       <li class="post">
         <a href="/blog/2019/10/12/building-an-atreus-keyboard/">Building an Atreus keyboard</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/08/23/building-a-onewheel-stand/">Building a Onewheel stand</a>
       </li>
     
   </ul>
