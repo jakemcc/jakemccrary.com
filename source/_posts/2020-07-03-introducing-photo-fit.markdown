@@ -5,12 +5,14 @@ date: 2020-07-03 20:59:05 -0500
 comments: true
 published: false
 description: Introducing Photo Fit, a TypeScript web app that makes your landscape photos work well with your vertical phone.
-keywords: 'csv, keywords, here'
+keywords: 'resize photo, typescript, javascript, photo, landscape, portrait'
 categories: 
+- typescript
+- experiment
 ---
 
-Earlier this year, I wanted to make a photo the new background on my phone.
-The photo was taken in landscape mode on my phone, similar to the photo of my keyboard below.
+Earlier this year, I wanted to make a landscape photo the new background on my phone.
+Pretend it was the photo below.
 
 {% img center /images/photo-fit/keyboard-new-keycaps.jpg "Landscape image of my keyboard" "Landscape image of my keyboard" %}
 
@@ -35,16 +37,14 @@ You open the website on your phone, select an image, and then download a properl
 {% img center /images/photo-fit/phone-background-after.jpg "Screenshot of phone with properly fitting image" "Screenshot of phone with properly fitting image" %}
 
 The tool uses the canvas API and does all of the work in the browser itself.
-The code isn't great.
-There are no tests.
-But it was a fun, bite-sized project and it gave me an excuse to write some TypeScript and do some web programming.
-I haven't written much JavaScript in the last year and this was the first TypeScript I've written since I first learned it.
+It was a fun, bite-sized project and it gave me an excuse to write some TypeScript and do some web programming.
+This was the first time I've written TypeScript since learning it and I haven't done any web programming in a while.
 
-This was definitely the long approach to getting the image as my background.
-But, now the tool exists and the next time I, or anyone else, needs to do this it will take all of twenty seconds.
+Making [this tool](/experiments/photo-fit/) was definitely the long approach to getting the image as my background.
+But, now the tool exists and anyone, including future me, can quickly and easily resize their image from the comfort of their own phone.
 
-[Photo Fit](/experiments/photo-fit/) is out there and available for others to use.
-It hasn't been tested with a variety of browsers or devices.
+[Photo Fit](/experiments/photo-fit/) is live and available for others to use.
+I don't guarantee it will work with any phone besides my own or browsers I don't frequently use.
 If you do try it and something weird happens, let me know!
 
 [^2]: I recently learned some TypeScript through [Execute Program](https:www.executeprogram.com). Execute program is a really need application of spaced repetition for learning programming concepts.
