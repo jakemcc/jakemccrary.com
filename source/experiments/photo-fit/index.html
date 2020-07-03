@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html class="h-100">
+  <head>
+    <title>Photo Fit</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+     .inputfile {
+       width: 0.1px;
+       height: 0.1px;
+       opacity: 0;
+       overflow: hidden;
+       position: absolute;
+       z-index: -1;
+     }
+
+     .inputfile + label {
+       display: inline-block;
+       cursor: pointer; /* "hand" cursor */
+     }
+    </style>
+    <link rel="stylesheet" href="tachyons.min.css"/>
+  </head>
+  <body class="h-100 sans-serif">
+    <noscript>
+      Your browser doesn't support JavaScript!
+      This tool needs JavaScript to do any work at all.
+    </noscript>
+    <main class="h-100 flex flex-column pl1 pr1 pt1">
+      <div id="hidder" class="dn">
+        <h1 class="f2 mt1 mb1">Photo Fit</h1>
+        <p class="f5 measure">
+          Ever try to use a landscape photo as your phone's background? On my phone it is terrible. The photo is forced to fit vertically by zooming in. I don't want that. This tool fixes the problem by adding black bars to the top and bottom. Use it on the device you want the photo to fit.
+        </p>
+        <ol class="measure">
+          <li>
+            <input type="file" class="inputfile" id="image" name="image" accept="image/*" />
+            <label for="image" class="link dim ba bw1 blue ph2 pv1 mb1 dib">Pick an image</label>
+          </li>
+          <li>Click the result to download</li>
+          <li>Set it as your background</li>
+        </ol>
+      </div>
+      <div class="mt1 flex-auto tc">
+        <a id="display-image-anchor">
+          <img class="h-100" id="display-image"></img>
+        </a>
+      </div>
+      <div class="pa1 f6">
+        By <a href="https://jakemccrary.com/about">Jake McCrary</a>. 
+        Something weird? <a href="https://twitter.com/jakemcc">Tweet</a>.
+      </div>
+    </main>
+    <canvas id="canvas" class="dn"> </canvas>
+    <script src="photo-fit.js"></script>
+  </body>
+</html>
