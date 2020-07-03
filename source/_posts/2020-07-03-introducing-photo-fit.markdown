@@ -1,12 +1,13 @@
 ---
 layout: post
-title: "Introducing Photo Fit"
-date: 2020-07-03 20:59:05 -0500
+title: Introducing Photo Fit
+date: 2020-07-03 18:37 -0500
 comments: true
-published: false
-description: Introducing Photo Fit, a TypeScript web app that makes your landscape photos work well with your vertical phone.
-keywords: 'resize photo, typescript, javascript, photo, landscape, portrait'
-categories: 
+published: true
+description: Introducing Photo Fit, a TypeScript web app that makes your landscape
+  photos work well with your vertical phone.
+keywords: resize photo, typescript, javascript, photo, landscape, portrait
+categories:
 - typescript
 - experiment
 ---
