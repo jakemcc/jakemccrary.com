@@ -19,6 +19,20 @@
      }
     </style>
     <link rel="stylesheet" href="tachyons.min.css"/>
+
+    <meta itemprop="name" content="Photo Fit"/>
+    <meta itemprop="description" content="Frustrated at smushed photos when made into your phone's background? This tool unsmushes them!" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@jakemcc" />
+    <meta name="twitter:title" content="Photo Fit" />
+    <meta name="twitter:description" content="Frustrated at smushed photos when made into your phone's background? This tool unsmushes them!" />
+    <meta name="twitter:creator" content="@jakemcc" />
+
+    <meta property="og:site_name" content="Photo Fit" />
+    <meta property="og:title" content="Photo Fit" />
+    <meta property="og:description" content="Frustrated at smushed photos when made into your phone's background? This tool unsmushes them!" />
+
+    <meta name="description" content="Frustrated at smushed photos when made into your phone's background? This tool unsmushes them!">
   </head>
   <body class="h-100 sans-serif">
     <noscript>
@@ -46,11 +60,27 @@
         </a>
       </div>
       <div class="pa1 f6">
-        By <a href="https://jakemccrary.com/about">Jake McCrary</a>. 
+        By <a href="https://jakemccrary.com/about">Jake McCrary</a>.
         Something weird? <a href="https://twitter.com/jakemcc">Tweet at me</a>.
       </div>
     </main>
     <canvas id="canvas" class="dn"> </canvas>
     <script src="photo-fit.js"></script>
+    <script>
+     var origin = window.location.origin;
+     if (!origin) {
+       origin = window.location.protocol + '//' + window.location.hostname + (window.location.port ? (':' + window.location.port) : '');
+     }
+     if (origin.indexOf('localhost') === -1) {
+       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+       })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-19834208-2', 'auto');
+       ga('send', 'pageview');
+     }
+    </script>
+
   </body>
 </html>
