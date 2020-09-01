@@ -4,7 +4,7 @@
   <title><![CDATA[Category: utilities | Jake McCrary]]></title>
   <link href="https://jakemccrary.com/blog/categories/utilities/atom.xml" rel="self"/>
   <link href="https://jakemccrary.com/"/>
-  <updated>2020-07-03T18:38:55-05:00</updated>
+  <updated>2020-08-31T22:24:48-05:00</updated>
   <id>https://jakemccrary.com/</id>
   <author>
     <name><![CDATA[Jake McCrary]]></name>
@@ -12,6 +12,31 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Utilities I like: selecta]]></title>
+    <link href="https://jakemccrary.com/blog/2020/08/31/utilities-i-like-selecta/"/>
+    <updated>2020-08-31T22:24:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2020/08/31/utilities-i-like-selecta</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/garybernhardt/selecta">Selecta</a> is a command-line utility that gives you the power to fuzzy select items from a list of text.
+What does that mean?
+It means you pipe <code>selecta</code> a list of text on stdin, it helps you make a choice from items in that list, and then <code>selecta</code> prints that choice to stdout.</p>
+
+<p>Here is an example of me using it to help me narrow in on what file I&rsquo;d like to pass to <code>wc</code>.</p>
+
+<p><img src="/images/selecta-search.gif" alt="Example of using selecta" /></p>
+
+<p>In this example, I search for markdown files using <code>ripgrep</code> (<code>rg</code>), type part of a filename, hit enter to select the match, and then see the <code>wc</code> stats of that file.
+This isn&rsquo;t the greatest example of using <code>selecta</code> but it adequately shows what it does.</p>
+
+<p>Some number of years ago, I wrote a script called <code>connect-db</code>.
+This script used <code>selecta</code>, along with <code>grep</code>, <code>sed</code>, and <code>cut</code>, to provide a very pleasant command-line experience for connecting to known databases.
+My coworkers and I used this script frequently.</p>
+
+<p>By combining <code>selecta</code> with other stdin/stdout friendly command-line tools you can build really enjoyable, time-saving tools.
+<a href="https://github.com/garybernhardt/selecta">Selecta</a> is a useful utility to add to your toolkit.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Auto-syncing a git repository]]></title>
@@ -241,23 +266,6 @@ higher.</p>
 <p>I used to set up aliases for jumping between projects but now that I&rsquo;ve trained myself to use autojump I don&rsquo;t think I&rsquo;ll ever go back. Not having to do any extra work besides simply entering the root directory of new projects to setup efficient directory movement is great. I think that if you give it a shot for a while you&rsquo;ll find the same benefits.</p>
 
 <p>If you are on a Mac and use <a href="https://github.com/mxcl/homebrew">homebrew</a> you can install by doing <code>brew install autojump</code>. For other platforms check out the <a href="https://github.com/joelthelion/autojump">github</a> page.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[A simple way of testing disconnect logic]]></title>
-    <link href="https://jakemccrary.com/blog/2011/06/28/a-simple-way-of-testing-disconnect-logic/"/>
-    <updated>2011-06-28T00:00:00-05:00</updated>
-    <id>https://jakemccrary.com/blog/2011/06/28/a-simple-way-of-testing-disconnect-logic</id>
-    <content type="html"><![CDATA[<p>I&rsquo;m guessing that software you write connects to some other server. I&rsquo;m also guessing that how it handles disconnects is tested (if ever tested) by either killing the process it connects to or by pulling out your network cable. I recently stumbled across a nifty Linux command line tool that makes causing disconnects significantly easier.</p>
-
-<p>This tool is <a href="http://linux.die.net/man/8/tcpkill">tcpkill</a>. To use <code>tcpkill</code> you specify an interface and a <a href="http://linux.die.net/man/8/tcpdump">tcpdump</a> style filter and it kills traffic on that interface that matches the filter.</p>
-
-<p>For example, if your application has a connection to 192.168.1.130, then to force a disconnect you would execute <code>tcpkill -i eth0 host 192.168.1.130</code>.</p>
-
-<p><code>tcpkill</code> can be used for more than forcing disconnects. It can also be used as a simple website filter. If <a href="http://stackoverflow.com">Stack Overflow</a> wastes too much of your time then you could simply leave <code>tcpkill -i eth0 host stackoverflow.com</code> running and enjoy your increased productivity.</p>
-
-<p><code>tcpkill</code> is a pretty useful tool. If you want to install it in Ubuntu it is found in the dsniff package (<code>apt-get install dsniff</code>).</p>
 ]]></content>
   </entry>
   

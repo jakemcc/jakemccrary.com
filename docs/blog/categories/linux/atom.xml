@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | Jake McCrary]]></title>
   <link href="https://jakemccrary.com/blog/categories/linux/atom.xml" rel="self"/>
   <link href="https://jakemccrary.com/"/>
-  <updated>2020-07-03T18:38:55-05:00</updated>
+  <updated>2020-08-31T22:24:48-05:00</updated>
   <id>https://jakemccrary.com/</id>
   <author>
     <name><![CDATA[Jake McCrary]]></name>
@@ -12,6 +12,31 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Utilities I like: selecta]]></title>
+    <link href="https://jakemccrary.com/blog/2020/08/31/utilities-i-like-selecta/"/>
+    <updated>2020-08-31T22:24:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2020/08/31/utilities-i-like-selecta</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/garybernhardt/selecta">Selecta</a> is a command-line utility that gives you the power to fuzzy select items from a list of text.
+What does that mean?
+It means you pipe <code>selecta</code> a list of text on stdin, it helps you make a choice from items in that list, and then <code>selecta</code> prints that choice to stdout.</p>
+
+<p>Here is an example of me using it to help me narrow in on what file I&rsquo;d like to pass to <code>wc</code>.</p>
+
+<p><img src="/images/selecta-search.gif" alt="Example of using selecta" /></p>
+
+<p>In this example, I search for markdown files using <code>ripgrep</code> (<code>rg</code>), type part of a filename, hit enter to select the match, and then see the <code>wc</code> stats of that file.
+This isn&rsquo;t the greatest example of using <code>selecta</code> but it adequately shows what it does.</p>
+
+<p>Some number of years ago, I wrote a script called <code>connect-db</code>.
+This script used <code>selecta</code>, along with <code>grep</code>, <code>sed</code>, and <code>cut</code>, to provide a very pleasant command-line experience for connecting to known databases.
+My coworkers and I used this script frequently.</p>
+
+<p>By combining <code>selecta</code> with other stdin/stdout friendly command-line tools you can build really enjoyable, time-saving tools.
+<a href="https://github.com/garybernhardt/selecta">Selecta</a> is a useful utility to add to your toolkit.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Using Bash-Preexec for monitoring the runtime of your last command]]></title>
@@ -313,70 +338,6 @@ highly recommend you add it to yours.</p>
 original code sample broke if you didn&rsquo;t already have something set as
 your <code>$PROMPT_COMMAND</code>. I&rsquo;ve updated the original snippet to reflect
 his <a href="https://twitter.com/gfredericks_/status/595249998838800384">changes</a>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Manage your workspace with grids under Linux, OS X, and Windows]]></title>
-    <link href="https://jakemccrary.com/blog/2013/04/15/manage-your-workspace-with-grids-under-linux-osx-and-windows/"/>
-    <updated>2013-04-15T19:15:00-05:00</updated>
-    <id>https://jakemccrary.com/blog/2013/04/15/manage-your-workspace-with-grids-under-linux-osx-and-windows</id>
-    <content type="html"><![CDATA[<p>I&rsquo;m the type of computer user that wants an organized
-workspace. To me this means having my active applications organized
-into a grid. Efficiently doing this is important to me. Before I jump
-into what tools I use let me give a quick explanation of what
-organized into a grid means to me.</p>
-
-<p>Imagine that your screen is divided both vertically and
-horizontally. To me a good tool for managing windows lets you take
-your active application and move it so it fits in any rectangle formed
-by the edges of your screen and those two lines splitting your
-monitor. This means that with a keystroke you can make the active
-window take up the full screen, half screen, or quarter screen. Below
-I&rsquo;ve listed the tools that let me do that.</p>
-
-<h4>Linux</h4>
-
-<p>I&rsquo;ve switched to using <a href="http://i3wm.org/">i3</a>, a
-<a href="http://en.wikipedia.org/wiki/Tiling_window_manager">tiling window manager</a>
-instead of the default window manager on every distribution I use. When using
-i3 the tiling is done automatically. There are hotkeys for changing
-window layout and for moving focus between windows. The automatic tiling and
-shortcuts take a bit to get used to, but now that I am I can&rsquo;t believe
-I switched to using a tiling window manager sometime in the last eight
-months.</p>
-
-<h4>Windows</h4>
-
-<p>When developing under Windows I use
-<a href="http://winsplit-revolution.com/">Winsplit Revolution</a>. Unlike i3,
-Winsplit Revolution only provides hotkeys snapping windows to
-different locations. This is admittedly more approachable than i3 as
-the grid isn&rsquo;t forced on you. WinSplit Revolution is pretty flexible,
-you can change shortcuts and even define your own grid.</p>
-
-<p>I can&rsquo;t remember when I started using Winsplit Revolution but it has
-become a vital tool for when I&rsquo;m stuck doing development on a Windows
-machine.</p>
-
-<h4>OS X</h4>
-
-<p>My only OS X machine is my 13 inch MacBook Air. I always thought that
-with such a small screen being able to tile my windows wouldn&rsquo;t be as
-useful. I  was completely wrong. If anything it may be more useful
-because of the tiny screen real estate. The 13 inch screen is just wide
-enough to have an editor up on one half and documentation on the
-other.</p>
-
-<p>The tool I use to snap my windows to a grid is
-<a href="http://spectacleapp.com/">Spectacle</a>. Spectacle provides some
-sensible keystrokes for moving windows around. The hotkeys are
-similar to Winsplit Revolution&rsquo;s which makes switching between
-operating systems easy.</p>
-
-<p>If you haven&rsquo;t tried using a tool to help you organize your windows I
-highly recommend that you do. I&rsquo;ve introduced both technical and
-non-technical people to these tools and everyone has enjoyed them.</p>
 ]]></content>
   </entry>
   

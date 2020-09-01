@@ -14,19 +14,17 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" At the suggestion of my coworker Jeff Bay
-you can now hit a single keystroke to cause
-lein-test-refresh to
-rerun your tests. Now you can hit enter in &hellip;" />
+    <meta itemprop="description" content=" lein-test-refresh has
+always supported notifying you of your tests' status through growl.
+With the release of version 0.3.4 it now will notify you &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" At the suggestion of my coworker Jeff Bay
-you can now hit a single keystroke to cause
-lein-test-refresh to
-rerun your tests. Now you can hit enter in &hellip;" />
+    <meta name="twitter:description" content=" lein-test-refresh has
+always supported notifying you of your tests' status through growl.
+With the release of version 0.3.4 it now will notify you &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -34,18 +32,16 @@ rerun your tests. Now you can hit enter in &hellip;" />
     <meta property="og:site_name" content="The Blog of Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/9/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" At the suggestion of my coworker Jeff Bay
-you can now hit a single keystroke to cause
-lein-test-refresh to
-rerun your tests. Now you can hit enter in &hellip;" />
+    <meta property="og:description" content=" lein-test-refresh has
+always supported notifying you of your tests' status through growl.
+With the release of version 0.3.4 it now will notify you &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" At the suggestion of my coworker Jeff Bay
-you can now hit a single keystroke to cause
-lein-test-refresh to
-rerun your tests. Now you can hit enter in &hellip;">
+    <meta name="description" content=" lein-test-refresh has
+always supported notifying you of your tests' status through growl.
+With the release of version 0.3.4 it now will notify you &hellip;">
 
     
 
@@ -127,6 +123,61 @@ rerun your tests. Now you can hit enter in &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/02/02/flexible-notification-of-clojure-tests-failing/">Flexible notification of Clojure tests failing</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-02-02T18:11:00-06:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2014</span></span> <span class='time'>6:11 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a> has
+always supported notifying you of your tests' status through growl.
+With the release of version 0.3.4 it now will notify you using
+whatever program you want.</p>
+
+<p>To make my Mac whisper my the results of running my tests I can use
+the following project.clj</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defproject </span><span class="nv">sample</span> <span class="s">&quot;1.2.3&quot;</span>
+</span><span class='line'>  <span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">org.clojure/clojure</span> <span class="s">&quot;1.5.1&quot;</span><span class="p">]]</span>
+</span><span class='line'>  <span class="ss">:profiles</span> <span class="p">{</span><span class="ss">:dev</span> <span class="p">{</span><span class="ss">:plugins</span> <span class="p">[[</span><span class="nv">com.jakemccrary/lein-test-refresh</span> <span class="s">&quot;0.3.4&quot;</span><span class="p">]]}}</span>
+</span><span class='line'>  <span class="ss">:test-refresh</span> <span class="p">{</span><span class="ss">:notify-command</span> <span class="p">[</span><span class="s">&quot;say&quot;</span> <span class="s">&quot;-v&quot;</span> <span class="s">&quot;Whisper&quot;</span><span class="p">]})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The specification of the command is found in the <code>:test-refresh
+{:notify-command ["say" "-v" "Whisper"]}</code> entry in the above
+project.clj. After running your tests
+<a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a> will
+pass a (usually) short summary message as the final parameter to the
+specified command.</p>
+
+<p>Now you can finally have the results of running
+your tests whispered to you.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1030,61 +1081,6 @@ non-technical people to these tools and everyone has enjoyed them.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/03/31/change-volume-from-the-command-line/">Change volume from the command line</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2013-03-31T16:17:00-05:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2013</span></span> <span class='time'>4:17 pm</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>On my Ubuntu desktop the volume at 100% is often too quiet. With Ubuntu&rsquo;s default window manager I could open up the graphical &ldquo;Sound Preferences&rdquo; and bump the volume to above 100%. After using <a href="http://i3wm.org/">i3 window manager</a> for a while I found myself missing this and took the time to figure out how to do it from the command line.</p>
-
-<p>Ubuntu uses <a href="http://www.freedesktop.org/wiki/Software/PulseAudio">PulseAudio</a> to handle sound related tasks. The tool <a href="http://linux.die.net/man/1/pacmd">pacmd</a> allows you to change PulseAudio settings, such as volume, on the fly. The command is <code>pacmd set-sink-volume &lt;sink-index&gt; &lt;sink-volume&gt;</code> where <code>&lt;sink-index&gt;</code> is an identifier for your output device and <code>&lt;sink-volume&gt;</code> is an integer greater than or equal to zero. Zero represents muted and 65536 represents 100% volume. <code>&lt;sink-index&gt;</code> is the index found in the output from the <code>pacmd list-sinks</code> for your output card. In my case it is 0.</p>
-
-<p>The below script makes changing volume with <code>pacmd</code> straightforward. I&rsquo;m using Perl convert a percentage into the proper units for the <sink-volume> argument. Using this script if you want to pull a <a href="http://www.youtube.com/watch?v=EbVKWCpNFhY">Spinal Tap</a> and go above 100% you simply pass in a number greater than 100.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$1&quot;</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-</span><span class='line'>  <span class="nb">echo</span> <span class="s2">&quot;Need to supply a percentage&quot;</span>
-</span><span class='line'>  <span class="nb">exit </span>1
-</span><span class='line'><span class="k">fi</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">vol</span><span class="o">=</span><span class="k">$(</span>perl -e <span class="s2">&quot;print int(65536 * ($1 / 100))&quot;</span><span class="k">)</span>
-</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;Setting volume to $1 ($vol)&quot;</span>
-</span><span class='line'>pacmd <span class="nb">set</span>-sink-volume <span class="m">0</span> <span class="nv">$vol</span>
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//10">&larr; Older</a>
@@ -1100,6 +1096,10 @@ non-technical people to these tools and everyone has enjoyed them.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/08/31/utilities-i-like-selecta/">Utilities I like: selecta</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2020/07/03/introducing-photo-fit/">Introducing Photo Fit</a>
@@ -1135,10 +1135,6 @@ non-technical people to these tools and everyone has enjoyed them.</p>
     
       <li class="post">
         <a href="/blog/2020/01/11/reading-in-2019/">Reading in 2019</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/10/12/building-an-atreus-keyboard/">Building an Atreus keyboard</a>
       </li>
     
   </ul>

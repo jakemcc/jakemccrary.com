@@ -14,13 +14,13 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" If you follow my work you probably know that I value fast feedback cycles. Most of the open-source I maintain was developed to enable faster feedback &hellip;" />
+    <meta itemprop="description" content=" In an older article of mine I extolled the virtues of having unified interfaces for interacting with your projects. I recently started working at &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" If you follow my work you probably know that I value fast feedback cycles. Most of the open-source I maintain was developed to enable faster feedback &hellip;" />
+    <meta name="twitter:description" content=" In an older article of mine I extolled the virtues of having unified interfaces for interacting with your projects. I recently started working at &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -28,12 +28,12 @@
     <meta property="og:site_name" content="The Blog of Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/3/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" If you follow my work you probably know that I value fast feedback cycles. Most of the open-source I maintain was developed to enable faster feedback &hellip;" />
+    <meta property="og:description" content=" In an older article of mine I extolled the virtues of having unified interfaces for interacting with your projects. I recently started working at &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" If you follow my work you probably know that I value fast feedback cycles. Most of the open-source I maintain was developed to enable faster feedback &hellip;">
+    <meta name="description" content=" In an older article of mine I extolled the virtues of having unified interfaces for interacting with your projects. I recently started working at &hellip;">
 
     
 
@@ -115,6 +115,128 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2018/12/27/a-more-helpful-makefile/">A more helpful makefile</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2018-12-27T21:21:00-06:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2018</span></span> <span class='time'>9:21 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In an <a href="/blog/2016/11/30/unify-your-project-interfaces/">older article</a> of mine I extolled the virtues of having unified interfaces for interacting with your projects. I recently started working at Coinbase and the group I&rsquo;m working with is mostly using makefiles as that common interface. We still have some more work to do to unify the makefile targets of the various projects but I&rsquo;ve picked up one tip that makes switching between projects easier.</p>
+
+<p>That tip is to have the default target of your makefile be one that prints out a helpful message. This looks like the following.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>.PHONY: help
+</span><span class='line'>help:
+</span><span class='line'>  @grep -E '^[0-9a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
+</span><span class='line'>   sort | \
+</span><span class='line'>   awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'</span></code></pre></td></tr></table></div></figure>
+
+
+<p>There is a lot going on there but it basically looks through your makefile targets and finds the ones that have a comment starting with <code>##</code> after the target dependencies. Those targets are printed to the console along with the comment.</p>
+
+<p>As an example, the makefile for my website looks similar to the below file.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>.PHONY: help
+</span><span class='line'>help:
+</span><span class='line'>  @grep -E '^[0-9a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
+</span><span class='line'>   sort | \
+</span><span class='line'>   awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+</span><span class='line'>
+</span><span class='line'>.PHONY: watch
+</span><span class='line'>watch: ## Watch for changes and serve preview of site with drafts
+</span><span class='line'>  bundle exec rake clean
+</span><span class='line'>  bundle exec rake preview
+</span><span class='line'>
+</span><span class='line'>.PHONY: develop
+</span><span class='line'>develop: ## Serve a preview of the site without drafts and refresh changes
+</span><span class='line'>  bundle exec rake clean
+</span><span class='line'>  bundle exec rake develop
+</span><span class='line'>
+</span><span class='line'>.PHONY: new_adventure
+</span><span class='line'>new_adventure: ## Start a new adventure post
+</span><span class='line'>  bundle exec rake new_adventure
+</span><span class='line'>
+</span><span class='line'>.PHONY: new_post
+</span><span class='line'>new_post: ## Start a new post
+</span><span class='line'>  bundle exec rake new_post 
+</span><span class='line'>
+</span><span class='line'>.PHONY: deploy
+</span><span class='line'>deploy: ## deploy
+</span><span class='line'>  ./deploy.sh</span></code></pre></td></tr></table></div></figure>
+
+
+<p>When this file, when I run <code>make</code> in this websites source, I get the following output.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>0 [last: 0s] 21:11:50 ~/src/jakemcc/blog (master)
+</span><span class='line'>$ make
+</span><span class='line'>deploy                         deploy
+</span><span class='line'>develop                        Serve a preview of the site without drafts and refresh changes
+</span><span class='line'>new_adventure                  Start a new adventure post
+</span><span class='line'>new_post                       Start a new post
+</span><span class='line'>watch                          Watch for changes and serve preview of site with drafts</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This is super useful when you&rsquo;re starting doing work in a new project. With this feature you can get a quick list of useful targets and a description. It allows you to quickly see what can be done in a project.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1658,81 +1780,6 @@ an area where this, or something similar to it, would help.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/08/27/my-current-leiningen-profiles-dot-clj/">My current Leiningen profiles.clj</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2017-08-27T19:06:00-05:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>7:06 pm</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Nearly three years ago I wrote an overview of my <a href="/blog/2015/01/11/overview-of-my-leiningen-profiles-dot-clj/">Leiningen profiles.clj</a>. That post is one of my most visited articles, so I thought I&rsquo;d give an update on what I currently keep in <code>~/.lein/profiles.clj</code>.</p>
-
-<figure class='code'><figcaption><span>profiles.clj</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">{</span><span class="ss">:user</span> <span class="p">{</span><span class="ss">:plugin-repositories</span> <span class="p">[[</span><span class="s">&quot;private-plugins&quot;</span> <span class="p">{</span><span class="ss">:url</span> <span class="s">&quot;private url&quot;</span><span class="p">}]]</span>
-</span><span class='line'>        <span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">pjstadig/humane-test-output</span> <span class="s">&quot;0.8.2&quot;</span><span class="p">]]</span>
-</span><span class='line'>        <span class="ss">:injections</span> <span class="p">[(</span><span class="nf">require</span> <span class="ss">&#39;pjstadig.humane-test-output</span><span class="p">)</span>
-</span><span class='line'>                     <span class="p">(</span><span class="nf">pjstadig.humane-test-output/activate!</span><span class="p">)]</span>
-</span><span class='line'>        <span class="ss">:plugins</span> <span class="p">[[</span><span class="nv">io.sattvik/lein-ancient</span> <span class="s">&quot;0.6.11&quot;</span><span class="p">]</span>
-</span><span class='line'>                  <span class="p">[</span><span class="nv">lein-pprint</span> <span class="s">&quot;1.1.2&quot;</span><span class="p">]</span>
-</span><span class='line'>                  <span class="p">[</span><span class="nv">com.jakemccrary/lein-test-refresh</span> <span class="s">&quot;0.21.1&quot;</span><span class="p">]</span>
-</span><span class='line'>                  <span class="p">[</span><span class="nv">lein-autoexpect</span> <span class="s">&quot;1.9.0&quot;</span><span class="p">]]</span>
-</span><span class='line'>        <span class="ss">:signing</span> <span class="p">{</span><span class="ss">:gpg-key</span> <span class="s">&quot;B38C2F8C&quot;</span><span class="p">}</span>
-</span><span class='line'>        <span class="ss">:test-refresh</span> <span class="p">{</span><span class="ss">:notify-command</span> <span class="p">[</span><span class="s">&quot;terminal-notifier&quot;</span> <span class="s">&quot;-title&quot;</span> <span class="s">&quot;Tests&quot;</span> <span class="s">&quot;-message&quot;</span><span class="p">]</span>
-</span><span class='line'>                       <span class="ss">:quiet</span> <span class="nv">true</span>
-</span><span class='line'>                       <span class="ss">:changes-only</span> <span class="nv">true</span><span class="p">}}}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The biggest difference between my <code>profiles.clj</code> from early 2015 and now is that I&rsquo;ve removed all of the CIDER related plugins. I still use CIDER, but CIDER no longer requires you to list its dependencies explicitly.</p>
-
-<p>I’ve also removed Eastwood and Kibit from my toolchain. I love static analysis, but these tools fail too frequently with my projects. As a result, I rarely used them and I’ve removed them. Instead, I’ve started using <a href="https://github.com/candid82/joker">joker</a> for some basic static analysis and am really enjoying it. It is fast, and it has made refactoring in Emacs noticeably better.</p>
-
-<p><a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a>, <a href="https://github.com/clojure-expectations/lein-autoexpect">lein-autoexpect</a>, and <a href="https://github.com/pjstadig/humane-test-output">humane-test-output</a> have stuck around and have been updated to the latest versions. These tools make testing Clojure much nicer.</p>
-
-<p>I&rsquo;m also taking advantage of some new features that <a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a> provides. These settings enable the most reliable, fastest feedback possible while writing tests. My <a href="/blog/2016/06/20/my-recommended-clojure-testing-setup/">recommended testing setup</a> article goes into more details.</p>
-
-<p><code>lein-ancient</code> and <code>lein-pprint</code> have stuck around. I rarely use <code>lein-pprint</code> but it comes in handy when debugging project.clj problems. <code>lein-ancient</code> is great for helping you keep your project&rsquo;s dependencies up to date. I use a forked version that contains some changes I need to work with my company&rsquo;s private repository.</p>
-
-<p>And there you have it. My updated profiles.clj<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.</p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>Some of you might wonder why I don&rsquo;t just link to this file in version control somewhere? Well, it is kept encrypted in a git repository because it also contains some secrets that should not be public that I&rsquo;ve removed for this post.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//4">&larr; Older</a>
@@ -1748,6 +1795,10 @@ an area where this, or something similar to it, would help.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/08/31/utilities-i-like-selecta/">Utilities I like: selecta</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2020/07/03/introducing-photo-fit/">Introducing Photo Fit</a>
@@ -1783,10 +1834,6 @@ an area where this, or something similar to it, would help.</p>
     
       <li class="post">
         <a href="/blog/2020/01/11/reading-in-2019/">Reading in 2019</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/10/12/building-an-atreus-keyboard/">Building an Atreus keyboard</a>
       </li>
     
   </ul>

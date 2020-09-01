@@ -14,19 +14,15 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" The
-ErgoDox
-is a great keyboard. One its appeals is that you can build your own
-firmware. This makes it possible to rearrange the keys however you &hellip;" />
+    <meta itemprop="description" content=" See all of my remote/working-from-home articles here. The above was tweeted 1 recently and it resulted in some decent
+discussion about code reviews. &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" The
-ErgoDox
-is a great keyboard. One its appeals is that you can build your own
-firmware. This makes it possible to rearrange the keys however you &hellip;" />
+    <meta name="twitter:description" content=" See all of my remote/working-from-home articles here. The above was tweeted 1 recently and it resulted in some decent
+discussion about code reviews. &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -34,18 +30,14 @@ firmware. This makes it possible to rearrange the keys however you &hellip;" />
     <meta property="og:site_name" content="The Blog of Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/8/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" The
-ErgoDox
-is a great keyboard. One its appeals is that you can build your own
-firmware. This makes it possible to rearrange the keys however you &hellip;" />
+    <meta property="og:description" content=" See all of my remote/working-from-home articles here. The above was tweeted 1 recently and it resulted in some decent
+discussion about code reviews. &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" The
-ErgoDox
-is a great keyboard. One its appeals is that you can build your own
-firmware. This makes it possible to rearrange the keys however you &hellip;">
+    <meta name="description" content=" See all of my remote/working-from-home articles here. The above was tweeted 1 recently and it resulted in some decent
+discussion about code reviews. &hellip;">
 
     
 
@@ -127,6 +119,157 @@ firmware. This makes it possible to rearrange the keys however you &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/12/09/an-effective-code-review-process/">An Effective Code Review Process</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-12-09T20:44:00-06:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>8:44 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><blockquote><p>See all of my remote/working-from-home <a href="/blog/categories/remote/">articles here</a>.</p></blockquote>
+
+<p><a href="https://twitter.com/searls/status/540603801955471360"><img class="center" src="/images/justin-searls-code-reviews-harmful.png" title="The way most organizations implement code reviews in teams is usually more harmful than helpful. I generally recommend going without them. - Justin Searls" ></a></p>
+
+<p>The above was tweeted <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> recently and it resulted in some decent
+discussion about code reviews. In the past six months at
+<a href="http://www.outpace.com">Outpace</a>, I&rsquo;ve been part of a handful of code
+review sessions that have been extremely productive. After the reviews
+many developers have expressed shock at the effectiveness of the process.
+A tweet-sized overview of the process we&rsquo;ve followed can be found in
+<a href="https://twitter.com/gigasquid">Carin Meier</a>&rsquo;s
+<a href="https://twitter.com/gigasquid/status/540606002547425281">responses</a> to
+the above tweet. Since you can&rsquo;t fit details into tweets the rest of
+this post expands on our code review process.</p>
+
+<p>Some background before we dive into the details.
+<a href="http://www.outpace.com">Outpace</a> is a software company that
+practices, despite every programmer working remotely, nearly 100% pair
+programming. In addition, the team Carin and I are on do most of our
+work through GitHub pull requests. Before merging with master, the
+pull requests are reviewed by other teammates. Between pairing and
+pull requests many eyes see every line of code as changes are made.</p>
+
+<p>Even with all this, we&rsquo;ve found value in having more traditional code
+reviews. We&rsquo;ve found that different feedback and action items emerge
+from reviewing code that we already have than from reviews of code
+changes (e.g., pull requests).</p>
+
+<p>In addition to working for the team described above, the process below
+has been successfully used to review an internal library where the
+reviewers where mostly interested users with a couple contributors. It
+has also been successful on teams that were not adherent to doing work
+through reviewed pull requests.</p>
+
+<h3>The Code Review Process</h3>
+
+<h4>Step 1: Select the code to review</h4>
+
+<p>Typically we do this between a week and two weeks before the code
+review. Here we identify the code we want to review and create a
+two-hour meeting on a Friday at the end of day.</p>
+
+<p>Having the meeting late on Friday helps create a relaxed environment.
+The review becomes a time to unwind, enjoy a beverage of choice, and
+talk about code. I haven&rsquo;t met a developer that doesn&rsquo;t enjoy
+discussing how to make code better and this lets everyone finish the
+week doing just that. The code review becomes an uplifting way to
+finish a week.</p>
+
+<h4>Step 2: Open the code review</h4>
+
+<p>A few days (typically late Tuesday or early Wednesday) before the
+Friday code review meeting we start the review. We do this by opening
+a <a href="https://github.com">GitHub</a> pull request. The following steps will
+create a pull request where you can comment every line of code being
+reviewed.</p>
+
+<ol>
+<li>Create a local branch.</li>
+<li>Delete the code being reviewed and commit locally.</li>
+<li>Push the branch to GitHub.</li>
+<li>Open a pull request.</li>
+</ol>
+
+
+<p>These steps are necessary because GitHub pull requests only let you
+view code that has changed. This process marks every line as deleted,
+which causes every line to appear the <em>Files changed</em> tab.</p>
+
+<p>Opening the pull request a few days before the review meeting provides
+a location for pre-meeting comments to be added. This lets reviewers
+spend a couple days thinking about and commenting on the code.
+Comments on the pull request indicate a conversation should happen
+during the code review meeting.</p>
+
+<h4>Step 3: The code review meeting</h4>
+
+<p>Its finally Friday and time to review the code as a group. Everyone
+joins a video conference and someone volunteers to lead the code
+review. At least one other person volunteers to be a note taker.</p>
+
+<p>The leader directs the code review and keeps it moving forward. To do
+this the leader shares their screen with the video conference and
+scrolls through the <em>Files changed</em> view of the pull request. When a
+comment appears on screen the leader stops scrolling and discussion
+starts.</p>
+
+<p>The comments are read (often silently) and discussion happens. The
+leader tries to recognize when a conclusion has been reached or when
+further discussion, outside of the code review, needs to happen. When
+a conclusion is reached someone (often the leader) states a quick
+summary and a note taker records the next steps. The next steps are
+added as additional comments in the comment thread being discussed. As
+the next steps are recorded the leader moves on to the next comment.</p>
+
+<p>This continues until either time runs out or the group runs out of
+things to discuss.</p>
+
+<p>After the code review a volunteer turns the next steps comments into
+Trello cards and we take care of the code review items as part of our
+usual work.</p>
+
+<h3>Results</h3>
+
+<p>We&rsquo;ve seen impressive improvements to code quality in the projects
+that have undergone this style of code review. Both small and large
+changes have happened as a result. Code has become simpler, clearer,
+and better understood. Additionally, the feeling of collective code
+ownership has increased.</p>
+
+<p>Teammates have been surprised at how well this process has worked.
+More than a couple have said that historically they have not found
+code reviews useful but that these were.</p>
+
+<p>This style of code review has worked in a few different settings and I
+encourage you to give it a shot.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Reading through the discussion on Twitter after this tweet can give some hints as to what it takes to have an effective code review.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1859,61 +2002,6 @@ possibility of being added pretty quickly.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/02/02/flexible-notification-of-clojure-tests-failing/">Flexible notification of Clojure tests failing</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-02-02T18:11:00-06:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>2</span><span class='date-suffix'>nd</span>, <span class='date-year'>2014</span></span> <span class='time'>6:11 pm</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a> has
-always supported notifying you of your tests' status through growl.
-With the release of version 0.3.4 it now will notify you using
-whatever program you want.</p>
-
-<p>To make my Mac whisper my the results of running my tests I can use
-the following project.clj</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defproject </span><span class="nv">sample</span> <span class="s">&quot;1.2.3&quot;</span>
-</span><span class='line'>  <span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">org.clojure/clojure</span> <span class="s">&quot;1.5.1&quot;</span><span class="p">]]</span>
-</span><span class='line'>  <span class="ss">:profiles</span> <span class="p">{</span><span class="ss">:dev</span> <span class="p">{</span><span class="ss">:plugins</span> <span class="p">[[</span><span class="nv">com.jakemccrary/lein-test-refresh</span> <span class="s">&quot;0.3.4&quot;</span><span class="p">]]}}</span>
-</span><span class='line'>  <span class="ss">:test-refresh</span> <span class="p">{</span><span class="ss">:notify-command</span> <span class="p">[</span><span class="s">&quot;say&quot;</span> <span class="s">&quot;-v&quot;</span> <span class="s">&quot;Whisper&quot;</span><span class="p">]})</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The specification of the command is found in the <code>:test-refresh
-{:notify-command ["say" "-v" "Whisper"]}</code> entry in the above
-project.clj. After running your tests
-<a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a> will
-pass a (usually) short summary message as the final parameter to the
-specified command.</p>
-
-<p>Now you can finally have the results of running
-your tests whispered to you.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//9">&larr; Older</a>
@@ -1929,6 +2017,10 @@ your tests whispered to you.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/08/31/utilities-i-like-selecta/">Utilities I like: selecta</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2020/07/03/introducing-photo-fit/">Introducing Photo Fit</a>
@@ -1964,10 +2056,6 @@ your tests whispered to you.</p>
     
       <li class="post">
         <a href="/blog/2020/01/11/reading-in-2019/">Reading in 2019</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/10/12/building-an-atreus-keyboard/">Building an Atreus keyboard</a>
       </li>
     
   </ul>

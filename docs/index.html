@@ -121,6 +121,50 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2020/08/31/utilities-i-like-selecta/">Utilities I like: selecta</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2020-08-31T22:24:00-05:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2020</span></span> <span class='time'>10:24 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="https://github.com/garybernhardt/selecta">Selecta</a> is a command-line utility that gives you the power to fuzzy select items from a list of text.
+What does that mean?
+It means you pipe <code>selecta</code> a list of text on stdin, it helps you make a choice from items in that list, and then <code>selecta</code> prints that choice to stdout.</p>
+
+<p>Here is an example of me using it to help me narrow in on what file I&rsquo;d like to pass to <code>wc</code>.</p>
+
+<p><img src="/images/selecta-search.gif" alt="Example of using selecta" /></p>
+
+<p>In this example, I search for markdown files using <code>ripgrep</code> (<code>rg</code>), type part of a filename, hit enter to select the match, and then see the <code>wc</code> stats of that file.
+This isn&rsquo;t the greatest example of using <code>selecta</code> but it adequately shows what it does.</p>
+
+<p>Some number of years ago, I wrote a script called <code>connect-db</code>.
+This script used <code>selecta</code>, along with <code>grep</code>, <code>sed</code>, and <code>cut</code>, to provide a very pleasant command-line experience for connecting to known databases.
+My coworkers and I used this script frequently.</p>
+
+<p>By combining <code>selecta</code> with other stdin/stdout friendly command-line tools you can build really enjoyable, time-saving tools.
+<a href="https://github.com/garybernhardt/selecta">Selecta</a> is a useful utility to add to your toolkit.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2020/07/03/introducing-photo-fit/">Introducing Photo Fit</a></h1>
     
     
@@ -1424,72 +1468,6 @@ I&rsquo;m going to try to improve that this year.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2019/10/12/building-an-atreus-keyboard/">Building an Atreus keyboard</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2019-10-12T15:43:00-05:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2019</span></span> <span class='time'>3:43 pm</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I recently built an <a href="https://atreus.technomancy.us">Atreus keyboard</a>.
-This keyboard is an extremely small keyboard with only 42 keys.
-Below is the photo of my result.</p>
-
-<p><img src="/images/atreus/atreus-done.jpg" alt="My completed Atreus keyboard" /></p>
-
-<p>As you can see, it has a split layout and the keys are aligned vertically and staggered.
-Thanks to using Ergodox keyboards since 2014, I&rsquo;m very used to this key layout and find it superior to traditional keyboards.</p>
-
-<p>The keyboard is very small.
-To give you an idea of how small it is, here is a photo of it next to one of my Ergodox keyboards and with a bit of my fingers in the shot.</p>
-
-<p><img src="/images/atreus/atreus-with-ergodox.jpg" alt="Atreus size comparison" /></p>
-
-<p>Building the keyboard was pretty straight forward.
-The included instructions are thorough and include plenty of photos.
-All of the components are through-hole so the soldering is not difficult.
-This would be a good first keyboard project.</p>
-
-<p>I already had USB cable, key switches, key caps, and a micro-controller so I purchased the partial kit from Phil.
-It came with everything else, except for something to coat the wood, that you need to build the keyboard.
-I wanted to connect the keyboard to USB C ports, so I used a <a href="https://amzn.to/2IJqItO">micro to USB C cable</a>.</p>
-
-<p>I enjoyed the color of the laser cut wood and appreciated the burn marks.
-I didn&rsquo;t want to lose the color or burns so I coated the wood with a water based clear polyurethane with a satin finish.
-This was probably the most difficult part of the build, and it was pretty easy, simply because I lack experience finishing wood.</p>
-
-<p>When reading other build logs I noticed that someone else put a zip tie on their USB cable to help prevent it from tugging on the micro-controller.
-I have no idea how helpful this is but it seemed like a good thing to do so I also did it.
-To do this you basically just wrap the cable with a zip tie and cram it against the case so that the zip tie prevents tugging on the micro-controller.
-You can see it in the picture below.</p>
-
-<p><img src="/images/atreus/atreus-inside-zip-tie.jpg" alt="My completed Atreus keyboard" /></p>
-
-<p>I&rsquo;ve only been typing on the keyboard for basically this blog post but I&rsquo;ve already found myself adapting to it pretty quickly.
-I don&rsquo;t intend for it to replace my Ergodox for normal usage but I think it will be a great portable keyboard.</p>
-
-<p>Overall it was a fun project and I&rsquo;m glad I did it.
-I look forward to customizing the firmware to make the key layout fit my usage.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//2">&larr; Older</a>
@@ -1503,6 +1481,10 @@ I look forward to customizing the firmware to make the key layout fit my usage.<
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/08/31/utilities-i-like-selecta/">Utilities I like: selecta</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2020/07/03/introducing-photo-fit/">Introducing Photo Fit</a>
@@ -1538,10 +1520,6 @@ I look forward to customizing the firmware to make the key layout fit my usage.<
     
       <li class="post">
         <a href="/blog/2020/01/11/reading-in-2019/">Reading in 2019</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/10/12/building-an-atreus-keyboard/">Building an Atreus keyboard</a>
       </li>
     
   </ul>

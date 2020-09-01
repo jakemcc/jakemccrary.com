@@ -14,13 +14,13 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" Jeff Ramnani wrote an article about unifying your command line interactions across programming projects. I recommend that you read it. The basic gist &hellip;" />
+    <meta itemprop="description" content=" I’ve spent a significant portion of my career figuring out how to make software run faster. It is a problem I enjoy solving. One of the most &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" Jeff Ramnani wrote an article about unifying your command line interactions across programming projects. I recommend that you read it. The basic gist &hellip;" />
+    <meta name="twitter:description" content=" I’ve spent a significant portion of my career figuring out how to make software run faster. It is a problem I enjoy solving. One of the most &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -28,12 +28,12 @@
     <meta property="og:site_name" content="The Blog of Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/5/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" Jeff Ramnani wrote an article about unifying your command line interactions across programming projects. I recommend that you read it. The basic gist &hellip;" />
+    <meta property="og:description" content=" I’ve spent a significant portion of my career figuring out how to make software run faster. It is a problem I enjoy solving. One of the most &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" Jeff Ramnani wrote an article about unifying your command line interactions across programming projects. I recommend that you read it. The basic gist &hellip;">
+    <meta name="description" content=" I’ve spent a significant portion of my career figuring out how to make software run faster. It is a problem I enjoy solving. One of the most &hellip;">
 
     
 
@@ -115,6 +115,121 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/12/31/measure-what-you-intended-to-measure/">Making code fast: Measure what you intend to measure</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-12-31T10:52:00-06:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>10:52 am</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I’ve spent a significant portion of my career figuring out how to make software run faster. It is a problem I enjoy solving. One of the most important steps in an optimization task is to identify what you are trying to optimize and how you will measure it. Answer these questions wrong and you’ll waste your time solving the wrong problem.</p>
+
+<p>Recently I joined a teammate on a task that involved identifying a bottleneck in a Clojure code base. We knew the code path we needed to optimize and turned to the
+<a href="https://github.com/ptaoussanis/tufte">Tufte</a> library to take timing measurements. This was my first time using Tufte and, with my tiny amount of usage, I like what I see.</p>
+
+<p>At some point in the process, we had code<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> that looked similar to the <code>translate</code> function below (lines 20-24).</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">ns </span><span class="nv">bench.core</span>
+</span><span class='line'>  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">clojure.string</span> <span class="ss">:as</span> <span class="nv">string</span><span class="p">]</span>
+</span><span class='line'>            <span class="p">[</span><span class="nv">taoensso.tufte</span> <span class="ss">:as</span> <span class="nv">tufte</span><span class="p">]))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">raw-&gt;maps</span> <span class="p">[</span><span class="nv">lines</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">map </span><span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">line</span><span class="p">]</span>
+</span><span class='line'>         <span class="p">(</span><span class="nb">zipmap </span><span class="p">[</span><span class="ss">:a</span> <span class="ss">:b</span> <span class="ss">:c</span><span class="p">]</span>
+</span><span class='line'>                 <span class="p">(</span><span class="nb">map </span><span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">s</span><span class="p">]</span> <span class="p">(</span><span class="nf">Long/parseLong</span> <span class="nv">s</span><span class="p">))</span>
+</span><span class='line'>                      <span class="p">(</span><span class="nf">string/split</span> <span class="nv">line</span> <span class="o">#</span><span class="s">&quot;\|&quot;</span><span class="p">))))</span>
+</span><span class='line'>       <span class="nv">lines</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">summarize</span> <span class="p">[</span><span class="nv">maps</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">reduce </span><span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">r</span> <span class="nv">m</span><span class="p">]</span>
+</span><span class='line'>            <span class="p">(</span><span class="nb">-&gt; </span><span class="nv">r</span>
+</span><span class='line'>                <span class="p">(</span><span class="nf">update</span> <span class="ss">:a</span> <span class="p">(</span><span class="nf">fnil</span> <span class="nb">+ </span><span class="mi">0</span><span class="p">)</span> <span class="p">(</span><span class="ss">:a</span> <span class="nv">m</span><span class="p">))</span>
+</span><span class='line'>                <span class="p">(</span><span class="nf">update</span> <span class="ss">:b</span> <span class="p">(</span><span class="nf">fnil</span> <span class="nb">+ </span><span class="mi">0</span><span class="p">)</span> <span class="p">(</span><span class="ss">:b</span> <span class="nv">m</span><span class="p">))</span>
+</span><span class='line'>                <span class="p">(</span><span class="nf">update</span> <span class="ss">:c</span> <span class="p">(</span><span class="nf">fnil</span> <span class="nb">+ </span><span class="mi">0</span><span class="p">)</span> <span class="p">(</span><span class="ss">:c</span> <span class="nv">m</span><span class="p">))))</span>
+</span><span class='line'>          <span class="nv">maps</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">translate</span> <span class="p">[</span><span class="nv">lines</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">tufte/profile</span> <span class="p">{}</span>
+</span><span class='line'>                 <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">maps</span> <span class="p">(</span><span class="nf">tufte/p</span> <span class="ss">::raw-&gt;maps</span> <span class="p">(</span><span class="nf">raw-&gt;maps</span> <span class="nv">lines</span><span class="p">))</span>
+</span><span class='line'>                       <span class="nv">summary</span> <span class="p">(</span><span class="nf">tufte/p</span> <span class="ss">::summarize</span> <span class="p">(</span><span class="nf">summarize</span> <span class="nv">maps</span><span class="p">))]</span>
+</span><span class='line'>                   <span class="nv">summary</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here is some Tufte output from running some data through <code>translate</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'>              <span class="nv">pId</span>      <span class="nv">nCalls</span>       <span class="nv">Min</span>        <span class="nv">Max</span>       <span class="nv">MAD</span>      <span class="nv">Mean</span>   <span class="nv">Time%</span> <span class="nv">Time</span>
+</span><span class='line'><span class="ss">:bench.core/summarize</span>           <span class="mi">1</span>   <span class="mf">346.0</span><span class="nv">ms</span>    <span class="mf">346.0</span><span class="nv">ms</span>       <span class="mi">0</span><span class="kd">ns </span>  <span class="mf">346.0</span><span class="nv">ms</span>     <span class="mi">100</span> <span class="mf">346.0</span><span class="nv">ms</span>
+</span><span class='line'><span class="ss">:bench.core/raw-&gt;maps</span>           <span class="mi">1</span>    <span class="mf">2.46</span><span class="err">µ</span><span class="nv">s</span>     <span class="mf">2.46</span><span class="err">µ</span><span class="nv">s</span>       <span class="mi">0</span><span class="kd">ns </span>   <span class="mf">2.46</span><span class="err">µ</span><span class="nv">s</span>       <span class="mi">0</span> <span class="mf">2.46</span><span class="err">µ</span><span class="nv">s</span>
+</span><span class='line'>       <span class="nv">Clock</span> <span class="nv">Time</span>                                                          <span class="mi">100</span> <span class="mf">346.05</span><span class="nv">ms</span>
+</span><span class='line'>   <span class="nv">Accounted</span> <span class="nv">Time</span>                                                          <span class="mi">100</span> <span class="mf">346.0</span><span class="nv">ms</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Notice anything surprising with the output?<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></p>
+
+<p>It surprised me that <code>raw-&gt;maps</code> took such a tiny amount of time compared to the <code>summarize</code> function. Then I realized that we had forgotten about Clojure’s lazy sequences. <code>summarize</code> is taking so much of the time because <code>raw-&gt;maps</code> is just creating a lazy sequence; all the work of realizing that sequence happens in <code>summarize</code>. By wrapping the call to <code>raw-&gt;maps</code> with a <code>doall</code> we were able to get the time measurements we intended.</p>
+
+<p>This example demonstrates an important lesson. When you are profiling code, make sure you are measuring what you think you are measuring. This can be challenging in languages, such as Clojure, that have a concept of laziness. Reflect on your measurement results and perform a gut check that the results make sense with what you intended to measure. If anything feels off, confirm that you’re measuring what you meant to measure.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>Example built using clojure 1.8.0 and tufte 1.1.1. Also, sorry for the terrible names of functions. I was drawing a blank when coming up with this example.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>Imagine this output having 10 more lines in it. Now imagine it having 20. It starts getting quite a bit more difficult to notice oddities as more and more lines get added to this output. Try not to overwhelm yourself by having too much output.<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -969,169 +1084,6 @@ then throw it away without costing us too much time.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/04/30/speeding-up-my-blog/">Speeding up my blog</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-04-30T23:42:00-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>11:42 pm</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I was recently reading
-<a href="https://jefframnani.com/about/">Jeff Ramnani&rsquo;s</a> <em>about</em> page and I
-was somewhat inspired by it. It loads quickly and links to
-<a href="http://mattgemmell.com/designing-blogs-for-readers/">Designing blogs for readers</a>,
-an interesting essay by Matt Gemmmell. Reading that essay inspired me
-to think about my own site and what experience I want to deliver to
-readers.</p>
-
-<p>I can&rsquo;t imagine what every reader wants but I know what I want to
-experience when I read an article online. Reading high quality content
-is my highest priority. Beyond that I enjoy when a page loads fast and
-the visual design doesn&rsquo;t get in the way. I think a great example of
-these two requirements is <a href="http://zenhabits.net/falling/">zen habits</a>
-(along with Jeff Ramnani&rsquo;s and Matt Gemmell&rsquo;s).</p>
-
-<p>My own site sort of achieves those goals. I like to think I&rsquo;m writing
-well-written content that helps others. I know it has helped me. With
-regards to visual design I think there is room for improvement. I don&rsquo;t
-think my site&rsquo;s design is actively distracting from the content
-though, so I&rsquo;ve decided to focus on improving the page load time
-first.</p>
-
-<h2>The optimization process</h2>
-
-<p>As with any optimization problem it is important figure what you&rsquo;re
-going to measure, how you&rsquo;re going to measure it and your starting
-point. I decided to focus on my page load time, as measured by
-<a href="http://www.webpagetest.org">Web Page Test</a>. I used Google&rsquo;s
-<a href="https://developers.google.com/speed/pagespeed/insights/">PageSpeed Insights</a>
-to score and provide helpful tips for improving page
-speed. Unfortunately I didn&rsquo;t capture my starting point with PageSpeed
-Insights but I think I was scoring around a 66/100 for mobile and
-79/100 for desktop.</p>
-
-<p><img src="/images/before-optimizations.png" alt="Starting point from Web Page Test" /></p>
-
-<p>As measured by Web Page Test, the first load of my main page took five
-seconds and it wasn&rsquo;t fully loaded for another second. This is
-ridiculous. My page is almost entirely static content and most of my
-assets are served from CloudFlare. It should be blazing fast.</p>
-
-<p>Next I looked at what was actually being loaded. Google&rsquo;s PageSpeed
-Insights identified that I had three render-blocking <code>script</code>
-tags. The offending scripts were Modernizr, jQuery, and
-octopress.js. PageSpeed Insights
-<a href="https://developers.google.com/speed/docs/insights/BlockingJS#overview">recommends</a>
-inlining JavaScript required to render the page or make loading
-asynchronous. I decided to go a step further and remove the need for
-the JavaScript.</p>
-
-<h3>Removing octopress.js</h3>
-
-<p>It turns out <code>octopress.js</code> was the reason Modernizr and jQuery were
-required. Most of what
-<a href="https://github.com/jakemcc/jakemccrary.com/blob/c27a131aef437181dcab9552c3241f8adafb3884/source/javascripts/octopress.js">octopress.js</a>
-did were things that I don&rsquo;t need; some sort of
-<a href="https://github.com/jakemcc/jakemccrary.com/blob/c27a131aef437181dcab9552c3241f8adafb3884/source/javascripts/octopress.js#L111">flash video fallback</a>,
-adding line numbers to
-<a href="https://github.com/jakemcc/jakemccrary.com/blob/c27a131aef437181dcab9552c3241f8adafb3884/source/javascripts/octopress.js#L112">GitHub Gists</a>,
-<a href="https://github.com/jakemcc/jakemccrary.com/blob/c27a131aef437181dcab9552c3241f8adafb3884/source/javascripts/octopress.js#L99">rendering</a>
-delicious links, and toggling the
-<a href="https://github.com/jakemcc/jakemccrary.com/blob/c27a131aef437181dcab9552c3241f8adafb3884/source/javascripts/octopress.js#L114">sidebar visibility</a>. I
-was able to delete all that code.</p>
-
-<p>Next up was the
-<a href="https://github.com/jakemcc/jakemccrary.com/blob/c27a131aef437181dcab9552c3241f8adafb3884/source/javascripts/octopress.js#L1-L13">mobile navigation</a>
-<code>octopress.js</code> provided. This feature enabled navigation through a
-<code>&lt;select&gt;</code> element when the reader&rsquo;s view port was tiny. Restyling my
-navigation bar to fit better on small screens allowed me to remove
-this feature. <code>ocotpress.js</code> also did some
-<a href="https://github.com/jakemcc/jakemccrary.com/blob/c27a131aef437181dcab9552c3241f8adafb3884/source/javascripts/octopress.js#L37">feature detection</a>
-for Modernizr. I stopped using image masks and was able to remove that
-code as well.</p>
-
-<p>The remaining code in <code>octopress.js</code> was a workaround for an
-<a href="https://github.com/jakemcc/jakemccrary.com/blob/c27a131aef437181dcab9552c3241f8adafb3884/source/javascripts/octopress.js#L121-L136">iOS scaling bug</a>. This
-JavaScript was inlined into my html. At this point <code>octopress.js</code> was
-empty and with it empty the requirements for jQuery and Modernizer
-disappeared. This let me remove three render-blocking <code>script</code> tags.</p>
-
-<h3>Remaining JavaScript</h3>
-
-<p>At this point the remaining JavaScript used for my blog was enabling
-comments with Disqus and showing recent tweets in my sidebar. I still
-enjoy having comments on my blog so I&rsquo;m keeping Disqus around. I doubt
-that readers care what my most recent tweets are so I removed
-Twitter&rsquo;s JavaScript. Removing my tweets also cleans up my sidebar and
-helps keep the focus on my writing.</p>
-
-<h3>Nearly no JavaScript, now what?</h3>
-
-<p>At this point Google&rsquo;s PageSpeed Insight was suggesting that I up my
-cache times, inline my css, and move my web fonts lower on my
-page. Bumping up my cache times was trivial; I simply tweaked a
-CloudFlare setting.</p>
-
-<p>I opted to not inline my css. This would require me to modify my
-site&rsquo;s generation and I just didn&rsquo;t feel like diving down that rabbit
-hole. I also didn&rsquo;t move the web fonts lower on the page. I find fonts
-re-rendering jarring and as a result kept them loading<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> in my <code>&lt;head&gt;</code>.</p>
-
-<h2>The results</h2>
-
-<p>I used Web Page Test to measure again and now the page load time is
-down to 2.5 seconds. Page load times are cut in half from the starting
-point. My PageSpeed Insights scores are also higher; up to 79/100 for mobile
-and 92/100 for desktop.</p>
-
-<p><img src="/images/after-optimizations.png" alt="Web Page Test after optimization" /></p>
-
-<p>Honestly, that number still seems high<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup> to me and I&rsquo;m sure I could
-get it lower. But for now it is good enough<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>. As a result of doing
-this I&rsquo;ve learned more about my blogging setup and managed to speed up
-my page load. Now it is time to focus on researching for future
-posts (and at some point restyling).</p>
-
-<h2>Update on 2016-05-03</h2>
-
-<p>I completely removed web font loading from my site. Getting rid of the
-fonts reduced my load time, as measured by Web Page Test, by a
-second. Google&rsquo;s PageSpeed Insights now scores this site at 90/100 for
-mobile and 96/100 for desktop.</p>
-
-<p><img src="/images/after-optimizations2.png" alt="Web Page Test after font removal" /></p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>When I first wrote this I didn&rsquo;t change anything about my web fonts. After thinking about it for a few days I ended up removing them completely. Details are in the update at the end of the post.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-<li id="fn:2">
-<p>I&rsquo;m asking Web Page Test to load my page using IE10. I get much faster load times using Chrome or Firefox locally which is what most of my readers use. This is good enough for now.<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
-<li id="fn:3">
-<p>I mean, the starting point was probably good enough but if I admitted that then I wouldn&rsquo;t have had the excuse to dig into my site&rsquo;s load time.<a href="#fnref:3" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//6">&larr; Older</a>
@@ -1147,6 +1099,10 @@ mobile and 96/100 for desktop.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/08/31/utilities-i-like-selecta/">Utilities I like: selecta</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2020/07/03/introducing-photo-fit/">Introducing Photo Fit</a>
@@ -1182,10 +1138,6 @@ mobile and 96/100 for desktop.</p>
     
       <li class="post">
         <a href="/blog/2020/01/11/reading-in-2019/">Reading in 2019</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2019/10/12/building-an-atreus-keyboard/">Building an Atreus keyboard</a>
       </li>
     
   </ul>

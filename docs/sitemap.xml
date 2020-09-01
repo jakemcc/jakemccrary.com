@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>https://jakemccrary.com/blog/2020/08/31/utilities-i-like-selecta/</loc>
+<lastmod>2020-08-31T22:24:00-05:00</lastmod>
+</url>
+<url>
 <loc>https://jakemccrary.com/blog/2020/07/03/introducing-photo-fit/</loc>
 <lastmod>2020-07-03T18:37:00-05:00</lastmod>
 </url>
@@ -618,6 +622,9 @@
 </url>
 <url>
 <loc>https://jakemccrary.com/blog/categories/experiment/</loc>
+</url>
+<url>
+<loc>https://jakemccrary.com/blog/categories/macos/</loc>
 </url>
 <url>
 <loc>https://jakemccrary.com/blog/2/</loc>

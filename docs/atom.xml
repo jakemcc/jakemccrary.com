@@ -4,7 +4,7 @@
   <title><![CDATA[Jake McCrary]]></title>
   <link href="https://jakemccrary.com/atom.xml" rel="self"/>
   <link href="https://jakemccrary.com/"/>
-  <updated>2020-07-03T18:38:55-05:00</updated>
+  <updated>2020-08-31T22:24:48-05:00</updated>
   <id>https://jakemccrary.com/</id>
   <author>
     <name><![CDATA[Jake McCrary]]></name>
@@ -12,6 +12,31 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Utilities I like: selecta]]></title>
+    <link href="https://jakemccrary.com/blog/2020/08/31/utilities-i-like-selecta/"/>
+    <updated>2020-08-31T22:24:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2020/08/31/utilities-i-like-selecta</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/garybernhardt/selecta">Selecta</a> is a command-line utility that gives you the power to fuzzy select items from a list of text.
+What does that mean?
+It means you pipe <code>selecta</code> a list of text on stdin, it helps you make a choice from items in that list, and then <code>selecta</code> prints that choice to stdout.</p>
+
+<p>Here is an example of me using it to help me narrow in on what file I&rsquo;d like to pass to <code>wc</code>.</p>
+
+<p><img src="https://jakemccrary.com/images/selecta-search.gif" alt="Example of using selecta" /></p>
+
+<p>In this example, I search for markdown files using <code>ripgrep</code> (<code>rg</code>), type part of a filename, hit enter to select the match, and then see the <code>wc</code> stats of that file.
+This isn&rsquo;t the greatest example of using <code>selecta</code> but it adequately shows what it does.</p>
+
+<p>Some number of years ago, I wrote a script called <code>connect-db</code>.
+This script used <code>selecta</code>, along with <code>grep</code>, <code>sed</code>, and <code>cut</code>, to provide a very pleasant command-line experience for connecting to known databases.
+My coworkers and I used this script frequently.</p>
+
+<p>By combining <code>selecta</code> with other stdin/stdout friendly command-line tools you can build really enjoyable, time-saving tools.
+<a href="https://github.com/garybernhardt/selecta">Selecta</a> is a useful utility to add to your toolkit.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Introducing Photo Fit]]></title>
@@ -1951,109 +1976,6 @@ I look forward to customizing the firmware to make the key layout fit my usage.<
 
 
 <p>I hope you enjoy this. Its has made using a remote terminal with tmux and <a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a> more enjoyable.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[A more helpful makefile]]></title>
-    <link href="https://jakemccrary.com/blog/2018/12/27/a-more-helpful-makefile/"/>
-    <updated>2018-12-27T21:21:00-06:00</updated>
-    <id>https://jakemccrary.com/blog/2018/12/27/a-more-helpful-makefile</id>
-    <content type="html"><![CDATA[<p>In an <a href="https://jakemccrary.com/blog/2016/11/30/unify-your-project-interfaces/">older article</a> of mine I extolled the virtues of having unified interfaces for interacting with your projects. I recently started working at Coinbase and the group I&rsquo;m working with is mostly using makefiles as that common interface. We still have some more work to do to unify the makefile targets of the various projects but I&rsquo;ve picked up one tip that makes switching between projects easier.</p>
-
-<p>That tip is to have the default target of your makefile be one that prints out a helpful message. This looks like the following.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>.PHONY: help
-</span><span class='line'>help:
-</span><span class='line'>  @grep -E '^[0-9a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
-</span><span class='line'>   sort | \
-</span><span class='line'>   awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'</span></code></pre></td></tr></table></div></figure>
-
-
-<p>There is a lot going on there but it basically looks through your makefile targets and finds the ones that have a comment starting with <code>##</code> after the target dependencies. Those targets are printed to the console along with the comment.</p>
-
-<p>As an example, the makefile for my website looks similar to the below file.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>.PHONY: help
-</span><span class='line'>help:
-</span><span class='line'>  @grep -E '^[0-9a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
-</span><span class='line'>   sort | \
-</span><span class='line'>   awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
-</span><span class='line'>
-</span><span class='line'>.PHONY: watch
-</span><span class='line'>watch: ## Watch for changes and serve preview of site with drafts
-</span><span class='line'>  bundle exec rake clean
-</span><span class='line'>  bundle exec rake preview
-</span><span class='line'>
-</span><span class='line'>.PHONY: develop
-</span><span class='line'>develop: ## Serve a preview of the site without drafts and refresh changes
-</span><span class='line'>  bundle exec rake clean
-</span><span class='line'>  bundle exec rake develop
-</span><span class='line'>
-</span><span class='line'>.PHONY: new_adventure
-</span><span class='line'>new_adventure: ## Start a new adventure post
-</span><span class='line'>  bundle exec rake new_adventure
-</span><span class='line'>
-</span><span class='line'>.PHONY: new_post
-</span><span class='line'>new_post: ## Start a new post
-</span><span class='line'>  bundle exec rake new_post 
-</span><span class='line'>
-</span><span class='line'>.PHONY: deploy
-</span><span class='line'>deploy: ## deploy
-</span><span class='line'>  ./deploy.sh</span></code></pre></td></tr></table></div></figure>
-
-
-<p>When this file, when I run <code>make</code> in this websites source, I get the following output.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>0 [last: 0s] 21:11:50 ~/src/jakemcc/blog (master)
-</span><span class='line'>$ make
-</span><span class='line'>deploy                         deploy
-</span><span class='line'>develop                        Serve a preview of the site without drafts and refresh changes
-</span><span class='line'>new_adventure                  Start a new adventure post
-</span><span class='line'>new_post                       Start a new post
-</span><span class='line'>watch                          Watch for changes and serve preview of site with drafts</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This is super useful when you&rsquo;re starting doing work in a new project. With this feature you can get a quick list of useful targets and a description. It allows you to quickly see what can be done in a project.</p>
 ]]></content>
   </entry>
   
