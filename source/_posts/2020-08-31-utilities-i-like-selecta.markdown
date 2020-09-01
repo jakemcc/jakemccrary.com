@@ -5,7 +5,7 @@ date: 2020-08-31 21:00:09 -0500
 comments: true
 published: false
 description: Selecta is a useful 
-keywords: 'selecta, utility, command line'
+keywords: 'selecta, utility, command-line'
 categories: 
 - utilities
 - command-line
@@ -14,7 +14,7 @@ categories:
 - tools
 ---
 
-[Selecta](https://github.com/garybernhardt/selecta) is a command line utility that gives you the power to fuzzy select items from a list of text.
+[Selecta](https://github.com/garybernhardt/selecta) is a command-line utility that gives you the power to fuzzy select items from a list of text.
 What does that mean?
 It means you pipe `selecta` a list of text on stdin, it helps you make a choice from items in that list, and then `selecta` prints that choice to stdout.
 
@@ -22,16 +22,13 @@ Here is an example of me using it to help me narrow in on what file I'd like to 
 
 ![Example of using selecta](/images/selecta-search.gif)
 
-In this example, I search for markdown files using `ripgrep` (`rg`)
+In this example, I search for markdown files using `ripgrep` (`rg`), type part of a filename, hit enter to select the match, and then see the `wc` stats of that file.
+This isn't the greatest example of using `selecta` but it adequately shows what it does.
 
-That example isn't the greatest use of `selecta` but hopefully it helps you see how it can be used.
+Some number of years ago, I wrote a script called `connect-db`.
+This script used `selecta`, along with `grep`, `sed`, and `cut`, to provide a very pleasant command-line experience for connecting to known databases.
+My coworkers and I used this script frequently.
 
-About five years ago, I used `selecta` to build a script called `connect-db`.
-This script parsed my `~/.pgpass` file using `grep`, `sed`, and `cut` with `selecta` to provide a command line fuzzy searcher for quickly connecting to known databases.
-It was a very useful script.
-
-I've also seen tools similar to `selecta`, such as [fzf](https://github.com/junegunn/fzf), used to build helpful tools for running subsets of tests quicker.
-
-By combining `selecta` with the various Unix tools that use stdin and stdout to pass lists of text around you can build pretty friendly tools.
-It is a useful utility to add to our toolkit.
+By combining `selecta` with other stdin/stdout friendly command-line tools you can build really enjoyable, time-saving tools.
+[Selecta](https://github.com/garybernhardt/selecta) is a useful utility to add to your toolkit.
 
