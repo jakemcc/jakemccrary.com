@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "Utilities I like: selecta"
-date: 2020-08-31 21:00:09 -0500
+title: 'Utilities I like: selecta'
+date: 2020-08-31 22:24 -0500
 comments: true
-published: false
+published: true
 description: Selecta is a useful command-line fuzzy text selector.
-keywords: 'selecta, utility, command-line'
-categories: 
+keywords: selecta, utility, command-line
+categories:
 - utilities
 - command-line
 - linux
