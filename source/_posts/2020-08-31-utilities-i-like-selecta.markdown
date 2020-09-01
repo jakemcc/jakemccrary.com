@@ -14,13 +14,15 @@ categories:
 - tools
 ---
 
-[Selecta](https://github.com/garybernhardt/selecta) is a command line utility that gives you the power to fuzzy search items in a list of text.
+[Selecta](https://github.com/garybernhardt/selecta) is a command line utility that gives you the power to fuzzy select items from a list of text.
 What does that mean?
-It means you pipe it a list of text on stdin, it helps you make a choice, and then prints that choice to stdout.
+It means you pipe `selecta` a list of text on stdin, it helps you make a choice from items in that list, and then `selecta` prints that choice to stdout.
 
 Here is an example of me using it to help me narrow in on what file I'd like to pass to `wc`.
 
 ![Example of using selecta](/images/selecta-search.gif)
+
+In this example, I search for markdown files using `ripgrep` (`rg`)
 
 That example isn't the greatest use of `selecta` but hopefully it helps you see how it can be used.
 
