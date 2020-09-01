@@ -4,7 +4,7 @@ title: "Utilities I like: selecta"
 date: 2020-08-31 21:00:09 -0500
 comments: true
 published: false
-description: Selecta is a useful 
+description: Selecta is a useful command-line fuzzy text selector.
 keywords: 'selecta, utility, command-line'
 categories: 
 - utilities
