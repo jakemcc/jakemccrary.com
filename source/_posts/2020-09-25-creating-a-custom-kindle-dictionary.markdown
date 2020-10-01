@@ -9,27 +9,32 @@ keywords: 'csv, keywords, here'
 categories: 
 ---
 
-https://gumroad.com/l/dune-dictionary
-
 Back in April 2013 I created and published a [custom Kindle dictionary](https://gumroad.com/l/dune-dictionary) for the book [Dune](http://www.amazon.com/gp/product/B00B7NPRY8/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B00B7NPRY8&linkCode=as2&tag=jakemccrary08-20&linkId=LC2NFEXWA7JXW57B).
-I was reading Dune for my first time and there were plenty of unfamiliar words.
-Since I was on my Kindle, I was very used to being able to select a word and see its meaning.
+As far as I can tell, [my Dune dictionary](https://gumroad.com/l/dune-dictionary) was the very first custom Kindle dictionary for a fiction book.
 
-This didn't work for many of the words I attempted to look up.
-This is because these words were unique to the Dune universe.
-They existed in the glossary in the back of the book but flipping to that on a Kindle was a huge pain.
+I created it because I had started reading Dune for the first time and there were many of unfamiliar words.
+At this point in my life, I was very used to being able to highlight a word on my Kindle and see its meaning.
 
-I printed out a term list from the Internet and carried that with me.
+This didn't work for many of the words in Dune because many of those words were unique to the Dune universe.
+They existed in the included glossary but flipping to that on a Kindle was a huge pain.
+
+I initially fixed this by printing a list for Wikipedia and carrying that with me.
 This was better but it was still annoying.
 
-I was annoyed enough that I took a break from reading to dig into how to create a custom Kindle dictionary.
-There wasn't a ton of great information online about how to do this.
+I was so annoyed that I took a break from reading to dig into how to create a custom Kindle dictionary.
+At the time, there wasn't a ton of great information online about how to do this.
 
-Eventually, I turned to Amazon's [Kindle Publishing Guidelines](https://s3.amazonaws.com/kindlegen/AmazonKindlePublishingGuidelines.pdf) and, with some experimentation, figured out something that worked.
+Eventually, I found to Amazon's [Kindle Publishing Guidelines](https://s3.amazonaws.com/kindlegen/AmazonKindlePublishingGuidelines.pdf) and, with some experimentation, figured out something that worked.
 The link in the previous sentence is to the **current** documentation, which is much nicer than the [mid-2013 documentation](https://web.archive.org/web/20130408183149/http://s3.amazonaws.com/kindlegen/AmazonKindlePublishingGuidelines.pdf).
-Using this documentation, I developed some Clojure code to generate my [dictionary](https://gumroad.com/l/dune-dictionary).
+The earlier documentation left me with questions and required some experimentation.
 
-As far as I can tell, [my Dune dictionary](https://gumroad.com/l/dune-dictionary) was the very first custom Kindle dictionary for a fiction book.
+Using the mid-2013 documentation, I developed some Clojure code to generate my [dictionary](https://gumroad.com/l/dune-dictionary).
+The rest of this post talks about the format I used in mid-2013.
+This format does not match the more recent documentation but it still works.
+
+https://web.archive.org/web/20200130040547mp_/http://kindlegen.s3.amazonaws.com/KindleGen_Mac_i386_v2_9.zip
+https://web.archive.org/web/20200130040547mp_/http://kindlegen.s3.amazonaws.com/kindlegen_linux_2.6_i386_v2_9.tar.gz
+https://web.archive.org/web/20200130040547mp_/http://kindlegen.s3.amazonaws.com/kindlegen_win32_v2_9.zip
 
 ## Making a dictionary
 
