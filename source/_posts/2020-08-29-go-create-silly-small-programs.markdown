@@ -10,31 +10,37 @@ categories:
 ---
 
 In the last couple of months I've written a couple small, sort-of silly programs.
-One, Photo Fit, is a little tool that runs in a web browser and resizes photos to fit as a background on your phone.
-The other, Default Equipment, runs on a server and automates the very silly task of setting my onewheel as the "bike" I rode when I track e-bike rides in Strava.
+One, [Photo Fit](https://jakemccrary.com/experiments/photo-fit/), is a little tool that runs in a web browser and resizes photos to fit as a background on your phone.
+The other, [Default Equipment](https://default-equipment.herokuapp.com/), runs on Heroku and automates changing the "bike" of my e-bike rides in Strava to be my [onewheel](https://onewheel.com/).
 
-Neither of this programs were written with the goal of making money.
-Each came to life to fix a minor annoyance in my life and, because these tools can live on the Internet, they can fix a similar minor annoyance in other lives.
+They weren't written to solve large problems in the world.
+They weren't written to make any money.
+As of October 1, 2020, Default Equipment doesn't even work for other people (though it could, send me a message if you'd like to use it and I'll eventually get around to it).
 
-That is one super power of being able to write software.
-You can introduce behavior into the world that non-programmers could not.
+Each were created to fix a minor annoyance in my life and, because these tools can live on the Internet, they can fix a similar minor annoyance in other lives.
 
-If you are a professional programmer, you probably mostly do this through your job and, after doing this for a long enough time, can fall out of the practice of building things to solve your own problems.
+With more and more of our world involving software, being able to write software is nearly sorcery[^1].
+You can identify a problem in the world and then fix it.
+And, depending on the problem, fix it for everyone else in the world.
 
-I hadn't written software to solve a non-persistant[^1], non-work related problem in a while.
+[^1]: This is taken to an extreme in the fantasy series [Magic 2.0](https://www.goodreads.com/series/131379-magic-2-0).
 
-Solving your own, smallish problems provides you with space for experimentation.
-Interested in a new language or programming technique?
-Try it out on your small problem.
-If you do a mediocre job, it doesn't really matter.
-You were able to learn while doing that mediocre job and nothing too serious depends on that software.
+This is very powerful.
 
-I wrote both of those small tools using TypeScript.
-I've never written TypeScript before and had just recently learned it through [Execute Program](https://executeprogram.com).
-I'm not familar with the ecosystem and I'm not that familar with the language.
-Writing these small programs in this language let me gain some familarity with both and do so in an area where failure doesn't matter.
+Your change to the world might be a minor improvement.
+Photo Fit might never be used by anyone besides me.
+But it is still out there, making the world slightly better.
+It is available for someone to stumble upon when they are also annoyed by the same problem.
 
+It felt good to write these tiny, useful programs.
+I wrote them using a language, TypeScript, I had just learned and in an ecosystem, nodejs, that I don't know.
+They were a nice, small task that let me gain exposure to things new to me.
 
+It also felt nice to solve a small problem.
+Recognizing a problem and knocking out a solution in a small number of hours invested feels good.
 
+If you haven't fixed some problem in your life with software recently, I'd recommend doing it.
+I hadn't fixed a persistent[^2] problem in my own life in a while.
+It felt good to do it.
 
-[^1]: By non-persistant problem, I mean a problem that stops being a problem once you've used your solution. An example of a non-persistant problem would be a one-off data extraction from a csv file or writing some software to calculate potential dimensions of a climbing wall fitting in your basement.
+[^2]: By persistant problem, I mean a problem that is is ongoing instead of a one-time problem.
