@@ -9,6 +9,7 @@ keywords: 'programming, problems, typescript, strava, onewheel, heroku'
 categories: 
 - programming
 - inspiration
+- typescript
 ---
 
 Over the summer, I developed a couple of small, sort of silly programs.
