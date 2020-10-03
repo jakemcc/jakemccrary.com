@@ -1,12 +1,13 @@
 ---
 layout: post
-title: "Go create silly, small programs"
-date: 2020-08-29 18:12:22 -0500
+title: Go create silly, small programs
+date: 2020-10-03 13:24 -0500
 comments: true
-published: false
-description: Solving small, sort of silly problems with software can make tiny improvements to the world. Go do it.
-keywords: 'programming, problems, typescript, strava, onewheel, heroku'
-categories: 
+published: true
+description: Solving small, sort of silly problems with software can make tiny improvements
+  to the world. Go do it.
+keywords: programming, problems, typescript, strava, onewheel, heroku
+categories:
 - programming
 - inspiration
 - typescript
