@@ -32,12 +32,12 @@ Carpenters can build shelves for their books.
 Cooks can prepare food to remove hunger.
 You can come up with nearly an infinite number of other examples.
 
-The difference, that makes creating software almost magical, is that a solo developer can solve problems for an unknown number of other folks.
-This is enabled by the increasing ease of distribution.
+The difference is that a solo developer can solve problems for an unknown number of other folks.
+This is enabled by the Internet enabled ease of distribution.
 This is very powerful.
 
 Developers can expose their solution to others through a web application.
-Applications can be distributed through various app stores or made available as a download.
+Desktop or mobile applications can be distributed through various app stores or made available as a download.
 Source code can be made available for others to run.
 Being able to distribute easily and cheaply is a game changer.
 
@@ -52,12 +52,12 @@ This lets you feel that finishing-a-project satisfaction quickly.
 The small size also allows you experiment with new techniques and tools without committing to a large and ongoing commitment.
 
 I wrote both Photo Fit and Default Equipment in TypeScript.
-Before the beginning of summer, I didn't know TypeScript and had little exposure to nodejs.
-Now I have some experience with both and gained that while making small improvements to my life.
+Before the beginning of summer, I didn't know TypeScript and had little exposure to Node.js.
+Now I have some experience with both and gained that while making small improvements to my life and potentially the lives of others.
 
 If you haven't developed software to solve a small problem recently, I'd recommend doing it.
 Don't hesitate to remove a problem that feels silly.
-Removing those problems can still make your life slightly better.
+Removing those problems can still make your life slightly better and gives you an opportunity to learn.
 It feels good to remove an annoyance from your life.
 If you can, make that software available to others so their lives are improved as well.
 Take advantage of the power of easy distribution to improve the world and not just your tiny slice of it.
