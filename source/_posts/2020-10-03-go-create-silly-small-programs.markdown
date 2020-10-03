@@ -19,7 +19,7 @@ The other, [Default Equipment](https://default-equipment.herokuapp.com/), runs o
 
 These weren't created to solve large problems in the world.
 There is no plan to make any money with them.
-As of October 1, 2020, Default Equipment doesn't even work for other people (though it could, send me a message if you'd like to use it and I'll get around to it).
+As of October 2020, Default Equipment doesn't even work for other people (though it could, send me a message if you'd like to use it and I'll get around to it).
 
 Each was created to fix a minor annoyance in my life and, because these tools can live on the Internet, they can fix the same minor annoyance in other lives.
 
