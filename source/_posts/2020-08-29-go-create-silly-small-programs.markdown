@@ -4,12 +4,14 @@ title: "Go create silly, small programs"
 date: 2020-08-29 18:12:22 -0500
 comments: true
 published: false
-description: PUT SUMMARY HERE 
-keywords: 'csv, keywords, here'
+description: Solving small, sort of silly problems with software can make tiny improvements to the world. Go do it.
+keywords: 'programming, problems, typescript, strava, onewheel, heroku'
 categories: 
+- programming
+- inspiration
 ---
 
-Over the summer, I developed a couple of small, sort-of silly programs.
+Over the summer, I developed a couple of small, sort of silly programs.
 One, [Photo Fit](https://jakemccrary.com/experiments/photo-fit/), is a little tool that runs in a web browser and resizes photos to fit as your phone's background.
 The other, [Default Equipment](https://default-equipment.herokuapp.com/), runs on Heroku and automates changing the "bike" of my Strava-tracked e-bike rides to be my [onewheel](https://onewheel.com/).
 
