@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: programming | Jake McCrary]]></title>
+  <link href="https://jakemccrary.com/blog/categories/programming/atom.xml" rel="self"/>
+  <link href="https://jakemccrary.com/"/>
+  <updated>2020-10-03T13:41:06-05:00</updated>
+  <id>https://jakemccrary.com/</id>
+  <author>
+    <name><![CDATA[Jake McCrary]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Go create silly, small programs]]></title>
+    <link href="https://jakemccrary.com/blog/2020/10/03/go-create-silly-small-programs/"/>
+    <updated>2020-10-03T13:24:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2020/10/03/go-create-silly-small-programs</id>
+    <content type="html"><![CDATA[<p>Over the summer, I developed a couple of small, sort of silly programs.
+One, <a href="https://jakemccrary.com/experiments/photo-fit/">Photo Fit</a>, is a little tool that runs in a web browser and resizes photos to fit as your phone&rsquo;s background.
+The other, <a href="https://default-equipment.herokuapp.com/">Default Equipment</a>, runs on Heroku and automates changing the &ldquo;bike&rdquo; of my Strava-tracked e-bike rides to be my <a href="https://onewheel.com/">onewheel</a>.</p>
+
+<p>These weren&rsquo;t created to solve large problems in the world.
+There is no plan to make any money with them.
+As of October 2020, Default Equipment doesn&rsquo;t even work for other people (though it could, send me a message if you&rsquo;d like to use it and I&rsquo;ll get around to it).</p>
+
+<p>Each was created to fix a minor annoyance in my life and, because these tools can live on the Internet, they can fix the same minor annoyance in other lives.</p>
+
+<p>With an increasing amount of software in the world, being able to write software is nearly sorcery<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.
+As a developer, you can identify a problem in the world and then change the world to remove that problem.
+And, depending on the problem, you can remove it for everyone else.</p>
+
+<p>Software developers aren&rsquo;t alone in being able to identify problems and remove them through creation.
+Carpenters can build shelves for their books.
+Cooks can prepare food to remove hunger.
+You can come up with nearly an infinite number of other examples.</p>
+
+<p>The difference is that a solo developer can solve problems for an unknown number of other folks.
+This is enabled by the Internet enabled ease of distribution.
+This is very powerful.</p>
+
+<p>Developers can expose their solution to others through a web application.
+Desktop or mobile applications can be distributed through various app stores or made available as a download.
+Source code can be made available for others to run.
+Being able to distribute easily and cheaply is a game changer.</p>
+
+<p>A developer&rsquo;s change to the world might be a minor improvement.
+Photo Fit might never be used by anyone besides me.
+But it is still out there, making the world slightly better.
+It is available for someone to stumble upon when they are also annoyed by the same problem.</p>
+
+<p>It felt good to write these tiny, useful programs.
+If you scope them small enough, there is a definitive ending point<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>.
+This lets you feel that finishing-a-project satisfaction quickly.
+The small size also allows you experiment with new techniques and tools without committing to a large and ongoing commitment.</p>
+
+<p>I wrote both Photo Fit and Default Equipment in TypeScript.
+Before the beginning of summer, I didn&rsquo;t know TypeScript and had little exposure to Node.js.
+Now I have some experience with both and gained that while making small improvements to my life and potentially the lives of others.</p>
+
+<p>If you haven&rsquo;t developed software to solve a small problem recently, I&rsquo;d recommend doing it.
+Don&rsquo;t hesitate to remove a problem that feels silly.
+Removing those problems can still make your life slightly better and gives you an opportunity to learn.
+It feels good to remove an annoyance from your life.
+If you can, make that software available to others so their lives are improved as well.
+Take advantage of the power of easy distribution to improve the world and not just your tiny slice of it.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>This is taken to an extreme in the fantasy series <a href="https://www.goodreads.com/series/131379-magic-2-0">Magic 2.0</a>.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>Excluding any ongoing maintenance. But if you&rsquo;re making something small enough you can approach near zero ongoing maintenance. One of my longest running solve-my-own-problems application, Book Robot, has been operating for nearly 7 years with minimal effort.<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
+  
+</feed>

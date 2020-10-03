@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>https://jakemccrary.com/blog/2020/10/03/go-create-silly-small-programs/</loc>
+<lastmod>2020-10-03T13:24:00-05:00</lastmod>
+</url>
+<url>
 <loc>https://jakemccrary.com/blog/2020/08/31/utilities-i-like-selecta/</loc>
 <lastmod>2020-08-31T22:24:00-05:00</lastmod>
 </url>
@@ -627,34 +631,10 @@
 <loc>https://jakemccrary.com/blog/categories/macos/</loc>
 </url>
 <url>
-<loc>https://jakemccrary.com/blog/2/</loc>
+<loc>https://jakemccrary.com/blog/categories/programming/</loc>
 </url>
 <url>
-<loc>https://jakemccrary.com/blog/3/</loc>
-</url>
-<url>
-<loc>https://jakemccrary.com/blog/4/</loc>
-</url>
-<url>
-<loc>https://jakemccrary.com/blog/5/</loc>
-</url>
-<url>
-<loc>https://jakemccrary.com/blog/6/</loc>
-</url>
-<url>
-<loc>https://jakemccrary.com/blog/7/</loc>
-</url>
-<url>
-<loc>https://jakemccrary.com/blog/8/</loc>
-</url>
-<url>
-<loc>https://jakemccrary.com/blog/9/</loc>
-</url>
-<url>
-<loc>https://jakemccrary.com/blog/10/</loc>
-</url>
-<url>
-<loc>https://jakemccrary.com/blog/11/</loc>
+<loc>https://jakemccrary.com/blog/categories/inspiration/</loc>
 </url>
 <url>
 <loc>https://jakemccrary.com/adventures/2010-chicago-mackinac-race/</loc>

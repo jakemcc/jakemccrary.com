@@ -14,26 +14,26 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" In an older article of mine I extolled the virtues of having unified interfaces for interacting with your projects. I recently started working at &hellip;" />
+    <meta itemprop="description" content=" I&rsquo;ve been using Emacs in a remote tmux session lately and I&rsquo;ve been missing lein-test-refresh notifications when my Clojure tests pass or &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" In an older article of mine I extolled the virtues of having unified interfaces for interacting with your projects. I recently started working at &hellip;" />
+    <meta name="twitter:description" content=" I&rsquo;ve been using Emacs in a remote tmux session lately and I&rsquo;ve been missing lein-test-refresh notifications when my Clojure tests pass or &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
     <!-- Open Graph data -->
-    <meta property="og:site_name" content="The Blog of Jake McCrary" />
+    <meta property="og:site_name" content="Writing by Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/3/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" In an older article of mine I extolled the virtues of having unified interfaces for interacting with your projects. I recently started working at &hellip;" />
+    <meta property="og:description" content=" I&rsquo;ve been using Emacs in a remote tmux session lately and I&rsquo;ve been missing lein-test-refresh notifications when my Clojure tests pass or &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" In an older article of mine I extolled the virtues of having unified interfaces for interacting with your projects. I recently started working at &hellip;">
+    <meta name="description" content=" I&rsquo;ve been using Emacs in a remote tmux session lately and I&rsquo;ve been missing lein-test-refresh notifications when my Clojure tests pass or &hellip;">
 
     
 
@@ -115,6 +115,49 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2019/01/06/notifications-with-tmux-and-lein-test-refresh/">Notifications with tmux and lein-test-refresh</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2019-01-06T16:55:00-06:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2019</span></span> <span class='time'>4:55 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&rsquo;ve been using Emacs in a remote <a href="https://github.com/tmux/tmux">tmux</a> session lately and I&rsquo;ve been missing <a href="https://github.com/jakemcc/lein-test-refresh#notifications">lein-test-refresh</a> notifications when my Clojure tests pass or fail. Luckily, it only took me a little bit of searching to figure out a solution for when I&rsquo;m working inside of tmux.</p>
+
+<p>Below is a GIF of the notifications I get as my tests run and pass or fail.</p>
+
+<p><img src="/images/tmux-test-refresh.gif" title="tmux and test-refresh notifications" alt="tmux and test-refresh notifications" /></p>
+
+<p>With the above notifications, I can keep my focus on my code and only switch to the tmux window with <code>lein test-refresh</code> running when a test fails.</p>
+
+<p>This was pretty easy to setup. You can trigger a message in tmux by running <code>tmux display-message &lt;MESSAGE_HERE&gt;</code>. To configure <a href="https://github.com/jakemcc/lein-test-refresh#notifications">lein-test-refresh</a> to send notifications to tmux simply include the following in your <code>:test-refresh</code> section of your <code>project.clj</code> or <code>profiles.clj</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="ss">:test-refresh</span> <span class="p">{</span><span class="ss">:notify-command</span> <span class="p">[</span><span class="s">&quot;tmux&quot;</span> <span class="s">&quot;display-message&quot;</span><span class="p">]}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I hope you enjoy this. Its has made using a remote terminal with tmux and <a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a> more enjoyable.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1581,205 +1624,6 @@ an area where this, or something similar to it, would help.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/09/29/measure-aggregate-performance/">Measuring aggregate performance in Clojure</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2017-09-29T08:48:01-05:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>8:48 am</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Last time I needed to speed up some code, I wrote a Clojure macro that recorded the aggregate time spent executing the code wrapped by the macro. Aggregate timings were useful since the same functions were called multiple times in the code path we were trying to optimize. Seeing total times made it easier to identify where we should spend our time.</p>
-
-<p>Below is the namespace I temporarily introduced into our codebase.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">ns </span><span class="nv">metrics</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">msec-str</span>
-</span><span class='line'>  <span class="s">&quot;Returns a human readable version of milliseconds based upon scale&quot;</span>
-</span><span class='line'>  <span class="p">[</span><span class="nv">msecs</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">s</span> <span class="mi">1000</span>
-</span><span class='line'>        <span class="nv">m</span> <span class="p">(</span><span class="nb">* </span><span class="mi">60</span> <span class="nv">s</span><span class="p">)</span>
-</span><span class='line'>        <span class="nv">h</span> <span class="p">(</span><span class="nb">* </span><span class="mi">60</span> <span class="nv">m</span><span class="p">)]</span>
-</span><span class='line'>    <span class="p">(</span><span class="nf">condp</span> <span class="nb">&gt;= </span><span class="nv">msecs</span>
-</span><span class='line'>      <span class="mi">1</span> <span class="p">(</span><span class="nf">format</span> <span class="s">&quot;%.5f msecs&quot;</span> <span class="p">(</span><span class="nb">float </span><span class="nv">msecs</span><span class="p">))</span>
-</span><span class='line'>      <span class="nv">s</span> <span class="p">(</span><span class="nf">format</span> <span class="s">&quot;%.1f msecs&quot;</span> <span class="p">(</span><span class="nb">float </span><span class="nv">msecs</span><span class="p">))</span>
-</span><span class='line'>      <span class="nv">m</span> <span class="p">(</span><span class="nf">format</span> <span class="s">&quot;%.1f seconds&quot;</span> <span class="p">(</span><span class="nb">float </span><span class="p">(</span><span class="nb">/ </span><span class="nv">msecs</span> <span class="nv">s</span><span class="p">)))</span>
-</span><span class='line'>      <span class="nv">h</span> <span class="p">(</span><span class="nf">format</span> <span class="s">&quot;%02dm:%02ds&quot;</span> <span class="p">(</span><span class="nb">int </span><span class="p">(</span><span class="nb">/ </span><span class="nv">msecs</span> <span class="nv">m</span><span class="p">))</span>
-</span><span class='line'>                <span class="p">(</span><span class="nf">mod</span> <span class="p">(</span><span class="nb">int </span><span class="p">(</span><span class="nb">/ </span><span class="nv">msecs</span> <span class="nv">s</span><span class="p">))</span> <span class="mi">60</span><span class="p">))</span>
-</span><span class='line'>      <span class="p">(</span><span class="nf">format</span> <span class="s">&quot;%dh:%02dm&quot;</span> <span class="p">(</span><span class="nb">int </span><span class="p">(</span><span class="nb">/ </span><span class="nv">msecs</span> <span class="nv">h</span><span class="p">))</span>
-</span><span class='line'>              <span class="p">(</span><span class="nf">mod</span> <span class="p">(</span><span class="nb">int </span><span class="p">(</span><span class="nb">/ </span><span class="nv">msecs</span> <span class="nv">m</span><span class="p">))</span> <span class="mi">60</span><span class="p">)))))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="k">def </span><span class="nv">aggregates</span> <span class="p">(</span><span class="nf">atom</span> <span class="p">{}))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defmacro </span><span class="nv">record-aggregate</span>
-</span><span class='line'>  <span class="s">&quot;Records the total time spent executing body across invocations.&quot;</span>
-</span><span class='line'>  <span class="p">[</span><span class="nv">label</span> <span class="o">&amp;</span> <span class="nv">body</span><span class="p">]</span>
-</span><span class='line'>  <span class="o">`</span><span class="p">(</span><span class="nf">do</span>
-</span><span class='line'>     <span class="p">(</span><span class="nb">when-not </span><span class="p">(</span><span class="nb">contains? </span><span class="o">@</span><span class="nv">aggregates</span> <span class="o">~</span><span class="nv">label</span><span class="p">)</span>
-</span><span class='line'>       <span class="p">(</span><span class="nf">swap!</span> <span class="nv">aggregates</span> <span class="nb">assoc </span><span class="o">~</span><span class="nv">label</span> <span class="p">{</span><span class="ss">:order</span> <span class="p">(</span><span class="nb">inc </span><span class="p">(</span><span class="nb">count </span><span class="o">@</span><span class="nv">aggregates</span><span class="p">))}))</span>
-</span><span class='line'>     <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">start-time#</span> <span class="p">(</span><span class="nf">System/nanoTime</span><span class="p">)</span>
-</span><span class='line'>           <span class="nv">result#</span> <span class="p">(</span><span class="k">do </span><span class="o">~@</span><span class="nv">body</span><span class="p">)</span>
-</span><span class='line'>           <span class="nv">result#</span> <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">and </span><span class="p">(</span><span class="nb">seq? </span><span class="nv">result#</span><span class="p">)</span>
-</span><span class='line'>                            <span class="p">(</span><span class="nb">instance? </span><span class="nv">clojure.lang.IPending</span> <span class="nv">result#</span><span class="p">)</span>
-</span><span class='line'>                            <span class="p">(</span><span class="nb">not </span><span class="p">(</span><span class="nf">realized?</span> <span class="nv">result#</span><span class="p">)))</span>
-</span><span class='line'>                     <span class="p">(</span><span class="nb">doall </span><span class="nv">result#</span><span class="p">)</span>
-</span><span class='line'>                     <span class="nv">result#</span><span class="p">)</span>
-</span><span class='line'>           <span class="nv">end-time#</span> <span class="p">(</span><span class="nf">System/nanoTime</span><span class="p">)]</span>
-</span><span class='line'>       <span class="p">(</span><span class="nf">swap!</span> <span class="nv">aggregates</span>
-</span><span class='line'>              <span class="nv">update-in</span>
-</span><span class='line'>              <span class="p">[</span><span class="o">~</span><span class="nv">label</span> <span class="ss">:msecs</span><span class="p">]</span>
-</span><span class='line'>              <span class="p">(</span><span class="nf">fnil</span> <span class="nb">+ </span><span class="mi">0</span><span class="p">)</span>
-</span><span class='line'>              <span class="p">(</span><span class="nb">/ </span><span class="p">(</span><span class="nb">double </span><span class="p">(</span><span class="nb">- </span><span class="nv">end-time#</span> <span class="nv">start-time#</span><span class="p">))</span> <span class="mf">1000000.0</span><span class="p">))</span>
-</span><span class='line'>       <span class="nv">result#</span><span class="p">)))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">log-times</span>
-</span><span class='line'>  <span class="s">&quot;Logs time recorded by record-aggregate and resets the aggregate times.&quot;</span>
-</span><span class='line'>  <span class="p">[]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nb">doseq </span><span class="p">[[</span><span class="nv">label</span> <span class="nv">data</span><span class="p">]</span> <span class="p">(</span><span class="nb">sort-by </span><span class="p">(</span><span class="nb">comp </span><span class="ss">:order</span> <span class="nv">second</span><span class="p">)</span> <span class="o">@</span><span class="nv">aggregates</span><span class="p">)</span>
-</span><span class='line'>          <span class="ss">:let</span> <span class="p">[</span><span class="nv">msecs</span> <span class="p">(</span><span class="ss">:msecs</span> <span class="nv">data</span><span class="p">)]]</span>
-</span><span class='line'>    <span class="p">(</span><span class="nb">println </span><span class="s">&quot;Executing&quot;</span> <span class="nv">label</span> <span class="s">&quot;took:&quot;</span> <span class="p">(</span><span class="nf">msec-str</span> <span class="nv">msecs</span><span class="p">)))</span>
-</span><span class='line'>  <span class="p">(</span><span class="nf">reset!</span> <span class="nv">aggregates</span> <span class="p">{}))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>record-aggregate</code> takes a label and code and times how long that code takes to run. If the executed code returns an unrealized lazy sequence, it also evaluates the sequence<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.</p>
-
-<p>Below is an example of using the above code. When we used it, we looked at the code path we needed to optimize and wrapped chunks of it in <code>record-aggregate</code>. At the end of the calculations, we inserted a call to <code>log-times</code> so timing data would show up in our logs.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">ns </span><span class="nv">work</span>
-</span><span class='line'>  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">metrics</span> <span class="ss">:as</span> <span class="nv">m</span><span class="p">]))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">calculation</span> <span class="p">[</span><span class="nv">x</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nf">m/record-aggregate</span> <span class="ss">::calculation</span>
-</span><span class='line'>                      <span class="p">(</span><span class="nf">Thread/sleep</span> <span class="p">(</span><span class="nb">+ </span><span class="mi">300</span> <span class="p">(</span><span class="nb">rand-int </span><span class="mi">60</span><span class="p">)))</span>
-</span><span class='line'>                      <span class="nv">x</span><span class="p">))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">work</span> <span class="p">[</span><span class="nv">x</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="nf">m/record-aggregate</span> <span class="ss">::work</span>
-</span><span class='line'>                      <span class="p">(</span><span class="nf">repeatedly</span> <span class="mi">10</span> <span class="p">(</span><span class="k">fn </span><span class="p">[]</span>
-</span><span class='line'>                                       <span class="p">(</span><span class="nf">Thread/sleep</span> <span class="mi">5</span><span class="p">)</span>
-</span><span class='line'>                                       <span class="nv">x</span><span class="p">))))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">process-rows</span> <span class="p">[</span><span class="nv">rows</span><span class="p">]</span>
-</span><span class='line'>  <span class="p">(</span><span class="k">let </span><span class="p">[</span><span class="nv">rows</span> <span class="p">(</span><span class="nf">m/record-aggregate</span> <span class="ss">::process-rows</span>
-</span><span class='line'>                                 <span class="p">(</span><span class="nf">-&gt;&gt;</span> <span class="nv">rows</span>
-</span><span class='line'>                                      <span class="p">(</span><span class="nf">mapv</span> <span class="nv">calculation</span><span class="p">)</span>
-</span><span class='line'>                                      <span class="p">(</span><span class="nb">mapcat </span><span class="nv">work</span><span class="p">)))]</span>
-</span><span class='line'>    <span class="p">(</span><span class="nf">m/log-times</span><span class="p">)</span>
-</span><span class='line'>    <span class="nv">rows</span><span class="p">))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now, when <code>(process-rows [:a :a])</code> is called output similar to below is printed.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nv">Executing</span> <span class="ss">:work/process-rows</span> <span class="nv">took</span><span class="err">:</span> <span class="mf">780.9</span> <span class="nv">msecs</span>
-</span><span class='line'><span class="nv">Executing</span> <span class="ss">:work/calculation</span> <span class="nv">took</span><span class="err">:</span> <span class="mf">664.6</span> <span class="nv">msecs</span>
-</span><span class='line'><span class="nv">Executing</span> <span class="ss">:work/work</span> <span class="nv">took</span><span class="err">:</span> <span class="mf">115.8</span> <span class="nv">msecs</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Using this technique, we were able to identify slow parts of our process and were able to optimize those chunks of our code. There are potential flaws with measuring time like this, but they were not a problem in our situation<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>.</p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>See <a href="/blog/2016/12/31/measure-what-you-intended-to-measure/">Measure what you intend to measure</a><a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-<li id="fn:2">
-<p>See <a href="https://shipilev.net/blog/2014/nanotrusting-nanotime/">Nanotrusting the Nanotime</a><a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//4">&larr; Older</a>
@@ -1795,6 +1639,10 @@ an area where this, or something similar to it, would help.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/10/03/go-create-silly-small-programs/">Go create silly, small programs</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2020/08/31/utilities-i-like-selecta/">Utilities I like: selecta</a>
@@ -1830,10 +1678,6 @@ an area where this, or something similar to it, would help.</p>
     
       <li class="post">
         <a href="/blog/2020/02/25/auto-syncing-a-git-repository/">Auto-syncing a git repository</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/01/11/reading-in-2019/">Reading in 2019</a>
       </li>
     
   </ul>
