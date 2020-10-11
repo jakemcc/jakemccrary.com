@@ -9,6 +9,23 @@ keywords: 'csv, keywords, here'
 categories: 
 ---
 
+## NOTES
+
+- Must have a primary index of words in alaphabtetical order
+- Marked as dictionary, input and output languages must be dfeined properly
+- Should have
+  - A cover image
+  - A copyright page
+  - Any relevant front or back matter
+  - Definitions of words
+- opf file
+  - ISO 639-1 language code for languages
+  - defautl lookup index if more than one index
+
+`kindlegen.exe [filename.opf] -c2 –verbose -dont_append_source`
+
+## CONTENT
+
 Back in April 2013 I created and published a [custom Kindle dictionary](https://gumroad.com/l/dune-dictionary) for the book [Dune](http://www.amazon.com/gp/product/B00B7NPRY8/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B00B7NPRY8&linkCode=as2&tag=jakemccrary08-20&linkId=LC2NFEXWA7JXW57B).
 As far as I can tell, [my Dune dictionary](https://gumroad.com/l/dune-dictionary) was the very first custom Kindle dictionary for a fiction book.
 
