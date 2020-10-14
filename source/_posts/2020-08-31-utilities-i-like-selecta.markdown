@@ -20,7 +20,10 @@ It means you pipe `selecta` a list of text on stdin, it helps you make a choice 
 
 Here is an example of me using it to help me narrow in on what file I'd like to pass to `wc`.
 
-![Example of using selecta](/images/selecta-search.gif)
+<video autoplay loop muted playsinline>
+  <source src="/images/selecta-search.webm" type="video/webm">
+  <source src="/images/selecta-search.mp4" type="video/mp4">
+</video>
 
 In this example, I search for markdown files using `ripgrep` (`rg`), type part of a filename, hit enter to select the match, and then see the `wc` stats of that file.
 This isn't the greatest example of using `selecta` but it adequately shows what it does.
