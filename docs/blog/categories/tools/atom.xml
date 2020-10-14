@@ -4,7 +4,7 @@
   <title><![CDATA[Category: tools | Jake McCrary]]></title>
   <link href="https://jakemccrary.com/blog/categories/tools/atom.xml" rel="self"/>
   <link href="https://jakemccrary.com/"/>
-  <updated>2020-10-11T13:16:40-05:00</updated>
+  <updated>2020-10-13T21:11:29-05:00</updated>
   <id>https://jakemccrary.com/</id>
   <author>
     <name><![CDATA[Jake McCrary]]></name>
@@ -24,7 +24,10 @@ It means you pipe <code>selecta</code> a list of text on stdin, it helps you mak
 
 <p>Here is an example of me using it to help me narrow in on what file I&rsquo;d like to pass to <code>wc</code>.</p>
 
-<p><img src="/images/selecta-search.gif" alt="Example of using selecta" /></p>
+<p><video autoplay loop muted playsinline>
+  <source src="https://jakemccrary.com/images/selecta-search.webm" type="video/webm">
+  <source src="https://jakemccrary.com/images/selecta-search.mp4" type="video/mp4">
+</video></p>
 
 <p>In this example, I search for markdown files using <code>ripgrep</code> (<code>rg</code>), type part of a filename, hit enter to select the match, and then see the <code>wc</code> stats of that file.
 This isn&rsquo;t the greatest example of using <code>selecta</code> but it adequately shows what it does.</p>
