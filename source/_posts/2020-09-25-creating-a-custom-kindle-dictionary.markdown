@@ -12,7 +12,7 @@ categories:
 ## NOTES
 
 - Must have a primary index of words in alaphabtetical order
-- Marked as dictionary, input and output languages must be dfeined properly
+- Marked as dictionary, input and output languages must be defined properly
 - Should have
   - A cover image
   - A copyright page
@@ -20,7 +20,7 @@ categories:
   - Definitions of words
 - opf file
   - ISO 639-1 language code for languages
-  - defautl lookup index if more than one index
+  - default lookup index if more than one index
 
 `kindlegen.exe [filename.opf] -c2 –verbose -dont_append_source`
 
@@ -145,13 +145,13 @@ The only markup you need is the `<idx:orth>` node.
 Its content is the word being looked up.
 The rest of the markup can be whatever you want.
 
-I wrap the term in a `dt` and the definition in `dd` because it just feels like the right thing to do and provides tags to put some css styles on.
-I wrap the `dt` element in an `h5` because I couldn't figure out what css styling would actually put the term and definition on different lines.
+I wrap the term in a `dt` and the definition in `dd` because it just feels like the right thing to do and provides tags to put some CSS styles on.
+I wrap the `dt` element in an `h5` because I couldn't figure out what CSS styling would actually put the term and definition on different lines.
 
 It isn't that I don't know what the styles should be but it seems like my Kindle did not respect them.
 Figuring this out is part of the experimentation required to produce a dictionary that you're happy with.
 
-Out of the css defined in the `head`, it seems like only the `font-weight` is actually doing anything on my 2nd generation Kindle paperwhite.
+Out of the CSS defined in the `head`, it seems like only the `font-weight` is actually doing anything on my 2second generation Kindle paperwhite.
 I don't know why.
 The other styles are there just to make it look how I want it to look when I view it in the Kindle Previewer application.
 
@@ -162,7 +162,7 @@ Most dictionaries don't need these features so I'm not going to elaborate on the
 ### 3. Construct a cover page.
 
 This is just a requirement of a Kindle.
-Create a html file called `cover.html` and substitute in the appropiate values.
+Create a html file called `cover.html` and substitute in the appropriate values.
 
 ```html
 <html>
@@ -186,7 +186,7 @@ You probably need to do this if you actually publish the dictionary through Amaz
 This is also a requirement of the Kindle publishing guide.
 There isn't any special markup for doing this.
 
-Just make another html file and fill in some appropiate details.
+Just make another html file and fill in some appropriate details.
 
 ### 5. Create a usage page
 
@@ -198,7 +198,7 @@ Again, this is just a html document with some content in it.
 This is one of the poorly documented but extremely important parts of making a Kindle dictionary.
 
 Make an opf file and name it whatever you want; in this example we'll go with `dict.opf`.
-This is an xml file that explains how to combine the various files together to actually make a dictionary.
+This is a XML file that explains how to combine the various files together to actually make a dictionary.
 
 Below is the one I've  used for the Diaspora dictionary.
 I've left in references, some commented out, to what you'd need to add a cover image.
@@ -258,7 +258,7 @@ For sideloading dictionaries onto Kindles, it is not required.
 The `<spine>` section references the `<item>`s from the `<manifest>` and specifies the order they appear in your book.
 
 I honestly don't remember why the `<guide>` section is in there or what it is doing in this example.
-I'm guessing that is what causes there to be an index with the wordlist in the dictionary but I haven't tried removing it and the documentation doesn't talk about it.
+I'm guessing that is what causes there to be an index with the word list in the dictionary but I haven't tried removing it and the documentation doesn't talk about it.
 I only have it there since I had it in earlier dictionaries I made.
 
 ### 6. Combine them together using `kindlegen`.
@@ -267,7 +267,7 @@ This is what the current (as of October 2020) Kindle publishing guidelines say t
 You can still find `kindlegen` through the Internet Archive.
 
 The old OS X version no longer works on my Apple laptop.
-To verify `kindlegen` still works, I downloaded the Linux version and used it in a linux Docker container.
+To verify `kindlegen` still works, I downloaded the Linux version and used it in a Linux Docker container.
 
 Maybe some day I'll write up doing this but you can use the Kindle Previewer application to make your dictionary so we'll do that.
 
@@ -295,7 +295,7 @@ Now when you try to look up a word, your dictionary is searched first.
 
 The great thing is that if a word _isn't_ in your dictionary then the Kindle searches the other dictionaries[^2].
 This feature is great as it lets your dictionary be very focused.
-Hopefully Amazon does't remove this feature.
+Hopefully Amazon doesn't remove this feature.
 
 [^2]: No idea if it searches all of them in some order but I'm very glad it works this way.
 
