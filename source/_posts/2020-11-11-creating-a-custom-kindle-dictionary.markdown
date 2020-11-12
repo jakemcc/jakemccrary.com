@@ -4,9 +4,11 @@ title: Creating a custom Kindle dictionary
 date: 2020-11-11 19:23 -0600
 comments: true
 published: true
-description: PUT SUMMARY HERE
-keywords: csv, keywords, here
-categories:
+description: Here are the steps to make a custom Kindle dictionary.
+keywords: kindle, dictionary
+categories: 
+- kindle
+- dictionary
 ---
 
 Back in April 2013, I created and published a [custom Kindle dictionary](https://gumroad.com/l/dune-dictionary) for the book [Dune](http://www.amazon.com/gp/product/B00B7NPRY8/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B00B7NPRY8&linkCode=as2&tag=jakemccrary08-20&linkId=LC2NFEXWA7JXW57B).
