@@ -14,17 +14,15 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" Last year
-I wrote about how I managed my windows under OS X, Windows, and Linux.
-I&rsquo;m a big fan of having an orderly layout and try to use grid &hellip;" />
+    <meta itemprop="description" content=" I&rsquo;m now writing Clojure nearly 100% of my time and as a result am spending more
+time in Emacs. I&rsquo;m working in a few different projects &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" Last year
-I wrote about how I managed my windows under OS X, Windows, and Linux.
-I&rsquo;m a big fan of having an orderly layout and try to use grid &hellip;" />
+    <meta name="twitter:description" content=" I&rsquo;m now writing Clojure nearly 100% of my time and as a result am spending more
+time in Emacs. I&rsquo;m working in a few different projects &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -32,16 +30,14 @@ I&rsquo;m a big fan of having an orderly layout and try to use grid &hellip;" />
     <meta property="og:site_name" content="Writing by Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/9/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" Last year
-I wrote about how I managed my windows under OS X, Windows, and Linux.
-I&rsquo;m a big fan of having an orderly layout and try to use grid &hellip;" />
+    <meta property="og:description" content=" I&rsquo;m now writing Clojure nearly 100% of my time and as a result am spending more
+time in Emacs. I&rsquo;m working in a few different projects &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" Last year
-I wrote about how I managed my windows under OS X, Windows, and Linux.
-I&rsquo;m a big fan of having an orderly layout and try to use grid &hellip;">
+    <meta name="description" content=" I&rsquo;m now writing Clojure nearly 100% of my time and as a result am spending more
+time in Emacs. I&rsquo;m working in a few different projects &hellip;">
 
     
 
@@ -123,6 +119,121 @@ I&rsquo;m a big fan of having an orderly layout and try to use grid &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/04/27/emacs-generating-project-shortcuts/">Emacs: Generating project shortcuts</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-04-27T16:38:00-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>4:38 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&rsquo;m now writing Clojure nearly 100% of my time and as a result am spending more
+time in Emacs. I&rsquo;m working in a few different projects and
+wanted a quicker way to jump between them. My first attempt at this
+ended with me defining many functions that looked like the following.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">b/test-refresh</span> <span class="p">()</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">find-file</span> <span class="s">&quot;~/src/jakemcc/lein-test-refresh/test-refresh/project.clj&quot;</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After writing a couple of these I decided the computer could do this
+better than I could and decided to write some code to automate it. A
+sample of my directory structure is shown below.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>jakemcc/
+</span><span class='line'>├── bookrobot
+</span><span class='line'>│   └── project.clj
+</span><span class='line'>└── lein-autoexpect
+</span><span class='line'>    └── project.clj
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Taking advantage of this structure I wrote some Emacs lisp to walk a
+directory and define functions that open up any found project.clj
+files.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="c1">;; -*- lexical-binding: t -*-</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">open-file-fn</span> <span class="p">(</span><span class="nv">file</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">lambda</span> <span class="p">()</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">find-file</span> <span class="nv">file</span><span class="p">)))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nb">defun</span> <span class="nv">create-project-shortcuts</span> <span class="p">(</span><span class="nv">prefix</span> <span class="nv">base</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">dolist</span> <span class="p">(</span><span class="nb">elt</span> <span class="p">(</span><span class="nv">directory-files</span> <span class="nv">base</span><span class="p">))</span>
+</span><span class='line'>    <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">project</span> <span class="p">(</span><span class="nv">concat</span> <span class="nv">base</span> <span class="s">&quot;/&quot;</span> <span class="nb">elt</span> <span class="s">&quot;/project.clj&quot;</span><span class="p">)))</span>
+</span><span class='line'>      <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nv">file-exists-p</span> <span class="nv">project</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">(</span><span class="nv">fset</span> <span class="p">(</span><span class="nb">intern</span> <span class="p">(</span><span class="nv">concat</span> <span class="nv">prefix</span> <span class="nb">elt</span><span class="p">))</span> <span class="p">(</span><span class="nv">open-file-fn</span> <span class="nv">project</span><span class="p">))))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>open-file-fn</code> creates an anonymous interactive function (meaning the function
+can be called interactively) that opens <code>file</code>. It takes advantage of
+the feature in Emacs 24 that enables lexical scoping by adding <code>;; -*-
+lexical-binding: t -*-</code> to the top of your Emacs lisp file. This lets
+the anonymous function capture <code>file</code>.</p>
+
+<p><code>create-project-shortcuts</code> takes in a <code>prefix</code> and a <code>base</code> directory.
+It searches <code>base</code> for directories that contain a
+project.clj file. For each found project.clj file a function is
+created (using <code>fset</code>) with the name of the containing directory
+prefixed by <code>prefix</code>.</p>
+
+<p>With those two functions defined all that is left is to call
+<code>create-project-shortcuts</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cl'><span class='line'><span class="p">(</span><span class="nv">create-project-shortcuts</span> <span class="s">&quot;b/&quot;</span> <span class="s">&quot;~/src/jakemcc&quot;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now <code>b/bookrobot</code> and <code>b/lein-autoexpect</code> are available after hitting
+<code>M-x</code>.</p>
+
+<p>I&rsquo;ve used this code to create quick
+shortcuts to all of my work and non-work projects. It has been
+immensely useful for jumping around projects.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1045,56 +1156,6 @@ a huge positive difference on my development experience.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/05/06/book-review-clojure-data-analysis-cookbook/">Book Review: Clojure Data Analysis Cookbook</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2013-05-06T07:00:00-05:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>6</span><span class='date-suffix'>th</span>, <span class='date-year'>2013</span></span> <span class='time'>7:00 am</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I spent the last week reading <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> the <a href="http://www.packtpub.com/clojure-data-analysis-cookbook/book">Clojure Data Analysis Cookbook</a> by Eric Rochester. As you may expect from the name, this book follows a traditional cookbook format. Each section presents a goal and then some code which achieves the goal.</p>
-
-<p>The text covers a variety of data analysis topics. Some include reading data from files, machine learning, graphing, and interfacing with other analysis tools. I particularly enjoyed the section on lazily processing large data sets. I find this is an area of frustration for many and this should serve as a reference to point them towards.</p>
-
-<p>The examples are fairly easy to follow. Many of the examples use <code>require</code> to alias dependent namespaces. I think this is key when presenting Clojure examples. Having to prefix calls to library functions causes them to stand out from uses of core Clojure functions. It also lets readers know from which library each function comes from. I would have liked to see all of the examples use <code>require</code> instead of <code>use</code> for pulling in dependencies because of the clarity it brings.</p>
-
-<p>I do have a sort of nit-picky negative about this (in particular, the PDF I received from the Packt Publishing website) book. While the vast majority of the code examples were well formatted every once in a while one would be poorly formatted. Poorly formatted code in a book all about showing code is disappointing and interrupts the flow of reading a recipe. One example of this is found in the first step of chapter 3&rsquo;s &ldquo;Combining agents and STM&rdquo; recipe.</p>
-
-<h4>Recommendation</h4>
-
-<p>Would I recommend getting this book? If any section in the table of contents sounds useful to you then yes, you should buy the book. It will be a useful reference.</p>
-
-<p>Would I recommend reading this book front to back? Probably not. I would recommend reading sections that interest you and skimming others.</p>
-
-<p>Just like a food cookbook&rsquo;s purpose (usually) isn&rsquo;t to teach you how to cook, this book will not teach you how to write Clojure. It will help you become better at specific tasks.</p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>I was given this book to review by Packt Publishing. If you think you have something interesting to read and want another set of eyes on it, feel free to reach out. Depending on the topic I&rsquo;m willing to give feedback before publication or potentially write a review after.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//10">&larr; Older</a>
@@ -1110,6 +1171,10 @@ a huge positive difference on my development experience.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/11/11/creating-a-custom-kindle-dictionary/">Creating a custom Kindle dictionary</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2020/10/03/go-create-silly-small-programs/">Go create silly, small programs</a>
@@ -1145,10 +1210,6 @@ a huge positive difference on my development experience.</p>
     
       <li class="post">
         <a href="/blog/2020/03/10/more-working-from-home-tips/">More working from home tips</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/02/25/auto-syncing-a-git-repository/">Auto-syncing a git repository</a>
       </li>
     
   </ul>

@@ -4,7 +4,7 @@
   <title><![CDATA[Jake McCrary]]></title>
   <link href="https://jakemccrary.com/atom.xml" rel="self"/>
   <link href="https://jakemccrary.com/"/>
-  <updated>2020-10-13T21:11:29-05:00</updated>
+  <updated>2020-11-11T19:23:58-06:00</updated>
   <id>https://jakemccrary.com/</id>
   <author>
     <name><![CDATA[Jake McCrary]]></name>
@@ -12,6 +12,389 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Creating a custom Kindle dictionary]]></title>
+    <link href="https://jakemccrary.com/blog/2020/11/11/creating-a-custom-kindle-dictionary/"/>
+    <updated>2020-11-11T19:23:00-06:00</updated>
+    <id>https://jakemccrary.com/blog/2020/11/11/creating-a-custom-kindle-dictionary</id>
+    <content type="html"><![CDATA[<p>Back in April 2013, I created and published a <a href="https://gumroad.com/l/dune-dictionary">custom Kindle dictionary</a> for the book <a href="http://www.amazon.com/gp/product/B00B7NPRY8/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B00B7NPRY8&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=LC2NFEXWA7JXW57B">Dune</a>.
+As far as I can tell, <a href="https://gumroad.com/l/dune-dictionary">my Dune dictionary</a> was the very first custom Kindle dictionary for a fiction book.</p>
+
+<p>I created it because I was reading Dune for the first time and there were many unfamiliar words.
+These words could not be looked up by my Kindle because they were not found in any of on-device dictionaries.
+These words were in Dune&rsquo;s glossary but flipping back-and-forth to that on a Kindle was a huge pain.</p>
+
+<p>I initially worked around this by printing a word list from Wikipedia and carrying it with me.
+This was better but it was still annoying.</p>
+
+<p>I was so annoyed that I took a break from reading to figure out how to create a custom Kindle dictionary.
+At the time, there wasn&rsquo;t a ton of great information online about how to do this.</p>
+
+<p>Eventually, I found Amazon&rsquo;s <a href="https://s3.amazonaws.com/kindlegen/AmazonKindlePublishingGuidelines.pdf">Kindle Publishing Guidelines</a> and, referencing it, managed to figure out something that worked.
+The link in the previous sentence is to the <strong>current</strong> documentation which is much nicer than the <a href="https://web.archive.org/web/20130408183149/http://s3.amazonaws.com/kindlegen/AmazonKindlePublishingGuidelines.pdf">mid-2013 documentation</a>.
+The earlier documentation left me with questions and required quite a bit of experimentation.</p>
+
+<p>Using the mid-2013 documentation, I developed some Clojure code to generate my <a href="https://gumroad.com/l/dune-dictionary">dictionary</a>.
+Doing this in 2013 was annoying.
+The documentation was not good.</p>
+
+<p>I recently read <a href="https://www.gregegan.net/DIASPORA/DIASPORA.html">Greg Egan&rsquo;s Diaspora</a> and found myself wishing I had a custom dictionary.
+I took a break from reading and packaged up Diaspora&rsquo;s glossary into a dictionary.
+I could have stuck with my 2013 generator but I decided to update it and write this article about creating a Kindle dictionary in late 2020.</p>
+
+<p>The new documentation is a bit better but it still isn&rsquo;t great.
+Here is what you need to do.</p>
+
+<h2>Making a dictionary</h2>
+
+<p>Below are the steps to building a dictionary.</p>
+
+<ol>
+<li>Construct your list of words and definitions.</li>
+<li>Convert the list into the format specified by Amazon.</li>
+<li>Create a cover page.</li>
+<li>Create a copyright page.</li>
+<li>Create a usage page (definitely optional).</li>
+<li>Make an <code>.opf</code> file.</li>
+<li>Combine the files together.</li>
+<li>Put it onto your device.</li>
+</ol>
+
+
+<h3>1. Construct your list of words and definitions</h3>
+
+<p>There really are no set instructions for this.
+Source your words and definitions and store them in some format that you&rsquo;ll be able to manipulate in a programming language.</p>
+
+<p>I&rsquo;ve sourced words a few different ways.
+I&rsquo;ve taken them straight from a book&rsquo;s glossary, a Wikipedia entry, and extracted them from a programming book&rsquo;s <a href="https://jakemccrary.com/blog/2013/07/09/releasing-the-functional-javascript-companion/">source code</a>.</p>
+
+<h3>2. Convert the list into the format specified by Amazon</h3>
+
+<p>Below is the basic scaffolding of the html file Amazon requires along with some inline styles that I think look decent on devices.
+This has some extra stuff in it and also doesn&rsquo;t contain everything Amazon specifies.
+But it works.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;html</span> <span class="na">xmlns:math=</span><span class="s">&quot;http://exslt.org/math&quot;</span> <span class="na">xmlns:svg=</span><span class="s">&quot;http://www.w3.org/2000/svg&quot;</span>
+</span><span class='line'>      <span class="na">xmlns:tl=</span><span class="s">&quot;https://kindlegen.s3.amazonaws.com/AmazonKindlePublishingGuidelines.pdf&quot;</span>
+</span><span class='line'>      <span class="na">xmlns:saxon=</span><span class="s">&quot;http://saxon.sf.net/&quot;</span> <span class="na">xmlns:xs=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema&quot;</span>
+</span><span class='line'>      <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+</span><span class='line'>      <span class="na">xmlns:cx=</span><span class="s">&quot;https://kindlegen.s3.amazonaws.com/AmazonKindlePublishingGuidelines.pdf&quot;</span>
+</span><span class='line'>      <span class="na">xmlns:dc=</span><span class="s">&quot;http://purl.org/dc/elements/1.1/&quot;</span>
+</span><span class='line'>      <span class="na">xmlns:mbp=</span><span class="s">&quot;https://kindlegen.s3.amazonaws.com/AmazonKindlePublishingGuidelines.pdf&quot;</span>
+</span><span class='line'>      <span class="na">xmlns:mmc=</span><span class="s">&quot;https://kindlegen.s3.amazonaws.com/AmazonKindlePublishingGuidelines.pdf&quot;</span>
+</span><span class='line'>      <span class="na">xmlns:idx=</span><span class="s">&quot;https://kindlegen.s3.amazonaws.com/AmazonKindlePublishingGuidelines.pdf&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;head&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">&quot;Content-Type&quot;</span> <span class="na">content=</span><span class="s">&quot;text/html; charset=utf-8&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;style&gt;</span>
+</span><span class='line'>      <span class="nt">h5</span> <span class="p">{</span>
+</span><span class='line'>          <span class="k">font-size</span><span class="o">:</span> <span class="m">1em</span><span class="p">;</span>
+</span><span class='line'>          <span class="k">margin</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="nt">dt</span> <span class="p">{</span>
+</span><span class='line'>          <span class="k">font-weight</span><span class="o">:</span> <span class="k">bold</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>      <span class="nt">dd</span> <span class="p">{</span>
+</span><span class='line'>          <span class="k">margin</span><span class="o">:</span> <span class="m">0</span><span class="p">;</span>
+</span><span class='line'>          <span class="k">padding</span><span class="o">:</span> <span class="m">0</span> <span class="m">0</span> <span class="m">0.5em</span> <span class="m">0</span><span class="p">;</span>
+</span><span class='line'>          <span class="k">display</span><span class="o">:</span> <span class="k">block</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>    <span class="nt">&lt;/style&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/head&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;body&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;mbp:framset&gt;</span>
+</span><span class='line'>      [PUT THE WORDS HERE]
+</span><span class='line'>    <span class="nt">&lt;/mbp:framset&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The <code>[PUT THE WORDS HERE]</code> part gets filled in with the markup for all of your words.
+The basic structure for an entry looks like the following.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;idx:entry</span> <span class="na">name=</span><span class="s">&quot;default&quot;</span> <span class="na">scriptable=</span><span class="s">&quot;yes&quot;</span> <span class="na">spell=</span><span class="s">&quot;yes&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;h5&gt;&lt;dt&gt;&lt;idx:orth&gt;</span>WORD HERE<span class="nt">&lt;/idx:orth&gt;&lt;/dt&gt;&lt;/h5&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;dd&gt;</span>DEFINITION<span class="nt">&lt;/dd&gt;</span>
+</span><span class='line'><span class="nt">&lt;/idx:entry&gt;</span>
+</span><span class='line'><span class="nt">&lt;hr/&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Every word has an <code>&lt;idx:entry&gt;</code> block followed by a <code>&lt;hr&gt;</code>.
+These two elements together comprise a single entry.</p>
+
+<p>The <code>name</code> attribute on the <code>&lt;idx:entry&gt;</code> element sets the lookup index associated with the entry.
+Unless you are building a dictionary with multiple indexes, you can pretty much ignore it.
+Whatever value is provided needs to match the value found in the <code>.opf</code> file we&rsquo;ll make later.</p>
+
+<p>The <code>scriptable</code> attribute makes the entry available from the index and can only have the value <code>"yes"</code>.
+The <code>spell</code> can also only be <code>"yes"</code> and enables wildcard search and spell correction.</p>
+
+<p>The markup you use inside the <code>idx:entry</code> element is mostly up to you.
+The only markup you need is the <code>&lt;idx:orth&gt;</code> node.
+Its content is the word being looked up.
+The rest of the markup can be whatever you want.</p>
+
+<p>I wrap the term in a <code>dt</code> and the definition in <code>dd</code> because it just feels like the right thing to do and provides tags to put some CSS styles on.
+I wrap the <code>dt</code> element in an <code>h5</code> because I couldn&rsquo;t figure out what CSS styles would actually work on my Kindle voyage to put the term on its own line.</p>
+
+<p>It isn&rsquo;t that I don&rsquo;t know what the styles should be but my Kindle did not respect them.
+Figuring out stuff like this is part of the experimentation required to produce a dictionary that you&rsquo;re happy with.</p>
+
+<p>There is additional supported markup that provides more functionality.
+This includes providing alternative words that all resolve to the same entry, specifying if an exact match is required, and varying the search word from the displayed word.
+Most dictionaries don&rsquo;t need these features so I&rsquo;m not going to elaborate on them.</p>
+
+<h3>3. Construct a cover page.</h3>
+
+<p>This is just a requirement of a Kindle.
+Create a html file called <code>cover.html</code> and substitute in the appropriate values.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;head&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;meta</span> <span class="na">content=</span><span class="s">&quot;text/html&quot;</span> <span class="na">http-equiv=</span><span class="s">&quot;content-type&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/head&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;body&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;h1&gt;</span>Dune Dictionary<span class="nt">&lt;/h1&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;h3&gt;</span>Created by Jake McCrary<span class="nt">&lt;/h3&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Amazon wants you to provide an image as well but you don&rsquo;t actually have to do this.
+You probably need to do this if you actually publish the dictionary through Amazon<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.</p>
+
+<h3>4. Create a copyright page</h3>
+
+<p>This is also a requirement of the Kindle publishing guide.
+There isn&rsquo;t any special markup for doing this.</p>
+
+<p>Just make another html file and fill in some appropriate details.</p>
+
+<h3>5. Create a usage page</h3>
+
+<p>This isn&rsquo;t a requirement but I include another page that explains how to use the dictionary.
+Again, this is just a html document with some content in it.</p>
+
+<h3>6. Make an <code>.opf</code> file.</h3>
+
+<p>This is one of the poorly documented but extremely important parts of making a Kindle dictionary.
+This is a XML file that ties together all the previous files into an actual dictionary.</p>
+
+<p>Make an opf file and name it whatever you want; in this example we&rsquo;ll go with <code>dict.opf</code>.</p>
+
+<p>Below is the one I&rsquo;ve used for the Diaspora dictionary.
+If you&rsquo;ve created an image for a cover then lines 7 and 15 are the important and line 15 should be uncommented.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+</pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+</span><span class='line'><span class="nt">&lt;package</span> <span class="na">version=</span><span class="s">&quot;2.0&quot;</span> <span class="na">xmlns=</span><span class="s">&quot;http://www.idpf.org/2007/opf&quot;</span> <span class="na">unique-identifier=</span><span class="s">&quot;BookId&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;metadata&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;dc:title&gt;</span>A dictionary for Diaspora by Greg Egan<span class="nt">&lt;/dc:title&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;dc:creator</span> <span class="na">opf:role=</span><span class="s">&quot;aut&quot;</span><span class="nt">&gt;</span>Jake McCrary<span class="nt">&lt;/dc:creator&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;dc:language&gt;</span>en-us<span class="nt">&lt;/dc:language&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">&quot;cover&quot;</span> <span class="na">content=</span><span class="s">&quot;my-cover-image&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;x-metadata&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;DictionaryInLanguage&gt;</span>en-us<span class="nt">&lt;/DictionaryInLanguage&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;DictionaryOutLanguage&gt;</span>en-us<span class="nt">&lt;/DictionaryOutLanguage&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;DefaultLookupIndex&gt;</span>default<span class="nt">&lt;/DefaultLookupIndex&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/x-metadata&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/metadata&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;manifest&gt;</span>
+</span><span class='line'>    <span class="c">&lt;!-- &lt;item href=&quot;cover-image.jpg&quot; id=&quot;my-cover-image&quot; media-type=&quot;image/jpg&quot; /&gt; --&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;item</span> <span class="na">id=</span><span class="s">&quot;cover&quot;</span>
+</span><span class='line'>          <span class="na">href=</span><span class="s">&quot;cover.html&quot;</span>
+</span><span class='line'>          <span class="na">media-type=</span><span class="s">&quot;application/xhtml+xml&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;item</span> <span class="na">id=</span><span class="s">&quot;usage&quot;</span>
+</span><span class='line'>          <span class="na">href=</span><span class="s">&quot;usage.html&quot;</span>
+</span><span class='line'>          <span class="na">media-type=</span><span class="s">&quot;application/xhtml+xml&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;item</span> <span class="na">id=</span><span class="s">&quot;copyright&quot;</span>
+</span><span class='line'>          <span class="na">href=</span><span class="s">&quot;copyright.html&quot;</span>
+</span><span class='line'>          <span class="na">media-type=</span><span class="s">&quot;application/xhtml+xml&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;item</span> <span class="na">id=</span><span class="s">&quot;content&quot;</span>
+</span><span class='line'>          <span class="na">href=</span><span class="s">&quot;content.html&quot;</span>
+</span><span class='line'>          <span class="na">media-type=</span><span class="s">&quot;application/xhtml+xml&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/manifest&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;spine&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;itemref</span> <span class="na">idref=</span><span class="s">&quot;cover&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;itemref</span> <span class="na">idref=</span><span class="s">&quot;usage&quot;</span> <span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;itemref</span> <span class="na">idref=</span><span class="s">&quot;copyright&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;itemref</span> <span class="na">idref=</span><span class="s">&quot;content&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/spine&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;guide&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;reference</span> <span class="na">type=</span><span class="s">&quot;index&quot;</span> <span class="na">title=</span><span class="s">&quot;IndexName&quot;</span> <span class="na">href=</span><span class="s">&quot;content.html&quot;</span><span class="nt">/&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/guide&gt;</span>
+</span><span class='line'><span class="nt">&lt;/package&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>An import element in this file is the <code>&lt;DefaultLookupIndex&gt;</code> element.
+The <code>&lt;DefaultLookupIndex&gt;</code> content needs to contain the same value from the <code>name</code> attribute on your <code>&lt;idx:entry&gt;</code> elements.
+The <code>&lt;DictionaryInLanguage&gt;</code> and <code>&lt;DictionaryOutLanguage&gt;</code> tell the Kindle the valid languages for your dictionary.</p>
+
+<p>The other elements in the <code>&lt;metadata&gt;</code> should be pretty self-explanatory.</p>
+
+<p>The <code>&lt;manifest&gt;</code> gives identifiers for the various files you&rsquo;ve made in the previous steps</p>
+
+<p>The commented out <code>&lt;img&gt;</code> shows how you&rsquo;d add the cover image if you opt to have one.
+For sideloading dictionaries onto Kindles, it is not required.</p>
+
+<p>The <code>&lt;spine&gt;</code> section references the <code>&lt;item&gt;</code>s from the <code>&lt;manifest&gt;</code> and specifies the order they appear in your book.</p>
+
+<p>I honestly don&rsquo;t remember why the <code>&lt;guide&gt;</code> section is in there or what it is doing in this example.
+I&rsquo;m guessing that is what causes there to be an index with the word list in the dictionary but I haven&rsquo;t tried removing it and the documentation doesn&rsquo;t talk about it.
+I only have it there since I had it in earlier dictionaries I made.</p>
+
+<h3>7. Combine the files together</h3>
+
+<p>The publishing guidelines (as of October 2020) tell you to combine the previously created files together using the command line tool <code>kindlegen</code>.
+The problem with those instructions is that Amazon doesn&rsquo;t offer <code>kindlegen</code> as a download anymore.
+If you want to use it, you can still find it through the Internet Archive.</p>
+
+<p>Instead of following the publishing guidelines, we&rsquo;ll use Kindle Previewer to finish making the dictionary.
+It is pretty straight forward.</p>
+
+<ol>
+<li>Download the <a href="https://www.amazon.com/gp/feature.html?ie=UTF8&amp;docId=1000765261">Kindle Previewer</a> application.</li>
+<li>Open it up and click <code>File &gt; Open</code>.</li>
+<li>Find your <code>dict.opf</code> file and open that.</li>
+<li><code>File &gt; Export</code> and export it as a <code>.mobi</code> file.</li>
+</ol>
+
+
+<p>The conversion log will complain about a couple things such as missing cover.
+As long as these are just <code>Warnings</code> it doesn&rsquo;t matter.</p>
+
+<p>I&rsquo;ve found the preview in this app doesn&rsquo;t match what it looks like on your device so take it with a grain of salt.</p>
+
+<h3>7. Put it onto your device</h3>
+
+<p>Finally, put the dictionary onto your Kindle.
+You can do this by either using a USB cable or by emailing it to your Kindle&rsquo;s email address.</p>
+
+<p>Once it is on your Kindle, open it up and double check that the formatting is correct.
+Next, open the book you&rsquo;ve made it for and try looking up a word.
+If the lookup fails or uses another dictionary, click the dictionary name in the pop-up to change your default dictionary to yours.
+Now when you try to look up a word, your dictionary is searched first.</p>
+
+<p>The great thing is that if a word <em>isn&rsquo;t</em> in your dictionary then the Kindle searches the other dictionaries<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>.
+This feature is great as it lets your dictionary be very focused.
+Hopefully Amazon doesn&rsquo;t remove this feature.</p>
+
+<h2>End</h2>
+
+<p>It was interesting creating another dictionary so long after I made my first couple.
+Some of the new features, like the ability to require an exact word match, would have been useful for my <a href="https://jakemccrary.com/blog/2013/07/09/releasing-the-functional-javascript-companion/">second dictionary</a>.
+The actual markup recommendations have changed over the years but luckily my <a href="https://gumroad.com/l/dune-dictionary">Dune dictionary</a> still works.
+I&rsquo;m not constantly checking that it works, so if Amazon had changed something and it broke, I probably wouldn&rsquo;t notice until someone reported it.</p>
+
+<p>The Kindle documentation is much better now compared to 2013 but it still isn&rsquo;t great.</p>
+
+<p>It is also a bummer that <code>kindlegen</code> is gone.
+It was nice to be able to convert the input files from the command line.
+I also think this means you can no longer make a dictionary from a Linux machine as I don&rsquo;t remember seeing Kindle Previewer support.</p>
+
+<p>If you&rsquo;re ever in a situation where you think a custom dictionary would be useful, feel free to reach out.</p>
+
+<p>Go forth and make dictionaries.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>This is actually a challenge to do due to restrictions on what Amazon allows published.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+<li id="fn:2">
+<p>No idea if it searches all of them in some order but I&rsquo;m very glad it works this way.<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Go create silly, small programs]]></title>
@@ -1819,208 +2202,6 @@ I look forward to customizing the firmware to make the key layout fit my usage.<
 
 
 <p><img src="https://jakemccrary.com/images/tmux-notify-script.gif" alt="Example using notify script" /></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Reading in 2018]]></title>
-    <link href="https://jakemccrary.com/blog/2019/01/21/reading-in-2018/"/>
-    <updated>2019-01-21T14:29:00-06:00</updated>
-    <id>https://jakemccrary.com/blog/2019/01/21/reading-in-2018</id>
-    <content type="html"><![CDATA[<p>At the beginning of every year I like to take the time to reflect on my previous year&rsquo;s reading. It gives me a time to correct my data and think about where I want my reading to go in the upcoming year.</p>
-
-<p>Here are links to my previous end-of-year reflections: <a href="https://jakemccrary.com/blog/2014/01/01/using-incanter-to-review-my-2013-reading/">2013</a>, <a href="https://jakemccrary.com/blog/2015/01/08/reading-in-2014/">2014</a>, <a href="https://jakemccrary.com/blog/2016/03/13/reading-in-2015/">2015</a>, <a href="https://jakemccrary.com/blog/2017/01/04/reading-in-2016/">2016</a>, and <a href="https://jakemccrary.com/blog/2018/03/03/reading-in-2017/">2017</a>.</p>
-
-<p>I&rsquo;ve continued to keep track of my reading using <a href="http://goodreads.com">Goodreads</a>. My <a href="https://www.goodreads.com/user/show/3431614-jake-mccrary">profile</a> continues to have the full list of the books I&rsquo;ve read since 2010. <a href="https://www.goodreads.com/review/list/3431614-jake-mccrary?read_at=2018">Here</a> is my entire 2018 record.</p>
-
-<p>I slacked off a bit when writing reviews for all of my read books in Goodreads. I often didn&rsquo;t write a review until some time had passed after completing the book and, as a result, I think I did a worse job reviewing books. Some books don&rsquo;t even have a written review. I&rsquo;m not a fan of this and will push myself some in 2019 to do a better job.</p>
-
-<h2>2018 Goal</h2>
-
-<blockquote><p>There are a few more books on writing that I&rsquo;ve wanted to read for a while. I&rsquo;m planning on reading at least one of them this year. I&rsquo;m also want to read more Octavia Butler. - Me (in the previous reading post)</p></blockquote>
-
-<p>That was my goal for 2018. It breaks down into two goals:</p>
-
-<ol>
-<li>Read at least one book on writing.</li>
-<li>Read more Octavia Butler.</li>
-</ol>
-
-
-<p>I succeeded on the Octavia Butler goal and completely failed with the other.</p>
-
-<h2>2018 Numbers</h2>
-
-<p>I read 43 books for a total of 16,213 pages. This is a bit less than last year but still a fair amount.</p>
-
-<h2>Highlights</h2>
-
-<p>Below is a list of my five star books from 2018. The book titles link to Amazon and are affiliate links. The other links are to my Goodreads review. Unfortunately, this year I didn&rsquo;t do a great job of always writing a review so some of them are missing or very short.</p>
-
-<p>I generally highlight a lot of passages while reading and then rarely go back to look at them. I&rsquo;ve included links to my highlights. Are they worthwhile without the context of the book? I have no idea. I&rsquo;ve reread them and got something out of them but many are also so far removed from my memory that they are almost useless.</p>
-
-<ul>
-<li><a href="https://amzn.to/2TYyeo2">Being Mortal: Medicine and What Matters in the End by Atul Gawande</a> (<a href="https://www.goodreads.com/review/show/1380346555">my review</a>, <a href="https://www.goodreads.com/notes/23290548-being-mortal/3431614-jake-mccrary">my highlights</a>)</li>
-<li><a href="https://amzn.to/2TaFJZb">Sapiens: A Brief History of Humankind by Yuval Noah Harari</a> (<a href="https://www.goodreads.com/review/show/1679140092">my review</a>, <a href="https://www.goodreads.com/notes/20873740-sapiens/3431614-jake-mccrary">my highlights</a>)</li>
-<li><a href="https://amzn.to/2FP8jvk">Essentialism: The Disciplined Pursuit of Less by Greg McKeown</a> (<a href="https://www.goodreads.com/review/show/1178908716">my review</a>, <a href="https://www.goodreads.com/notes/19776547-essentialism/3431614-jake-mccrary">my highlights</a>)</li>
-<li><a href="https://amzn.to/2Docah1">Crucial Conversations Tools for Talking When Stakes Are High by Kerry Patterson,  Joseph Grenny, Ron McMillan, Al Switzler</a> (<a href="https://www.goodreads.com/notes/13041257-crucial-conversations-tools-for-talking-when-stakes-are-high/3431614-jake-mccrary">my highlights</a>)</li>
-<li><a href="https://amzn.to/2sAWpNB">Rediscovering JavaScript: Master ES6, ES7, and ES8 by Venkat Subramaniam</a> (<a href="https://www.goodreads.com/review/show/2450809712">my review</a>)</li>
-<li><a href="https://amzn.to/2U2QDjy">CivilWarLand in Bad Decline by George Saunders</a> (<a href="https://www.goodreads.com/review/show/104227855">my review</a>)</li>
-<li><a href="https://amzn.to/2Do2fIt">The Obelisk Gate (The Broken Earth #2) by N.K. Jemisin</a></li>
-<li><a href="https://amzn.to/2FLwbje">The Stone Sky (The Broken Earth, #3) by N.K. Jemisin</a> (<a href="https://www.goodreads.com/review/show/2467372092">my review</a>)</li>
-<li><a href="https://amzn.to/2FNdgo8">The Hate U Give by Angie Thomas</a> (<a href="https://www.goodreads.com/review/show/2221117127">my review</a>)</li>
-<li><a href="https://amzn.to/2T4PUy9">Six of Crows (Six of Crows, #1) by Leigh Bardugo</a> (<a href="https://www.goodreads.com/review/show/2309941150">my review</a>)</li>
-<li><a href="https://amzn.to/2RZOzeG">Crooked Kingdom (Six of Crows #2) by Leigh Bardugo</a></li>
-</ul>
-
-
-<h4>Being Mortal: Medicine and What Matters in the End by Atul Gawande</h4>
-
-<p>This book deals with the end of our lives. It was great. There is a lot of good insight here. Like a lot of the non-fiction books I read, I really should go back and take notes on what I highlighted.</p>
-
-<p>We&rsquo;re all going to deal with death and sickness. This book can help.</p>
-
-<h4>Sapiens: A Brief History of Humankind by Yuval Noah Harari</h4>
-
-<p>My entire Goodreads review is two sentences.</p>
-
-<blockquote><p>This is an incredible book. You should read this. - Me</p></blockquote>
-
-<p>I still agree with this. My friend, Steve Deobald, <a href="https://www.goodreads.com/review/show/2347504001?book_show_action=false">described</a> this book as &ldquo;the most lucid book he&rsquo;s ever read.&rdquo; There is a reason this book has a 4.45 rating on Goodreads. Go read the blurb about it there and then buy and read this book<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.</p>
-
-<h4>Essentialism: The Disciplined Pursuit of Less by Greg McKeown</h4>
-
-<blockquote><p>If you don’t prioritize your life, someone else will. - Greg McKeown</p></blockquote>
-
-<p>A really great book encouraging you to focus on what matters and, as a result, make a bigger impact and be happier. It is better to make a mile of progress on one thing instead of making inches of progress in a bunch.</p>
-
-<p>Tim Ferris recently <a href="https://tim.blog/2019/01/09/greg-mckeown-essentialism/">published a podcast</a> with Greg McKeown which I&rsquo;d also recommend. I&rsquo;ve enjoyed listening to the podcast after a bit of time away from the book. This has helped reinforce ideas from the book. If you&rsquo;re hesitant to read the book, take the time to listen and pay attention to this long podcast.</p>
-
-<p>I highlighted over 100 sections of this book. I plan on revisiting these notes and this book periodically.</p>
-
-<h4>Crucial Conversations Tools for Talking When Stakes Are High by Kerry Patterson, Joseph Grenny, Ron McMillan, Al Switzler</h4>
-
-<p>A crucial conversation is one where the stakes are high, opinions vary, and emotions run strong. This book provides guidance for handling those conversations better.</p>
-
-<p>I enjoyed this book and thought I picked up some useful tips from it. I think this is another where doing follow up work would help solidify some of the concepts.</p>
-
-<h4>Rediscovering JavaScript: Master ES6, ES7, and ES8 by Venkat Subramaniam</h4>
-
-<p>Do you write JavaScript?</p>
-
-<p>Did you write JavaScript in the past but then move on to languages like ClojureScript and miss all the changes that happened to JavaScript?</p>
-
-<p>Both of those sentences apply to me. This book has been great at catching up on modern JavaScript. I find myself referencing it while writing JavaScript and it has been very helpful. It is to the point and I find myself referencing it periodically.</p>
-
-<h4>CivilWarLand in Bad Decline by George Saunders</h4>
-
-<p>I really like this book. It is a wonderful collection of short stories. This was my second time reading it and I still enjoyed it.</p>
-
-<h4>The Obelisk Gate (The Broken Earth #2) and The Stone Sky (The Broken Earth, #3) by N.K. Jemisin</h4>
-
-<p>N.K. Jemisin has won a Hugo three years in a row. Those three years line up with each release of a book in The Broken Earth series. They are really good.</p>
-
-<p>This series is great. The world is interesting and the story compelling. I highly recommend it.</p>
-
-<h4>The Hate U Give by Angie Thomas</h4>
-
-<p>Reading lets you experience life from a different perspective. This book is good. It was quickly made into a movie which is also pretty good.</p>
-
-<p>I read this as part of my book club and it was universally enjoyed.</p>
-
-<h4>Six of Crows (Six of Crows, #1) and Crooked Kingdom (Six of Crows #2) by Leigh Bardugo</h4>
-
-<p>I just really enjoyed this series. I enjoyed the fantasy world it was set in and have read most of Leigh Bardugo&rsquo;s other books that are set in this same world.</p>
-
-<p>The series is a young adult series. It isn&rsquo;t complex. The reading isn&rsquo;t difficult. It isn&rsquo;t going to change your life and you&rsquo;re not going to be blown away by the writing. It almost feels weird to include this series in the same list as CivilWarLand and The Broken Earth series. Even still, I found myself sucked into the story and didn&rsquo;t mind spending the short amount of time it took to read the books.</p>
-
-<h3>Non-Five Star highlights</h3>
-
-<h4>Life 3.0: Being Human in the Age of Artificial Intelligence by Max Tegmark</h4>
-
-<p><a href="https://amzn.to/2AU6B8E">amazon</a>, <a href="https://www.goodreads.com/notes/35881748-life-3-0/3431614-jake-mccrary">my highlights</a></p>
-
-<p>I thought this was a really interesting book.</p>
-
-<h4>When: The Scientific Secrets of Perfect Timing by Daniel H. Pink</h4>
-
-<p><a href="https://amzn.to/2RV2v9W">amazon</a>, <a href="https://www.goodreads.com/review/show/2278408888">my review</a>, <a href="https://www.goodreads.com/notes/35786699-when/3431614-jake-mccrary">my highlights</a></p>
-
-<p>I really enjoyed this. Pink references other works to build a narrative about how timing matters. When should you take a nap? Is it better to go do the doctors in the morning or afternoon? How do are cognitive abilities generally change throughout the day? How should you try to end your vacations?</p>
-
-<p>I did take some notes on the book while reading it and I have referenced them. It was a good book. I should have taken more notes.</p>
-
-<h4>Bloodchild and Other Stories by Octavia E. Butler</h4>
-
-<p><a href="https://amzn.to/2MreMxO">amazon</a>, <a href="https://www.goodreads.com/review/show/2293497979">my review</a>, <a href="https://www.goodreads.com/notes/40274755-bloodchild-and-other-stories/3431614-jake-mccrary">my highlights</a></p>
-
-<p>This is a great collection of short stories and non-fiction articles written by Octavia Butler. I really love her writing. I&rsquo;ve read a few of her works and still enjoy <a href="https://www.goodreads.com/book/show/60926.Lilith_s_Brood">Lilith&rsquo;s Brood</a> the most.</p>
-
-<p>Below is a quote from her about science fiction that really resonated with me. It really hits home on one of the reasons I love reading science fiction.</p>
-
-<blockquote><p>But still I’m asked, what good is science fiction to Black people? What good is any form of literature to Black people? What good is science fiction’s thinking about the present, the future, and the past? What good is its tendency to warn or to consider alternative ways of thinking and doing? What good is its examination of the possible effects of science and technology, or social organization and political direction? At its best, science fiction stimulates imagination and creativity. It gets reader and writer off the beaten track, off the narrow, narrow footpath of what “everyone” is saying, doing, thinking—whoever “everyone” happens to be this year. And what good is all this to Black people? - Octavia Butler</p></blockquote>
-
-<h4>Eeeee Eee Eeee by Tao Lin</h4>
-
-<p><a href="https://amzn.to/2AUSrnJ">amazon</a>, <a href="https://www.goodreads.com/review/show/1788752328">my review</a></p>
-
-<p>This book is real bizarre. For some reason I liked it.</p>
-
-<h4>Factfulness: Ten Reasons We&rsquo;re Wrong About the World&ndash;and Why Things Are Better Than You Think by Hans Rosling</h4>
-
-<p><a href="https://amzn.to/2FQBmP8">amazon</a>, <a href="https://www.goodreads.com/review/show/2402596250">my review</a>, <a href="https://www.goodreads.com/notes/36185940-factfulness/3431614-jake-mccrary">my highlights</a></p>
-
-<p>This book is great. It is very approachable and dispels some wrong common knowledge.</p>
-
-<h2>Stats</h2>
-
-<p>I struggled generating stats this year. I kept having data issues with Goodreads. There is data that is in Goodreads that is failing to export both through their export feature and API. I&rsquo;m somewhat wondering what I would need to do to track reading in a different way.</p>
-
-<p>Below is the reading stats per month. The numbers are based on when the book is completed. December is partially so low because the other books all carried over to January.</p>
-
-<p><img src="https://jakemccrary.com/images/2018-books-and-pages.svg" title="Book and pages count by month" alt="Book and pages count by month" /></p>
-
-<p>Electronic books continue to make up the majority of the books I&rsquo;m reading.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>|           | 2018 | 2017 | 2016 | 2015 |
-</span><span class='line'>|-----------+------+------+------+------|
-</span><span class='line'>| ebook     |   37 |   37 |   56 |   47 |
-</span><span class='line'>| hardcover |    1 |    7 |    0 |    1 |
-</span><span class='line'>| paperback |    5 |    5 |    3 |    3 |</span></code></pre></td></tr></table></div></figure>
-
-
-<p>There are two physical books not included in my read books that I started and still need to finish. They are a both books focused on fitness (climbing injuries and proper movement) and aren&rsquo;t books I&rsquo;m actively reading.</p>
-
-<p>Nearly a third of my reading was non-fiction. For the second year in a row, only two of those were software related.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>|             | Number of books |
-</span><span class='line'>|-------------+-----------------|
-</span><span class='line'>| fiction     |              29 |
-</span><span class='line'>| non-fiction |              14 |</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>2019 Goals</h2>
-
-<p>I have a stack of software and process books and I&rsquo;d like to read through at least some of them (others are more reference books). I&rsquo;m also going to bring over the 2018 goal of reading at least one book on writing.</p>
-
-<p>In a more general sense, I&rsquo;m hoping to put some practices together that help me gain more from the books I&rsquo;m reading. I&rsquo;m still thinking through what that means.</p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>In the beginning of 2019 I also read Harari&rsquo;s &ldquo;21 lessons for the 21st Century.&rdquo; Spoiler alert: this book will end up in my 2019 reading summary post.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
 ]]></content>
   </entry>
   
