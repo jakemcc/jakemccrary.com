@@ -193,7 +193,7 @@ Just make another html file and fill in some appropriate details.
 This isn't a requirement but I include another page that explains how to use the dictionary.
 Again, this is just a html document with some content in it.
 
-### 5. Make a `.opf` file.
+### 6. Make a `.opf` file.
 
 This is one of the poorly documented but extremely important parts of making a Kindle dictionary.
 
@@ -261,9 +261,9 @@ I honestly don't remember why the `<guide>` section is in there or what it is do
 I'm guessing that is what causes there to be an index with the word list in the dictionary but I haven't tried removing it and the documentation doesn't talk about it.
 I only have it there since I had it in earlier dictionaries I made.
 
-### 6. Combine them together using `kindlegen`.
+### 7. Combine them together using `kindlegen`.
 
-This is what the current (as of October 2020) Kindle publishing guidelines say to do but Amazon doesn't offer `kindlegen` as a download anymore.
+This is what tphe current (as of October 2020) Kindle publishing guidelines say to do but Amazon doesn't offer `kindlegen` as a download anymore.
 You can still find `kindlegen` through the Internet Archive.
 
 The old OS X version no longer works on my Apple laptop.
@@ -271,7 +271,7 @@ To verify `kindlegen` still works, I downloaded the Linux version and used it in
 
 Maybe some day I'll write up doing this but you can use the Kindle Previewer application to make your dictionary so we'll do that.
 
-### (actual) 6. Use the Kindle Previewer application to make the dictionary
+### (actual) 7. Use the Kindle Previewer application to make the dictionary
 
 1. Download the [Kindle Previewer](https://www.amazon.com/gp/feature.html?ie=UTF8&docId=1000765261) application.
 1. Open it up and click `File > Open`.
