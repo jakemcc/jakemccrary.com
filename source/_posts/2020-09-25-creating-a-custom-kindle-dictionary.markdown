@@ -9,38 +9,21 @@ keywords: 'csv, keywords, here'
 categories: 
 ---
 
-## NOTES
-
-- Must have a primary index of words in alaphabtetical order
-- Marked as dictionary, input and output languages must be defined properly
-- Should have
-  - A cover image
-  - A copyright page
-  - Any relevant front or back matter
-  - Definitions of words
-- opf file
-  - ISO 639-1 language code for languages
-  - default lookup index if more than one index
-
-`kindlegen.exe [filename.opf] -c2 –verbose -dont_append_source`
-
-## CONTENT
-
-Back in April 2013 I created and published a [custom Kindle dictionary](https://gumroad.com/l/dune-dictionary) for the book [Dune](http://www.amazon.com/gp/product/B00B7NPRY8/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B00B7NPRY8&linkCode=as2&tag=jakemccrary08-20&linkId=LC2NFEXWA7JXW57B).
+Back in April 2013, I created and published a [custom Kindle dictionary](https://gumroad.com/l/dune-dictionary) for the book [Dune](http://www.amazon.com/gp/product/B00B7NPRY8/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B00B7NPRY8&linkCode=as2&tag=jakemccrary08-20&linkId=LC2NFEXWA7JXW57B).
 As far as I can tell, [my Dune dictionary](https://gumroad.com/l/dune-dictionary) was the very first custom Kindle dictionary for a fiction book.
 
-I created it because I was reading Dune for the first time and there were many of unfamiliar words.
+I created it because I was reading Dune for the first time and there were many unfamiliar words.
 These words could not be looked up by my Kindle because they were not found in any of on-device dictionaries.
-These words were found in Dune's glossary but flipping to that on the Kindle was a huge pain.
+These words were in Dune's glossary but flipping back-and-forth to that on a Kindle was a huge pain.
 
 I initially worked around this by printing a word list from Wikipedia and carrying it with me.
 This was better but it was still annoying.
 
-I was so annoyed that I took a break from reading to dig into how to create a custom Kindle dictionary.
+I was so annoyed that I took a break from reading to figure out how to create a custom Kindle dictionary.
 At the time, there wasn't a ton of great information online about how to do this.
 
-Eventually, I found to Amazon's [Kindle Publishing Guidelines](https://s3.amazonaws.com/kindlegen/AmazonKindlePublishingGuidelines.pdf) and figured out something that worked.
-The link in the previous sentence is to the **current** documentation, which is much nicer than the [mid-2013 documentation](https://web.archive.org/web/20130408183149/http://s3.amazonaws.com/kindlegen/AmazonKindlePublishingGuidelines.pdf).
+Eventually, I found Amazon's [Kindle Publishing Guidelines](https://s3.amazonaws.com/kindlegen/AmazonKindlePublishingGuidelines.pdf) and, referencing it, managed to figure out something that worked.
+The link in the previous sentence is to the **current** documentation which is much nicer than the [mid-2013 documentation](https://web.archive.org/web/20130408183149/http://s3.amazonaws.com/kindlegen/AmazonKindlePublishingGuidelines.pdf).
 The earlier documentation left me with questions and required quite a bit of experimentation.
 
 Using the mid-2013 documentation, I developed some Clojure code to generate my [dictionary](https://gumroad.com/l/dune-dictionary).
@@ -54,33 +37,30 @@ I could have stuck with my 2013 generator but I decided to update it and write t
 The new documentation is a bit better but it still isn't great.
 Here is what you need to do.
 
-https://web.archive.org/web/20200130040547mp_/http://kindlegen.s3.amazonaws.com/KindleGen_Mac_i386_v2_9.zip
-https://web.archive.org/web/20200130040547mp_/http://kindlegen.s3.amazonaws.com/kindlegen_linux_2.6_i386_v2_9.tar.gz
-https://web.archive.org/web/20200130040547mp_/http://kindlegen.s3.amazonaws.com/kindlegen_win32_v2_9.zip
-
 ## Making a dictionary
 
-The steps to build a dictionary are minimal.
+Below are the steps to building a dictionary.
 
 1. Construct your list of words and definitions.
 1. Convert the list into the format specified by Amazon.
-1. Construct a cover page. (sort of optional)
-1. Construct a few other pages.
-1. Create a `.opf` file that ties everything together.
-1. Combine them together using `kindlegen`.
+1. Create a cover page.
+1. Create a copyright page.
+1. Create a usage page (definitely optional).
+1. Make an `.opf` file.
+1. Combine the files together.
 1. Put it onto your device.
 
 ### 1. Construct your list of words and definitions
 
-There really isn't set instructions for this.
-Source your words and definitions and store them in some format you'll be able to manipulate in a programming language.
+There really are no set instructions for this.
+Source your words and definitions and store them in some format that you'll be able to manipulate in a programming language.
 
 I've sourced words a few different ways.
-I've taken them straight from a books glossary, a Wikipedia entry, and extracted them from a programming books [source code](/blog/2013/07/09/releasing-the-functional-javascript-companion/).
+I've taken them straight from a book's glossary, a Wikipedia entry, and extracted them from a programming book's [source code](/blog/2013/07/09/releasing-the-functional-javascript-companion/).
 
 ### 2. Convert the list into the format specified by Amazon
 
-Below is the basic scaffolding of what Amazon wants you to have along with some inline styles.
+Below is the basic scaffolding of the html file Amazon requires along with some inline styles that I think look decent on devices.
 This has some extra stuff in it and also doesn't contain everything Amazon specifies.
 But it works.
 
@@ -120,7 +100,7 @@ But it works.
 ```
 
 The `[PUT THE WORDS HERE]` part gets filled in with the markup for all of your words.
-The basic structure for an entry looks like the below.
+The basic structure for an entry looks like the following.
 
 ```html
 <idx:entry name="default" scriptable="yes" spell="yes">
@@ -135,7 +115,7 @@ These two elements together comprise a single entry.
 
 The `name` attribute on the `<idx:entry>` element sets the lookup index associated with the entry.
 Unless you are building a dictionary with multiple indexes, you can pretty much ignore it.
-Whatever value is provided needs to match a value found in the `.opf` file we'll make later.
+Whatever value is provided needs to match the value found in the `.opf` file we'll make later.
 
 The `scriptable` attribute makes the entry available from the index and can only have the value `"yes"`.
 The `spell` can also only be `"yes"` and enables wildcard search and spell correction.
@@ -146,14 +126,10 @@ Its content is the word being looked up.
 The rest of the markup can be whatever you want.
 
 I wrap the term in a `dt` and the definition in `dd` because it just feels like the right thing to do and provides tags to put some CSS styles on.
-I wrap the `dt` element in an `h5` because I couldn't figure out what CSS styling would actually put the term and definition on different lines.
+I wrap the `dt` element in an `h5` because I couldn't figure out what CSS styles would actually work on my Kindle voyage to put the term on its own line.
 
-It isn't that I don't know what the styles should be but it seems like my Kindle did not respect them.
-Figuring this out is part of the experimentation required to produce a dictionary that you're happy with.
-
-Out of the CSS defined in the `head`, it seems like only the `font-weight` is actually doing anything on my 2second generation Kindle paperwhite.
-I don't know why.
-The other styles are there just to make it look how I want it to look when I view it in the Kindle Previewer application.
+It isn't that I don't know what the styles should be but my Kindle did not respect them.
+Figuring out stuff like this is part of the experimentation required to produce a dictionary that you're happy with.
 
 There is additional supported markup that provides more functionality.
 This includes providing alternative words that all resolve to the same entry, specifying if an exact match is required, and varying the search word from the displayed word.
@@ -176,7 +152,7 @@ Create a html file called `cover.html` and substitute in the appropriate values.
 </html>
 ```
 
-Amazon actually wants you to provide an image as well but you don't actually have to do this.
+Amazon wants you to provide an image as well but you don't actually have to do this.
 You probably need to do this if you actually publish the dictionary through Amazon[^3].
 
 [^3]: This is actually a challenge to do due to restrictions on what Amazon allows published.
@@ -193,15 +169,15 @@ Just make another html file and fill in some appropriate details.
 This isn't a requirement but I include another page that explains how to use the dictionary.
 Again, this is just a html document with some content in it.
 
-### 6. Make a `.opf` file.
+### 6. Make an `.opf` file.
 
 This is one of the poorly documented but extremely important parts of making a Kindle dictionary.
+This is a XML file that ties together all the previous files into an actual dictionary.
 
 Make an opf file and name it whatever you want; in this example we'll go with `dict.opf`.
-This is a XML file that explains how to combine the various files together to actually make a dictionary.
 
-Below is the one I've  used for the Diaspora dictionary.
-I've left in references, some commented out, to what you'd need to add a cover image.
+Below is the one I've used for the Diaspora dictionary.
+If you've created an image for a cover then lines 7 and 15 are the important and line 15 should be uncommented.
 
 ```xml
 <?xml version="1.0"?>
@@ -245,8 +221,8 @@ I've left in references, some commented out, to what you'd need to add a cover i
 ```
 
 An import element in this file is the `<DefaultLookupIndex>` element.
-The `<DictionaryInLanguage>` and `<DictionaryOutLanguage>` tell the Kindle the valid languages for your dictionary.
 The `<DefaultLookupIndex>` content needs to contain the same value from the `name` attribute on your `<idx:entry>` elements.
+The `<DictionaryInLanguage>` and `<DictionaryOutLanguage>` tell the Kindle the valid languages for your dictionary.
 
 The other elements in the `<metadata>` should be pretty self-explanatory.
 
@@ -261,17 +237,14 @@ I honestly don't remember why the `<guide>` section is in there or what it is do
 I'm guessing that is what causes there to be an index with the word list in the dictionary but I haven't tried removing it and the documentation doesn't talk about it.
 I only have it there since I had it in earlier dictionaries I made.
 
-### 7. Combine them together using `kindlegen`.
+### 7. Combine the files together
 
-This is what tphe current (as of October 2020) Kindle publishing guidelines say to do but Amazon doesn't offer `kindlegen` as a download anymore.
-You can still find `kindlegen` through the Internet Archive.
+The publishing guidelines (as of October 2020) tell you to combine the previously created files together using the command line tool `kindlegen`.
+The problem with those instructions is that Amazon doesn't offer `kindlegen` as a download anymore.
+If you want to use it, you can still find it through the Internet Archive.
 
-The old OS X version no longer works on my Apple laptop.
-To verify `kindlegen` still works, I downloaded the Linux version and used it in a Linux Docker container.
-
-Maybe some day I'll write up doing this but you can use the Kindle Previewer application to make your dictionary so we'll do that.
-
-### (actual) 7. Use the Kindle Previewer application to make the dictionary
+Instead of following the publishing guidelines, we'll use Kindle Previewer to finish making the dictionary.
+It is pretty straight forward.
 
 1. Download the [Kindle Previewer](https://www.amazon.com/gp/feature.html?ie=UTF8&docId=1000765261) application.
 1. Open it up and click `File > Open`.
@@ -281,7 +254,7 @@ Maybe some day I'll write up doing this but you can use the Kindle Previewer app
 The conversion log will complain about a couple things such as missing cover.
 As long as these are just `Warnings` it doesn't matter.
 
-I've found the preview in this app doesn't match what it looks like on your device so take them with a grain of salt.
+I've found the preview in this app doesn't match what it looks like on your device so take it with a grain of salt.
 
 ### 7. Put it onto your device
 
@@ -290,7 +263,7 @@ You can do this by either using a USB cable or by emailing it to your Kindle's e
 
 Once it is on your Kindle, open it up and double check that the formatting is correct.
 Next, open the book you've made it for and try looking up a word.
-If the lookup fails or went to another dictionary, click the dictionary name in the pop-up to change your default dictionary to yours.
+If the lookup fails or uses another dictionary, click the dictionary name in the pop-up to change your default dictionary to yours.
 Now when you try to look up a word, your dictionary is searched first.
 
 The great thing is that if a word _isn't_ in your dictionary then the Kindle searches the other dictionaries[^2].
@@ -304,19 +277,15 @@ Hopefully Amazon doesn't remove this feature.
 
 It was interesting creating another dictionary so long after I made my first couple.
 Some of the new features, like the ability to require an exact word match, would have been useful for my [second dictionary](/blog/2013/07/09/releasing-the-functional-javascript-companion/).
-The actual markup recommendations has changed over the years but luckily my [Dune dictionary](https://gumroad.com/l/dune-dictionary) still works
+The actual markup recommendations have changed over the years but luckily my [Dune dictionary](https://gumroad.com/l/dune-dictionary) still works.
 I'm not constantly checking that it works, so if Amazon had changed something and it broke, I probably wouldn't notice until someone reported it.
 
-The Kindle documentation is much now compared to 2013.
-It still isn't great.
+The Kindle documentation is much better now compared to 2013 but it still isn't great.
 
 It is also a bummer that `kindlegen` is gone.
 It was nice to be able to convert the input files from the command line.
 I also think this means you can no longer make a dictionary from a Linux machine as I don't remember seeing Kindle Previewer support.
 
-If you're ever in a situation where you think a custom dictionary would be useful, feel free to reach out[^3].
-
-[^3]: I haven't shared my generation code here as I think it is less interesting than talking about what is required to make a dictionary.
+If you're ever in a situation where you think a custom dictionary would be useful, feel free to reach out.
 
 Go forth and make dictionaries.
-
