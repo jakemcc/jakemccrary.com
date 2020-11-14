@@ -13,13 +13,13 @@ categories:
 [Magit](https://github.com/magit/magit) is a great Emacs tool and by far my favorite way of interacting with git repositories.
 I use Magit nearly every day.
 
-Unfortunately, refreshing the Magit status page can be a big sluggish when you are working a large repository.
+Unfortunately, refreshing the Magit status page can be sluggish when you are working in a large repository.
 
 A few months ago, I was sick of waiting and dug into ways of speeding up loading the status page.
 After doing some searching and reading, I learned about the `magit-refresh-verbose` variable.
 
 Setting `magit-refresh-verbose` to true causes Magit to print some very useful output to your `*Messages*` buffer.
-This output hows how many seconds each step of `magit-status` takes.
+This output shows how many seconds each step of `magit-status` takes.
 
 Here is the output for the large repo I'm spending most of my time in.
 
@@ -59,7 +59,7 @@ For me, that list includes `magit-insert-tags-header`, `magit-insert-status-head
 
 You remove a function from a hook with some code like `(remove-hook 'magit-status-sections-hook 'magit-insert-tags-header)` wherever you configure your Emacs.
 
-I use [use-package](https://github.com/jwiegley/use-package) do to configure mine and below is what my `magit` section looks like.
+I use [use-package](https://github.com/jwiegley/use-package) to configure mine and below is what my `magit` section looks like.
 
 Lines 21-26 show the hooks I removed to strip down the work done for `magit-status`.
 On Line 5, I hard-code `magit-git-executable` to be the full path of the `git` executable.
@@ -133,7 +133,7 @@ Since I've made these changes, I'm back to doing 99% of my `git` interactions th
 Don't settle for slow interactions with your computer.
 Aggressively shorten your feedback cycles and you'll change how you interact with your machine.
 
-### Versions used when writing this article
+##### Versions used when writing this article
 
-This post was written with me using Magit version `20201111.1436` with Emacs `26.3` on macOS `10.15.7`.
-I've been using these changes for a a few months but do not remember or have a record of what Magit version I was using at the time I originally made these changes.
+This post was written with Magit version `20201111.1436` and Emacs `26.3` on macOS `10.15.7`.
+I've been using these changes for a few months but do not remember or have a record of what Magit version I was using at the time I originally made these changes.
