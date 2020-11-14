@@ -17,7 +17,7 @@ I use Magit nearly every day.
 Unfortunately, refreshing the `magit-status` buffer is sluggish when you are working in a large repository.
 
 A few months ago, I became sick of waiting and investigated how to speed up refreshing the status buffer.
-After doing some searching and reading, I learned about the `magit-refresh-verbose` variable.
+After doing some research, I learned about the `magit-refresh-verbose` variable.
 
 Setting `magit-refresh-verbose` to true causes Magit to print some very useful output to your `*Messages*` buffer.
 This output shows how many seconds each step of `magit-status` takes.
