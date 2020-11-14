@@ -13,9 +13,9 @@ categories:
 [Magit](https://github.com/magit/magit) is a great Emacs tool and by far my favorite way of interacting with git repositories.
 I use Magit nearly every day.
 
-Unfortunately, refreshing the Magit status page can be sluggish when you are working in a large repository.
+Unfortunately, refreshing the `magit-status` buffer is sluggish when you are working in a large repository.
 
-A few months ago, I was sick of waiting and dug into ways of speeding up loading the status page.
+A few months ago, I became sick of waiting and investigated how to speed up refreshing the status page.
 After doing some searching and reading, I learned about the `magit-refresh-verbose` variable.
 
 Setting `magit-refresh-verbose` to true causes Magit to print some very useful output to your `*Messages*` buffer.
@@ -53,17 +53,16 @@ Refreshing buffer ‘magit: example-repo’...done (4.003s)
 The total time is found in the last line and we can see it took four seconds.
 Four seconds is an incredibly long time to wait before interacting with Magit.
 
-You can stop Magit from doing individual sections by removing them from the `magit-status-sections-hook`.
+You can change how much work Magit does by removing functions from the `magit-status-sections-hook` with `remove-hook`.
 I looked at the timings and and tried removing anything I decided was slow and something I didn't think I'd miss.
-For me, that list includes `magit-insert-tags-header`, `magit-insert-status-headers`, `magit-insert-unpushed-to-pushremote`, and `magit-insert-unpushed-to-upstream-or-recent`.
+For me, that list includes `magit-insert-tags-header`, `magit-insert-status-headers`, `magit-insert-unpushed-to-pushremote`, `magit-insert-unpushed-to-upstream-or-recent`, and `magit-insert-unpulled-from-upstream`. I also removed `magit-insert-unpulled-from-pushremote`.
 
-You remove a function from a hook with some code like `(remove-hook 'magit-status-sections-hook 'magit-insert-tags-header)` wherever you configure your Emacs.
+You remove a function from a hook with some code like `(remove-hook 'magit-status-sections-hook 'magit-insert-tags-header)` in your Emacs configuration.
 
 I use [use-package](https://github.com/jwiegley/use-package) to configure mine and below is what my `magit` section looks like.
 
-Lines 21-26 show the hooks I removed to strip down the work done for `magit-status`.
-On Line 5, I hard-code `magit-git-executable` to be the full path of the `git` executable.
-Folks in GitHub issues claimed this was beneficial.
+Lines 20-25 show the hooks I removed to reduce the work done by `magit-status`.
+I also hard-code `magit-git-executable` to be the full path of the `git` executable on line 5 because folks said this made a difference on macOS.
 
 ```elisp
 (use-package magit
@@ -111,13 +110,12 @@ Refreshing buffer ‘magit: example-repo’...
 Refreshing buffer ‘magit: example-repo’...done (0.348s)
 ```
 
-So, what did I lose from the `magit-status` buffer?
-
-Here is before the changes.
+What did I lose from the `magit-status` buffer as a result of these changes?
+Here is screenshot of the original buffer.
 
 ![Buffer before changes](/images/magit-speed/magit-before.png)
 
-And here it is after.
+And here is the buffer after.
 
 ![Buffer after changes](/images/magit-speed/magit-after.png)
 
@@ -126,14 +124,15 @@ And so is the speed difference.
 
 [^1]: The before image is even missing some sections that would have gone missing in the after shot since I didn't want to put the effort.
 
-For how I interact with repositories, the speed increase is worth it.
+The increased speed is worth losing the additional information.
+I interact with `git` very often and much prefer using Magit to do so.
 Before these changes, I found myself regressing to using `git` at the command line and I don't find that to be nearly as enjoyable.
 Since I've made these changes, I'm back to doing 99% of my `git` interactions through Magit.
 
 Don't settle for slow interactions with your computer.
 Aggressively shorten your feedback cycles and you'll change how you interact with your machine.
 
-##### Versions used when writing this article
+#### Versions used when writing this article
 
 This post was written with Magit version `20201111.1436` and Emacs `26.3` on macOS `10.15.7`.
 I've been using these changes for a few months but do not remember or have a record of what Magit version I was using at the time I originally made these changes.
