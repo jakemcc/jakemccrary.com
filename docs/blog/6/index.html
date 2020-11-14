@@ -14,15 +14,17 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" See all of my remote/working-from-home articles here. I&rsquo;ve been working remotely since October 2013. I can barely believe
-that nearly three &hellip;" />
+    <meta itemprop="description" content=" Occasionally, either on Stack Overflow or in the
+Clojurians Slack group, someone will ask
+what tools they should use to test Clojure code. Below is &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" See all of my remote/working-from-home articles here. I&rsquo;ve been working remotely since October 2013. I can barely believe
-that nearly three &hellip;" />
+    <meta name="twitter:description" content=" Occasionally, either on Stack Overflow or in the
+Clojurians Slack group, someone will ask
+what tools they should use to test Clojure code. Below is &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -30,14 +32,16 @@ that nearly three &hellip;" />
     <meta property="og:site_name" content="Writing by Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/6/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" See all of my remote/working-from-home articles here. I&rsquo;ve been working remotely since October 2013. I can barely believe
-that nearly three &hellip;" />
+    <meta property="og:description" content=" Occasionally, either on Stack Overflow or in the
+Clojurians Slack group, someone will ask
+what tools they should use to test Clojure code. Below is &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" See all of my remote/working-from-home articles here. I&rsquo;ve been working remotely since October 2013. I can barely believe
-that nearly three &hellip;">
+    <meta name="description" content=" Occasionally, either on Stack Overflow or in the
+Clojurians Slack group, someone will ask
+what tools they should use to test Clojure code. Below is &hellip;">
 
     
 
@@ -119,6 +123,109 @@ that nearly three &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/06/20/my-recommended-clojure-testing-setup/">My recommended Clojure testing setup</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-06-20T21:03:00-05:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>9:03 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Occasionally, either on Stack Overflow or in the
+<a href="http://clojurians.net/">Clojurians</a> Slack group, someone will ask
+what tools they should use to test Clojure code. Below is what I would
+currently recommend. I&rsquo;ve come to this recommendation through
+observing teams using a variety of testing tools and through my own
+use them.</p>
+
+<blockquote><p>Use clojure.test with
+<a href="https://github.com/pjstadig/humane-test-output">humane-test-output</a>
+and <a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a>.</p></blockquote>
+
+<h3>Use clojure.test</h3>
+
+<p>clojure.test is ubiquitous and not a big departure from other
+languages' testing libraries. It has its warts but your team will be
+able to understand it quickly and will be able to write maintainable
+tests.</p>
+
+<h3>Use humane-test-output</h3>
+
+<p>You should use clojure.test with
+<a href="https://github.com/pjstadig/humane-test-output">humane-test-output</a>. Together
+they provide a testing library that has minimal additional syntax and
+good test failure reporting.</p>
+
+<h3>Use lein-test-refresh</h3>
+
+<p>If you&rsquo;re not using a tool that reloads and reruns your tests on file
+changes then you are wasting your time. The delay between changing
+code and seeing test results is drastically reduced by using a tool
+like
+<a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a>. Nearly
+everyone I know who tries adding lein-test-refresh to their testing
+toolbox continues to use it. Many of these converts were not newcomers
+to Clojure either, they had years of experience and had already
+developed workflows that worked for them.</p>
+
+<h3>Use lein-test-refresh&rsquo;s advanced features</h3>
+
+<p><a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a>
+makes development better even if you don&rsquo;t change any of its
+settings. It gets even better if you use some of its advanced
+features.</p>
+
+<p>Below is a stripped down version of my <code>~/.lein/profiles.clj</code>. The
+<code>:test-refresh</code> key points towards my recommended lein-test-refresh
+settings.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">{</span><span class="ss">:user</span> <span class="p">{</span><span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">pjstadig/humane-test-output</span> <span class="s">&quot;0.8.0&quot;</span><span class="p">]]</span>
+</span><span class='line'>        <span class="ss">:injections</span> <span class="p">[(</span><span class="nf">require</span> <span class="ss">&#39;pjstadig.humane-test-output</span><span class="p">)</span>
+</span><span class='line'>                     <span class="p">(</span><span class="nf">pjstadig.humane-test-output/activate!</span><span class="p">)]</span>
+</span><span class='line'>        <span class="ss">:plugins</span> <span class="p">[[</span><span class="nv">com.jakemccrary/lein-test-refresh</span> <span class="s">&quot;0.16.0&quot;</span><span class="p">]]</span>
+</span><span class='line'>        <span class="ss">:test-refresh</span> <span class="p">{</span><span class="ss">:notify-command</span> <span class="p">[</span><span class="s">&quot;terminal-notifier&quot;</span> <span class="s">&quot;-title&quot;</span> <span class="s">&quot;Tests&quot;</span> <span class="s">&quot;-message&quot;</span><span class="p">]</span>
+</span><span class='line'>                       <span class="ss">:quiet</span> <span class="nv">true</span>
+</span><span class='line'>                       <span class="ss">:changes-only</span> <span class="nv">true</span><span class="p">}}}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>These settings turn on notifications when my tests finish running
+(<code>:notify-command</code> setting), make clojure.test&rsquo;s output less verbose
+(<code>:quiet true</code>), and only run tests in namespaces affected by the
+previous code change (<code>:changes-only true</code>). These three settings give
+me the quickest feedback possible and free me from having the terminal
+running <code>lein test-refresh</code> visible.</p>
+
+<p>Quick feedback lets you make changes faster. If you&rsquo;re going to write
+tests, and you should write tests, having them run quickly is
+powerful. After years of writing Clojure, this is my current go-to for
+testing Clojure code and getting extremely fast feedback.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1337,145 +1444,6 @@ providing feedback on earlier versions of this post.</em></p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/07/03/github-code-reviews/">GitHub Code Reviews</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-07-03T11:22:00-05:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>11:22 am</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Last December I wrote about the
-<a href="/blog/2014/12/09/an-effective-code-review-process/">effective code review process</a>
-I started at Outpace. The process works well; participants say it is
-the most effective review process they&rsquo;ve experienced. The rest of
-this post is a summary of the process with a bit of an enhancement
-around setting up the code for review. I&rsquo;d recommend you read the
-original
-<a href="/blog/2014/12/09/an-effective-code-review-process/">post</a>
-for a bit more color on the process.</p>
-
-<h3>Steps for GitHub code review</h3>
-
-<ol>
-<li>Select the code to review.</li>
-<li>About a week before the review, create a branch and delete the code
-you&rsquo;re reviewing.</li>
-<li>Push this branch to GitHub and open a pull request. This pull
-request provides a location where comments can be made on every
-line of code.</li>
-<li>Schedule the code review meeting. Make sure participants have two
-to three days to asynchronously review the code in the pull
-request.</li>
-<li>Have the code review. Get everyone together (video chat or in person)
-and go through the comments on the pull request and discuss. Add
-action items as a comment. The leader of the code review keeps
-discussion moving.</li>
-</ol>
-
-
-<p>It&rsquo;s a lightweight process. If you&rsquo;re already using GitHub it doesn&rsquo;t
-bring in any other tools and, unlike some dedicated code review
-software I&rsquo;ve used, the GitHub pull request interface has good
-performance.</p>
-
-<p>One complaint about this process is that the code you&rsquo;re reviewing
-appears as deleted in the pull request. It is a superficial complaint
-but seeing the entire code base as deleted can feel a bit weird.</p>
-
-<p>For the most recent code review, I figured out how to have all the
-code appear as added. The snippet below contains the steps and example
-commands.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="gp">#</span> <span class="nb">cd </span>to the repository you are reviewing.
-</span><span class='line'><span class="go">cd blog</span>
-</span><span class='line'>
-</span><span class='line'><span class="gp">#</span> Make a new branch.
-</span><span class='line'><span class="go">git checkout -b empty-repo</span>
-</span><span class='line'>
-</span><span class='line'><span class="gp">#</span> Copy all files in repo to a temporary directory.
-</span><span class='line'><span class="go">rm -rf /tmp/repo &amp;&amp; mkdir /tmp/repo &amp;&amp; cp -R * /tmp/repo</span>
-</span><span class='line'>
-</span><span class='line'><span class="gp">#</span> Remove all files from repository, commit, and push to GitHub.
-</span><span class='line'><span class="go">rm -rf *</span>
-</span><span class='line'><span class="go">git commit -am &#39;remove all files&#39;</span>
-</span><span class='line'><span class="go">git push origin empty-repo</span>
-</span><span class='line'>
-</span><span class='line'><span class="gp">#</span> Create a new branch with the empty-repo as the parent.
-</span><span class='line'><span class="go">git checkout -b code-review</span>
-</span><span class='line'>
-</span><span class='line'><span class="gp">#</span> Copy back in the files and add the files you want to review.
-</span><span class='line'><span class="gp">#</span> Commit and push to GitHub.
-</span><span class='line'><span class="go">cp -R /tmp/repo/* .</span>
-</span><span class='line'><span class="go">git add files-to-review</span>
-</span><span class='line'><span class="go">git commit -m &#39;adding files for review&#39;</span>
-</span><span class='line'><span class="go">git push origin code-review</span>
-</span><span class='line'>
-</span><span class='line'><span class="gp">#</span> Now, go to project on GitHub and switch to the code-review branch.
-</span><span class='line'><span class="gp">#</span> Open a pull request comparing the empty-repo and the code-review
-</span><span class='line'><span class="gp">#</span> branch.
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Voila, you now have a pull request with every line under review marked
-as added instead of deleted! It takes a little more than two times the
-number steps required to open a pull request with the code deleted but
-you might find it worth it. Seeing code as added instead of removed is
-a minor thing but minor things can make a process more enjoyable. It
-is nice to know it is possible.</p>
-
-<p>If you aren&rsquo;t doing code reviews or have found them useless in the
-past, I recommend you try out this process. This post is the
-abbreviated version but it gives you enough to get started. If you
-haven&rsquo;t done one in this style before, I&rsquo;d highly recommend reading
-the longer <a href="/blog/2014/12/09/an-effective-code-review-process/">post</a>
-as it gives some details that I&rsquo;ve left out here.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//7">&larr; Older</a>
@@ -1491,6 +1459,10 @@ as it gives some details that I&rsquo;ve left out here.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/11/14/speeding-up-magit/">Speeding up magit</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2020/11/11/creating-a-custom-kindle-dictionary/">Creating a custom Kindle dictionary</a>
@@ -1526,10 +1498,6 @@ as it gives some details that I&rsquo;ve left out here.</p>
     
       <li class="post">
         <a href="/blog/2020/03/16/a-retrospective-format/">A retrospective format for remote or co-located teams</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/03/10/more-working-from-home-tips/">More working from home tips</a>
       </li>
     
   </ul>

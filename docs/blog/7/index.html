@@ -14,19 +14,19 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" If you write Clojure using Emacs you should check out
-clj-refactor. It
-is working better than ever and makes developing Clojure more
-enjoyable. I don &hellip;" />
+    <meta itemprop="description" content=" Last December I wrote about the
+effective code review process
+I started at Outpace. The process works well; participants say it is
+the most effective &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" If you write Clojure using Emacs you should check out
-clj-refactor. It
-is working better than ever and makes developing Clojure more
-enjoyable. I don &hellip;" />
+    <meta name="twitter:description" content=" Last December I wrote about the
+effective code review process
+I started at Outpace. The process works well; participants say it is
+the most effective &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -34,18 +34,18 @@ enjoyable. I don &hellip;" />
     <meta property="og:site_name" content="Writing by Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/7/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" If you write Clojure using Emacs you should check out
-clj-refactor. It
-is working better than ever and makes developing Clojure more
-enjoyable. I don &hellip;" />
+    <meta property="og:description" content=" Last December I wrote about the
+effective code review process
+I started at Outpace. The process works well; participants say it is
+the most effective &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" If you write Clojure using Emacs you should check out
-clj-refactor. It
-is working better than ever and makes developing Clojure more
-enjoyable. I don &hellip;">
+    <meta name="description" content=" Last December I wrote about the
+effective code review process
+I started at Outpace. The process works well; participants say it is
+the most effective &hellip;">
 
     
 
@@ -127,6 +127,145 @@ enjoyable. I don &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/07/03/github-code-reviews/">GitHub Code Reviews</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-07-03T11:22:00-05:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>11:22 am</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Last December I wrote about the
+<a href="/blog/2014/12/09/an-effective-code-review-process/">effective code review process</a>
+I started at Outpace. The process works well; participants say it is
+the most effective review process they&rsquo;ve experienced. The rest of
+this post is a summary of the process with a bit of an enhancement
+around setting up the code for review. I&rsquo;d recommend you read the
+original
+<a href="/blog/2014/12/09/an-effective-code-review-process/">post</a>
+for a bit more color on the process.</p>
+
+<h3>Steps for GitHub code review</h3>
+
+<ol>
+<li>Select the code to review.</li>
+<li>About a week before the review, create a branch and delete the code
+you&rsquo;re reviewing.</li>
+<li>Push this branch to GitHub and open a pull request. This pull
+request provides a location where comments can be made on every
+line of code.</li>
+<li>Schedule the code review meeting. Make sure participants have two
+to three days to asynchronously review the code in the pull
+request.</li>
+<li>Have the code review. Get everyone together (video chat or in person)
+and go through the comments on the pull request and discuss. Add
+action items as a comment. The leader of the code review keeps
+discussion moving.</li>
+</ol>
+
+
+<p>It&rsquo;s a lightweight process. If you&rsquo;re already using GitHub it doesn&rsquo;t
+bring in any other tools and, unlike some dedicated code review
+software I&rsquo;ve used, the GitHub pull request interface has good
+performance.</p>
+
+<p>One complaint about this process is that the code you&rsquo;re reviewing
+appears as deleted in the pull request. It is a superficial complaint
+but seeing the entire code base as deleted can feel a bit weird.</p>
+
+<p>For the most recent code review, I figured out how to have all the
+code appear as added. The snippet below contains the steps and example
+commands.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="gp">#</span> <span class="nb">cd </span>to the repository you are reviewing.
+</span><span class='line'><span class="go">cd blog</span>
+</span><span class='line'>
+</span><span class='line'><span class="gp">#</span> Make a new branch.
+</span><span class='line'><span class="go">git checkout -b empty-repo</span>
+</span><span class='line'>
+</span><span class='line'><span class="gp">#</span> Copy all files in repo to a temporary directory.
+</span><span class='line'><span class="go">rm -rf /tmp/repo &amp;&amp; mkdir /tmp/repo &amp;&amp; cp -R * /tmp/repo</span>
+</span><span class='line'>
+</span><span class='line'><span class="gp">#</span> Remove all files from repository, commit, and push to GitHub.
+</span><span class='line'><span class="go">rm -rf *</span>
+</span><span class='line'><span class="go">git commit -am &#39;remove all files&#39;</span>
+</span><span class='line'><span class="go">git push origin empty-repo</span>
+</span><span class='line'>
+</span><span class='line'><span class="gp">#</span> Create a new branch with the empty-repo as the parent.
+</span><span class='line'><span class="go">git checkout -b code-review</span>
+</span><span class='line'>
+</span><span class='line'><span class="gp">#</span> Copy back in the files and add the files you want to review.
+</span><span class='line'><span class="gp">#</span> Commit and push to GitHub.
+</span><span class='line'><span class="go">cp -R /tmp/repo/* .</span>
+</span><span class='line'><span class="go">git add files-to-review</span>
+</span><span class='line'><span class="go">git commit -m &#39;adding files for review&#39;</span>
+</span><span class='line'><span class="go">git push origin code-review</span>
+</span><span class='line'>
+</span><span class='line'><span class="gp">#</span> Now, go to project on GitHub and switch to the code-review branch.
+</span><span class='line'><span class="gp">#</span> Open a pull request comparing the empty-repo and the code-review
+</span><span class='line'><span class="gp">#</span> branch.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Voila, you now have a pull request with every line under review marked
+as added instead of deleted! It takes a little more than two times the
+number steps required to open a pull request with the code deleted but
+you might find it worth it. Seeing code as added instead of removed is
+a minor thing but minor things can make a process more enjoyable. It
+is nice to know it is possible.</p>
+
+<p>If you aren&rsquo;t doing code reviews or have found them useless in the
+past, I recommend you try out this process. This post is the
+abbreviated version but it gives you enough to get started. If you
+haven&rsquo;t done one in this style before, I&rsquo;d highly recommend reading
+the longer <a href="/blog/2014/12/09/an-effective-code-review-process/">post</a>
+as it gives some details that I&rsquo;ve left out here.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1324,187 +1463,6 @@ your pair.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/01/11/overview-of-my-leiningen-profiles-dot-clj/">Overview of my Leiningen profiles.clj</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-01-11T22:12:00-06:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>10:12 pm</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><strong>2017-08-27: I&rsquo;ve published an updated version <a href="/blog/2017/08/27/my-current-leiningen-profiles-dot-clj/">here</a>.</strong></p>
-
-<p><a href="https://github.com/technomancy/leiningen">Leiningen</a>, a Clojure build
-tool, has the concept of
-<a href="https://github.com/technomancy/leiningen/blob/master/doc/PROFILES.md">profiles</a>.
-One thing profiles are useful for is allowing you to have development
-tools available to a project without having them as dependencies when
-you release your project. An example of when you might want to do this
-is when you are using a testing library like
-<a href="https://github.com/jaycfields/expectations">expectations</a>.</p>
-
-<p>Some development tools, such as
-<a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a>, are
-useful to have across most of your Clojure projects. Rather nicely,
-Leiningen supports adding global profiles to <code>~/.lein/profiles.clj</code>.
-These profiles are available in all your projects.</p>
-
-<p>Below is most of my <code>profiles.clj</code>. I&rsquo;ve removed some sensitive
-settings and what is left are the development tools that I find
-useful.</p>
-
-<figure class='code'><figcaption><span>Entire :user profile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">{</span><span class="ss">:user</span> <span class="p">{</span><span class="ss">:plugin-repositories</span> <span class="p">[[</span><span class="s">&quot;private-plugins&quot;</span> <span class="p">{</span><span class="ss">:url</span> <span class="s">&quot;private repo url&quot;</span><span class="p">}]]</span>
-</span><span class='line'>        <span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">pjstadig/humane-test-output</span> <span class="s">&quot;0.6.0&quot;</span><span class="p">]]</span>
-</span><span class='line'>        <span class="ss">:injections</span> <span class="p">[(</span><span class="nf">require</span> <span class="ss">&#39;pjstadig.humane-test-output</span><span class="p">)</span>
-</span><span class='line'>                     <span class="p">(</span><span class="nf">pjstadig.humane-test-output/activate!</span><span class="p">)]</span>
-</span><span class='line'>        <span class="ss">:plugins</span> <span class="p">[[</span><span class="nv">cider/cider-nrepl</span> <span class="s">&quot;0.8.2&quot;</span><span class="p">]</span>
-</span><span class='line'>                  <span class="p">[</span><span class="nv">refactor-nrepl</span> <span class="s">&quot;0.2.2&quot;</span><span class="p">]</span>
-</span><span class='line'>                  <span class="p">[</span><span class="nv">com.jakemccrary/lein-test-refresh</span> <span class="s">&quot;0.5.5&quot;</span><span class="p">]</span>
-</span><span class='line'>                  <span class="p">[</span><span class="nv">lein-autoexpect</span> <span class="s">&quot;1.4.2&quot;</span><span class="p">]</span>
-</span><span class='line'>                  <span class="p">[</span><span class="nv">lein-ancient</span> <span class="s">&quot;0.5.5&quot;</span><span class="p">]</span>
-</span><span class='line'>                  <span class="p">[</span><span class="nv">jonase/eastwood</span> <span class="s">&quot;0.2.1&quot;</span><span class="p">]</span>
-</span><span class='line'>                  <span class="p">[</span><span class="nv">lein-kibit</span> <span class="s">&quot;0.0.8&quot;</span><span class="p">]</span>
-</span><span class='line'>                  <span class="p">[</span><span class="nv">lein-pprint</span> <span class="s">&quot;1.1.2&quot;</span><span class="p">]]</span>
-</span><span class='line'>        <span class="ss">:test-refresh</span> <span class="p">{</span><span class="ss">:notify-command</span> <span class="p">[</span><span class="s">&quot;terminal-notifier&quot;</span> <span class="s">&quot;-title&quot;</span> <span class="s">&quot;Tests&quot;</span> <span class="s">&quot;-message&quot;</span><span class="p">]}}}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>:plugin-repositories [["private-plugins" {:url "private repo url"}]]</code>
-sets a private plugin repository. This allows me to use
-<a href="http://outpace.com/">Outpace&rsquo;s</a> private Leiningen templates for
-setting up new projects for work.</p>
-
-<p>The next few lines are all related. They setup
-<a href="https://github.com/pjstadig/humane-test-output">humane-test-output</a>.
-<code>humane-test-output</code> makes <code>clojure.test</code> output more readable. It
-makes using <code>clojure.test</code> much more enjoyable. I highly recommend it.
-Sample output can be found in my
-<a href="/blog/2014/06/22/comparing-clojure-testing-libraries-output/">Comparing Clojure Testing Libraries</a>
-post.</p>
-
-<figure class='code'><figcaption><span>humane-test-output setup in the :user profile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">pjstadig/humane-test-output</span> <span class="s">&quot;0.6.0&quot;</span><span class="p">]]</span>
-</span><span class='line'><span class="ss">:injections</span> <span class="p">[(</span><span class="nf">require</span> <span class="ss">&#39;pjstadig.humane-test-output</span><span class="p">)</span>
-</span><span class='line'>             <span class="p">(</span><span class="nf">pjstadig.humane-test-output/activate!</span><span class="p">)]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Next we get to my <code>:plugins</code> section. This is the bulk of
-my <code>profiles.clj</code>.</p>
-
-<figure class='code'><figcaption><span>:plugins section of my :user profile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="ss">:plugins</span> <span class="p">[[</span><span class="nv">cider/cider-nrepl</span> <span class="s">&quot;0.8.2&quot;</span><span class="p">]</span>
-</span><span class='line'>          <span class="p">[</span><span class="nv">refactor-nrepl</span> <span class="s">&quot;0.2.2&quot;</span><span class="p">]</span>
-</span><span class='line'>          <span class="p">[</span><span class="nv">com.jakemccrary/lein-test-refresh</span> <span class="s">&quot;0.5.5&quot;</span><span class="p">]</span>
-</span><span class='line'>          <span class="p">[</span><span class="nv">lein-autoexpect</span> <span class="s">&quot;1.4.2&quot;</span><span class="p">]</span>
-</span><span class='line'>          <span class="p">[</span><span class="nv">lein-ancient</span> <span class="s">&quot;0.5.5&quot;</span><span class="p">]</span>
-</span><span class='line'>          <span class="p">[</span><span class="nv">jonase/eastwood</span> <span class="s">&quot;0.2.1&quot;</span><span class="p">]</span>
-</span><span class='line'>          <span class="p">[</span><span class="nv">lein-kibit</span> <span class="s">&quot;0.0.8&quot;</span><span class="p">]</span>
-</span><span class='line'>          <span class="p">[</span><span class="nv">lein-pprint</span> <span class="s">&quot;1.1.2&quot;</span><span class="p">]]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The first entry is for <code>cider/cider-nrepl</code>. I write Clojure using
-Emacs and <a href="https://github.com/clojure-emacs/cider">CIDER</a> and much of
-CIDER&rsquo;s functionality exists in nrepl middleware found in
-<code>cider/cider-nrepl</code>. This dependency is required for me to be
-effective while writing Clojure.</p>
-
-<p><code>refactor-nrepl</code> is next.
-<a href="https://github.com/clojure-emacs/clj-refactor.el">clj-refactor.el</a>
-requires it for some refactorings. I actually don&rsquo;t use any of those
-refactorings (I only use move to let, extract to let, and
-introduce let refactorings) but I still keep it around.</p>
-
-<p><code>com.jakemccrary/lein-test-refresh</code> is next. This lets me use
-<a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a>
-globally. <code>lein-test-refresh</code> runs your <code>clojure.test</code> tests whenever
-a file changes in your project. This is another key development tool
-in my process.</p>
-
-<p>Up next is <code>lein-autoexpect</code>. It was the first Leiningen plugin I
-wrote and it enables continuous testing with
-<a href="https://github.com/jaycfields/expectations">expectations</a>.</p>
-
-<p>Both <code>lein-autoexpect</code> and <code>lein-test-refresh</code> are projects I created
-and maintain. Writing <code>lein-autoexpect</code> was my first
-exposure to continuous testing and it changed how I develop code. I
-find it frustrating to develop without such a tool.</p>
-
-<p>Next up is <a href="https://github.com/xsc/lein-ancient">lein-ancient</a>. It
-checks your project.clj for outdated dependencies and plugins. It
-isn&rsquo;t something that gets used every day but it is super useful when
-you need it.</p>
-
-<p>The next two entries are for
-<a href="https://github.com/jonase/eastwood">jonase/eastwood</a> and
-<a href="https://github.com/jonase/kibit">lein-kibit</a>. They are both tools
-that look at your Clojure code and report common mistakes. I don&rsquo;t use
-either consistently but I do find them useful. I&rsquo;ve found bugs with eastwood.</p>
-
-<p>The final plugin is <code>lein-pprint</code>.
-<a href="https://github.com/technomancy/leiningen/tree/master/lein-pprint">lein-pprint</a>
-prints out your project map. It is useful for trying to grasp what is
-going on when messing around with various Leiningen options.</p>
-
-<p>The final part, seen below, of my <code>profiles.clj</code> is configuration for
-<code>lein-test-refresh.</code> It configures <code>lein-test-refresh</code> to use
-<a href="https://github.com/alloy/terminal-notifier">terminal-notifier</a> to
-notify me when my tests pass or fail. Using a continuous tester that
-allows flexible notification is useful. Not having to glance at a
-terminal to see if your tests are passing or failing is great.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="ss">:test-refresh</span> <span class="p">{</span><span class="ss">:notify-command</span> <span class="p">[</span><span class="s">&quot;terminal-notifier&quot;</span> <span class="s">&quot;-title&quot;</span> <span class="s">&quot;Tests&quot;</span> <span class="s">&quot;-message&quot;</span><span class="p">]}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>That is my <code>~/.lein/profiles.clj</code>. I don&rsquo;t think it contains anything
-mind blowing but it definitely contains a useful collection of Clojure
-development tools. I encourage you to check out them out and to think
-about what tools you should be putting into your global <code>:user</code>
-profile.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//8">&larr; Older</a>
@@ -1520,6 +1478,10 @@ profile.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/11/14/speeding-up-magit/">Speeding up magit</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2020/11/11/creating-a-custom-kindle-dictionary/">Creating a custom Kindle dictionary</a>
@@ -1555,10 +1517,6 @@ profile.</p>
     
       <li class="post">
         <a href="/blog/2020/03/16/a-retrospective-format/">A retrospective format for remote or co-located teams</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/03/10/more-working-from-home-tips/">More working from home tips</a>
       </li>
     
   </ul>

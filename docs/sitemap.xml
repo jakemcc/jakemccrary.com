@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>https://jakemccrary.com/blog/2020/11/14/speeding-up-magit/</loc>
+<lastmod>2020-11-14T16:37:00-06:00</lastmod>
+</url>
+<url>
 <loc>https://jakemccrary.com/blog/2020/11/11/creating-a-custom-kindle-dictionary/</loc>
 <lastmod>2020-11-11T19:23:00-06:00</lastmod>
 </url>
@@ -639,36 +643,6 @@
 </url>
 <url>
 <loc>https://jakemccrary.com/blog/categories/inspiration/</loc>
-</url>
-<url>
-<loc>https://jakemccrary.com/blog/2/</loc>
-</url>
-<url>
-<loc>https://jakemccrary.com/blog/3/</loc>
-</url>
-<url>
-<loc>https://jakemccrary.com/blog/4/</loc>
-</url>
-<url>
-<loc>https://jakemccrary.com/blog/5/</loc>
-</url>
-<url>
-<loc>https://jakemccrary.com/blog/6/</loc>
-</url>
-<url>
-<loc>https://jakemccrary.com/blog/7/</loc>
-</url>
-<url>
-<loc>https://jakemccrary.com/blog/8/</loc>
-</url>
-<url>
-<loc>https://jakemccrary.com/blog/9/</loc>
-</url>
-<url>
-<loc>https://jakemccrary.com/blog/10/</loc>
-</url>
-<url>
-<loc>https://jakemccrary.com/blog/11/</loc>
 </url>
 <url>
 <loc>https://jakemccrary.com/adventures/2010-chicago-mackinac-race/</loc>

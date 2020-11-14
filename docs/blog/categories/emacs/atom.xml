@@ -4,7 +4,7 @@
   <title><![CDATA[Category: emacs | Jake McCrary]]></title>
   <link href="https://jakemccrary.com/blog/categories/emacs/atom.xml" rel="self"/>
   <link href="https://jakemccrary.com/"/>
-  <updated>2020-11-12T07:10:35-06:00</updated>
+  <updated>2020-11-14T16:43:07-06:00</updated>
   <id>https://jakemccrary.com/</id>
   <author>
     <name><![CDATA[Jake McCrary]]></name>
@@ -12,6 +12,143 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Speeding up magit]]></title>
+    <link href="https://jakemccrary.com/blog/2020/11/14/speeding-up-magit/"/>
+    <updated>2020-11-14T16:37:00-06:00</updated>
+    <id>https://jakemccrary.com/blog/2020/11/14/speeding-up-magit</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/magit/magit">Magit</a> is a great Emacs tool and by far my favorite way of interacting with git repositories.
+I use Magit nearly every day.</p>
+
+<p>Unfortunately, refreshing the <code>magit-status</code> buffer is sluggish when you are working in a large repository.</p>
+
+<p>A few months ago, I became sick of waiting and investigated how to speed up refreshing the status buffer.
+After doing some research, I learned about the <code>magit-refresh-verbose</code> variable.</p>
+
+<p>Setting <code>magit-refresh-verbose</code> to true causes Magit to print some very useful output to your <code>*Messages*</code> buffer.
+This output shows how many seconds each step of <code>magit-status</code> takes.</p>
+
+<p>Here is the output for the large repo that caused me to look into this.</p>
+
+<pre><code>Refreshing buffer ‘magit: example-repo’...
+  magit-insert-error-header                          1e-06
+  magit-insert-diff-filter-header                    2.3e-05
+  magit-insert-head-branch-header                    0.026227
+  magit-insert-upstream-branch-header                0.014285
+  magit-insert-push-branch-header                    0.005662
+  magit-insert-tags-header                           1.7119309999999999
+  magit-insert-status-headers                        1.767466
+  magit-insert-merge-log                             0.005947
+  magit-insert-rebase-sequence                       0.000115
+  magit-insert-am-sequence                           5.1e-05
+  magit-insert-sequencer-sequence                    0.000105
+  magit-insert-bisect-output                         5.3e-05
+  magit-insert-bisect-rest                           1.1e-05
+  magit-insert-bisect-log                            1e-05
+  magit-insert-untracked-files                       0.259485
+  magit-insert-unstaged-changes                      0.031528
+  magit-insert-staged-changes                        0.017763
+  magit-insert-stashes                               0.028514
+  magit-insert-unpushed-to-pushremote                0.911193
+  magit-insert-unpushed-to-upstream-or-recent        0.497709
+  magit-insert-unpulled-from-pushremote              7.2e-05
+  magit-insert-unpulled-from-upstream                0.446168
+Refreshing buffer ‘magit: example-repo’...done (4.003s)
+</code></pre>
+
+<p>The total time is found in the last line and we can see it took four seconds.
+Four seconds is an incredibly long time to wait before interacting with Magit.</p>
+
+<p>You can change how much work Magit does by removing functions from the <code>magit-status-sections-hook</code> with <code>remove-hook</code>.
+I looked at the timings and and tried removing anything I decided was slow and something I didn&rsquo;t think I&rsquo;d miss.
+For me, that list includes <code>magit-insert-tags-header</code>, <code>magit-insert-status-headers</code>, <code>magit-insert-unpushed-to-pushremote</code>, <code>magit-insert-unpushed-to-upstream-or-recent</code>, and <code>magit-insert-unpulled-from-upstream</code>. I also removed <code>magit-insert-unpulled-from-pushremote</code>.</p>
+
+<p>You remove a function from a hook by adding elisp similar to <code>(remove-hook 'magit-status-sections-hook 'magit-insert-tags-header)</code> to your Emacs configuration.</p>
+
+<p>I use <a href="https://github.com/jwiegley/use-package">use-package</a> to configure mine and below is what my <code>magit</code> section looks like.</p>
+
+<p>Lines 20-25 remove the hooks.
+I also hard-code <code>magit-git-executable</code> to be the full path of the <code>git</code> executable on line 5 because folks said this made a difference on macOS.</p>
+
+<pre><code class="elisp">(use-package magit
+  :ensure t
+  :bind ("C-c g" . magit-status)
+  :custom
+  (magit-git-executable "/usr/local/bin/git")
+  :init
+  (use-package with-editor :ensure t)
+
+  ;; Have magit-status go full screen and quit to previous
+  ;; configuration.  Taken from
+  ;; http://whattheemacsd.com/setup-magit.el-01.html#comment-748135498
+  ;; and http://irreal.org/blog/?p=2253
+  (defadvice magit-status (around magit-fullscreen activate)
+    (window-configuration-to-register :magit-fullscreen)
+    ad-do-it
+    (delete-other-windows))
+  (defadvice magit-quit-window (after magit-restore-screen activate)
+    (jump-to-register :magit-fullscreen))
+  :config
+  (remove-hook 'magit-status-sections-hook 'magit-insert-tags-header)
+  (remove-hook 'magit-status-sections-hook 'magit-insert-status-headers)
+  (remove-hook 'magit-status-sections-hook 'magit-insert-unpushed-to-pushremote)
+  (remove-hook 'magit-status-sections-hook 'magit-insert-unpulled-from-pushremote)
+  (remove-hook 'magit-status-sections-hook 'magit-insert-unpulled-from-upstream)
+  (remove-hook 'magit-status-sections-hook 'magit-insert-unpushed-to-upstream-or-recent))
+</code></pre>
+
+<p>After this change, my <code>magit-status</code> buffer refreshes in under half a second.</p>
+
+<pre><code>Refreshing buffer ‘magit: example-repo’...
+  magit-insert-merge-log                             0.005771
+  magit-insert-rebase-sequence                       0.000118
+  magit-insert-am-sequence                           5.3e-05
+  magit-insert-sequencer-sequence                    0.0001
+  magit-insert-bisect-output                         5.5e-05
+  magit-insert-bisect-rest                           1.1e-05
+  magit-insert-bisect-log                            1.1e-05
+  magit-insert-untracked-files                       0.247723
+  magit-insert-unstaged-changes                      0.024989
+  magit-insert-staged-changes                        0.018397
+  magit-insert-stashes                               0.026055
+Refreshing buffer ‘magit: example-repo’...done (0.348s)
+</code></pre>
+
+<p>What did I lose from the <code>magit-status</code> buffer as a result of these changes?
+Here is screenshot of the original buffer.</p>
+
+<p><img src="/images/magit-speed/magit-before.png" alt="Buffer before changes" /></p>
+
+<p>And here is the buffer after.</p>
+
+<p><img src="/images/magit-speed/magit-after.png" alt="Buffer after changes" /></p>
+
+<p>The difference is drastic<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.
+And so is the speed difference.</p>
+
+<p>The increased speed is worth losing the additional information.
+I interact with <code>git</code> very often and much prefer using Magit to do so.
+Before these changes, I found myself regressing to using <code>git</code> at the command line and I don&rsquo;t find that to be nearly as enjoyable.
+Since I&rsquo;ve made these changes, I&rsquo;m back to doing 99% of my <code>git</code> interactions through Magit.</p>
+
+<p>Don&rsquo;t settle for slow interactions with your computer.
+Aggressively shorten your feedback cycles and you&rsquo;ll change how you interact with the machine.</p>
+
+<h4>Versions used when writing this article</h4>
+
+<p>This post was written with Magit version <code>20201111.1436</code> and Emacs <code>26.3</code> on macOS <code>10.15.7</code>.
+I&rsquo;ve been using these changes for a few months but do not remember or have a record of what Magit version I was using at the time I originally made these changes.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>The before image is even missing some sections that would have gone missing in the after shot since I didn&rsquo;t want to put the effort.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[My favorite clj-refactor features]]></title>
@@ -307,87 +444,6 @@ prefixed by <code>prefix</code>.</p>
 <p>I&rsquo;ve used this code to create quick
 shortcuts to all of my work and non-work projects. It has been
 immensely useful for jumping around projects.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Emacs: Capture shell command output in temporary buffer]]></title>
-    <link href="https://jakemccrary.com/blog/2013/08/10/emacs-capture-shell-command-output-in-temporary-buffer/"/>
-    <updated>2013-08-10T14:33:00-05:00</updated>
-    <id>https://jakemccrary.com/blog/2013/08/10/emacs-capture-shell-command-output-in-temporary-buffer</id>
-    <content type="html"><![CDATA[<p>My text editor of choice is Emacs. Its extensibility is a major
-contributor to this preference. The ease of adding additional
-functionality means you can customize it to your liking. You should
-not go overboard and change too much of the default behavior but you
-should feel free to add additional features.</p>
-
-<p>I recently found myself often editing a file in emacs and then
-switching to a terminal and running a bash script to see how the
-output changed. This is part of my work flow for shutting down or
-starting new server processes. Since this is something I&rsquo;ll be doing
-quite frequently in the future, I wrote some Emacs Lisp to run the
-shell script and display the output in a temporary buffer. With this
-function in place I no longer have to toggle to a terminal and run a
-command.</p>
-
-<p>I&rsquo;m picky and I wanted this output buffer to have the same behavior as
-the help buffer. That is, I wanted to be able to close the buffer by
-just hitting the letter <code>q</code>. It took me a while to figure out how to
-do this so I thought I would share it here in hopes it might benefit others.</p>
-
-<p>First I&rsquo;ll show the code and then I&rsquo;ll explain what it is doing.</p>
-
-<pre><code class="cl">(defun blog-example ()
-  (interactive)
-  (with-output-to-temp-buffer "*blog-example*"
-    (shell-command "echo This is an example"
-                   "*blog-example*"
-                   "*Messages*")
-    (pop-to-buffer "*blog-example*")))
-</code></pre>
-
-<p>The above snippet defines a function named <code>blog-example</code>. It takes no
-arguments and is interactive (as indicated by the second line calling
-<code>interactive</code>). This call to <code>interactive</code> makes <code>blog-example</code>
-available to be called interactively, meaning you can call it after
-triggering <code>M-x</code>. This is probably a simplification of what is
-actually does, so if you care the documentation is available
-<a href="http://www.gnu.org/software/emacs/manual/html_node/elisp/Using-Interactive.html">here</a>.</p>
-
-<p>After the call to <code>interactive</code> we hit the core of this function, the
-call to <code>with-output-to-temp-buffer</code>. This function a buffer name as a first argument
-and additional forms. The output of those forms is put into the named
-buffer.</p>
-
-<p>The form I&rsquo;m passing to <code>with-output-to-temp-buffer</code> is a call to
-<code>shell-command</code>. <code>shell-command</code> will run <code>echo This is an example</code>
-synchronously and redirect stdout to <code>*blog-example*</code> and stderr to
-<code>*Messages*</code>.</p>
-
-<p>The final line opens the buffer and switches focus to it. Now you can
-look at the output and when you are ready to return just hit <code>q</code>.</p>
-
-<p>This is a simplified example but it shows how easy it is to extend
-Emacs functionality. Doing something similar to this made a task I do
-frequently more pleasant.</p>
-
-<p>My use case is a bit more complicated and involves saving the buffer
-I&rsquo;m currently editing and then running a command against the saved
-file. Below is some sample code that does something similar.</p>
-
-<pre><code class="cl">(defun example2 ()
-  (interactive)
-  (when (and (buffer-modified-p)
-             (y-or-n-p (format "Save file %s? " (buffer-file-name))))
-    (save-buffer))
-  (with-output-to-temp-buffer "*blog-example*"
-    (shell-command (concat "wc -l"
-                           " "
-                           (expand-file-name (buffer-file-name)))
-                   "*blog-example*"
-                   "*Messages*")
-    (pop-to-buffer "*blog-example*")))
-</code></pre>
 ]]></content>
   </entry>
   

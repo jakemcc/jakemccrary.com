@@ -4,7 +4,7 @@
   <title><![CDATA[Jake McCrary]]></title>
   <link href="https://jakemccrary.com/atom.xml" rel="self"/>
   <link href="https://jakemccrary.com/"/>
-  <updated>2020-11-12T07:10:35-06:00</updated>
+  <updated>2020-11-14T16:43:07-06:00</updated>
   <id>https://jakemccrary.com/</id>
   <author>
     <name><![CDATA[Jake McCrary]]></name>
@@ -12,6 +12,207 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Speeding up magit]]></title>
+    <link href="https://jakemccrary.com/blog/2020/11/14/speeding-up-magit/"/>
+    <updated>2020-11-14T16:37:00-06:00</updated>
+    <id>https://jakemccrary.com/blog/2020/11/14/speeding-up-magit</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/magit/magit">Magit</a> is a great Emacs tool and by far my favorite way of interacting with git repositories.
+I use Magit nearly every day.</p>
+
+<p>Unfortunately, refreshing the <code>magit-status</code> buffer is sluggish when you are working in a large repository.</p>
+
+<p>A few months ago, I became sick of waiting and investigated how to speed up refreshing the status buffer.
+After doing some research, I learned about the <code>magit-refresh-verbose</code> variable.</p>
+
+<p>Setting <code>magit-refresh-verbose</code> to true causes Magit to print some very useful output to your <code>*Messages*</code> buffer.
+This output shows how many seconds each step of <code>magit-status</code> takes.</p>
+
+<p>Here is the output for the large repo that caused me to look into this.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Refreshing buffer ‘magit: example-repo’...
+</span><span class='line'>  magit-insert-error-header                          1e-06
+</span><span class='line'>  magit-insert-diff-filter-header                    2.3e-05
+</span><span class='line'>  magit-insert-head-branch-header                    0.026227
+</span><span class='line'>  magit-insert-upstream-branch-header                0.014285
+</span><span class='line'>  magit-insert-push-branch-header                    0.005662
+</span><span class='line'>  magit-insert-tags-header                           1.7119309999999999
+</span><span class='line'>  magit-insert-status-headers                        1.767466
+</span><span class='line'>  magit-insert-merge-log                             0.005947
+</span><span class='line'>  magit-insert-rebase-sequence                       0.000115
+</span><span class='line'>  magit-insert-am-sequence                           5.1e-05
+</span><span class='line'>  magit-insert-sequencer-sequence                    0.000105
+</span><span class='line'>  magit-insert-bisect-output                         5.3e-05
+</span><span class='line'>  magit-insert-bisect-rest                           1.1e-05
+</span><span class='line'>  magit-insert-bisect-log                            1e-05
+</span><span class='line'>  magit-insert-untracked-files                       0.259485
+</span><span class='line'>  magit-insert-unstaged-changes                      0.031528
+</span><span class='line'>  magit-insert-staged-changes                        0.017763
+</span><span class='line'>  magit-insert-stashes                               0.028514
+</span><span class='line'>  magit-insert-unpushed-to-pushremote                0.911193
+</span><span class='line'>  magit-insert-unpushed-to-upstream-or-recent        0.497709
+</span><span class='line'>  magit-insert-unpulled-from-pushremote              7.2e-05
+</span><span class='line'>  magit-insert-unpulled-from-upstream                0.446168
+</span><span class='line'>Refreshing buffer ‘magit: example-repo’...done (4.003s)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The total time is found in the last line and we can see it took four seconds.
+Four seconds is an incredibly long time to wait before interacting with Magit.</p>
+
+<p>You can change how much work Magit does by removing functions from the <code>magit-status-sections-hook</code> with <code>remove-hook</code>.
+I looked at the timings and and tried removing anything I decided was slow and something I didn&rsquo;t think I&rsquo;d miss.
+For me, that list includes <code>magit-insert-tags-header</code>, <code>magit-insert-status-headers</code>, <code>magit-insert-unpushed-to-pushremote</code>, <code>magit-insert-unpushed-to-upstream-or-recent</code>, and <code>magit-insert-unpulled-from-upstream</code>. I also removed <code>magit-insert-unpulled-from-pushremote</code>.</p>
+
+<p>You remove a function from a hook by adding elisp similar to <code>(remove-hook 'magit-status-sections-hook 'magit-insert-tags-header)</code> to your Emacs configuration.</p>
+
+<p>I use <a href="https://github.com/jwiegley/use-package">use-package</a> to configure mine and below is what my <code>magit</code> section looks like.</p>
+
+<p>Lines 20-25 remove the hooks.
+I also hard-code <code>magit-git-executable</code> to be the full path of the <code>git</code> executable on line 5 because folks said this made a difference on macOS.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='elisp'><span class='line'><span class="p">(</span><span class="nb">use-package</span> <span class="nv">magit</span>
+</span><span class='line'>  <span class="ss">:ensure</span> <span class="no">t</span>
+</span><span class='line'>  <span class="ss">:bind</span> <span class="p">(</span><span class="s">&quot;C-c g&quot;</span> <span class="o">.</span> <span class="nv">magit-status</span><span class="p">)</span>
+</span><span class='line'>  <span class="ss">:custom</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">magit-git-executable</span> <span class="s">&quot;/usr/local/bin/git&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="ss">:init</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">use-package</span> <span class="nv">with-editor</span> <span class="ss">:ensure</span> <span class="no">t</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1">;; Have magit-status go full screen and quit to previous</span>
+</span><span class='line'>  <span class="c1">;; configuration.  Taken from</span>
+</span><span class='line'>  <span class="c1">;; http://whattheemacsd.com/setup-magit.el-01.html#comment-748135498</span>
+</span><span class='line'>  <span class="c1">;; and http://irreal.org/blog/?p=2253</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">defadvice</span> <span class="nv">magit-status</span> <span class="p">(</span><span class="nv">around</span> <span class="nv">magit-fullscreen</span> <span class="nv">activate</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">window-configuration-to-register</span> <span class="ss">:magit-fullscreen</span><span class="p">)</span>
+</span><span class='line'>    <span class="nv">ad-do-it</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">delete-other-windows</span><span class="p">))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">defadvice</span> <span class="nv">magit-quit-window</span> <span class="p">(</span><span class="nv">after</span> <span class="nv">magit-restore-screen</span> <span class="nv">activate</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nv">jump-to-register</span> <span class="ss">:magit-fullscreen</span><span class="p">))</span>
+</span><span class='line'>  <span class="ss">:config</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">remove-hook</span> <span class="ss">&#39;magit-status-sections-hook</span> <span class="ss">&#39;magit-insert-tags-header</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">remove-hook</span> <span class="ss">&#39;magit-status-sections-hook</span> <span class="ss">&#39;magit-insert-status-headers</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">remove-hook</span> <span class="ss">&#39;magit-status-sections-hook</span> <span class="ss">&#39;magit-insert-unpushed-to-pushremote</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">remove-hook</span> <span class="ss">&#39;magit-status-sections-hook</span> <span class="ss">&#39;magit-insert-unpulled-from-pushremote</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">remove-hook</span> <span class="ss">&#39;magit-status-sections-hook</span> <span class="ss">&#39;magit-insert-unpulled-from-upstream</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">(</span><span class="nv">remove-hook</span> <span class="ss">&#39;magit-status-sections-hook</span> <span class="ss">&#39;magit-insert-unpushed-to-upstream-or-recent</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After this change, my <code>magit-status</code> buffer refreshes in under half a second.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='elisp'><span class='line'><span class="nv">Refreshing</span> <span class="nv">buffer</span> <span class="err">‘</span><span class="nv">magit:</span> <span class="nv">example-repo</span><span class="err">’</span><span class="o">...</span>
+</span><span class='line'>  <span class="nv">magit-insert-merge-log</span>                             <span class="mf">0.005771</span>
+</span><span class='line'>  <span class="nv">magit-insert-rebase-sequence</span>                       <span class="mf">0.000118</span>
+</span><span class='line'>  <span class="nv">magit-insert-am-sequence</span>                           <span class="mf">5.3e-05</span>
+</span><span class='line'>  <span class="nv">magit-insert-sequencer-sequence</span>                    <span class="mf">0.0001</span>
+</span><span class='line'>  <span class="nv">magit-insert-bisect-output</span>                         <span class="mf">5.5e-05</span>
+</span><span class='line'>  <span class="nv">magit-insert-bisect-rest</span>                           <span class="mf">1.1e-05</span>
+</span><span class='line'>  <span class="nv">magit-insert-bisect-log</span>                            <span class="mf">1.1e-05</span>
+</span><span class='line'>  <span class="nv">magit-insert-untracked-files</span>                       <span class="mf">0.247723</span>
+</span><span class='line'>  <span class="nv">magit-insert-unstaged-changes</span>                      <span class="mf">0.024989</span>
+</span><span class='line'>  <span class="nv">magit-insert-staged-changes</span>                        <span class="mf">0.018397</span>
+</span><span class='line'>  <span class="nv">magit-insert-stashes</span>                               <span class="mf">0.026055</span>
+</span><span class='line'><span class="nv">Refreshing</span> <span class="nv">buffer</span> <span class="err">‘</span><span class="nv">magit:</span> <span class="nv">example-repo</span><span class="err">’</span><span class="o">...</span><span class="nv">done</span> <span class="p">(</span><span class="nv">0.348s</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>What did I lose from the <code>magit-status</code> buffer as a result of these changes?
+Here is screenshot of the original buffer.</p>
+
+<p><img src="https://jakemccrary.com/images/magit-speed/magit-before.png" alt="Buffer before changes" /></p>
+
+<p>And here is the buffer after.</p>
+
+<p><img src="https://jakemccrary.com/images/magit-speed/magit-after.png" alt="Buffer after changes" /></p>
+
+<p>The difference is drastic<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.
+And so is the speed difference.</p>
+
+<p>The increased speed is worth losing the additional information.
+I interact with <code>git</code> very often and much prefer using Magit to do so.
+Before these changes, I found myself regressing to using <code>git</code> at the command line and I don&rsquo;t find that to be nearly as enjoyable.
+Since I&rsquo;ve made these changes, I&rsquo;m back to doing 99% of my <code>git</code> interactions through Magit.</p>
+
+<p>Don&rsquo;t settle for slow interactions with your computer.
+Aggressively shorten your feedback cycles and you&rsquo;ll change how you interact with the machine.</p>
+
+<h4>Versions used when writing this article</h4>
+
+<p>This post was written with Magit version <code>20201111.1436</code> and Emacs <code>26.3</code> on macOS <code>10.15.7</code>.
+I&rsquo;ve been using these changes for a few months but do not remember or have a record of what Magit version I was using at the time I originally made these changes.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>The before image is even missing some sections that would have gone missing in the after shot since I didn&rsquo;t want to put the effort.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Creating a custom Kindle dictionary]]></title>
@@ -2113,95 +2314,6 @@ I look forward to customizing the firmware to make the key layout fit my usage.<
 </ol>
 </div>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How to display a message to all tmux clients]]></title>
-    <link href="https://jakemccrary.com/blog/2019/01/27/how-to-display-a-message-to-all-tmux-clients/"/>
-    <updated>2019-01-27T17:03:00-06:00</updated>
-    <id>https://jakemccrary.com/blog/2019/01/27/how-to-display-a-message-to-all-tmux-clients</id>
-    <content type="html"><![CDATA[<!-- Estimated time: 30 minutes -->
-
-
-<!-- First Draft: 26 minutes -->
-
-
-<!-- First edits: 14 minutes -->
-
-
-<p>Lately, I&rsquo;ve been using <a href="https://github.com/tmux/tmux">tmux</a> a lot. This resulted in me figuring out how to get <a href="https://github.com/jakemcc/lein-test-refresh#notifications">lein-test-refresh</a> to send <a href="https://jakemccrary.com/blog/2019/01/06/notifications-with-tmux-and-lein-test-refresh/">notifications using tmux</a>.</p>
-
-<p>The setup linked above works great for when I&rsquo;m doing work all by myself. It showed a problem when using ssh and tmux to pair with another developer. Instead of both developers receiving a notification, only one did. One is better than none but not ideal.</p>
-
-<p>Below is a GIF showing the problem. Each window simulates a different developer.</p>
-
-<p><img src="https://jakemccrary.com/images/tmux-pair-fail.gif" alt="tmux only showing one developer a notification" /></p>
-
-<p>This wasn&rsquo;t too hard to fix. A little digging through the tmux manpage shows that <code>tmux display-message</code> takes an optional flag telling it which client receives the message. If we can get a list of all the clients then iterating over them and sending a message to each is straightforward.</p>
-
-<p><code>tmux list-clients</code> give us this list. Below is the output.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ tmux list-clients
-</span><span class='line'>/dev/ttys002: 0 [78x41 xterm-256color] (utf8)
-</span><span class='line'>/dev/ttys006: 0 [78x42 xterm-256color] (utf8)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>What we care about are the parts that look like <code>/dev/ttys002</code>. At first I used <code>cut</code> to grab these values but then I dug a bit deeper into the <code>tmux</code> manpage.</p>
-
-<p>It turns out that you can specify a format to <code>tmux list-clients</code>. Running <code>tmux list-clients -F "#{client_name}"</code> gives us the output we care about.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ tmux list-clients -F "#{client_name}"
-</span><span class='line'>/dev/ttys002
-</span><span class='line'>/dev/ttys006</span></code></pre></td></tr></table></div></figure>
-
-
-<p>We can combine that with <code>xargs</code> to send a message to multiple clients.</p>
-
-<p><img src="https://jakemccrary.com/images/tmux-xargs-example.gif" alt="tmux xargs example" /></p>
-
-<p>That command is a bit much to put into <code>lein-test-refresh</code>&rsquo;s configuration so I shoved it in a script called <code>notify</code> and configured <code>lein-test-refresh</code> to use it. Script and GIF of that below. Now both you and your pair can get notifications.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">USAGE</span><span class="o">=</span><span class="s2">&quot;Usage: notify &lt;message&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="s2">example: notify &#39;Tests passed!&#39;&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;$1&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-</span><span class='line'>    <span class="nb">echo</span> <span class="s2">&quot;$USAGE&quot;</span>
-</span><span class='line'>    <span class="nb">exit </span>1
-</span><span class='line'><span class="k">fi</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">message</span><span class="o">=</span><span class="s2">&quot;$1&quot;</span>
-</span><span class='line'>
-</span><span class='line'>tmux list-clients -F <span class="s2">&quot;#{client_name}&quot;</span> <span class="se">\</span>
-</span><span class='line'>    <span class="p">|</span> xargs -n1 -I<span class="o">{}</span> tmux display-message -c <span class="o">{}</span> <span class="s2">&quot;$message&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><img src="https://jakemccrary.com/images/tmux-notify-script.gif" alt="Example using notify script" /></p>
 ]]></content>
   </entry>
   
