@@ -1,12 +1,13 @@
 ---
 layout: post
-title: "Speeding up magit"
-date: 2020-11-14 14:35:00 -0600
+title: Speeding up magit
+date: 2020-11-14 16:37 -0600
 comments: true
-published: false
-description: Magit is great but on large repos it can be sluggish. Here is how you can speed it up.
-keywords: 'emacs, magit'
-categories: 
+published: true
+description: Magit is great but on large repos it can be sluggish. Here is how you
+  can speed it up.
+keywords: emacs, magit
+categories:
 - emacs
 ---
 
