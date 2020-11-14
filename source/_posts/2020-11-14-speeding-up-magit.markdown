@@ -22,7 +22,7 @@ After doing some research, I learned about the `magit-refresh-verbose` variable.
 Setting `magit-refresh-verbose` to true causes Magit to print some very useful output to your `*Messages*` buffer.
 This output shows how many seconds each step of `magit-status` takes.
 
-Here is the output for the large repo I'm spending most of my time in.
+Here is the output for the large repo that caused me to look into this.
 
 ```
 Refreshing buffer ‘magit: example-repo’...
@@ -58,11 +58,11 @@ You can change how much work Magit does by removing functions from the `magit-st
 I looked at the timings and and tried removing anything I decided was slow and something I didn't think I'd miss.
 For me, that list includes `magit-insert-tags-header`, `magit-insert-status-headers`, `magit-insert-unpushed-to-pushremote`, `magit-insert-unpushed-to-upstream-or-recent`, and `magit-insert-unpulled-from-upstream`. I also removed `magit-insert-unpulled-from-pushremote`.
 
-You remove a function from a hook with some code like `(remove-hook 'magit-status-sections-hook 'magit-insert-tags-header)` in your Emacs configuration.
+You remove a function from a hook by adding elisp similar to `(remove-hook 'magit-status-sections-hook 'magit-insert-tags-header)` to your Emacs configuration.
 
 I use [use-package](https://github.com/jwiegley/use-package) to configure mine and below is what my `magit` section looks like.
 
-Lines 20-25 show the hooks I removed to reduce the work done by `magit-status`.
+Lines 20-25 remove the hooks.
 I also hard-code `magit-git-executable` to be the full path of the `git` executable on line 5 because folks said this made a difference on macOS.
 
 ```elisp
@@ -131,7 +131,7 @@ Before these changes, I found myself regressing to using `git` at the command li
 Since I've made these changes, I'm back to doing 99% of my `git` interactions through Magit.
 
 Don't settle for slow interactions with your computer.
-Aggressively shorten your feedback cycles and you'll change how you interact with your machine.
+Aggressively shorten your feedback cycles and you'll change how you interact with the machine.
 
 #### Versions used when writing this article
 
