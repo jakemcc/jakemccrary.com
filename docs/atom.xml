@@ -4,7 +4,7 @@
   <title><![CDATA[Jake McCrary]]></title>
   <link href="https://jakemccrary.com/atom.xml" rel="self"/>
   <link href="https://jakemccrary.com/"/>
-  <updated>2020-11-14T16:43:07-06:00</updated>
+  <updated>2020-12-15T19:49:26-06:00</updated>
   <id>https://jakemccrary.com/</id>
   <author>
     <name><![CDATA[Jake McCrary]]></name>
@@ -203,6 +203,12 @@ Aggressively shorten your feedback cycles and you&rsquo;ll change how you intera
 
 <p>This post was written with Magit version <code>20201111.1436</code> and Emacs <code>26.3</code> on macOS <code>10.15.7</code>.
 I&rsquo;ve been using these changes for a few months but do not remember or have a record of what Magit version I was using at the time I originally made these changes.</p>
+
+<p><strong>edit on 2020/12/15</strong>:</p>
+
+<p>I recently upgraded Emacs to tryout the native-comp work and can report this still works with with Emacs <code>28.0.50</code>, Magit <code>20201212.929</code>, and Git <code>2.29.2</code> running in macOS <code>11.0.1</code>.</p>
+
+<p>As a warning, this reduces the information Magit shows you. The status buffer will be blank if you have no changes.</p>
 <div class="footnotes">
 <hr/>
 <ol>
