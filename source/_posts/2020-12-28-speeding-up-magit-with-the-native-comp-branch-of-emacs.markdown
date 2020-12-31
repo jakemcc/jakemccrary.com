@@ -17,6 +17,7 @@ This reddit thread was the first time I had heard of the `native-comp` feature.
 This feature lives on the `feature/native-comp` branch of the Emacs repository and it compiles Elisp code into native code.
 Many users have reported noticeable speed improvements using it.
 The [official development log](http://akrl.sdf.org/gccemacs.html) and [Emacs Wiki](https://www.emacswiki.org/emacs/GccEmacs) have more information about it.
+
 I'll provide more information about getting `native-comp` working on macOS after I answer the Magit speed question.
 
 ## How did it change refresh times of the Magit status buffer?
@@ -25,7 +26,6 @@ The quick answer is that running Emacs with `native-comp` improved the refresh t
 Below is a table of the various times.
 
 ```
-
 | Experiment                              | magit-status refresh time |
 |-----------------------------------------+---------------------------|
 | full magit-status with native-comp      | 3.152 seconds             |
@@ -50,7 +50,7 @@ When browsing reddit, I found the [build-emacs-for-macos](https://github.com/jim
 I followed the instructions from the readme and picked the latest known good commit from [this issue](https://github.com/jimeh/build-emacs-for-macos/issues/6) (at the time I did this `be907b0ba82c2a65e0468d50653cae8a7cf5f16b`).
 I then updated my [init.el](https://github.com/jakemcc/emacs.d/commit/72cf37a497b72b8990956395e2eaa87285ea7c81) based on instructions from in the `build-emacs-for-macos` project.
 
-I haven't had any issues since switching to this bleeding edge.
+I haven't had any issues since switching to this very new Emacs.
 I don't have numbers to back this up but it does feel faster.
 
 ## Recommendation
