@@ -4,7 +4,7 @@
   <title><![CDATA[Category: emacs | Jake McCrary]]></title>
   <link href="https://jakemccrary.com/blog/categories/emacs/atom.xml" rel="self"/>
   <link href="https://jakemccrary.com/"/>
-  <updated>2020-12-15T19:49:26-06:00</updated>
+  <updated>2020-12-30T20:12:42-06:00</updated>
   <id>https://jakemccrary.com/</id>
   <author>
     <name><![CDATA[Jake McCrary]]></name>
@@ -12,6 +12,61 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Speeding up Magit with the native-comp branch of Emacs]]></title>
+    <link href="https://jakemccrary.com/blog/2020/12/30/speeding-up-magit-with-the-native-comp-branch-of-emacs/"/>
+    <updated>2020-12-30T20:08:00-06:00</updated>
+    <id>https://jakemccrary.com/blog/2020/12/30/speeding-up-magit-with-the-native-comp-branch-of-emacs</id>
+    <content type="html"><![CDATA[<p>In my last article, <a href="/blog/2020/11/14/speeding-up-magit/">Speeding up Magit</a>, I showed how removing elements from Magit&rsquo;s status buffer drastically reduces the time it takes to refresh this buffer when working in a large repository (from 4 seconds to around 0.348 seconds).
+In a <a href="https://www.reddit.com/r/emacs/comments/k3xfa1/speeding_up_magit/ge5o0e0/?utm_source=reddit&amp;utm_medium=web2x&amp;context=3">comment on r/emacs</a>, someone wondered if the <code>native-comp</code> feature of Emacs might improve the Magit status refresh time.</p>
+
+<p>This reddit thread was the first time I had heard of the <code>native-comp</code> feature.
+This feature lives on the <code>feature/native-comp</code> branch of the Emacs repository and it compiles Elisp code into native code.
+Many users have reported noticeable speed improvements using it.
+The <a href="http://akrl.sdf.org/gccemacs.html">official development log</a> and <a href="https://www.emacswiki.org/emacs/GccEmacs">Emacs Wiki</a> have more information about it.</p>
+
+<p>I&rsquo;ll provide more information about getting <code>native-comp</code> working on macOS after I answer the Magit speed question.</p>
+
+<h2>How did it change refresh times of the Magit status buffer?</h2>
+
+<p>The quick answer is that running Emacs with <code>native-comp</code> improved the refresh times of the Magit status buffer.
+Below is a table of the various times.</p>
+
+<pre><code>| Experiment                              | magit-status refresh time |
+|-----------------------------------------+---------------------------|
+| full magit-status with native-comp      | 3.152 seconds             |
+| full magit-status without native-comp   | 4.003 seconds             |
+| magit-status with many sections removed | 0.348 seconds             |
+</code></pre>
+
+<p>Using <code>native-comp</code>, we&rsquo;ve cut off about 0.85 seconds.
+That is a pretty solid improvement.
+Even still, that isn&rsquo;t fast enough for how often I use Magit so I&rsquo;ll be sticking with my <a href="/blog/2020/11/14/speeding-up-magit/">Magit setup</a> with many sections removed.</p>
+
+<p>As a caveat, the timing with <code>native-comp</code> also includes upgrading Emacs from <code>26.3</code> to <code>28.0.50</code> (so I could have <code>native-comp</code>) and Magit from <code>20201111.1436</code> to <code>20201212.929</code>.
+As a result, the comparison to <code>full magit-status without native-comp</code> isn&rsquo;t entirely fair as multiple variables have changed.
+The comparison to time with sections removed is fair as I&rsquo;m still using that setup (but with native-comp) and the timing is pretty much the same.</p>
+
+<h2>Getting <code>native-comp</code> on macOS</h2>
+
+<p>To enable <code>native-comp</code> you need to build Emacs from source.
+I&rsquo;ve done this before on Linux systems but this was the first time I&rsquo;ve done this on macOS.</p>
+
+<p>When browsing reddit, I found the <a href="https://github.com/jimeh/build-emacs-for-macos">build-emacs-for-macos</a> project which has some helpful instructions for doing this.
+I followed the instructions from the readme and picked the latest known good commit from <a href="https://github.com/jimeh/build-emacs-for-macos/issues/6">this issue</a> (at the time I did this <code>be907b0ba82c2a65e0468d50653cae8a7cf5f16b</code>).
+I then updated my <a href="https://github.com/jakemcc/emacs.d/commit/72cf37a497b72b8990956395e2eaa87285ea7c81">init.el</a> based on instructions from in the <code>build-emacs-for-macos</code> project.</p>
+
+<p>I haven&rsquo;t had any issues since switching to this very new Emacs.
+I don&rsquo;t have numbers to back this up but it does feel faster.</p>
+
+<h2>Recommendation</h2>
+
+<p>I&rsquo;d recommend giving the <code>native-comp</code> feature of Emacs a shot.
+It wasn&rsquo;t terribly challenging to get setup and it is nice to get a glimpse of what the future of Emacs might be.
+That future is a bit snappier.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Speeding up magit]]></title>
@@ -379,77 +434,6 @@ targeting <code>localhost</code> fail. The solution is to query <code>127.0.0.1<
 testing HTTP APIs. Since it operates on a simple text
 format it allows you to easily share executable documentation with
 others. I highly recommend <strong>restclient.el</strong>.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Emacs: Generating project shortcuts]]></title>
-    <link href="https://jakemccrary.com/blog/2014/04/27/emacs-generating-project-shortcuts/"/>
-    <updated>2014-04-27T16:38:00-05:00</updated>
-    <id>https://jakemccrary.com/blog/2014/04/27/emacs-generating-project-shortcuts</id>
-    <content type="html"><![CDATA[<p>I&rsquo;m now writing Clojure nearly 100% of my time and as a result am spending more
-time in Emacs. I&rsquo;m working in a few different projects and
-wanted a quicker way to jump between them. My first attempt at this
-ended with me defining many functions that looked like the following.</p>
-
-<pre><code class="cl">(defun b/test-refresh ()
-  (interactive)
-  (find-file "~/src/jakemcc/lein-test-refresh/test-refresh/project.clj"))
-</code></pre>
-
-<p>After writing a couple of these I decided the computer could do this
-better than I could and decided to write some code to automate it. A
-sample of my directory structure is shown below.</p>
-
-<pre><code class="bash">jakemcc/
-├── bookrobot
-│   └── project.clj
-└── lein-autoexpect
-    └── project.clj
-</code></pre>
-
-<p>Taking advantage of this structure I wrote some Emacs lisp to walk a
-directory and define functions that open up any found project.clj
-files.</p>
-
-<pre><code class="cl">;; -*- lexical-binding: t -*-
-
-(defun open-file-fn (file) 
-  (lambda ()
-    (interactive)
-    (find-file file)))
-
-(defun create-project-shortcuts (prefix base)
-  (dolist (elt (directory-files base))
-    (let ((project (concat base "/" elt "/project.clj")))
-      (when (file-exists-p project)
-        (fset (intern (concat prefix elt)) (open-file-fn project))))))
-</code></pre>
-
-<p><code>open-file-fn</code> creates an anonymous interactive function (meaning the function
-can be called interactively) that opens <code>file</code>. It takes advantage of
-the feature in Emacs 24 that enables lexical scoping by adding <code>;; -*-
-lexical-binding: t -*-</code> to the top of your Emacs lisp file. This lets
-the anonymous function capture <code>file</code>.</p>
-
-<p><code>create-project-shortcuts</code> takes in a <code>prefix</code> and a <code>base</code> directory.
-It searches <code>base</code> for directories that contain a
-project.clj file. For each found project.clj file a function is
-created (using <code>fset</code>) with the name of the containing directory
-prefixed by <code>prefix</code>.</p>
-
-<p>With those two functions defined all that is left is to call
-<code>create-project-shortcuts</code>.</p>
-
-<pre><code class="cl">(create-project-shortcuts "b/" "~/src/jakemcc")
-</code></pre>
-
-<p>Now <code>b/bookrobot</code> and <code>b/lein-autoexpect</code> are available after hitting
-<code>M-x</code>.</p>
-
-<p>I&rsquo;ve used this code to create quick
-shortcuts to all of my work and non-work projects. It has been
-immensely useful for jumping around projects.</p>
 ]]></content>
   </entry>
   

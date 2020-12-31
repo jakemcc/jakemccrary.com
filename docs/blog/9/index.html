@@ -14,19 +14,17 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" I was recently given a review copy of
-Clojure for Machine Learning.
-I have an academic familiarity with machine learning techniques and
-presented on &hellip;" />
+    <meta itemprop="description" content=" Over the last couple of years I&rsquo;ve desired quicker feedback from my
+Clojure tests. This has resulted in the development of
+lein-autoexpect and &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" I was recently given a review copy of
-Clojure for Machine Learning.
-I have an academic familiarity with machine learning techniques and
-presented on &hellip;" />
+    <meta name="twitter:description" content=" Over the last couple of years I&rsquo;ve desired quicker feedback from my
+Clojure tests. This has resulted in the development of
+lein-autoexpect and &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -34,18 +32,16 @@ presented on &hellip;" />
     <meta property="og:site_name" content="Writing by Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/9/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" I was recently given a review copy of
-Clojure for Machine Learning.
-I have an academic familiarity with machine learning techniques and
-presented on &hellip;" />
+    <meta property="og:description" content=" Over the last couple of years I&rsquo;ve desired quicker feedback from my
+Clojure tests. This has resulted in the development of
+lein-autoexpect and &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" I was recently given a review copy of
-Clojure for Machine Learning.
-I have an academic familiarity with machine learning techniques and
-presented on &hellip;">
+    <meta name="description" content=" Over the last couple of years I&rsquo;ve desired quicker feedback from my
+Clojure tests. This has resulted in the development of
+lein-autoexpect and &hellip;">
 
     
 
@@ -127,6 +123,85 @@ presented on &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/31/quicker-feedback-from-failing-tests/">Quicker Feedback From Failing Tests</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-05-31T13:14:00-05:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2014</span></span> <span class='time'>1:14 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Over the last couple of years I&rsquo;ve desired quicker feedback from my
+Clojure tests. This has resulted in the development of
+<a href="https://github.com/jakemcc/lein-autoexpect">lein-autoexpect</a> and more
+recently
+<a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a>.
+Each tool monitors your project for changes and on change uses
+<a href="https://github.com/clojure/tools.namespace">tools.namespace</a> to
+reload your code and then reruns either your
+<a href="http://jayfields.com/expectations/">expectations</a> or <code>clojure.test</code>
+tests. Using tools like these has changed my development process.</p>
+
+<p>Version 0.5.0 of <strong>lein-test-refresh</strong> was released last week. This
+release enables even quicker feedback by tracking which tests fail and
+after reloading your code it runs those tests first. Only when your
+previously failed tests pass does it then rerun all of your tests.</p>
+
+<p><strong>lein-test-refresh</strong> has had quite a few features added since I last
+wrote about it. The
+<a href="https://github.com/jakemcc/lein-test-refresh/blob/master/README.md#features">readme</a>
+will always have the latest list but as of the time of writing this
+they include:</p>
+
+<ul>
+<li>Reloads code and reruns tests on changes to your project&rsquo;s code.</li>
+<li>Runs previously failing tests first.</li>
+<li>Supports
+<a href="https://github.com/jakemcc/lein-test-refresh/blob/d6b2f2710ae94ae3270d92b0efd85d481717477b/sample.project.clj#L6-L9">custom notification</a>
+commands.</li>
+<li>Built in <a href="http://growl.info/">Growl</a> support.</li>
+<li>Can notify after test success and failure or <a href="https://github.com/jakemcc/lein-test-refresh/blob/d6b2f2710ae94ae3270d92b0efd85d481717477b/sample.project.clj#L12">just after failure</a>.</li>
+<li>Supports a
+<a href="https://github.com/jakemcc/lein-test-refresh/blob/master/CHANGES.md#040">subset</a>
+of Leiningen test selectors.</li>
+<li>Reports on your tests running time.</li>
+</ul>
+
+
+<p>I don&rsquo;t have enough experience with the new <strong>lein-test-refresh</strong> to
+say how having failing tests will affect my development practices. I
+don&rsquo;t expect this to change my development practices but it will
+enable quicker feedback. Quick feedback cycles are what it is all
+about.</p>
+
+<h3>Acknowledgments</h3>
+
+<p>Most of the &lsquo;rerun failed tests first&rsquo; feature was hashed out and spiked
+during a mob programming session organized by
+<a href="http://www.zeespencer.com/">Zee Spencer</a>. This happened at a company
+conference put on by <a href="http://www.outpace.com/">Outpace</a> in Las Vegas.
+Many developers were involved but two that most influenced the final
+result were <a href="https://github.com/noprompt">Joel Holdbrooks</a> and
+<a href="https://github.com/timothypratley">Timothy Pratley</a>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1141,56 +1216,6 @@ file. Below is some sample code that does something similar.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/08/05/releasing-lein-autoexpect-1-dot-0/">Releasing lein-autoexpect 1.0</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2013-08-05T19:50:00-05:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2013</span></span> <span class='time'>7:50 pm</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Put together a new release of
-<a href="https://github.com/jakemcc/lein-autoexpect">lein-autoexpect</a> today.
-lein-autoexpect is a plugin for <a href="http://leiningen.org/">Leiningen</a>
-that monitors your source directories for changes and then reloads
-your code and runs your
-<a href="https://github.com/jaycfields/expectations">expectations</a>. It reports
-test output to the console and optionally sends notifications to
-<a href="http://growl.info/">Growl</a> (and Growl like notification tools).</p>
-
-<p>To use lein-autoexpect, add <code>:plugins [[lein-autoexpect "1.0"]]</code> to
-your either your project&rsquo;s <code>project.clj</code> or your global
-<code>~/.lein/profiles.clj</code>. To use the plugin run <code>lein autoexpect</code>.
-This will display the test results to the console. To also have
-results reported using Growl run <code>lein autoexpect :growl</code>.</p>
-
-<p>Release 1.0 of lein-autoexpect upgrades its dependency on
-<a href="https://github.com/clojure/tools.namespace/">org.clojure/tools.namespace</a>
-to version 0.2.4. It also no longer crashes if there isn&rsquo;t a Growl
-connection available.</p>
-
-<p>If you haven&rsquo;t tried using expectations and lein-autoexpect I
-encourage you to give it a try. Having my tests run automatically made
-a huge positive difference on my development experience.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//10">&larr; Older</a>
@@ -1206,6 +1231,10 @@ a huge positive difference on my development experience.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/12/30/speeding-up-magit-with-the-native-comp-branch-of-emacs/">Speeding up Magit with the native-comp branch of Emacs</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2020/11/14/speeding-up-magit/">Speeding up magit</a>
@@ -1241,10 +1270,6 @@ a huge positive difference on my development experience.</p>
     
       <li class="post">
         <a href="/blog/2020/04/21/using-bash-preexec-for-monitoring-the-runtime-of-your-last-command/">Using Bash-Preexec for monitoring the runtime of your last command</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/03/16/a-retrospective-format/">A retrospective format for remote or co-located teams</a>
       </li>
     
   </ul>

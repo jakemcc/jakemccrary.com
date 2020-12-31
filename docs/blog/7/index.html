@@ -14,19 +14,17 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" Last December I wrote about the
-effective code review process
-I started at Outpace. The process works well; participants say it is
-the most effective &hellip;" />
+    <meta itemprop="description" content=" Lately I&rsquo;ve been working on projects that use
+Postgres as our relational database.
+This has allowed us to simplify some of our Clojure code by &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" Last December I wrote about the
-effective code review process
-I started at Outpace. The process works well; participants say it is
-the most effective &hellip;" />
+    <meta name="twitter:description" content=" Lately I&rsquo;ve been working on projects that use
+Postgres as our relational database.
+This has allowed us to simplify some of our Clojure code by &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -34,18 +32,16 @@ the most effective &hellip;" />
     <meta property="og:site_name" content="Writing by Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/7/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" Last December I wrote about the
-effective code review process
-I started at Outpace. The process works well; participants say it is
-the most effective &hellip;" />
+    <meta property="og:description" content=" Lately I&rsquo;ve been working on projects that use
+Postgres as our relational database.
+This has allowed us to simplify some of our Clojure code by &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" Last December I wrote about the
-effective code review process
-I started at Outpace. The process works well; participants say it is
-the most effective &hellip;">
+    <meta name="description" content=" Lately I&rsquo;ve been working on projects that use
+Postgres as our relational database.
+This has allowed us to simplify some of our Clojure code by &hellip;">
 
     
 
@@ -127,6 +123,247 @@ the most effective &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/11/15/sql-aggregate-a-set-of-values-together/">SQL: Aggregate a set of values together</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-11-15T19:45:00-06:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>7:45 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Lately I&rsquo;ve been working on projects that use
+<a href="http://www.postgresql.org/">Postgres</a> as our relational database.
+This has allowed us to simplify some of our Clojure code by leaning on
+some built-in features of Postgres. One SQL function supported by
+Postgres which has greatly simplified our code is the <code>array_agg</code>
+<a href="http://www.postgresql.org/docs/9.4/static/functions-aggregate.html">aggregate</a>
+function.</p>
+
+<h2>What is <code>array_agg</code>?</h2>
+
+<p>The <code>array_agg</code> function takes an argument and returns an array of the
+argument type. That sentence will make more sense after an example.
+The snippet below shows a simplified schema for a blog&rsquo;s database.
+There is a table called <code>blog_posts</code> that contains details about
+posts, a table called <code>categories</code> that has labels that can be applied
+to blog posts, and a join table called <code>post_categories</code> that links
+the two previous tables together.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="n">blog</span><span class="o">=#</span> <span class="k">select</span> <span class="n">id</span><span class="p">,</span> <span class="n">title</span> <span class="k">from</span> <span class="n">blog_posts</span><span class="p">;</span>
+</span><span class='line'> <span class="n">id</span> <span class="o">|</span>    <span class="n">title</span>
+</span><span class='line'><span class="c1">----+--------------</span>
+</span><span class='line'>  <span class="mi">1</span> <span class="o">|</span> <span class="k">SQL</span> <span class="n">Post</span>
+</span><span class='line'>  <span class="mi">2</span> <span class="o">|</span> <span class="n">Clojure</span> <span class="n">Post</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">blog</span><span class="o">=#</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">categories</span><span class="p">;</span>
+</span><span class='line'> <span class="n">id</span> <span class="o">|</span>   <span class="n">name</span>
+</span><span class='line'><span class="c1">----+----------</span>
+</span><span class='line'>  <span class="mi">1</span> <span class="o">|</span> <span class="k">sql</span>
+</span><span class='line'>  <span class="mi">2</span> <span class="o">|</span> <span class="n">emacs</span>
+</span><span class='line'>  <span class="mi">3</span> <span class="o">|</span> <span class="n">clojure</span>
+</span><span class='line'>  <span class="mi">4</span> <span class="o">|</span> <span class="n">postgres</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">blog</span><span class="o">=#</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">post_categories</span><span class="p">;</span>
+</span><span class='line'> <span class="n">blog_post_id</span> <span class="o">|</span> <span class="n">category_id</span>
+</span><span class='line'><span class="c1">--------------+-------------</span>
+</span><span class='line'>            <span class="mi">1</span> <span class="o">|</span>           <span class="mi">1</span>
+</span><span class='line'>            <span class="mi">2</span> <span class="o">|</span>           <span class="mi">2</span>
+</span><span class='line'>            <span class="mi">1</span> <span class="o">|</span>           <span class="mi">4</span>
+</span><span class='line'>            <span class="mi">2</span> <span class="o">|</span>           <span class="mi">3</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Before I learned about <code>array_agg</code>, if I wanted to know how each blog
+post had been categorized I might have written the following query.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="n">title</span><span class="p">,</span> <span class="n">name</span> <span class="k">as</span> <span class="n">category</span>
+</span><span class='line'>  <span class="k">from</span> <span class="n">blog_posts</span> <span class="n">bp</span>
+</span><span class='line'>  <span class="k">join</span> <span class="n">post_categories</span> <span class="n">pc</span> <span class="k">on</span> <span class="n">pc</span><span class="p">.</span><span class="n">blog_post_id</span> <span class="o">=</span> <span class="n">bp</span><span class="p">.</span><span class="n">id</span>
+</span><span class='line'>  <span class="k">join</span> <span class="n">categories</span> <span class="k">c</span> <span class="k">on</span> <span class="k">c</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">pc</span><span class="p">.</span><span class="n">category_id</span>
+</span><span class='line'>  <span class="k">order</span> <span class="k">by</span> <span class="n">title</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">title</span>     <span class="o">|</span> <span class="n">category</span>
+</span><span class='line'><span class="c1">--------------+----------</span>
+</span><span class='line'> <span class="n">Clojure</span> <span class="n">Post</span> <span class="o">|</span> <span class="n">emacs</span>
+</span><span class='line'> <span class="n">Clojure</span> <span class="n">Post</span> <span class="o">|</span> <span class="n">clojure</span>
+</span><span class='line'> <span class="k">SQL</span> <span class="n">Post</span>     <span class="o">|</span> <span class="k">sql</span>
+</span><span class='line'> <span class="k">SQL</span> <span class="n">Post</span>     <span class="o">|</span> <span class="n">postgres</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The result is readable but as the number of posts and categories grow
+it becomes harder to read. The query also doesn&rsquo;t answer the question,
+&ldquo;How are my posts categorized?&rdquo;, well. The ideal answer is a single
+row per post that shows the post&rsquo;s categories. You can use <code>array_agg</code>
+to get that ideal answer.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">select</span> <span class="n">title</span><span class="p">,</span> <span class="n">array_agg</span><span class="p">(</span><span class="n">name</span><span class="p">)</span> <span class="k">as</span> <span class="n">categories</span>
+</span><span class='line'>  <span class="k">from</span> <span class="n">blog_posts</span> <span class="n">bp</span>
+</span><span class='line'>  <span class="k">join</span> <span class="n">post_categories</span> <span class="n">pc</span> <span class="k">on</span> <span class="n">pc</span><span class="p">.</span><span class="n">blog_post_id</span> <span class="o">=</span> <span class="n">bp</span><span class="p">.</span><span class="n">id</span>
+</span><span class='line'>  <span class="k">join</span> <span class="n">categories</span> <span class="k">c</span> <span class="k">on</span> <span class="k">c</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">pc</span><span class="p">.</span><span class="n">category_id</span>
+</span><span class='line'>  <span class="k">group</span> <span class="k">by</span> <span class="n">title</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">title</span>     <span class="o">|</span>   <span class="n">categories</span>
+</span><span class='line'><span class="c1">--------------+-----------------</span>
+</span><span class='line'> <span class="k">SQL</span> <span class="n">Post</span>     <span class="o">|</span> <span class="err">{</span><span class="k">sql</span><span class="p">,</span><span class="n">postgres</span><span class="err">}</span>
+</span><span class='line'> <span class="n">Clojure</span> <span class="n">Post</span> <span class="o">|</span> <span class="err">{</span><span class="n">emacs</span><span class="p">,</span><span class="n">clojure</span><span class="err">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I find the <code>array_agg</code> version much nicer to read. The result answers
+the question in a very direct fashion and the query expresses the
+question well. Everything about the query expresses the question, you
+no longer have an extra <code>order by</code> clause to make the result more
+readable by human eyes.</p>
+
+<h2>How did it make my Clojure code simpler?</h2>
+
+<p>The above is great and it makes everything more readable for a human.
+Most of the time I&rsquo;m not querying a SQL database so that a human can
+directly read the results; instead I&rsquo;m using Clojure to manipulate
+results of a query. Fortunately, <code>array_agg</code> simplifies my Clojure
+code as well.</p>
+
+<p>I&rsquo;m working with a schema that has many relationships similar to the
+above relationship. Continuing with the example from above the snippet
+below shows the data shape we&rsquo;d get back from <code>clojure.java.jdbc</code>
+prior to using <code>array_agg</code>. The data shape we actually want follows.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="c1">;; data shape you get from the non-array_agg query.</span>
+</span><span class='line'><span class="p">[{</span><span class="ss">:title</span> <span class="s">&quot;Clojure Post&quot;</span> <span class="ss">:category</span> <span class="s">&quot;emacs&quot;</span><span class="p">}</span>
+</span><span class='line'> <span class="p">{</span><span class="ss">:title</span> <span class="s">&quot;SQL Post&quot;</span> <span class="ss">:category</span> <span class="s">&quot;sql&quot;</span><span class="p">}</span>
+</span><span class='line'> <span class="p">{</span><span class="ss">:title</span> <span class="s">&quot;Clojure Post&quot;</span> <span class="ss">:category</span> <span class="s">&quot;clojure&quot;</span><span class="p">}</span>
+</span><span class='line'> <span class="p">{</span><span class="ss">:title</span> <span class="s">&quot;SQL Post&quot;</span> <span class="ss">:category</span> <span class="s">&quot;postgres&quot;</span><span class="p">}]</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">;; data shape you want</span>
+</span><span class='line'><span class="p">[{</span><span class="ss">:title</span> <span class="s">&quot;Clojure Post&quot;</span> <span class="ss">:categories</span> <span class="p">[</span><span class="s">&quot;emacs&quot;</span> <span class="s">&quot;clojure&quot;</span><span class="p">]}</span>
+</span><span class='line'> <span class="p">{</span><span class="ss">:title</span> <span class="s">&quot;SQL Post&quot;</span> <span class="ss">:categories</span> <span class="p">[</span><span class="s">&quot;sql&quot;</span> <span class="s">&quot;postgres&quot;</span><span class="p">]}]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Since we&rsquo;re not getting data in our desired shape we need to write
+code that combines rows. One way of doing that is to use <code>reduce</code> and <code>map</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">squash-by-title</span> <span class="p">[</span><span class="nv">rows</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">-&gt;&gt;</span> <span class="nv">rows</span>
+</span><span class='line'>       <span class="p">(</span><span class="nb">reduce </span><span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">r</span> <span class="nv">row</span><span class="p">]</span> <span class="p">(</span><span class="nf">update</span> <span class="nv">r</span> <span class="p">(</span><span class="ss">:title</span> <span class="nv">row</span><span class="p">)</span> <span class="nb">conj </span><span class="p">(</span><span class="ss">:category</span> <span class="nv">row</span><span class="p">)))</span> <span class="p">{})</span>
+</span><span class='line'>       <span class="p">(</span><span class="nb">map </span><span class="p">(</span><span class="k">fn </span><span class="p">[[</span><span class="nv">title</span> <span class="nv">categories</span><span class="p">]]</span> <span class="p">{</span><span class="ss">:title</span> <span class="nv">title</span> <span class="ss">:categories</span> <span class="nv">categories</span><span class="p">}))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I&rsquo;ve been writing Clojure for a long time and when I see code like
+above it still takes me a bit of time to figure out what is happening.
+Not only that, but eventually your project has different squash
+operations depending on what data you&rsquo;re pulling back from the
+database. They are probably mostly similar and eventually you abstract
+the differences and feel great. Then you come back months later and
+have to figure out how it all works. Luckily, if you&rsquo;re using a
+database that supports <code>array_agg</code>, there is a better way.</p>
+
+<p>The first step is to change your queries to use <code>array_agg</code>. The
+second step is to extend the <code>clojure.java.jdbc/IResultSetReadColumn</code>
+protocol to the type returned by your jdbc driver. For my project that
+looks like the following code:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="c1">;; clojure.java.jdbc has been required as jdbc</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">extend-protocol</span> <span class="nv">jdbc/IResultSetReadColumn</span>
+</span><span class='line'>  <span class="nv">org.postgresql.jdbc4.Jdbc4Array</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">result-set-read-column</span> <span class="p">[</span><span class="nv">pgobj</span> <span class="nv">metadata</span> <span class="nv">i</span><span class="p">]</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">vec</span> <span class="p">(</span><span class="nf">.getArray</span> <span class="nv">pgobj</span><span class="p">))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>By changing my queries to use <code>array_agg</code> and adding those four lines
+of code I&rsquo;m able to delete all of my squashing functions and get data
+from my database in the shape I want. I also end up with easier to
+understand code and more expressive queries. Awesome.</p>
+
+<p><em>Thanks to <a href="http://timothypratley.blogspot.com/">Timothy Pratley</a> for
+providing feedback on earlier versions of this post.</em></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1315,154 +1552,6 @@ example project.clj is below.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/01/24/remote-pairing/">Remote Pairing</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-01-24T15:19:00-06:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>3:19 pm</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><blockquote><p>See all of my remote/working-from-home <a href="/blog/categories/remote/">articles here</a>.</p></blockquote>
-
-<p>Over a year ago I joined <a href="http://outpace.com">Outpace</a>. All of
-Outpace&rsquo;s developers are remote but we still practice pair
-programming. As a result I&rsquo;ve done a lot of remote pairing. I was
-skeptical before joining that it would work well and I&rsquo;m happy to
-report that I was wrong. Remote pairing works.</p>
-
-<h2>Why remote pairing?</h2>
-
-<p>The usual pair programming
-<a href="http://c2.com/cgi/wiki?PairProgrammingBenefits">benefits</a> apply to
-remote pairing; more people know the code, quality is higher, and
-it provides an opportunity for mentorship. Another benefit, more
-beneficial in a remote setting, is that it increases <strong>social
-interaction</strong>.</p>
-
-<p>The most common response I receive when I tell someone I work from my
-apartment is &ldquo;I&rsquo;d miss the interaction with co-workers.&rdquo; When you work
-remote you do miss out on the usual in office interaction. Pair
-programming helps replace some of this. It helps you build and
-maintain relationships with your remote colleagues.</p>
-
-<h2>Communication</h2>
-
-<p>Communication is an important part of pair programming. When you&rsquo;re
-pairing in person you use both physical and vocal communication. When
-remote pairing you primarily use vocal communication. You can pick up
-on some physical cues with video chat but it is hard. You will never
-notice your pair reaching for their keyboard.</p>
-
-<p>I&rsquo;ve used Google Hangouts, <a href="http://zoom.us">Zoom</a>, and Skype for
-communication. Currently I&rsquo;m primarily using Zoom. It offers high
-quality video and audio and usually doesn&rsquo;t consume too many
-resources.</p>
-
-<p>I recommend not using your computers built-in microphone. You should
-use headphones with a mic or a directional microphone. You&rsquo;ll sound
-better and you&rsquo;ll stop your pair from hearing themselves through your
-computer.</p>
-
-<p>I use
-<a href="http://www.amazon.com/gp/product/B005VAORH6/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B005VAORH6&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=3AX26BCB4ZHZWLC5">these headphones</a>.
-They are cheap, light, and open-eared but are wired. I&rsquo;ve been told I
-sound the best when I&rsquo;m using them. I also own these
-<a href="http://www.amazon.com/gp/product/B003VANOFY/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B003VANOFY&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=LDHRWNCUOO45B7G4">wireless headphones</a>.
-They are closed-ear, heavier, and wireless. The wireless is great but
-the closed-ear design causes me to talk differently and by the end of
-the day my throat is hoarse. Both of these headphones are widely used
-by my colleagues and I don&rsquo;t think you can go wrong with either one.</p>
-
-<p>Some people don&rsquo;t like wearing headphones all day. If you are one of
-those I&rsquo;d recommend picking up a directional microphone. Many of my
-colleagues use a
-<a href="http://www.amazon.com/gp/product/B002OO333Q/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B002OO333Q&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=XVNYHVNXTAC3J2RD">Snowball</a>.</p>
-
-<h2>Connecting the machines</h2>
-
-<p>So now you can communicate with your pair. It is time to deal with the
-main problem in remote pairing. How do you actually work on the same
-code with someone across the world?</p>
-
-<p>At Outpace we&rsquo;ve somewhat cheated and have standardized our
-development hardware. Everyone has a computer running OS X and, if
-they want it, at least one 27 inch monitor (mostly Apple 27 inch
-displays or a
-<a href="http://www.amazon.com/gp/product/B009H0XQQY/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B009H0XQQY&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=JJLKLYNESYPKCRKZ">Dell</a>)
-with a resolution of 2560x1440. Since everyone has nearly identical
-hardware and software we are able to pair using OS X&rsquo;s built-in screen
-sharing. This allows full sharing of the host&rsquo;s desktop. This full
-desktop sharing is the best way to emulate working physically next to
-your pair. This enable the use of any editor and lets you both look at
-the same browser windows (useful for testing UIs or reading reference
-material). With decent internet connections both programmers can write
-code with minimal lag. This is my preferred way of pairing.</p>
-
-<p>Another option that works well is <a href="http://tmate.io/">tmate</a>. tmate is
-a fork of tmux that makes remote pairing easy. It makes it dead simple
-to have remote developer connect to your machine and share your
-terminal. This means you are stuck using tools that work in a terminal
-and, if you are working on a user interface, you need to share that
-some other way. There generally is less lag when the remote developer
-is typing.</p>
-
-<p>A third option is to have the host programmer share their screen using
-screen sharing built-in to Google Hangouts or <a href="http://zoom.us">Zoom</a>.
-This is a quick way to share a screen and is my preferred way of
-sharing GUIs with more than one other person. With both Zoom and
-Google Hangouts the remote developer can control the host&rsquo;s machine
-but it isn&rsquo;t a great experience. If you are pairing this way the
-remote developer rarely touches the keyboard.</p>
-
-<h2>Soloing</h2>
-
-<p>It might seem weird to have a section on soloing in an article about
-remote pairing. Soloing happens and even in an environment that almost
-entirely pairs it is important. Not everyone can or wants to pair 100%
-of the time. Soloing can be recharging. It is important to be
-self-aware and recognize if you need solo time. Below are a few tips
-for getting that solo time.</p>
-
-<p>One way to introduce solo time is to take your lunch at a different
-time than your pair. This provides both of you and your pair with an
-opportunity to do a bit of soloing.</p>
-
-<p>Other short soloing opportunities happen because of meetings and
-interviews. It isn&rsquo;t uncommon for half of a pair to leave for a bit to
-join a meeting, give an interview, or jump over to help out another
-developer for a bit.</p>
-
-<p>Soloing also happens as a result of uneven team numbers. If your team
-is odd numbered than there are plenty of opportunities for being a solo
-developer. Try to volunteer to be the solo developer but be aware of
-becoming too isolated.</p>
-
-<h2>Conclusion</h2>
-
-<p>Remote pairing works. Working at <a href="http://outpace.com">Outpace</a> has
-shown me how well it can work. Reasonably fast Internet paired with
-modern tools can make it seem like you&rsquo;re almost in the same room as
-your pair.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//8">&larr; Older</a>
@@ -1478,6 +1567,10 @@ your pair.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/12/30/speeding-up-magit-with-the-native-comp-branch-of-emacs/">Speeding up Magit with the native-comp branch of Emacs</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2020/11/14/speeding-up-magit/">Speeding up magit</a>
@@ -1513,10 +1606,6 @@ your pair.</p>
     
       <li class="post">
         <a href="/blog/2020/04/21/using-bash-preexec-for-monitoring-the-runtime-of-your-last-command/">Using Bash-Preexec for monitoring the runtime of your last command</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/03/16/a-retrospective-format/">A retrospective format for remote or co-located teams</a>
       </li>
     
   </ul>

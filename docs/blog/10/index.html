@@ -14,15 +14,19 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" You may have seen me tweeting about building custom Kindle dictionaries. A few months ago I made a
-custom Kindle dictionary for Dune and my reading &hellip;" />
+    <meta itemprop="description" content=" Put together a new release of
+lein-autoexpect today.
+lein-autoexpect is a plugin for Leiningen
+that monitors your source directories for changes and &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" You may have seen me tweeting about building custom Kindle dictionaries. A few months ago I made a
-custom Kindle dictionary for Dune and my reading &hellip;" />
+    <meta name="twitter:description" content=" Put together a new release of
+lein-autoexpect today.
+lein-autoexpect is a plugin for Leiningen
+that monitors your source directories for changes and &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -30,14 +34,18 @@ custom Kindle dictionary for Dune and my reading &hellip;" />
     <meta property="og:site_name" content="Writing by Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/10/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" You may have seen me tweeting about building custom Kindle dictionaries. A few months ago I made a
-custom Kindle dictionary for Dune and my reading &hellip;" />
+    <meta property="og:description" content=" Put together a new release of
+lein-autoexpect today.
+lein-autoexpect is a plugin for Leiningen
+that monitors your source directories for changes and &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" You may have seen me tweeting about building custom Kindle dictionaries. A few months ago I made a
-custom Kindle dictionary for Dune and my reading &hellip;">
+    <meta name="description" content=" Put together a new release of
+lein-autoexpect today.
+lein-autoexpect is a plugin for Leiningen
+that monitors your source directories for changes and &hellip;">
 
     
 
@@ -119,6 +127,56 @@ custom Kindle dictionary for Dune and my reading &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/08/05/releasing-lein-autoexpect-1-dot-0/">Releasing lein-autoexpect 1.0</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2013-08-05T19:50:00-05:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>5</span><span class='date-suffix'>th</span>, <span class='date-year'>2013</span></span> <span class='time'>7:50 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Put together a new release of
+<a href="https://github.com/jakemcc/lein-autoexpect">lein-autoexpect</a> today.
+lein-autoexpect is a plugin for <a href="http://leiningen.org/">Leiningen</a>
+that monitors your source directories for changes and then reloads
+your code and runs your
+<a href="https://github.com/jaycfields/expectations">expectations</a>. It reports
+test output to the console and optionally sends notifications to
+<a href="http://growl.info/">Growl</a> (and Growl like notification tools).</p>
+
+<p>To use lein-autoexpect, add <code>:plugins [[lein-autoexpect "1.0"]]</code> to
+your either your project&rsquo;s <code>project.clj</code> or your global
+<code>~/.lein/profiles.clj</code>. To use the plugin run <code>lein autoexpect</code>.
+This will display the test results to the console. To also have
+results reported using Growl run <code>lein autoexpect :growl</code>.</p>
+
+<p>Release 1.0 of lein-autoexpect upgrades its dependency on
+<a href="https://github.com/clojure/tools.namespace/">org.clojure/tools.namespace</a>
+to version 0.2.4. It also no longer crashes if there isn&rsquo;t a Growl
+connection available.</p>
+
+<p>If you haven&rsquo;t tried using expectations and lein-autoexpect I
+encourage you to give it a try. Having my tests run automatically made
+a huge positive difference on my development experience.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -728,42 +786,6 @@ non-technical people to these tools and everyone has enjoyed them.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/06/28/a-simple-way-of-testing-disconnect-logic/">A simple way of testing disconnect logic</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2011-06-28T00:00:00-05:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2011</span></span> <span class='time'>12:00 am</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&rsquo;m guessing that software you write connects to some other server. I&rsquo;m also guessing that how it handles disconnects is tested (if ever tested) by either killing the process it connects to or by pulling out your network cable. I recently stumbled across a nifty Linux command line tool that makes causing disconnects significantly easier.</p>
-
-<p>This tool is <a href="http://linux.die.net/man/8/tcpkill">tcpkill</a>. To use <code>tcpkill</code> you specify an interface and a <a href="http://linux.die.net/man/8/tcpdump">tcpdump</a> style filter and it kills traffic on that interface that matches the filter.</p>
-
-<p>For example, if your application has a connection to 192.168.1.130, then to force a disconnect you would execute <code>tcpkill -i eth0 host 192.168.1.130</code>.</p>
-
-<p><code>tcpkill</code> can be used for more than forcing disconnects. It can also be used as a simple website filter. If <a href="http://stackoverflow.com">Stack Overflow</a> wastes too much of your time then you could simply leave <code>tcpkill -i eth0 host stackoverflow.com</code> running and enjoy your increased productivity.</p>
-
-<p><code>tcpkill</code> is a pretty useful tool. If you want to install it in Ubuntu it is found in the dsniff package (<code>apt-get install dsniff</code>).</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//11">&larr; Older</a>
@@ -779,6 +801,10 @@ non-technical people to these tools and everyone has enjoyed them.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2020/12/30/speeding-up-magit-with-the-native-comp-branch-of-emacs/">Speeding up Magit with the native-comp branch of Emacs</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2020/11/14/speeding-up-magit/">Speeding up magit</a>
@@ -814,10 +840,6 @@ non-technical people to these tools and everyone has enjoyed them.</p>
     
       <li class="post">
         <a href="/blog/2020/04/21/using-bash-preexec-for-monitoring-the-runtime-of-your-last-command/">Using Bash-Preexec for monitoring the runtime of your last command</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/03/16/a-retrospective-format/">A retrospective format for remote or co-located teams</a>
       </li>
     
   </ul>

@@ -4,7 +4,7 @@
   <title><![CDATA[Jake McCrary]]></title>
   <link href="https://jakemccrary.com/atom.xml" rel="self"/>
   <link href="https://jakemccrary.com/"/>
-  <updated>2020-12-15T19:49:26-06:00</updated>
+  <updated>2020-12-30T20:12:42-06:00</updated>
   <id>https://jakemccrary.com/</id>
   <author>
     <name><![CDATA[Jake McCrary]]></name>
@@ -12,6 +12,66 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Speeding up Magit with the native-comp branch of Emacs]]></title>
+    <link href="https://jakemccrary.com/blog/2020/12/30/speeding-up-magit-with-the-native-comp-branch-of-emacs/"/>
+    <updated>2020-12-30T20:08:00-06:00</updated>
+    <id>https://jakemccrary.com/blog/2020/12/30/speeding-up-magit-with-the-native-comp-branch-of-emacs</id>
+    <content type="html"><![CDATA[<p>In my last article, <a href="https://jakemccrary.com/blog/2020/11/14/speeding-up-magit/">Speeding up Magit</a>, I showed how removing elements from Magit&rsquo;s status buffer drastically reduces the time it takes to refresh this buffer when working in a large repository (from 4 seconds to around 0.348 seconds).
+In a <a href="https://www.reddit.com/r/emacs/comments/k3xfa1/speeding_up_magit/ge5o0e0/?utm_source=reddit&amp;utm_medium=web2x&amp;context=3">comment on r/emacs</a>, someone wondered if the <code>native-comp</code> feature of Emacs might improve the Magit status refresh time.</p>
+
+<p>This reddit thread was the first time I had heard of the <code>native-comp</code> feature.
+This feature lives on the <code>feature/native-comp</code> branch of the Emacs repository and it compiles Elisp code into native code.
+Many users have reported noticeable speed improvements using it.
+The <a href="http://akrl.sdf.org/gccemacs.html">official development log</a> and <a href="https://www.emacswiki.org/emacs/GccEmacs">Emacs Wiki</a> have more information about it.</p>
+
+<p>I&rsquo;ll provide more information about getting <code>native-comp</code> working on macOS after I answer the Magit speed question.</p>
+
+<h2>How did it change refresh times of the Magit status buffer?</h2>
+
+<p>The quick answer is that running Emacs with <code>native-comp</code> improved the refresh times of the Magit status buffer.
+Below is a table of the various times.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>| Experiment                              | magit-status refresh time |
+</span><span class='line'>|-----------------------------------------+---------------------------|
+</span><span class='line'>| full magit-status with native-comp      | 3.152 seconds             |
+</span><span class='line'>| full magit-status without native-comp   | 4.003 seconds             |
+</span><span class='line'>| magit-status with many sections removed | 0.348 seconds             |</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Using <code>native-comp</code>, we&rsquo;ve cut off about 0.85 seconds.
+That is a pretty solid improvement.
+Even still, that isn&rsquo;t fast enough for how often I use Magit so I&rsquo;ll be sticking with my <a href="https://jakemccrary.com/blog/2020/11/14/speeding-up-magit/">Magit setup</a> with many sections removed.</p>
+
+<p>As a caveat, the timing with <code>native-comp</code> also includes upgrading Emacs from <code>26.3</code> to <code>28.0.50</code> (so I could have <code>native-comp</code>) and Magit from <code>20201111.1436</code> to <code>20201212.929</code>.
+As a result, the comparison to <code>full magit-status without native-comp</code> isn&rsquo;t entirely fair as multiple variables have changed.
+The comparison to time with sections removed is fair as I&rsquo;m still using that setup (but with native-comp) and the timing is pretty much the same.</p>
+
+<h2>Getting <code>native-comp</code> on macOS</h2>
+
+<p>To enable <code>native-comp</code> you need to build Emacs from source.
+I&rsquo;ve done this before on Linux systems but this was the first time I&rsquo;ve done this on macOS.</p>
+
+<p>When browsing reddit, I found the <a href="https://github.com/jimeh/build-emacs-for-macos">build-emacs-for-macos</a> project which has some helpful instructions for doing this.
+I followed the instructions from the readme and picked the latest known good commit from <a href="https://github.com/jimeh/build-emacs-for-macos/issues/6">this issue</a> (at the time I did this <code>be907b0ba82c2a65e0468d50653cae8a7cf5f16b</code>).
+I then updated my <a href="https://github.com/jakemcc/emacs.d/commit/72cf37a497b72b8990956395e2eaa87285ea7c81">init.el</a> based on instructions from in the <code>build-emacs-for-macos</code> project.</p>
+
+<p>I haven&rsquo;t had any issues since switching to this very new Emacs.
+I don&rsquo;t have numbers to back this up but it does feel faster.</p>
+
+<h2>Recommendation</h2>
+
+<p>I&rsquo;d recommend giving the <code>native-comp</code> feature of Emacs a shot.
+It wasn&rsquo;t terribly challenging to get setup and it is nice to get a glimpse of what the future of Emacs might be.
+That future is a bit snappier.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Speeding up magit]]></title>
@@ -2205,121 +2265,6 @@ I look forward to customizing the firmware to make the key layout fit my usage.<
 <p>You don&rsquo;t actually need the <code>expect(console.error).toHaveBeenCalled();</code> as <code>done</code> won&rsquo;t be called unless <code>console.error</code> has been called. If you don&rsquo;t have it though then Jasmine will complain there are no assertions in the test.</p>
 
 <p>So there we have it, an example of using some of Jasmine&rsquo;s asynchronous test features with spies. I wish I had found an article like this when I started this task. Hopefully it saves you, and future me, some time.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How to use Leiningen test selectors to filter by test name]]></title>
-    <link href="https://jakemccrary.com/blog/2019/01/28/how-to-use-leiningen-test-selectors-to-filter-by-test-name/"/>
-    <updated>2019-01-28T21:27:00-06:00</updated>
-    <id>https://jakemccrary.com/blog/2019/01/28/how-to-use-leiningen-test-selectors-to-filter-by-test-name</id>
-    <content type="html"><![CDATA[<!-- Estimate: 30 minutes -->
-
-
-<!-- First draft: 38 minutes -->
-
-
-<!-- First edit: 13 minutes -->
-
-
-<!-- Second edit: 8 minutes -->
-
-
-<p>Leiningen test selectors are great. They allow you to filter what tests run by applying a function to the test&rsquo;s metadata. If that function returns a truthy value then that test will run. <a href="https://github.com/jakemcc/lein-test-refresh/blob/master/CHANGES.md#040">lein-test-refresh</a> supports them and even includes a built in one for its <a href="https://github.com/jakemcc/lein-test-refresh#built-in-test-narrowing-test-selector">focus feature</a>.</p>
-
-<p>I was recently <a href="https://github.com/jakemcc/lein-test-refresh/issues/78">asked</a> if test-refresh could support filtering tests using a regular expression against the name of a namespace or test. Lucky for me, test-refresh already supports this because of its support of test selectors.</p>
-
-<p>Most of the examples of Leiningen test selectors show very simple functions that look for the existence of a keyword in the metadata. We can do more than that. We can write a predicate that does whatever we want with the metadata.</p>
-
-<p>To take a look at a test&rsquo;s metadata, I generated a new project and looked at the generated default test file.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">ns </span><span class="nv">selector.core-test</span>
-</span><span class='line'>  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">clojure.test</span> <span class="ss">:refer</span> <span class="ss">:all</span><span class="p">]</span>
-</span><span class='line'>            <span class="p">[</span><span class="nv">selector.core</span> <span class="ss">:refer</span> <span class="ss">:all</span><span class="p">]))</span>
-</span><span class='line'>
-</span><span class='line'><span class="p">(</span><span class="nf">deftest</span> <span class="nv">a-test</span>
-</span><span class='line'>  <span class="p">(</span><span class="nf">testing</span> <span class="s">&quot;FIXME, I fail.&quot;</span>
-</span><span class='line'>    <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="mi">0</span> <span class="mi">1</span><span class="p">))))</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I then used my repl and to see what metadata was on the test.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nv">selector.core-test&gt;</span> <span class="p">(</span><span class="nb">meta </span><span class="o">#</span><span class="ss">&#39;a-test</span><span class="p">)</span>
-</span><span class='line'><span class="p">{</span><span class="ss">:test</span> <span class="o">#</span><span class="nv">function</span><span class="p">[</span><span class="nv">selector.core-test/fn--17267</span><span class="p">]</span>,
-</span><span class='line'> <span class="ss">:line</span> <span class="mi">5</span>,
-</span><span class='line'> <span class="ss">:column</span> <span class="mi">1</span>,
-</span><span class='line'> <span class="ss">:file</span> <span class="s">&quot;/Users/jake/src/jakemcc/blog-examples/selector/test/selector/core_test.clj&quot;</span>,
-</span><span class='line'> <span class="ss">:name</span> <span class="nv">a-test</span>,
-</span><span class='line'> <span class="ss">:ns</span> <span class="o">#</span><span class="nv">namespace</span><span class="p">[</span><span class="nv">selector.core-test</span><span class="p">]}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Given the metadata above, I wrote the selector below which lets us select only integration tests.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="ss">:test-selectors</span> <span class="p">{</span><span class="ss">:integration</span> <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">m</span><span class="p">]</span>
-</span><span class='line'>                                <span class="p">(</span><span class="nb">or </span><span class="p">(</span><span class="nf">clojure.string/includes?</span> <span class="p">(</span><span class="nb">str </span><span class="p">(</span><span class="ss">:ns</span> <span class="nv">m</span><span class="p">))</span>
-</span><span class='line'>                                                              <span class="s">&quot;integration&quot;</span><span class="p">)</span>
-</span><span class='line'>                                    <span class="p">(</span><span class="nf">clojure.string/includes?</span> <span class="p">(</span><span class="nb">str </span><span class="p">(</span><span class="ss">:name</span> <span class="nv">m</span><span class="p">))</span>
-</span><span class='line'>                                                              <span class="s">&quot;integration&quot;</span><span class="p">)))}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>You could write the above code is many different ways. Whatever you write, it needs to look for the existence of <code>integration</code> in either the test&rsquo;s name or namespace.</p>
-
-<p>If you wanted to make <code>lein test</code> or <code>lein test-refresh</code> only run non-integration tests you can add a default test selector to the project.clj.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="ss">:test-selectors</span> <span class="p">{</span><span class="ss">:default</span> <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">m</span><span class="p">]</span>
-</span><span class='line'>                            <span class="p">(</span><span class="nb">not </span><span class="p">(</span><span class="nb">or </span><span class="p">(</span><span class="nf">clojure.string/includes?</span> <span class="p">(</span><span class="nb">str </span><span class="p">(</span><span class="ss">:ns</span> <span class="nv">m</span><span class="p">))</span>
-</span><span class='line'>                                                               <span class="s">&quot;integration&quot;</span><span class="p">)</span>
-</span><span class='line'>                                     <span class="p">(</span><span class="nf">clojure.string/includes?</span> <span class="p">(</span><span class="nb">str </span><span class="p">(</span><span class="ss">:name</span> <span class="nv">m</span><span class="p">))</span>
-</span><span class='line'>                                                               <span class="s">&quot;integration&quot;</span><span class="p">))))</span>
-</span><span class='line'>                 <span class="ss">:integration</span> <span class="p">(</span><span class="k">fn </span><span class="p">[</span><span class="nv">m</span><span class="p">]</span>
-</span><span class='line'>                                <span class="p">(</span><span class="nb">or </span><span class="p">(</span><span class="nf">clojure.string/includes?</span> <span class="p">(</span><span class="nb">str </span><span class="p">(</span><span class="ss">:ns</span> <span class="nv">m</span><span class="p">))</span>
-</span><span class='line'>                                                              <span class="s">&quot;integration&quot;</span><span class="p">)</span>
-</span><span class='line'>                                    <span class="p">(</span><span class="nf">clojure.string/includes?</span> <span class="p">(</span><span class="nb">str </span><span class="p">(</span><span class="ss">:name</span> <span class="nv">m</span><span class="p">))</span>
-</span><span class='line'>                                                              <span class="s">&quot;integration&quot;</span><span class="p">)))}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Enjoy! I hope this example helps you run a subset<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> of your Clojure tests through Leiningen test selectors.</p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>Running a subset of your tests can be helpful and test-refresh has a few features that help you do that. If you can, I&rsquo;d still recommend making all your tests fast enough to run them all the time.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
 ]]></content>
   </entry>
   
