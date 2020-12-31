@@ -1,12 +1,13 @@
 ---
 layout: post
-title: "Speeding up Magit with the native-comp branch of Emacs"
-date: 2020-12-28 20:43:05 -0600
+title: Speeding up Magit with the native-comp branch of Emacs
+date: 2020-12-30 20:08 -0600
 comments: true
-published: false
-description: Here is a summary of trying out the native-comp branch of Emacs and how it changed Magit's performance on a large git repository.
+published: true
+description: Here is a summary of trying out the native-comp branch of Emacs and how
+  it changed Magit's performance on a large git repository.
 keywords: emacs, magit
-categories: 
+categories:
 - emacs
 ---
 
