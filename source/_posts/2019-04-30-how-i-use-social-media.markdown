@@ -22,7 +22,7 @@ The following books have helped shape my thinking towards digital distractions. 
 - [Deep Work](https://amzn.to/2UJu1V7) by Cal Newport
 - [Digital Minimalism](https://amzn.to/2WfLYMv) by Cal Newport
 - [Essentialism](https://amzn.to/2XX6imC) by Greg Mckeown
-- [The Distracted Mind](https://amzn.to/2WgdBVR) by Adam Gazzaley & Larry D. Rosen
+- [The Distracted Mind](https://amzn.to/2X3Tzjz) by Adam Gazzaley & Larry D. Rosen
 
 One of the ideas in both *Digital Minimalism* and *Essentialism* is that you can pick and choose what you add to your life. This extends to individual features of products you use. This is something I arrived at prior to reading these books and it was nice hearing others putting this idea into words.
 
