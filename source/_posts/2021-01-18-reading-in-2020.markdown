@@ -19,8 +19,6 @@ I've continued to keep track of my reading using [Goodreads](http://goodreads.co
 My [profile](https://www.goodreads.com/user/show/3431614-jake-mccrary) has nearly the full list of the books I've read since 2010.
 [This](https://www.goodreads.com/review/list/3431614-jake-mccrary?shelf=read_2020) is my 2020.
 
-I know at least one book that wasn't captured in these stats and that book is Kurt Vonnegut's _Welcome to the Monkey House_. I've slowly reread this book over the course of 2020 but only in the moments when I'm at my partner's apartment and she is busy.
-
 ## 2020 Goals
 
 > I was encouraged by how many non-fiction books I read this year and how many of them ended up earning a five star rating. I'd like to continue that trend of reading high-quality non-fiction books.
@@ -34,16 +32,17 @@ I'll come back at the end of this article and reflect on if I hit it or not.
 
 ## Highlights
 
-Here are my five estar books from 2020.
+Here are my five star books from 2020.
 The titles are affiliate links to Amazon.
-If you click one of those and make a purchase I get a small kickback.
+If you click one and make a purchase I get a small kickback.
 
 If I wrote a review on Goodreads the `my review` link will take you there.
-Over the last couple of years I've found myself writing reviews on Goodreads less than I have in the past so many of the books do not have a written review there.
+In the last couple of years, I've been writing fewer reviews on Goodreads than in the past so many books do not have a review there.
 
-If you're missing those reviews, I did start sending out an email about every month or two that frequently includes small reviews of what I've read since the previous email.
+If you're missing these reviews, I have started sending out an email every month or two and it frequently includes small reviews of what I've read since the previous email.
 You can subscribe to that [here]({{ site.subscribe_email }}).
 
+Here are the 2020 five star books:
 
 - [The Hard Truth: Simple Ways to Become a Better Climber](https://www.amazon.com/Hard-Truth-Simple-Become-Climber/dp/1734103604/ref=as_li_ss_tl?crid=HR017VVZNWCS&dchild=1&keywords=the+hard+truth+simple+ways+to+become+a+better+climber&qid=1611004871&sprefix=the+hard+truth+simple+way%2Caps%2C211&sr=8-1&linkCode=ll1&tag=jakemccrary08-20&linkId=c83f83a7274f1a1cea8ff971a794c2f9&language=en_US) by Kris Hampton ([my review](https://www.goodreads.com/review/show/3315020265))
 - [The Body Keeps the Score: Brain, Mind, and Body in the Healing of Trauma](https://www.amazon.com/Body-Keeps-Score-Healing-Trauma/dp/0143127748/ref=as_li_ss_tl?crid=1UWC4YYXTHFVP&dchild=1&keywords=the+body+keeps+the+score&qid=1611004915&sprefix=the+body+keeps+th%2Caps%2C172&sr=8-1&linkCode=ll1&tag=jakemccrary08-20&linkId=fdf8e6c322e906aa75d8691969b1c468&language=en_US) by Bessel A. van der Kolk
@@ -59,13 +58,28 @@ You can subscribe to that [here]({{ site.subscribe_email }}).
 
 #### The Hard Truth: Simple Ways to Become a Better Climber by Kris Hampton
 
+This is an excellent dose of wisdom about climbing and improving your performance.
+It does this through suggestions of how to change your mental relationship with climbing.
+Improving is is about putting in the work, reflecting, and trying hard.
+
 #### The Body Keeps the Score: Brain, Mind, and Body in the Healing of Trauma by Bessel A. van der Kolk
+
+I really enjoyed this book and made hundreds of highlights while reading it on my Kindle.
+I'd suggest reading some other reviews on [Goodread](https://www.goodreads.com/book/show/22268254-the-body-keeps-the-score) and seeing if is something that would be interesting for you.
 
 #### Come as You Are: The Surprising New Science that Will Transform Your Sex Life by Emily Nagoski
 
+I enjoyed reading this book.
+Unlike what the book subtitle claims, I don't think this has transformed my sex life but it did give me some things to think about with regards to stress, responses to stress, and emotional systems.
+
 #### How to Change Your Mind by Michael Pollan
 
+This book is about psechedlics, such as LSD and psilocybin.
+It combines the history of these substances, old and new research being done with them, and Michael Pollan's experience with these substances.
+
 #### Why I’m No Longer Talking to White People About Race by Reni Eddo-Lodge
+
+I'll just link to a [friend's review](https://www.goodreads.com/review/show/2697985490?book_show_action=false) of this book.
 
 #### The author Chimamanda Ngozi Adichie
 
@@ -139,7 +153,11 @@ The data also doesn't capture three books that I've started but have yet to fini
 
 ```
 
-This initially felt low to me but I a significant amount of my time spent reading this year has, for better or worse, been taken up by newsletters and, probably to my detriment, reading articles about the on-going global pandemic, the USAs election, and other non-stop news from 2020.
+This initially felt low to me but a significant portion of my time spent reading this year has, for better or worse, been taken up by newsletters and, probably to my detriment, reading articles about the on-going global pandemic, the USAs election, and other non-stop news from 2020.
+
+I'm also listening to more podcasts.
+In the first months of 2020, those definitely replaced my train commute reading with listening.
+It is mostly easier to pop in some headphones and listen while walking to the train, riding it, and walking to an office.
 
 Looking at the below graph, I did not read many pages in January through March.
 During those months, I was aggressively training for rock climbing and starting a new relationship.
@@ -173,3 +191,24 @@ The numbers move slightly towards fiction consuming more of reading compared to 
 
 ```
 
+Below is the distribution of star ratings broken apart into fiction and non-fiction.
+
+```org
+|             | 2 stars | 3 stars | 4 stars | 5 stars |
+|-------------+---------+---------+---------+---------|
+| fiction     |       1 |       8 |      12 |       5 |
+| non-fiction |       0 |       4 |       7 |       6 |
+```
+
+## Did I hit my 2020 goals?
+
+I succeeded in reading a solid number of non-fiction books that earned a high rating.
+I read fewer non-fictiion books than fiction but managed to have more 5 star ratings.
+
+Did I get better at applying the lessons from books?
+Not at all and I barely even tried to do so.
+
+## 2021 goals
+
+I have quite a few unread books sitting on my Kindle or on a bookshelf.
+This feels like kind of a low-bar to hit but this year I'd like to read some of these unread-but-owned book.
