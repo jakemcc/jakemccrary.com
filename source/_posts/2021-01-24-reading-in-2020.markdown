@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Reading in 2020"
-date: 2021-01-18 14:36:52 -0600
+title: Reading in 2020
+date: 2021-01-24 17:14 -0600
 comments: true
-published: false
+published: true
 description: A look back at my reading done in the year 2020.
 keywords: 2020, books, book review, reading
 categories:
