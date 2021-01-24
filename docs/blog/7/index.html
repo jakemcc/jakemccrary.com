@@ -14,17 +14,19 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" Lately I&rsquo;ve been working on projects that use
-Postgres as our relational database.
-This has allowed us to simplify some of our Clojure code by &hellip;" />
+    <meta itemprop="description" content=" I was recently inspired by a post on a mailing list to make the TDD
+cycle with clojure.test and
+lein-test-refresh even
+faster. lein-test-refresh is a &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" Lately I&rsquo;ve been working on projects that use
-Postgres as our relational database.
-This has allowed us to simplify some of our Clojure code by &hellip;" />
+    <meta name="twitter:description" content=" I was recently inspired by a post on a mailing list to make the TDD
+cycle with clojure.test and
+lein-test-refresh even
+faster. lein-test-refresh is a &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -32,16 +34,18 @@ This has allowed us to simplify some of our Clojure code by &hellip;" />
     <meta property="og:site_name" content="Writing by Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/7/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" Lately I&rsquo;ve been working on projects that use
-Postgres as our relational database.
-This has allowed us to simplify some of our Clojure code by &hellip;" />
+    <meta property="og:description" content=" I was recently inspired by a post on a mailing list to make the TDD
+cycle with clojure.test and
+lein-test-refresh even
+faster. lein-test-refresh is a &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" Lately I&rsquo;ve been working on projects that use
-Postgres as our relational database.
-This has allowed us to simplify some of our Clojure code by &hellip;">
+    <meta name="description" content=" I was recently inspired by a post on a mailing list to make the TDD
+cycle with clojure.test and
+lein-test-refresh even
+faster. lein-test-refresh is a &hellip;">
 
     
 
@@ -123,6 +127,93 @@ This has allowed us to simplify some of our Clojure code by &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/12/18/even-quicker-feedback-from-your-clojure-tests/">Even quicker feedback from your Clojure tests</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-12-18T15:29:00-06:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>3:29 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I was recently inspired by a post on a mailing list to make the TDD
+cycle with <code>clojure.test</code> and
+<a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a> even
+faster. <code>lein-test-refresh</code> is a Leiningen tool that monitors your
+Clojure project&rsquo;s source, reloads changes, and then runs your tests.
+Tools like it provide some of the fastest feedback cycles possible.</p>
+
+<p>To make the feedback cycle even faster I added the option to only run
+tests in changed namespaces. This means you&rsquo;re running
+the minimum number of tests after a change. Version 0.12.0 of
+<code>lein-test-refresh</code> was released earlier this week with this feature.</p>
+
+<p>To use it add <code>[com.jakemccrary/lein-test-refresh 0.12.0]</code> as a plugin
+to your profiles.clj or project.clj. An example
+<a href="https://github.com/jakemcc/lein-test-refresh/blob/master/sample.project.clj#L3">project.clj</a>
+can be found in the project&rsquo;s GitHub repo.</p>
+
+<p>Once you&rsquo;re on the latest version you can toggle this feature from the
+command line by providing a <code>:changes-only</code> flag, <code>lein test-refresh
+:changes-only</code>, or by adding <code>:changes-only true</code> to your
+<code>:test-refresh</code> configuration section in your project.clj or
+profiles.clj. When the feature is on you can still run all your tests
+by hitting <code>enter</code> in the terminal running <code>lein test-refresh</code>.</p>
+
+<p>Below is an example of the time difference between running all my tests
+and the tests in a single namespace.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Ran 49 tests containing 219 assertions.
+</span><span class='line'>0 failures, 0 errors.
+</span><span class='line'>
+</span><span class='line'>Passed all tests
+</span><span class='line'>Finished at 14:42:41.655 (run time: 2.006s)
+</span><span class='line'>*********************************************
+</span><span class='line'>*************** Running tests ***************
+</span><span class='line'>:reloading (lumanu.utils-test)
+</span><span class='line'>
+</span><span class='line'>Ran 1 tests containing 3 assertions.
+</span><span class='line'>0 failures, 0 errors.
+</span><span class='line'>
+</span><span class='line'>Passed all tests
+</span><span class='line'>Finished at 14:43:12.648 (run time: 0.085s)</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I&rsquo;ve been using this feature for about a week now and am enjoying it.
+My whole test suite isn&rsquo;t particularly slow but even still I&rsquo;ve been
+enjoying the faster feedback.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1377,181 +1468,6 @@ setup.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/03/24/advanced-leiningen-checkouts-configuring-what-ends-up-on-your-classpath/">Advanced Leiningen checkouts: configuring what ends up on your classpath</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-03-24T21:29:00-05:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:29 pm</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><a href="http://leiningen.org/">Leiningen</a> checkout dependencies are a useful
-feature. Checkout dependencies allow you to work on a library and consuming
-project at the same time. By setting up checkout dependencies you can
-skip running <code>lein install</code> in the library project; it appears on the
-classpath of the consuming project. An example of what this looks like
-can be found in the
-<a href="https://github.com/technomancy/leiningen/blob/master/doc/TUTORIAL.md#checkout-dependencies">Leiningen documentation</a>
-or in a
-<a href="http://jakemccrary.com/blog/2012/03/28/working-on-multiple-clojure-projects-at-once/">previous post</a>
-of mine.</p>
-
-<p>By default, Leiningen adds the <code>:source-paths</code>, <code>:test-paths</code>,
-<code>:resource-paths</code>, and <code>:compile-path</code> directories of the checkout
-projects to your consuming project&rsquo;s classpath. It also recurses and
-adds the checkouts of your checkouts (and keeps recursing).</p>
-
-<p>You can override what gets added to your classpath by
-<code>:checkout-deps-shares</code> to your project.clj. This key&rsquo;s value should
-be a vector of functions that when applied to your checkouts' project
-map return the paths that should be included on the classpath. The
-default values can be found
-<a href="https://github.com/technomancy/leiningen/blob/ff84da697249184874b528950048981621ac0b61/leiningen-core/src/leiningen/core/project.clj#L488-L492">here</a>
-and an example of overriding the default behavior can be found in the
-<a href="https://github.com/technomancy/leiningen/blob/ff84da697249184874b528950048981621ac0b61/sample.project.clj#L320-L321">sample.project.clj</a>.</p>
-
-<p>I ran into a situation this week where having my checkouts'
-<code>:test-paths</code> on the classpath caused issues my consuming project. My
-first pass at fixing this problem was to add <code>:checkout-deps-shares
-[:source-paths :resource-paths :compile-path]</code> to my project.clj. <strong>This
-didn&rsquo;t work</strong>. My project.clj looked like below.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defproject </span><span class="nv">example</span> <span class="s">&quot;1.2.3-SNAPSHOT&quot;</span>
-</span><span class='line'>  <span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">library</span> <span class="s">&quot;1.2.2&quot;</span><span class="p">]</span>
-</span><span class='line'>                 <span class="p">[</span><span class="nv">org.clojure/clojure</span> <span class="s">&quot;1.6.0&quot;</span><span class="p">]]</span>
-</span><span class='line'>  <span class="ss">:checkout-deps-shares</span> <span class="p">[</span><span class="ss">:source-paths</span> <span class="ss">:resource-paths</span> <span class="ss">:compile-path</span><span class="p">])</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Why didn&rsquo;t it work? It didn&rsquo;t work because of how Leiningen merges
-duplicate keys in the project map. When Leiningen merges the various
-configuration maps (from merging profiles, merging defaults, etc) and
-it encounters values that are collections it combines them (more
-details found in
-<a href="https://github.com/technomancy/leiningen/blob/master/doc/PROFILES.md#merging">documentation</a>).
-Using <code>lein pprint :checkout-deps-shares</code> shows what we end up with.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="gp">$</span> lein pprint :checkout-deps-shares
-</span><span class='line'><span class="go">(:source-paths</span>
-</span><span class='line'><span class="go"> :resource-paths</span>
-</span><span class='line'><span class="go"> :compile-path</span>
-</span><span class='line'><span class="go"> :source-paths</span>
-</span><span class='line'><span class="go"> :test-paths</span>
-</span><span class='line'><span class="go"> :resource-paths</span>
-</span><span class='line'><span class="go"> :compile-path</span>
-</span><span class='line'><span class="go"> #&lt;Var@43e3a075:</span>
-</span><span class='line'><span class="go">   #&lt;classpath$checkout_deps_paths leiningen.core.classpath$checkout_deps_paths@6761b44b&gt;&gt;)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>We&rsquo;ve ended up with the default values and the values we specified in
-the project.clj. This isn&rsquo;t hard to fix. To tell Leiningen to replace
-the value instead of merging you add the <code>^:replace</code> metadata to the
-value. Below is the same project.clj but with <code>^:replace</code> added.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defproject </span><span class="nv">example</span> <span class="s">&quot;1.2.3-SNAPSHOT&quot;</span>
-</span><span class='line'>  <span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">library</span> <span class="s">&quot;1.2.2&quot;</span><span class="p">]</span>
-</span><span class='line'>                 <span class="p">[</span><span class="nv">org.clojure/clojure</span> <span class="s">&quot;1.6.0&quot;</span><span class="p">]]</span>
-</span><span class='line'>  <span class="ss">:checkout-deps-shares</span> <span class="o">^</span><span class="ss">:replace</span> <span class="p">[</span><span class="ss">:source-paths</span> <span class="ss">:resource-paths</span> <span class="ss">:compile-path</span><span class="p">])</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This solves the problem of <code>:test-paths</code> showing up on the classpath
-but it introduces another problem. Checkouts' checkout dependencies no
-longer show up on the classpath. This is because
-<code>leiningen.core.classpath/checkout-deps-paths</code> is no longer applied to
-the checkouts.</p>
-
-<p>Without <code>leiningen.core.classpath/checkout-deps-paths</code> Leiningen stops
-recursing and, as a result, no longer picks up checkouts' checkout
-dependencies. My first attempt at fixing this was to modify my
-project.clj so the <code>:checkout-deps-shares</code> section looked like below.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="ss">:checkout-deps-shares</span> <span class="o">^</span><span class="ss">:replace</span> <span class="p">[</span><span class="ss">:source-paths</span> <span class="ss">:resource-paths</span> <span class="ss">:compile-path</span>
-</span><span class='line'>                                 <span class="nv">leiningen.core.classpath/checkout-deps-paths</span><span class="p">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The above fails. It runs but doesn&rsquo;t actually add the correct
-directories to the classpath. The next attempt is below.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="ss">:checkout-deps-shares</span> <span class="o">^</span><span class="ss">:replace</span> <span class="p">[</span><span class="ss">:source-paths</span> <span class="ss">:resource-paths</span> <span class="ss">:compile-path</span>
-</span><span class='line'>                                 <span class="o">#</span><span class="ss">&#39;leiningen.core.classpath/checkout-deps-paths</span><span class="p">]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>This attempt failed quicker. Now an exception is thrown when trying to
-run Leiningen tasks.</p>
-
-<p>The next one works. It takes advantage of dynamic eval through
-<a href="https://github.com/technomancy/leiningen/blob/master/doc/PROFILES.md#dynamic-eval">read-eval</a>
-syntax. With the below snippet the checkouts' checkouts are added to
-the classpath.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="ss">:checkout-deps-shares</span> <span class="o">^</span><span class="ss">:replace</span> <span class="p">[</span><span class="ss">:source-paths</span> <span class="ss">:resource-paths</span> <span class="ss">:compile-path</span>
-</span><span class='line'>                                 <span class="o">#</span><span class="nv">=</span><span class="p">(</span><span class="nb">eval </span><span class="nv">leiningen.core.classpath/checkout-deps-paths</span><span class="p">)]</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Hopefully this is useful to someone else. It took a bit of digging to
-figure it out and many incorrect attempts to get correct. The full
-example project.clj is below.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defproject </span><span class="nv">example</span> <span class="s">&quot;1.2.3-SNAPSHOT&quot;</span>
-</span><span class='line'>  <span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">library</span> <span class="s">&quot;1.2.2&quot;</span><span class="p">]</span>
-</span><span class='line'>                 <span class="p">[</span><span class="nv">org.clojure/clojure</span> <span class="s">&quot;1.6.0&quot;</span><span class="p">]]</span>
-</span><span class='line'>  <span class="ss">:checkout-deps-shares</span> <span class="o">^</span><span class="ss">:replace</span> <span class="p">[</span><span class="ss">:source-paths</span> <span class="ss">:resource-paths</span> <span class="ss">:compile-path</span>
-</span><span class='line'>                                   <span class="o">#</span><span class="nv">=</span><span class="p">(</span><span class="nb">eval </span><span class="nv">leiningen.core.classpath/checkout-deps-paths</span><span class="p">)])</span>
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//8">&larr; Older</a>
@@ -1567,6 +1483,10 @@ example project.clj is below.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2021/01/24/reading-in-2020/">Reading in 2020</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2020/12/30/speeding-up-magit-with-the-native-comp-branch-of-emacs/">Speeding up Magit with the native-comp branch of Emacs</a>
@@ -1602,10 +1522,6 @@ example project.clj is below.</p>
     
       <li class="post">
         <a href="/blog/2020/04/26/hanging-a-hangboard-using-a-doorway-pull-up-bar/">How to hang a hangboard using a doorway pull-up bar</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/04/21/using-bash-preexec-for-monitoring-the-runtime-of-your-last-command/">Using Bash-Preexec for monitoring the runtime of your last command</a>
       </li>
     
   </ul>

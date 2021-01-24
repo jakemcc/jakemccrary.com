@@ -14,17 +14,19 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" See all of my remote/working-from-home articles here. As mentioned in my
-tips for working from home
-article, I&rsquo;ve been working remotely for &hellip;" />
+    <meta itemprop="description" content=" Lumanu uses
+AWS Elastic Beanstalk. Elastic
+Beanstalk (from now on abbreviated as EB) helps you provision and tie
+together Amazon services to fairly &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" See all of my remote/working-from-home articles here. As mentioned in my
-tips for working from home
-article, I&rsquo;ve been working remotely for &hellip;" />
+    <meta name="twitter:description" content=" Lumanu uses
+AWS Elastic Beanstalk. Elastic
+Beanstalk (from now on abbreviated as EB) helps you provision and tie
+together Amazon services to fairly &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -32,16 +34,18 @@ article, I&rsquo;ve been working remotely for &hellip;" />
     <meta property="og:site_name" content="Writing by Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/6/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" See all of my remote/working-from-home articles here. As mentioned in my
-tips for working from home
-article, I&rsquo;ve been working remotely for &hellip;" />
+    <meta property="og:description" content=" Lumanu uses
+AWS Elastic Beanstalk. Elastic
+Beanstalk (from now on abbreviated as EB) helps you provision and tie
+together Amazon services to fairly &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" See all of my remote/working-from-home articles here. As mentioned in my
-tips for working from home
-article, I&rsquo;ve been working remotely for &hellip;">
+    <meta name="description" content=" Lumanu uses
+AWS Elastic Beanstalk. Elastic
+Beanstalk (from now on abbreviated as EB) helps you provision and tie
+together Amazon services to fairly &hellip;">
 
     
 
@@ -123,6 +127,62 @@ article, I&rsquo;ve been working remotely for &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/07/31/aws-elastic-beanstalk-send-a-sqs-message-to-a-specific-route-in-your-worker-environment/">AWS Elastic Beanstalk: Send a SQS message to a specific route in your worker environment</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-07-31T12:16:00-05:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2016</span></span> <span class='time'>12:16 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="https://lumanu.com">Lumanu</a> uses
+<a href="https://aws.amazon.com/elasticbeanstalk/">AWS Elastic Beanstalk</a>. Elastic
+Beanstalk (from now on abbreviated as EB) helps you provision and tie
+together Amazon services to fairly easily get web applications and
+services running with push button (or command line) deploys. We&rsquo;ve
+been using EB with a multi-container docker deploy for nearly a year
+now and it pretty much just works.</p>
+
+<p>EB has a concept of environment tiers and there are two different
+types; a web tier and a worker tier. Web tier environments provide
+the configuration and components necessary for serving HTTP requests
+in a scalable
+fashion. <a href="http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/using-features-managing-env-tiers.html">Worker environments</a>
+are designed to run operations that you wouldn&rsquo;t want performed by
+your front-end serving web application.</p>
+
+<p>A major difference between the two environment tiers is that a worker
+environment provisions a <a href="https://aws.amazon.com/sqs/">SQS</a> queue and
+provides a daemon that reads from this queue and POSTs messages to an
+instance of your worker service. This daemon prevents your worker
+service from having to connect to and manage a SQS queue. By default,
+the daemon POSTs messages to <code>http://localhost/</code>. You can optionally
+configure it to POST to a different route.</p>
+
+<p>It is possible to have different messages POST to different
+routes. You can do this by setting the <code>beanstalk.sqsd.path</code> attribute
+on your SQS message. For example, if you want your worker service to
+receive a message at <code>/trigger-email</code> you would set the
+<code>beanstalk.sqsd.path</code> attribute to <code>/trigger-email</code>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1280,93 +1340,6 @@ build and deploy with a little more confidence.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/12/18/even-quicker-feedback-from-your-clojure-tests/">Even quicker feedback from your Clojure tests</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-12-18T15:29:00-06:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>3:29 pm</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I was recently inspired by a post on a mailing list to make the TDD
-cycle with <code>clojure.test</code> and
-<a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a> even
-faster. <code>lein-test-refresh</code> is a Leiningen tool that monitors your
-Clojure project&rsquo;s source, reloads changes, and then runs your tests.
-Tools like it provide some of the fastest feedback cycles possible.</p>
-
-<p>To make the feedback cycle even faster I added the option to only run
-tests in changed namespaces. This means you&rsquo;re running
-the minimum number of tests after a change. Version 0.12.0 of
-<code>lein-test-refresh</code> was released earlier this week with this feature.</p>
-
-<p>To use it add <code>[com.jakemccrary/lein-test-refresh 0.12.0]</code> as a plugin
-to your profiles.clj or project.clj. An example
-<a href="https://github.com/jakemcc/lein-test-refresh/blob/master/sample.project.clj#L3">project.clj</a>
-can be found in the project&rsquo;s GitHub repo.</p>
-
-<p>Once you&rsquo;re on the latest version you can toggle this feature from the
-command line by providing a <code>:changes-only</code> flag, <code>lein test-refresh
-:changes-only</code>, or by adding <code>:changes-only true</code> to your
-<code>:test-refresh</code> configuration section in your project.clj or
-profiles.clj. When the feature is on you can still run all your tests
-by hitting <code>enter</code> in the terminal running <code>lein test-refresh</code>.</p>
-
-<p>Below is an example of the time difference between running all my tests
-and the tests in a single namespace.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>Ran 49 tests containing 219 assertions.
-</span><span class='line'>0 failures, 0 errors.
-</span><span class='line'>
-</span><span class='line'>Passed all tests
-</span><span class='line'>Finished at 14:42:41.655 (run time: 2.006s)
-</span><span class='line'>*********************************************
-</span><span class='line'>*************** Running tests ***************
-</span><span class='line'>:reloading (lumanu.utils-test)
-</span><span class='line'>
-</span><span class='line'>Ran 1 tests containing 3 assertions.
-</span><span class='line'>0 failures, 0 errors.
-</span><span class='line'>
-</span><span class='line'>Passed all tests
-</span><span class='line'>Finished at 14:43:12.648 (run time: 0.085s)</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I&rsquo;ve been using this feature for about a week now and am enjoying it.
-My whole test suite isn&rsquo;t particularly slow but even still I&rsquo;ve been
-enjoying the faster feedback.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//7">&larr; Older</a>
@@ -1382,6 +1355,10 @@ enjoying the faster feedback.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2021/01/24/reading-in-2020/">Reading in 2020</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2020/12/30/speeding-up-magit-with-the-native-comp-branch-of-emacs/">Speeding up Magit with the native-comp branch of Emacs</a>
@@ -1417,10 +1394,6 @@ enjoying the faster feedback.</p>
     
       <li class="post">
         <a href="/blog/2020/04/26/hanging-a-hangboard-using-a-doorway-pull-up-bar/">How to hang a hangboard using a doorway pull-up bar</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/04/21/using-bash-preexec-for-monitoring-the-runtime-of-your-last-command/">Using Bash-Preexec for monitoring the runtime of your last command</a>
       </li>
     
   </ul>

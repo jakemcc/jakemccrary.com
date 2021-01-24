@@ -14,45 +14,17 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" In July 2017, I found myself editing some Clojure code that looked approximately like this. 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-(defn validate- &hellip;" />
+    <meta itemprop="description" content=" Earlier this year, I traveled to India and gave a presentation at
+IN/Clojure. I talked about building serverless
+ClojureScript applications that use &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" In July 2017, I found myself editing some Clojure code that looked approximately like this. 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-(defn validate- &hellip;" />
+    <meta name="twitter:description" content=" Earlier this year, I traveled to India and gave a presentation at
+IN/Clojure. I talked about building serverless
+ClojureScript applications that use &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -60,44 +32,16 @@
     <meta property="og:site_name" content="Writing by Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/4/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" In July 2017, I found myself editing some Clojure code that looked approximately like this. 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-(defn validate- &hellip;" />
+    <meta property="og:description" content=" Earlier this year, I traveled to India and gave a presentation at
+IN/Clojure. I talked about building serverless
+ClojureScript applications that use &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" In July 2017, I found myself editing some Clojure code that looked approximately like this. 1
-2
-3
-4
-5
-6
-7
-8
-9
-10
-11
-12
-13
-14
-15
-16
-(defn validate- &hellip;">
+    <meta name="description" content=" Earlier this year, I traveled to India and gave a presentation at
+IN/Clojure. I talked about building serverless
+ClojureScript applications that use &hellip;">
 
     
 
@@ -179,6 +123,46 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2018/02/20/creating-serverless-applications-with-clojurescript-and-firebase/">Creating serverless applications with ClojureScript and Firebase</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2018-02-20T11:30:00-06:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>20</span><span class='date-suffix'>th</span>, <span class='date-year'>2018</span></span> <span class='time'>11:30 am</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Earlier this year, I traveled to India and gave a presentation at
+<a href="http://inclojure.org">IN/Clojure</a>. I talked about building serverless
+ClojureScript applications that use <a href="https://firebase.com">Firebase</a>
+to persist and sync data between clients.</p>
+
+<p>I was pretty pleased with how the talk went. The people who talked to
+me after seemed to enjoy the presentation and were inspired to try out
+some of the techniques and tools I mentioned.</p>
+
+<p>Here is the talk. I hope you enjoy it. It was fun to give.</p>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/rMqo3lgxe7o" frameborder="0" allow="encrypted-media" allowfullscreen></iframe>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1741,89 +1725,6 @@ an area where this, or something similar to it, would help.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/05/15/send-a-push-notification-when-your-external-ip-address-changes/">Send a push notification when your external IP address changes</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2017-05-15T22:15:00-05:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>10:15 pm</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I need to know when my external IP address changes. Whenever it changes, I need to update an IP whitelist and need to re-login to a few sites. I sometimes don&rsquo;t notice for a couple of days and, during that time, some automatic processes fail.</p>
-
-<p>After the last time this happened, I whipped up a script that sends me a push notification when my IP address changes.</p>
-
-<p>The script uses <a href="https://pushover.net/">Pushover</a> to send the push notification. Pushover is great. I have used it for years to get notifications from my headless computers. If you use the below script, replace <code>${PUSHOVER_TOKEN}</code> and <code>${PUSHOVER_USER}</code> with your own details.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">set</span> -e
-</span><span class='line'>
-</span><span class='line'><span class="nv">previous_file</span><span class="o">=</span><span class="s2">&quot;${HOME}/.previous-external-ip&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">if</span> <span class="o">[</span> ! -e <span class="s2">&quot;${previous_file}&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-</span><span class='line'>    dig +short myip.opendns.com @resolver1.opendns.com &gt; <span class="s2">&quot;${previous_file}&quot;</span>
-</span><span class='line'><span class="k">fi</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">current_ip</span><span class="o">=</span><span class="k">$(</span>dig +short myip.opendns.com @resolver1.opendns.com<span class="k">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">previous_ip</span><span class="o">=</span><span class="k">$(</span>cat <span class="s2">&quot;${previous_file}&quot;</span><span class="k">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;${current_ip}&quot;</span> !<span class="o">=</span> <span class="s2">&quot;${previous_ip}&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-</span><span class='line'>    <span class="nb">echo</span> <span class="s2">&quot;external ip changed&quot;</span>
-</span><span class='line'>    curl -s --form-string <span class="s2">&quot;token=${PUSHOVER_TOKEN}&quot;</span> <span class="se">\</span>
-</span><span class='line'>         --form-string <span class="s2">&quot;user=${PUSHOVER_USER}&quot;</span> <span class="se">\</span>
-</span><span class='line'>         --form-string <span class="s2">&quot;title=External IP address changed&quot;</span> <span class="se">\</span>
-</span><span class='line'>         --form-string <span class="s2">&quot;message=&#39;${previous_ip}&#39; =&gt; &#39;${current_ip}&#39;&quot;</span> <span class="se">\</span>
-</span><span class='line'>         https://api.pushover.net/1/messages.json
-</span><span class='line'><span class="k">fi</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;${current_ip}&quot;</span> &gt; <span class="s2">&quot;${previous_file}&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//5">&larr; Older</a>
@@ -1839,6 +1740,10 @@ an area where this, or something similar to it, would help.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2021/01/24/reading-in-2020/">Reading in 2020</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2020/12/30/speeding-up-magit-with-the-native-comp-branch-of-emacs/">Speeding up Magit with the native-comp branch of Emacs</a>
@@ -1874,10 +1779,6 @@ an area where this, or something similar to it, would help.</p>
     
       <li class="post">
         <a href="/blog/2020/04/26/hanging-a-hangboard-using-a-doorway-pull-up-bar/">How to hang a hangboard using a doorway pull-up bar</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/04/21/using-bash-preexec-for-monitoring-the-runtime-of-your-last-command/">Using Bash-Preexec for monitoring the runtime of your last command</a>
       </li>
     
   </ul>
