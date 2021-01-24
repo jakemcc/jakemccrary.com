@@ -10,7 +10,7 @@ categories:
 - books
 ---
 
-At the beginning of every year I reflect on my reading in the previous year.
+At the beginning of every year I reflect on my reading from the previous year.
 I take a look at my records, fix errors, and think about reading goals for the upcoming year.
 
 Here are links to my previous end-of-year reflections: [2013](/blog/2014/01/01/using-incanter-to-review-my-2013-reading/), [2014](/blog/2015/01/08/reading-in-2014/), [2015](/blog/2016/03/13/reading-in-2015/), [2016](/blog/2017/01/04/reading-in-2016/), [2017](/blog/2018/03/03/reading-in-2017/), [2018](/blog/2019/01/21/reading-in-2018/), and [2019](/blog/2020/01/11/reading-in-2019/).
@@ -29,7 +29,6 @@ Last year I wrote:
 
 > Those are pretty fuzzy goals but I'm alright with that.
 
-The quote above was my 2020 goal.
 I'll come back at the end of this article and reflect on if I hit it or not.
 
 ## Highlights
@@ -112,6 +111,7 @@ These are fantastic science fiction reads that explore human connections and wha
 
 ### Other notable reads
 
+These are books that for some reason I didn't give five stars but I still think they are worth recommending.
 All links below are to Goodreads.
 
 #### [Piranesi](https://www.goodreads.com/book/show/52702097-piranesi) by Susanna Clark
