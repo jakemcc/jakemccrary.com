@@ -10,16 +10,18 @@ categories:
 - books
 ---
 
-At the beginning of every year I reflect on the previous year of reading.
+At the beginning of every year I reflect on my reading in the previous year.
 I take a look at my records, fix errors, and think about reading goals for the upcoming year.
 
 Here are links to my previous end-of-year reflections: [2013](/blog/2014/01/01/using-incanter-to-review-my-2013-reading/), [2014](/blog/2015/01/08/reading-in-2014/), [2015](/blog/2016/03/13/reading-in-2015/), [2016](/blog/2017/01/04/reading-in-2016/), [2017](/blog/2018/03/03/reading-in-2017/), [2018](/blog/2019/01/21/reading-in-2018/), and [2019](/blog/2020/01/11/reading-in-2019/).
 
 I've continued to keep track of my reading using [Goodreads](http://goodreads.com).
 My [profile](https://www.goodreads.com/user/show/3431614-jake-mccrary) has nearly the full list of the books I've read since 2010.
-[This](https://www.goodreads.com/review/list/3431614-jake-mccrary?shelf=read_2020) is my 2020.
+[Here](https://www.goodreads.com/review/list/3431614-jake-mccrary?shelf=read_2020) is my 2020.
 
 ## 2020 Goals
+
+Last year I wrote:
 
 > I was encouraged by how many non-fiction books I read this year and how many of them ended up earning a five star rating. I'd like to continue that trend of reading high-quality non-fiction books.
 
@@ -36,7 +38,7 @@ Here are my five star books from 2020.
 The titles are affiliate links to Amazon.
 If you click one and make a purchase I get a small kickback.
 
-If I wrote a review on Goodreads the `my review` link will take you there.
+If I wrote a review on Goodreads then the `my review` link will take you there.
 In the last couple of years, I've been writing fewer reviews on Goodreads than in the past so many books do not have a review there.
 
 If you're missing these reviews, I have started sending out an email every month or two and it frequently includes small reviews of what I've read since the previous email.
@@ -60,22 +62,24 @@ Here are the 2020 five star books:
 
 This is an excellent dose of wisdom about climbing and improving your performance.
 It does this through suggestions of how to change your mental relationship with climbing.
-Improving is is about putting in the work, reflecting, and trying hard.
+Improving is about putting in the work, reflecting, and trying hard.
 
 #### The Body Keeps the Score: Brain, Mind, and Body in the Healing of Trauma by Bessel A. van der Kolk
 
 I really enjoyed this book and made hundreds of highlights while reading it on my Kindle.
-I'd suggest reading some other reviews on [Goodread](https://www.goodreads.com/book/show/22268254-the-body-keeps-the-score) and seeing if is something that would be interesting for you.
+I'd suggest reading reviews on [Goodreads](https://www.goodreads.com/book/show/22268254-the-body-keeps-the-score) and seeing if it is something that would be interesting for you.
 
 #### Come as You Are: The Surprising New Science that Will Transform Your Sex Life by Emily Nagoski
 
-I enjoyed reading this book.
-Unlike what the book subtitle claims, I don't think this has transformed my sex life but it did give me some things to think about with regards to stress, responses to stress, and emotional systems.
+This was a good book that, unlike what the subtitle claims, did not transform my sex life.
+But I didn't go into it expecting that.
+I'm not the main audience for this book but still got some value from it.
+I particularly enjoyed the parts that talked about stress, responses to stress, and emotional systems.
 
 #### How to Change Your Mind by Michael Pollan
 
-This book is about psechedlics, such as LSD and psilocybin.
-It combines the history of these substances, old and new research being done with them, and Michael Pollan's experience with these substances.
+This book is about psychedelics, such as LSD and psilocybin.
+It combines the history of these substances, old and new research being done with them, and sort of a travelogue of Michael Pollan's growing experience with these substances.
 
 #### Why I’m No Longer Talking to White People About Race by Reni Eddo-Lodge
 
@@ -86,24 +90,33 @@ I'll just link to a [friend's review](https://www.goodreads.com/review/show/2697
 I devoured all of her writing this year, both fiction and non-fiction, and the highlights are above.
 None of her writing earned less than four stars.
 
-While writing this article, I learned that she published a new short story, _Zikora_, in October 2020 and now I'm eager to finish writing this and go read her new story.
+Between starting and finishing writing this article, I learned she published a new short story, _Zikora_, and immediately read it.
+It was pretty great.
+
+One of the reasons I enjoy reading fiction is that it provides a window into the experiences of others.
+Chimamanda Ngozi Adichie's writing does exactly this and does it with beautiful prose and compelling stories.
 
 #### The Diamond Age by Neal Stephenson
 
-This was a reread of the first Neal Stephenson book I ever read.
-It was still great the second time through.
-This book deals with too many topics to list but one of the most prevalent is inequality.
+This was a reread of the first Neal Stephenson book I read.
+I wanted to reread this book as I had been recommending it as a relatively short introduction to Neal Stephenson's writing but I was second guessing how much I enjoyed it.
+
+I was wrong to second guess that.
+This story was still great the second time through.
+This book covers so much and feels prescient despite being read 25 years after it was originally published (February 1995).
 
 #### Parable of the Sower and Parable of the Talents by Octavia E. Butler
 
 Octavia Butler builds a new religion in this series and, honestly, that religion is tempting.
-These were fantastic science fiction reads that explore human connections and what we could be as a species.
+These are fantastic science fiction reads that explore human connections and what we could be as a species.
 
 ### Other notable reads
 
+All links below are to Goodreads.
+
 #### [Piranesi](https://www.goodreads.com/book/show/52702097-piranesi) by Susanna Clark
 
-This book was weird and I really enjoyed it.
+This book was weird and I enjoyed it.
 You follow a character that lives in a weird, infinite building made of corridors lined with statues.
 
 #### [Why We're Polarized](https://www.goodreads.com/book/show/52655150-why-we-re-polarized) by Ezra Klein
@@ -113,13 +126,14 @@ I thought it was a pretty interesting read.
 
 #### [The Will to Change: Men, Masculinity, and Love](https://www.goodreads.com/book/show/6656720-the-will-to-change) by bell hooks
 
-I read this at the very beginning of 2020 and think that probably everyone should read it.
-I highlighted a ton of passages and should definitely review it.
+I read this at the very beginning of 2020 and think that everyone should read it.
+I highlighted a ton of passages and plan on going back and reviewing those passages.
 
 #### [You're Not Listening: What You're Missing and Why It Matters](https://www.goodreads.com/book/show/52355815-you-re-not-listening) by Kate Murphy
 
-Another book that I read at the very beginning of 2020 and another book where I highlighted a ton of passages.
-The book is about listening and basically how we do a bad job at it with suggestions about how to get better.
+I read this at the very beginning of 2020 and highlighted a ton of passages.
+The book is about listening and how we do a bad job at it.
+It includes suggestions about how to get better.
 
 Pair this book with [I hear you](https://www.goodreads.com/book/show/35522033-i-hear-you), a book I read last year, and you'll have the tools to become a better listener.
 
@@ -128,13 +142,15 @@ Pair this book with [I hear you](https://www.goodreads.com/book/show/35522033-i-
 This was a stupendous science fiction read.
 It takes you on a wild journey into a far future where sentient beings can exist in software.
 
-This probably would have received five stars from me but I found myself getting bogged down in some of science explanations.
-What a story.
+This was very close to receiving five stars but I kept getting bogged down in some of the explanations.
+I know this is why some folks enjoy hard science fiction but that isn't why I'm reading these stories.
+This book delivers an interesting, complex, and very speculative far future.
+If the blurb sounds interesting to you and you're willing to put up some with advanced theoretical (real? fake? I don't know) physics then pick this book up.
 
 ## Stats
 
-I read 43 books in 2020 and 12093 pages in 2020.
-The data also doesn't capture three books that I've started but have yet to finish (as I only capture finished books here).
+I read 43 books and 12,093 pages in 2020.
+The data also doesn't capture three books that I've started but have yet to finish.
 
 ```org
 | Year | # of Pages | # of Books |
@@ -150,25 +166,32 @@ The data also doesn't capture three books that I've started but have yet to fini
 | 2012 |      14208 |         44 |
 | 2011 |       9179 |         19 |
 | 2010 |      14667 |         46 |
-
+w
 ```
 
-This initially felt low to me but a significant portion of my time spent reading this year has, for better or worse, been taken up by newsletters and, probably to my detriment, reading articles about the on-going global pandemic, the USAs election, and other non-stop news from 2020.
+Last year marks a decade of me tracking my reading and it was the second lowest page count in that decade.
+For many reasons 2020 was an unforgettable year and one where I spent a lot of time at home.
 
-I'm also listening to more podcasts.
-In the first months of 2020, those definitely replaced my train commute reading with listening.
-It is mostly easier to pop in some headphones and listen while walking to the train, riding it, and walking to an office.
+I would have thought that would have lead to a large number of pages read but I think much of my time ended up being taken up by non-book reading activities.
+For better or worse (probably worse), a lot of my time was spent reading articles about the on-going global pandemic, the USA election, and the other non-stop news cycle of 2020.
+Between that and the increase in newsletters and podcasts I'm consuming, I'm not that surprised my book reading has taken a hit.
 
-Looking at the below graph, I did not read many pages in January through March.
-During those months, I was aggressively training for rock climbing and starting a new relationship.
-Both of those took up much of my non-working hours.
-It is still surprising though, as those were months still had me taking a commute to an office, which usually provides plenty of time for reading.
-
-February is an outlier for sheer number of books because I read a collection of short stories that were published as individual stories through Amazon.
+Here is a breakdown of books finished by month.
 
 ![Book and pages count by month](/images/reading-2020/books-by-month-2020.png "Number of books and pages for each month")
 
-Unsurprisingly, electronic books continue to be the dominate format.
+This graph tells a slightly different story than the one I presented above.
+I did not finish many pages in January through March, the pre-pandemic time period in the United States.
+
+Those months I was extremely dedicated to training for climbing and was starting a new relationship.
+I'm very happy both of those took up my non-working hours during those months.
+
+I was still commuting to an office from January till mid-March and would have expected more pages finished on the train.
+I'll blame podcasts for that as this year I did start listening to those while commuting, since I can enjoy those while walking to and from the train as well.
+
+The number of books read in February is high because I read a short story collection where each story was published individually on Amazon.
+
+Unsurprisingly, electronic books continue to be the dominant format.
 
 ```org
 |           | 2020 | 2019 | 2018 | 2017 | 2016 | 2015 |
@@ -179,8 +202,8 @@ Unsurprisingly, electronic books continue to be the dominate format.
 | paperback |    1 |    7 |    5 |    5 |    3 |    3 |
 ```
 
-Below is the breakdown of fiction vs non-fiction book.
-The numbers move slightly towards fiction consuming more of reading compared to 2019
+Below is the breakdown of fiction vs non-fiction books.
+Fiction started to regain its dominance after having non-fiction catch up in 2019.
 
 ```org
 |                           |   2020 |   2019 |   2018 |
@@ -191,7 +214,7 @@ The numbers move slightly towards fiction consuming more of reading compared to 
 
 ```
 
-Below is the distribution of star ratings broken apart into fiction and non-fiction.
+Here is the star rating distribution.
 
 ```org
 |             | 2 stars | 3 stars | 4 stars | 5 stars |
@@ -203,15 +226,19 @@ Below is the distribution of star ratings broken apart into fiction and non-fict
 ## Did I hit my 2020 goals?
 
 I succeeded in reading a solid number of non-fiction books that earned a high rating.
-I read fewer non-fictiion books than fiction but managed to have more 5 star ratings.
+I read fewer non-fiction books than fiction but managed to have more 5 star ratings.
+I'm going to count this as successfully hitting the non-fiction part of my 2020 goal.
 
 Did I get better at applying the lessons from books?
 Not at all and I barely even tried to do so.
+Definite failure here.
 
 ## 2021 goals
 
-I have quite a few unread books sitting on my Kindle or on a bookshelf.
-This feels like kind of a low-bar to hit but this year I'd like to read some of these unread-but-owned book.
+I have quite a few unread books sitting on my virtual and physical bookshelf.
+This feels like setting a really low-bar but this year I'd like to read some of these unread-but-owned books.
 
-I'm also planning on reading at least one book on writing.
-I've made and achieved this goal before but I intend to do it again.
+I'm also planning on reading at least one book on writing and one book on climbing.
+This goal is almost a subset of the above goal as I have books on both these topics sitting on my shelf.
+
+It is interesting to have been collecting this data for a decade now.
