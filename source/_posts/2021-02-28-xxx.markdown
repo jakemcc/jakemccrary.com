@@ -10,18 +10,18 @@ categories:
 ---
 
 The constants you use in your unit tests can make your tests better.
-Like test and variables names, they can improve the readability of your code and make it easier to understand test failures.
+Like test and variable names, they can improve the readability of your code and make it easier to understand test failures.
 
 Let's get into an example.
 
 Imagine a code base that uses a relatively simple key-value pair concept for configuration.
 It reads keys and values from a known files and, based on some rules, either ignores or overrides values when keys are duplicated.
 
-The main entry point to interacting with this config system is the `config-value` function.
-It takes a map that represents these files and the values contained in them, a string to lookup, and a keyword that selects the rules for selecting the value of the queried string.
+`config-value` is the function that looks up the value for a particular configuration key, represented as a `string`.
+This function also takes an in-memory representation of the configuration files, the key to lookup, and the mode to operate it.
+The mode, represented here by a `keyword`, seelcts how configuration key resolution works.
 
-Now lets pretend you are trying to answer a question about config resolution and you stumble across the tests below.
-A variable, `config`, holds some sample configuration data and tests assert a few different querying scenarios.
+We haven't talked about how how resolution works so now is a good time to simulate stumbling across the tests.
 
 ```clojure
 (def config {"scratch.conf" {"a" "1"}
@@ -44,19 +44,19 @@ A variable, `config`, holds some sample configuration data and tests assert a fe
   (is (= "3" (config-value config "c" :prod))))
 ```
 
-This could be clearer.
-The values used in these tests don't give you any assistance.
+These tests could be clearer.
+They don't provide much assitance for understanding the resolution rules.
 
-The assertions don't provide helpful hints to make them obvious. 
+One aspect that could be improved is picking better constants.
+
 In `(= "2" (config-value config "b" :dev))`, what does `"2"` represent?
 What does `"b"` mean?
-
-You have to either keep `config` in your memory or keep glancing up to remember its structure.
+You have to either keep `config` in your memory or keep glancing up to recall its structure.
 
 This isn't great.
 This adds cognitive overhead that doesn't need to be there.
 
-Let's rewrite it by swapping in some different values.
+Let's rewrite it by swapping in some different constants.
 
 ```clojure
 (def config {"scratch.conf" {"in dev+app+scratch" "from scratch"}
@@ -82,16 +82,18 @@ Let's rewrite it by swapping in some different values.
 The tests tell you much more now.
 You don't have to remember the value of `config` or keep glancing up at it to understand the assertions in a test.
 
-You can read `(= "from development" (config-value config "in dev+app" :dev))` and have a pretty solid idea that you are looking up a key found in `development.conf` and `application.conf` and, while in `:dev` mode, should receive a value from `development.conf`.
+You can read `(= "from development" (config-value config "in dev+app" :dev))` and have a pretty solid idea that you are looking up a key found in both `development.conf` and `application.conf` and, while in `:dev` mode, expect the value from `development.conf`.
 
-The new constants provide clues to the reader about what the test expects.
-The reader no longer needs to keep state in their head.
+The new constants provide clues about what the test expects.
+You can read and understand these without keeping much state in your head.
 
-These new constants also help with a test fails.
+By using descriptive constants, the tests give clues to how config resolution should work.
+
+These new constants also help when a test fails.
 Which of the following is clearer?
 
 ```
-FAIL in (handles-overrides-in-dev-mode) (example.clj:22)
+FAIL in (handles-overrides-in-dev-mode)
 expected: "2"
   actual: "3"
     diff: - "2"
@@ -99,15 +101,15 @@ expected: "2"
 ```
 
 ```
-FAIL in (handles-overrides-in-dev-mode) (example.clj:41)
+FAIL in (handles-overrides-in-dev-mode)
 expected: "from development"
   actual: "from application"
     diff: - "from development"
           + "from application"
 ```
 
-I prefer the second one.
-I can read it and have a better idea of what might be broken.
+The second one is clearer.
+I can read it and form a hypothesis about what might be broken.
 
 Well chosen constants can reduce the state a person needs to keep in their head.
 Good constants can make test failures easier to understand.
