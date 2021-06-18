@@ -10,17 +10,18 @@ categories:
 ---
 
 The constants you use in your unit tests can make your tests better.
-Like test names and variables, they can improve the readability of your code and make it easier to understand test failures.
+Like test and variables names, they can improve the readability of your code and make it easier to understand test failures.
 
 Let's get into an example.
 
-Pretend your codebase has a relatively simple key-value pair concept for managing configuration.
-It also allows you to load configs from a few known files and, depending on what mode it is in, lets keys from from file override keys from another.
-You main entry point to interacting with this config system is the `config-value` function.
-It takes a map that represents these files and the values contained in them, a string to lookup, and a keyword representing the mode.
+Imagine a code base that uses a relatively simple key-value pair concept for configuration.
+It reads keys and values from a known files and, based on some rules, either ignores or overrides values when keys are duplicated.
 
-You stumble across some tests code written like this first example.
-This code has a shared variable, `config`, that holds a representation of the config data and some tests that make assertions.
+The main entry point to interacting with this config system is the `config-value` function.
+It takes a map that represents these files and the values contained in them, a string to lookup, and a keyword that selects the rules for selecting the value of the queried string.
+
+Now lets pretend you are trying to answer a question about config resolution and you stumble across the tests below.
+A variable, `config`, holds some sample configuration data and tests assert a few different querying scenarios.
 
 ```clojure
 (def config {"scratch.conf" {"a" "1"}
@@ -43,48 +44,51 @@ This code has a shared variable, `config`, that holds a representation of the co
   (is (= "3" (config-value config "c" :prod))))
 ```
 
-The above piece of code isn't as clear as it could be.
-When reading the tests, you need to keep referencing what values are in `config`.
+This could be clearer.
+The values used in these tests don't give you any assistance.
 
-You read the code `(= "2" (config-value config "b" :dev))` and you aren't given any help with regards to what `"2"` or `"b`" mean.
-You have to keep looking up the code sample to map the used values back to where they came from.
+The assertions don't provide helpful hints to make them obvious. 
+In `(= "2" (config-value config "b" :dev))`, what does `"2"` represent?
+What does `"b"` mean?
+
+You have to either keep `config` in your memory or keep glancing up to remember its structure.
 
 This isn't great.
 This adds cognitive overhead that doesn't need to be there.
 
 Let's rewrite it by swapping in some different values.
 
-
 ```clojure
-(def config {"scratch.conf" {"dev+app+scratch" "from scratch"}
+(def config {"scratch.conf" {"in dev+app+scratch" "from scratch"}
 
-             "development.conf" {"dev+app+scratch" "from development"
-                                 "dev+app" "from development"}
+             "development.conf" {"in dev+app+scratch" "from development"
+                                 "in dev+app" "from development"}
 
-             "application.conf" {"dev+app+scratch" "from application"
-                                 "dev+app" "from application"
-                                 "app" "from application"}})
+             "application.conf" {"in dev+app+scratch" "from application"
+                                 "in dev+app" "from application"
+                                 "in app" "from application"}})
 
 (deftest handles-overrides-in-dev-mode
-  (is (= "from scratch" (config-value config "dev+app+scratch" :dev)))
-  (is (= "from development" (config-value config "dev+app" :dev)))
-  (is (= "from application" (config-value config "app" :dev))))
+  (is (= "from scratch" (config-value config "in dev+app+scratch" :dev)))
+  (is (= "from development" (config-value config "in dev+app" :dev)))
+  (is (= "from application" (config-value config "in app" :dev))))
 
 (deftest handles-overrides-in-prod-mode
-  (is (= "from application" (config-value config "a" :prod)))
-  (is (= "from application" (config-value config "b" :prod)))
-  (is (= "from application" (config-value config "c" :prod))))
+  (is (= "from application" (config-value config "in dev+app+scratch" :prod)))
+  (is (= "from application" (config-value config "in dev+app" :prod)))
+  (is (= "from application" (config-value config "in app" :prod))))
 ```
 
-I'm not going to claim this is the most amazing piece of code but it is better than before.
-You can read `(= "from development" (config-value config "dev+app" :dev))` in it and have an idea that you are looking up a key that is found in the `dev` and `app` config and the expected value tells you where it came from (`"from development"`).
+The tests tell you much more now.
+You don't have to remember the value of `config` or keep glancing up at it to understand the assertions in a test.
 
-Because of the changes in the constants in this test suite the reader has a better chance of reasoning about a piece of code without needing to maintain knowledge of what they've read earlier in the file.
-They no longer need to remember "Oh yeah, `"2"` comes from the development.conf section."
-The refactored expected value does that for the reader.
+You can read `(= "from development" (config-value config "in dev+app" :dev))` and have a pretty solid idea that you are looking up a key found in `development.conf` and `application.conf` and, while in `:dev` mode, should receive a value from `development.conf`.
 
-These even helps when tests fails.
-Which of the following would you rather see?
+The new constants provide clues to the reader about what the test expects.
+The reader no longer needs to keep state in their head.
+
+These new constants also help with a test fails.
+Which of the following is clearer?
 
 ```
 FAIL in (handles-overrides-in-dev-mode) (example.clj:22)
@@ -102,10 +106,11 @@ expected: "from development"
           + "from application"
 ```
 
-I'd rather see the second one.
-I can read it and have _some_ idea what might be broken instead of just wondering what `"2"` and `"3"` mean.
+I prefer the second one.
+I can read it and have a better idea of what might be broken.
 
-The constants we choose to use in test code can make or break the readability.
-They help future you or other maintainer understand the test better.
-They help you understand failures faster.
-You should put some thought into the constants that are used in your tests.
+Well chosen constants can reduce the state a person needs to keep in their head.
+Good constants can make test failures easier to understand.
+The constants we use can increase the readability of our tests.
+
+It is well worth placing some extra thought into the constants found in your tests.
