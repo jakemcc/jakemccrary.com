@@ -138,8 +138,6 @@ Aggressively shorten your feedback cycles and you'll change how you interact wit
 This post was written with Magit version `20201111.1436` and Emacs `26.3` on macOS `10.15.7`.
 I've been using these changes for a few months but do not remember or have a record of what Magit version I was using at the time I originally made these changes.
 
-**edit on 2020/12/15**:
+**edit on 2020/12/15**: I recently upgraded Emacs to tryout the native-comp work and can report this still works with with Emacs `28.0.50`, Magit `20201212.929`, and Git `2.29.2` running in macOS `11.0.1`.
 
-I recently upgraded Emacs to tryout the native-comp work and can report this still works with with Emacs `28.0.50`, Magit `20201212.929`, and Git `2.29.2` running in macOS `11.0.1`.
-
-As a warning, this reduces the information Magit shows you. The status buffer will be blank if you have no changes.
+**Warning**: This reduces the information Magit shows you. The status buffer will be blank if you have no changes. I find this tradeoff to be worth it.
