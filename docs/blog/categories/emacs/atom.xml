@@ -4,7 +4,7 @@
   <title><![CDATA[Category: emacs | Jake McCrary]]></title>
   <link href="https://jakemccrary.com/blog/categories/emacs/atom.xml" rel="self"/>
   <link href="https://jakemccrary.com/"/>
-  <updated>2021-05-13T22:59:18-05:00</updated>
+  <updated>2021-06-25T09:41:48-05:00</updated>
   <id>https://jakemccrary.com/</id>
   <author>
     <name><![CDATA[Jake McCrary]]></name>
@@ -195,11 +195,9 @@ Aggressively shorten your feedback cycles and you&rsquo;ll change how you intera
 <p>This post was written with Magit version <code>20201111.1436</code> and Emacs <code>26.3</code> on macOS <code>10.15.7</code>.
 I&rsquo;ve been using these changes for a few months but do not remember or have a record of what Magit version I was using at the time I originally made these changes.</p>
 
-<p><strong>edit on 2020/12/15</strong>:</p>
+<p><strong>edit on 2020/12/15</strong>: I recently upgraded Emacs to tryout the native-comp work and can report this still works with with Emacs <code>28.0.50</code>, Magit <code>20201212.929</code>, and Git <code>2.29.2</code> running in macOS <code>11.0.1</code>.</p>
 
-<p>I recently upgraded Emacs to tryout the native-comp work and can report this still works with with Emacs <code>28.0.50</code>, Magit <code>20201212.929</code>, and Git <code>2.29.2</code> running in macOS <code>11.0.1</code>.</p>
-
-<p>As a warning, this reduces the information Magit shows you. The status buffer will be blank if you have no changes.</p>
+<p><strong>Warning</strong>: This reduces the information Magit shows you. The status buffer will be blank if you have no changes. I find this tradeoff to be worth it.</p>
 <div class="footnotes">
 <hr/>
 <ol>
