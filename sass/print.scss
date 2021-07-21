@@ -1,0 +1,28 @@
+@media only print {
+    header[role=banner] {
+        h1::before {
+            content: "Writing by ";
+        }
+        h1 {
+            font-size: 1.5rem;
+        }
+    }
+    nav { 
+        display: none;
+    }
+    header { 
+        h1 {
+            font-size: 2rem;
+        }
+        .meta {
+            font-style: italic;
+        }
+    }
+    figure.code { 
+        margin-left: 0;
+    }
+    figure .line-numbers { 
+        border-right: 1px dotted #c5c5c5;
+    }
+
+}
