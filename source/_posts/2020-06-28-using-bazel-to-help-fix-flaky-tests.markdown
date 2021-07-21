@@ -8,6 +8,7 @@ description: Here is a way to use Bazel to help fix flaky tests.
 keywords: bazel, test, flaky tests
 categories:
 - bazel
+- testing
 ---
 
 Flaky tests are terrible.
