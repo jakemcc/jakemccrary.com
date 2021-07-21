@@ -1,12 +1,13 @@
 ---
 layout: post
-title: "Improve your tests by picking better constants"
-date: 2021-02-28 18:35:44 -0600
+title: Improve your tests by picking better constants
+date: 2021-07-20 20:34 -0500
 comments: true
-published: false
-description: The constants you put in your test code can improve its readability. You should put thought into them.
-keywords: 'clojure, test, unit test, readability, legibility'
-categories: 
+published: true
+description: The constants you put in your test code can improve its readability.
+  You should put thought into them.
+keywords: clojure, test, unit test, readability, legibility
+categories:
 - testing
 ---
 
