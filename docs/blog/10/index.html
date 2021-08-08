@@ -14,17 +14,17 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" My text editor of choice is Emacs. Its extensibility is a major
-contributor to this preference. The ease of adding additional
-functionality means you &hellip;" />
+    <meta itemprop="description" content=" I recently switched companies and find myself working
+on a project that uses clojure.test. I haven&rsquo;t worked with
+clojure.test since I started &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" My text editor of choice is Emacs. Its extensibility is a major
-contributor to this preference. The ease of adding additional
-functionality means you &hellip;" />
+    <meta name="twitter:description" content=" I recently switched companies and find myself working
+on a project that uses clojure.test. I haven&rsquo;t worked with
+clojure.test since I started &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -32,16 +32,16 @@ functionality means you &hellip;" />
     <meta property="og:site_name" content="Writing by Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/10/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" My text editor of choice is Emacs. Its extensibility is a major
-contributor to this preference. The ease of adding additional
-functionality means you &hellip;" />
+    <meta property="og:description" content=" I recently switched companies and find myself working
+on a project that uses clojure.test. I haven&rsquo;t worked with
+clojure.test since I started &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" My text editor of choice is Emacs. Its extensibility is a major
-contributor to this preference. The ease of adding additional
-functionality means you &hellip;">
+    <meta name="description" content=" I recently switched companies and find myself working
+on a project that uses clojure.test. I haven&rsquo;t worked with
+clojure.test since I started &hellip;">
 
     
 
@@ -53,6 +53,7 @@ functionality means you &hellip;">
     <link rel="canonical" href="https://jakemccrary.com/blog/10/">
     <link href="/favicon.png" rel="icon">
     <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet" type="text/css">
     <link href="http://feeds.feedburner.com/JakeMccrarysMusings" rel="alternate" title="Jake McCrary" type="application/atom+xml">
     <link href="https://jakemccrary.com/feed.json" rel="alternate" title="Jake McCrary" type="application/json">
 
@@ -123,6 +124,77 @@ functionality means you &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/11/11/running-clojure-dot-test-tests-on-file-changes/">Running clojure.test tests on file changes</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2013-11-11T20:02:00-06:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>11</span><span class='date-suffix'>th</span>, <span class='date-year'>2013</span></span> <span class='time'>8:02 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I recently switched <a href="http://outpace.com">companies</a> and find myself working
+on a project that uses <code>clojure.test</code>. I haven&rsquo;t worked with
+<code>clojure.test</code> since I started using
+<a href="https://github.com/jaycfields/expectations">expectations</a> with
+<a href="https://github.com/jakemcc/lein-autoexpect">lein-autoexpect</a>. This
+combination spoiled me when it comes to testing Clojure code. I
+can no longer stand running tests by hand; I&rsquo;m too used to having a
+tool run them for me. As a result I tried out some
+<code>clojure.test</code> continuous testing tools.</p>
+
+<p>I wasn&rsquo;t satisfied with what I found. Since I wrote <code>lein-autoexpect</code>,
+a continous tester for <code>expectations</code>, it was easy for me to fork it
+and and create
+<a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a>.
+<code>lein-test-refresh</code> solves the issues I ran into with the other
+<code>clojure.test</code> tools.</p>
+
+<p>To use <code>lein-test-refresh</code> follow these steps (latest version found in
+image at end):</p>
+
+<ol>
+<li>Add <code>[com.jakemccrary/lein-test-refresh "0.1.2"]</code> to the <code>:plugins</code>
+section in your <code>project.clj</code> or <code>~/.lein/profiles.clj</code> file.</li>
+<li>Run <code>lein test-refresh</code> or <code>lein test-refresh :growl</code>.</li>
+<li>Enjoy your minimal feedback delays between editing your Clojure
+code and seeing if your tests pass.</li>
+</ol>
+
+
+<p><a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a>
+watches the source and test directories specified in your
+<code>project.clj</code> and reloads code when files changes. After reloading
+your code your <code>clojure.test</code> tests are run and the output is printed
+to your console. When you pass <code>:growl</code> as a command line argument the
+plugin will use growl to notify you of success and failures. This is
+one of my favorite features about <code>lein-test-refresh</code> as it allows me
+to continuously run my tests without taking up space on my monitors.</p>
+
+<p>I hope you enjoy
+<a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a>. It
+has made using <code>clojure.test</code> much more enjoyable.</p>
+
+<p>Latest version from Clojars:
+<img src="https://clojars.org/com.jakemccrary/lein-test-refresh/latest-version.svg" alt="Clojars generated dependency vector" /></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -776,80 +848,6 @@ non-technical people to these tools and everyone has enjoyed them.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/12/16/continuous-testing-with-clojure-and-expectations/">Continuous testing with Clojure and expectations</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2011-12-16T09:30:00-06:00'><span class='date'><span class='date-month'>Dec</span> <span class='date-day'>16</span><span class='date-suffix'>th</span>, <span class='date-year'>2011</span></span> <span class='time'>9:30 am</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&rsquo;ve recently started using <a href="http://jayfields.com/">Jay Fields'</a> Clojure testing library, <a href="https://github.com/jaycfields/expectations"><code>expectations</code></a>. I&rsquo;m not going to explain <code>expectations</code>, Jay already did a great job on his <a href="http://blog.jayfields.com/2011/11/clojure-expectations-introduction.html">blog</a>, but I will quote its <a href="https://github.com/jaycfields/expectations">Github</a> page.</p>
-
-<blockquote><p>expectations is a minimalist&rsquo;s testing framework</p></blockquote>
-
-<p>The above quote is absolutely true, which is one of the major reasons I&rsquo;m liking <code>expectations</code>. It hasn&rsquo;t been all sunshine though, when I first started using it I had a major problem. It slowed down my usual Clojure workflow.</p>
-
-<p>Up until this point I had stuck to using <code>clojure.test</code>. Combined with emacs, slime, swank, and <code>clojure-test-mode</code> I found the time between making a change to code and running tests to be minimal.</p>
-
-<p>When I switched to <code>expectations</code> the time it took between making a code change and running tests increased. With <code>expectations</code> I couldn&rsquo;t reevaluate my buffer to get the new tests in my repl environment. Doing so caused the new tests to be there along with the old tests. This meant I needed to switch to the command line to run my tests. This caused me to incur the startup costs of the jvm simply to run my expectations (tests). This was a huge cost compared to what I was used to before.</p>
-
-<h2>Introducing <code>lein-autoexpect</code></h2>
-
-<p>To fix my problem I wrote <a href="https://github.com/jakemcc/lein-autoexpect"><code>lein-autoexpect</code></a>. <code>lein-autoexpect</code> is a <a href="https://github.com/technomancy/leiningen/"><code>Leiningen</code></a> plugin that monitors a project&rsquo;s source and test directory and when a Clojure file changes it reloads the affected namespaces and runs all the expectations. Using this plugin my turn around time from modifying code to running all of my expectations is practically nothing. Without the cost of the jvm startup there is practically no time wasted between when code is saved and tests are run.</p>
-
-<p>To use <code>lein-autoexpect</code> simply add <code>[lein-autoexpect "0.0.2"]</code> to your <code>project.clj</code> file and fetch the dependency. Then at the command line run <code>lein autoexpect</code>. You&rsquo;ll see your tests run and then it will just hang there, eagerly waiting for code to change.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nv">$ </span>lein autoexpect
-</span><span class='line'>*********************************************
-</span><span class='line'>*************** Running tests ***************
-</span><span class='line'>Ran <span class="m">3</span> tests containing <span class="m">3</span> assertions in <span class="m">16</span> msecs
-</span><span class='line'><span class="m">0</span> failures, <span class="m">0</span> errors.
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Next time you end up saving you&rsquo;ll see your tests run again and the following example output appears.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>*********************************************
-</span><span class='line'>*************** Running tests ***************
-</span><span class='line'>Ran <span class="m">4</span> tests containing <span class="m">4</span> assertions in <span class="m">3</span> msecs
-</span><span class='line'><span class="m">0</span> failures, <span class="m">0</span> errors.
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><code>lein-autoexpect</code> tries to clearly delimit each test session with the banner made of <code>*</code>. This helps keep different runs separate when scrolling through your terminal.</p>
-
-<p>This style of testing is called <a href="http://blog.objectmentor.com/articles/2007/09/20/continuous-testing-explained">continuous testing</a>. If you haven&rsquo;t tried it, I would highly recommend giving it a shot. Even just using it for the last few days changed how I think testing should be done.</p>
-
-<p>Source can be found on <a href="https://github.com/jakemcc/lein-autoexpect">Github</a>.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//11">&larr; Older</a>
@@ -865,6 +863,10 @@ non-technical people to these tools and everyone has enjoyed them.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2021/08/07/improve-your-tests-by-picking-better-constants/">Improve your tests by picking better constants</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2021/01/24/reading-in-2020/">Reading in 2020</a>
@@ -900,10 +902,6 @@ non-technical people to these tools and everyone has enjoyed them.</p>
     
       <li class="post">
         <a href="/blog/2020/05/04/how-to-be-alerted-when-a-long-running-process-finishes/">How to be automatically notified when long running processes finish</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/04/26/hanging-a-hangboard-using-a-doorway-pull-up-bar/">How to hang a hangboard using a doorway pull-up bar</a>
       </li>
     
   </ul>

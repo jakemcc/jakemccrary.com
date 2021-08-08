@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>https://jakemccrary.com/blog/2021/08/07/improve-your-tests-by-picking-better-constants/</loc>
+<lastmod>2021-08-07T19:58:00-05:00</lastmod>
+</url>
+<url>
 <loc>https://jakemccrary.com/blog/2021/01/24/reading-in-2020/</loc>
 <lastmod>2021-01-24T17:14:00-06:00</lastmod>
 </url>
@@ -651,36 +655,6 @@
 </url>
 <url>
 <loc>https://jakemccrary.com/blog/categories/inspiration/</loc>
-</url>
-<url>
-<loc>https://jakemccrary.com/blog/2/</loc>
-</url>
-<url>
-<loc>https://jakemccrary.com/blog/3/</loc>
-</url>
-<url>
-<loc>https://jakemccrary.com/blog/4/</loc>
-</url>
-<url>
-<loc>https://jakemccrary.com/blog/5/</loc>
-</url>
-<url>
-<loc>https://jakemccrary.com/blog/6/</loc>
-</url>
-<url>
-<loc>https://jakemccrary.com/blog/7/</loc>
-</url>
-<url>
-<loc>https://jakemccrary.com/blog/8/</loc>
-</url>
-<url>
-<loc>https://jakemccrary.com/blog/9/</loc>
-</url>
-<url>
-<loc>https://jakemccrary.com/blog/10/</loc>
-</url>
-<url>
-<loc>https://jakemccrary.com/blog/11/</loc>
 </url>
 <url>
 <loc>https://jakemccrary.com/adventures/2010-chicago-mackinac-race/</loc>

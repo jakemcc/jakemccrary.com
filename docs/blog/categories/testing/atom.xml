@@ -4,7 +4,7 @@
   <title><![CDATA[Category: testing | Jake McCrary]]></title>
   <link href="https://jakemccrary.com/blog/categories/testing/atom.xml" rel="self"/>
   <link href="https://jakemccrary.com/"/>
-  <updated>2021-06-25T09:41:48-05:00</updated>
+  <updated>2021-08-07T19:58:39-05:00</updated>
   <id>https://jakemccrary.com/</id>
   <author>
     <name><![CDATA[Jake McCrary]]></name>
@@ -12,6 +12,172 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Improve your tests by picking better constants]]></title>
+    <link href="https://jakemccrary.com/blog/2021/08/07/improve-your-tests-by-picking-better-constants/"/>
+    <updated>2021-08-07T19:58:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2021/08/07/improve-your-tests-by-picking-better-constants</id>
+    <content type="html"><![CDATA[<p>The constants you use in unit tests matter.
+Like test and variable names, they can improve the readability of your code and make it easier to understand test failures.</p>
+
+<p>Imagine the following.</p>
+
+<p>A new developer joins your team and asks a question about how the code resolves config values.
+You are unsure of the details so you pair up with the new teammate to dig into the code.</p>
+
+<p>You know the codebase uses a relatively simple key-value pair concept for configuration.
+It reads keys and values from a known files and, based on some rules, either ignores or overrides values when keys are duplicated across files.</p>
+
+<p><code>config-value</code> is the function that looks up the value for a particular configuration key, represented as a <code>string</code>.
+This function takes three arguments: an in-memory representation of the configuration files, the key to lookup, and the mode to operate in.
+You know the mode is important in influencing how config resolution works but you don&rsquo;t remember the details.</p>
+
+<p>Luckily for you and your pair, the codebase has plenty of unit tests.
+The two of you dive in and look at some tests, hoping to understand how config resolution works.</p>
+
+<pre><code class="clojure">(def config {"scratch.conf" {"a" "1"}
+
+             "development.conf" {"a" "2"
+                                 "b" "2"}
+
+             "application.conf" {"a" "3"
+                                 "b" "3"
+                                 "c" "3"}})
+
+(deftest handles-overrides-in-dev-mode
+  (is (= "1" (config-value config "a" :dev)))
+  (is (= "2" (config-value config "b" :dev)))
+  (is (= "3" (config-value config "c" :dev))))
+
+(deftest handles-overrides-in-prod-mode
+  (is (= "3" (config-value config "a" :prod)))
+  (is (= "3" (config-value config "b" :prod)))
+  (is (= "3" (config-value config "c" :prod))))
+</code></pre>
+
+<p>It is great that these tests exist but they could be clearer.
+They aren&rsquo;t terrible but you have to work a bit understand what is happening.</p>
+
+<p>When reading <code>(= "2" (config-value config "b" :dev))</code>, what does <code>"2"</code> represent?
+What does <code>"b"</code> mean?
+You have to either keep the value of <code>config</code> in your brain or keep glancing up in the file to recall what it is.</p>
+
+<p>This isn&rsquo;t great.
+This adds cognitive overhead that doesn&rsquo;t need to be there.</p>
+
+<p>There are a few ways these tests could be improved
+One way is through using better constants.
+Let&rsquo;s do a quick rewrite.</p>
+
+<pre><code class="clojure">(def config {"scratch.conf" {"in dev+app+scratch" "from scratch"}
+
+             "development.conf" {"in dev+app+scratch" "from development"
+                                 "in dev+app" "from development"}
+
+             "application.conf" {"in dev+app+scratch" "from application"
+                                 "in dev+app" "from application"
+                                 "in app" "from application"}})
+
+(deftest handles-overrides-in-dev-mode
+  (is (= "from scratch" (config-value config "in dev+app+scratch" :dev)))
+  (is (= "from development" (config-value config "in dev+app" :dev)))
+  (is (= "from application" (config-value config "in app" :dev))))
+
+(deftest handles-overrides-in-prod-mode
+  (is (= "from application" (config-value config "in dev+app+scratch" :prod)))
+  (is (= "from application" (config-value config "in dev+app" :prod)))
+  (is (= "from application" (config-value config "in app" :prod))))
+</code></pre>
+
+<p>These are the same tests but with different constants.
+Those constants make a huge difference.
+This change has made the tests more legible.
+You no longer need to remember the value of <code>config</code> or keep glancing up at it to understand the assertions in a test.</p>
+
+<p>You can read <code>(= "from development" (config-value config "in dev+app" :dev))</code> and have a pretty solid idea that you are looking up a key found in both <code>development.conf</code> and <code>application.conf</code> and while in <code>:dev</code> mode expect the value from <code>development.conf</code>.</p>
+
+<p>The new constants provide clues about what the test expects.
+You can read and understand the assertions without keeping much state in your head.</p>
+
+<p>This increases the legibility of the tests and is useful when a test fails.
+Which of the following is clearer?</p>
+
+<pre><code>FAIL in (handles-overrides-in-dev-mode)
+expected: "2"
+  actual: "3"
+    diff: - "2"
+          + "3"
+</code></pre>
+
+<pre><code>FAIL in (handles-overrides-in-dev-mode)
+expected: "from development"
+  actual: "from application"
+    diff: - "from development"
+          + "from application"
+</code></pre>
+
+<p>The second one is clearer.
+You can read it and form a hypothesis about what might be broken.</p>
+
+<p>Well chosen constants reduce the state a person needs to keep in their head.
+This makes tests easier to understand.
+Good constants also make test failures easier to understand.
+Just like good variable names, good constants increase the readability of our tests.</p>
+
+<p>It is well worth placing some extra thought into the constants found in your tests.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Using Bazel to help fix flaky tests]]></title>
+    <link href="https://jakemccrary.com/blog/2020/06/28/using-bazel-to-help-fix-flaky-tests/"/>
+    <updated>2020-06-28T18:28:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2020/06/28/using-bazel-to-help-fix-flaky-tests</id>
+    <content type="html"><![CDATA[<p>Flaky tests are terrible.
+These are tests that pass or fail without anything changing in the code.
+They often pass the majority of the time and fail rarely.
+This makes them hard to detect and cause developers to often just run the tests again.</p>
+
+<p>Flaky tests erode your team&rsquo;s confidence in your system.
+They cause folks to get in the habit of not trusting the output of tests.
+This discourages people from writing tests as they stop seeing them as something that improves quality and instead view them as a drag on productivity.</p>
+
+<p>Flaky tests are often hard to fix.
+If they were easy to fix, they wouldn&rsquo;t have been flaky in the first place.
+One difficulty in fixing them is that the failures are often hard to reproduce.</p>
+
+<p>Often, the first step in fixing a flaky test is to write a script to run the tests multiple times in a row.
+If you are using <a href="https://bazel.build/">Bazel</a> as your build tool you don&rsquo;t need to write this.</p>
+
+<p>Here is an example <code>bazel</code><sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> command for helping you recreate flaky test failures.</p>
+
+<p><code>bazel test --test_strategy=exclusive --test_output=errors --runs_per_test=50 -t- //...</code></p>
+
+<p>The above command is running all the test targets in a workspace and each flag is important.</p>
+
+<ul>
+<li><code>--runs_per_test=50</code> is telling Bazel to run each test 50 times.</li>
+<li><code>--test_output=errors</code> is telling Bazel to only print errors to your console.</li>
+<li><code>-t-</code> is a shortcut for <code>--nocache_test_results</code> (or <code>--cache_test_results=no</code>).
+This flag tells Bazel to <strong>not</strong> cache the test results.</li>
+<li><code>--test_strategy=exclusive</code> will cause tests to be run serially.
+Without this, Bazel could run your test targets concurrently and if your tests aren&rsquo;t designed for this you may run into other failures.</li>
+</ul>
+
+
+<p>Flaky tests are terrible and you should try not to have them.
+Try your best to have reliable tests.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>I&rsquo;ve written this while using Bazel 3.2.0. If you are reading this far in the future the flags may have changed.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Breaking change and more in lein-test-refresh 0.24.1]]></title>
@@ -196,49 +362,6 @@ user=&gt; (com.jakemccrary.test-refresh/run-in-repl "test")
 </ol>
 </div>
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Notifications with tmux and lein-test-refresh]]></title>
-    <link href="https://jakemccrary.com/blog/2019/01/06/notifications-with-tmux-and-lein-test-refresh/"/>
-    <updated>2019-01-06T16:55:00-06:00</updated>
-    <id>https://jakemccrary.com/blog/2019/01/06/notifications-with-tmux-and-lein-test-refresh</id>
-    <content type="html"><![CDATA[<p>I&rsquo;ve been using Emacs in a remote <a href="https://github.com/tmux/tmux">tmux</a> session lately and I&rsquo;ve been missing <a href="https://github.com/jakemcc/lein-test-refresh#notifications">lein-test-refresh</a> notifications when my Clojure tests pass or fail. Luckily, it only took me a little bit of searching to figure out a solution for when I&rsquo;m working inside of tmux.</p>
-
-<p>Below is a GIF of the notifications I get as my tests run and pass or fail.</p>
-
-<p><img src="/images/tmux-test-refresh.gif" title="tmux and test-refresh notifications" alt="tmux and test-refresh notifications" /></p>
-
-<p>With the above notifications, I can keep my focus on my code and only switch to the tmux window with <code>lein test-refresh</code> running when a test fails.</p>
-
-<p>This was pretty easy to setup. You can trigger a message in tmux by running <code>tmux display-message &lt;MESSAGE_HERE&gt;</code>. To configure <a href="https://github.com/jakemcc/lein-test-refresh#notifications">lein-test-refresh</a> to send notifications to tmux simply include the following in your <code>:test-refresh</code> section of your <code>project.clj</code> or <code>profiles.clj</code>.</p>
-
-<pre><code class="clojure">:test-refresh {:notify-command ["tmux" "display-message"]}
-</code></pre>
-
-<p>I hope you enjoy this. Its has made using a remote terminal with tmux and <a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a> more enjoyable.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Built-in test narrowing with lein-test-refresh]]></title>
-    <link href="https://jakemccrary.com/blog/2018/07/16/built-in-test-narrowing-with-lein-test-refresh/"/>
-    <updated>2018-07-16T14:47:00-05:00</updated>
-    <id>https://jakemccrary.com/blog/2018/07/16/built-in-test-narrowing-with-lein-test-refresh</id>
-    <content type="html"><![CDATA[<p>If you follow my work you probably know that I value fast feedback cycles. Most of the open-source I maintain was developed to enable faster feedback cycles. This is why <a href="https://github.com/jakemcc/lein-test-refresh/">lein-test-refresh</a> and <a href="https://github.com/clojure-expectations/lein-autoexpect">lein-autoexpect</a> were originally created.</p>
-
-<p>Leiningen supports <a href="https://github.com/technomancy/leiningen/blob/master/doc/TUTORIAL.md#tests">test selectors</a> and lein-test-refresh <a href="https://github.com/jakemcc/lein-test-refresh/blob/master/CHANGES.md#040">does as well</a>. This lets you start-up a testing session and only run tests or namespaces with certain metadata on them. This is a super useful feature as it lets you narrow your testing scope to one (or a handful) of tests while working on solving a specific problem.</p>
-
-<p>lein-test-refresh now has built-in functionality that allows you to focus your test scope without restarting the Leiningen test process. If lein-test-refresh sees a <code>deftest</code> or <code>ns</code> form marked with <code>:test-refresh/focus true</code> in its metadata, then it will only run tests marked with <code>:test-refresh/focus</code>.</p>
-
-<p>Below is an example of what this looks like.</p>
-
-<pre><code class="clojure">(deftest ^:test-refresh/focus test-addition
-  (is (= 2 (+ 1 1))))
-</code></pre>
-
-<p>This functionality has only been available for a short period of time and I&rsquo;ve already found it useful. I think you will too. Enjoy.</p>
 ]]></content>
   </entry>
   
