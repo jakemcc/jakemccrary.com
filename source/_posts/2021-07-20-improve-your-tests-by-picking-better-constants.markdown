@@ -3,7 +3,7 @@ layout: post
 title: Improve your tests by picking better constants
 date: 2021-07-20 20:34 -0500
 comments: true
-published: true
+published: false
 description: The constants you put in your test code can improve its readability.
   You should put thought into them.
 keywords: clojure, test, unit test, readability, legibility
@@ -11,7 +11,7 @@ categories:
 - testing
 ---
 
-The constants you use in your unit tests can make your tests better.
+The constants you use in unit tests matter.
 Like test and variable names, they can improve the readability of your code and make it easier to understand test failures.
 
 Imagine the following.
@@ -19,12 +19,12 @@ Imagine the following.
 A new developer joins your team and asks a question about how the code resolves config values.
 You are unsure of the details so you pair up with the new teammate to dig into the code.
 
-You know the codebase uses a relatively simple relatively simple key-value pair concept for configuration.
+You know the codebase uses a relatively simple key-value pair concept for configuration.
 It reads keys and values from a known files and, based on some rules, either ignores or overrides values when keys are duplicated across files.
 
 `config-value` is the function that looks up the value for a particular configuration key, represented as a `string`.
-This function takes three arguments an in-memory representation of the configuration files, the key to lookup, and the mode to operate in.
-You know the mode is important in influencing how config key resolution works but don't remember the details.
+This function takes three arguments: an in-memory representation of the configuration files, the key to lookup, and the mode to operate in.
+You know the mode is important in influencing how config resolution works but you don't remember the details.
 
 Luckily for you and your pair, the codebase has plenty of unit tests.
 The two of you dive in and look at some tests, hoping to understand how config resolution works.
@@ -51,11 +51,11 @@ The two of you dive in and look at some tests, hoping to understand how config r
 ```
 
 It is great that these tests exist but they could be clearer.
-They are readable but you kind of have to work a bit understand what is happening.
+They aren't terrible but you have to work a bit understand what is happening.
 
 When reading `(= "2" (config-value config "b" :dev))`, what does `"2"` represent?
 What does `"b"` mean?
-You have to either keep `config` in your memory or keep glancing up in the file to recall what value it holds.
+You have to either keep the value of `config` in your brain or keep glancing up in the file to recall what it is.
 
 This isn't great.
 This adds cognitive overhead that doesn't need to be there.
@@ -95,9 +95,7 @@ You can read `(= "from development" (config-value config "in dev+app" :dev))` an
 The new constants provide clues about what the test expects.
 You can read and understand the assertions without keeping much state in your head.
 
-The descriptive constants in the tests give clues to how config resolution should work.
-
-This increases the legibility of the tests and are useful when a test fails.
+This increases the legibility of the tests and is useful when a test fails.
 Which of the following is clearer?
 
 ```
@@ -121,7 +119,7 @@ You can read it and form a hypothesis about what might be broken.
 
 Well chosen constants reduce the state a person needs to keep in their head.
 This makes tests easier to understand.
-Good constants make test failures easier to understand.
+Good constants also make test failures easier to understand.
 Just like good variable names, good constants increase the readability of our tests.
 
 It is well worth placing some extra thought into the constants found in your tests.
