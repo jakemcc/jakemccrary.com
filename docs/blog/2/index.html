@@ -14,15 +14,17 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" If you&rsquo;ve browsed the adventure section of my website you know I&rsquo;m a climber.
-Currently, the climbing gyms in Chicago are closed due to &hellip;" />
+    <meta itemprop="description" content=" Let me set the stage.
+I kick off the compilation of a large Scala codebase.
+This will take minutes to finish, so I switch to Slack and catch up on &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" If you&rsquo;ve browsed the adventure section of my website you know I&rsquo;m a climber.
-Currently, the climbing gyms in Chicago are closed due to &hellip;" />
+    <meta name="twitter:description" content=" Let me set the stage.
+I kick off the compilation of a large Scala codebase.
+This will take minutes to finish, so I switch to Slack and catch up on &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -30,14 +32,16 @@ Currently, the climbing gyms in Chicago are closed due to &hellip;" />
     <meta property="og:site_name" content="Writing by Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/2/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" If you&rsquo;ve browsed the adventure section of my website you know I&rsquo;m a climber.
-Currently, the climbing gyms in Chicago are closed due to &hellip;" />
+    <meta property="og:description" content=" Let me set the stage.
+I kick off the compilation of a large Scala codebase.
+This will take minutes to finish, so I switch to Slack and catch up on &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" If you&rsquo;ve browsed the adventure section of my website you know I&rsquo;m a climber.
-Currently, the climbing gyms in Chicago are closed due to &hellip;">
+    <meta name="description" content=" Let me set the stage.
+I kick off the compilation of a large Scala codebase.
+This will take minutes to finish, so I switch to Slack and catch up on &hellip;">
 
     
 
@@ -120,6 +124,149 @@ Currently, the climbing gyms in Chicago are closed due to &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2020/05/04/how-to-be-alerted-when-a-long-running-process-finishes/">How to be automatically notified when long running processes finish</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2020-05-04T20:35:00-05:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2020</span></span> <span class='time'>8:35 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Let me set the stage.
+I kick off the compilation of a large Scala codebase.
+This will take minutes to finish, so I switch to Slack and catch up on what coworkers have posted.
+Someone posted an interesting link and I follow it to an article.
+Fifteen minutes later, I notice the compilation finished twelve minutes ago.
+I silently grumble at myself, disappointed that I didn&rsquo;t start the next step twelve minutes ago.</p>
+
+<p>Has some variation of the above happened to you?</p>
+
+<p>It doesn&rsquo;t happen to me anymore because now my computer tells me when any long running process finishes.
+This might sound annoying but it is great.
+I no longer feel guilty<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> for dropping into Slack and can immediately get back to the task at hand as soon the process finishes.</p>
+
+<p>I&rsquo;ve done this by enhancing on my setup for showing the <a href="/blog/2020/04/21/using-bash-preexec-for-monitoring-the-runtime-of-your-last-command/">runtime of the previous command in my prompt</a>.
+You don&rsquo;t have to read that article for the rest of this one to make sense, but you should because it shows you how to add a very useful feature to your prompt.</p>
+
+<p>Below is the code that causes my computer to tell me when it finishes running commands that takes longer than 30 seconds.
+It is found in my <code>~/.bashrc</code>.
+An explanation follows the code snippet.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># Using https://github.com/rcaloras/bash-preexec</span>
+</span><span class='line'>preexec<span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>  <span class="nv">_last_command</span><span class="o">=</span><span class="nv">$1</span>
+</span><span class='line'>  <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;UNSET&quot;</span> <span class="o">==</span> <span class="s2">&quot;${_timer}&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>    <span class="nv">_timer</span><span class="o">=</span><span class="nv">$SECONDS</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>    <span class="nv">_timer</span><span class="o">=</span><span class="k">${</span><span class="nv">_timer</span><span class="k">:-</span><span class="nv">$SECONDS</span><span class="k">}</span>
+</span><span class='line'>  <span class="k">fi</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>_maybe_speak<span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>    <span class="nb">local </span><span class="nv">elapsed_seconds</span><span class="o">=</span><span class="nv">$1</span>
+</span><span class='line'>    <span class="k">if</span> <span class="o">((</span> elapsed_seconds &gt; <span class="m">30</span> <span class="o">))</span><span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>        <span class="nb">local </span>c
+</span><span class='line'>        <span class="nv">c</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">&quot;${_last_command}&quot;</span> <span class="p">|</span> cut -d<span class="s1">&#39; &#39;</span> -f1<span class="k">)</span>
+</span><span class='line'>        <span class="o">(</span> say <span class="s2">&quot;finished ${c}&quot;</span> <span class="p">&amp;</span> <span class="o">)</span>
+</span><span class='line'>    <span class="k">fi</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>precmd<span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;UNSET&quot;</span> <span class="o">==</span> <span class="s2">&quot;${_timer}&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>     <span class="nv">timer_show</span><span class="o">=</span><span class="s2">&quot;0s&quot;</span>
+</span><span class='line'>  <span class="k">else</span>
+</span><span class='line'>    <span class="nv">elapsed_seconds</span><span class="o">=</span><span class="k">$((</span>SECONDS <span class="o">-</span> _timer<span class="k">))</span>
+</span><span class='line'>    _maybe_speak <span class="k">${</span><span class="nv">elapsed_seconds</span><span class="k">}</span>
+</span><span class='line'>    <span class="nv">timer_show</span><span class="o">=</span><span class="s2">&quot;$(format-duration seconds $elapsed_seconds)&quot;</span>
+</span><span class='line'>  <span class="k">fi</span>
+</span><span class='line'>  <span class="nv">_timer</span><span class="o">=</span><span class="s2">&quot;UNSET&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="c"># put at the bottom of my .bashrc</span>
+</span><span class='line'><span class="o">[[</span> -f <span class="s2">&quot;$HOME/.bash-preexec.sh&quot;</span> <span class="o">]]</span> <span class="o">&amp;&amp;</span> <span class="nb">source</span> <span class="s2">&quot;$HOME/.bash-preexec.sh&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="https://github.com/rcaloras/bash-preexec">Bash-Preexec</a> triggers the <code>preexec</code>, immediately before a command is execute, and <code>precmd</code> functions, immediately before the shell prompt reappears.
+Those two functions are enough to figure out how much time has elapsed while a command ran.
+You setup Bash-Preexec by downloading <a href="https://github.com/rcaloras/bash-preexec/blob/master/bash-preexec.sh">bash-preexec.sh</a> and sourcing it in your <code>~/.bashrc</code>.</p>
+
+<p><code>preexec</code> is passed the command being ran and it captures it in <code>_last_command</code>.
+It also captures the current number of seconds the shell has been running as <code>_timer</code>.</p>
+
+<p><code>precmd</code> uses the value in <code>_timer</code> to calculate the elapsed time in seconds and then calls the function <code>_maybe_speak</code> with this as an argument.
+It also does the work required for showing the elapsed time in my prompt.</p>
+
+<p>If the elapsed time is greater than 30 seconds then <code>_maybe_speak</code> uses <code>cut</code> to discard the arguments of captured command, leaving me with the command itself.
+It then uses <code>say</code> to produce an audible alert of what command just finished.
+I discard the arguments because otherwise the <code>say</code> command can go on for a long time.</p>
+
+<p><code>say</code> is a tool that ships with macOS.
+I haven&rsquo;t gotten around to it yet but I&rsquo;ll need to use something else on my Linux machines.</p>
+
+<p>You may have noticed that I run <code>say</code> in the background and in a subshell.
+Running it in the background lets me continue interacting with my shell while <code>say</code> finishes executing and running it in a subshell prevents text from appearing in my shell when the background job finishes.</p>
+
+<p>With this setup, I can kick off a slow compile or test run and not feel so bad about dropping into Slack or reading Reddit. It is wonderful and I&rsquo;d recommend it (though, I&rsquo;d more strongly recommend not having commands that take a while to run).</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>I still feel a little guilty as doing so will break any momentum/flow I had going on, but that flow was already broken by the slowness of the command.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1363,110 +1510,6 @@ I look forward to customizing the firmware to make the key layout fit my usage.<
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2019/04/30/how-i-use-social-media/">How I use social media</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2019-04-30T17:50:00-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2019</span></span> <span class='time'>5:50 pm</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Over the years, I&rsquo;ve read many articles about the negative aspects of social media. You&rsquo;ve probably read articles extolling the benefits of cutting social media out of your life. These articles are abundant and easy to find through a search for <a href="https://www.google.com/search?q=stop+social+media">&ldquo;stop social media&rdquo;</a> or <a href="https://www.google.com/search?q=quit+social+media">&ldquo;quit social media&rdquo;</a>.</p>
-
-<p>Social media hasn&rsquo;t played a significant role in my life for a couple of years. I first started being more mindful of how I consumed social media in 2013. Back then, I temporarily switched to using a <a href="https://en.wikipedia.org/wiki/Feature_phone">feature phone</a> (a non-smart phone) for a month and a half. This really reset my relationship with consuming media on a phone. Since my phone was my primary entry point into Twitter and Facebook, my usage of both plummeted.</p>
-
-<p>Since then, I&rsquo;ve continued to take a careful look at how I use social media and have made tweaks to get maximum enjoyment with minimal downsides. This has involved changing how I use the desktop web applications for both Twitter and Facebook<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.</p>
-
-<p>The following books have helped shape my thinking towards digital distractions. They&rsquo;ve put into words some of the practices I stumbled into. They&rsquo;ve affected how I use smart phones and how I approach social media.</p>
-
-<ul>
-<li><a href="https://amzn.to/2UJu1V7">Deep Work</a> by Cal Newport</li>
-<li><a href="https://amzn.to/2WfLYMv">Digital Minimalism</a> by Cal Newport</li>
-<li><a href="https://amzn.to/2XX6imC">Essentialism</a> by Greg Mckeown</li>
-<li><a href="https://amzn.to/2X3Tzjz">The Distracted Mind</a> by Adam Gazzaley &amp; Larry D. Rosen</li>
-</ul>
-
-
-<p>One of the ideas in both <em>Digital Minimalism</em> and <em>Essentialism</em> is that you can pick and choose what you add to your life. This extends to individual features of products you use. This is something I arrived at prior to reading these books and it was nice hearing others putting this idea into words.</p>
-
-<p>Below is how I&rsquo;ve chosen to use various social media platforms.</p>
-
-<h2>Twitter</h2>
-
-<p>I only consume Twitter on my computer and I read it through <a href="https://tweetdeck.twitter.com/">Tweetdeck</a>.</p>
-
-<p>I don&rsquo;t check my entire feed. Instead, I have Tweetdeck setup to display a few curated lists of accounts along with mentions and direct messages. One list is composed of close friends, another highlights some people in the software development space, and another contains some Twitter art projects.</p>
-
-<p>Because I focus on a limited number of accounts, I don&rsquo;t have an infinite list to scroll through. This focus keeps Twitter useful to me and allows me to check it every few days and still stay up to date on topics I care about.</p>
-
-<p>I rarely tweet but when I do it is usually to promote my own or another person&rsquo;s writing. I also occasionally tweet as an <a href="https://twitter.com/ErowidBobRoss">art bot</a>.</p>
-
-<h2>Facebook</h2>
-
-<p>I only consume Facebook on my computer and mostly stopped using the website in 2016. The 2016 US presidential election made me realize I didn&rsquo;t find the Facebook news feed useful. It did not add positive value to my life.</p>
-
-<p>That is when I found the <a href="https://chrome.google.com/webstore/detail/news-feed-eradicator-for/fjcldmjmjhkklehbacihaiopjklihlgg?hl=en">News Feed Eradicator</a> Chrome extension. This extension gets rid of the news feed. It is great.</p>
-
-<p>Without the news feed, I no longer open the site and mindlessly scroll through the firehose of updates. I no longer know what is going on in the curated lives of my friends that still use Facebook. That is ok. Now when I run into them in real life, I can catch up and learn about their kids and their lives. I can have an honest reaction to learning that someone got married instead of sort of already knowing it. Someone can tell me about a trip they took and can show me photos I&rsquo;ve never seen before.</p>
-
-<p>I haven&rsquo;t completely deleted my Facebook account because it does add value to my life through a couple of groups and Facebook messenger. Only using these features has reduced the frequency I visit Facebook to once every few days. That is more than enough to keep up with what is going in in the Chicago climbing community and events going on at local climbing gyms.</p>
-
-<p>I rarely post to Facebook but when I do it is often to promote something I&rsquo;ve written.</p>
-
-<h2>Goodreads</h2>
-
-<p>I&rsquo;m not really sure if Goodreads counts as a social media site. I use it to keep track books I want to read and books I&rsquo;ve already read. It isn&rsquo;t something that consumes any amount of my time mindlessly.</p>
-
-<h2>LinkedIn</h2>
-
-<p>I&rsquo;m not sure if you can consider my usage of LinkedIn to be actual usage. It mostly results in email in my inbox that almost immediately gets archived. It does keep me somewhat informed about what job opportunities are out there though recruiter outreach.</p>
-
-<p>I very rarely post anything to LinkedIn.</p>
-
-<h2>Instagram</h2>
-
-<p>I&rsquo;ll completely admit that this is the social media platform that I waste time on. It is the only social media app on my phone and that increases how frequently I use it.</p>
-
-<p>I signed up for Instagram in order to follow tattoo artists. This helped me learn what tattoo styles I enjoyed the most. This was a huge success and now I have a much better appreciation and eye for this art.</p>
-
-<p>Eventually, my usage of Instagram expanded to follow some friends, local Chicago artists, and professional rock climbers. Following each of these groups is slightly beneficial but I&rsquo;m not sure if it is an overall positive impact compared to the temptation to fill downtime with Instagram scrolling.</p>
-
-<p>I&rsquo;m approaching the point of deleting Instagram from my phone and experiencing that.</p>
-
-<p>I post occasionally to Instagram both using the story feature and normal posts. These are usually photos of some street art or stickers put up in Chicago. It is very infrequent.</p>
-
-<h1>End</h1>
-
-<p>So that is how I consume social media. It mostly happens on my computer and I use a subset of features a platform offers. I&rsquo;ve reached a point where I feel like I&rsquo;m getting a lot of the pros without too many of the cons.</p>
-
-<p>It is an area in which I&rsquo;ll keep experimenting. I&rsquo;d encourage you to as well. Try a different usage pattern for an extended period of time and then reflect on your changed behavior. Keep the changes that have made a positive impact.</p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>Ignoring LinkedIn and Goodreads, I think Facebook and Twitter were the only social media platforms I used back then.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//3">&larr; Older</a>
@@ -1482,6 +1525,10 @@ I look forward to customizing the firmware to make the key layout fit my usage.<
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2021/09/11/tests-can-act-as-living-documentation/">Tests are living documentation</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2021/08/07/improve-your-tests-by-picking-better-constants/">Improve your tests by picking better constants</a>
@@ -1517,10 +1564,6 @@ I look forward to customizing the firmware to make the key layout fit my usage.<
     
       <li class="post">
         <a href="/blog/2020/06/28/using-bazel-to-help-fix-flaky-tests/">Using Bazel to help fix flaky tests</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/05/04/how-to-be-alerted-when-a-long-running-process-finishes/">How to be automatically notified when long running processes finish</a>
       </li>
     
   </ul>

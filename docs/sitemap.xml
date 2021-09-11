@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>https://jakemccrary.com/blog/2021/09/11/tests-can-act-as-living-documentation/</loc>
+<lastmod>2021-09-11T18:20:00-05:00</lastmod>
+</url>
+<url>
 <loc>https://jakemccrary.com/blog/2021/08/07/improve-your-tests-by-picking-better-constants/</loc>
 <lastmod>2021-08-07T19:58:00-05:00</lastmod>
 </url>

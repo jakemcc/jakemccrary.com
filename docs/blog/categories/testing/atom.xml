@@ -4,7 +4,7 @@
   <title><![CDATA[Category: testing | Jake McCrary]]></title>
   <link href="https://jakemccrary.com/blog/categories/testing/atom.xml" rel="self"/>
   <link href="https://jakemccrary.com/"/>
-  <updated>2021-08-07T19:58:39-05:00</updated>
+  <updated>2021-09-11T18:21:34-05:00</updated>
   <id>https://jakemccrary.com/</id>
   <author>
     <name><![CDATA[Jake McCrary]]></name>
@@ -12,6 +12,55 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Tests are living documentation]]></title>
+    <link href="https://jakemccrary.com/blog/2021/09/11/tests-can-act-as-living-documentation/"/>
+    <updated>2021-09-11T18:20:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2021/09/11/tests-can-act-as-living-documentation</id>
+    <content type="html"><![CDATA[<p>Tests can serve many purposes.</p>
+
+<p>You might write tests as a way of driving the design of your software.
+Other tests might be written in response to a discovered bug and, if written first, those tests you know when you&rsquo;ve fixed the bug and act as guardrails preventing the reintroduction of that bug.
+Tests can also be used to confirm you haven&rsquo;t changed behavior while refactoring.</p>
+
+<p>Tests can also be used as documentation.
+Unlike non-executable documentation, tests will always match the implementation&rsquo;s behavior.</p>
+
+<p>An example in a comment or other documentation deserves to be in a test.
+Take the following sketch of a Clojure function:</p>
+
+<pre><code class="clojure">(defn confobulate
+  "Takes a string and transforms it to the confobulated form. Examples:
+  - \"alice\" -&gt; \"EcilA\"
+  - \"//yolo1\" -&gt; \"//oneOloY\"
+  "
+  [s]
+  (-&gt; s
+      ;; insert some work here, not going to implement this
+      ))
+</code></pre>
+
+<p>The docstring has examples in it to aid humans in understanding its behavior.
+These examples are useful!
+But they stop being useful and start being dangerous when they stop being accurate.</p>
+
+<p>We can use unit tests to keep examples like this correct.
+You can write comments near the assertions letting future readers know about the documentation that needs to be updated if behavior changes.</p>
+
+<pre><code class="clojure">(deftest confobulate-should-ignore-slashes
+  ;; If this assertion changes the docstring needs to be updated
+  (is (= "//oneOloY" (confobulate "//yolo1"))))
+
+(deftest confobulate-reverses-and-capitalizes
+  ;; If this assertion changes the docstring needs to be updated
+  (is (= "alice" (confobulate "EcilA"))))
+</code></pre>
+
+<p>Any example in a comment or other non-executable documentation should be an assertion in a unit test.
+You&rsquo;ve already taken the time to document the behavior; take the time to figure out how to document it in a way that will fail if the behavior changes.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Improve your tests by picking better constants]]></title>
@@ -280,88 +329,6 @@ user=&gt; (com.jakemccrary.test-refresh/run-in-repl "test")
 <p>You don&rsquo;t actually need the <code>expect(console.error).toHaveBeenCalled();</code> as <code>done</code> won&rsquo;t be called unless <code>console.error</code> has been called. If you don&rsquo;t have it though then Jasmine will complain there are no assertions in the test.</p>
 
 <p>So there we have it, an example of using some of Jasmine&rsquo;s asynchronous test features with spies. I wish I had found an article like this when I started this task. Hopefully it saves you, and future me, some time.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How to use Leiningen test selectors to filter by test name]]></title>
-    <link href="https://jakemccrary.com/blog/2019/01/28/how-to-use-leiningen-test-selectors-to-filter-by-test-name/"/>
-    <updated>2019-01-28T21:27:00-06:00</updated>
-    <id>https://jakemccrary.com/blog/2019/01/28/how-to-use-leiningen-test-selectors-to-filter-by-test-name</id>
-    <content type="html"><![CDATA[<!-- Estimate: 30 minutes -->
-
-
-<!-- First draft: 38 minutes -->
-
-
-<!-- First edit: 13 minutes -->
-
-
-<!-- Second edit: 8 minutes -->
-
-
-<p>Leiningen test selectors are great. They allow you to filter what tests run by applying a function to the test&rsquo;s metadata. If that function returns a truthy value then that test will run. <a href="https://github.com/jakemcc/lein-test-refresh/blob/master/CHANGES.md#040">lein-test-refresh</a> supports them and even includes a built in one for its <a href="https://github.com/jakemcc/lein-test-refresh#built-in-test-narrowing-test-selector">focus feature</a>.</p>
-
-<p>I was recently <a href="https://github.com/jakemcc/lein-test-refresh/issues/78">asked</a> if test-refresh could support filtering tests using a regular expression against the name of a namespace or test. Lucky for me, test-refresh already supports this because of its support of test selectors.</p>
-
-<p>Most of the examples of Leiningen test selectors show very simple functions that look for the existence of a keyword in the metadata. We can do more than that. We can write a predicate that does whatever we want with the metadata.</p>
-
-<p>To take a look at a test&rsquo;s metadata, I generated a new project and looked at the generated default test file.</p>
-
-<pre><code class="clojure">(ns selector.core-test
-  (:require [clojure.test :refer :all]
-            [selector.core :refer :all]))
-
-(deftest a-test
-  (testing "FIXME, I fail."
-    (is (= 0 1))))
-</code></pre>
-
-<p>I then used my repl and to see what metadata was on the test.</p>
-
-<pre><code class="clojure">selector.core-test&gt; (meta #'a-test)
-{:test #function[selector.core-test/fn--17267],
- :line 5,
- :column 1,
- :file "/Users/jake/src/jakemcc/blog-examples/selector/test/selector/core_test.clj",
- :name a-test,
- :ns #namespace[selector.core-test]}
-</code></pre>
-
-<p>Given the metadata above, I wrote the selector below which lets us select only integration tests.</p>
-
-<pre><code class="clojure">:test-selectors {:integration (fn [m]
-                                (or (clojure.string/includes? (str (:ns m))
-                                                              "integration")
-                                    (clojure.string/includes? (str (:name m))
-                                                              "integration")))}
-</code></pre>
-
-<p>You could write the above code is many different ways. Whatever you write, it needs to look for the existence of <code>integration</code> in either the test&rsquo;s name or namespace.</p>
-
-<p>If you wanted to make <code>lein test</code> or <code>lein test-refresh</code> only run non-integration tests you can add a default test selector to the project.clj.</p>
-
-<pre><code class="clojure">:test-selectors {:default (fn [m]
-                            (not (or (clojure.string/includes? (str (:ns m))
-                                                               "integration")
-                                     (clojure.string/includes? (str (:name m))
-                                                               "integration"))))
-                 :integration (fn [m]
-                                (or (clojure.string/includes? (str (:ns m))
-                                                              "integration")
-                                    (clojure.string/includes? (str (:name m))
-                                                              "integration")))}
-</code></pre>
-
-<p>Enjoy! I hope this example helps you run a subset<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> of your Clojure tests through Leiningen test selectors.</p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>Running a subset of your tests can be helpful and test-refresh has a few features that help you do that. If you can, I&rsquo;d still recommend making all your tests fast enough to run them all the time.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
 ]]></content>
   </entry>
   

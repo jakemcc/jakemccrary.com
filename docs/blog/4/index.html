@@ -14,13 +14,17 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" I typically like to reflect on my previous years reading closer to the beginning of the next year. We are just entering March, so I&rsquo;ve missed &hellip;" />
+    <meta itemprop="description" content=" A couple months ago I was looking into a problem and noticed that
+there was a situation where an expensive operation could be running
+simultaneously &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" I typically like to reflect on my previous years reading closer to the beginning of the next year. We are just entering March, so I&rsquo;ve missed &hellip;" />
+    <meta name="twitter:description" content=" A couple months ago I was looking into a problem and noticed that
+there was a situation where an expensive operation could be running
+simultaneously &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -28,12 +32,16 @@
     <meta property="og:site_name" content="Writing by Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/4/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" I typically like to reflect on my previous years reading closer to the beginning of the next year. We are just entering March, so I&rsquo;ve missed &hellip;" />
+    <meta property="og:description" content=" A couple months ago I was looking into a problem and noticed that
+there was a situation where an expensive operation could be running
+simultaneously &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" I typically like to reflect on my previous years reading closer to the beginning of the next year. We are just entering March, so I&rsquo;ve missed &hellip;">
+    <meta name="description" content=" A couple months ago I was looking into a problem and noticed that
+there was a situation where an expensive operation could be running
+simultaneously &hellip;">
 
     
 
@@ -116,6 +124,95 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2018/06/14/clojure-prevent-multiple-simultaneous-invocations/">Preventing duplicate long-running invocations in Clojure</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2018-06-14T09:47:00-05:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2018</span></span> <span class='time'>9:47 am</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>A couple months ago I was looking into a problem and noticed that
+there was a situation where an expensive operation could be running
+simultaneously multiple times. This was wasteful.</p>
+
+<p>This operation happened on a timer and could also be triggered by a power
+user through the UI. A power user could accidentally (or purposefully)
+mash on a UI button and cause the instance they&rsquo;re interacting with
+to grind to a halt<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.</p>
+
+<p>It was pretty easy to prevent. All I needed to introduce was an
+<code>atom</code> and lean on <code>compare-and-set!</code>. <code>compare-and-set!</code> is a pretty
+neat function (and concept found in many languages). Here is the docstring:</p>
+
+<blockquote><p>Atomically sets the value of atom to newval if and only if the
+current value of the atom is identical to oldval. Returns true if
+set happened, else false</p></blockquote>
+
+<p>Basically, <code>compare-and-set!</code> changes the value of an atom only if it
+starts from a specified value and returns a boolean letting you know
+if it did.</p>
+
+<p>To prevent an operation from running multiple times, introduce an atom
+and wrap calling the operation in a conditional using
+<code>compare-and-set!</code>.  After doing the work, be sure to <code>reset!</code> your
+atom back to the starting value.</p>
+
+<p>Below is the code.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defonce </span><span class="nv">running?</span> <span class="p">(</span><span class="nf">atom</span> <span class="nv">false</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn- </span><span class="nv">expensive-operation!</span><span class="o">&#39;</span> <span class="p">[]</span>
+</span><span class='line'>  <span class="c1">;; do work</span>
+</span><span class='line'>  <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">expensive-operation!</span> <span class="p">[]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">when </span><span class="p">(</span><span class="nf">compare-and-set!</span> <span class="nv">running?</span> <span class="nv">false</span> <span class="nv">true</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">(</span><span class="nf">try</span>
+</span><span class='line'>      <span class="p">(</span><span class="nf">expensive-operation!</span><span class="o">&#39;</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">(</span><span class="nf">finally</span>
+</span><span class='line'>        <span class="p">(</span><span class="nf">reset!</span> <span class="nv">running?</span> <span class="nv">false</span><span class="p">)))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>OK, not really grind to a halt, but consume unnecessary resources.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1641,139 +1738,6 @@ an area where this, or something similar to it, would help.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2017/05/30/adding-a-json-feed-to-octopress-slash-jekyll/">Adding a JSON Feed to an Octopress/Jekyll generated site</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2017-05-30T22:31:00-05:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>10:31 pm</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I went to a coffee shop this last weekend with the intention of writing up a <a href="/blog/2017/05/29/using-comm-to-verify-matching-content/">quick article</a> on <code>comm</code>. I sat down, sipping my coffee, and wasn’t motivated. I didn’t feel like knocking out a short post, and I didn’t feel like editing a draft I’ve been sitting on for a while. I wanted to do some work though, so I decided to add a <a href="https://jsonfeed.org/">JSON Feed</a> to this site.</p>
-
-<p>JSON Feed is an alternative to <a href="https://tools.ietf.org/html/rfc4287">Atom</a> and <a href="http://cyber.harvard.edu/rss/rss.html">RSS</a> that uses JSON instead of XML. I figured I could add support for it in less than the time it would take to enjoy my coffee and maybe some readers would find it useful. I’d be shocked if anyone actually finds this useful, but it was a fun little exercise anyway.</p>
-
-<p>An old version of Octopress (2.something), which uses an old version of Jekyll (2.5.3), generates this site. Despite this, I don’t think the template would need to change much if I moved to a new version. The template below is saved as <a href="https://github.com/jakemcc/jakemccrary.com/blob/master/source/feed.json">source/feed.json</a> in my git repository.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">---</span>
-</span><span class='line'><span class="nx">layout</span><span class="o">:</span> <span class="kc">null</span>
-</span><span class='line'><span class="o">---</span>
-</span><span class='line'><span class="p">{</span>
-</span><span class='line'>  <span class="s2">&quot;version&quot;</span><span class="o">:</span> <span class="s2">&quot;https://jsonfeed.org/version/1&quot;</span><span class="p">,</span>
-</span><span class='line'>  <span class="s2">&quot;title&quot;</span><span class="o">:</span> <span class="p">{{</span> <span class="nx">site</span><span class="p">.</span><span class="nx">title</span> <span class="o">|</span> <span class="nx">jsonify</span> <span class="p">}},</span>
-</span><span class='line'>  <span class="s2">&quot;home_page_url&quot;</span><span class="o">:</span> <span class="s2">&quot;{{ site.url }}&quot;</span><span class="p">,</span>
-</span><span class='line'>  <span class="s2">&quot;feed_url&quot;</span><span class="o">:</span> <span class="s2">&quot;{{site.url}}/feed.json&quot;</span><span class="p">,</span>
-</span><span class='line'>  <span class="s2">&quot;favicon&quot;</span><span class="o">:</span> <span class="s2">&quot;{{ site.url }}/favicon.png&quot;</span><span class="p">,</span>
-</span><span class='line'>  <span class="s2">&quot;author&quot;</span> <span class="o">:</span> <span class="p">{</span>
-</span><span class='line'>      <span class="s2">&quot;url&quot;</span> <span class="o">:</span> <span class="s2">&quot;https://twitter.com/jakemcc&quot;</span><span class="p">,</span>
-</span><span class='line'>      <span class="s2">&quot;name&quot;</span> <span class="o">:</span> <span class="s2">&quot;{{ site.author | strip_html }}&quot;</span>
-</span><span class='line'>  <span class="p">},</span>
-</span><span class='line'>  <span class="s2">&quot;user_comment&quot;</span><span class="o">:</span> <span class="s2">&quot;This feed allows you to read the posts from this site in any feed reader that supports the JSON Feed format. To add this feed to your reader, copy the following URL - {{ site.url }}/feed.json - and add it your reader.&quot;</span><span class="p">,</span>
-</span><span class='line'>  <span class="s2">&quot;items&quot;</span><span class="o">:</span> <span class="p">[{</span><span class="o">%</span> <span class="k">for</span> <span class="nx">post</span> <span class="k">in</span> <span class="nx">site</span><span class="p">.</span><span class="nx">posts</span> <span class="nx">limit</span><span class="o">:</span> <span class="mi">20</span> <span class="o">%</span><span class="p">}</span>
-</span><span class='line'>    <span class="p">{</span>
-</span><span class='line'>      <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;{{ site.url }}{{ post.id }}&quot;</span><span class="p">,</span>
-</span><span class='line'>      <span class="s2">&quot;url&quot;</span><span class="o">:</span> <span class="s2">&quot;{{ site.url }}{{ post.url }}&quot;</span><span class="p">,</span>
-</span><span class='line'>      <span class="s2">&quot;date_published&quot;</span><span class="o">:</span> <span class="s2">&quot;{{ post.date | date_to_xmlschema }}&quot;</span><span class="p">,</span>
-</span><span class='line'>      <span class="s2">&quot;title&quot;</span><span class="o">:</span> <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="nx">site</span><span class="p">.</span><span class="nx">titlecase</span> <span class="o">%</span><span class="p">}{{</span> <span class="nx">post</span><span class="p">.</span><span class="nx">title</span> <span class="o">|</span> <span class="nx">titlecase</span> <span class="o">|</span> <span class="nx">jsonify</span> <span class="p">}}{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">}{{</span> <span class="nx">post</span><span class="p">.</span><span class="nx">title</span> <span class="o">|</span> <span class="nx">jsonify</span> <span class="p">}}{</span><span class="o">%</span> <span class="nx">endif</span> <span class="o">%</span><span class="p">},</span>
-</span><span class='line'>      <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="nx">post</span><span class="p">.</span><span class="nx">description</span> <span class="o">%</span><span class="p">}</span><span class="s2">&quot;summary&quot;</span><span class="o">:</span> <span class="p">{{</span> <span class="nx">post</span><span class="p">.</span><span class="nx">description</span> <span class="o">|</span> <span class="nx">jsonify</span> <span class="p">}},{</span><span class="o">%</span> <span class="nx">endif</span> <span class="o">%</span><span class="p">}</span>
-</span><span class='line'>      <span class="s2">&quot;content_html&quot;</span><span class="o">:</span> <span class="p">{{</span> <span class="nx">post</span><span class="p">.</span><span class="nx">content</span> <span class="o">|</span> <span class="nx">expand_urls</span><span class="o">:</span> <span class="nx">site</span><span class="p">.</span><span class="nx">url</span> <span class="o">|</span> <span class="nx">jsonify</span> <span class="p">}},</span>
-</span><span class='line'>      <span class="s2">&quot;author&quot;</span> <span class="o">:</span> <span class="p">{</span>
-</span><span class='line'>        <span class="s2">&quot;name&quot;</span> <span class="o">:</span> <span class="s2">&quot;{{ site.author | strip_html }}&quot;</span>
-</span><span class='line'>      <span class="p">}</span>
-</span><span class='line'>    <span class="p">}{</span><span class="o">%</span> <span class="k">if</span> <span class="nx">forloop</span><span class="p">.</span><span class="nx">last</span> <span class="o">==</span> <span class="kc">false</span> <span class="o">%</span><span class="p">},{</span><span class="o">%</span> <span class="nx">endif</span> <span class="o">%</span><span class="p">}</span>
-</span><span class='line'>    <span class="p">{</span><span class="o">%</span> <span class="nx">endfor</span> <span class="o">%</span><span class="p">}</span>
-</span><span class='line'>  <span class="p">]</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I approached this problem by reading the <a href="https://jsonfeed.org/version/1">JSON Feed Version 1 spec</a> and cribbing values from the template for my Atom feed. The trickiest part was filling in the <code>"content_html"</code> value. It took me a while to find figure out that <code>jsonify</code> needed to be at the end of <code>{{ post.content | expand_urls: site.url | jsonify }}</code>. That translates the post&rsquo;s HTML content into its JSON representation. You’ll notice that any template expression with <code>jsonify</code> at the end also isn’t wrapped in quotes. This is because <code>jsonify</code> is doing that for me.</p>
-
-<p>The <code>{% if forloop.last == false %},{% endif %}</code> is also important. Without this, the generated JSON has an extra <code>,</code> after the final element in items. This isn’t valid JSON.</p>
-
-<p>I caught that by using the command line tool <a href="http://trentm.com/json/">json</a>. If you ever edit JSON by hand or generate it from a template then you should add this tool to your toolbox. It will prevent you from creating invalid JSON.</p>
-
-<p>How did I use it? I’d make a change in the <code>feed.json</code> template and generate an output file. Then I’d <code>cat</code> that file to <code>json --validate</code>. When there was an error, I’d see a message like below.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">0 [last: 5s] 12:43:47 ~/src/jakemcc/blog (master *)</span>
-</span><span class='line'><span class="gp">$</span> cat public/feed.json <span class="p">|</span> json --validate
-</span><span class='line'><span class="go">json: error: input is not JSON: Expected &#39;,&#39; instead of &#39;{&#39; at line 25, column 5:</span>
-</span><span class='line'><span class="go">            {</span>
-</span><span class='line'><span class="go">        ....^</span>
-</span><span class='line'><span class="go">1 [last: 0s] 12:43:49 ~/src/jakemcc/blog (master *)</span>
-</span><span class='line'><span class="gp">$</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>And there would be zero output on success.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">0 [last: 5s] 12:45:25 ~/src/jakemcc/blog (master)</span>
-</span><span class='line'><span class="gp">$</span> cat public/feed.json <span class="p">|</span> json --validate
-</span><span class='line'><span class="go">0 [last: 0s] 12:45:30 ~/src/jakemcc/blog (master)</span>
-</span><span class='line'><span class="gp">$</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>It was pretty straightforward to add a JSON Feed. Was it a good use of my time? <code>¯\_(ツ)_/¯</code>. In the process of adding the feed I learned more about Liquid templating and figured out how to embed liquid tags into a blog post. Even adding redundant features can be a useful exercise.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//5">&larr; Older</a>
@@ -1789,6 +1753,10 @@ an area where this, or something similar to it, would help.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2021/09/11/tests-can-act-as-living-documentation/">Tests are living documentation</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2021/08/07/improve-your-tests-by-picking-better-constants/">Improve your tests by picking better constants</a>
@@ -1824,10 +1792,6 @@ an area where this, or something similar to it, would help.</p>
     
       <li class="post">
         <a href="/blog/2020/06/28/using-bazel-to-help-fix-flaky-tests/">Using Bazel to help fix flaky tests</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/05/04/how-to-be-alerted-when-a-long-running-process-finishes/">How to be automatically notified when long running processes finish</a>
       </li>
     
   </ul>

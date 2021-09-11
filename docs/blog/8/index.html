@@ -14,15 +14,17 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" I&rsquo;ve been working remotely for about a year and a half. In that time,
-I&rsquo;ve worked from many locations but most of my time has been spent &hellip;" />
+    <meta itemprop="description" content=" For nearly the last two years, I&rsquo;ve been doing most of my development
+in OS X. Most of that development has been done in Clojure and,
+whenever &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" I&rsquo;ve been working remotely for about a year and a half. In that time,
-I&rsquo;ve worked from many locations but most of my time has been spent &hellip;" />
+    <meta name="twitter:description" content=" For nearly the last two years, I&rsquo;ve been doing most of my development
+in OS X. Most of that development has been done in Clojure and,
+whenever &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -30,14 +32,16 @@ I&rsquo;ve worked from many locations but most of my time has been spent &hellip
     <meta property="og:site_name" content="Writing by Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/8/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" I&rsquo;ve been working remotely for about a year and a half. In that time,
-I&rsquo;ve worked from many locations but most of my time has been spent &hellip;" />
+    <meta property="og:description" content=" For nearly the last two years, I&rsquo;ve been doing most of my development
+in OS X. Most of that development has been done in Clojure and,
+whenever &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" I&rsquo;ve been working remotely for about a year and a half. In that time,
-I&rsquo;ve worked from many locations but most of my time has been spent &hellip;">
+    <meta name="description" content=" For nearly the last two years, I&rsquo;ve been doing most of my development
+in OS X. Most of that development has been done in Clojure and,
+whenever &hellip;">
 
     
 
@@ -120,6 +124,67 @@ I&rsquo;ve worked from many locations but most of my time has been spent &hellip
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/12/making-tmate-and-tmux-play-nice-with-os-x-terminal-notifier/">Making tmate and tmux play nice with OS X terminal-notifier</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-12T17:47:00-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>5:47 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>For nearly the last two years, I&rsquo;ve been doing most of my development
+in OS X. Most of that development has been done in Clojure and,
+whenever possible, using
+<a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a> with
+<a href="https://github.com/alloy/terminal-notifier">terminal-notifier</a> to
+have my tests automatically run and a notification shown with the
+status of the test run. Its a great work flow that gives me a quick
+feedback cycle and doesn&rsquo;t pull my attention in different directions.</p>
+
+<p>Recently I&rsquo;ve started using <a href="http://tmate.io/">tmate</a> for remote
+pairing. Unfortunately when I first started using it my quick feedback
+cycle was broken. <code>lein test-refresh</code> would run my tests but would
+become hung when sending a notification using <code>terminal-notifier</code>.
+This was terrible and, if I hadn&rsquo;t been able to fix it, would have
+stopped me from using <code>tmate</code>. After some searching I stumbled across
+<a href="https://github.com/alloy/terminal-notifier/issues/115">this</a> GitHub
+issue which helped solve the problem.</p>
+
+<p>To make <code>tmate</code> work nicely with <code>terminal-notifier</code> you&rsquo;ll need
+to install
+<a href="https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard">reattach-to-user-namespace</a>
+and change your <code>tmate</code> configuration to use it. If you use <code>brew</code> you
+can install by running <code>brew install --with-wrap-pbcopy-and-pbpaste
+reattach-to-user-namespace</code>. Then open your <code>.tmux.conf</code> or
+<code>.tmate.conf</code> file and add the line below.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>set-option -g default-command "which reattach-to-user-namespace &gt; /dev/null && reattach-to-user-namespace -l $SHELL || $SHELL"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The above tells <code>tmate</code> to use <code>reattach-to-user-namespace</code> if it is
+available. Now <code>terminal-notifier</code> no longer hangs when invoked inside
+<code>tmate</code>. Unsurprisingly, this change also makes <code>tmux</code> place nice with
+<code>terminal-notifier</code>.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1487,214 +1552,6 @@ have much to offer you.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/07/27/building-the-ergodox-keyboard/">Building the ErgoDox Keyboard</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-07-27T21:05:00-05:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>9:05 pm</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Earlier this year I built an
-<a href="https://deskthority.net/wiki/ErgoDox">ErgoDox</a>. The ErgoDox is a split
-hand mechanical keyboard whose design has been released under the GNU
-GPLv3. There are a few standard <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> ways of getting the parts. It
-basically comes down to sourcing all the parts yourself or buying a
-bundle from <a href="https://www.massdrop.com/buy/ergodox">Massdrop</a>. I opted
-to wait until Massdrop was selling them and bought a kit from them.</p>
-
-<p><img src="/images/my-keyboard.jpg" title="My ErgoDox" alt="My ErgoDox" /></p>
-
-<h3>Why?</h3>
-
-<ol>
-<li>I&rsquo;ve used an ergonomic keyboard for years and was intrigued by the split hand design.</li>
-<li>I wanted to try out Cherry MX key switches.</li>
-<li>Using your thumb for more than just space bar made a lot of sense to me.</li>
-<li>The firmware lets you have multiple layers. I thought this could be really useful.</li>
-<li>The project sounded fun. I used to make physical devices and this
-seemed like a good way to do that again.</li>
-</ol>
-
-
-<h3>Buying</h3>
-
-<p>As mentioned earlier I bought my parts from Massdrop. In the buy I
-participated in I had the option of a full hand case or the
-traditional case and I opted for the full hand. As part of the buy I
-also bought additional aluminum top layers, a blank set of DSA <sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>
-keycaps, and Cherry MX blue key switches.</p>
-
-<p>If I were doing it again I would not buy the extra aluminum top
-layer. I built one of my hands using the aluminum and the other with
-the basic acrylic top. I enjoy both the look and feel of the acrylic
-hand better.</p>
-
-<p>I would also not buy the set of DSA keycaps from Massdrop. It was
-convenient and a bit cheaper to buy from them but had I known I could
-get different
-<a href="http://keyshop.pimpmykeyboard.com/products/full-keysets/dsa-blank-sets-1">colors</a>
-from <a href="http://www.keycapsdirect.com/">Signature Plastics</a> I would have done that.</p>
-
-<p>I also bought eight &ldquo;deep-dish&rdquo; DSA keys direct from Signature
-Plastics. These keys feel different which lets me know when my fingers
-are above the home row. I&rsquo;d recommend doing this. You can order from
-<a href="http://www.keycapsdirect.com/key-capsinventory.php">this</a> page.</p>
-
-<p>For key switches I bought Cherry MX Blues through Massdrop. Blues are
-extremely clicky. You can easily hear me typing in every room of my
-apartment. It is very satisfying.</p>
-
-<p>After using the keyboard for about a week I also ended up buying some
-<a href="http://www.amazon.com/gp/product/B00897D3OQ/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B00897D3OQ&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=HTBBKS475FGFIG2M">pads</a>
-for my wrists. I occasionally rest my wrists on the keyboard and the
-keyboard&rsquo;s edge would dig into me.</p>
-
-<h3>Building</h3>
-
-<p>I followed Massdrop&rsquo;s step-by-step
-<a href="https://www.massdrop.com/ext/ergodox/assembly.php">guide</a> and
-<a href="https://www.youtube.com/watch?v=x1irVrAl3Ts">this</a> YouTube video.
-Another great resource is the community at
-<a href="http://geekhack.org/index.php?topic=22780.0">GeekHack</a>. I&rsquo;d recommend
-reading and watching as much as possible before starting your build.</p>
-
-<p>I built this using a cheap soldering iron I&rsquo;ve had for years, very
-thin solder, solder wick, and a multimeter. I don&rsquo;t know if this would
-have been easier with better tools or not but those got the job done.</p>
-
-<p>While soldering the surface mount diodes I was in the zone and
-soldered a few locations that didn&rsquo;t actually need to be soldered.
-When you are soldering the diodes you should only be soldering them to
-the locations that have the key silk screen.</p>
-
-<p>My system for minimizing errors while soldering the diodes is the
-following five steps.</p>
-
-<ol>
-<li>Lay down some solder on one of the pads.</li>
-<li>Put the correct end of the diode on top of that solder, reheat and
-push down.</li>
-<li>Test the connection with a multimeter.</li>
-<li>Solder the other half of the diode.</li>
-<li>Test the connection.</li>
-</ol>
-
-
-<p>I batched up the steps. I&rsquo;d do a whole row of the first step, then
-move to the second for the entire row, then do the third, etc. Being
-rigorous about testing every connection is important. Catching
-mistakes early makes it easier to fix the mistakes.</p>
-
-<p>If you solder a diode on the wrong way there is a huge difference (at
-least for me using solder wick) between the difficulty of fixing the
-error when only one pad has been soldered versus two pads. I soldered
-more than one diode backwards and a mistake noticed after soldering
-only one pad was easy to fix. After soldering both pads it took
-serious effort.</p>
-
-<p>Eventually you&rsquo;ll need to cut open a USB cable. I ended up removing
-the plastic housing using a Dremel. When soldering the wires to the
-USB holes I was too concerned with it looking pretty and did not leave
-plenty of wire. This made it harder to solder and as a result I ended
-up doing a poor job that resulted in a short. After desoldering and
-destroying another cable, but leaving more wire, I managed to do a
-better job. I originally noticed the short because I kept getting
-warnings from my computer about my USB Keyboard drawing too much
-power.</p>
-
-<p>I&rsquo;ve
-<a href="https://www.evernote.com/shard/s68/sh/4f51c3b2-b50b-47d3-8219-ea155cf5fef5/df239167726bcebf06cc2b5101ac8e42/">annotated a copy</a>
-of Massdrop&rsquo;s instructions using Evernote. It contains the above tips
-inline.</p>
-
-<h3>Firmware</h3>
-
-<p>After you physically build your keyboard you need to build the
-firmware. There are a few different firmwares that can work and you
-can discover those on GeekHack. I&rsquo;m using a fork of what Massdrop&rsquo;s
-<a href="https://www.massdrop.com/ext/ergodox">graphical configuration</a> tool
-uses. It is based off
-<a href="https://github.com/benblazak/ergodox-firmware">benblazak/ergodox-firmware</a>.</p>
-
-<p>One of the exciting things about the ErgoDox is tweaking the firmware.
-I took the base firmware and modified it to have media key support and
-<a href="https://github.com/jakemcc/ergodox-firmware/commit/383f16a3f091b4e2dd031d098007c4289cc1a261">light up the LEDs</a>
-when I&rsquo;m on any layer besides the base. Some people have added the
-ability to record keyboard macros and other neat features. I encourage
-you to take a look at the source even if you use the graphical
-configuration tool. I haven&rsquo;t explored beyond
-<a href="https://github.com/benblazak/ergodox-firmware">benblazak/ergodox-firmware</a>
-so I can&rsquo;t compare it to other firmwares.</p>
-
-<h3>Conclusion</h3>
-
-<p>I really enjoy it. Building it was both fun and frustrating <sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>.</p>
-
-<p>After using the keyboard for a few months I&rsquo;ve found that I really
-only use three (on each hand) of the thumb cluster keys. I also don&rsquo;t
-use the keyboard layers too often. I have three layers programmed and
-I always stay on the main one unless I want to hit a media key.</p>
-
-<p>Would I recommend building your own ErgoDox? If you already can or are
-willing to learn to solder and this sounds at all interesting to you I
-would recommend it. The project can be frustrating but the result is
-great.</p>
-
-<h3>The Future</h3>
-
-<p>There is still a lot left to explore in the custom keyboard space.
-Even so I have no plans on leaving the ErgoDox anytime soon. In terms
-of improving my ErgoDox, I plan on poking around the different
-firmwares at some point. I&rsquo;d also like to explore
-<a href="http://geekhack.org/index.php?topic=22780.msg1405792#msg1405792">tenting</a>
-<a href="https://github.com/adereth/ergodox-tent">options</a>.</p>
-
-<h3>Resources</h3>
-
-<ul>
-<li><a href="http://geekhack.org/index.php?topic=22780.0">GeekHack ErgoDox thread</a></li>
-<li><a href="http://geekhack.org/index.php?topic=40501.0">GeekHack FAQ</a>
-Useful for general information about keyboard topics.</li>
-<li><a href="http://geekhack.org/index.php?topic=40501.0#post_DD">GeekHack Cherry actuation forces</a></li>
-<li><a href="https://www.massdrop.com/buy/ergodox">Massdrop Buy</a></li>
-<li><a href="https://www.massdrop.com/ext/ergodox">Massdrop Configuration Tool</a></li>
-<li><a href="https://github.com/benblazak/ergodox-firmware">benblazak/ergodox-firmware</a></li>
-<li><a href="http://geekhack.org/index.php?topic=48106.0">TMK firmware for ErgoDox</a>
-One of the alternative firmwares.</li>
-</ul>
-
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>I feel a bit odd using the word standard to describe acquiring parts to build a keyboard.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-<li id="fn:2">
-<p><a href="http://keycapsdirect.com/key-caps.php">This</a> page has diagrams that shows the different keycap families.<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
-<li id="fn:3">
-<p>Those surface mount diodes are so tiny.<a href="#fnref:3" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//9">&larr; Older</a>
@@ -1710,6 +1567,10 @@ One of the alternative firmwares.</li>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2021/09/11/tests-can-act-as-living-documentation/">Tests are living documentation</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2021/08/07/improve-your-tests-by-picking-better-constants/">Improve your tests by picking better constants</a>
@@ -1745,10 +1606,6 @@ One of the alternative firmwares.</li>
     
       <li class="post">
         <a href="/blog/2020/06/28/using-bazel-to-help-fix-flaky-tests/">Using Bazel to help fix flaky tests</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/05/04/how-to-be-alerted-when-a-long-running-process-finishes/">How to be automatically notified when long running processes finish</a>
       </li>
     
   </ul>

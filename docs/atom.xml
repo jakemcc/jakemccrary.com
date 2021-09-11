@@ -4,7 +4,7 @@
   <title><![CDATA[Jake McCrary]]></title>
   <link href="https://jakemccrary.com/atom.xml" rel="self"/>
   <link href="https://jakemccrary.com/"/>
-  <updated>2021-08-07T19:58:39-05:00</updated>
+  <updated>2021-09-11T18:21:34-05:00</updated>
   <id>https://jakemccrary.com/</id>
   <author>
     <name><![CDATA[Jake McCrary]]></name>
@@ -12,6 +12,73 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Tests are living documentation]]></title>
+    <link href="https://jakemccrary.com/blog/2021/09/11/tests-can-act-as-living-documentation/"/>
+    <updated>2021-09-11T18:20:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2021/09/11/tests-can-act-as-living-documentation</id>
+    <content type="html"><![CDATA[<p>Tests can serve many purposes.</p>
+
+<p>You might write tests as a way of driving the design of your software.
+Other tests might be written in response to a discovered bug and, if written first, those tests you know when you&rsquo;ve fixed the bug and act as guardrails preventing the reintroduction of that bug.
+Tests can also be used to confirm you haven&rsquo;t changed behavior while refactoring.</p>
+
+<p>Tests can also be used as documentation.
+Unlike non-executable documentation, tests will always match the implementation&rsquo;s behavior.</p>
+
+<p>An example in a comment or other documentation deserves to be in a test.
+Take the following sketch of a Clojure function:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defn </span><span class="nv">confobulate</span>
+</span><span class='line'>  <span class="s">&quot;Takes a string and transforms it to the confobulated form. Examples:</span>
+</span><span class='line'><span class="s">  - \&quot;alice\&quot; -&gt; \&quot;EcilA\&quot;</span>
+</span><span class='line'><span class="s">  - \&quot;//yolo1\&quot; -&gt; \&quot;//oneOloY\&quot;</span>
+</span><span class='line'><span class="s">  &quot;</span>
+</span><span class='line'>  <span class="p">[</span><span class="nv">s</span><span class="p">]</span>
+</span><span class='line'>  <span class="p">(</span><span class="nb">-&gt; </span><span class="nv">s</span>
+</span><span class='line'>      <span class="c1">;; insert some work here, not going to implement this</span>
+</span><span class='line'>      <span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The docstring has examples in it to aid humans in understanding its behavior.
+These examples are useful!
+But they stop being useful and start being dangerous when they stop being accurate.</p>
+
+<p>We can use unit tests to keep examples like this correct.
+You can write comments near the assertions letting future readers know about the documentation that needs to be updated if behavior changes.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="nf">deftest</span> <span class="nv">confobulate-should-ignore-slashes</span>
+</span><span class='line'>  <span class="c1">;; If this assertion changes the docstring needs to be updated</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="s">&quot;//oneOloY&quot;</span> <span class="p">(</span><span class="nf">confobulate</span> <span class="s">&quot;//yolo1&quot;</span><span class="p">))))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">deftest</span> <span class="nv">confobulate-reverses-and-capitalizes</span>
+</span><span class='line'>  <span class="c1">;; If this assertion changes the docstring needs to be updated</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="s">&quot;alice&quot;</span> <span class="p">(</span><span class="nf">confobulate</span> <span class="s">&quot;EcilA&quot;</span><span class="p">))))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Any example in a comment or other non-executable documentation should be an assertion in a unit test.
+You&rsquo;ve already taken the time to document the behavior; take the time to figure out how to document it in a way that will fail if the behavior changes.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Improve your tests by picking better constants]]></title>
@@ -2488,91 +2555,6 @@ I look forward to customizing the firmware to make the key layout fit my usage.<
 <ol>
 <li id="fn:1">
 <p>I bought one with Cherry MX Clear switches. I&rsquo;ve since switched them to Cherry MX Browns. The clears were too firm for me. I did not get Cherry MX Blues because I didn&rsquo;t want my fellow coworkers to be annoyed by the glorious clickty-clack of those switches.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How I use social media]]></title>
-    <link href="https://jakemccrary.com/blog/2019/04/30/how-i-use-social-media/"/>
-    <updated>2019-04-30T17:50:00-05:00</updated>
-    <id>https://jakemccrary.com/blog/2019/04/30/how-i-use-social-media</id>
-    <content type="html"><![CDATA[<p>Over the years, I&rsquo;ve read many articles about the negative aspects of social media. You&rsquo;ve probably read articles extolling the benefits of cutting social media out of your life. These articles are abundant and easy to find through a search for <a href="https://www.google.com/search?q=stop+social+media">&ldquo;stop social media&rdquo;</a> or <a href="https://www.google.com/search?q=quit+social+media">&ldquo;quit social media&rdquo;</a>.</p>
-
-<p>Social media hasn&rsquo;t played a significant role in my life for a couple of years. I first started being more mindful of how I consumed social media in 2013. Back then, I temporarily switched to using a <a href="https://en.wikipedia.org/wiki/Feature_phone">feature phone</a> (a non-smart phone) for a month and a half. This really reset my relationship with consuming media on a phone. Since my phone was my primary entry point into Twitter and Facebook, my usage of both plummeted.</p>
-
-<p>Since then, I&rsquo;ve continued to take a careful look at how I use social media and have made tweaks to get maximum enjoyment with minimal downsides. This has involved changing how I use the desktop web applications for both Twitter and Facebook<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.</p>
-
-<p>The following books have helped shape my thinking towards digital distractions. They&rsquo;ve put into words some of the practices I stumbled into. They&rsquo;ve affected how I use smart phones and how I approach social media.</p>
-
-<ul>
-<li><a href="https://amzn.to/2UJu1V7">Deep Work</a> by Cal Newport</li>
-<li><a href="https://amzn.to/2WfLYMv">Digital Minimalism</a> by Cal Newport</li>
-<li><a href="https://amzn.to/2XX6imC">Essentialism</a> by Greg Mckeown</li>
-<li><a href="https://amzn.to/2X3Tzjz">The Distracted Mind</a> by Adam Gazzaley &amp; Larry D. Rosen</li>
-</ul>
-
-
-<p>One of the ideas in both <em>Digital Minimalism</em> and <em>Essentialism</em> is that you can pick and choose what you add to your life. This extends to individual features of products you use. This is something I arrived at prior to reading these books and it was nice hearing others putting this idea into words.</p>
-
-<p>Below is how I&rsquo;ve chosen to use various social media platforms.</p>
-
-<h2>Twitter</h2>
-
-<p>I only consume Twitter on my computer and I read it through <a href="https://tweetdeck.twitter.com/">Tweetdeck</a>.</p>
-
-<p>I don&rsquo;t check my entire feed. Instead, I have Tweetdeck setup to display a few curated lists of accounts along with mentions and direct messages. One list is composed of close friends, another highlights some people in the software development space, and another contains some Twitter art projects.</p>
-
-<p>Because I focus on a limited number of accounts, I don&rsquo;t have an infinite list to scroll through. This focus keeps Twitter useful to me and allows me to check it every few days and still stay up to date on topics I care about.</p>
-
-<p>I rarely tweet but when I do it is usually to promote my own or another person&rsquo;s writing. I also occasionally tweet as an <a href="https://twitter.com/ErowidBobRoss">art bot</a>.</p>
-
-<h2>Facebook</h2>
-
-<p>I only consume Facebook on my computer and mostly stopped using the website in 2016. The 2016 US presidential election made me realize I didn&rsquo;t find the Facebook news feed useful. It did not add positive value to my life.</p>
-
-<p>That is when I found the <a href="https://chrome.google.com/webstore/detail/news-feed-eradicator-for/fjcldmjmjhkklehbacihaiopjklihlgg?hl=en">News Feed Eradicator</a> Chrome extension. This extension gets rid of the news feed. It is great.</p>
-
-<p>Without the news feed, I no longer open the site and mindlessly scroll through the firehose of updates. I no longer know what is going on in the curated lives of my friends that still use Facebook. That is ok. Now when I run into them in real life, I can catch up and learn about their kids and their lives. I can have an honest reaction to learning that someone got married instead of sort of already knowing it. Someone can tell me about a trip they took and can show me photos I&rsquo;ve never seen before.</p>
-
-<p>I haven&rsquo;t completely deleted my Facebook account because it does add value to my life through a couple of groups and Facebook messenger. Only using these features has reduced the frequency I visit Facebook to once every few days. That is more than enough to keep up with what is going in in the Chicago climbing community and events going on at local climbing gyms.</p>
-
-<p>I rarely post to Facebook but when I do it is often to promote something I&rsquo;ve written.</p>
-
-<h2>Goodreads</h2>
-
-<p>I&rsquo;m not really sure if Goodreads counts as a social media site. I use it to keep track books I want to read and books I&rsquo;ve already read. It isn&rsquo;t something that consumes any amount of my time mindlessly.</p>
-
-<h2>LinkedIn</h2>
-
-<p>I&rsquo;m not sure if you can consider my usage of LinkedIn to be actual usage. It mostly results in email in my inbox that almost immediately gets archived. It does keep me somewhat informed about what job opportunities are out there though recruiter outreach.</p>
-
-<p>I very rarely post anything to LinkedIn.</p>
-
-<h2>Instagram</h2>
-
-<p>I&rsquo;ll completely admit that this is the social media platform that I waste time on. It is the only social media app on my phone and that increases how frequently I use it.</p>
-
-<p>I signed up for Instagram in order to follow tattoo artists. This helped me learn what tattoo styles I enjoyed the most. This was a huge success and now I have a much better appreciation and eye for this art.</p>
-
-<p>Eventually, my usage of Instagram expanded to follow some friends, local Chicago artists, and professional rock climbers. Following each of these groups is slightly beneficial but I&rsquo;m not sure if it is an overall positive impact compared to the temptation to fill downtime with Instagram scrolling.</p>
-
-<p>I&rsquo;m approaching the point of deleting Instagram from my phone and experiencing that.</p>
-
-<p>I post occasionally to Instagram both using the story feature and normal posts. These are usually photos of some street art or stickers put up in Chicago. It is very infrequent.</p>
-
-<h1>End</h1>
-
-<p>So that is how I consume social media. It mostly happens on my computer and I use a subset of features a platform offers. I&rsquo;ve reached a point where I feel like I&rsquo;m getting a lot of the pros without too many of the cons.</p>
-
-<p>It is an area in which I&rsquo;ll keep experimenting. I&rsquo;d encourage you to as well. Try a different usage pattern for an extended period of time and then reflect on your changed behavior. Keep the changes that have made a positive impact.</p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>Ignoring LinkedIn and Goodreads, I think Facebook and Twitter were the only social media platforms I used back then.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
 </ol>
 </div>
 
