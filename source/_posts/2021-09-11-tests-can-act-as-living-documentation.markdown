@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "Tests are living documentation"
-date: 2021-09-01 20:04:08 -0500
+title: Tests are living documentation
+date: 2021-09-11 18:20 -0500
 comments: true
-published: false
-description: PUT SUMMARY HERE 
+published: true
+description: PUT SUMMARY HERE
 keywords: testing
-categories: 
+categories:
 - testing
 ---
 
