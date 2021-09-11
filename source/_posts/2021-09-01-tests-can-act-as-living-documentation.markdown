@@ -1,32 +1,26 @@
 ---
 layout: post
-title: "Tests are documentation"
+title: "Tests are living documentation"
 date: 2021-09-01 20:04:08 -0500
 comments: true
 published: false
 description: PUT SUMMARY HERE 
-keywords: 'csv, keywords, here'
+keywords: testing
 categories: 
+- testing
 ---
 
-The tests targeting the software you care about can serve different purposes.
+Tests can serve many purposes.
 
-Some tests help guide your design.
+You might write tests as a way of driving the design of your software.
+Another test might be written in response to a bug being discovered and act as a guardrail preventing that bug from being reintroduced.
+Tests can be used to confirm you haven't changed behavior through refactoring.
 
-Other tests might act as guardrails.
-They provide feedback that code works as expected.
-They break if you make a mistake while refactoring.
+Tests can also be used as documentation.
+Assuming the tests are frequently ran, tests-as-documentation benefit from never being out of sync with the code.
 
-You might write another test to protect against a bug from being reintroduced.
-
-There are also exploratory tests.
-A collegue might write some tests while exploring the functionality of a piece of code.
-Tests you might write to help you better understand the behavior of some code.
-
-Tests can also serve as documentation.
-They show how a piece of code behaves under certain conditions with certain inputs.
-
-Below is an example function you might come across in a codebase.
+Tests can also be used to let you know when non-executable documentation needs to change.
+For example, take the following sketch of a Clojure function:
 
 ```clojure
 (defn confobulate
@@ -40,24 +34,20 @@ Below is an example function you might come across in a codebase.
       ))
 ```
 
-The documentation includes some examples in it.
-Hopefully these are helpful examples to the caller and potential readers of the function.
-
-But this documentation is effectively a comment.
-There is nothing that forces it to be in-sync with the implementation.
-
-This type of documentation needs to exist in a test.
-This test needs to be ran regularly.
-Since the test is being ran regularly, it will fail when the implementation changes and helpful documentation stops being helpful.
+The docstring has a few examples in it to help callers understand the behavior of the function.
+These examples are useful!
+But they stop being useful and start being dangerous if they stop being accurate.
+We can use unit tests to make sure examples like this stay accurate.
 
 ```clojure
 (deftest confobulate-should-ignore-slashes
+  ;; If this assertion changes the docstring needs to be updated
   (is (= "//oneOloY" (confobulate "//yolo1"))))
 
 (deftest confobulate-reverses-and-capitilizes
+  ;; If this assertion changes the docstring needs to be updated
   (is (= "alice" (confobulate "EcilA"))))
 ```
 
-If you feel the need, you can even add a comment near the tests reminding you to update the function's documentation.
-Alternatively, you could also change the documentation to point towards the tests!
-Then it will never be out of date.
+If you find it helpful, put some comments near the assertions letting future readers know about the doctring.
+
