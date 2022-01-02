@@ -166,7 +166,6 @@ The data also doesn't capture three books that I've started but have yet to fini
 | 2012 |      14208 |         44 |
 | 2011 |       9179 |         19 |
 | 2010 |      14667 |         46 |
-w
 ```
 
 Last year marks a decade of me tracking my reading and it was the second lowest page count in that decade.
