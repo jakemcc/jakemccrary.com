@@ -250,3 +250,7 @@ Here is the star rating distribution.
 ```
 
 ## 2022 goals
+
+I used to be pretty good at capturing some thoughts upon completion of a book.
+I haven't been doing a great job of that.
+I'd like to do better this year.
