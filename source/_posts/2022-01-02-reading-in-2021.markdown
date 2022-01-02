@@ -1,0 +1,118 @@
+---
+layout: post
+title: Reading in 2021
+date: 2021-01-24 17:14 -0600
+comments: true
+published: true
+description: A look back at my reading done in the year 2021.
+keywords: 2021, books, book review, reading
+categories:
+- books
+---
+
+At the beginning of every year I reflect on my reading from the previous year.
+I take a look at my records, fix errors, and think about reading goals for the upcoming year.
+
+Here are links to my previous end-of-year reflections: [2013](/blog/2014/01/01/using-incanter-to-review-my-2013-reading/), [2014](/blog/2015/01/08/reading-in-2014/), [2015](/blog/2016/03/13/reading-in-2015/), [2016](/blog/2017/01/04/reading-in-2016/), [2017](/blog/2018/03/03/reading-in-2017/), [2018](/blog/2019/01/21/reading-in-2018/), and [2019](/blog/2020/01/11/reading-in-2019/).
+
+I've continued to keep track of my reading using [Goodreads](http://goodreads.com).
+My [profile](https://www.goodreads.com/user/show/3431614-jake-mccrary) has nearly the full list of the books I've read since 2010.
+[Here](https://www.goodreads.com/review/list/3431614-jake-mccrary?shelf=read_2021) is my 2021.
+
+## 2021 Goals
+
+Last year I wrote:
+
+> I have quite a few unread books sitting on my virtual and physical bookshelf. This feels like setting a really low-bar but this year I'd like to read some of these unread-but-owned books.
+
+> I'm also planning on reading at least one book on writing and one book on climbing. This goal is almost a subset of the above goal as I have books on both these topics sitting on my shelf.
+
+## Highlights
+
+Here are my five star books from 2021.
+The titles are affiliate links to Amazon.
+If you click one and make a purchase I get a small kickback.
+
+If I wrote a review on Goodreads then the `my review` link will take you there.
+In the last couple of years, I've been writing fewer reviews on Goodreads than in the past so many books do not have a review there.
+
+If you're missing these reviews, I have started sending out an email every month or two and it frequently includes small reviews of what I've read since the previous email.
+You can subscribe to that [here]({{ site.subscribe_email }}).
+
+Here are the 2021 five star books:
+
+## Stats
+
+I thought I had read less this year than I had in recent years but I was wrong.
+I read 57 books and 19,564 pages in 2021.
+
+```org
+| Year | # of Pages | # of Books |
+|------+------------+------------|
+| 2021 |      19564 |         57 |
+| 2020 |      12093 |         43 |
+| 2019 |      15994 |         42 |
+| 2018 |      13538 |         36 |
+| 2017 |      18317 |         48 |
+| 2016 |      22790 |         59 |
+| 2015 |      21689 |         51 |
+| 2014 |      24340 |         71 |
+| 2013 |      19815 |         60 |
+| 2012 |      14208 |         44 |
+| 2011 |       9179 |         19 |
+| 2010 |      14667 |         46 |
+```
+
+Here is a breakdown of books finished by month.
+
+![Book and pages count by month](/images/reading-by-month-2021.png "Number of books and pages for each month")
+
+Unsurprisingly, electronic books continue to be the dominant format.
+
+```org
+|           | 2021 | 2020 | 2019 | 2018 | 2017 | 2016 | 2015 |
+|-----------+------+------+------+------+------+------+------|
+| audiobook |    0 |    1 |    0 |    0 |    0 |    0 |    0 |
+| ebook     |   56 |   41 |   43 |   37 |   37 |   56 |   47 |
+| hardcover |    0 |    0 |    1 |    1 |    7 |    0 |    1 |
+| paperback |    1 |    1 |    7 |    5 |    5 |    3 |    3 |
+```
+
+Below is the breakdown of fiction vs non-fiction books.
+Fiction started to regain its dominance after having non-fiction catch up in 2019.
+
+```org
+|                           |   2021 |   2020 |   2019 |   2018 |
+|---------------------------+--------+--------+--------+--------|
+| fiction                   |     46 |     26 |     28 |     29 |
+| non-fiction               |     11 |     17 |     23 |     14 |
+| fiction:non-fiction ratio | 4.18:1 | 1.53:1 | 1.22:1 | 2.07:1 |
+
+```
+
+Here is the star rating distribution.
+
+```org
+|             | 2 stars | 3 stars | 4 stars | 5 stars |
+|-------------+---------+---------+---------+---------|
+| fiction     |       2 |      17 |      19 |       8 |
+| non-fiction |       1 |       2 |       3 |       5 |
+```
+
+## Did I hit my 2021 goals?
+
+I succeeded in reading a solid number of non-fiction books that earned a high rating.
+I read fewer non-fiction books than fiction but managed to have more 5 star ratings.
+I'm going to count this as successfully hitting the non-fiction part of my 2020 goal.
+
+Did I get better at applying the lessons from books?
+Not at all and I barely even tried to do so.
+Definite failure here.
+
+## 2022 goals
+
+
+It is interesting to have been collecting this data for a decade now.
+I haven't done much in the way around looking at multi-year trends but I think it might be interesting to do so.
+
+If you have a book recommendation, feel free to reach out and contact me.
