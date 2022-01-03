@@ -1,6 +1,6 @@
 ---
 layout: page
-published: false
+published: true
 title: "Climbing at Seneca Rocks"
 date: 2021-10-03 14:45:01 -0500
 start_date: 2021-09-19
