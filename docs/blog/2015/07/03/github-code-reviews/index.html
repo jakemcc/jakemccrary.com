@@ -1,0 +1,403 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="iem7"><![endif]-->
+<!--[if lt IE 9]><html class="lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html lang="en"><!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <title>GitHub Code Reviews - Jake McCrary</title>
+    <meta name="author" content="Jake McCrary">
+
+    
+    
+    
+    
+
+    <meta itemprop="name" content="GitHub Code Reviews" />
+    <meta itemprop="description" content=" GitHub Code Reviews Jul 3rd, 2015 11:22 am Last December I wrote about the
+effective code review process
+I started at Outpace. The process works &hellip;" />
+
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@jakemcc" />
+    <meta name="twitter:title" content="GitHub Code Reviews" />
+    <meta name="twitter:description" content=" GitHub Code Reviews Jul 3rd, 2015 11:22 am Last December I wrote about the
+effective code review process
+I started at Outpace. The process works &hellip;" />
+    <meta name="twitter:creator" content="@jakemcc" />
+    <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
+
+    <!-- Open Graph data -->
+    <meta property="og:site_name" content="Writing by Jake McCrary" />
+    <meta property="og:url" content="https://jakemccrary.com/blog/2015/07/03/github-code-reviews/" />
+    <meta property="og:title" content="GitHub Code Reviews" />
+    <meta property="og:description" content=" GitHub Code Reviews Jul 3rd, 2015 11:22 am Last December I wrote about the
+effective code review process
+I started at Outpace. The process works &hellip;" />
+    <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
+    
+    <meta property="og:type" content="article" />
+    
+    
+    <meta property="article:published_time" content="2015-07-03T11:22:00-05:00" />
+    
+
+    <meta name="description" content=" GitHub Code Reviews Jul 3rd, 2015 11:22 am Last December I wrote about the
+effective code review process
+I started at Outpace. The process works &hellip;">
+
+    
+
+    <!-- http://t.co/dKP3o1e -->
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https://jakemccrary.com/blog/2015/07/03/github-code-reviews/">
+    <link href="/favicon.png" rel="icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet" type="text/css">
+    <link href="http://feeds.feedburner.com/JakeMccrarysMusings" rel="alternate" title="Jake McCrary" type="application/atom+xml">
+    <link href="https://jakemccrary.com/feed.json" rel="alternate" title="Jake McCrary" type="application/json">
+
+    <!-- iOS scaling bug fix Rewritten version By @mathias, @cheeaun and @jdalton Source url: https://gist.github.com/901295 -->
+    <script type="text/javascript">
+     (function(doc) {
+       var addEvent = 'addEventListener',
+           type = 'gesturestart',
+           qsa = 'querySelectorAll',
+           scales = [1, 1],
+           meta = qsa in doc ? doc[qsa]('meta[name=viewport]') : [];
+       function fix() {
+         meta.content = 'width=device-width,minimum-scale=' + scales[0] + ',maximum-scale=' + scales[1];
+         doc.removeEventListener(type, fix, true);
+       }
+       if ((meta = meta[meta.length - 1]) && addEvent in doc) {
+         fix();
+         scales = [0.25, 1.6];
+         doc[addEvent](type, fix, true);
+       }
+     }(document));
+    </script>
+    
+<script>
+ var origin = window.location.origin;
+ if (!origin) {
+   origin = window.location.protocol + '//' + window.location.hostname + (window.location.port ? (':' + window.location.port) : '');
+ }
+ if (origin.indexOf('localhost') === -1) {
+   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+   ga('create', 'UA-19834208-2', 'auto');
+   ga('send', 'pageview');
+ }
+</script>
+
+
+  </head>
+
+<body  >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Jake McCrary</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul role=main-navigation>
+  <li><a href="/">Articles</a></li>
+  <li><a href="/adventures/">Adventures</a></li>
+  <li><a href="/about.html">About</a></li>
+  <li><a href="/blog/archives/">Archives</a></li>
+  <li><a href="http://feeds.feedburner.com/JakeMccrarysMusings" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  <li><a href="https://jakemccrary.substack.com/welcome" target="_blank" rel="subscribe-email" title="subscribe via email">Newsletter</a></li>
+</ul>
+
+  <form action="https://google.com/search" method="get">
+    <fieldset role="search">
+      <input type="hidden" name="sitesearch" value="jakemccrary.com">
+      <input class="search" type="text" name="q" placeholder="Search"/>
+    </fieldset>
+  </form>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+  <article class="hentry" role="article">
+    
+  <header>
+    
+      <h1 class="entry-title">GitHub Code Reviews</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-07-03T11:22:00-05:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>11:22 am</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Last December I wrote about the
+<a href="/blog/2014/12/09/an-effective-code-review-process/">effective code review process</a>
+I started at Outpace. The process works well; participants say it is
+the most effective review process they&rsquo;ve experienced. The rest of
+this post is a summary of the process with a bit of an enhancement
+around setting up the code for review. I&rsquo;d recommend you read the
+original
+<a href="/blog/2014/12/09/an-effective-code-review-process/">post</a>
+for a bit more color on the process.</p>
+
+<h3>Steps for GitHub code review</h3>
+
+<ol>
+<li>Select the code to review.</li>
+<li>About a week before the review, create a branch and delete the code
+you&rsquo;re reviewing.</li>
+<li>Push this branch to GitHub and open a pull request. This pull
+request provides a location where comments can be made on every
+line of code.</li>
+<li>Schedule the code review meeting. Make sure participants have two
+to three days to asynchronously review the code in the pull
+request.</li>
+<li>Have the code review. Get everyone together (video chat or in person)
+and go through the comments on the pull request and discuss. Add
+action items as a comment. The leader of the code review keeps
+discussion moving.</li>
+</ol>
+
+
+<p>It&rsquo;s a lightweight process. If you&rsquo;re already using GitHub it doesn&rsquo;t
+bring in any other tools and, unlike some dedicated code review
+software I&rsquo;ve used, the GitHub pull request interface has good
+performance.</p>
+
+<p>One complaint about this process is that the code you&rsquo;re reviewing
+appears as deleted in the pull request. It is a superficial complaint
+but seeing the entire code base as deleted can feel a bit weird.</p>
+
+<p>For the most recent code review, I figured out how to have all the
+code appear as added. The snippet below contains the steps and example
+commands.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="gp">#</span> <span class="nb">cd </span>to the repository you are reviewing.
+</span><span class='line'><span class="go">cd blog</span>
+</span><span class='line'>
+</span><span class='line'><span class="gp">#</span> Make a new branch.
+</span><span class='line'><span class="go">git checkout -b empty-repo</span>
+</span><span class='line'>
+</span><span class='line'><span class="gp">#</span> Copy all files in repo to a temporary directory.
+</span><span class='line'><span class="go">rm -rf /tmp/repo &amp;&amp; mkdir /tmp/repo &amp;&amp; cp -R * /tmp/repo</span>
+</span><span class='line'>
+</span><span class='line'><span class="gp">#</span> Remove all files from repository, commit, and push to GitHub.
+</span><span class='line'><span class="go">rm -rf *</span>
+</span><span class='line'><span class="go">git commit -am &#39;remove all files&#39;</span>
+</span><span class='line'><span class="go">git push origin empty-repo</span>
+</span><span class='line'>
+</span><span class='line'><span class="gp">#</span> Create a new branch with the empty-repo as the parent.
+</span><span class='line'><span class="go">git checkout -b code-review</span>
+</span><span class='line'>
+</span><span class='line'><span class="gp">#</span> Copy back in the files and add the files you want to review.
+</span><span class='line'><span class="gp">#</span> Commit and push to GitHub.
+</span><span class='line'><span class="go">cp -R /tmp/repo/* .</span>
+</span><span class='line'><span class="go">git add files-to-review</span>
+</span><span class='line'><span class="go">git commit -m &#39;adding files for review&#39;</span>
+</span><span class='line'><span class="go">git push origin code-review</span>
+</span><span class='line'>
+</span><span class='line'><span class="gp">#</span> Now, go to project on GitHub and switch to the code-review branch.
+</span><span class='line'><span class="gp">#</span> Open a pull request comparing the empty-repo and the code-review
+</span><span class='line'><span class="gp">#</span> branch.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Voila, you now have a pull request with every line under review marked
+as added instead of deleted! It takes a little more than two times the
+number steps required to open a pull request with the code deleted but
+you might find it worth it. Seeing code as added instead of removed is
+a minor thing but minor things can make a process more enjoyable. It
+is nice to know it is possible.</p>
+
+<p>If you aren&rsquo;t doing code reviews or have found them useless in the
+past, I recommend you try out this process. This post is the
+abbreviated version but it gives you enough to get started. If you
+haven&rsquo;t done one in this style before, I&rsquo;d highly recommend reading
+the longer <a href="/blog/2014/12/09/an-effective-code-review-process/">post</a>
+as it gives some details that I&rsquo;ve left out here.</p>
+</div>
+
+
+    <em>Looking forward to the next article? Never miss a post by subscribing using <a target="_blank" href="https://jakemccrary.substack.com/welcome">e-mail</a> or <a href="http://feeds.feedburner.com/JakeMccrarysMusings">RSS</a>. The <a target="_blank" href="https://jakemccrary.substack.com/welcome">e-mail newsletter</a> goes out periodically (at most once a month) and includes reviews of books I've been reading and links to stuff I've found interesting.
+</em>
+
+    <footer>
+      <p class="meta">
+        
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jake McCrary</span></span>
+
+        
+
+
+
+
+<time class='entry-date' datetime='2015-07-03T11:22:00-05:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2015</span></span> <span class='time'>11:22 am</span></time>
+        
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/code-review/'>code review</a>, <a class='category' href='/blog/categories/github/'>github</a>, <a class='category' href='/blog/categories/process/'>process</a>
+  
+</span>
+
+
+      </p>
+      
+      <div class="sharing">
+  
+</div>
+
+      
+      <p class="meta">
+        
+        <a class="basic-alignment left" href="/blog/2015/06/30/my-favorite-clj-refactor-features/" title="Previous Post: My favorite clj-refactor features">&laquo; My favorite clj-refactor features</a>
+        
+        
+        <a class="basic-alignment right" href="/blog/2015/11/15/sql-aggregate-a-set-of-values-together/" title="Next Post: SQL: Aggregate a set of values together">SQL: Aggregate a set of values together &raquo;</a>
+        
+      </p>
+    </footer>
+  </article>
+  
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite">
+
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <div id="disqus_target" >
+    <script>
+     var insertDisqus = function() {
+       var elem = document.createElement('script');
+       elem.innerHTML =  "var disqus_shortname = 'jakemccrary'; var disqus_identifier = 'https://jakemccrary.com/blog/2015/07/03/github-code-reviews/'; var disqus_url = 'https://jakemccrary.com/blog/2015/07/03/github-code-reviews/'; (function () {var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);}());"
+       var target = document.getElementById('disqus_target');
+       target.parentNode.replaceChild(elem, target);
+     }
+    </script>
+    <button class="comment-button" onclick="insertDisqus()"><span>ENABLE COMMENTS AND RECOMMENDED ARTICLES</span></button>
+  </div>
+
+</div>
+  </section>
+  
+</div>
+
+<aside class="sidebar">
+  
+  <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2022/01/02/reading-in-2021/">Reading in 2021</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2021/09/11/tests-can-act-as-living-documentation/">Tests are living documentation</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2021/08/07/improve-your-tests-by-picking-better-constants/">Improve your tests by picking better constants</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2021/01/24/reading-in-2020/">Reading in 2020</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/12/30/speeding-up-magit-with-the-native-comp-branch-of-emacs/">Speeding up Magit with the native-comp branch of Emacs</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/11/14/speeding-up-magit/">Speeding up magit</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/11/11/creating-a-custom-kindle-dictionary/">Creating a custom Kindle dictionary</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/10/03/go-create-silly-small-programs/">Go create silly, small programs</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/08/31/utilities-i-like-selecta/">Utilities I like: selecta</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/07/03/introducing-photo-fit/">Introducing Photo Fit</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Subscribe</h1>
+  <p>Looking forward to reading more of my writing?</p>
+  <p>Sign up for my <a target="_blank" href="https://jakemccrary.substack.com/welcome">newsletter</a> to get periodic emails with links to my latest writing and other thoughts.</p>
+  <p>Can't wait for the infrequent newsletter? Subscribe to the <a href="http://feeds.feedburner.com/JakeMccrarysMusings">RSS</a> feed.</p>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  <a href="/disclosure-policy">Disclosure Policy</a><br/>
+  <a href="//www.iubenda.com/privacy-policy/509351" class="iubenda-nostyle iub-legal-only iubenda-embed" title="Privacy Policy">Privacy Policy</a><br/>
+<script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src = "//cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
+  Content licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/">Creative Commons Attribution-NonCommercial 3.0 Unported License</a>.
+</p>
+
+
+</footer>
+  
+
+
+</body>
+</html>
