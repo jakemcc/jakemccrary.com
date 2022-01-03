@@ -10,7 +10,7 @@ categories:
 - books
 ---
 
-At the beginning of every year I reflect on my reading from the previous year.
+At the beginning of every year, I reflect on books I've read in the previous year.
 I take a look at my records, fix errors, and think about reading goals for the upcoming year.
 
 Here are links to my previous end-of-year reflections: [2013](/blog/2014/01/01/using-incanter-to-review-my-2013-reading/), [2014](/blog/2015/01/08/reading-in-2014/), [2015](/blog/2016/03/13/reading-in-2015/), [2016](/blog/2017/01/04/reading-in-2016/), [2017](/blog/2018/03/03/reading-in-2017/), [2018](/blog/2019/01/21/reading-in-2018/), [2019](/blog/2020/01/11/reading-in-2019/), and [2020](/blog/2021/01/24/reading-in-2020/).
@@ -32,19 +32,18 @@ Last year I wrote:
 Did I achieve those goals?
 No.
 
-Looking through my list of read books, I think only one of those books was a book I had already owned at the beginning of 2021.
+Looking through my list of read books, I think only one of those a book I owned at the beginning of 2021.
 I did not read _some_ already owned books; I read a single already owned book.
 
 I did read a book on writing, George Saunders' _A Swim in a Pond in the Rain_, and multiple climbing books, _Rock Climbing Technique_ by John Kettle and _[Rock Climbing in Kentucky's Red River Gorge](https://www.goodreads.com/book/show/57691814-rock-climbing-in-kentucky-s-red-river-gorge)_ by James Maples.
 
-Early in 2020, at the request of some readers, I started a [mailing list]({{ site.subscribe_email }}).
-During 2020 I used this list as a way to notify subscribers of new articles to this website and write up short blurbs on books I had been reading.
+Early in 2020, at the request of some readers of this site, I started a [mailing list]({{ site.subscribe_email }}).
+During 2020 I used this newsletter as a way to notify subscribers of new articles posted to this website and write up short blurbs on books I had finished.
+Except for a single email, I also didn't send out any updates to the newsletter.
 
-It wasn't a stated goal of 2021 but a non-explicit goal of mine is to to post one article a month here and send a corresponding email with a link to it and include a summary of my reading.
-Except for a single email, I didn't do this at all in 2021.
-Oops.
-Maybe I'll do a better job of that this year.
-I do miss having the reviews to reread, so I'd like to restart doing a better job of writing small book reviews closer to when I'm wrapping up books.
+This is partially because I didn't write many articles last year.
+I generally try to write about one article a month but I did not do that in 2021.
+We'll see if I pick back up this habit in 2022.
 
 ## Highlights
 
@@ -52,7 +51,7 @@ Below are some highlights from 2021.
 The titles link to Goodreads.
 
 I didn't write many reviews on Goodreads this year and did not write detailed reviews in this article.
-I'd encourage you to click through and read reviews on Goodreads.
+I'd encourage you to click the links and read reviews on Goodreads.
 
 ### Five-star books
 
@@ -62,12 +61,12 @@ This was my third time reading Dune.
 I read it in preparation for seeing the 2021 film.
 
 I'm a huge fan of Dune but parts of it definitely haven't aged well.
-I think the story manages to have multiple layers and plenty of movement but somehow isn't overwhelming.
+I think the story manages to be complex and have plenty of movement but somehow isn't overwhelming.
 I thought the film did a pretty good job of capturing that.
 
 The first time I read Dune, I also made the very first [Kindle Dune Dictionary](https://jakemcc.gumroad.com/l/dune-dictionary).
 If you are reading on a Kindle and haven't read the book before, I'd recommend purchasing the dictionary.
-I didn't find it that useful on my third time through the book but it made my first read through better.
+I didn't find it useful  on my third time through the book but it made my first read through better.
 
 #### [Memory](https://www.goodreads.com/book/show/12621704-memory) by Lois McMaster Bujold
 
@@ -75,7 +74,7 @@ In August and September, I pretty much devoured the entire [Vorkosigan Saga](htt
 I read all these books pretty much back to back and can barely distinguish them.
 
 I'd recommend the series.
-It was a fun series to read with a lot of books in it.
+It was a fun series and there are quite a few books in it.
 For some reason, this book stood out and is the only one I gave five stars.
 
 #### [A Memory Called Empire](https://www.goodreads.com/book/show/39873472-a-memory-called-empire) and [A Desolation Called Peace](https://www.goodreads.com/book/show/45154547-a-desolation-called-peace) by Arkady Martine
@@ -131,13 +130,16 @@ If you are also well-versed in cognitive biases, parts of this book will be a re
 
 I think a second edition came out immediately after I finished reading the first edition.
 Hopefully the second edition has high quality updates as the original edition of this book is pretty solid.
-I've lived the vision promoted by this book and it is a good place to be in.
+I've lived the vision promoted by this book and it is a good place to be.
 
 #### [Rock Climbing Technique: The Practical Guide to Movement Mastery](https://www.goodreads.com/book/show/40526042-rock-climbing-technique) by John Kettle
 
 A short book full of specific drills that are intended to improve your skill in climbing.
 This book isn't about improving your strength, flexibility, or endurance.
 It is all about getting better at movement and paying attention to your movement patterns.
+
+I've taken some of these drills and incorporated them into my climbing practice.
+I plan on digging back into this book and incorporating more of them.
 
 #### [Drug Use for Grown-Ups: Chasing Liberty in the Land of Fear](https://www.goodreads.com/book/show/54965614-drug-use-for-grown-ups) by Carl L. Hart
 
@@ -260,4 +262,4 @@ I'd like to do better this year.
 We'll see what that entails but it might take the form of having more discipline around sending out some thoughts in the [newsletter]({{ site.subscribe_email }}).
 
 Have any book recommendations?
-Feel free to shoot me an email or leave a comment.
+Please shoot me an email or leave a comment.
