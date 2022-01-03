@@ -14,15 +14,19 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" At the beginning of the year I generally take the time to reflect on
-my reading in the previous year. I&rsquo;m nearly three months but I&rsquo;m &hellip;" />
+    <meta itemprop="description" content=" I&rsquo;ve read Ben Rady&rsquo;s
+Serverless Single Page Apps
+twice now. As an early technical reviewer, I was able to watch and
+take part in the book &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" At the beginning of the year I generally take the time to reflect on
-my reading in the previous year. I&rsquo;m nearly three months but I&rsquo;m &hellip;" />
+    <meta name="twitter:description" content=" I&rsquo;ve read Ben Rady&rsquo;s
+Serverless Single Page Apps
+twice now. As an early technical reviewer, I was able to watch and
+take part in the book &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -30,14 +34,18 @@ my reading in the previous year. I&rsquo;m nearly three months but I&rsquo;m &he
     <meta property="og:site_name" content="Writing by Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/7/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" At the beginning of the year I generally take the time to reflect on
-my reading in the previous year. I&rsquo;m nearly three months but I&rsquo;m &hellip;" />
+    <meta property="og:description" content=" I&rsquo;ve read Ben Rady&rsquo;s
+Serverless Single Page Apps
+twice now. As an early technical reviewer, I was able to watch and
+take part in the book &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" At the beginning of the year I generally take the time to reflect on
-my reading in the previous year. I&rsquo;m nearly three months but I&rsquo;m &hellip;">
+    <meta name="description" content=" I&rsquo;ve read Ben Rady&rsquo;s
+Serverless Single Page Apps
+twice now. As an early technical reviewer, I was able to watch and
+take part in the book &hellip;">
 
     
 
@@ -120,6 +128,62 @@ my reading in the previous year. I&rsquo;m nearly three months but I&rsquo;m &he
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/04/08/book-review-serverless-single-page-apps/">Book review: Serverless Single Page Apps</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-04-08T10:15:00-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>8</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>10:15 am</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&rsquo;ve read Ben Rady&rsquo;s
+<a href="https://pragprog.com/book/brapps/serverless-single-page-apps">Serverless Single Page Apps</a>
+twice now. As an early technical reviewer, I was able to watch and
+take part in the book&rsquo;s evolution. The early draft was good but the
+most recent near-final draft was better.</p>
+
+<p><em>Serverless Single Page Apps</em> walks you through building a low-cost,
+highly-available, serverless single page web application. It does this
+on top of various Amazon web services (DynamoDB, Cognito, Lambda, API
+Gateway, S3). If you follow along you&rsquo;ll end up with a simple web
+application with authentication.</p>
+
+<p>The book is very enjoyable. The examples are clear and the book is
+well written. The book uses JavaScript to implement the serverless
+application. For the user interface it uses plain JavaScript with a
+bit of jQuery and for the AWS Lambda functions you dip into some
+Node.js. <em>Serverless</em> doesn&rsquo;t distract you from learning about
+serverless applications by forcing you to learn new JavaScript
+frameworks or libraries.</p>
+
+<p>One of my favorite parts of the book is Ben&rsquo;s use of test driven
+development. The examples provided give the reader a decent taste of
+the benefits of test-first development. Having the tests helped me
+when I made some silly mistakes in later parts of the book.</p>
+
+<p>Overall I&rsquo;d recommend this book to developers who are interested in
+learning what a serverless application might look like. If you follow
+along you&rsquo;ll know how to build one by the end and will have a good
+starting point for diving deeper into the topic.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1418,82 +1482,6 @@ his <a href="https://twitter.com/gfredericks_/status/595249998838800384">changes
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/04/25/quieter-clojure-dot-test-output/">Quieter clojure.test output</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-04-25T15:40:00-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>3:40 pm</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>If you use <code>clojure.test</code> then there is a good chance you&rsquo;ve been
-annoyed by all the
-<a href="https://github.com/jakemcc/lein-test-refresh/issues/33">output</a> when
-you run your tests in the terminal. When there is a test failure you
-have to scroll through pages of output to find the error.</p>
-
-<p>With release <code>0.9.0</code> of
-<a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a> you
-can minimize the output of <code>clojure.test</code> and <strong>only</strong> see failure and
-summary messages. To enable this feature add <code>:quiet true</code> to the
-<code>:test-refresh</code> configuration map in either your project.clj or
-profiles.clj file. If you configure <code>lein-test-refresh</code> in
-<code>~/.lein/profiles.clj</code> then turning on this feature looks like the
-following. <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">{</span><span class="ss">:user</span> <span class="p">{</span><span class="ss">:plugins</span> <span class="p">[[</span><span class="nv">com.jakemccrary/lein-test-refresh</span> <span class="s">&quot;0.9.0&quot;</span><span class="p">]]</span>
-</span><span class='line'>        <span class="ss">:test-refresh</span> <span class="p">{</span><span class="ss">:quiet</span> <span class="nv">true</span><span class="p">}}}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Setting up your profiles.clj like above allows you to move to Clojure
-project in your terminal, run <code>lein test-refresh</code>, and have your
-<code>clojure.test</code>s run whenever a file changes. In addition, your
-terminal won&rsquo;t show the usual <em>Testing a.namespace</em> output.</p>
-
-<p>Below is what you typically see when running <code>clojure.test</code> tests in a
-terminal. I had to cut most of the <em>Testing a.namespace</em> messages from
-the picture.</p>
-
-<p><img src="/images/not-quiet-test-output.png" alt="Normal view of test output" /></p>
-
-<p>The following picture is with quiet mode turned on in
-<code>lein-test-refresh</code>. No more <em>Testing a.namespace</em> messages! No more
-scrolling through all your namespaces to find the failure!</p>
-
-<p><img src="/images/minimal-test-output.png" alt="Minimal output in console" /></p>
-
-<p>I just released this feature so i haven&rsquo;t had a chance to use it too
-much. I imagine it may evolve to change the output more.</p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>More configuration options can be found <a href="https://github.com/jakemcc/lein-test-refresh/blob/master/sample.project.clj#L5-L24">here</a><a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//8">&larr; Older</a>
@@ -1509,6 +1497,10 @@ much. I imagine it may evolve to change the output more.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2022/01/02/reading-in-2021/">Reading in 2021</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2021/09/11/tests-can-act-as-living-documentation/">Tests are living documentation</a>
@@ -1544,10 +1536,6 @@ much. I imagine it may evolve to change the output more.</p>
     
       <li class="post">
         <a href="/blog/2020/07/03/introducing-photo-fit/">Introducing Photo Fit</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/06/28/using-bazel-to-help-fix-flaky-tests/">Using Bazel to help fix flaky tests</a>
       </li>
     
   </ul>

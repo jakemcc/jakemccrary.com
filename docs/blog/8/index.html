@@ -14,17 +14,19 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" For nearly the last two years, I&rsquo;ve been doing most of my development
-in OS X. Most of that development has been done in Clojure and,
-whenever &hellip;" />
+    <meta itemprop="description" content=" If you use clojure.test then there is a good chance you&rsquo;ve been
+annoyed by all the
+output when
+you run your tests in the terminal. When there &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" For nearly the last two years, I&rsquo;ve been doing most of my development
-in OS X. Most of that development has been done in Clojure and,
-whenever &hellip;" />
+    <meta name="twitter:description" content=" If you use clojure.test then there is a good chance you&rsquo;ve been
+annoyed by all the
+output when
+you run your tests in the terminal. When there &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -32,16 +34,18 @@ whenever &hellip;" />
     <meta property="og:site_name" content="Writing by Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/8/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" For nearly the last two years, I&rsquo;ve been doing most of my development
-in OS X. Most of that development has been done in Clojure and,
-whenever &hellip;" />
+    <meta property="og:description" content=" If you use clojure.test then there is a good chance you&rsquo;ve been
+annoyed by all the
+output when
+you run your tests in the terminal. When there &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" For nearly the last two years, I&rsquo;ve been doing most of my development
-in OS X. Most of that development has been done in Clojure and,
-whenever &hellip;">
+    <meta name="description" content=" If you use clojure.test then there is a good chance you&rsquo;ve been
+annoyed by all the
+output when
+you run your tests in the terminal. When there &hellip;">
 
     
 
@@ -124,6 +128,82 @@ whenever &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/04/25/quieter-clojure-dot-test-output/">Quieter clojure.test output</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-04-25T15:40:00-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>25</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>3:40 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>If you use <code>clojure.test</code> then there is a good chance you&rsquo;ve been
+annoyed by all the
+<a href="https://github.com/jakemcc/lein-test-refresh/issues/33">output</a> when
+you run your tests in the terminal. When there is a test failure you
+have to scroll through pages of output to find the error.</p>
+
+<p>With release <code>0.9.0</code> of
+<a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a> you
+can minimize the output of <code>clojure.test</code> and <strong>only</strong> see failure and
+summary messages. To enable this feature add <code>:quiet true</code> to the
+<code>:test-refresh</code> configuration map in either your project.clj or
+profiles.clj file. If you configure <code>lein-test-refresh</code> in
+<code>~/.lein/profiles.clj</code> then turning on this feature looks like the
+following. <sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">{</span><span class="ss">:user</span> <span class="p">{</span><span class="ss">:plugins</span> <span class="p">[[</span><span class="nv">com.jakemccrary/lein-test-refresh</span> <span class="s">&quot;0.9.0&quot;</span><span class="p">]]</span>
+</span><span class='line'>        <span class="ss">:test-refresh</span> <span class="p">{</span><span class="ss">:quiet</span> <span class="nv">true</span><span class="p">}}}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Setting up your profiles.clj like above allows you to move to Clojure
+project in your terminal, run <code>lein test-refresh</code>, and have your
+<code>clojure.test</code>s run whenever a file changes. In addition, your
+terminal won&rsquo;t show the usual <em>Testing a.namespace</em> output.</p>
+
+<p>Below is what you typically see when running <code>clojure.test</code> tests in a
+terminal. I had to cut most of the <em>Testing a.namespace</em> messages from
+the picture.</p>
+
+<p><img src="/images/not-quiet-test-output.png" alt="Normal view of test output" /></p>
+
+<p>The following picture is with quiet mode turned on in
+<code>lein-test-refresh</code>. No more <em>Testing a.namespace</em> messages! No more
+scrolling through all your namespaces to find the failure!</p>
+
+<p><img src="/images/minimal-test-output.png" alt="Minimal output in console" /></p>
+
+<p>I just released this feature so i haven&rsquo;t had a chance to use it too
+much. I imagine it may evolve to change the output more.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+<p>More configuration options can be found <a href="https://github.com/jakemcc/lein-test-refresh/blob/master/sample.project.clj#L5-L24">here</a><a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1476,82 +1556,6 @@ transparent DSA keycaps so I can see the LED easier.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/09/01/book-review-haskell-data-analysis-cookbook/">Book Review: Haskell Data Analysis Cookbook</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2014-09-01T13:49:00-05:00'><span class='date'><span class='date-month'>Sep</span> <span class='date-day'>1</span><span class='date-suffix'>st</span>, <span class='date-year'>2014</span></span> <span class='time'>1:49 pm</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Packt Publishing recently asked me to write a review of the book
-<a href="http://bit.ly/X0YQaL">Haskell Data Analysis Cookbook</a> by Nishant
-Shukla. The book is broken into small sections that show you how to do
-a particular task related to data analysis. These tasks vary from
-reading a csv file or parsing json to listening to a stream of tweets.</p>
-
-<p>I&rsquo;m not a Haskell programmer. My Haskell experience is limited to
-reading some books
-(<a href="http://learnyouahaskell.com/">Learn You a Haskell for Great Good</a>
-and most of <a href="http://realworldhaskell.org/">Real World Haskell</a>) and
-solving some toy problems. All of reading and programming happened
-years ago though so I&rsquo;m out of practice.</p>
-
-<p>This book is not for a programmer that is unfamiliar with Haskell. If
-you&rsquo;ve never studied it before you&rsquo;ll find yourself turning towards
-documentation. If you enter this book with a solid understanding of
-functional programming you can get by with a smaller understanding of
-Haskell but you will not get much from the book.</p>
-
-<p>I&rsquo;ve only read a few cookbook style books and this one followed the
-usual format. It will be more useful as a quick reference than as
-something you would read through. It doesn&rsquo;t dive deep into any topic
-but does point you toward libraries for various tasks and shows a
-short example of using them.</p>
-
-<p>A common critic I have of most code examples applies to this book.
-Most examples do not do qualified imports of namespaces or selective
-imports of functions from namespaces. This is especially useful when
-your examples might be read by people who are not be familiar with the
-languages standard libraries. Reading code and immediately knowing
-where a function comes from is incredibly useful to understanding.</p>
-
-<p>The code for this book is available on
-<a href="https://github.com/BinRoot/Haskell-Data-Analysis-Cookbook">GitHub</a>.
-It is useful to look at the full example for a section. The examples
-in the book are broken into parts with English explanations and I
-found that made it hard to fully understand how the code fit together.
-Looking at the examples in the GitHub repo helped.</p>
-
-<h4>Recommendation</h4>
-
-<p>I&rsquo;d recommend this book for Haskell programmers who find the table of
-contents interesting. If you read the table of contents and think it
-would be useful to have a shallow introduction to the topics listed
-then you&rsquo;ll find this book useful. It doesn&rsquo;t give a detailed dive
-into anything but at least gives you a starting point.</p>
-
-<p>If you either learning Haskell or using Haskell then this book doesn&rsquo;t
-have much to offer you.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//9">&larr; Older</a>
@@ -1567,6 +1571,10 @@ have much to offer you.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2022/01/02/reading-in-2021/">Reading in 2021</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2021/09/11/tests-can-act-as-living-documentation/">Tests are living documentation</a>
@@ -1602,10 +1610,6 @@ have much to offer you.</p>
     
       <li class="post">
         <a href="/blog/2020/07/03/introducing-photo-fit/">Introducing Photo Fit</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/06/28/using-bazel-to-help-fix-flaky-tests/">Using Bazel to help fix flaky tests</a>
       </li>
     
   </ul>

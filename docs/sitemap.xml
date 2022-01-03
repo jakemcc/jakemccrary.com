@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>https://jakemccrary.com/blog/2022/01/02/reading-in-2021/</loc>
+<lastmod>2022-01-02T12:14:00-06:00</lastmod>
+</url>
+<url>
 <loc>https://jakemccrary.com/blog/2021/09/11/tests-can-act-as-living-documentation/</loc>
 <lastmod>2021-09-11T18:20:00-05:00</lastmod>
 </url>
@@ -737,6 +741,9 @@
 </url>
 <url>
 <loc>https://jakemccrary.com/adventures/2019-10-25-2019-10-27-a-fall-weekend-in-red-wing-minnesota/</loc>
+</url>
+<url>
+<loc>https://jakemccrary.com/adventures/2021-09-19-2021-09-22-climbing-at-seneca-rocks/</loc>
 </url>
 <url>
 <loc>https://jakemccrary.com/adventures/climbing-in-el-chorro/</loc>
