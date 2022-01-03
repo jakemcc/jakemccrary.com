@@ -4,7 +4,7 @@
   <title><![CDATA[Category: books | Jake McCrary]]></title>
   <link href="https://jakemccrary.com/blog/categories/books/atom.xml" rel="self"/>
   <link href="https://jakemccrary.com/"/>
-  <updated>2022-01-03T11:36:31-06:00</updated>
+  <updated>2022-01-03T15:11:22-06:00</updated>
   <id>https://jakemccrary.com/</id>
   <author>
     <name><![CDATA[Jake McCrary]]></name>
@@ -45,7 +45,7 @@ I did not read <em>some</em> already owned books; I read a single already owned 
 
 <p>I did read a book on writing, George Saunders' <em>A Swim in a Pond in the Rain</em>, and multiple climbing books, <em>Rock Climbing Technique</em> by John Kettle and <em><a href="https://www.goodreads.com/book/show/57691814-rock-climbing-in-kentucky-s-red-river-gorge">Rock Climbing in Kentucky&rsquo;s Red River Gorge</a></em> by James Maples.</p>
 
-<p>Early in 2020, at the request of some readers of this site, I started a <a href="">mailing list</a>.
+<p>Early in 2020, at the request of some readers of this site, I started a <a href="{{%20site.subscribe_email%20}}">mailing list</a>.
 During 2020 I used this newsletter as a way to notify subscribers of new articles posted to this website and write up short blurbs on books I had finished.
 Except for a single email, I also didn&rsquo;t send out any updates to the newsletter.</p>
 
@@ -262,7 +262,7 @@ I can tell from looking at August and September that I started and finished the 
 I haven&rsquo;t been doing a great job of that.
 I&rsquo;d like to do better this year.</p>
 
-<p>We&rsquo;ll see what that entails but it might take the form of having more discipline around sending out some thoughts in the <a href="">newsletter</a>.</p>
+<p>We&rsquo;ll see what that entails but it might take the form of having more discipline around sending out some thoughts in the <a href="{{%20site.subscribe_email%20}}">newsletter</a>.</p>
 
 <p>Have any book recommendations?
 Please shoot me an email or leave a comment.</p>
@@ -305,7 +305,7 @@ If you click one and make a purchase I get a small kickback.</p>
 In the last couple of years, I&rsquo;ve been writing fewer reviews on Goodreads than in the past so many books do not have a review there.</p>
 
 <p>If you&rsquo;re missing these reviews, I have started sending out an email every month or two and it frequently includes small reviews of what I&rsquo;ve read since the previous email.
-You can subscribe to that <a href="">here</a>.</p>
+You can subscribe to that <a href="{{%20site.subscribe_email%20}}">here</a>.</p>
 
 <p>Here are the 2020 five star books:</p>
 

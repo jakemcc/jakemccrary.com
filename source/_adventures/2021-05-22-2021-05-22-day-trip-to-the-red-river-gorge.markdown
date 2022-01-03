@@ -1,6 +1,6 @@
 ---
 layout: page
-published: false
+published: true
 title: "Day trip to the Red River Gorge"
 date: 2022-01-03 15:08:42 -0600
 start_date: 2021-05-22
