@@ -8,25 +8,31 @@ sharing: false
 
 I'm an experienced software developer.
 I enjoy coming up with simple solutions to seemingly complex problems.
-I've proven to be a reliable technology leader that can be depended on to understand business requirements, make technology choices, and make teams better through individual contributions and mentoring others.
+I'm a reliable technology leader that can be depended on to understand business requirements, make technology choices, and make teams better through individual contributions, mentoring others, encouraging better practices, and managing  .
 
-I'm currently working at [Gemini](https://gemini.com).
+I currently work at [DRW](https://drw.com/).
+
+Prior to this, I worked at [Gemini](https://gemini.com) and was part of creating their Chicago office.
+At Gemini, I lead the team focused on making the entire engineering organization more effective.
+If you described that team in two words, we were making Gemini engineering faster and safer.
+We did this by improving the build pipeline, improving developer tooling, discovering new ways to work, adding linters, and managing the shared libraries that enabled quicker development of business level features.
 
 Prior to Gemini, I worked at [Coinbase](https://coinbase.com) in their short-lived Chicago office.
 The Chicago office was tasked with delivering a new high performance exchange.
+This was an incredible project that was unfortunately cut short when the business decided to go another direction.
 
 Previously, I worked at at [Outpace](http://outpace.com).
 There I mostly developed marketing tools that decided what millions of people saw when interacting with large corporations through mostly electronic mediums.
-While at Outpace I lead a couple different teams including the one tasked with rewriting our core product.
-That lead to a significantly more flexible, understandable, and reliable product while being incredibly faster.
+While at Outpace I led a couple different teams including the one tasked with rewriting our core product.
+This led to a significantly more flexible, understandable, and reliable product while being incredibly faster.
 
 While at Outpace, I was part of a group that spun out another marketing startup.
-That startup was [Lumanu](https://lumanu.com) and I headed up technology as the CTO.
+That startup was [Lumanu](https://lumanu.com) and I was the Chief Technology Officer.
 While I was there, Lumanu scoured the web for articles and extracted useful data.
 That data was used to both help authors create better content and help marketers build relationships with content creators.
 I set architecture direction, made technology choices, set business direction, talked to potential investors, dealt with third-party vendors, helped with recruiting, and provided guidance across the data science and software engineering teams.
 
-Before Outpace and Lumanu, I worked at [DRW Trading](http://drw.com).
+Before Outpace and Lumanu, I worked at [DRW](http://drw.com).
 At DRW I spent my time writing research tools, trading systems (latency sensitive and non-latency sensitive), and more.
 
 I've worked on a range of problems using a variety of technologies and methodologies.
