@@ -94,9 +94,9 @@ But it works.
     </style>
   </head>
   <body>
-    <mbp:framset>
+    <mbp:frameset>
       [PUT THE WORDS HERE]
-    </mbp:framset>
+    </mbp:frameset>
   </body>
 </html>
 ```
