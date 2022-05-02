@@ -15,3 +15,5 @@ node_modules
 vendor/ruby
 .preview-mode
 Gemfile.lock
+.clj-kondo/
+.lsp
