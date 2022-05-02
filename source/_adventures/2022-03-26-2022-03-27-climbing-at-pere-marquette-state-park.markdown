@@ -3,8 +3,8 @@ layout: page
 published: false
 title: "Climbing at Pere Marquette State Park"
 date: 2022-05-01 19:42:24 -0500
-start_date: 2022-04-26
-end_date: 2022-04-27
+start_date: 2022-03-26
+end_date: 2022-03-27
 description: A short weekend trip with Jenn to Southern Illinois to clime at Pere Marquette State Park
 ---
 
