@@ -19,17 +19,17 @@ The first trick is specific to The Atlantic.
 At The Atlantic, if you put a `.` after the `.com` then you are able to go past your monthly article limit.
 You can try for yourself and see how much easier this is with your computer browser compared to your mobile browser.
 
-The second trick is to prefix a url with `http://archive.is/`.
-This uses the archive.is service to both archive the url (if not already archived) and view the archived content.
+The second trick is to prefix a URL with `http://archive.is/`.
+This uses the archive.is service to both archive the URL (if not already archived) and view the archived content.
 This has the benefit of getting around many other paywalls and archives the site so you can find the exact content later.
 Also, annoying to do on a mobile browser.
 
-Luickly, bookmarklets work on mobile browsers.
-For those that don't know, bookmarklets are little snippets of javascript that you put into a brower's bookmark.
-Then when you select that bookmark the javascript executes.
+Luckily, bookmarklets work on mobile browsers.
+For those that don't know, bookmarklets are little snippets of JavaScript that you put into a browser's bookmark.
+Then when you select that bookmark the JavaScript executes.
 
 On mobile Chrome and Brave, you can execute a bookmark by searching for its name in your location bar.
-This discovery, found by reading this article TODO, encouraged me to write two bookmarkets.
+This discovery, found by reading this article TODO, encouraged me to write two bookmarklets.
 One called OpenArchive and another called FixAtlantic.
 
 ``` javascript
