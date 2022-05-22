@@ -21,8 +21,8 @@ We hiked in the path that takes you to Creature Feature and then followed the cr
 It would have been more efficient to hike down the road and take the alternative path
 But it was nice being outside.
 
-Pogue Ethics is such a fun climb with a little spicy crux approxmiately in the middle.
-The crux definitely is less intimedating if you tall enough, I was tall enough, to hang the draw before doing the move.
+Pogue Ethics is such a fun climb with a little spicy crux approximately in the middle.
+The crux definitely is less intimidating if you tall enough, I was tall enough, to hang the draw before doing the move.
 
 Pogue often has, and did this time, a lot of chalk Xs on some hollow sounding holds.
 Those holds are solid and can be used, though there are alternative paths.
@@ -43,15 +43,15 @@ After a meal, we headed to the Big Bear cabin.
 This cabin is in the same general direction of Muir Valley.
 It is a nice cabin with a fenced in yard.
 It made a good home base.
-Since it is kind of near Muir, it does discourage you from going into town for the coffee shop or Migue's.
+Since it is kind of near Muir, it does discourage you from going into town for the coffee shop or Miguel's.
 
 On Friday, we left the dog at the cabin and went to Muir Valley.
 The weather forecast predicted rain and it was spot on.
 
 We opted to go to Bruise Brothers since we knew a lot of routes would stay dry.
 We didn't climb any of the longer, really fun routes because it would have been a little miserable to belay there.
-We basically climbed out all of the dry problems in the shorter area, includng the very easy short ones to the right.
-We also top roped an undevelped route to the right of the last short one.
+We basically climbed out all of the dry problems in the shorter area, including the very easy short ones to the right.
+We also top roped an undeveloped route to the right of the last short one.
 
 It did get crowded but that isn't surprising.
 It is Bruise Brothers.
@@ -75,7 +75,7 @@ Many other folks showed up too but we were able to stay somewhat spread out and 
 
 We climbed: TODO
 
-Dinner on Saturday was Miguels again.
+Dinner on Saturday was Miguel's again.
 The pizza I ordered was so good.
 The toppings were: TODO
 
@@ -83,7 +83,7 @@ Joel and Liz let us borrow their gear so that Jenn and I could get more climbing
 Four people, one being pregnant, and a single rope doesn't lend it self to cramming in some early Sunday sends.
 It was nice of Joel and Liz to do this.
 
-With Joel and Liz leaving earli, Jenn and I only had her tiny car for getting around.
+With Joel and Liz leaving early, Jenn and I only had her tiny car for getting around.
 As a result, we went back to Muir.
 
 It had been raining for days in the RRG so Jenn and I hunted around for some dry rock.
