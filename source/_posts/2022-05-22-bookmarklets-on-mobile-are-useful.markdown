@@ -5,8 +5,11 @@ date: 2022-05-22 16:00:25 -0500
 comments: true
 published: false
 description: PUT SUMMARY HERE 
-keywords: 'csv, keywords, here'
+keywords: 'bookmarklet, mobile, browser'
 categories: 
+- mobile
+- browser
+- javascript
 ---
 
 Bookmarklets, little snippets of JavaScript that you keep around as a bookmark, are useful.
