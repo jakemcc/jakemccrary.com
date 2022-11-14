@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "Bookmarklets on mobile are useful"
-date: 2022-05-22 16:00:25 -0500
+title: Bookmarklets on mobile are useful
+date: 2022-11-13 18:36 -0600
 comments: true
-published: false
-description: PUT SUMMARY HERE 
-keywords: 'bookmarklet, mobile, browser'
-categories: 
+published: true
+description: PUT SUMMARY HERE
+keywords: bookmarklet, mobile, browser
+categories:
 - mobile
 - browser
 - javascript
