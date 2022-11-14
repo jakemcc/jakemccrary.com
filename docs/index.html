@@ -122,6 +122,75 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2022/11/13/bookmarklets-on-mobile-are-useful/">Bookmarklets on mobile are useful</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2022-11-13T18:36:00-06:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>13</span><span class='date-suffix'>th</span>, <span class='date-year'>2022</span></span> <span class='time'>6:36 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Bookmarklets, little snippets of JavaScript that you keep around as a bookmark, are useful.
+They let you execute some JavaScript to perform almost any action you want on a website.</p>
+
+<p>Some bookmarklets I use on my desktop browser include:</p>
+
+<ol>
+<li>A collection of bookmarklets that let you change the playback speed of most embedded videos.</li>
+<li>A bookmarklet to manipulate the URL of the page you&rsquo;re visiting.</li>
+<li>A <a href="https://pinboard.in/howto/">bookmarklet</a> to save the current page&rsquo;s URL to pinboard.in.</li>
+</ol>
+
+
+<p>For years, I thought I was restricted to only using bookmarklets in my desktop web browser.
+I hadn&rsquo;t effectively used mobile bookmarks before and thought that clicking them would be a huge pain.</p>
+
+<p>It turns out, I was wrong!
+I recently learned that if you start typing a bookmark&rsquo;s title into your mobile browser&rsquo;s location bar, it will let you select the bookmark.
+This means you can easily execute a bookmarklet just by starting to type its name and clicking it when it appears.
+This &ldquo;search for bookmark in location bar&rdquo; technique works with at least Google Chrome and Brave running in Android.</p>
+
+<p>Below are the two bookmarklets I use regularly on my phone.
+They exist to bypass paywalls.</p>
+
+<p>This one prepends <code>http://archive.is/</code> to the current URL:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">javascript</span><span class="o">:</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span><span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="o">=</span><span class="s2">&quot;http://archive.is/&quot;</span><span class="o">+</span><span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">toString</span><span class="p">();}())</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This one changes <code>theatlantic.com</code> to <code>theatlantic.com.</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">javascript</span><span class="o">:</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span><span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="o">=</span><span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">href</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/theatlantic.com/</span><span class="p">,</span> <span class="s1">&#39;theatlantic.com.&#39;</span><span class="p">);}())</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>To get them onto my phone, I added them a bookmarks on my laptop&rsquo;s Chrome and synced them to my mobile phone.
+Once in my mobile Chrome, I edited the bookmark in mobile Chrome, copied the code, and pasted it into a bookmark in Brave.</p>
+
+<p>I type three characters into my mobile browser&rsquo;s location bar before I can select either of these bookmarklets.
+That is quicker than editing the URLs by hand and has improved the experience of reading articles on my phone.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2022/01/02/reading-in-2021/">Reading in 2021</a></h1>
     
     
@@ -1826,77 +1895,6 @@ My coworkers and I used this script frequently.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2020/07/03/introducing-photo-fit/">Introducing Photo Fit</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2020-07-03T18:37:00-05:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>3</span><span class='date-suffix'>rd</span>, <span class='date-year'>2020</span></span> <span class='time'>6:37 pm</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Earlier this year, I wanted to use a landscape photo as my background on my phone.
-It wasn&rsquo;t the photo below but we can use it as an example.</p>
-
-<p><img class="center" src="/images/photo-fit/keyboard-new-keycaps.jpg" title="Landscape image of my keyboard" alt="Landscape image of my keyboard"></p>
-
-<p>When I made it my background, my phone<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> zoomed in to make it fit the portrait orientation of the phone.</p>
-
-<p><img class="center" src="/images/photo-fit/phone-background-before.jpg" title="Screenshot of phone with zoomed in keyboard photo" alt="Screenshot of phone with zoomed in keyboard photo"></p>
-
-<p>This is not great.
-I don&rsquo;t want a zoomed in version that fits my vertical phone.
-I want to see the whole photo with black bars at the top and bottom</p>
-
-<p>I tried to find a way to add these bars using my phone.
-I couldn&rsquo;t find an easy way.</p>
-
-<p>At this point, a reasonable solution would have been transferring the photo to a computer, editing it, and transferring it back to my phone.
-I didn&rsquo;t do that.
-Instead, I wrote a little TypeScript<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup> web app that adds the bars for you.
-You open the website on your phone, select an image, and then download a properly sized image.</p>
-
-<p><img class="center" src="/images/photo-fit/phone-background-after.jpg" title="Screenshot of phone with properly fitting image" alt="Screenshot of phone with properly fitting image"></p>
-
-<p>The tool uses the canvas API and does all of the work in the browser itself.
-It was a fun, bite-sized project and it gave me an excuse to write some TypeScript and do some web programming.
-This was the first time I&rsquo;ve written TypeScript since learning it and I haven&rsquo;t done any web programming in a while.</p>
-
-<p>Making <a href="/experiments/photo-fit/">Photo Fit</a> was not a fast approach to changing my phone&rsquo;s background.
-But, now the tool exists and anyone, including future me, can quickly resize their photo from the comfort of their own phone.</p>
-
-<p><a href="/experiments/photo-fit/">Photo Fit</a> is live and available for others to use.
-I&rsquo;ve only tested it on my own phone and desktop browsers.
-It might not work!
-If you do try it and something weird happens, plese let me know.</p>
-<div class="footnotes">
-<hr/>
-<ol>
-<li id="fn:1">
-<p>A Samsung S8 running Android 9 <a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
-<li id="fn:2">
-<p>I recently learned some TypeScript through <a href="https://www.executeprogram.com">Execute Program</a>. Execute program is a really neat application of spaced repetition for learning programming concepts.<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
-</ol>
-</div>
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//2">&larr; Older</a>
@@ -1910,6 +1908,10 @@ If you do try it and something weird happens, plese let me know.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2022/11/13/bookmarklets-on-mobile-are-useful/">Bookmarklets on mobile are useful</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2022/01/02/reading-in-2021/">Reading in 2021</a>
@@ -1945,10 +1947,6 @@ If you do try it and something weird happens, plese let me know.</p>
     
       <li class="post">
         <a href="/blog/2020/08/31/utilities-i-like-selecta/">Utilities I like: selecta</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/07/03/introducing-photo-fit/">Introducing Photo Fit</a>
       </li>
     
   </ul>

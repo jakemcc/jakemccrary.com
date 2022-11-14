@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
+<loc>https://jakemccrary.com/blog/2022/11/13/bookmarklets-on-mobile-are-useful/</loc>
+<lastmod>2022-11-13T18:36:00-06:00</lastmod>
+</url>
+<url>
 <loc>https://jakemccrary.com/blog/2022/01/02/reading-in-2021/</loc>
 <lastmod>2022-01-02T12:14:00-06:00</lastmod>
 </url>
@@ -665,6 +669,12 @@
 <loc>https://jakemccrary.com/blog/categories/inspiration/</loc>
 </url>
 <url>
+<loc>https://jakemccrary.com/blog/categories/mobile/</loc>
+</url>
+<url>
+<loc>https://jakemccrary.com/blog/categories/browser/</loc>
+</url>
+<url>
 <loc>https://jakemccrary.com/adventures/2010-chicago-mackinac-race/</loc>
 </url>
 <url>
@@ -753,6 +763,9 @@
 </url>
 <url>
 <loc>https://jakemccrary.com/adventures/2022-04-22-2022-04-24-climbing-at-pere-marquette-state-park-and-first-ascent-peoria/</loc>
+</url>
+<url>
+<loc>https://jakemccrary.com/adventures/2022-05-05-2022-05-08-spring-trip-to-the-red-river-gorge/</loc>
 </url>
 <url>
 <loc>https://jakemccrary.com/adventures/climbing-in-el-chorro/</loc>

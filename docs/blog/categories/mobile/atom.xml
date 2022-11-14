@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: mobile | Jake McCrary]]></title>
+  <link href="https://jakemccrary.com/blog/categories/mobile/atom.xml" rel="self"/>
+  <link href="https://jakemccrary.com/"/>
+  <updated>2022-11-13T18:37:11-06:00</updated>
+  <id>https://jakemccrary.com/</id>
+  <author>
+    <name><![CDATA[Jake McCrary]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Bookmarklets on mobile are useful]]></title>
+    <link href="https://jakemccrary.com/blog/2022/11/13/bookmarklets-on-mobile-are-useful/"/>
+    <updated>2022-11-13T18:36:00-06:00</updated>
+    <id>https://jakemccrary.com/blog/2022/11/13/bookmarklets-on-mobile-are-useful</id>
+    <content type="html"><![CDATA[<p>Bookmarklets, little snippets of JavaScript that you keep around as a bookmark, are useful.
+They let you execute some JavaScript to perform almost any action you want on a website.</p>
+
+<p>Some bookmarklets I use on my desktop browser include:</p>
+
+<ol>
+<li>A collection of bookmarklets that let you change the playback speed of most embedded videos.</li>
+<li>A bookmarklet to manipulate the URL of the page you&rsquo;re visiting.</li>
+<li>A <a href="https://pinboard.in/howto/">bookmarklet</a> to save the current page&rsquo;s URL to pinboard.in.</li>
+</ol>
+
+
+<p>For years, I thought I was restricted to only using bookmarklets in my desktop web browser.
+I hadn&rsquo;t effectively used mobile bookmarks before and thought that clicking them would be a huge pain.</p>
+
+<p>It turns out, I was wrong!
+I recently learned that if you start typing a bookmark&rsquo;s title into your mobile browser&rsquo;s location bar, it will let you select the bookmark.
+This means you can easily execute a bookmarklet just by starting to type its name and clicking it when it appears.
+This &ldquo;search for bookmark in location bar&rdquo; technique works with at least Google Chrome and Brave running in Android.</p>
+
+<p>Below are the two bookmarklets I use regularly on my phone.
+They exist to bypass paywalls.</p>
+
+<p>This one prepends <code>http://archive.is/</code> to the current URL:</p>
+
+<pre><code class="javascript">javascript:(function() {window.location="http://archive.is/"+window.location.toString();}())
+</code></pre>
+
+<p>This one changes <code>theatlantic.com</code> to <code>theatlantic.com.</code>:</p>
+
+<pre><code class="javascript">javascript:(function() {window.location=window.location.href.replace(/theatlantic.com/, 'theatlantic.com.');}())
+</code></pre>
+
+<p>To get them onto my phone, I added them a bookmarks on my laptop&rsquo;s Chrome and synced them to my mobile phone.
+Once in my mobile Chrome, I edited the bookmark in mobile Chrome, copied the code, and pasted it into a bookmark in Brave.</p>
+
+<p>I type three characters into my mobile browser&rsquo;s location bar before I can select either of these bookmarklets.
+That is quicker than editing the URLs by hand and has improved the experience of reading articles on my phone.</p>
+]]></content>
+  </entry>
+  
+</feed>
