@@ -27,6 +27,7 @@ This means you can easily execute a bookmarklet just by starting to type its nam
 This "search for bookmark in location bar" technique works with at least Google Chrome and Brave running in Android.
 
 Below are the two bookmarklets I use regularly on my phone.
+They exist to bypass paywalls.
 
 This one prepends `http://archive.is/` to the current URL:
 
