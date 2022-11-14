@@ -9,39 +9,39 @@ keywords: 'csv, keywords, here'
 categories: 
 ---
 
-I do a lot of article reading on my phone.
-This is convenient but a couple tricks I've adopted for reading on a computer web browser are much harder to do on a phone.
-These tricks involved editing the URL in the location bar and the way mobile browsers location and keyboard interact make it much trickier.
+Bookmarklets, little snippets of JavaScript that you keep around as a bookmark, are useful.
+They let you execute some JavaScript to perform almost any action you want on a website.
 
-The tricks I do are for getting around various paywalls.
+Some bookmarklets I use on my desktop browser include:
 
-The first trick is specific to The Atlantic.
-At The Atlantic, if you put a `.` after the `.com` then you are able to go past your monthly article limit.
-You can try for yourself and see how much easier this is with your computer browser compared to your mobile browser.
+1. A collection of bookmarklets that let you change the playback speed of most embedded videos.
+1. A bookmarklet to manipulate the URL of the page you're visiting.
+1. A [bookmarklet](https://pinboard.in/howto/) to save the current page's URL to pinboard.in.
 
-The second trick is to prefix a URL with `http://archive.is/`.
-This uses the archive.is service to both archive the URL (if not already archived) and view the archived content.
-This has the benefit of getting around many other paywalls and archives the site so you can find the exact content later.
-Also, annoying to do on a mobile browser.
+For years, I thought I was restricted to only using bookmarklets in my desktop web browser.
+I hadn't effectively used mobile bookmarks before and thought that clicking them would be a huge pain.
 
-Luckily, bookmarklets work on mobile browsers.
-For those that don't know, bookmarklets are little snippets of JavaScript that you put into a browser's bookmark.
-Then when you select that bookmark the JavaScript executes.
+It turns out, I was wrong!
+I recently learned that if you start typing a bookmark's title into your mobile browser's location bar, it will let you select the bookmark.
+This means you can easily execute a bookmarklet just by starting to type its name and clicking it when it appears.
+This "search for bookmark in location bar" technique works with at least Google Chrome and Brave running in Android.
 
-On mobile Chrome and Brave, you can execute a bookmark by searching for its name in your location bar.
-This discovery, found by reading this article TODO, encouraged me to write two bookmarklets.
-One called OpenArchive and another called FixAtlantic.
+Below are the two bookmarklets I use regularly on my phone.
+
+This one prepends `http://archive.is/` to the current URL:
 
 ``` javascript
 javascript:(function() {window.location="http://archive.is/"+window.location.toString();}())
 ```
+
+This one changes `theatlantic.com` to `theatlantic.com.`:
 
 ``` javascript
 javascript:(function() {window.location=window.location.href.replace(/theatlantic.com/, 'theatlantic.com.');}())
 ```
 
 To get them onto my phone, I added them a bookmarks on my laptop's Chrome and synced them to my mobile phone.
-Once in my mobile Chrome, I copied the code and pasted it into a bookmark in Brave.
+Once in my mobile Chrome, I edited the bookmark in mobile Chrome, copied the code, and pasted it into a bookmark in Brave.
 
-These bookmarklets are great.
-I've only had them for a couple days but they are already improving my mobile experience.
+I type three characters into my mobile browser's location bar before I can select either of these bookmarklets.
+That is quicker than editing the URLs by hand and has improved the experience of reading articles on my phone.
