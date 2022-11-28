@@ -73,6 +73,7 @@ It was a lot of fun.
 Many other folks showed up too but we were able to stay somewhat spread out and the vibe was fun.
 
 We climbed:
+
 - [Mary Pop-Parazzi](https://www.mountainproject.com/route/110606875/mary-pop-parazzi), 5.5
 - [Pocahontas Path](https://www.mountainproject.com/route/107353477/pocahontas-path), 5.7
 - [Brolo El Cunado](https://www.mountainproject.com/route/112562988/brolo-el-cunado), 5.8
