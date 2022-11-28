@@ -1,6 +1,6 @@
 ---
 layout: page
-published: false
+published: true
 title: "Spring trip to the Red River Gorge"
 date: 2022-05-22 15:21:47 -0500
 start_date: 2022-05-05
