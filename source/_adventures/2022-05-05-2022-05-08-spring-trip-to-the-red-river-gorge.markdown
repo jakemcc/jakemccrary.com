@@ -102,7 +102,7 @@ This crag had more dry routes but we headed to Slab City instead of continuing a
 I really wanted to climb [Return to Balance](https://www.mountainproject.com/route/106773969/return-to-balance) at Slab City but we started with [Thrillbillies](https://www.mountainproject.com/route/107250835/thrillbillies).
 Thrillbillies was great.
 90 feet of Red River Gorge slab climbing followed by a beautiful view at the top.
-I didn't recognize the route at first but by the top I got to the top I realized I had climbed it before; I thikn on one of my first trips to the Red.
+I didn't recognize the route at first but by the top I got to the top I realized I had climbed it before; I think on one of my first trips to the Red.
 The lizards were out in full force and we saw at least three while climbing this route.
 
 Due to its length and style of climbing, it took as a long, long time to finish Thrillbillies so we didn't have time to try any of the other routes there.
