@@ -94,5 +94,5 @@ pinboard_count: 3
 disqus_short_name: jakemccrary
 disqus_show_comment_count: true
 
-# Google Analytics (if change, change photo-fit)
-google_analytics_tracking_id: UA-19834208-2
+# Google Analytics
+google_analytics_tracking_id:
