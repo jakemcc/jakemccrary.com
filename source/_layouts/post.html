@@ -35,8 +35,10 @@ single: true
 </div>
 {% unless page.sidebar == false %}
 <aside class="sidebar">
-{% for aside in default_asides %}
-  {% include aside %}
-{% endfor %}
+  {% if site.post_asides.size %}
+  {% include_array post_asides %}
+  {% else %}
+  {% include_array default_asides %}
+  {% endif %}
 </aside>
 {% endunless %}
