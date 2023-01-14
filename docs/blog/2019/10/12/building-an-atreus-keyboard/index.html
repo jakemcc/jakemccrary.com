@@ -1,0 +1,301 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="iem7"><![endif]-->
+<!--[if lt IE 9]><html class="lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html lang="en"><!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <title>Building an Atreus keyboard - Jake McCrary</title>
+    <meta name="author" content="Jake McCrary">
+
+    
+    
+    
+    
+
+    <meta itemprop="name" content="Building an Atreus keyboard" />
+    <meta itemprop="description" content="I built an Atreus keyboard. Here are some details on the build." />
+
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@jakemcc" />
+    <meta name="twitter:title" content="Building an Atreus keyboard" />
+    <meta name="twitter:description" content="I built an Atreus keyboard. Here are some details on the build." />
+    <meta name="twitter:creator" content="@jakemcc" />
+    <meta name="twitter:image" content="https://jakemccrary.com/images/atreus/atreus-done.jpg" />
+
+    <!-- Open Graph data -->
+    <meta property="og:site_name" content="Writing by Jake McCrary" />
+    <meta property="og:url" content="https://jakemccrary.com/blog/2019/10/12/building-an-atreus-keyboard/" />
+    <meta property="og:title" content="Building an Atreus keyboard" />
+    <meta property="og:description" content="I built an Atreus keyboard. Here are some details on the build." />
+    <meta property="og:image" content="https://jakemccrary.com/images/atreus/atreus-done.jpg" />
+    
+    <meta property="og:type" content="article" />
+    
+    
+    <meta property="article:published_time" content="2019-10-12T15:43:00-05:00" />
+    
+
+    <meta name="description" content="I built an Atreus keyboard. Here are some details on the build.">
+
+    <meta name="keywords" content="keyboard, diy, atreus">
+
+    <!-- http://t.co/dKP3o1e -->
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https://jakemccrary.com/blog/2019/10/12/building-an-atreus-keyboard/">
+    <link href="/favicon.png" rel="icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet" type="text/css">
+    <link href="http://feeds.feedburner.com/JakeMccrarysMusings" rel="alternate" title="Jake McCrary" type="application/atom+xml">
+    <link href="https://jakemccrary.com/feed.json" rel="alternate" title="Jake McCrary" type="application/json">
+
+    <!-- iOS scaling bug fix Rewritten version By @mathias, @cheeaun and @jdalton Source url: https://gist.github.com/901295 -->
+    <script type="text/javascript">
+     (function(doc) {
+       var addEvent = 'addEventListener',
+           type = 'gesturestart',
+           qsa = 'querySelectorAll',
+           scales = [1, 1],
+           meta = qsa in doc ? doc[qsa]('meta[name=viewport]') : [];
+       function fix() {
+         meta.content = 'width=device-width,minimum-scale=' + scales[0] + ',maximum-scale=' + scales[1];
+         doc.removeEventListener(type, fix, true);
+       }
+       if ((meta = meta[meta.length - 1]) && addEvent in doc) {
+         fix();
+         scales = [0.25, 1.6];
+         doc[addEvent](type, fix, true);
+       }
+     }(document));
+    </script>
+  </head>
+
+<body  >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Jake McCrary</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul role=main-navigation>
+  <li><a href="/">Articles</a></li>
+  <li><a href="/adventures/">Adventures</a></li>
+  <li><a href="/about.html">About</a></li>
+  <li><a href="/blog/archives/">Archives</a></li>
+  <li><a href="http://feeds.feedburner.com/JakeMccrarysMusings" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  <li><a href="https://jakemccrary.substack.com/welcome" target="_blank" rel="subscribe-email" title="subscribe via email">Newsletter</a></li>
+</ul>
+
+  <form action="https://google.com/search" method="get">
+    <fieldset role="search">
+      <input type="hidden" name="sitesearch" value="jakemccrary.com">
+      <input class="search" type="text" name="q" placeholder="Search"/>
+    </fieldset>
+  </form>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+  <article class="hentry" role="article">
+    
+  <header>
+    
+      <h1 class="entry-title">Building an Atreus keyboard</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2019-10-12T15:43:00-05:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2019</span></span> <span class='time'>3:43 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I recently built an <a href="https://atreus.technomancy.us">Atreus keyboard</a>.
+This keyboard is an extremely small keyboard with only 42 keys.
+Below is the photo of my result.</p>
+
+<p><img src="/images/atreus/atreus-done.jpg" alt="My completed Atreus keyboard" /></p>
+
+<p>As you can see, it has a split layout and the keys are aligned vertically and staggered.
+Thanks to using Ergodox keyboards since 2014, I&rsquo;m very used to this key layout and find it superior to traditional keyboards.</p>
+
+<p>The keyboard is very small.
+To give you an idea of how small it is, here is a photo of it next to one of my Ergodox keyboards and with a bit of my fingers in the shot.</p>
+
+<p><img src="/images/atreus/atreus-with-ergodox.jpg" alt="Atreus size comparison" /></p>
+
+<p>Building the keyboard was pretty straight forward.
+The included instructions are thorough and include plenty of photos.
+All of the components are through-hole so the soldering is not difficult.
+This would be a good first keyboard project.</p>
+
+<p>I already had USB cable, key switches, key caps, and a micro-controller so I purchased the partial kit from Phil.
+It came with everything else, except for something to coat the wood, that you need to build the keyboard.
+I wanted to connect the keyboard to USB C ports, so I used a <a href="https://amzn.to/2IJqItO">micro to USB C cable</a>.</p>
+
+<p>I enjoyed the color of the laser cut wood and appreciated the burn marks.
+I didn&rsquo;t want to lose the color or burns so I coated the wood with a water based clear polyurethane with a satin finish.
+This was probably the most difficult part of the build, and it was pretty easy, simply because I lack experience finishing wood.</p>
+
+<p>When reading other build logs I noticed that someone else put a zip tie on their USB cable to help prevent it from tugging on the micro-controller.
+I have no idea how helpful this is but it seemed like a good thing to do so I also did it.
+To do this you basically just wrap the cable with a zip tie and cram it against the case so that the zip tie prevents tugging on the micro-controller.
+You can see it in the picture below.</p>
+
+<p><img src="/images/atreus/atreus-inside-zip-tie.jpg" alt="My completed Atreus keyboard" /></p>
+
+<p>I&rsquo;ve only been typing on the keyboard for basically this blog post but I&rsquo;ve already found myself adapting to it pretty quickly.
+I don&rsquo;t intend for it to replace my Ergodox for normal usage but I think it will be a great portable keyboard.</p>
+
+<p>Overall it was a fun project and I&rsquo;m glad I did it.
+I look forward to customizing the firmware to make the key layout fit my usage.</p>
+</div>
+
+
+    <em>Looking forward to the next article? Never miss a post by subscribing using <a target="_blank" href="https://jakemccrary.substack.com/welcome">e-mail</a> or <a href="http://feeds.feedburner.com/JakeMccrarysMusings">RSS</a>. The <a target="_blank" href="https://jakemccrary.substack.com/welcome">e-mail newsletter</a> goes out periodically (at most once a month) and includes reviews of books I've been reading and links to stuff I've found interesting.
+</em>
+
+    <footer>
+      <p class="meta">
+        
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jake McCrary</span></span>
+
+        
+
+
+
+
+<time class='entry-date' datetime='2019-10-12T15:43:00-05:00'><span class='date'><span class='date-month'>Oct</span> <span class='date-day'>12</span><span class='date-suffix'>th</span>, <span class='date-year'>2019</span></span> <span class='time'>3:43 pm</span></time>
+        
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/diy/'>diy</a>, <a class='category' href='/blog/categories/keyboard/'>keyboard</a>
+  
+</span>
+
+
+      </p>
+      
+      <div class="sharing">
+  
+</div>
+
+      
+      <p class="meta">
+        
+        <a class="basic-alignment left" href="/blog/2019/08/23/building-a-onewheel-stand/" title="Previous Post: Building a Onewheel stand">&laquo; Building a Onewheel stand</a>
+        
+        
+        <a class="basic-alignment right" href="/blog/2020/01/11/reading-in-2019/" title="Next Post: Reading in 2019">Reading in 2019 &raquo;</a>
+        
+      </p>
+    </footer>
+  </article>
+  
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite">
+
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <div id="disqus_target" >
+    <script>
+     var insertDisqus = function() {
+       var elem = document.createElement('script');
+       elem.innerHTML =  "var disqus_shortname = 'jakemccrary'; var disqus_identifier = 'https://jakemccrary.com/blog/2019/10/12/building-an-atreus-keyboard/'; var disqus_url = 'https://jakemccrary.com/blog/2019/10/12/building-an-atreus-keyboard/'; (function () {var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);}());"
+       var target = document.getElementById('disqus_target');
+       target.parentNode.replaceChild(elem, target);
+     }
+    </script>
+    <button class="comment-button" onclick="insertDisqus()"><span>ENABLE COMMENTS AND RECOMMENDED ARTICLES</span></button>
+  </div>
+
+</div>
+  </section>
+  
+</div>
+
+<aside class="sidebar">
+  
+  <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2023/01/14/reading-in-2022/">Reading in 2022</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2022/11/13/bookmarklets-on-mobile-are-useful/">Bookmarklets on mobile are useful</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2022/01/02/reading-in-2021/">Reading in 2021</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2021/09/11/tests-can-act-as-living-documentation/">Tests are living documentation</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2021/08/07/improve-your-tests-by-picking-better-constants/">Improve your tests by picking better constants</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2021/01/24/reading-in-2020/">Reading in 2020</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/12/30/speeding-up-magit-with-the-native-comp-branch-of-emacs/">Speeding up Magit with the native-comp branch of Emacs</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/11/14/speeding-up-magit/">Speeding up magit</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/11/11/creating-a-custom-kindle-dictionary/">Creating a custom Kindle dictionary</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/10/03/go-create-silly-small-programs/">Go create silly, small programs</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Subscribe</h1>
+  <p>Looking forward to reading more of my writing?</p>
+  <p>Sign up for my <a target="_blank" href="https://jakemccrary.substack.com/welcome">newsletter</a> to get periodic emails with links to my latest writing and other thoughts.</p>
+  <p>Can't wait for the infrequent newsletter? Subscribe to the <a href="http://feeds.feedburner.com/JakeMccrarysMusings">RSS</a> feed.</p>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  <a href="/disclosure-policy">Disclosure Policy</a><br/>
+  <a href="//www.iubenda.com/privacy-policy/509351" class="iubenda-nostyle iub-legal-only iubenda-embed" title="Privacy Policy">Privacy Policy</a><br/>
+<script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src = "//cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
+  Content licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/">Creative Commons Attribution-NonCommercial 3.0 Unported License</a>.
+</p>
+
+
+</footer>
+</body>
+</html>

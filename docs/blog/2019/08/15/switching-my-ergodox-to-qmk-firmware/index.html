@@ -1,0 +1,322 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="iem7"><![endif]-->
+<!--[if lt IE 9]><html class="lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html lang="en"><!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <title>Switching my Ergodox to QMK firmware - Jake McCrary</title>
+    <meta name="author" content="Jake McCrary">
+
+    
+    
+    
+    
+
+    <meta itemprop="name" content="Switching my Ergodox to QMK firmware" />
+    <meta itemprop="description" content="Here are some steps I followed for flashing my hand-built Ergodox to the QMK firmware." />
+
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@jakemcc" />
+    <meta name="twitter:title" content="Switching my Ergodox to QMK firmware" />
+    <meta name="twitter:description" content="Here are some steps I followed for flashing my hand-built Ergodox to the QMK firmware." />
+    <meta name="twitter:creator" content="@jakemcc" />
+    <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
+
+    <!-- Open Graph data -->
+    <meta property="og:site_name" content="Writing by Jake McCrary" />
+    <meta property="og:url" content="https://jakemccrary.com/blog/2019/08/15/switching-my-ergodox-to-qmk-firmware/" />
+    <meta property="og:title" content="Switching my Ergodox to QMK firmware" />
+    <meta property="og:description" content="Here are some steps I followed for flashing my hand-built Ergodox to the QMK firmware." />
+    <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
+    
+    <meta property="og:type" content="article" />
+    
+    
+    <meta property="article:published_time" content="2019-08-15T19:07:00-05:00" />
+    
+
+    <meta name="description" content="Here are some steps I followed for flashing my hand-built Ergodox to the QMK firmware.">
+
+    <meta name="keywords" content="ergodox, qmk, qmk firmware, ergodox ez">
+
+    <!-- http://t.co/dKP3o1e -->
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https://jakemccrary.com/blog/2019/08/15/switching-my-ergodox-to-qmk-firmware/">
+    <link href="/favicon.png" rel="icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet" type="text/css">
+    <link href="http://feeds.feedburner.com/JakeMccrarysMusings" rel="alternate" title="Jake McCrary" type="application/atom+xml">
+    <link href="https://jakemccrary.com/feed.json" rel="alternate" title="Jake McCrary" type="application/json">
+
+    <!-- iOS scaling bug fix Rewritten version By @mathias, @cheeaun and @jdalton Source url: https://gist.github.com/901295 -->
+    <script type="text/javascript">
+     (function(doc) {
+       var addEvent = 'addEventListener',
+           type = 'gesturestart',
+           qsa = 'querySelectorAll',
+           scales = [1, 1],
+           meta = qsa in doc ? doc[qsa]('meta[name=viewport]') : [];
+       function fix() {
+         meta.content = 'width=device-width,minimum-scale=' + scales[0] + ',maximum-scale=' + scales[1];
+         doc.removeEventListener(type, fix, true);
+       }
+       if ((meta = meta[meta.length - 1]) && addEvent in doc) {
+         fix();
+         scales = [0.25, 1.6];
+         doc[addEvent](type, fix, true);
+       }
+     }(document));
+    </script>
+  </head>
+
+<body  >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Jake McCrary</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul role=main-navigation>
+  <li><a href="/">Articles</a></li>
+  <li><a href="/adventures/">Adventures</a></li>
+  <li><a href="/about.html">About</a></li>
+  <li><a href="/blog/archives/">Archives</a></li>
+  <li><a href="http://feeds.feedburner.com/JakeMccrarysMusings" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  <li><a href="https://jakemccrary.substack.com/welcome" target="_blank" rel="subscribe-email" title="subscribe via email">Newsletter</a></li>
+</ul>
+
+  <form action="https://google.com/search" method="get">
+    <fieldset role="search">
+      <input type="hidden" name="sitesearch" value="jakemccrary.com">
+      <input class="search" type="text" name="q" placeholder="Search"/>
+    </fieldset>
+  </form>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+  <article class="hentry" role="article">
+    
+  <header>
+    
+      <h1 class="entry-title">Switching my Ergodox to QMK firmware</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2019-08-15T19:07:00-05:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2019</span></span> <span class='time'>7:07 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Last fall I started to work in an office again. I&rsquo;ve used a hand-built Ergodox for years now and really prefer working on it. This meant I needed another ergodox for the office. Luckily, now you don&rsquo;t have to build your own. I bought an <a href="https://ergodox-ez.com">Ergodox EZ</a><sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.</p>
+
+<p>The Ergodox EZ uses the <a href="https://github.com/qmk/qmk_firmware">QMK</a> firmware. This has a lot of fancier options than the firmware I had been using on my hand-built ergodox.</p>
+
+<p>This mostly didn&rsquo;t matter and I just configured the Ergodox EZ to match my original Ergodox&rsquo;s layout. Then I started a new job and found myself programming in Scala using IntelliJ IDEA.</p>
+
+<p>Shockingly, after not using IntelliJ for years, I still remembered many of the keyboard shortcuts. This was great! Unfortunately, in my years since last using IntelliJ, I created some conflicting keyboard shortcuts for managing my window layout. These were mostly shortcuts that involved holding Command + Alt and pushing an arrow key. Luckily, the QMK firmware supports a <em>Meh</em> key.</p>
+
+<p>What is the <em>Meh</em> key? It is a key that presses Control + Alt + Shift all at the same time.</p>
+
+<p>This is great for setting up shortcuts that don&rsquo;t conflict with ones found in most normal programs. This let me <a href="https://github.com/jakemcc/cljs-phoenix/commit/fa2186589d99a4763c7bf79e1f795cb910063a4e">change my window manger</a> shortcuts to use the <em>Meh</em> key and I was then conflict free.</p>
+
+<p>I can&rsquo;t handle having different shortcuts across different machines with the same OS, so I needed to needed to update my original Ergodox to use the QMK firmware so I could also have a <em>Meh</em> key at home. Luckily, the QMK firmware also works on it and, maybe even more luckily, the Ergodox EZ firmware just works with my original Ergodox.</p>
+
+<p>This actually means I can simply take the compiled Ergodox EZ firmware and flash it straight to my Ergodox. Any time I&rsquo;ve done this the keyboard keeps working.</p>
+
+<p>Unfortunately, the LEDs in my original Ergodox are mostly hidden by non-translucent keys. These LEDs indicate when I&rsquo;m not main layer and I find them really useful. I only have a single translucent keycap and would prefer only that LED to be used.</p>
+
+<p>Here are the steps I took to make that change.</p>
+
+<ol>
+<li>Use the <a href="https://config.qmk.fm/#/ergodox_ez/LAYOUT_ergodox">graphical QMK Configurator</a> to visually configure my keyboard layout. In the <strong>Keymap Name</strong> field, put <code>jakemcc</code>.</li>
+<li>Click the <strong>Compile</strong> button in the above configurator.</li>
+<li>Download the full source.</li>
+<li>Unzip the source and edit <code>qmk_firmware/keyboards/ergodox_ez/keymaps/jakemcc/keymap.c</code> to include snippet of code below this list.</li>
+<li>In <code>qmk_firmware</code> run <code>make ergodox_ez:jakemcc</code>.</li>
+<li>Find <code>ergodox_ez_jakemcc.hex</code> and flash my original Ergodox.</li>
+</ol>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='c'><span class='line'><span class="kt">uint32_t</span> <span class="nf">layer_state_set_user</span><span class="p">(</span><span class="kt">uint32_t</span> <span class="n">state</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(</span><span class="n">biton32</span><span class="p">(</span><span class="n">state</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">ergodox_right_led_1_off</span><span class="p">();</span>
+</span><span class='line'>  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>    <span class="n">ergodox_right_led_1_on</span><span class="p">();</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">return</span> <span class="n">state</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This snippet gets added to the bottom of the <code>keymap.c</code>. It only turns on led 1, which is the one under my translucent key, whenever my keyboard isn&rsquo;t on layer 0.</p>
+
+<p>Now, I can use the fancy <em>Meh</em> key to be conflict free and easily tell when I&rsquo;m not on my main layer. This is wonderful.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+I bought one with Cherry MX Clear switches. I&rsquo;ve since switched them to Cherry MX Browns. The clears were too firm for me. I did not get Cherry MX Blues because I didn&rsquo;t want my fellow coworkers to be annoyed by the glorious clickty-clack of those switches.<a href="#fnref:1" rev="footnote">&#8617;</a></li>
+</ol>
+</div>
+
+</div>
+
+
+    <em>Looking forward to the next article? Never miss a post by subscribing using <a target="_blank" href="https://jakemccrary.substack.com/welcome">e-mail</a> or <a href="http://feeds.feedburner.com/JakeMccrarysMusings">RSS</a>. The <a target="_blank" href="https://jakemccrary.substack.com/welcome">e-mail newsletter</a> goes out periodically (at most once a month) and includes reviews of books I've been reading and links to stuff I've found interesting.
+</em>
+
+    <footer>
+      <p class="meta">
+        
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jake McCrary</span></span>
+
+        
+
+
+
+
+<time class='entry-date' datetime='2019-08-15T19:07:00-05:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2019</span></span> <span class='time'>7:07 pm</span></time>
+        
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/ergodox/'>ergodox</a>, <a class='category' href='/blog/categories/hardware/'>hardware</a>, <a class='category' href='/blog/categories/keyboard/'>keyboard</a>
+  
+</span>
+
+
+      </p>
+      
+      <div class="sharing">
+  
+</div>
+
+      
+      <p class="meta">
+        
+        <a class="basic-alignment left" href="/blog/2019/04/30/how-i-use-social-media/" title="Previous Post: How I use social media">&laquo; How I use social media</a>
+        
+        
+        <a class="basic-alignment right" href="/blog/2019/08/23/building-a-onewheel-stand/" title="Next Post: Building a Onewheel stand">Building a Onewheel stand &raquo;</a>
+        
+      </p>
+    </footer>
+  </article>
+  
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite">
+
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <div id="disqus_target" >
+    <script>
+     var insertDisqus = function() {
+       var elem = document.createElement('script');
+       elem.innerHTML =  "var disqus_shortname = 'jakemccrary'; var disqus_identifier = 'https://jakemccrary.com/blog/2019/08/15/switching-my-ergodox-to-qmk-firmware/'; var disqus_url = 'https://jakemccrary.com/blog/2019/08/15/switching-my-ergodox-to-qmk-firmware/'; (function () {var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);}());"
+       var target = document.getElementById('disqus_target');
+       target.parentNode.replaceChild(elem, target);
+     }
+    </script>
+    <button class="comment-button" onclick="insertDisqus()"><span>ENABLE COMMENTS AND RECOMMENDED ARTICLES</span></button>
+  </div>
+
+</div>
+  </section>
+  
+</div>
+
+<aside class="sidebar">
+  
+  <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2023/01/14/reading-in-2022/">Reading in 2022</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2022/11/13/bookmarklets-on-mobile-are-useful/">Bookmarklets on mobile are useful</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2022/01/02/reading-in-2021/">Reading in 2021</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2021/09/11/tests-can-act-as-living-documentation/">Tests are living documentation</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2021/08/07/improve-your-tests-by-picking-better-constants/">Improve your tests by picking better constants</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2021/01/24/reading-in-2020/">Reading in 2020</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/12/30/speeding-up-magit-with-the-native-comp-branch-of-emacs/">Speeding up Magit with the native-comp branch of Emacs</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/11/14/speeding-up-magit/">Speeding up magit</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/11/11/creating-a-custom-kindle-dictionary/">Creating a custom Kindle dictionary</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/10/03/go-create-silly-small-programs/">Go create silly, small programs</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Subscribe</h1>
+  <p>Looking forward to reading more of my writing?</p>
+  <p>Sign up for my <a target="_blank" href="https://jakemccrary.substack.com/welcome">newsletter</a> to get periodic emails with links to my latest writing and other thoughts.</p>
+  <p>Can't wait for the infrequent newsletter? Subscribe to the <a href="http://feeds.feedburner.com/JakeMccrarysMusings">RSS</a> feed.</p>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  <a href="/disclosure-policy">Disclosure Policy</a><br/>
+  <a href="//www.iubenda.com/privacy-policy/509351" class="iubenda-nostyle iub-legal-only iubenda-embed" title="Privacy Policy">Privacy Policy</a><br/>
+<script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src = "//cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
+  Content licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/">Creative Commons Attribution-NonCommercial 3.0 Unported License</a>.
+</p>
+
+
+</footer>
+</body>
+</html>
