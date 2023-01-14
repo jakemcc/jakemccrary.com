@@ -4,7 +4,7 @@
   <title><![CDATA[Category: performance | Jake McCrary]]></title>
   <link href="https://jakemccrary.com/blog/categories/performance/atom.xml" rel="self"/>
   <link href="https://jakemccrary.com/"/>
-  <updated>2023-01-01T15:44:19-06:00</updated>
+  <updated>2023-01-14T16:39:06-06:00</updated>
   <id>https://jakemccrary.com/</id>
   <author>
     <name><![CDATA[Jake McCrary]]></name>
@@ -110,9 +110,9 @@ Executing :work/work took: 115.8 msecs
 <hr/>
 <ol>
 <li id="fn:1">
-<p>See <a href="/blog/2016/12/31/measure-what-you-intended-to-measure/">Measure what you intend to measure</a><a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+See <a href="/blog/2016/12/31/measure-what-you-intended-to-measure/">Measure what you intend to measure</a><a href="#fnref:1" rev="footnote">&#8617;</a></li>
 <li id="fn:2">
-<p>See <a href="https://shipilev.net/blog/2014/nanotrusting-nanotime/">Nanotrusting the Nanotime</a><a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+See <a href="https://shipilev.net/blog/2014/nanotrusting-nanotime/">Nanotrusting the Nanotime</a><a href="#fnref:2" rev="footnote">&#8617;</a></li>
 </ol>
 </div>
 
@@ -175,9 +175,9 @@ Executing :work/work took: 115.8 msecs
 <hr/>
 <ol>
 <li id="fn:1">
-<p>Example built using clojure 1.8.0 and tufte 1.1.1. Also, sorry for the terrible names of functions. I was drawing a blank when coming up with this example.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+Example built using clojure 1.8.0 and tufte 1.1.1. Also, sorry for the terrible names of functions. I was drawing a blank when coming up with this example.<a href="#fnref:1" rev="footnote">&#8617;</a></li>
 <li id="fn:2">
-<p>Imagine this output having 10 more lines in it. Now imagine it having 20. It starts getting quite a bit more difficult to notice oddities as more and more lines get added to this output. Try not to overwhelm yourself by having too much output.<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+Imagine this output having 10 more lines in it. Now imagine it having 20. It starts getting quite a bit more difficult to notice oddities as more and more lines get added to this output. Try not to overwhelm yourself by having too much output.<a href="#fnref:2" rev="footnote">&#8617;</a></li>
 </ol>
 </div>
 

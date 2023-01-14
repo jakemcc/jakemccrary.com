@@ -4,7 +4,7 @@
   <title><![CDATA[Category: incanter | Jake McCrary]]></title>
   <link href="https://jakemccrary.com/blog/categories/incanter/atom.xml" rel="self"/>
   <link href="https://jakemccrary.com/"/>
-  <updated>2023-01-01T15:44:19-06:00</updated>
+  <updated>2023-01-14T16:39:06-06:00</updated>
   <id>https://jakemccrary.com/</id>
   <author>
     <name><![CDATA[Jake McCrary]]></name>
@@ -240,13 +240,6 @@ others) reading experience.</p>
 
 <p>Summary table <sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup>:</p>
 
-<pre><code>|   :shelf | :books | :pages |
-|----------+--------+--------|
-| non-tech |     51 |  17798 |
-|     tech |     10 |   2707 |
-|     read |     61 |  20505 |
-</code></pre>
-
 <h3>Plans for 2014</h3>
 
 <p>I&rsquo;m planning on reading a similar amount in this upcoming year but
@@ -262,13 +255,19 @@ comments or contact me through twitter or email.</p>
 <hr/>
 <ol>
 <li id="fn:1">
-<p>A project on Heroku that takes your to-read list from goodreads and queries the Chicago Public Library to see if books are available. Someday I&rsquo;ll give it some love and make it usable by others.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+A project on Heroku that takes your to-read list from goodreads and queries the Chicago Public Library to see if books are available. Someday I&rsquo;ll give it some love and make it usable by others.<a href="#fnref:1" rev="footnote">&#8617;</a></li>
 <li id="fn:2">
-<p>I&rsquo;ve also applied to be a goodreads librarian so I can actually fix their data as well.<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+I&rsquo;ve also applied to be a goodreads librarian so I can actually fix their data as well.<a href="#fnref:2" rev="footnote">&#8617;</a></li>
 <li id="fn:3">
-<p>One for <a href="http://jakemccrary.com/blog/2013/07/09/releasing-the-functional-javascript-companion/">Functional JavaScript</a> and another for <a href="http://gum.co/dune-dictionary">Dune</a>. If you want a custom Kindle dictionary made feel free to reach out.<a href="#fnref:3" rev="footnote">&#8617;</a></p></li>
+One for <a href="http://jakemccrary.com/blog/2013/07/09/releasing-the-functional-javascript-companion/">Functional JavaScript</a> and another for <a href="http://gum.co/dune-dictionary">Dune</a>. If you want a custom Kindle dictionary made feel free to reach out.<a href="#fnref:3" rev="footnote">&#8617;</a></li>
 <li id="fn:4">
-<p>tech shelf only includes programming books.<a href="#fnref:4" rev="footnote">&#8617;</a></p></li>
+<p>tech shelf only includes programming books.</p>
+
+<p>|   :shelf | :books | :pages |
+|&mdash;&mdash;&mdash;-+&mdash;&mdash;&ndash;+&mdash;&mdash;&ndash;|
+| non-tech |     51 |  17798 |
+|     tech |     10 |   2707 |
+|     read |     61 |  20505 |</p><a href="#fnref:4" rev="footnote">&#8617;</a></li>
 </ol>
 </div>
 

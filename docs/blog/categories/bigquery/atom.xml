@@ -4,7 +4,7 @@
   <title><![CDATA[Category: bigquery | Jake McCrary]]></title>
   <link href="https://jakemccrary.com/blog/categories/bigquery/atom.xml" rel="self"/>
   <link href="https://jakemccrary.com/"/>
-  <updated>2023-01-01T15:44:19-06:00</updated>
+  <updated>2023-01-14T16:39:06-06:00</updated>
   <id>https://jakemccrary.com/</id>
   <author>
     <name><![CDATA[Jake McCrary]]></name>
@@ -238,7 +238,7 @@ usage painless and fun.</p>
 <hr/>
 <ol>
 <li id="fn:1">
-<p>I did this in early March 2017.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+I did this in early March 2017.<a href="#fnref:1" rev="footnote">&#8617;</a></li>
 </ol>
 </div>
 
@@ -424,11 +424,11 @@ dollars to write. This doesn&rsquo;t seem too outrageous to me.</p>
 <hr/>
 <ol>
 <li id="fn:1">
-<p>Probably higher, as projects can and use more than one testing library.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+Probably higher, as projects can and use more than one testing library.<a href="#fnref:1" rev="footnote">&#8617;</a></li>
 <li id="fn:2">
-<p>And those projects are <a href="https://github.com/jumarko/clojure-random">jumarko/clojure-random</a>, <a href="https://github.com/dpassen1/great-sort">dpassen1/great-sort</a>, and <a href="https://github.com/jimpil/fudje">jimpil/fudje</a>.<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+And those projects are <a href="https://github.com/jumarko/clojure-random">jumarko/clojure-random</a>, <a href="https://github.com/dpassen1/great-sort">dpassen1/great-sort</a>, and <a href="https://github.com/jimpil/fudje">jimpil/fudje</a>.<a href="#fnref:2" rev="footnote">&#8617;</a></li>
 <li id="fn:3">
-<p><a href="https://news.ycombinator.com/item?id=12004644">Source is a Google Developer Advocate&rsquo;s response on old HN post</a><a href="#fnref:3" rev="footnote">&#8617;</a></p></li>
+<a href="https://news.ycombinator.com/item?id=12004644">Source is a Google Developer Advocate&rsquo;s response on old HN post</a><a href="#fnref:3" rev="footnote">&#8617;</a></li>
 </ol>
 </div>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: bazel | Jake McCrary]]></title>
   <link href="https://jakemccrary.com/blog/categories/bazel/atom.xml" rel="self"/>
   <link href="https://jakemccrary.com/"/>
-  <updated>2023-01-01T15:44:19-06:00</updated>
+  <updated>2023-01-14T16:39:06-06:00</updated>
   <id>https://jakemccrary.com/</id>
   <author>
     <name><![CDATA[Jake McCrary]]></name>
@@ -56,7 +56,7 @@ Try your best to have reliable tests.</p>
 <hr/>
 <ol>
 <li id="fn:1">
-<p>I&rsquo;ve written this while using Bazel 3.2.0. If you are reading this far in the future the flags may have changed.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+I&rsquo;ve written this while using Bazel 3.2.0. If you are reading this far in the future the flags may have changed.<a href="#fnref:1" rev="footnote">&#8617;</a></li>
 </ol>
 </div>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: testing | Jake McCrary]]></title>
   <link href="https://jakemccrary.com/blog/categories/testing/atom.xml" rel="self"/>
   <link href="https://jakemccrary.com/"/>
-  <updated>2023-01-01T15:44:19-06:00</updated>
+  <updated>2023-01-14T16:39:06-06:00</updated>
   <id>https://jakemccrary.com/</id>
   <author>
     <name><![CDATA[Jake McCrary]]></name>
@@ -159,6 +159,8 @@ expected: "2"
           + "3"
 </code></pre>
 
+
+
 <pre><code>FAIL in (handles-overrides-in-dev-mode)
 expected: "from development"
   actual: "from application"
@@ -221,7 +223,7 @@ Try your best to have reliable tests.</p>
 <hr/>
 <ol>
 <li id="fn:1">
-<p>I&rsquo;ve written this while using Bazel 3.2.0. If you are reading this far in the future the flags may have changed.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+I&rsquo;ve written this while using Bazel 3.2.0. If you are reading this far in the future the flags may have changed.<a href="#fnref:1" rev="footnote">&#8617;</a></li>
 </ol>
 </div>
 
@@ -275,7 +277,7 @@ user=&gt; (com.jakemccrary.test-refresh/run-in-repl "test")
 <hr/>
 <ol>
 <li id="fn:1">
-<p>This was originally 0.24.0 but that had a bug in it. Sorry about that.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+This was originally 0.24.0 but that had a bug in it. Sorry about that.<a href="#fnref:1" rev="footnote">&#8617;</a></li>
 </ol>
 </div>
 

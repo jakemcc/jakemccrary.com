@@ -4,7 +4,7 @@
   <title><![CDATA[Category: kindle | Jake McCrary]]></title>
   <link href="https://jakemccrary.com/blog/categories/kindle/atom.xml" rel="self"/>
   <link href="https://jakemccrary.com/"/>
-  <updated>2023-01-01T15:44:19-06:00</updated>
+  <updated>2023-01-14T16:39:06-06:00</updated>
   <id>https://jakemccrary.com/</id>
   <author>
     <name><![CDATA[Jake McCrary]]></name>
@@ -113,57 +113,53 @@ But it works.</p>
 <p>The <code>[PUT THE WORDS HERE]</code> part gets filled in with the markup for all of your words.
 The basic structure for an entry looks like the following.</p>
 
-<p>```html
-&lt;idx:entry name=&ldquo;default&rdquo; scriptable=&ldquo;yes&rdquo; spell=&ldquo;yes&rdquo;>
-  <h5><dt>&lt;idx:orth>WORD HERE&lt;/idx:orth></dt></h5>
-  <dd>DEFINITION</dd>
-&lt;/idx:entry></p>
-
-<hr/>
-
-
-<pre><code>
-Every word has an `&lt;idx:entry&gt;` block followed by a `&lt;hr&gt;`.
-These two elements together comprise a single entry.
-
-The `name` attribute on the `&lt;idx:entry&gt;` element sets the lookup index associated with the entry.
-Unless you are building a dictionary with multiple indexes, you can pretty much ignore it.
-Whatever value is provided needs to match the value found in the `.opf` file we'll make later.
-
-The `scriptable` attribute makes the entry available from the index and can only have the value `"yes"`.
-The `spell` can also only be `"yes"` and enables wildcard search and spell correction.
-
-The markup you use inside the `idx:entry` element is mostly up to you.
-The only markup you need is the `&lt;idx:orth&gt;` node.
-Its content is the word being looked up.
-The rest of the markup can be whatever you want.
-
-I wrap the term in a `dt` and the definition in `dd` because it just feels like the right thing to do and provides tags to put some CSS styles on.
-I wrap the `dt` element in an `h5` because I couldn't figure out what CSS styles would actually work on my Kindle voyage to put the term on its own line.
-
-It isn't that I don't know what the styles should be but my Kindle did not respect them.
-Figuring out stuff like this is part of the experimentation required to produce a dictionary that you're happy with.
-
-There is additional supported markup that provides more functionality.
-This includes providing alternative words that all resolve to the same entry, specifying if an exact match is required, and varying the search word from the displayed word.
-Most dictionaries don't need these features so I'm not going to elaborate on them.
-
-### 3. Construct a cover page.
-
-This is just a requirement of a Kindle.
-Create a html file called `cover.html` and substitute in the appropriate values.
+<pre><code class="html">&lt;idx:entry name="default" scriptable="yes" spell="yes"&gt;
+  &lt;h5&gt;&lt;dt&gt;&lt;idx:orth&gt;WORD HERE&lt;/idx:orth&gt;&lt;/dt&gt;&lt;/h5&gt;
+  &lt;dd&gt;DEFINITION&lt;/dd&gt;
+&lt;/idx:entry&gt;
+&lt;hr/&gt;
 </code></pre>
 
-<p><html>
-  <head>
-    <meta content="text/html" http-equiv="content-type">
-  </head>
-  <body>
-    <h1>Dune Dictionary</h1>
-    <h3>Created by Jake McCrary</h3>
-  </body>
-</html>
-```</p>
+<p>Every word has an <code>&lt;idx:entry&gt;</code> block followed by a <code>&lt;hr&gt;</code>.
+These two elements together comprise a single entry.</p>
+
+<p>The <code>name</code> attribute on the <code>&lt;idx:entry&gt;</code> element sets the lookup index associated with the entry.
+Unless you are building a dictionary with multiple indexes, you can pretty much ignore it.
+Whatever value is provided needs to match the value found in the <code>.opf</code> file we&rsquo;ll make later.</p>
+
+<p>The <code>scriptable</code> attribute makes the entry available from the index and can only have the value <code>"yes"</code>.
+The <code>spell</code> can also only be <code>"yes"</code> and enables wildcard search and spell correction.</p>
+
+<p>The markup you use inside the <code>idx:entry</code> element is mostly up to you.
+The only markup you need is the <code>&lt;idx:orth&gt;</code> node.
+Its content is the word being looked up.
+The rest of the markup can be whatever you want.</p>
+
+<p>I wrap the term in a <code>dt</code> and the definition in <code>dd</code> because it just feels like the right thing to do and provides tags to put some CSS styles on.
+I wrap the <code>dt</code> element in an <code>h5</code> because I couldn&rsquo;t figure out what CSS styles would actually work on my Kindle voyage to put the term on its own line.</p>
+
+<p>It isn&rsquo;t that I don&rsquo;t know what the styles should be but my Kindle did not respect them.
+Figuring out stuff like this is part of the experimentation required to produce a dictionary that you&rsquo;re happy with.</p>
+
+<p>There is additional supported markup that provides more functionality.
+This includes providing alternative words that all resolve to the same entry, specifying if an exact match is required, and varying the search word from the displayed word.
+Most dictionaries don&rsquo;t need these features so I&rsquo;m not going to elaborate on them.</p>
+
+<h3>3. Construct a cover page.</h3>
+
+<p>This is just a requirement of a Kindle.
+Create a html file called <code>cover.html</code> and substitute in the appropriate values.</p>
+
+<pre><code class="html">&lt;html&gt;
+  &lt;head&gt;
+    &lt;meta content="text/html" http-equiv="content-type"&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Dune Dictionary&lt;/h1&gt;
+    &lt;h3&gt;Created by Jake McCrary&lt;/h3&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
 
 <p>Amazon wants you to provide an image as well but you don&rsquo;t actually have to do this.
 You probably need to do this if you actually publish the dictionary through Amazon<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.</p>
@@ -303,9 +299,9 @@ I also think this means you can no longer make a dictionary from a Linux machine
 <hr/>
 <ol>
 <li id="fn:1">
-<p>This is actually a challenge to do due to restrictions on what Amazon allows published.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+This is actually a challenge to do due to restrictions on what Amazon allows published.<a href="#fnref:1" rev="footnote">&#8617;</a></li>
 <li id="fn:2">
-<p>No idea if it searches all of them in some order but I&rsquo;m very glad it works this way.<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+No idea if it searches all of them in some order but I&rsquo;m very glad it works this way.<a href="#fnref:2" rev="footnote">&#8617;</a></li>
 </ol>
 </div>
 

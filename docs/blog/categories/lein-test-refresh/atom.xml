@@ -4,7 +4,7 @@
   <title><![CDATA[Category: lein-test-refresh | Jake McCrary]]></title>
   <link href="https://jakemccrary.com/blog/categories/lein-test-refresh/atom.xml" rel="self"/>
   <link href="https://jakemccrary.com/"/>
-  <updated>2023-01-01T15:44:19-06:00</updated>
+  <updated>2023-01-14T16:39:06-06:00</updated>
   <id>https://jakemccrary.com/</id>
   <author>
     <name><![CDATA[Jake McCrary]]></name>
@@ -60,7 +60,7 @@ user=&gt; (com.jakemccrary.test-refresh/run-in-repl "test")
 <hr/>
 <ol>
 <li id="fn:1">
-<p>This was originally 0.24.0 but that had a bug in it. Sorry about that.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+This was originally 0.24.0 but that had a bug in it. Sorry about that.<a href="#fnref:1" rev="footnote">&#8617;</a></li>
 </ol>
 </div>
 
@@ -142,7 +142,7 @@ user=&gt; (com.jakemccrary.test-refresh/run-in-repl "test")
 <hr/>
 <ol>
 <li id="fn:1">
-<p>Running a subset of your tests can be helpful and test-refresh has a few features that help you do that. If you can, I&rsquo;d still recommend making all your tests fast enough to run them all the time.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+Running a subset of your tests can be helpful and test-refresh has a few features that help you do that. If you can, I&rsquo;d still recommend making all your tests fast enough to run them all the time.<a href="#fnref:1" rev="footnote">&#8617;</a></li>
 </ol>
 </div>
 
@@ -299,9 +299,9 @@ using
 <hr/>
 <ol>
 <li id="fn:1">
-<p>As of 2016-02-27 <code>2.2.0</code> isn&rsquo;t out yet, but <code>2.2.0-beta1</code> has been released and has the changes.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+As of 2016-02-27 <code>2.2.0</code> isn&rsquo;t out yet, but <code>2.2.0-beta1</code> has been released and has the changes.<a href="#fnref:1" rev="footnote">&#8617;</a></li>
 <li id="fn:2">
-<p>In fact, you have to use it if you use Leiningen and the new syntax and want your tests to run automatically.<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+In fact, you have to use it if you use Leiningen and the new syntax and want your tests to run automatically.<a href="#fnref:2" rev="footnote">&#8617;</a></li>
 </ol>
 </div>
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: blog | Jake McCrary]]></title>
   <link href="https://jakemccrary.com/blog/categories/blog/atom.xml" rel="self"/>
   <link href="https://jakemccrary.com/"/>
-  <updated>2023-01-01T15:44:19-06:00</updated>
+  <updated>2023-01-14T16:39:06-06:00</updated>
   <id>https://jakemccrary.com/</id>
   <author>
     <name><![CDATA[Jake McCrary]]></name>
@@ -32,7 +32,7 @@
 
 <p>My exact template might not work for you, but I&rsquo;d encourage you to think about optionally loading Disqus and other non-required JavaScript. Your readers will thank you.</p>
 
-<p>
+<p>{% raw %}
 <code>html
 {% if site.disqus_short_name and page.comments == true %}
   &lt;noscript&gt;Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;&lt;/noscript&gt;
@@ -49,7 +49,7 @@
   &lt;/div&gt;
 {% endif %}
 </code>
-</p>
+{% endraw %}</p>
 ]]></content>
   </entry>
   
@@ -64,7 +64,7 @@
 
 <p>An old version of Octopress (2.something), which uses an old version of Jekyll (2.5.3), generates this site. Despite this, I don’t think the template would need to change much if I moved to a new version. The template below is saved as <a href="https://github.com/jakemcc/jakemccrary.com/blob/master/source/feed.json">source/feed.json</a> in my git repository.</p>
 
-<p></p>
+<p>{% raw %}</p>
 
 <pre><code class="javascript">---
 layout: null
@@ -97,11 +97,11 @@ layout: null
 }
 </code></pre>
 
-<p></p>
+<p>{% endraw %}</p>
 
-<p>I approached this problem by reading the <a href="https://jsonfeed.org/version/1">JSON Feed Version 1 spec</a> and cribbing values from the template for my Atom feed. The trickiest part was filling in the <code>"content_html"</code> value. It took me a while to find figure out that <code>jsonify</code> needed to be at the end of <code>{{ post.content | expand_urls: site.url | jsonify }}</code>. That translates the post&rsquo;s HTML content into its JSON representation. You’ll notice that any template expression with <code>jsonify</code> at the end also isn’t wrapped in quotes. This is because <code>jsonify</code> is doing that for me.</p>
+<p>I approached this problem by reading the <a href="https://jsonfeed.org/version/1">JSON Feed Version 1 spec</a> and cribbing values from the template for my Atom feed. The trickiest part was filling in the <code>"content_html"</code> value. It took me a while to find figure out that <code>jsonify</code> needed to be at the end of {% raw %}<code>{{ post.content | expand_urls: site.url | jsonify }}</code>{% endraw %}. That translates the post&rsquo;s HTML content into its JSON representation. You’ll notice that any template expression with <code>jsonify</code> at the end also isn’t wrapped in quotes. This is because <code>jsonify</code> is doing that for me.</p>
 
-<p>The <code>{% if forloop.last == false %},{% endif %}</code> is also important. Without this, the generated JSON has an extra <code>,</code> after the final element in items. This isn’t valid JSON.</p>
+<p>The {% raw %}<code>{% if forloop.last == false %},{% endif %}</code>{% endraw %} is also important. Without this, the generated JSON has an extra <code>,</code> after the final element in items. This isn’t valid JSON.</p>
 
 <p>I caught that by using the command line tool <a href="http://trentm.com/json/">json</a>. If you ever edit JSON by hand or generate it from a template then you should add this tool to your toolbox. It will prevent you from creating invalid JSON.</p>
 
@@ -156,29 +156,23 @@ and
 for more details. The <a href="http://ogp.me/">Open Graph</a> documentation has
 more details as well.</p>
 
-<p>```html</p>
+<pre><code class="html">&lt;!-- Twitter Card data --&gt;
+&lt;meta name="twitter:card" content="SUMMARY" /&gt;
+&lt;meta name="twitter:site" content="TWITTER HANDLE OF SITE (@jakemcc for this site)" /&gt;
+&lt;meta name="twitter:creator" content="YOUR TWITTER HANDLE" /&gt;
+&lt;meta name="twitter:title" content="ARTICLE TITLE" /&gt;
+&lt;meta name="twitter:description" content="SHORT DESCRIPTION OF CONTENT" /&gt;
+&lt;meta name="twitter:image" content="IMAGE THAT SHOWS UP WITH PREVIEW" /&gt;
 
-<!-- Twitter Card data -->
-
-
-<p><meta name="twitter:card" content="SUMMARY" />
-<meta name="twitter:site" content="TWITTER HANDLE OF SITE (@jakemcc for this site)" />
-<meta name="twitter:creator" content="YOUR TWITTER HANDLE" />
-<meta name="twitter:title" content="ARTICLE TITLE" />
-<meta name="twitter:description" content="SHORT DESCRIPTION OF CONTENT" />
-<meta name="twitter:image" content="IMAGE THAT SHOWS UP WITH PREVIEW" /></p>
-
-<!-- Open Graph data -->
-
-
-<p><meta property="og:site_name" content="SITE TITLE" />
-<meta property="og:url" content="CANONICAL URL" />
-<meta property="og:title" content="ARTICLE TITLE" />
-<meta property="og:description" content="SHORT DESCRIPTION OF CONTENT" />
-<meta property="og:image" content="IMAGE THAT SHOWS UP WITH PREVIEW" />
-<meta property="og:type" content="article" />
-<meta property="article:published_time" content="PUBLISHED DATETIME" />
-```</p>
+&lt;!-- Open Graph data --&gt;
+&lt;meta property="og:site_name" content="SITE TITLE" /&gt;
+&lt;meta property="og:url" content="CANONICAL URL" /&gt;
+&lt;meta property="og:title" content="ARTICLE TITLE" /&gt;
+&lt;meta property="og:description" content="SHORT DESCRIPTION OF CONTENT" /&gt;
+&lt;meta property="og:image" content="IMAGE THAT SHOWS UP WITH PREVIEW" /&gt;
+&lt;meta property="og:type" content="article" /&gt;
+&lt;meta property="article:published_time" content="PUBLISHED DATETIME" /&gt;
+</code></pre>
 
 <p>If you have control of your site&rsquo;s markup and want better previews of
 your articles on the various social networks then you should add this
@@ -189,7 +183,7 @@ mailing list.</p>
 <hr/>
 <ol>
 <li id="fn:1">
-<p>You can actually remove the <code>twitter:title</code>, <code>twitter:description</code>, and <code>twitter:image</code> lines since Twitter will fallback to the equivalent Open Graph markup if they missing.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+You can actually remove the <code>twitter:title</code>, <code>twitter:description</code>, and <code>twitter:image</code> lines since Twitter will fallback to the equivalent Open Graph markup if they missing.<a href="#fnref:1" rev="footnote">&#8617;</a></li>
 </ol>
 </div>
 
@@ -329,11 +323,11 @@ mobile and 96/100 for desktop.</p>
 <hr/>
 <ol>
 <li id="fn:1">
-<p>When I first wrote this I didn&rsquo;t change anything about my web fonts. After thinking about it for a few days I ended up removing them completely. Details are in the update at the end of the post.<a href="#fnref:1" rev="footnote">&#8617;</a></p></li>
+When I first wrote this I didn&rsquo;t change anything about my web fonts. After thinking about it for a few days I ended up removing them completely. Details are in the update at the end of the post.<a href="#fnref:1" rev="footnote">&#8617;</a></li>
 <li id="fn:2">
-<p>I&rsquo;m asking Web Page Test to load my page using IE10. I get much faster load times using Chrome or Firefox locally which is what most of my readers use. This is good enough for now.<a href="#fnref:2" rev="footnote">&#8617;</a></p></li>
+I&rsquo;m asking Web Page Test to load my page using IE10. I get much faster load times using Chrome or Firefox locally which is what most of my readers use. This is good enough for now.<a href="#fnref:2" rev="footnote">&#8617;</a></li>
 <li id="fn:3">
-<p>I mean, the starting point was probably good enough but if I admitted that then I wouldn&rsquo;t have had the excuse to dig into my site&rsquo;s load time.<a href="#fnref:3" rev="footnote">&#8617;</a></p></li>
+I mean, the starting point was probably good enough but if I admitted that then I wouldn&rsquo;t have had the excuse to dig into my site&rsquo;s load time.<a href="#fnref:3" rev="footnote">&#8617;</a></li>
 </ol>
 </div>
 
