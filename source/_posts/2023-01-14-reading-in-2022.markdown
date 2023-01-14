@@ -155,7 +155,7 @@ Here is the star rating distribution.
 |             | 2 stars | 3 stars | 4 stars | 5 stars |
 |-------------+---------+---------+---------+---------|
 | fiction     |       2 |      10 |      14 |       2 |
-| non-fiction |       0 |       0 |       5 |       2
+| non-fiction |       0 |       0 |       5 |       2 |
 ```
 
 ## 2023 goals
