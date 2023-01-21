@@ -4,7 +4,7 @@
   <title><![CDATA[Category: javascript | Jake McCrary]]></title>
   <link href="https://jakemccrary.com/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="https://jakemccrary.com/"/>
-  <updated>2023-01-14T16:41:49-06:00</updated>
+  <updated>2023-01-21T10:12:10-06:00</updated>
   <id>https://jakemccrary.com/</id>
   <author>
     <name><![CDATA[Jake McCrary]]></name>
@@ -46,7 +46,7 @@ They exist to bypass paywalls.</p>
 <pre><code class="javascript">javascript:(function() {window.location="http://archive.is/"+window.location.toString();}())
 </code></pre>
 
-<p>This one changes <code>theatlantic.com</code> to <code>theatlantic.com.</code>:</p>
+<p>This one changes <code>theatlantic.com</code> to <code>theatlantic.com.</code> (though it also no longer gets around their paywall):</p>
 
 <pre><code class="javascript">javascript:(function() {window.location=window.location.href.replace(/theatlantic.com/, 'theatlantic.com.');}())
 </code></pre>

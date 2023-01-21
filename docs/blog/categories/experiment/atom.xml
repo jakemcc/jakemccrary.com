@@ -4,7 +4,7 @@
   <title><![CDATA[Category: experiment | Jake McCrary]]></title>
   <link href="https://jakemccrary.com/blog/categories/experiment/atom.xml" rel="self"/>
   <link href="https://jakemccrary.com/"/>
-  <updated>2023-01-14T16:41:49-06:00</updated>
+  <updated>2023-01-21T10:12:10-06:00</updated>
   <id>https://jakemccrary.com/</id>
   <author>
     <name><![CDATA[Jake McCrary]]></name>
@@ -21,11 +21,11 @@
     <content type="html"><![CDATA[<p>Earlier this year, I wanted to use a landscape photo as my background on my phone.
 It wasn&rsquo;t the photo below but we can use it as an example.</p>
 
-<p><img class="center" src="/images/photo-fit/keyboard-new-keycaps.jpg" title="&ldquo;Landscape image of my keyboard&rdquo; &ldquo;Landscape image of my keyboard&rdquo;" ></p>
+<p>{% img center /images/photo-fit/keyboard-new-keycaps.jpg &ldquo;Landscape image of my keyboard&rdquo; &ldquo;Landscape image of my keyboard&rdquo; %}</p>
 
 <p>When I made it my background, my phone<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> zoomed in to make it fit the portrait orientation of the phone.</p>
 
-<p><img class="center" src="/images/photo-fit/phone-background-before.jpg" title="&ldquo;Screenshot of phone with zoomed in keyboard photo&rdquo; &ldquo;Screenshot of phone with zoomed in keyboard photo&rdquo;" ></p>
+<p>{% img center /images/photo-fit/phone-background-before.jpg &ldquo;Screenshot of phone with zoomed in keyboard photo&rdquo; &ldquo;Screenshot of phone with zoomed in keyboard photo&rdquo; %}</p>
 
 <p>This is not great.
 I don&rsquo;t want a zoomed in version that fits my vertical phone.
@@ -39,7 +39,7 @@ I didn&rsquo;t do that.
 Instead, I wrote a little TypeScript<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup> web app that adds the bars for you.
 You open the website on your phone, select an image, and then download a properly sized image.</p>
 
-<p><img class="center" src="/images/photo-fit/phone-background-after.jpg" title="&ldquo;Screenshot of phone with properly fitting image&rdquo; &ldquo;Screenshot of phone with properly fitting image&rdquo;" ></p>
+<p>{% img center /images/photo-fit/phone-background-after.jpg &ldquo;Screenshot of phone with properly fitting image&rdquo; &ldquo;Screenshot of phone with properly fitting image&rdquo; %}</p>
 
 <p>The tool uses the canvas API and does all of the work in the browser itself.
 It was a fun, bite-sized project and it gave me an excuse to write some TypeScript and do some web programming.
