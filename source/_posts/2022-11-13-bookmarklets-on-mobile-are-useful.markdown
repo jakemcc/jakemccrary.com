@@ -4,7 +4,7 @@ title: Bookmarklets on mobile are useful
 date: 2022-11-13 18:36 -0600
 comments: true
 published: true
-description: PUT SUMMARY HERE
+description: Triggering bookmarklets in your mobile web browser doesn't have to be painful.
 keywords: bookmarklet, mobile, browser
 categories:
 - mobile
@@ -38,7 +38,7 @@ This one prepends `http://archive.is/` to the current URL:
 javascript:(function() {window.location="http://archive.is/"+window.location.toString();}())
 ```
 
-This one changes `theatlantic.com` to `theatlantic.com.`:
+This one changes `theatlantic.com` to `theatlantic.com.` (though it also no longer gets around their paywall):
 
 ``` javascript
 javascript:(function() {window.location=window.location.href.replace(/theatlantic.com/, 'theatlantic.com.');}())
