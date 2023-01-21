@@ -1,0 +1,414 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="iem7"><![endif]-->
+<!--[if lt IE 9]><html class="lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html lang="en"><!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <title>Advanced Leiningen checkouts: configuring what ends up on your classpath - Jake McCrary</title>
+    <meta name="author" content="Jake McCrary">
+
+    
+    
+    
+    
+
+    <meta itemprop="name" content="Advanced Leiningen checkouts: configuring what ends up on your classpath" />
+    <meta itemprop="description" content=" Advanced Leiningen checkouts: configuring what ends up on your classpath Mar 24th, 2015 9:29 pm Leiningen checkout dependencies are a useful
+feature &hellip;" />
+
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@jakemcc" />
+    <meta name="twitter:title" content="Advanced Leiningen checkouts: configuring what ends up on your classpath" />
+    <meta name="twitter:description" content=" Advanced Leiningen checkouts: configuring what ends up on your classpath Mar 24th, 2015 9:29 pm Leiningen checkout dependencies are a useful
+feature &hellip;" />
+    <meta name="twitter:creator" content="@jakemcc" />
+    <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
+
+    <!-- Open Graph data -->
+    <meta property="og:site_name" content="Writing by Jake McCrary" />
+    <meta property="og:url" content="https://jakemccrary.com/blog/2015/03/24/advanced-leiningen-checkouts-configuring-what-ends-up-on-your-classpath/" />
+    <meta property="og:title" content="Advanced Leiningen checkouts: configuring what ends up on your classpath" />
+    <meta property="og:description" content=" Advanced Leiningen checkouts: configuring what ends up on your classpath Mar 24th, 2015 9:29 pm Leiningen checkout dependencies are a useful
+feature &hellip;" />
+    <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
+    
+    <meta property="og:type" content="article" />
+    
+    
+    <meta property="article:published_time" content="2015-03-24T21:29:00-05:00" />
+    
+
+    <meta name="description" content=" Advanced Leiningen checkouts: configuring what ends up on your classpath Mar 24th, 2015 9:29 pm Leiningen checkout dependencies are a useful
+feature &hellip;">
+
+    
+
+    <!-- http://t.co/dKP3o1e -->
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https://jakemccrary.com/blog/2015/03/24/advanced-leiningen-checkouts-configuring-what-ends-up-on-your-classpath/">
+    <link href="/favicon.png" rel="icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet" type="text/css">
+    <link href="http://feeds.feedburner.com/JakeMccrarysMusings" rel="alternate" title="Jake McCrary" type="application/atom+xml">
+    <link href="https://jakemccrary.com/feed.json" rel="alternate" title="Jake McCrary" type="application/json">
+
+    <!-- iOS scaling bug fix Rewritten version By @mathias, @cheeaun and @jdalton Source url: https://gist.github.com/901295 -->
+    <script type="text/javascript">
+     (function(doc) {
+       var addEvent = 'addEventListener',
+           type = 'gesturestart',
+           qsa = 'querySelectorAll',
+           scales = [1, 1],
+           meta = qsa in doc ? doc[qsa]('meta[name=viewport]') : [];
+       function fix() {
+         meta.content = 'width=device-width,minimum-scale=' + scales[0] + ',maximum-scale=' + scales[1];
+         doc.removeEventListener(type, fix, true);
+       }
+       if ((meta = meta[meta.length - 1]) && addEvent in doc) {
+         fix();
+         scales = [0.25, 1.6];
+         doc[addEvent](type, fix, true);
+       }
+     }(document));
+    </script>
+  </head>
+
+<body  >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Jake McCrary</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul role=main-navigation>
+  <li><a href="/">Articles</a></li>
+  <li><a href="/adventures/">Adventures</a></li>
+  <li><a href="/about.html">About</a></li>
+  <li><a href="/blog/archives/">Archives</a></li>
+  <li><a href="http://feeds.feedburner.com/JakeMccrarysMusings" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  <li><a href="https://jakemccrary.substack.com/welcome" target="_blank" rel="subscribe-email" title="subscribe via email">Newsletter</a></li>
+</ul>
+
+  <form action="https://google.com/search" method="get">
+    <fieldset role="search">
+      <input type="hidden" name="sitesearch" value="jakemccrary.com">
+      <input class="search" type="text" name="q" placeholder="Search"/>
+    </fieldset>
+  </form>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+  <article class="hentry" role="article">
+    
+  <header>
+    
+      <h1 class="entry-title">Advanced Leiningen checkouts: configuring what ends up on your classpath</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-24T21:29:00-05:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:29 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://leiningen.org/">Leiningen</a> checkout dependencies are a useful
+feature. Checkout dependencies allow you to work on a library and consuming
+project at the same time. By setting up checkout dependencies you can
+skip running <code>lein install</code> in the library project; it appears on the
+classpath of the consuming project. An example of what this looks like
+can be found in the
+<a href="https://github.com/technomancy/leiningen/blob/master/doc/TUTORIAL.md#checkout-dependencies">Leiningen documentation</a>
+or in a
+<a href="http://jakemccrary.com/blog/2012/03/28/working-on-multiple-clojure-projects-at-once/">previous post</a>
+of mine.</p>
+
+<p>By default, Leiningen adds the <code>:source-paths</code>, <code>:test-paths</code>,
+<code>:resource-paths</code>, and <code>:compile-path</code> directories of the checkout
+projects to your consuming project&rsquo;s classpath. It also recurses and
+adds the checkouts of your checkouts (and keeps recursing).</p>
+
+<p>You can override what gets added to your classpath by
+<code>:checkout-deps-shares</code> to your project.clj. This key&rsquo;s value should
+be a vector of functions that when applied to your checkouts' project
+map return the paths that should be included on the classpath. The
+default values can be found
+<a href="https://github.com/technomancy/leiningen/blob/ff84da697249184874b528950048981621ac0b61/leiningen-core/src/leiningen/core/project.clj#L488-L492">here</a>
+and an example of overriding the default behavior can be found in the
+<a href="https://github.com/technomancy/leiningen/blob/ff84da697249184874b528950048981621ac0b61/sample.project.clj#L320-L321">sample.project.clj</a>.</p>
+
+<p>I ran into a situation this week where having my checkouts'
+<code>:test-paths</code> on the classpath caused issues my consuming project. My
+first pass at fixing this problem was to add <code>:checkout-deps-shares
+[:source-paths :resource-paths :compile-path]</code> to my project.clj. <strong>This
+didn&rsquo;t work</strong>. My project.clj looked like below.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defproject </span><span class="nv">example</span> <span class="s">&quot;1.2.3-SNAPSHOT&quot;</span>
+</span><span class='line'>  <span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">library</span> <span class="s">&quot;1.2.2&quot;</span><span class="p">]</span>
+</span><span class='line'>                 <span class="p">[</span><span class="nv">org.clojure/clojure</span> <span class="s">&quot;1.6.0&quot;</span><span class="p">]]</span>
+</span><span class='line'>  <span class="ss">:checkout-deps-shares</span> <span class="p">[</span><span class="ss">:source-paths</span> <span class="ss">:resource-paths</span> <span class="ss">:compile-path</span><span class="p">])</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Why didn&rsquo;t it work? It didn&rsquo;t work because of how Leiningen merges
+duplicate keys in the project map. When Leiningen merges the various
+configuration maps (from merging profiles, merging defaults, etc) and
+it encounters values that are collections it combines them (more
+details found in
+<a href="https://github.com/technomancy/leiningen/blob/master/doc/PROFILES.md#merging">documentation</a>).
+Using <code>lein pprint :checkout-deps-shares</code> shows what we end up with.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="gp">$</span> lein pprint :checkout-deps-shares
+</span><span class='line'><span class="go">(:source-paths</span>
+</span><span class='line'><span class="go"> :resource-paths</span>
+</span><span class='line'><span class="go"> :compile-path</span>
+</span><span class='line'><span class="go"> :source-paths</span>
+</span><span class='line'><span class="go"> :test-paths</span>
+</span><span class='line'><span class="go"> :resource-paths</span>
+</span><span class='line'><span class="go"> :compile-path</span>
+</span><span class='line'><span class="go"> #&lt;Var@43e3a075:</span>
+</span><span class='line'><span class="go">   #&lt;classpath$checkout_deps_paths leiningen.core.classpath$checkout_deps_paths@6761b44b&gt;&gt;)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We&rsquo;ve ended up with the default values and the values we specified in
+the project.clj. This isn&rsquo;t hard to fix. To tell Leiningen to replace
+the value instead of merging you add the <code>^:replace</code> metadata to the
+value. Below is the same project.clj but with <code>^:replace</code> added.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defproject </span><span class="nv">example</span> <span class="s">&quot;1.2.3-SNAPSHOT&quot;</span>
+</span><span class='line'>  <span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">library</span> <span class="s">&quot;1.2.2&quot;</span><span class="p">]</span>
+</span><span class='line'>                 <span class="p">[</span><span class="nv">org.clojure/clojure</span> <span class="s">&quot;1.6.0&quot;</span><span class="p">]]</span>
+</span><span class='line'>  <span class="ss">:checkout-deps-shares</span> <span class="o">^</span><span class="ss">:replace</span> <span class="p">[</span><span class="ss">:source-paths</span> <span class="ss">:resource-paths</span> <span class="ss">:compile-path</span><span class="p">])</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This solves the problem of <code>:test-paths</code> showing up on the classpath
+but it introduces another problem. Checkouts' checkout dependencies no
+longer show up on the classpath. This is because
+<code>leiningen.core.classpath/checkout-deps-paths</code> is no longer applied to
+the checkouts.</p>
+
+<p>Without <code>leiningen.core.classpath/checkout-deps-paths</code> Leiningen stops
+recursing and, as a result, no longer picks up checkouts' checkout
+dependencies. My first attempt at fixing this was to modify my
+project.clj so the <code>:checkout-deps-shares</code> section looked like below.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="ss">:checkout-deps-shares</span> <span class="o">^</span><span class="ss">:replace</span> <span class="p">[</span><span class="ss">:source-paths</span> <span class="ss">:resource-paths</span> <span class="ss">:compile-path</span>
+</span><span class='line'>                                 <span class="nv">leiningen.core.classpath/checkout-deps-paths</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The above fails. It runs but doesn&rsquo;t actually add the correct
+directories to the classpath. The next attempt is below.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="ss">:checkout-deps-shares</span> <span class="o">^</span><span class="ss">:replace</span> <span class="p">[</span><span class="ss">:source-paths</span> <span class="ss">:resource-paths</span> <span class="ss">:compile-path</span>
+</span><span class='line'>                                 <span class="o">#</span><span class="ss">&#39;leiningen.core.classpath/checkout-deps-paths</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This attempt failed quicker. Now an exception is thrown when trying to
+run Leiningen tasks.</p>
+
+<p>The next one works. It takes advantage of dynamic eval through
+<a href="https://github.com/technomancy/leiningen/blob/master/doc/PROFILES.md#dynamic-eval">read-eval</a>
+syntax. With the below snippet the checkouts' checkouts are added to
+the classpath.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="ss">:checkout-deps-shares</span> <span class="o">^</span><span class="ss">:replace</span> <span class="p">[</span><span class="ss">:source-paths</span> <span class="ss">:resource-paths</span> <span class="ss">:compile-path</span>
+</span><span class='line'>                                 <span class="o">#</span><span class="nv">=</span><span class="p">(</span><span class="nb">eval </span><span class="nv">leiningen.core.classpath/checkout-deps-paths</span><span class="p">)]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Hopefully this is useful to someone else. It took a bit of digging to
+figure it out and many incorrect attempts to get correct. The full
+example project.clj is below.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defproject </span><span class="nv">example</span> <span class="s">&quot;1.2.3-SNAPSHOT&quot;</span>
+</span><span class='line'>  <span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">library</span> <span class="s">&quot;1.2.2&quot;</span><span class="p">]</span>
+</span><span class='line'>                 <span class="p">[</span><span class="nv">org.clojure/clojure</span> <span class="s">&quot;1.6.0&quot;</span><span class="p">]]</span>
+</span><span class='line'>  <span class="ss">:checkout-deps-shares</span> <span class="o">^</span><span class="ss">:replace</span> <span class="p">[</span><span class="ss">:source-paths</span> <span class="ss">:resource-paths</span> <span class="ss">:compile-path</span>
+</span><span class='line'>                                   <span class="o">#</span><span class="nv">=</span><span class="p">(</span><span class="nb">eval </span><span class="nv">leiningen.core.classpath/checkout-deps-paths</span><span class="p">)])</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+    <em>Looking forward to the next article? Never miss a post by subscribing using <a target="_blank" href="https://jakemccrary.substack.com/welcome">e-mail</a> or <a href="http://feeds.feedburner.com/JakeMccrarysMusings">RSS</a>. The <a target="_blank" href="https://jakemccrary.substack.com/welcome">e-mail newsletter</a> goes out periodically (at most once a month) and includes reviews of books I've been reading and links to stuff I've found interesting.
+</em>
+
+    <footer>
+      <p class="meta">
+        
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Jake McCrary</span></span>
+
+        
+
+
+
+
+<time class='entry-date' datetime='2015-03-24T21:29:00-05:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>24</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>9:29 pm</span></time>
+        
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/clojure/'>clojure</a>, <a class='category' href='/blog/categories/leiningen/'>leiningen</a>
+  
+</span>
+
+
+      </p>
+      
+      <div class="sharing">
+  
+</div>
+
+      
+      <p class="meta">
+        
+        <a class="basic-alignment left" href="/blog/2015/01/24/remote-pairing/" title="Previous Post: Remote Pairing">&laquo; Remote Pairing</a>
+        
+        
+        <a class="basic-alignment right" href="/blog/2015/03/31/my-home-work-space/" title="Next Post: My home work space">My home work space &raquo;</a>
+        
+      </p>
+    </footer>
+  </article>
+  
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite">
+
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <div id="disqus_target" >
+    <script>
+     var insertDisqus = function() {
+       var elem = document.createElement('script');
+       elem.innerHTML =  "var disqus_shortname = 'jakemccrary'; var disqus_identifier = 'https://jakemccrary.com/blog/2015/03/24/advanced-leiningen-checkouts-configuring-what-ends-up-on-your-classpath/'; var disqus_url = 'https://jakemccrary.com/blog/2015/03/24/advanced-leiningen-checkouts-configuring-what-ends-up-on-your-classpath/'; (function () {var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true; dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js'; (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);}());"
+       var target = document.getElementById('disqus_target');
+       target.parentNode.replaceChild(elem, target);
+     }
+    </script>
+    <button class="comment-button" onclick="insertDisqus()"><span>ENABLE COMMENTS AND RECOMMENDED ARTICLES</span></button>
+  </div>
+
+</div>
+  </section>
+  
+</div>
+
+<aside class="sidebar">
+  
+  <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2023/01/14/reading-in-2022/">Reading in 2022</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2022/11/13/bookmarklets-on-mobile-are-useful/">Bookmarklets on mobile are useful</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2022/01/02/reading-in-2021/">Reading in 2021</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2021/09/11/tests-can-act-as-living-documentation/">Tests are living documentation</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2021/08/07/improve-your-tests-by-picking-better-constants/">Improve your tests by picking better constants</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2021/01/24/reading-in-2020/">Reading in 2020</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/12/30/speeding-up-magit-with-the-native-comp-branch-of-emacs/">Speeding up Magit with the native-comp branch of Emacs</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/11/14/speeding-up-magit/">Speeding up magit</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/11/11/creating-a-custom-kindle-dictionary/">Creating a custom Kindle dictionary</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/10/03/go-create-silly-small-programs/">Go create silly, small programs</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Subscribe</h1>
+  <p>Looking forward to reading more of my writing?</p>
+  <p>Sign up for my <a target="_blank" href="https://jakemccrary.substack.com/welcome">newsletter</a> to get periodic emails with links to my latest writing and other thoughts.</p>
+  <p>Can't wait for the infrequent newsletter? Subscribe to the <a href="http://feeds.feedburner.com/JakeMccrarysMusings">RSS</a> feed.</p>
+</section>
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  <a href="/disclosure-policy">Disclosure Policy</a><br/>
+  <a href="//www.iubenda.com/privacy-policy/509351" class="iubenda-nostyle iub-legal-only iubenda-embed" title="Privacy Policy">Privacy Policy</a><br/>
+<script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src = "//cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
+  Content licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/">Creative Commons Attribution-NonCommercial 3.0 Unported License</a>.
+</p>
+
+
+</footer>
+</body>
+</html>

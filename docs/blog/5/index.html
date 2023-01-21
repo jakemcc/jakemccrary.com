@@ -1,0 +1,1778 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="iem7"><![endif]-->
+<!--[if lt IE 9]><html class="lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html lang="en"><!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <title>Jake McCrary</title>
+    <meta name="author" content="Jake McCrary">
+
+    
+    
+    
+    
+
+    <meta itemprop="name" content="Jake McCrary" />
+    <meta itemprop="description" content=" Nearly three years ago I wrote an overview of my Leiningen profiles.clj. That post is one of my most visited articles, so I thought I&rsquo;d give an &hellip;" />
+
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@jakemcc" />
+    <meta name="twitter:title" content="Jake McCrary" />
+    <meta name="twitter:description" content=" Nearly three years ago I wrote an overview of my Leiningen profiles.clj. That post is one of my most visited articles, so I thought I&rsquo;d give an &hellip;" />
+    <meta name="twitter:creator" content="@jakemcc" />
+    <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
+
+    <!-- Open Graph data -->
+    <meta property="og:site_name" content="Writing by Jake McCrary" />
+    <meta property="og:url" content="https://jakemccrary.com/blog/5/" />
+    <meta property="og:title" content="Jake McCrary" />
+    <meta property="og:description" content=" Nearly three years ago I wrote an overview of my Leiningen profiles.clj. That post is one of my most visited articles, so I thought I&rsquo;d give an &hellip;" />
+    <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
+    
+    
+
+    <meta name="description" content=" Nearly three years ago I wrote an overview of my Leiningen profiles.clj. That post is one of my most visited articles, so I thought I&rsquo;d give an &hellip;">
+
+    
+
+    <!-- http://t.co/dKP3o1e -->
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https://jakemccrary.com/blog/5/">
+    <link href="/favicon.png" rel="icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+    <link href="/stylesheets/print.css" media="print" rel="stylesheet" type="text/css">
+    <link href="http://feeds.feedburner.com/JakeMccrarysMusings" rel="alternate" title="Jake McCrary" type="application/atom+xml">
+    <link href="https://jakemccrary.com/feed.json" rel="alternate" title="Jake McCrary" type="application/json">
+
+    <!-- iOS scaling bug fix Rewritten version By @mathias, @cheeaun and @jdalton Source url: https://gist.github.com/901295 -->
+    <script type="text/javascript">
+     (function(doc) {
+       var addEvent = 'addEventListener',
+           type = 'gesturestart',
+           qsa = 'querySelectorAll',
+           scales = [1, 1],
+           meta = qsa in doc ? doc[qsa]('meta[name=viewport]') : [];
+       function fix() {
+         meta.content = 'width=device-width,minimum-scale=' + scales[0] + ',maximum-scale=' + scales[1];
+         doc.removeEventListener(type, fix, true);
+       }
+       if ((meta = meta[meta.length - 1]) && addEvent in doc) {
+         fix();
+         scales = [0.25, 1.6];
+         doc[addEvent](type, fix, true);
+       }
+     }(document));
+    </script>
+  </head>
+
+<body  >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Jake McCrary</a></h1>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul role=main-navigation>
+  <li><a href="/">Articles</a></li>
+  <li><a href="/adventures/">Adventures</a></li>
+  <li><a href="/about.html">About</a></li>
+  <li><a href="/blog/archives/">Archives</a></li>
+  <li><a href="http://feeds.feedburner.com/JakeMccrarysMusings" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  <li><a href="https://jakemccrary.substack.com/welcome" target="_blank" rel="subscribe-email" title="subscribe via email">Newsletter</a></li>
+</ul>
+
+  <form action="https://google.com/search" method="get">
+    <fieldset role="search">
+      <input type="hidden" name="sitesearch" value="jakemccrary.com">
+      <input class="search" type="text" name="q" placeholder="Search"/>
+    </fieldset>
+  </form>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/08/27/my-current-leiningen-profiles-dot-clj/">My current Leiningen profiles.clj</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-08-27T19:06:00-05:00'><span class='date'><span class='date-month'>Aug</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>7:06 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Nearly three years ago I wrote an overview of my <a href="/blog/2015/01/11/overview-of-my-leiningen-profiles-dot-clj/">Leiningen profiles.clj</a>. That post is one of my most visited articles, so I thought I&rsquo;d give an update on what I currently keep in <code>~/.lein/profiles.clj</code>.</p>
+
+<figure class='code'><figcaption><span>profiles.clj</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">{</span><span class="ss">:user</span> <span class="p">{</span><span class="ss">:plugin-repositories</span> <span class="p">[[</span><span class="s">&quot;private-plugins&quot;</span> <span class="p">{</span><span class="ss">:url</span> <span class="s">&quot;private url&quot;</span><span class="p">}]]</span>
+</span><span class='line'>        <span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">pjstadig/humane-test-output</span> <span class="s">&quot;0.8.2&quot;</span><span class="p">]]</span>
+</span><span class='line'>        <span class="ss">:injections</span> <span class="p">[(</span><span class="nf">require</span> <span class="ss">&#39;pjstadig.humane-test-output</span><span class="p">)</span>
+</span><span class='line'>                     <span class="p">(</span><span class="nf">pjstadig.humane-test-output/activate!</span><span class="p">)]</span>
+</span><span class='line'>        <span class="ss">:plugins</span> <span class="p">[[</span><span class="nv">io.sattvik/lein-ancient</span> <span class="s">&quot;0.6.11&quot;</span><span class="p">]</span>
+</span><span class='line'>                  <span class="p">[</span><span class="nv">lein-pprint</span> <span class="s">&quot;1.1.2&quot;</span><span class="p">]</span>
+</span><span class='line'>                  <span class="p">[</span><span class="nv">com.jakemccrary/lein-test-refresh</span> <span class="s">&quot;0.21.1&quot;</span><span class="p">]</span>
+</span><span class='line'>                  <span class="p">[</span><span class="nv">lein-autoexpect</span> <span class="s">&quot;1.9.0&quot;</span><span class="p">]]</span>
+</span><span class='line'>        <span class="ss">:signing</span> <span class="p">{</span><span class="ss">:gpg-key</span> <span class="s">&quot;B38C2F8C&quot;</span><span class="p">}</span>
+</span><span class='line'>        <span class="ss">:test-refresh</span> <span class="p">{</span><span class="ss">:notify-command</span> <span class="p">[</span><span class="s">&quot;terminal-notifier&quot;</span> <span class="s">&quot;-title&quot;</span> <span class="s">&quot;Tests&quot;</span> <span class="s">&quot;-message&quot;</span><span class="p">]</span>
+</span><span class='line'>                       <span class="ss">:quiet</span> <span class="nv">true</span>
+</span><span class='line'>                       <span class="ss">:changes-only</span> <span class="nv">true</span><span class="p">}}}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The biggest difference between my <code>profiles.clj</code> from early 2015 and now is that I&rsquo;ve removed all of the CIDER related plugins. I still use CIDER, but CIDER no longer requires you to list its dependencies explicitly.</p>
+
+<p>I’ve also removed Eastwood and Kibit from my toolchain. I love static analysis, but these tools fail too frequently with my projects. As a result, I rarely used them and I’ve removed them. Instead, I’ve started using <a href="https://github.com/candid82/joker">joker</a> for some basic static analysis and am really enjoying it. It is fast, and it has made refactoring in Emacs noticeably better.</p>
+
+<p><a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a>, <a href="https://github.com/clojure-expectations/lein-autoexpect">lein-autoexpect</a>, and <a href="https://github.com/pjstadig/humane-test-output">humane-test-output</a> have stuck around and have been updated to the latest versions. These tools make testing Clojure much nicer.</p>
+
+<p>I&rsquo;m also taking advantage of some new features that <a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a> provides. These settings enable the most reliable, fastest feedback possible while writing tests. My <a href="/blog/2016/06/20/my-recommended-clojure-testing-setup/">recommended testing setup</a> article goes into more details.</p>
+
+<p><code>lein-ancient</code> and <code>lein-pprint</code> have stuck around. I rarely use <code>lein-pprint</code> but it comes in handy when debugging project.clj problems. <code>lein-ancient</code> is great for helping you keep your project&rsquo;s dependencies up to date. I use a forked version that contains some changes I need to work with my company&rsquo;s private repository.</p>
+
+<p>And there you have it. My updated profiles.clj<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+Some of you might wonder why I don&rsquo;t just link to this file in version control somewhere? Well, it is kept encrypted in a git repository because it also contains some secrets that should not be public that I&rsquo;ve removed for this post.<a href="#fnref:1" rev="footnote">&#8617;</a></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/07/28/using-my-phones-voice-control-for-a-month/">Using my phone's voice control for a month</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-07-28T09:06:00-05:00'><span class='date'><span class='date-month'>Jul</span> <span class='date-day'>28</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>9:06 am</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>From May 6th to June 2nd the screen of my phone had a crack. I have an Android phone, and the crack was through the software buttons at the bottom of the screen. As a result, I could not touch the back, home, or overview (app switching) buttons. For nearly a month I never saw my home screen, couldn&rsquo;t go back, or switch apps through touching my phone. I was very reliant on arriving notifications giving me an opportunity to open apps.</p>
+
+<p>It took me some time, but I realized I could use voice commands to replace some of the missing functionality. Using voice commands, I could open apps and no longer be at the whim of notifications.</p>
+
+<p>Here is an example of my phone usage during this month. My thoughts are in [brackets]. <em>Italics</em> indicate actions. Talking is wrapped in “ ”.</p>
+
+<ol>
+<li>[Alright, I want to open Instagram] &ldquo;Ok Google, open Instagram.&rdquo;</li>
+<li>[Sweet, it worked] <em>scrolls through feed</em></li>
+<li><em>WhatsApp notification happens</em> [Great, a notification, I can click it to open WhatsApp]</li>
+<li><em>I read messages in WhatsApp.</em></li>
+<li>[Time to go back to Instagram] &ldquo;Ok Google, open Instagram&rdquo;</li>
+<li>[sigh, voice command failed, lets try again] &ldquo;Ok Google, open Instagram&rdquo;</li>
+<li><em>Instagram opens</em> [Great, time to scroll through more pictures]</li>
+</ol>
+
+
+<p>As you can see, it is a bit more painful than clicking buttons to switch between different apps. Voice commands fail sometimes and, at least for me, generally take more effort than tapping the screen. That’s ok though; I was determined to embrace voice commands and experience what a future of only voice commands might feel like.</p>
+
+<p>Below are some observations from using my voice to control my phone for a month.</p>
+
+<h3>It is awkward in public</h3>
+
+<p>My phone usage in public went way down. There was something about having to talk to your phone to open an app that made me not want to pull out my phone.</p>
+
+<p>It is much more obvious you are using your phone when you use your voice to control it. It makes casual glances at your phone while hanging out with a group impossible. You can’t sneak a quick look at Instagram when you need to say “Ok Google, open Instagram” without completely letting everyone around you know you are no longer paying attention.</p>
+
+<p>This also stopped me from using my phone in Ubers/Lyfts/cabs. I often talk to the driver or other passengers anyway, but this cemented that. I realize it is completely normal to ignore the other people in a car but I felt like a (small) asshole audibly calling out that I&rsquo;m ignoring other people in the car.</p>
+
+<h3>You become more conscious of what apps you use</h3>
+
+<p>When you have to say “Okay Google, open Instagram” every time you want to open Instagram, you become way more aware of how often you use Instagram. Using your voice instead of tapping a button on your screen is a much bigger hurdle between having the urge to open something and actually opening it. It gives you more time to observe what you are doing.</p>
+
+<h3>You become more conscious of using your phone</h3>
+
+<p>Using your phone becomes a lot harder. This increased difficulty helped highlight when I was using my phone. My phone’s functionality dropped drastically and, as a result, I stopped reaching for it as much.</p>
+
+<p>This reminded me of when I used a dumb (feature) phone for a couple of months a few years ago. Using a non-smartphone after using a smartphone for years was weird. It helped me reign in my usage<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.</p>
+
+<h3>Voice control can be pretty convenient</h3>
+
+<p>Even after repairing my screen, I still find myself using some voice commands. While making my morning coffee, I often ask my phone for the weather forecast. This is more convenient than opening an app and it lets me continue to use both hands while making coffee.</p>
+
+<p>Setting alarms, starting countdown timers, adding reminders, and checking the weather are all things I do through voice commands now.</p>
+
+<h3>I wish it worked all the time</h3>
+
+<p>I suppose this is an argument for getting a <a href="https://store.google.com/us/product/google_home?hl=en-US">Google Home</a> or <a href="http://amzn.to/2vctz9A">Amazon Echo</a>. I have to wake up my phone to use voice commands with it. This limits the usefulness of voice commands since I need be within reach of my phone.</p>
+
+<h3>I wish it could do more</h3>
+
+<p>At some point, I got used to asking my phone to do things. Then I started giving it more complicated commands, and it would fail. I found myself giving it multi-stage commands such as “Ok Google, turn on Bluetooth and play my playlist Chill on Spotify.” That doesn&rsquo;t work but it would be amazing if it did.</p>
+
+<h2>Recommendations</h2>
+
+<p>I recommend that you force yourself to use voice commands for some period of time. Pretend your home button is broken and you have to use voice control to move around your phone. You’ll become more aware of your phone usage and you&rsquo;ll learn some useful voice commands that will make your technology usage nicer.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+My non-smartphone experiment four years ago is what resulted in me no longer using Facebook or Twitter on my phone. It also is the reason I silenced most notifications, including email, on my phone.<a href="#fnref:1" rev="footnote">&#8617;</a></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/06/30/speeding-up-site-by-optionally-loading-disqus-comments/">Speeding up this site by optionally loading Disqus comments</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-06-30T19:37:00-05:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>7:37 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Earlier this month I took another look at what was required for reading an article on this site. What <a href="/blog/2016/04/30/speeding-up-my-blog/">else</a> could I do to make this site load faster?</p>
+
+<p>To do this, I loaded up <a href="http://webpagetest.org/">WebPageTest</a> and pointed it towards one of my <a href="/blog/2017/05/30/adding-a-json-feed-to-octopress-slash-jekyll/">posts</a>. To my shock, it took 113 requests for a total of 721 KB to load a single post. This took WebPageTest 6.491 seconds. The document complete event triggered after 15 requests (103 KB, 1.6 seconds).</p>
+
+<p>113 requests to load a static article was ridiculous. Most of those requests happened as a result of loading the Disqus javascript. I find comments valuable and want to continue including them on my site. Because of this, I couldn&rsquo;t remove Disqus. Instead, I made loading Disqus optional.</p>
+
+<p>After making the required changes, it only takes 11 requests for 61 KB of data to fully load the test post. The document complete event only required 8 requests for 51 KB of data. Optionally loading the Disqus javascript resulted in a massive reduction of data transferred.</p>
+
+<p>How did I do it? The template that generates my articles now only inserts the Disqus javascript when a reader clicks a button. My <a href="https://github.com/jakemcc/jakemccrary.com/blob/74f4232ce7263ba3de48497d0c0d10a8fa1a73f9/source/_includes/disqus.html">final template</a> is at the bottom of this post.</p>
+
+<p>The template adds an <code>insertDisqus</code> function that inserts a <code>&lt;script&gt;</code> element when a reader clicks a button. This element contains the original JavaScript that loads Disqus. When the <code>&lt;script&gt;</code> element is inserted into the page, the Disqus javascript is loaded and the comments appear.</p>
+
+<p>My exact template might not work for you, but I&rsquo;d encourage you to think about optionally loading Disqus and other non-required JavaScript. Your readers will thank you.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'>{% if site.disqus_short_name and page.comments == true %}
+</span><span class='line'>  <span class="nt">&lt;noscript&gt;</span>Please enable JavaScript to view the <span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">&quot;http://disqus.com/?ref_noscript&quot;</span><span class="nt">&gt;</span>comments powered by Disqus.<span class="nt">&lt;/a&gt;&lt;/noscript&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">&quot;disqus_target&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;script&gt;</span>
+</span><span class='line'>     <span class="kd">var</span> <span class="nx">insertDisqus</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>       <span class="kd">var</span> <span class="nx">elem</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;script&#39;</span><span class="p">);</span>
+</span><span class='line'>       <span class="nx">elem</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span>  <span class="s2">&quot;var disqus_shortname = &#39;{{ site.disqus_short_name }}&#39;; var disqus_identifier = &#39;{{ site.url }}{{ page.url }}&#39;; var disqus_url = &#39;{{ site.url }}{{ page.url }}&#39;; (function () {var dsq = document.createElement(&#39;script&#39;); dsq.type = &#39;text/javascript&#39;; dsq.async = true; dsq.src = &#39;//&#39; + disqus_shortname + &#39;.disqus.com/embed.js&#39;; (document.getElementsByTagName(&#39;head&#39;)[0] || document.getElementsByTagName(&#39;body&#39;)[0]).appendChild(dsq);}());&quot;</span>
+</span><span class='line'>       <span class="kd">var</span> <span class="nx">target</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s1">&#39;disqus_target&#39;</span><span class="p">);</span>
+</span><span class='line'>       <span class="nx">target</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">replaceChild</span><span class="p">(</span><span class="nx">elem</span><span class="p">,</span> <span class="nx">target</span><span class="p">);</span>
+</span><span class='line'>     <span class="p">}</span>
+</span><span class='line'>    <span class="nt">&lt;/script&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;button</span> <span class="na">class=</span><span class="s">&quot;comment-button&quot;</span> <span class="na">onclick=</span><span class="s">&quot;insertDisqus()&quot;</span><span class="nt">&gt;&lt;span&gt;</span>ENABLE COMMENTS AND RECOMMENDED ARTICLES<span class="nt">&lt;/span&gt;&lt;/button&gt;</span>
+</span><span class='line'>  <span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>{% endif %}
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/05/30/adding-a-json-feed-to-octopress-slash-jekyll/">Adding a JSON Feed to an Octopress/Jekyll generated site</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-05-30T22:31:00-05:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>10:31 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I went to a coffee shop this last weekend with the intention of writing up a <a href="/blog/2017/05/29/using-comm-to-verify-matching-content/">quick article</a> on <code>comm</code>. I sat down, sipping my coffee, and wasn’t motivated. I didn’t feel like knocking out a short post, and I didn’t feel like editing a draft I’ve been sitting on for a while. I wanted to do some work though, so I decided to add a <a href="https://jsonfeed.org/">JSON Feed</a> to this site.</p>
+
+<p>JSON Feed is an alternative to <a href="https://tools.ietf.org/html/rfc4287">Atom</a> and <a href="http://cyber.harvard.edu/rss/rss.html">RSS</a> that uses JSON instead of XML. I figured I could add support for it in less than the time it would take to enjoy my coffee and maybe some readers would find it useful. I’d be shocked if anyone actually finds this useful, but it was a fun little exercise anyway.</p>
+
+<p>An old version of Octopress (2.something), which uses an old version of Jekyll (2.5.3), generates this site. Despite this, I don’t think the template would need to change much if I moved to a new version. The template below is saved as <a href="https://github.com/jakemcc/jakemccrary.com/blob/master/source/feed.json">source/feed.json</a> in my git repository.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">---</span>
+</span><span class='line'><span class="nx">layout</span><span class="o">:</span> <span class="kc">null</span>
+</span><span class='line'><span class="o">---</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="s2">&quot;version&quot;</span><span class="o">:</span> <span class="s2">&quot;https://jsonfeed.org/version/1&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="s2">&quot;title&quot;</span><span class="o">:</span> <span class="p">{{</span> <span class="nx">site</span><span class="p">.</span><span class="nx">title</span> <span class="o">|</span> <span class="nx">jsonify</span> <span class="p">}},</span>
+</span><span class='line'>  <span class="s2">&quot;home_page_url&quot;</span><span class="o">:</span> <span class="s2">&quot;{{ site.url }}&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="s2">&quot;feed_url&quot;</span><span class="o">:</span> <span class="s2">&quot;{{site.url}}/feed.json&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="s2">&quot;favicon&quot;</span><span class="o">:</span> <span class="s2">&quot;{{ site.url }}/favicon.png&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="s2">&quot;author&quot;</span> <span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>      <span class="s2">&quot;url&quot;</span> <span class="o">:</span> <span class="s2">&quot;https://twitter.com/jakemcc&quot;</span><span class="p">,</span>
+</span><span class='line'>      <span class="s2">&quot;name&quot;</span> <span class="o">:</span> <span class="s2">&quot;{{ site.author | strip_html }}&quot;</span>
+</span><span class='line'>  <span class="p">},</span>
+</span><span class='line'>  <span class="s2">&quot;user_comment&quot;</span><span class="o">:</span> <span class="s2">&quot;This feed allows you to read the posts from this site in any feed reader that supports the JSON Feed format. To add this feed to your reader, copy the following URL - {{ site.url }}/feed.json - and add it your reader.&quot;</span><span class="p">,</span>
+</span><span class='line'>  <span class="s2">&quot;items&quot;</span><span class="o">:</span> <span class="p">[{</span><span class="o">%</span> <span class="k">for</span> <span class="nx">post</span> <span class="k">in</span> <span class="nx">site</span><span class="p">.</span><span class="nx">posts</span> <span class="nx">limit</span><span class="o">:</span> <span class="mi">20</span> <span class="o">%</span><span class="p">}</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>      <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;{{ site.url }}{{ post.id }}&quot;</span><span class="p">,</span>
+</span><span class='line'>      <span class="s2">&quot;url&quot;</span><span class="o">:</span> <span class="s2">&quot;{{ site.url }}{{ post.url }}&quot;</span><span class="p">,</span>
+</span><span class='line'>      <span class="s2">&quot;date_published&quot;</span><span class="o">:</span> <span class="s2">&quot;{{ post.date | date_to_xmlschema }}&quot;</span><span class="p">,</span>
+</span><span class='line'>      <span class="s2">&quot;title&quot;</span><span class="o">:</span> <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="nx">site</span><span class="p">.</span><span class="nx">titlecase</span> <span class="o">%</span><span class="p">}{{</span> <span class="nx">post</span><span class="p">.</span><span class="nx">title</span> <span class="o">|</span> <span class="nx">titlecase</span> <span class="o">|</span> <span class="nx">jsonify</span> <span class="p">}}{</span><span class="o">%</span> <span class="k">else</span> <span class="o">%</span><span class="p">}{{</span> <span class="nx">post</span><span class="p">.</span><span class="nx">title</span> <span class="o">|</span> <span class="nx">jsonify</span> <span class="p">}}{</span><span class="o">%</span> <span class="nx">endif</span> <span class="o">%</span><span class="p">},</span>
+</span><span class='line'>      <span class="p">{</span><span class="o">%</span> <span class="k">if</span> <span class="nx">post</span><span class="p">.</span><span class="nx">description</span> <span class="o">%</span><span class="p">}</span><span class="s2">&quot;summary&quot;</span><span class="o">:</span> <span class="p">{{</span> <span class="nx">post</span><span class="p">.</span><span class="nx">description</span> <span class="o">|</span> <span class="nx">jsonify</span> <span class="p">}},{</span><span class="o">%</span> <span class="nx">endif</span> <span class="o">%</span><span class="p">}</span>
+</span><span class='line'>      <span class="s2">&quot;content_html&quot;</span><span class="o">:</span> <span class="p">{{</span> <span class="nx">post</span><span class="p">.</span><span class="nx">content</span> <span class="o">|</span> <span class="nx">expand_urls</span><span class="o">:</span> <span class="nx">site</span><span class="p">.</span><span class="nx">url</span> <span class="o">|</span> <span class="nx">jsonify</span> <span class="p">}},</span>
+</span><span class='line'>      <span class="s2">&quot;author&quot;</span> <span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="s2">&quot;name&quot;</span> <span class="o">:</span> <span class="s2">&quot;{{ site.author | strip_html }}&quot;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>    <span class="p">}{</span><span class="o">%</span> <span class="k">if</span> <span class="nx">forloop</span><span class="p">.</span><span class="nx">last</span> <span class="o">==</span> <span class="kc">false</span> <span class="o">%</span><span class="p">},{</span><span class="o">%</span> <span class="nx">endif</span> <span class="o">%</span><span class="p">}</span>
+</span><span class='line'>    <span class="p">{</span><span class="o">%</span> <span class="nx">endfor</span> <span class="o">%</span><span class="p">}</span>
+</span><span class='line'>  <span class="p">]</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I approached this problem by reading the <a href="https://jsonfeed.org/version/1">JSON Feed Version 1 spec</a> and cribbing values from the template for my Atom feed. The trickiest part was filling in the <code>"content_html"</code> value. It took me a while to find figure out that <code>jsonify</code> needed to be at the end of <code>{{ post.content | expand_urls: site.url | jsonify }}</code>. That translates the post&rsquo;s HTML content into its JSON representation. You’ll notice that any template expression with <code>jsonify</code> at the end also isn’t wrapped in quotes. This is because <code>jsonify</code> is doing that for me.</p>
+
+<p>The <code>{% if forloop.last == false %},{% endif %}</code> is also important. Without this, the generated JSON has an extra <code>,</code> after the final element in items. This isn’t valid JSON.</p>
+
+<p>I caught that by using the command line tool <a href="http://trentm.com/json/">json</a>. If you ever edit JSON by hand or generate it from a template then you should add this tool to your toolbox. It will prevent you from creating invalid JSON.</p>
+
+<p>How did I use it? I’d make a change in the <code>feed.json</code> template and generate an output file. Then I’d <code>cat</code> that file to <code>json --validate</code>. When there was an error, I’d see a message like below.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">0 [last: 5s] 12:43:47 ~/src/jakemcc/blog (master *)</span>
+</span><span class='line'><span class="gp">$</span> cat public/feed.json <span class="p">|</span> json --validate
+</span><span class='line'><span class="go">json: error: input is not JSON: Expected &#39;,&#39; instead of &#39;{&#39; at line 25, column 5:</span>
+</span><span class='line'><span class="go">            {</span>
+</span><span class='line'><span class="go">        ....^</span>
+</span><span class='line'><span class="go">1 [last: 0s] 12:43:49 ~/src/jakemcc/blog (master *)</span>
+</span><span class='line'><span class="gp">$</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And there would be zero output on success.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='console'><span class='line'><span class="go">0 [last: 5s] 12:45:25 ~/src/jakemcc/blog (master)</span>
+</span><span class='line'><span class="gp">$</span> cat public/feed.json <span class="p">|</span> json --validate
+</span><span class='line'><span class="go">0 [last: 0s] 12:45:30 ~/src/jakemcc/blog (master)</span>
+</span><span class='line'><span class="gp">$</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It was pretty straightforward to add a JSON Feed. Was it a good use of my time? <code>¯\_(ツ)_/¯</code>. In the process of adding the feed I learned more about Liquid templating and figured out how to embed liquid tags into a blog post. Even adding redundant features can be a useful exercise.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/05/29/using-comm-to-verify-matching-content/">Using comm to verify file content matches</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-05-29T10:45:00-05:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>29</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>10:45 am</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I recently found myself in a situation where I needed to confirm that a process took in a tab separated file, did some processing, and then output a new file containing the original columns with some additional ones. The feature I was adding allowed the process to die and restart while processing the input file and pick up where it left off.</p>
+
+<p>I needed to confirm the output had data for every line in the input. I reached to the command line tool <code>comm</code>.</p>
+
+<p>Below is a made up input file.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>UNIQUE_ID    USER
+</span><span class='line'>1 38101838
+</span><span class='line'>2 19183819
+</span><span class='line'>3 19123811
+</span><span class='line'>4 10348018
+</span><span class='line'>5 19881911
+</span><span class='line'>6 29182918</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And here is some made up output.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>UNIQUE_ID    USER    MESSAGE
+</span><span class='line'>1 38101838    A01
+</span><span class='line'>2 19183819    A05
+</span><span class='line'>3 19123811    A02
+</span><span class='line'>4 10348018    A01
+</span><span class='line'>5 19881911    A02
+</span><span class='line'>6 29182918    A05</span></code></pre></td></tr></table></div></figure>
+
+
+<p>With files this size, it would be easy enough to check visually. In my testing, I was dealing with files that had thousands of lines. This is too many to check by hand. It is a perfect amount for <code>comm</code>.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Comm">comm</a> reads two files as input and then outputs three columns. The first column contains lines found only in the first file, the second column contains lines only found in the second, and the last column contains lines in both. If it is easier for you to think about it as set operations, the first two columns are similar to performing two set differences and the third is similar to set intersection. Below is an example adapted from Wikipedia showing its behavior.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cat foo.txt
+</span><span class='line'>apple
+</span><span class='line'>banana
+</span><span class='line'>eggplant
+</span><span class='line'>$ cat bar.txt
+</span><span class='line'>apple
+</span><span class='line'>banana
+</span><span class='line'>banana
+</span><span class='line'>zucchini
+</span><span class='line'>$ comm foo.txt bar.txt
+</span><span class='line'>                  apple
+</span><span class='line'>                  banana
+</span><span class='line'>          banana
+</span><span class='line'>eggplant
+</span><span class='line'>          zucchini</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So how is this useful? Well, you can also tell <code>comm</code> to suppress outputting specific columns.  If we send the common columns from the input and output file to <code>comm</code> and suppress <code>comm</code>&rsquo;s third column then anything printed to the screen is a problem. Anything printed to the screen was found in one of the files and not the other. We&rsquo;ll select the common columns using cut and, since comm expects input to be sorted, then sort using <code>sort</code>. Let&rsquo;s see what happens.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ comm -3 &lt;(cut -f 1,2 input.txt | sort) &lt;(cut -f 1,2 output.txt | sort)
+</span><span class='line'>$</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Success! Nothing was printed to the console, so there is nothing unique in either file.</p>
+
+<p><code>comm</code> is a useful tool to have in your command line toolbox.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/05/15/send-a-push-notification-when-your-external-ip-address-changes/">Send a push notification when your external IP address changes</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-05-15T22:15:00-05:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>10:15 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I need to know when my external IP address changes. Whenever it changes, I need to update an IP whitelist and need to re-login to a few sites. I sometimes don&rsquo;t notice for a couple of days and, during that time, some automatic processes fail.</p>
+
+<p>After the last time this happened, I whipped up a script that sends me a push notification when my IP address changes.</p>
+
+<p>The script uses <a href="https://pushover.net/">Pushover</a> to send the push notification. Pushover is great. I have used it for years to get notifications from my headless computers. If you use the below script, replace <code>${PUSHOVER_TOKEN}</code> and <code>${PUSHOVER_USER}</code> with your own details.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">set</span> -e
+</span><span class='line'>
+</span><span class='line'><span class="nv">previous_file</span><span class="o">=</span><span class="s2">&quot;${HOME}/.previous-external-ip&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span> ! -e <span class="s2">&quot;${previous_file}&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>    dig +short myip.opendns.com @resolver1.opendns.com &gt; <span class="s2">&quot;${previous_file}&quot;</span>
+</span><span class='line'><span class="k">fi</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">current_ip</span><span class="o">=</span><span class="k">$(</span>dig +short myip.opendns.com @resolver1.opendns.com<span class="k">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">previous_ip</span><span class="o">=</span><span class="k">$(</span>cat <span class="s2">&quot;${previous_file}&quot;</span><span class="k">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;${current_ip}&quot;</span> !<span class="o">=</span> <span class="s2">&quot;${previous_ip}&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>    <span class="nb">echo</span> <span class="s2">&quot;external ip changed&quot;</span>
+</span><span class='line'>    curl -s --form-string <span class="s2">&quot;token=${PUSHOVER_TOKEN}&quot;</span> <span class="se">\</span>
+</span><span class='line'>         --form-string <span class="s2">&quot;user=${PUSHOVER_USER}&quot;</span> <span class="se">\</span>
+</span><span class='line'>         --form-string <span class="s2">&quot;title=External IP address changed&quot;</span> <span class="se">\</span>
+</span><span class='line'>         --form-string <span class="s2">&quot;message=&#39;${previous_ip}&#39; =&gt; &#39;${current_ip}&#39;&quot;</span> <span class="se">\</span>
+</span><span class='line'>         https://api.pushover.net/1/messages.json
+</span><span class='line'><span class="k">fi</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;${current_ip}&quot;</span> &gt; <span class="s2">&quot;${previous_file}&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/04/17/what-are-the-most-used-clojure-libraries/">What are the most used Clojure libraries?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-04-17T10:07:00-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>17</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>10:07 am</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In
+a
+<a href="/blog/2017/03/31/what-clojure-testing-library-is-most-used/">previous post</a>,
+we used Google&rsquo;s BigQuery and the
+public
+<a href="https://cloud.google.com/bigquery/public-data/github">GitHub dataset</a>
+to discover the most used Clojure testing library. The answer wasn&rsquo;t
+surprising. The built-in <code>clojure.test</code> was by far the most used.</p>
+
+<p>Let&rsquo;s use the dataset to answer a less obvious question, what are the
+most used libraries in Clojure projects? We&rsquo;ll measure this by
+counting references to libraries in <code>project.clj</code> and <code>build.boot</code>
+files.</p>
+
+<p>Before we can answer that question, we&rsquo;ll need to transform the
+data. First, we create the Clojure subset of the GitHub dataset. I did
+this by executing the following queries and saving the results to
+tables<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="c1">-- Save the results of this query to the clojure.files table</span>
+</span><span class='line'><span class="k">SELECT</span>
+</span><span class='line'>  <span class="o">*</span>
+</span><span class='line'><span class="k">FROM</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">bigquery</span><span class="o">-</span><span class="k">public</span><span class="o">-</span><span class="k">data</span><span class="p">:</span><span class="n">github_repos</span><span class="p">.</span><span class="n">files</span><span class="p">]</span>
+</span><span class='line'><span class="k">WHERE</span>
+</span><span class='line'>  <span class="k">RIGHT</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;.clj&#39;</span>
+</span><span class='line'>  <span class="k">OR</span> <span class="k">RIGHT</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;.cljc&#39;</span>
+</span><span class='line'>  <span class="k">OR</span> <span class="k">RIGHT</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;.cljs&#39;</span>
+</span><span class='line'>  <span class="k">OR</span> <span class="k">RIGHT</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;boot.build&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">-- Save the results to clojure.contents</span>
+</span><span class='line'><span class="k">SELECT</span> <span class="o">*</span>
+</span><span class='line'><span class="k">FROM</span> <span class="p">[</span><span class="n">bigquery</span><span class="o">-</span><span class="k">public</span><span class="o">-</span><span class="k">data</span><span class="p">:</span><span class="n">github_repos</span><span class="p">.</span><span class="n">contents</span><span class="p">]</span>
+</span><span class='line'><span class="k">WHERE</span> <span class="n">id</span> <span class="k">IN</span> <span class="p">(</span><span class="k">SELECT</span> <span class="n">id</span> <span class="k">FROM</span> <span class="n">clojure</span><span class="p">.</span><span class="n">files</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Next we extract the dependencies from <code>build.boot</code> and <code>project.clj</code>
+files. Fortunately for us, both of these files specify dependencies in
+the same format, so we&rsquo;re able to use the same regular expression on both types.</p>
+
+<p>The query below identifies <code>project.clj</code> and <code>build.boot</code> files,
+splits each file into lines, and extracts referenced library names and
+versions using a regular expression. Additional filtering is done get
+rid of some spurious results.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">SELECT</span>
+</span><span class='line'>  <span class="n">REGEXP_EXTRACT</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">r</span><span class="s1">&#39;\[+(\S+)\s+&quot;\S+&quot;]&#39;</span><span class="p">)</span> <span class="k">AS</span> <span class="n">library</span><span class="p">,</span>
+</span><span class='line'>  <span class="n">REGEXP_EXTRACT</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="n">r</span><span class="s1">&#39;\[+\S+\s+&quot;(\S+)&quot;]&#39;</span><span class="p">)</span> <span class="k">AS</span> <span class="k">version</span><span class="p">,</span>
+</span><span class='line'>  <span class="k">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">AS</span> <span class="k">count</span>
+</span><span class='line'><span class="k">FROM</span> <span class="p">(</span>
+</span><span class='line'>  <span class="k">SELECT</span>
+</span><span class='line'>    <span class="n">SPLIT</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;\n&#39;</span><span class="p">)</span> <span class="k">AS</span> <span class="n">line</span>
+</span><span class='line'>  <span class="k">FROM</span>
+</span><span class='line'>    <span class="p">[</span><span class="n">clojure</span><span class="p">.</span><span class="n">contents</span><span class="p">]</span>
+</span><span class='line'>  <span class="k">WHERE</span>
+</span><span class='line'>    <span class="n">id</span> <span class="k">IN</span> <span class="p">(</span>
+</span><span class='line'>    <span class="k">SELECT</span>
+</span><span class='line'>      <span class="n">id</span>
+</span><span class='line'>    <span class="k">FROM</span>
+</span><span class='line'>      <span class="p">[</span><span class="n">clojure</span><span class="p">.</span><span class="n">files</span><span class="p">]</span>
+</span><span class='line'>    <span class="k">WHERE</span>
+</span><span class='line'>      <span class="n">path</span> <span class="k">LIKE</span> <span class="s1">&#39;%project.clj&#39;</span>
+</span><span class='line'>      <span class="k">OR</span> <span class="n">path</span> <span class="k">LIKE</span> <span class="s1">&#39;%build.boot&#39;</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">HAVING</span> <span class="n">line</span> <span class="k">contains</span> <span class="s1">&#39;[&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="k">GROUP</span> <span class="k">BY</span>
+</span><span class='line'>  <span class="n">library</span><span class="p">,</span> <span class="k">version</span>
+</span><span class='line'><span class="k">HAVING</span> <span class="n">library</span> <span class="k">is</span> <span class="k">not</span> <span class="k">null</span> <span class="k">and</span> <span class="k">not</span> <span class="n">library</span> <span class="k">contains</span> <span class="s1">&#39;&quot;&#39;</span>
+</span><span class='line'><span class="k">ORDER</span> <span class="k">BY</span>
+</span><span class='line'>  <span class="k">count</span> <span class="k">DESC</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The first five rows from the result are below. Let&rsquo;s save the entire
+result to a <code>clojure.libraries</code> table.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="o">|</span> <span class="n">library</span>             <span class="o">|</span> <span class="k">version</span> <span class="o">|</span> <span class="k">count</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span><span class="c1">---------------------+---------+-------|</span>
+</span><span class='line'><span class="o">|</span> <span class="n">org</span><span class="p">.</span><span class="n">clojure</span><span class="o">/</span><span class="n">clojure</span> <span class="o">|</span> <span class="mi">1</span><span class="p">.</span><span class="mi">6</span><span class="p">.</span><span class="mi">0</span>   <span class="o">|</span> <span class="mi">7015</span>  <span class="o">|</span>
+</span><span class='line'><span class="o">|</span> <span class="n">org</span><span class="p">.</span><span class="n">clojure</span><span class="o">/</span><span class="n">clojure</span> <span class="o">|</span> <span class="mi">1</span><span class="p">.</span><span class="mi">5</span><span class="p">.</span><span class="mi">1</span>   <span class="o">|</span> <span class="mi">4251</span>  <span class="o">|</span>
+</span><span class='line'><span class="o">|</span> <span class="n">org</span><span class="p">.</span><span class="n">clojure</span><span class="o">/</span><span class="n">clojure</span> <span class="o">|</span> <span class="mi">1</span><span class="p">.</span><span class="mi">7</span><span class="p">.</span><span class="mi">0</span>   <span class="o">|</span> <span class="mi">4093</span>  <span class="o">|</span>
+</span><span class='line'><span class="o">|</span> <span class="n">org</span><span class="p">.</span><span class="n">clojure</span><span class="o">/</span><span class="n">clojure</span> <span class="o">|</span> <span class="mi">1</span><span class="p">.</span><span class="mi">8</span><span class="p">.</span><span class="mi">0</span>   <span class="o">|</span> <span class="mi">3016</span>  <span class="o">|</span>
+</span><span class='line'><span class="o">|</span> <span class="n">hiccup</span>              <span class="o">|</span> <span class="mi">1</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">5</span>   <span class="o">|</span> <span class="mi">1280</span>  <span class="o">|</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now we can start answering all sorts of interesting questions.</p>
+
+<p>What is the most referenced library put out under the <code>org.clojure</code> group?</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">SELECT</span> <span class="n">library</span><span class="p">,</span> <span class="k">sum</span><span class="p">(</span><span class="k">count</span><span class="p">)</span> <span class="k">count</span>
+</span><span class='line'><span class="k">FROM</span> <span class="n">clojure</span><span class="p">.</span><span class="n">libraries</span>
+</span><span class='line'><span class="k">WHERE</span> <span class="n">library</span> <span class="k">CONTAINS</span> <span class="s1">&#39;org.clojure&#39;</span>
+</span><span class='line'><span class="k">GROUP</span> <span class="k">BY</span> <span class="n">library</span>
+</span><span class='line'><span class="k">ORDER</span> <span class="k">BY</span> <span class="k">count</span> <span class="k">desc</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">|</span> <span class="k">Row</span> <span class="o">|</span> <span class="n">library</span>                        <span class="o">|</span> <span class="k">count</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span><span class="c1">-----+--------------------------------+-------|</span>
+</span><span class='line'><span class="o">|</span>   <span class="mi">1</span> <span class="o">|</span> <span class="n">org</span><span class="p">.</span><span class="n">clojure</span><span class="o">/</span><span class="n">clojure</span>            <span class="o">|</span> <span class="mi">20834</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>   <span class="mi">2</span> <span class="o">|</span> <span class="n">org</span><span class="p">.</span><span class="n">clojure</span><span class="o">/</span><span class="n">clojurescript</span>      <span class="o">|</span>  <span class="mi">3080</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>   <span class="mi">3</span> <span class="o">|</span> <span class="n">org</span><span class="p">.</span><span class="n">clojure</span><span class="o">/</span><span class="n">core</span><span class="p">.</span><span class="n">async</span>         <span class="o">|</span>  <span class="mi">2612</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>   <span class="mi">4</span> <span class="o">|</span> <span class="n">org</span><span class="p">.</span><span class="n">clojure</span><span class="o">/</span><span class="n">tools</span><span class="p">.</span><span class="n">logging</span>      <span class="o">|</span>  <span class="mi">1579</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>   <span class="mi">5</span> <span class="o">|</span> <span class="n">org</span><span class="p">.</span><span class="n">clojure</span><span class="o">/</span><span class="k">data</span><span class="p">.</span><span class="n">json</span>          <span class="o">|</span>  <span class="mi">1546</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>   <span class="mi">6</span> <span class="o">|</span> <span class="n">org</span><span class="p">.</span><span class="n">clojure</span><span class="o">/</span><span class="n">tools</span><span class="p">.</span><span class="n">nrepl</span>        <span class="o">|</span>  <span class="mi">1244</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>   <span class="mi">7</span> <span class="o">|</span> <span class="n">org</span><span class="p">.</span><span class="n">clojure</span><span class="o">/</span><span class="n">java</span><span class="p">.</span><span class="n">jdbc</span>          <span class="o">|</span>  <span class="mi">1064</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>   <span class="mi">8</span> <span class="o">|</span> <span class="n">org</span><span class="p">.</span><span class="n">clojure</span><span class="o">/</span><span class="n">tools</span><span class="p">.</span><span class="n">cli</span>          <span class="o">|</span>  <span class="mi">1053</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>   <span class="mi">9</span> <span class="o">|</span> <span class="n">org</span><span class="p">.</span><span class="n">clojure</span><span class="o">/</span><span class="n">tools</span><span class="p">.</span><span class="n">namespace</span>    <span class="o">|</span>   <span class="mi">982</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>  <span class="mi">10</span> <span class="o">|</span> <span class="n">org</span><span class="p">.</span><span class="n">clojure</span><span class="o">/</span><span class="n">test</span><span class="p">.</span><span class="k">check</span>         <span class="o">|</span>   <span class="mi">603</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>  <span class="mi">11</span> <span class="o">|</span> <span class="n">org</span><span class="p">.</span><span class="n">clojure</span><span class="o">/</span><span class="n">core</span><span class="p">.</span><span class="k">match</span>         <span class="o">|</span>   <span class="mi">578</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>  <span class="mi">12</span> <span class="o">|</span> <span class="n">org</span><span class="p">.</span><span class="n">clojure</span><span class="o">/</span><span class="n">math</span><span class="p">.</span><span class="nb">numeric</span><span class="o">-</span><span class="n">tower</span> <span class="o">|</span>   <span class="mi">503</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>  <span class="mi">13</span> <span class="o">|</span> <span class="n">org</span><span class="p">.</span><span class="n">clojure</span><span class="o">/</span><span class="k">data</span><span class="p">.</span><span class="n">csv</span>           <span class="o">|</span>   <span class="mi">381</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>  <span class="mi">14</span> <span class="o">|</span> <span class="n">org</span><span class="p">.</span><span class="n">clojure</span><span class="o">/</span><span class="n">math</span><span class="p">.</span><span class="n">combinatorics</span> <span class="o">|</span>   <span class="mi">372</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>  <span class="mi">15</span> <span class="o">|</span> <span class="n">org</span><span class="p">.</span><span class="n">clojure</span><span class="o">/</span><span class="n">tools</span><span class="p">.</span><span class="n">reader</span>       <span class="o">|</span>   <span class="mi">368</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>  <span class="mi">16</span> <span class="o">|</span> <span class="n">org</span><span class="p">.</span><span class="n">clojure</span><span class="o">/</span><span class="n">clojure</span><span class="o">-</span><span class="n">contrib</span>    <span class="o">|</span>   <span class="mi">335</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>  <span class="mi">17</span> <span class="o">|</span> <span class="n">org</span><span class="p">.</span><span class="n">clojure</span><span class="o">/</span><span class="k">data</span><span class="p">.</span><span class="n">xml</span>           <span class="o">|</span>   <span class="mi">289</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>  <span class="mi">18</span> <span class="o">|</span> <span class="n">org</span><span class="p">.</span><span class="n">clojure</span><span class="o">/</span><span class="n">tools</span><span class="p">.</span><span class="n">trace</span>        <span class="o">|</span>   <span class="mi">236</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>  <span class="mi">19</span> <span class="o">|</span> <span class="n">org</span><span class="p">.</span><span class="n">clojure</span><span class="o">/</span><span class="n">java</span><span class="p">.</span><span class="n">classpath</span>     <span class="o">|</span>   <span class="mi">199</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>  <span class="mi">20</span> <span class="o">|</span> <span class="n">org</span><span class="p">.</span><span class="n">clojure</span><span class="o">/</span><span class="n">core</span><span class="p">.</span><span class="k">cache</span>         <span class="o">|</span>   <span class="mi">179</span> <span class="o">|</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Clojure and ClojureScript are at the top, which isn&rsquo;t surprising. I&rsquo;m
+surprised to see <code>tools.nrepl</code> in the next five results (rows 3-7). It
+is the only library out of the top that I haven&rsquo;t used.</p>
+
+<p>What testing library is used the most? We already answered this in
+my
+<a href="/blog/2017/03/31/what-clojure-testing-library-is-most-used/">last article</a> but
+let&rsquo;s see if we get the same answer when we&rsquo;re counting how many times
+a library is pulled into a project.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">SELECT</span> <span class="n">library</span><span class="p">,</span> <span class="k">sum</span><span class="p">(</span><span class="k">count</span><span class="p">)</span> <span class="k">count</span>
+</span><span class='line'><span class="k">FROM</span> <span class="p">[</span><span class="n">clojure</span><span class="p">.</span><span class="n">libraries</span><span class="p">]</span>
+</span><span class='line'><span class="k">WHERE</span> <span class="n">library</span> <span class="k">in</span> <span class="p">(</span><span class="s1">&#39;midje&#39;</span><span class="p">,</span> <span class="s1">&#39;expectations&#39;</span><span class="p">,</span> <span class="s1">&#39;speclj&#39;</span><span class="p">,</span> <span class="s1">&#39;smidjen&#39;</span><span class="p">,</span> <span class="s1">&#39;fudje&#39;</span><span class="p">)</span>
+</span><span class='line'><span class="k">GROUP</span> <span class="k">BY</span> <span class="n">library</span>
+</span><span class='line'><span class="k">ORDER</span> <span class="k">BY</span> <span class="k">count</span> <span class="k">desc</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">|</span> <span class="k">Row</span> <span class="o">|</span> <span class="n">library</span>                <span class="o">|</span> <span class="k">count</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span><span class="c1">-----+------------------------+-------|</span>
+</span><span class='line'><span class="o">|</span>   <span class="mi">1</span> <span class="o">|</span> <span class="n">midje</span>                  <span class="o">|</span>  <span class="mi">1122</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>   <span class="mi">2</span> <span class="o">|</span> <span class="n">speclj</span>                 <span class="o">|</span>   <span class="mi">336</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>   <span class="mi">3</span> <span class="o">|</span> <span class="n">expectations</span>           <span class="o">|</span>   <span class="mi">235</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>   <span class="mi">4</span> <span class="o">|</span> <span class="n">smidjen</span>                <span class="o">|</span>     <span class="mi">1</span> <span class="o">|</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Those results are close to the previous results. Of the non-clojure.test libraries, midje still ends up on top.</p>
+
+<p>What groups (as identified by the Maven groupId) have their libraries referenced the most? Top 12 are below but the <a href="https://docs.google.com/a/jakemccrary.com/spreadsheets/d/1QGRRGSo5t5Pnpwizdv_H8negs8NBxtRour6KxWN6hVY/edit?usp=sharing">full result</a> is available.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">SELECT</span> <span class="n">REGEXP_EXTRACT</span><span class="p">(</span><span class="n">library</span><span class="p">,</span> <span class="n">r</span><span class="s1">&#39;(\S+)/\S+&#39;</span><span class="p">)</span> <span class="k">AS</span> <span class="k">group</span><span class="p">,</span> <span class="k">sum</span><span class="p">(</span><span class="k">count</span><span class="p">)</span> <span class="k">AS</span> <span class="k">count</span>
+</span><span class='line'><span class="k">FROM</span> <span class="p">[</span><span class="n">clojure</span><span class="p">.</span><span class="n">libraries</span><span class="p">]</span>
+</span><span class='line'><span class="k">GROUP</span> <span class="k">BY</span> <span class="k">group</span>
+</span><span class='line'><span class="k">HAVING</span> <span class="k">group</span> <span class="k">IS</span> <span class="k">NOT</span> <span class="k">null</span>
+</span><span class='line'><span class="k">ORDER</span> <span class="k">BY</span> <span class="k">count</span> <span class="k">DESC</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">|</span> <span class="k">Row</span> <span class="o">|</span> <span class="k">group</span>                 <span class="o">|</span> <span class="k">count</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span><span class="c1">-----+-----------------------+-------|</span>
+</span><span class='line'><span class="o">|</span>   <span class="mi">1</span> <span class="o">|</span> <span class="n">org</span><span class="p">.</span><span class="n">clojure</span>           <span class="o">|</span> <span class="mi">39611</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>   <span class="mi">2</span> <span class="o">|</span> <span class="n">ring</span>                  <span class="o">|</span>  <span class="mi">5817</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>   <span class="mi">3</span> <span class="o">|</span> <span class="n">com</span><span class="p">.</span><span class="n">cemerick</span>          <span class="o">|</span>  <span class="mi">2053</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>   <span class="mi">4</span> <span class="o">|</span> <span class="n">com</span><span class="p">.</span><span class="n">taoensso</span>          <span class="o">|</span>  <span class="mi">1605</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>   <span class="mi">5</span> <span class="o">|</span> <span class="n">prismatic</span>             <span class="o">|</span>  <span class="mi">1398</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>   <span class="mi">6</span> <span class="o">|</span> <span class="n">org</span><span class="p">.</span><span class="n">slf4j</span>             <span class="o">|</span>  <span class="mi">1209</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>   <span class="mi">7</span> <span class="o">|</span> <span class="n">cljsjs</span>                <span class="o">|</span>   <span class="mi">868</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>   <span class="mi">8</span> <span class="o">|</span> <span class="n">javax</span><span class="p">.</span><span class="n">servlet</span>         <span class="o">|</span>   <span class="mi">786</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>   <span class="mi">9</span> <span class="o">|</span> <span class="n">com</span><span class="p">.</span><span class="n">stuartsierra</span>      <span class="o">|</span>   <span class="mi">642</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>  <span class="mi">10</span> <span class="o">|</span> <span class="n">com</span><span class="p">.</span><span class="n">badlogicgames</span><span class="p">.</span><span class="n">gdx</span> <span class="o">|</span>   <span class="mi">586</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>  <span class="mi">11</span> <span class="o">|</span> <span class="n">cider</span>                 <span class="o">|</span>   <span class="mi">560</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>  <span class="mi">12</span> <span class="o">|</span> <span class="n">pjstadig</span>              <span class="o">|</span>   <span class="mi">536</span> <span class="o">|</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And finally, the question that inspired this article, what is the most used library?</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">SELECT</span> <span class="n">library</span><span class="p">,</span> <span class="k">sum</span><span class="p">(</span><span class="k">count</span><span class="p">)</span> <span class="k">count</span>
+</span><span class='line'><span class="k">FROM</span> <span class="p">[</span><span class="n">clojure</span><span class="p">.</span><span class="n">libraries</span><span class="p">]</span>
+</span><span class='line'><span class="k">WHERE</span> <span class="n">library</span> <span class="o">!=</span> <span class="s1">&#39;org.clojure/clojure&#39;</span>
+</span><span class='line'><span class="k">GROUP</span> <span class="k">BY</span> <span class="n">library</span>
+</span><span class='line'><span class="k">ORDER</span> <span class="k">BY</span> <span class="k">count</span> <span class="k">desc</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">|</span> <span class="k">Row</span> <span class="o">|</span> <span class="n">library</span>                     <span class="o">|</span> <span class="k">count</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span><span class="c1">-----+-----------------------------+-------|</span>
+</span><span class='line'><span class="o">|</span>   <span class="mi">1</span> <span class="o">|</span> <span class="n">compojure</span>                   <span class="o">|</span>  <span class="mi">3609</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>   <span class="mi">2</span> <span class="o">|</span> <span class="n">lein</span><span class="o">-</span><span class="n">cljsbuild</span>              <span class="o">|</span>  <span class="mi">3413</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>   <span class="mi">3</span> <span class="o">|</span> <span class="n">org</span><span class="p">.</span><span class="n">clojure</span><span class="o">/</span><span class="n">clojurescript</span>   <span class="o">|</span>  <span class="mi">3080</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>   <span class="mi">4</span> <span class="o">|</span> <span class="n">org</span><span class="p">.</span><span class="n">clojure</span><span class="o">/</span><span class="n">core</span><span class="p">.</span><span class="n">async</span>      <span class="o">|</span>  <span class="mi">2612</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>   <span class="mi">5</span> <span class="o">|</span> <span class="n">lein</span><span class="o">-</span><span class="n">ring</span>                   <span class="o">|</span>  <span class="mi">1809</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>   <span class="mi">6</span> <span class="o">|</span> <span class="n">cheshire</span>                    <span class="o">|</span>  <span class="mi">1802</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>   <span class="mi">7</span> <span class="o">|</span> <span class="n">environ</span>                     <span class="o">|</span>  <span class="mi">1763</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>   <span class="mi">8</span> <span class="o">|</span> <span class="n">ring</span>                        <span class="o">|</span>  <span class="mi">1678</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>   <span class="mi">9</span> <span class="o">|</span> <span class="n">clj</span><span class="o">-</span><span class="n">http</span>                    <span class="o">|</span>  <span class="mi">1648</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>  <span class="mi">10</span> <span class="o">|</span> <span class="n">clj</span><span class="o">-</span><span class="n">time</span>                    <span class="o">|</span>  <span class="mi">1613</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>  <span class="mi">11</span> <span class="o">|</span> <span class="n">hiccup</span>                      <span class="o">|</span>  <span class="mi">1591</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>  <span class="mi">12</span> <span class="o">|</span> <span class="n">lein</span><span class="o">-</span><span class="n">figwheel</span>               <span class="o">|</span>  <span class="mi">1582</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>  <span class="mi">13</span> <span class="o">|</span> <span class="n">org</span><span class="p">.</span><span class="n">clojure</span><span class="o">/</span><span class="n">tools</span><span class="p">.</span><span class="n">logging</span>   <span class="o">|</span>  <span class="mi">1579</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>  <span class="mi">14</span> <span class="o">|</span> <span class="n">org</span><span class="p">.</span><span class="n">clojure</span><span class="o">/</span><span class="k">data</span><span class="p">.</span><span class="n">json</span>       <span class="o">|</span>  <span class="mi">1546</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>  <span class="mi">15</span> <span class="o">|</span> <span class="n">http</span><span class="o">-</span><span class="n">kit</span>                    <span class="o">|</span>  <span class="mi">1423</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>  <span class="mi">16</span> <span class="o">|</span> <span class="n">lein</span><span class="o">-</span><span class="n">environ</span>                <span class="o">|</span>  <span class="mi">1325</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>  <span class="mi">17</span> <span class="o">|</span> <span class="n">ring</span><span class="o">/</span><span class="n">ring</span><span class="o">-</span><span class="k">defaults</span>          <span class="o">|</span>  <span class="mi">1302</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>  <span class="mi">18</span> <span class="o">|</span> <span class="n">org</span><span class="p">.</span><span class="n">clojure</span><span class="o">/</span><span class="n">tools</span><span class="p">.</span><span class="n">nrepl</span>     <span class="o">|</span>  <span class="mi">1244</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>  <span class="mi">19</span> <span class="o">|</span> <span class="n">midje</span>                       <span class="o">|</span>  <span class="mi">1122</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>  <span class="mi">20</span> <span class="o">|</span> <span class="n">com</span><span class="p">.</span><span class="n">cemerick</span><span class="o">/</span><span class="n">piggieback</span>     <span class="o">|</span>  <span class="mi">1096</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>  <span class="mi">21</span> <span class="o">|</span> <span class="n">org</span><span class="p">.</span><span class="n">clojure</span><span class="o">/</span><span class="n">java</span><span class="p">.</span><span class="n">jdbc</span>       <span class="o">|</span>  <span class="mi">1064</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>  <span class="mi">22</span> <span class="o">|</span> <span class="n">org</span><span class="p">.</span><span class="n">clojure</span><span class="o">/</span><span class="n">tools</span><span class="p">.</span><span class="n">cli</span>       <span class="o">|</span>  <span class="mi">1053</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>  <span class="mi">23</span> <span class="o">|</span> <span class="n">enlive</span>                      <span class="o">|</span>  <span class="mi">1001</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>  <span class="mi">24</span> <span class="o">|</span> <span class="n">ring</span><span class="o">/</span><span class="n">ring</span><span class="o">-</span><span class="n">core</span>              <span class="o">|</span>   <span class="mi">995</span> <span class="o">|</span>
+</span><span class='line'><span class="o">|</span>  <span class="mi">25</span> <span class="o">|</span> <span class="n">org</span><span class="p">.</span><span class="n">clojure</span><span class="o">/</span><span class="n">tools</span><span class="p">.</span><span class="n">namespace</span> <span class="o">|</span>   <span class="mi">982</span> <span class="o">|</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="https://github.com/weavejester/compojure">Compojure</a> takes the top
+slot. <a href="https://docs.google.com/a/jakemccrary.com/spreadsheets/d/1-zmcOVPKLGrdRT_VkTrRUuRFyuxxmXi9eeH6Xzlt7yg/edit?usp=sharing">Full results are available</a>.</p>
+
+<p>Before doing this research I tried to predict what libraries I&rsquo;d see
+in the top 10. I thought that clj-time and clj-http would be up
+there. I&rsquo;m happy to see my guess was correct.</p>
+
+<p>It was pretty pleasant using BigQuery to do this analysis. Queries
+took at most seconds to execute. This quick feedback let me play
+around in the web interface without feeling like I was waiting for
+computers to do work. This made the research into Clojure library
+usage painless and fun.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+I did this in early March 2017.<a href="#fnref:1" rev="footnote">&#8617;</a></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/03/31/what-clojure-testing-library-is-most-used/">Which Clojure testing library is most used?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-03-31T21:54:00-05:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>31</span><span class='date-suffix'>st</span>, <span class='date-year'>2017</span></span> <span class='time'>9:54 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I&rsquo;ve always assumed that the built-in <code>clojure.test</code> is the most
+widely used testing library in the Clojure community. Earlier this
+month I decided to test this assumption using the
+Google&rsquo;s BigQuery <a href="https://cloud.google.com/bigquery/public-data/github">GitHub dataset</a>.</p>
+
+<p>The BigQuery GitHub dataset contains over three terabytes of source
+code from more than 2.8 million open source GitHub
+repositories. BigQuery lets us quickly query this data using SQL.</p>
+
+<p>Below is a table with the results (done in early March 2017) of my
+investigation. Surprising no one, <code>clojure.test</code> comes out as the
+winner and it is a winner by a lot.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>| Library      | # Repos Using |
+</span><span class='line'>|--------------+---------------|
+</span><span class='line'>| clojure.test |         14304 |
+</span><span class='line'>| midje        |          1348 |
+</span><span class='line'>| expectations |           429 |
+</span><span class='line'>| speclj       |           207 |
+</span><span class='line'>| smidjen      |             1 |
+</span><span class='line'>| fudje        |             1 |</span></code></pre></td></tr></table></div></figure>
+
+
+<p>23,243 repositories were identified as containing Clojure (or
+ClojureScript) code. This means there were about 6,953 repositories
+that didn&rsquo;t use any testing library<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>. This puts the &ldquo;no tests or an
+obscure other way of testing&rdquo; in a pretty solid second place.</p>
+
+<p>You should take these numbers as ballpark figures and not exact
+answers. I know from using GitHub&rsquo;s search interface that there are
+three public projects
+using <a href="https://github.com/jimpil/fudje">fudje</a><sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>.</p>
+
+<p>So, why don&rsquo;t all three of those projects show up? The dataset only
+includes projects where Google could identify the project as open
+source and the GitHub licenses API is used to do that<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup>. Two of
+those three projects were probably unable to be identified as
+something with an appropriate license.</p>
+
+<p>Another small problem is that since <code>expectations</code> is an actual word,
+it shows up outside of <code>ns</code> declarations. I ended up using a fairly
+simple query to generate this data and it only knows that
+<code>expectations</code> shows up somewhere in a file. I experimented with some
+more restrictive queries but they didn&rsquo;t drastically change the result
+and I wasn&rsquo;t sure they weren&rsquo;t wrong in other ways. If you subtract a
+number between 100 and 150 you&rsquo;ll probably have a more accurate
+expectations usage count.</p>
+
+<p>Keep reading if you want to hear more about the steps to come up with
+the above numbers.</p>
+
+<p>If you have other Clojure questions you think could be answered by
+querying this dataset, let me know in the comments or
+on <a href="https://twitter.com/jakemcc">twitter</a>. I have some more ideas, so
+I wouldn&rsquo;t be surprised if at least one more article gets written.</p>
+
+<h2>The Details</h2>
+
+<p>The process was pretty straightforward. Most of my time was spent
+exploring the tables, figuring out what the columns represented,
+figuring out what queries worked well, and manually confirming some of
+the results. BigQuery is very fast. Very little of my time was spent
+waiting for results.</p>
+
+<h3>1. Setup the data</h3>
+
+<p>You get 1 TB of free BigQuery usage a month. You can blow through this
+in a single query. Google provides sample tables that contain less
+data but I wanted to operate on the full set of Clojure(Script) files,
+so my first step was to execute some queries to create tables
+that only contained Clojure data.</p>
+
+<p>First, I queried the <code>github_repos.files</code> table for all the
+Clojure(Script) files and saved that to a <code>clojure.files</code> table.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">SELECT</span>
+</span><span class='line'>  <span class="o">*</span>
+</span><span class='line'><span class="k">FROM</span>
+</span><span class='line'>  <span class="p">[</span><span class="n">bigquery</span><span class="o">-</span><span class="k">public</span><span class="o">-</span><span class="k">data</span><span class="p">:</span><span class="n">github_repos</span><span class="p">.</span><span class="n">files</span><span class="p">]</span>
+</span><span class='line'><span class="k">WHERE</span>
+</span><span class='line'>  <span class="p">(</span><span class="k">RIGHT</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;.clj&#39;</span>
+</span><span class='line'>    <span class="k">OR</span> <span class="k">RIGHT</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;.cljc&#39;</span>
+</span><span class='line'>    <span class="k">OR</span> <span class="k">RIGHT</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="o">=</span> <span class="s1">&#39;.cljs&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The above query took only 9.2 seconds to run and processed 328 GB of data.</p>
+
+<p>Using the <code>clojure.files</code> table, we can select the source for all the
+Clojure code from the <code>github_repos.contents</code>. I saved this to a
+<code>clojure.contents</code> table.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">SELECT</span> <span class="o">*</span>
+</span><span class='line'><span class="k">FROM</span> <span class="p">[</span><span class="n">bigquery</span><span class="o">-</span><span class="k">public</span><span class="o">-</span><span class="k">data</span><span class="p">:</span><span class="n">github_repos</span><span class="p">.</span><span class="n">contents</span><span class="p">]</span>
+</span><span class='line'><span class="k">WHERE</span> <span class="n">id</span> <span class="k">IN</span> <span class="p">(</span><span class="k">SELECT</span> <span class="n">id</span> <span class="k">FROM</span> <span class="n">clojure</span><span class="p">.</span><span class="n">files</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This query processed 1.84 TB of data in 21.5 seconds. So fast. In just
+under 30 seconds, I&rsquo;ve blown through the free limit.</p>
+
+<h3>2. Identify what testing library (or libraries) a repo uses</h3>
+
+<p>We can guess that a file uses a testing library if it contains certain
+string. The strings we&rsquo;ll search for are the namespaces we&rsquo;d expect to
+see required or used in a <code>ns</code> declaration. The below query does this
+for each file and then rolls up the results by repository. It took 3
+seconds to run and processed 611 MB of data.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="k">SELECT</span>
+</span><span class='line'>  <span class="n">files</span><span class="p">.</span><span class="n">repo_name</span><span class="p">,</span>
+</span><span class='line'>  <span class="k">MAX</span><span class="p">(</span><span class="n">uses_clojure_test</span><span class="p">)</span> <span class="n">uses_clojure_test</span><span class="p">,</span>
+</span><span class='line'>  <span class="k">MAX</span><span class="p">(</span><span class="n">uses_expectations</span><span class="p">)</span> <span class="n">uses_expectations</span><span class="p">,</span>
+</span><span class='line'>  <span class="k">MAX</span><span class="p">(</span><span class="n">uses_midje</span><span class="p">)</span> <span class="n">uses_midje</span><span class="p">,</span>
+</span><span class='line'>  <span class="k">MAX</span><span class="p">(</span><span class="n">uses_speclj</span><span class="p">)</span> <span class="n">uses_speclj</span><span class="p">,</span>
+</span><span class='line'>  <span class="k">MAX</span><span class="p">(</span><span class="n">uses_fudje</span><span class="p">)</span> <span class="n">uses_fudje</span><span class="p">,</span>
+</span><span class='line'>  <span class="k">MAX</span><span class="p">(</span><span class="n">uses_smidjen</span><span class="p">)</span> <span class="n">uses_smidjen</span><span class="p">,</span>
+</span><span class='line'><span class="k">FROM</span> <span class="p">(</span>
+</span><span class='line'>  <span class="k">SELECT</span>
+</span><span class='line'>    <span class="n">id</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">contents</span><span class="p">.</span><span class="n">content</span> <span class="k">LIKE</span> <span class="s1">&#39;%clojure.test%&#39;</span> <span class="n">uses_clojure_test</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">contents</span><span class="p">.</span><span class="n">content</span> <span class="k">LIKE</span> <span class="s1">&#39;%expectations%&#39;</span> <span class="n">uses_expectations</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">contents</span><span class="p">.</span><span class="n">content</span> <span class="k">LIKE</span> <span class="s1">&#39;%midje%&#39;</span> <span class="n">uses_midje</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">contents</span><span class="p">.</span><span class="n">content</span> <span class="k">LIKE</span> <span class="s1">&#39;%speclj%&#39;</span> <span class="n">uses_speclj</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">contents</span><span class="p">.</span><span class="n">content</span> <span class="k">LIKE</span> <span class="s1">&#39;%fudje%&#39;</span> <span class="n">uses_fudje</span><span class="p">,</span>
+</span><span class='line'>    <span class="n">contents</span><span class="p">.</span><span class="n">content</span> <span class="k">LIKE</span> <span class="s1">&#39;%smidjen%&#39;</span> <span class="n">uses_smidjen</span><span class="p">,</span>
+</span><span class='line'>  <span class="k">FROM</span>
+</span><span class='line'>    <span class="n">clojure</span><span class="p">.</span><span class="n">contents</span> <span class="k">AS</span> <span class="n">contents</span><span class="p">)</span> <span class="n">x</span>
+</span><span class='line'><span class="k">JOIN</span>
+</span><span class='line'>  <span class="n">clojure</span><span class="p">.</span><span class="n">files</span> <span class="n">files</span> <span class="k">ON</span> <span class="n">files</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">id</span>
+</span><span class='line'><span class="k">GROUP</span> <span class="k">BY</span>
+</span><span class='line'>  <span class="n">files</span><span class="p">.</span><span class="n">repo_name</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Below is a screenshot of the first few rows in the result.</p>
+
+<p><img src="/images/bigquery-testing-library-result.png" title="BigQuery results for test library usage by repo" alt="BigQuery results for test library usage by repo" /></p>
+
+<h3>3. Export the data</h3>
+
+<p>At this point, we could continue doing the analysis using SQL and the
+BigQuery UI but I opted to explore the data using Clojure and the
+repl. There were too many rows to directly download the query results
+as a csv file, so I ended up having to save the results as a table and
+then export it to Google&rsquo;s cloud storage and download from there.</p>
+
+<p>The first few rows of the file look like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sql'><span class='line'><span class="n">files_repo_name</span><span class="p">,</span><span class="n">uses_clojure_test</span><span class="p">,</span><span class="n">uses_expectations</span><span class="p">,</span><span class="n">uses_midje</span><span class="p">,</span><span class="n">uses_speclj</span><span class="p">,</span><span class="n">uses_fudje</span><span class="p">,</span><span class="n">uses_smidjen</span>
+</span><span class='line'><span class="n">wangchunyang</span><span class="o">/</span><span class="n">clojure</span><span class="o">-</span><span class="n">liberator</span><span class="o">-</span><span class="n">examples</span><span class="p">,</span><span class="k">true</span><span class="p">,</span><span class="k">false</span><span class="p">,</span><span class="k">false</span><span class="p">,</span><span class="k">false</span><span class="p">,</span><span class="k">false</span><span class="p">,</span><span class="k">false</span>
+</span><span class='line'><span class="n">yantonov</span><span class="o">/</span><span class="n">rex</span><span class="p">,</span><span class="k">false</span><span class="p">,</span><span class="k">false</span><span class="p">,</span><span class="k">false</span><span class="p">,</span><span class="k">false</span><span class="p">,</span><span class="k">false</span><span class="p">,</span><span class="k">false</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>4. Calculate some numbers</h3>
+
+<p>The code takes the csv file and does some transformations. You could
+do this in Excel or using any language of your choice. I&rsquo;m not going
+to include code here, as it isn&rsquo;t that interesting.</p>
+
+<h2>BigQuery thoughts</h2>
+
+<p>This was my first time using Google&rsquo;s BigQuery. This wasn&rsquo;t the most
+difficult analysis to do but I was impressed at the speed and ease of
+use. The web UI, which I used entirely for this, is neither really
+great or extremely terrible. It mostly just worked and I rarely had to
+look up documentation.</p>
+
+<p>I don&rsquo;t really feel comfortable making a judgment call on if the cost
+is expensive or not but this article cost a bit less than seven
+dollars to write. This doesn&rsquo;t seem too outrageous to me.</p>
+
+<p>Based on my limited usage of BigQuery, it is something I&rsquo;d look into further if I needed its capabilities.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+Probably higher, as projects can and use more than one testing library.<a href="#fnref:1" rev="footnote">&#8617;</a></li>
+<li id="fn:2">
+And those projects are <a href="https://github.com/jumarko/clojure-random">jumarko/clojure-random</a>, <a href="https://github.com/dpassen1/great-sort">dpassen1/great-sort</a>, and <a href="https://github.com/jimpil/fudje">jimpil/fudje</a>.<a href="#fnref:2" rev="footnote">&#8617;</a></li>
+<li id="fn:3">
+<a href="https://news.ycombinator.com/item?id=12004644">Source is a Google Developer Advocate&rsquo;s response on old HN post</a><a href="#fnref:3" rev="footnote">&#8617;</a></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/02/27/using-lein-test-refresh-with-expectations/">Using lein-test-refresh with expectations</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-02-27T09:19:00-06:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>9:19 am</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The 2.2.0 release<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>
+of
+<a href="https://github.com/clojure-expectations/expectations/blob/master/CHANGELOG.md#changes-in-version-220">expectations</a> adds
+a
+<code>clojure.test</code>
+<a href="https://clojure-expectations.github.io/clojure-test.html">compatible syntax</a>. The release
+adds the <code>defexpect</code> macro which forces you to name your test but then
+generates code that is compatible with <code>clojure.test</code>.</p>
+
+<p>Why would you want this? Because <code>clojure.test</code> is the built-in
+testing library for Clojure, an entire ecosystem has been built around
+it. Tool support for <code>clojure.test</code> is always going to be ahead of
+support for the original <code>expectations</code>. By using the new
+<code>clojure.test</code> compatible syntax, <code>expectations</code> can take
+advantage of all the tools built for <code>clojure.test</code>.</p>
+
+<h3>Using lein-test-refresh with expectations</h3>
+
+<p>If you move to the new <code>clojure.test</code> compatible syntax, you can start
+using
+<a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a> to
+automatically rerun your tests when your code
+changes. <code>lein-test-refresh</code> is a fork of the original expectations autorunner, <a href="https://github.com/clojure-expectations/lein-autoexpect">lein-autoexpect</a>, but it has grown to have more features than its original inspiration. Now you can use it with <code>expectations</code><sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>.</p>
+
+<p>Below is a sample <code>project.clj</code> that uses <code>lein-test-refresh</code> with the latest expectations.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defproject </span><span class="nv">expectations-project</span> <span class="s">&quot;0.1.0-SNAPSHOT&quot;</span>
+</span><span class='line'>  <span class="ss">:description</span> <span class="s">&quot;Sample project using expectations&quot;</span>
+</span><span class='line'>  <span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">org.clojure/clojure</span> <span class="s">&quot;1.8.0&quot;</span><span class="p">]]</span>
+</span><span class='line'>  <span class="ss">:plugins</span> <span class="p">[[</span><span class="nv">com.jakemccrary/lein-test-refresh</span>  <span class="s">&quot;0.18.1&quot;</span><span class="p">]]</span>
+</span><span class='line'>  <span class="ss">:profiles</span> <span class="p">{</span><span class="ss">:dev</span> <span class="p">{</span><span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">expectations</span> <span class="s">&quot;2.2.0-beta1&quot;</span><span class="p">]]}})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here is an example test file.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">ns </span><span class="nv">expectations-project.core-test</span>
+</span><span class='line'>  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">expectations</span> <span class="ss">:refer</span> <span class="ss">:all</span><span class="p">]</span>
+</span><span class='line'>            <span class="p">[</span><span class="nv">expectations.clojure.test</span> <span class="ss">:refer</span> <span class="p">[</span><span class="nv">defexpect</span><span class="p">]]))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">defexpect</span> <span class="nv">two</span>
+</span><span class='line'>  <span class="mi">2</span> <span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="mi">1</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">defexpect</span> <span class="nv">three</span>
+</span><span class='line'>  <span class="mi">3</span> <span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="mi">1</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">defexpect</span> <span class="nv">group</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">expect</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">]</span> <span class="p">(</span><span class="nb">conj </span><span class="p">[]</span> <span class="mi">1</span> <span class="mi">5</span><span class="p">))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">expect</span> <span class="o">#</span><span class="p">{</span><span class="mi">1</span> <span class="mi">2</span><span class="p">}</span> <span class="p">(</span><span class="nb">conj </span><span class="o">#</span><span class="p">{}</span> <span class="mi">1</span> <span class="mi">2</span><span class="p">))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">expect</span> <span class="p">{</span><span class="mi">1</span> <span class="mi">2</span><span class="p">}</span> <span class="p">(</span><span class="nb">assoc </span><span class="p">{}</span> <span class="mi">1</span> <span class="mi">3</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And here is the result of running <code>lein test-refresh</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nv">$</span> <span class="nv">lein</span> <span class="nv">test-refresh</span>
+</span><span class='line'><span class="nv">*********************************************</span>
+</span><span class='line'><span class="nv">***************</span> <span class="nv">Running</span> <span class="nv">tests</span> <span class="nv">***************</span>
+</span><span class='line'><span class="ss">:reloading</span> <span class="p">(</span><span class="nf">expectations-project.core-test</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">FAIL</span> <span class="nv">in</span> <span class="p">(</span><span class="nf">group</span><span class="p">)</span> <span class="p">(</span><span class="nf">expectations_project/core_test.clj</span><span class="ss">:11</span><span class="p">)</span>
+</span><span class='line'><span class="nv">expected</span><span class="err">:</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">]</span>
+</span><span class='line'>  <span class="nv">actual</span><span class="err">:</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">5</span><span class="p">]</span> <span class="nv">from</span> <span class="p">(</span><span class="nb">conj </span><span class="p">[]</span> <span class="mi">1</span> <span class="mi">5</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">FAIL</span> <span class="nv">in</span> <span class="p">(</span><span class="nf">group</span><span class="p">)</span> <span class="p">(</span><span class="nf">expectations_project/core_test.clj</span><span class="ss">:11</span><span class="p">)</span>
+</span><span class='line'><span class="nv">expected</span><span class="err">:</span> <span class="p">{</span><span class="mi">1</span> <span class="mi">2</span><span class="p">}</span>
+</span><span class='line'>  <span class="nv">actual</span><span class="err">:</span> <span class="p">{</span><span class="mi">1</span> <span class="mi">3</span><span class="p">}</span> <span class="nv">from</span> <span class="p">(</span><span class="nb">assoc </span><span class="p">{}</span> <span class="mi">1</span> <span class="mi">3</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">FAIL</span> <span class="nv">in</span> <span class="p">(</span><span class="nf">three</span><span class="p">)</span> <span class="p">(</span><span class="nf">expectations_project/core_test.clj</span><span class="ss">:8</span><span class="p">)</span>
+</span><span class='line'><span class="nv">expected</span><span class="err">:</span> <span class="mi">3</span>
+</span><span class='line'>  <span class="nv">actual</span><span class="err">:</span> <span class="mi">2</span> <span class="nv">from</span> <span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="mi">1</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">Ran</span> <span class="mi">3</span> <span class="nv">tests</span> <span class="nv">containing</span> <span class="mi">5</span> <span class="nv">assertions.n</span>
+</span><span class='line'><span class="mi">3</span> <span class="nv">failures</span>, <span class="mi">0</span> <span class="nv">errors.</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">Failed</span> <span class="mi">3</span> <span class="nv">of</span> <span class="mi">5</span> <span class="nv">assertions</span>
+</span><span class='line'><span class="nv">Finished</span> <span class="nv">at</span> <span class="mi">11</span><span class="ss">:53:06.281</span> <span class="p">(</span><span class="nf">run</span> <span class="nv">time</span><span class="err">:</span> <span class="mf">0.270</span><span class="nv">s</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After some quick edits to fix the test errors and saving the file, here is the output from the tests re-running.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nv">*********************************************</span>
+</span><span class='line'><span class="nv">***************</span> <span class="nv">Running</span> <span class="nv">tests</span> <span class="nv">***************</span>
+</span><span class='line'><span class="ss">:reloading</span> <span class="p">(</span><span class="nf">expectations-project.core-test</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">Ran</span> <span class="mi">3</span> <span class="nv">tests</span> <span class="nv">containing</span> <span class="mi">5</span> <span class="nv">assertions.</span>
+</span><span class='line'><span class="mi">0</span> <span class="nv">failures</span>, <span class="mi">0</span> <span class="nv">errors.</span>
+</span><span class='line'><span class="ss">:reloading</span> <span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">Ran</span> <span class="mi">3</span> <span class="nv">tests</span> <span class="nv">containing</span> <span class="mi">5</span> <span class="nv">assertions.</span>
+</span><span class='line'><span class="mi">0</span> <span class="nv">failures</span>, <span class="mi">0</span> <span class="nv">errors.</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">Passed</span> <span class="nv">all</span> <span class="nv">tests</span>
+</span><span class='line'><span class="nv">Finished</span> <span class="nv">at</span> <span class="mi">11</span><span class="ss">:53:59.045</span> <span class="p">(</span><span class="nf">run</span> <span class="nv">time</span><span class="err">:</span> <span class="mf">0.013</span><span class="nv">s</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you&rsquo;re using <code>expectations</code> and switch to the new
+<code>clojure.test</code> compatible syntax, I&rsquo;d encourage you to start
+using
+<a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a>.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+As of 2016-02-27 <code>2.2.0</code> isn&rsquo;t out yet, but <code>2.2.0-beta1</code> has been released and has the changes.<a href="#fnref:1" rev="footnote">&#8617;</a></li>
+<li id="fn:2">
+In fact, you have to use it if you use Leiningen and the new syntax and want your tests to run automatically.<a href="#fnref:2" rev="footnote">&#8617;</a></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/01/04/reading-in-2016/">Reading in 2016</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-01-04T18:29:00-06:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>4</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>6:29 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The time has come for another end-of-year summary of my reading from the previous year. Here are links to my previous end-of-year reflections: <a href="//jakemccrary.com/blog/2014/01/01/using-incanter-to-review-my-2013-reading/">2013</a>, <a href="//jakemccrary.com/blog/2015/01/08/reading-in-2014/">2014</a>, <a href="//jakemccrary.com/blog/2016/03/13/reading-in-2015/">2015</a>.</p>
+
+<p>I&rsquo;ve continued to keep track of my reading using
+<a href="http://goodreads.com">Goodreads</a>. My
+<a href="https://www.goodreads.com/user/show/3431614-jake-mccrary">profile</a>
+contains the full list and reviews of books I&rsquo;ve read
+since 2010. <a href="https://www.goodreads.com/review/list/3431614-jake-mccrary?read_at=2016">Here</a>
+is my full 2016 list.</p>
+
+<h2>2016 Goal</h2>
+
+<p>My 2016 goal was to read one or two biographies. It is a genre that I typically don&rsquo;t read and I felt like branching out. I&rsquo;m going to consider this goal achieved. I read <a href="http://amzn.to/2j3Fux9">Open</a> (<a href="https://www.goodreads.com/review/show/1679109928">my review</a>) by Andre Agassi (well, ghostwritten for him) and <a href="http://amzn.to/2iQrZkG">Medium Raw</a> by Anthony Bourdain. Both have been tagged as memoirs so in the strictest sense maybe I shouldn&rsquo;t count them towards my goal but I&rsquo;m counting them. <em>Open</em> tells Andre Agassi&rsquo;s life story and claims to have been fact checked so it is pretty close to a biography.</p>
+
+<p>Of the two, I drastically preferred <em>Open</em>. I would not recommend <em>Medium Raw</em> unless you know you like Bourdain&rsquo;s writing and the book description sounds interesting to you. <em>Open</em> has a broader appeal and tells an interesting story of a man&rsquo;s conflict, struggle and success.</p>
+
+<h2>2016 Numbers</h2>
+
+<p>I read 59 books in 2016 for a total of 22,397 pages. I also read every issue of Amazon&rsquo;s <em>Day One</em> weekly periodical (as I have every year since <em>Day One</em> started being published). Overall my rating distribution is pretty similar to 2015, with my three, four, and five star categories all containing two or three more books than the previous year.</p>
+
+<h2>Recommendations</h2>
+
+<p>I awarded twelve books a five star rating. I&rsquo;ve listed them below in no particular order. The title links are affiliate links to Amazon and the review links to go my review on Goodreads.</p>
+
+<ul>
+<li><a href="http://amzn.to/2ipbNWJ">The Brain Audit: Why Customers Buy (And Why They Don&rsquo;t)</a> (<a href="https://www.goodreads.com/review/show/1534752389">my review</a>)</li>
+<li><a href="http://amzn.to/2iQnuqv">The Charisma Myth - Olivia Fox Cabane</a> (<a href="https://www.goodreads.com/review/show/1047168473">my review</a>)</li>
+<li><a href="http://amzn.to/2iUG6Ir">Lying - Sam Harris</a> (<a href="https://www.goodreads.com/review/show/1518371907">my review</a>)</li>
+<li><a href="http://amzn.to/2iQyOD3">To Sell Is Human: The Surprising Truth About Moving Others - Daniel Pink</a> (<a href="https://www.goodreads.com/review/show/622644583">my review</a>)</li>
+<li><a href="http://amzn.to/2j3HsgY">Climbing Anchors - John Long and Bob Gains</a> (<a href="https://www.goodreads.com/review/show/1484465759">my review</a>)</li>
+<li><a href="http://amzn.to/2iph8gL">Creativity, Inc. - Ed Catmull and Amy Wallace</a> (<a href="http://www.goodreads.com/review/show/947747190">my review</a>)</li>
+<li><a href="http://amzn.to/2iUS0BR://amzn.to/2iINMdB">Chasing the Scream - Johann Hari</a> (<a href="https://www.goodreads.com/review/show/1184643637">my review</a>)</li>
+<li><a href="http://amzn.to/2ip4Zs2">Deep Work - Cal Newport</a> (<a href="https://www.goodreads.com/review/show/1529172855">my review</a>)</li>
+<li><a href="http://amzn.to/2iUJ9Ac">Seveneves - Neal Stephenson</a> (<a href="https://www.goodreads.com/review/show/1295783533">my review</a>)</li>
+<li><a href="http://amzn.to/2iUKYxe">A Little Life - Hanya Yanagihara</a> (<a href="https://www.goodreads.com/review/show/1474596789">my review</a>)</li>
+<li><a href="http://amzn.to/2j3y8tH">The Paper Menagerie and Other Stories - Ken Liu</a> (<a href="https://www.goodreads.com/review/show/1827462108">my review</a>)</li>
+<li><a href="http://amzn.to/2j3AGaY">This Is How You Lose Her - Junot Díaz</a> (<a href="https://www.goodreads.com/review/show/1600396478">my review</a><sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>)</li>
+</ul>
+
+
+<p>While I enjoyed all of the above books, a few stand out.</p>
+
+<h4><em>Chasing the Scream</em> by Johann Hari</h4>
+
+<p>This book is about the war on drugs. It brings together studies, history, and anecdotes to present a compelling read on addiction and drug policy. I think it would be hard to finish this book and not be persuaded to vote for policies of drug decriminalization or legalization and more humane addiction treatments. The <a href="https://www.goodreads.com/book/show/24379960-chasing-the-scream">goodreads reviews</a> of this book are generally extremely positive, with 61% of them being five stars. Go read the book&rsquo;s summary and a few reviews and you&rsquo;ll want to read this book.</p>
+
+<h4><em>Deep Work</em> by Cal Newport</h4>
+
+<p>This book is game changer for those of us that have hobbies or work in fields where distraction-free concentration is beneficial or required. Cal Newport makes the argument that the ability to perform deep work is critical for mastering complicated information and producing great results. The book is split in to two parts. The first defines and makes the argument for deep work. The second prescribes rules for enabling yourself to perform more deep work. I highly recommend reading this book <strong>and</strong> implementing the recommendations<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>.</p>
+
+<h4><em>A Little Life</em> by Hanya Yanagihara</h4>
+
+<p>This is a depressing and challenging book. As <a href="https://www.goodreads.com/review/show/1167073305?book_show_action=true">this</a> review says, this book is about a terribly broken character, Jude, and his struggles. The writing is excellent. If you feel up to reading a long, difficult book that exposes you to some terrible experiences then read this book. I&rsquo;m having a hard time saying this was my favorite fiction book from last year but it is the only five star fiction book I&rsquo;m specifically calling out.</p>
+
+<h4><em>Moral Tribes</em> by Joshua Greene</h4>
+
+<p>I didn&rsquo;t give this book five stars but I&rsquo;m still going to recommend <a href="http://amzn.to/2iOQ6Ch">Moral Tribes</a> by Joshua Greene. This book explains how conflict arises when two moral groups meet and interact (an &ldquo;Us&rdquo; vs &ldquo;Them&rdquo; situation) and proposes Utilitarianism as a solution to this problem. While some parts of the book were a chore to finish, I&rsquo;m glad I&rsquo;ve read this book. <a href="https://www.goodreads.com/review/show/1825978507">My review</a> highlights more of what I found interesting in this book.</p>
+
+<p>There is a section of the book that presents both sides of the abortion debate which I&rsquo;ve shown to friends on both side of the debate. All of them seemed to enjoy reading this small section of the book.</p>
+
+<h2>Series read this year</h2>
+
+<p>I finish almost every book I start reading. I read quick enough where I find it worthwhile to finish marginal books just in case they turn out good. With a book series the end of each book provides a checkpoint for me to reevaluate if I want to continue the series. While none of the below series earned five stars, I&rsquo;m highlighting them because each series represents me making the choice to continue staying in author&rsquo;s world.</p>
+
+<p>I continued <a href="http://amzn.to/2iUC6Y8">The Expanse</a> series this year and read books 4-6. This is just great space opera and I&rsquo;ll continue reading it until it stops being written.</p>
+
+<p>I started and finished Don Winslow&rsquo;s <a href="https://www.goodreads.com/series/156704-power-of-the-dog">The Power of the Dog</a> series. It tells the fictionalized tale of drug cartels in Mexico. Parts are brutal and violent and unfortunately often based on real events.</p>
+
+<p>I read the three main books of Ann Leckie&rsquo;s <a href="https://www.goodreads.com/series/113751-imperial-radch">Imperial Radch</a>. It is a neat science fiction story that deals with interesting topics. As a warning, I found the first book in the series to be the weakest. Keep pushing and read the second before giving up on this story.</p>
+
+<p>Scott Meyer&rsquo;s <a href="https://www.goodreads.com/series/131379-magic-2-0">Magic 2.0</a> was a fun read in which the main character realizes he can edit a file and change reality. It is a silly premise and it delivers good, funny, lighthearted reading.</p>
+
+<p>I also read Neil Gaiman&rsquo;s <em>American Gods</em> and <em>Anasazi Boys</em>. I devoured both of these books.</p>
+
+<h2>Technical books read</h2>
+
+<p>I didn&rsquo;t read many books on software in 2016. I read the lowest number of software related books since I&rsquo;ve started keeping track. I finished Ben Rady&rsquo;s <a href="http://amzn.to/2iUWatp">Serverless Single Page Apps</a> and Ron Jeffries' <a href="http://amzn.to/2iQnIxR">The Nature of Software Development</a>. I also read most of Google&rsquo;s <a href="http://amzn.to/2i8tpGi">Site Reliability Engineering</a> but did not finish it before the end of 2016. I read more non-fiction books than in 2015 but I would have liked to see more software books in the mix.</p>
+
+<h2>More stats</h2>
+
+<p>There were definitely a couple months where my reading took a definite dip. I don&rsquo;t remember what I was doing during April or September but apparently I wasn&rsquo;t reading.</p>
+
+<p><img src="/images/books-and-pages-read-2016.png" title="Chart of reading per month" alt="Chart of reading per month" /></p>
+
+<p>Unsurprisingly, ebooks continued to be my preferred format. This isn&rsquo;t surprising and I expect that this trend continues. At this point the only reason I&rsquo;ll even potentially look at this stat next year is because it forces me to go through and confirm each book had its format recorded correctly.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>|           | 2014 | 2015 | 2016 |
+</span><span class='line'>|-----------+------+------+------|
+</span><span class='line'>| ebook     |   64 |   47 |   56 |
+</span><span class='line'>| hardcover |    1 |    1 |    0 |
+</span><span class='line'>| paperback |    4 |    3 |    3 |</span></code></pre></td></tr></table></div></figure>
+
+
+<p>My average rating was about the same as 2015.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>| Year | Average Rating |
+</span><span class='line'>|------+----------------|
+</span><span class='line'>| 2011 |           3.84 |
+</span><span class='line'>| 2012 |           3.66 |
+</span><span class='line'>| 2013 |           3.67 |
+</span><span class='line'>| 2014 |           3.48 |
+</span><span class='line'>| 2015 |           3.86 |
+</span><span class='line'>| 2016 |           3.83 |</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I read multiple books by quite a few authors. Below is a table summarizing my repeat</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>| Author           | Average Rating | Number of Books | Number of Pages |
+</span><span class='line'>|------------------+----------------+-----------------+-----------------|
+</span><span class='line'>| Ann Leckie       |          3.667 |               3 |            1205 |
+</span><span class='line'>| James S.A. Corey |          3.667 |               3 |            1673 |
+</span><span class='line'>| Scott Meyer      |              4 |               3 |            1249 |
+</span><span class='line'>| Don Winslow      |              4 |               2 |            1182 |
+</span><span class='line'>| Junot Díaz       |              4 |               2 |             565 |
+</span><span class='line'>| Michael Crichton |            3.5 |               2 |             814 |
+</span><span class='line'>| Neil Gaiman      |              4 |               2 |             981 |</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>2017 goals</h2>
+
+<p>This year I&rsquo;m planning on revisiting some of my favorite books. I&rsquo;m not going to set a concrete number for this goal and will just have to trust myself to honestly judge if I accomplish this goal.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+This review is currently blank on Goodreads because this was a book read for a book club I&rsquo;m part of and we haven&rsquo;t met to discuss the book yet. We typically don&rsquo;t post reviews online of books we&rsquo;ll be discussing. To any of my book club members that are reading this post, I apologize for spoiling the surprise of what star rating I&rsquo;m planning on giving this book.<a href="#fnref:1" rev="footnote">&#8617;</a></li>
+<li id="fn:2">
+I&rsquo;m considering writing up more about this book and some changes I&rsquo;ve made to help myself do more deep work.<a href="#fnref:2" rev="footnote">&#8617;</a></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+      <a class="prev" href="/blog//6">&larr; Older</a>
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/blog//4">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2023/01/14/reading-in-2022/">Reading in 2022</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2022/11/13/bookmarklets-on-mobile-are-useful/">Bookmarklets on mobile are useful</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2022/01/02/reading-in-2021/">Reading in 2021</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2021/09/11/tests-can-act-as-living-documentation/">Tests are living documentation</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2021/08/07/improve-your-tests-by-picking-better-constants/">Improve your tests by picking better constants</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2021/01/24/reading-in-2020/">Reading in 2020</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/12/30/speeding-up-magit-with-the-native-comp-branch-of-emacs/">Speeding up Magit with the native-comp branch of Emacs</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/11/14/speeding-up-magit/">Speeding up magit</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/11/11/creating-a-custom-kindle-dictionary/">Creating a custom Kindle dictionary</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2020/10/03/go-create-silly-small-programs/">Go create silly, small programs</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Subscribe</h1>
+  <p>Looking forward to reading more of my writing?</p>
+  <p>Sign up for my <a target="_blank" href="https://jakemccrary.substack.com/welcome">newsletter</a> to get periodic emails with links to my latest writing and other thoughts.</p>
+  <p>Can't wait for the infrequent newsletter? Subscribe to the <a href="http://feeds.feedburner.com/JakeMccrarysMusings">RSS</a> feed.</p>
+</section>
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  <a href="/disclosure-policy">Disclosure Policy</a><br/>
+  <a href="//www.iubenda.com/privacy-policy/509351" class="iubenda-nostyle iub-legal-only iubenda-embed" title="Privacy Policy">Privacy Policy</a><br/>
+<script type="text/javascript">(function (w,d) {var loader = function () {var s = d.createElement("script"), tag = d.getElementsByTagName("script")[0]; s.src = "//cdn.iubenda.com/iubenda.js"; tag.parentNode.insertBefore(s,tag);}; if(w.addEventListener){w.addEventListener("load", loader, false);}else if(w.attachEvent){w.attachEvent("onload", loader);}else{w.onload = loader;}})(window, document);</script>
+  Content licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/3.0/">Creative Commons Attribution-NonCommercial 3.0 Unported License</a>.
+</p>
+
+
+</footer>
+</body>
+</html>

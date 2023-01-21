@@ -4,7 +4,7 @@
   <title><![CDATA[Category: bash | Jake McCrary]]></title>
   <link href="https://jakemccrary.com/blog/categories/bash/atom.xml" rel="self"/>
   <link href="https://jakemccrary.com/"/>
-  <updated>2023-01-21T10:12:10-06:00</updated>
+  <updated>2023-01-21T10:12:48-06:00</updated>
   <id>https://jakemccrary.com/</id>
   <author>
     <name><![CDATA[Jake McCrary]]></name>
@@ -134,7 +134,7 @@ This script converts seconds into a more readable string (example: 310 to <code>
 
 <p>Here is a screenshot of everything in action (with a reduced prompt, my normal one includes git and other info).</p>
 
-<p>{% img /images/runtime-humane-example.png 320 150 &ldquo;Command line prompt showing runtimes of previous commands&rdquo; &ldquo;Command line prompt showing runtimes of previous commands&rdquo; %}</p>
+<p><img src="/images/runtime-humane-example.png" width="320" height="150" title="&ldquo;Command line prompt showing runtimes of previous commands&rdquo; &ldquo;Command line prompt showing runtimes of previous commands&rdquo;" ></p>
 
 <p>Below is a simplified snippet from my <code>.bashrc</code> that provides runtimes using both of these additions.</p>
 
