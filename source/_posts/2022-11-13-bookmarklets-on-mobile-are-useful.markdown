@@ -38,7 +38,7 @@ This one prepends `http://archive.is/` to the current URL:
 javascript:(function() {window.location="http://archive.is/"+window.location.toString();}())
 ```
 
-This one changes `theatlantic.com` to `theatlantic.com.` (though it also no longer gets around their paywall):
+This one changes `theatlantic.com` to `theatlantic.com.` (though it no longer gets around their paywall):
 
 ``` javascript
 javascript:(function() {window.location=window.location.href.replace(/theatlantic.com/, 'theatlantic.com.');}())
