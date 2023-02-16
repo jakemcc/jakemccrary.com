@@ -1,3 +1,7 @@
+ifeq ($(WAS_SOURCED),)
+  $(error WAS_SOURCED is not set, source Envfile)
+endif
+
 .PHONY: help
 help:
 	@grep -E '^[0-9a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
