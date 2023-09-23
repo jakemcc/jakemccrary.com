@@ -122,19 +122,22 @@
         hash (js/decodeURIComponent (subs hash 1))]
     (println hash)
     (if (string/blank? hash)
-      {}
+      (new-state)
       (-> (read-string hash)
           (update :trip-types set)))))
 
 (defn set-hash! [m]
   (set! (.-hash js/location) (js/encodeURIComponent (pr-str m))))
 
-(add-watch state :state-changed (fn [k ref old new] (set-hash! new)))
+(add-watch state :state-changed
+           (fn [k ref old new]
+             (prn new)
+             (set-hash! new)))
 
 (defn toggle-trip-type [type]
-  (swap! state update :trip-types (fn [s](if (contains? s type)
-                                           (disj s type)
-                                           (conj s type)))))
+  (swap! state update :trip-types (fn [s] (if (contains? s type)
+                                            (disj s type)
+                                            (conj s type)))))
 
 (defn trip-selected [type]
   (contains? (:trip-types @state) type))
