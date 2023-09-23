@@ -52,9 +52,13 @@
 
    ::outdoors #{(i "Bug spray")
                 (i "Sunscreen")
-                (i "Headlamp")}
+                (i "Headlamp")
+                (i "sun shirt")
+                (i "sun pants")
+                (i "sun hat")}
    
    ::camping #{(i "tent")
+               (i "trash bag(s)")
                ::outdoors}
 
    ::climbing #{(q "bouldering?" ::bouldering)
