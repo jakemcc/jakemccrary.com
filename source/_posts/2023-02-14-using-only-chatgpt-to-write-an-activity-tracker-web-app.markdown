@@ -34,7 +34,7 @@ Alright, that's better.
 ## The Goal
 
 I wanted to try to write a simple web application only using ChatGPT.
-In the spirit of [creating small programs](http://localhost:4000/blog/2020/10/03/go-create-silly-small-programs/) to solve a minor annoyance, I decided to try to make an activity tracker.
+In the spirit of [creating small programs](/blog/2020/10/03/go-create-silly-small-programs/) to solve a minor annoyance, I decided to try to make an activity tracker.
 
 Features of the tracker:
 
@@ -333,9 +333,417 @@ I refreshed the page, clicked some buttons, and saw the `console.log` messages.
 🎉 Success!
 
 At this point, I went to bed.
-This was on a Tuesday.
 
 ## Persisting to Firebase
 
-Four days later, I picked back up the project.
+Four days later, I picked back up the project and rejoined the conversation with ChatGPT.
+I continued the conversation as if I had never left.
+
+{% img /images/chatgpt/restarting-the-conversation.png %}
+
+{% img /images/chatgpt/first-instructions-for-readding-firebase.png %}
+
+This numbered list with a link to Firebase is a pretty solid response.
+Step 6 and the code provided is a bit off as the previous code did not have a `recordActivity` function.
+
+The code, and step 2, switches back to using the Firebase Firestore offering instead of the Realtime Database.
+Probably either would be fine to use but at this point ChatGPT has flipped between them a couple times.
+
+Given the time between when I had started this project and continued it, I had forgotten about the Firestore vs Realtime Database usage and just followed the instructions and setup a Firestore database through the Firebase console.
+
+I next told ChatGPT that I didn't have a `recordActivity` function and asked if I should add it and where should I call it from.
+It's response was good, saying ot add it to `script.js` and call it from the `onClick` handler.
+
+I was still trying to not type any code myself, so I asked it to show me what that would look like.
+
+{% img /images/chatgpt/code-after-adding-record-activity.png %}
+{% img /images/chatgpt/code-after-adding-record-activity-continued.png %}
+
+This response has good parts and bad parts.
+We've switched back to use the Realtime Database and `import` statements have shown up again.
+But the rest of it is pretty good and the explanation after it is useful.
+
+I knew there would be problems but I saved the latest `script.js` to disk and refreshed my browser.
+As expected, there were errors about the `import` statements.
+So I told ChatGPT about them.
+
+Me:
+> I did this but now receive an error in my browser about the import statements and not being part of a module. Do I need to use the import statments?
+
+It responded suggesting that my browser didn't support ES6 modules and said I could work around it by using script tags and then it displayed some updated HTML and javascript.
+
+Updated `index.html`:
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>My Activity Tracker</title>
+  </head>
+  <body>
+    <h1>My Activity Tracker</h1>
+    <div id="buttons">
+      <button id="book-button">Book</button>
+      <button id="tv-button">TV</button>
+      <button id="computer-button">Computer</button>
+      <button id="phone-game-button">Phone Game</button>
+      <button id="vr-game-button">VR Game</button>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-database.js"></script>
+    <script>
+      // Your Firebase configuration
+      const firebaseConfig = {
+        apiKey: "YOUR_API_KEY",
+        authDomain: "YOUR_AUTH_DOMAIN",
+        datapbaseURL: "YOUR_DATABASE_URL",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_STORAGE_BUCKET",
+        messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+        appId: "YOUR_APP_ID"
+      };
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+
+      // Get a reference to the database
+      const database = firebase.database();
+    </script>
+    <script src="script.js"></script>
+  </body>
+</html>
+```
+
+The updated `script.js`:
+
+```javascript
+const buttons = document.querySelectorAll('button');
+
+buttons.forEach(button => {
+  button.addEventListener('click', event => {
+    const buttonId = event.target.id;
+    const activity = buttonId.split('-')[0];
+    console.log(`Activity: ${activity}`);
+
+    // Write the activity to the database
+    database.ref().push({
+      activity: activity,
+      timestamp: Date.now()
+    });
+  });
+});
+```
+
+Reviewing this while writing the article and it would have mostly worked.
+One area that was slightly off is the `const activity = buttonId.split('-')[0];` line.
+That would have worked fine for `book-button` but would not return the value I want for `vr-game-button`.
+
+I also didn't want to inline JavaScript into the HTML, so I asked "Do I need to have the initialization in the html file? Can it be recombined with script.js?"
+
+It replied that it was possible to combine the initialization with `script.js` and displayed an updated version of the JavaScript.
+
+```javascript
+const firebase = require("firebase/app");
+require("firebase/database");
+
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_AUTH_DOMAIN",
+  databaseURL: "YOUR_DATABASE_URL",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_STORAGE_BUCKET",
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  appId: "YOUR_APP_ID",
+};
+
+firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
+
+class Button {
+  constructor(name) {
+    this.name = name;
+    this.count = 0;
+
+    this.button = document.createElement("button");
+    this.button.textContent = `${this.name}: 0`;
+    this.button.addEventListener("click", () => {
+      this.count += 1;
+      this.button.textContent = `${this.name}: ${this.count}`;
+      this.recordActivity();
+    });
+  }
+
+  render() {
+    return this.button;
+  }
+
+  recordActivity() {
+    database.ref(this.name).set({
+      count: this.count,
+    });
+    console.log(`${this.name} activity recorded: ${this.count}`);
+  }
+}
+
+const buttons = [
+  new Button("Book"),
+  new Button("TV"),
+  new Button("Computer"),
+  new Button("Phone Game"),
+  new Button("VR Game"),
+];
+
+buttons.forEach((button) => {
+  document.body.appendChild(button.render());
+});
+```
+
+This `script.js` brings back in `require` and moves back to using a `Button` class.
+
+The main problem with this version of the script is that it stopped recording the timestamp of the event and instead just records the count.
+I'm not upset that it stopped recording the timestamp.
+While I do want to record a timestamp, I hadn't prompted ChatGPT to do so.
+
+The actual bug here is that it is just setting the count in the Firebase Database to the in-memory count.
+If I click a button ten times and then reload the page and click it again, the persisted count would be reset.
+Generously, I suppose I hadn't specified that this shouldn't be the behavior so maybe that is on me.
+
+At this point, I just wanted to get to a complete state so I stopped entirely replacing my code with the provided code blocks and just selectively made some of the suggested edits to the HTML file and fixed the `import` issue from the previously provided code.
+This means I was still on a version of code that had a `recordActivity` that indirectly recorded a timestamp and did not lose data.
+I had also filled in the in the `firebaseConfig` values in the `firebaseConfig`.
+Below are my `index.html` and `script.js` looked like.
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Activity Tracker</title>
+  </head>
+  <body>
+    <h1>Activity Tracker</h1>
+
+    <button id="book-button">Book</button>
+    <button id="tv-button">TV</button>
+    <button id="computer-button">Computer</button>
+    <button id="phone-game-button">Phone Game</button>
+    <button id="vr-game-button">VR Game</button>
+
+    <script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-database.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
+```
+
+```javascript
+const firebaseConfig = {
+  apiKey: "AIzaSyBvjPwNyC3vpByghCK2oPJtZLdNJj-ZZY0",
+  authDomain: "chatgpt-activity.firebaseapp.com",
+  databaseURL: "https://chatgpt-activity.firebaseio.com",
+  projectId: "chatgpt-activity",
+  storageBucket: "chatgpt-activity.appspot.com",
+  messagingSenderId: "302737905399",
+  appId: "1:302737905399:web:a866ac2b8ab6e1b0f025f2"
+};
+
+firebase.initializeApp(firebaseConfig);
+
+const database = firebase.database();
+
+class Button {
+  constructor(title, id) {
+    this.title = title;
+    this.id = id;
+    this.element = document.createElement('button');
+    this.element.textContent = this.title;
+    this.element.id = this.id;
+    this.element.addEventListener('click', () => this.onClick());
+  }
+
+  onClick() {
+    console.log(`Button '${this.title}' clicked`);
+    recordActivity(this.title);
+  }
+
+  appendTo(element) {
+    element.appendChild(this.element);
+  }
+}
+
+const recordActivity = (activity) => {
+  database.ref('activities/' + Date.now()).set({
+    activity: activity
+  });
+};
+
+const buttons = [
+  new Button('Book', 'book-button'),
+  new Button('TV', 'tv-button'),
+  new Button('Computer', 'computer-button'),
+  new Button('Phone Game', 'phone-game-button'),
+  new Button('VR Game', 'vr-game-button')
+];
+
+buttons.forEach((button) => button.appendTo(document.body));
+```
+
+I tried loading the page and received an error about the Firebase Realtime Database URL being wrong.
+ChatGPT to the rescue!
+
+{% img /images/chatgpt/url-error.png %}
+
+This was a useful response.
+I **hadn't** noticed that the earlier numbered instructions had me setup a Firebase Firestore and not a Realtime Database.
+Following the instructions here made me realize the mistake.
+
+I updated `script.js` to have the right URL and loaded the app.
+It worked!
+Kind of.
+
+## Adding auth
+
+Now I was getting a permission error.
+But that was progress.
+
+{% img /images/chatgpt/open-permissions.png %}
+
+This is a good response and it even warns that it isn't a recommended configuration.
+For this experiment, I could have just gone with the completely open permissions but I wanted to do better.
+
+{% img /images/chatgpt/some-permissions.png %}
+
+I updated the code and tried again.
+Still getting permission issues because `script.js` isn't doing any sort of logging in.
+
+I remembereed that the first `recordActivity` implementation had a line in it about signing in with email and password, so I asked ChatGPT about that.
+
+{% img /images/chatgpt/email-and-passord.png %}
+
+Not bad.
+I setup a user in the Firebase console, copied the above code into `script.js`, and hard-coded an email and password[5].
+I refreshed the browser and got a new error.
+You know what I'm going to do next.
+
+[5]: Not a good idea for deploying into the wild but good enough for running locally and this experiment.
+
+{% img /images/chatgpt/grab-auth.png %}
+
+Pretty near perfect response.
+I added the suggested `<script>` tag, noticed the version was different from the other tags, and updated the version to match the others.
+
+I refreshed the page and clicked some buttons.
+No errors in the JavaScript console.
+I pulled up the Firebase Realtime Database UI and can see activities! 🎉
+
+## Displaying activities
+
+We're in a great spot now; data is flowing.
+But we really need to display the activities in our UI.
+
+{% img /images/chatgpt/first-display.png %}
+
+I updated `script.js` and `index.html` based off this response and now there was a list of activities on the page.
+Unfortunately, `activity.time` did not exist since the current `recordActivity` was not recording time like that, so that part of the string just said `null`.
+But this was still pretty good.
+
+{% img /images/chatgpt/persist-time.png %}
+
+Not a bad response but it switched us back to using Firestore and recorded the timestamp in `timestamp` field instead of `time`.
+Time to try to switch back.
+
+{% img /images/chatgpt/back-to-realtime-database.png %}
+
+This worked!
+
+## Skipping some parts
+
+At this point, the UI was a little janky with the buttons being below the activity list.
+So whenever I clicked a button, the list grew and the buttons would move.
+This would be an easy fix to just make myself but I continued to work with ChatGPT on solving it.
+
+I'm going to leave out some of the of the prompts and responses here.
+Trust me that it was basically more of the same.
+
+To try to fix the moving buttons, I prompted ChatGPT with the following:
+
+> So, the clickable buttons are below the activity list so they keep moving when new activities are added. What needs to happen to keep them above the list?
+
+ChatGPT suggested adding a fixed header to the HTML contain the buttons and provided a HTML snippet and CSS to add to a CSS file.
+I recognized that `script.js` needed to be updated to work with the new HTML (the new HTML already had `<button>`s in it and the current `script.js` was adding them).
+
+I asked ChatGPT how `script.js` needed to be changed to work with the suggested `index.html`.
+The response it gave shows an example of using `document.getElementById` to grab a button, but it used entirely different ids[6].
+The example would have probably been enough to have a novice go make the necessary edits.
+But I still wanted to try to have it write the code.
+
+[6]: It looked like these were ids for a timer: `start-button`, `stop-button`, `reset-button`.
+
+So next, I asked "How would I change this block of code to work with the current index.html with regards to button clicks?" and I pasted a large snippet of code into the prompt (basically, everything to do with the class `Button` and adding the buttons to the DOM).
+Its response was pretty good.
+
+```javascript
+class Button {
+  constructor(title, id) {
+    this.title = title;
+    this.id = id;
+    this.element = document.createElement('button');
+    this.element.textContent = this.title;
+    this.element.id = this.id;
+    this.element.addEventListener('click', () => this.onClick());
+  }
+
+  onClick() {
+    console.log(`Button '${this.title}' clicked`);
+    recordActivity(this.title);
+  }
+
+  appendTo(element) {
+    element.appendChild(this.element);
+  }
+}
+
+const buttons = [
+  new Button('Book', 'book-button'),
+  new Button('TV', 'tv-button'),
+  new Button('Computer', 'computer-button'),
+  new Button('Phone Game', 'phone-game-button'),
+  new Button('VR Game', 'vr-game-button')
+];
+
+buttons.forEach((button) => button.appendTo(document.getElementById('buttons')));
+```
+
+This is ok, except the previous HTML didn't use an id for `buttons`, it put that as the class.
+It also ends up duplicating the buttons on the page since the JavaScript adds new buttons.
+
+I did some more prompting and got a version of the HTML to exist without the `<button>` elements already being there and it had `<div>` with an id to query for adding the buttons from the JavaScript.
+The only bit that was off now was the ids in the HTML were `buttons-container` and `activity-list` and the JavaScript was looking for `button-container` and `activities-list`.
+I made those edits by hand and now the site works without moving the buttons around.
+
+## More auth
+
+The Firebase console was warning me about the Realtime Database rules being too permissive.
+I asked ChatGPT for some stricter rules and it provided some to me that worked.
+
+I also asked what other authentication methods were available and it provided a list of options, such as using Google or Twitter authentication.
+I asked "how would I use Google authentication?" and its response seems pretty good.
+I did not bother trying to do it though.
+
+# Conclusion
+
+This was a really interesting experiment to try.
+I was able to limit the non-ChatGPT suggested editing I did to removing some `require`s, updating a version number (this probably wasn't strictly needed), and fixing a slight mismatch between the ids found in the HTML file and the ids the JavaScript needed.
+
+Could I have done this faster on my own?
+Yes.
+But I've also written a handful of small ClojureScript and JavaScript tools/games that use Firebase Realtime Database as their persistent storage.
+
+Would using ChatGPT for the scaffolding but allowing myself to make bigger edits have gone faster than doing it on my own?
+I think so.
+
+It was definitely useful to have experience writing these style of programs before.
+Knowing the direction I wanted the code to go definitely helped me write prompts to get there.
+I'd be really interested in observing a non-programmer attempt this same task.
 
