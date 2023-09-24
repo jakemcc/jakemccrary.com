@@ -61,12 +61,15 @@
                (i "trash bag(s)")
                ::outdoors}
 
-   ::climbing #{(q "bouldering?" ::bouldering)
+   ::climbing #{::outdoors
+                (q "bouldering?" ::bouldering)
                 (q "sport climbing?" ::sport-climbing)
                 (i "chalk")
                 (a "refill chalk")
                 (i "climbing shoes")
-                ::outdoors}
+                (a "trim nails")
+                (a "download offline google map")
+                (a "mountain project download")}
 
    ::bathroom #{(i "toothbrush")
                 (i "toothpaste")
@@ -99,6 +102,7 @@
 
 (defn bucket-by [pred xs]
   (let [r (group-by pred xs)]
+    (assert (<= (count (keys r)) 2))
     [(get r true) (get r false)]))
 
 (defn packing-list'
@@ -134,10 +138,13 @@
              (prn new)
              (set-hash! new)))
 
+(defn toggle-membership [s type]
+  (if (contains? s type)
+    (disj s type)
+    (conj s type)))
+
 (defn toggle-trip-type [type]
-  (swap! state update :trip-types (fn [s] (if (contains? s type)
-                                            (disj s type)
-                                            (conj s type)))))
+  (swap! state update :trip-types toggle-membership type))
 
 (defn trip-selected [type]
   (contains? (:trip-types @state) type))
@@ -145,25 +152,45 @@
 (defn trip-types []
   (:trip-types @state))
 
+(defn- k=
+  [k x]
+  (fn [m] (= x (get m k))))
+
+(def subcategory-trip-types
+  (set (keep :yes (reduce set/union (vals packing-lists)))))
+
+(def root-trip-types (clojure.set/difference (set (keys packing-lists)) subcategory-trip-types))
+
 (defn my-component []
   [:div
    [:div#actions [:button {:on-click #(reset! state (new-state))} "reset"]]
    [:div#trip-types
-    (for [type (keys packing-lists)]
+    (for [type root-trip-types]
       ^{:key type} [:div
                     [:input {:type "checkbox"
                              :checked (trip-selected type)
                              :on-change #(toggle-trip-type type)}]
                     [:label type]])]
-   [:div#list
-    (let [items (reduce clojure.set/union (mapv (partial packing-list' packing-lists)
-                                                (trip-types)))]
+   (let [[items others] (->> (trip-types)
+                             (mapv (partial packing-list' packing-lists))
+                             (reduce clojure.set/union)
+                             (bucket-by (k= :type :item)))]
+     [:div#list
+      [:ul (for [i (reverse (sort-by :type others))]
+             ^{:key i} [:div
+                        [:input (cond-> {:type "checkbox"}
+                                  (= :question (:type i))
+                                  (assoc :checked (trip-selected (:yes i))
+                                         :on-change #(toggle-trip-type (:yes i))))]
+                        [:label (when (= :action (:type i))
+                                  "TODO: ")
+                         (:value i)]])]
       [:ul (for [i (sort-by :type items)]
              ^{:key i} [:div
                         [:input {:type "checkbox"}]
                         [:label (when (= :action (:type i))
                                   "TODO: ")
-                         (:value i)]])])]])
+                         (:value i)]])]])])
 
 (reset! state (load-from-hash))
 (rdom/render [my-component] (.getElementById js/document "app"))
