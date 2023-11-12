@@ -35,10 +35,12 @@ At the Best in Show boulder, I flashed a v4 and worked and sent a v6 and v5.
 According to what I wrote down the names of the problems are:
 
 - God Loves a Terrier, v4
-- Best in Show, v6
+- ~~Best in Show~~ Shit Show, v6
 - sit-start from start of above v6 into the above v4
 
 I think I may have the Best in Show name wrong and I should have written down Short Show but I'm not really sure and these boulders are not online yet.
+
+**Edit(2023/11/12): I did have it wrong! Unsure what it was called when I sent it but now it is known as Shit Show**
 
 Whatever the name, the v6 was incredibly fun.
 The way I did it involved at least one, maybe two, heel toe cam(s) and you moved around quite a bit.
