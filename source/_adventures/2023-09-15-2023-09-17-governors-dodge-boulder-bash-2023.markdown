@@ -35,7 +35,6 @@ Some of the problems we climbed include:
 - [Leaning Rock](https://www.mountainproject.com/route/105879039/leaning-rock), v3 (very sick)
 - [Another Warm-up](https://www.mountainproject.com/route/106239107/another-warmup), v0
 
-
 We did not get on the [Nameless](https://www.mountainproject.com/route/105879059/nameless) arete next to Sandstone Violence but it looked sweet.
 
 I don't think I've ever smiled more than when climbing Belly of the Beast.
