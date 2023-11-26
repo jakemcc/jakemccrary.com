@@ -21,6 +21,10 @@ The day of the competition!
 The [WCA](https://www.wiclimbers.com/) did a great job hosting the event.
 Volunteers took the new boulders around and showed them how to setup crash pads, how to spot, and took folks to the boulders and helped them have a great time.
 
+The organizers let the Open category start before the other groups.
+This was so they could knock out the warm-ups before the problems were mobbed by other climbers.
+This was a nice touch.
+
 Disney and I climbed along the ridge behind Group Campsite B.
 Some of the problems we climbed include:
 
