@@ -10,18 +10,13 @@ categories:
 - books
 ---
 
-At the beginning of every year (not so much the beginning this year), I take the time to update my records of what I've read the previous year.
+At the beginning of every year (not so much the beginning this year), I take the time to update my records of what I've read the previous year and write up a summary.
 
 
-Previous years: [2013](/blog/2014/01/01/using-incanter-to-review-my-2013-reading/), [2014](/blog/2015/01/08/reading-in-2014/), [2015](/blog/2016/03/13/reading-in-2015/), [2016](/blog/2017/01/04/reading-in-2016/), [2017](/blog/2018/03/03/reading-in-2017/), [2018](/blog/2019/01/21/reading-in-2018/), [2019](/blog/2020/01/11/reading-in-2019/), [2020](/blog/2021/01/24/reading-in-2020/), [2021](/blog/2022/01/02/reading-in-2021/), [2022](/blog/2023/01/14/reading-in-2022/).
+Previous summaries: [2013](/blog/2014/01/01/using-incanter-to-review-my-2013-reading/), [2014](/blog/2015/01/08/reading-in-2014/), [2015](/blog/2016/03/13/reading-in-2015/), [2016](/blog/2017/01/04/reading-in-2016/), [2017](/blog/2018/03/03/reading-in-2017/), [2018](/blog/2019/01/21/reading-in-2018/), [2019](/blog/2020/01/11/reading-in-2019/), [2020](/blog/2021/01/24/reading-in-2020/), [2021](/blog/2022/01/02/reading-in-2021/), [2022](/blog/2023/01/14/reading-in-2022/).
 
 I've continued to keep track of my reading using [Goodreads](http://goodreads.com).
 My [profile](https://www.goodreads.com/user/show/3431614-jake-mccrary) has nearly the full list of the books I've read since 2010.
-
-In 2022 I did a poor job of keeping Goodreads updated.
-I continued that trend and did a poor job this year as well.
-Oh well.
-Goodreads is still a fairly close approximation of what and when I read last year and, even if it wasn't, it is the best source I have for this data.
 
 ## 2023 Goals
 
@@ -38,7 +33,7 @@ Was it better than 2022?
 Perhaps.
 
 I didn't write many reviews for specific books nor did I send out any emails about what I was reading throughout the year.
-But, I did do fewer corrections of the data I had in Goodreads.
+But I did do fewer corrections of the data I had in Goodreads.
 
 I did read more than I did last year.
 
@@ -59,6 +54,9 @@ It is a pandemic story that has characters spanning hundreds of years.
 It is a little weird and beautiful.
 It did an excellent job of conveying feeling.
 
+This is one of the few books that I did a mini-review of when I finished it.
+That review: 
+
 > A beautiful novel. While reading, I found myself rereading parts. Not because the sentences were confusing but because they expressed such a clear feeling.
 
 I highly recommend this book.
@@ -69,7 +67,7 @@ This book is real weird and fantastic.
 The main character is extremely interesting.
 I had a blast reading this.
 
-#### [Network Effect](https://www.goodreads.com/book/show/53440834-the-first-bad-man) by Martha Wells
+#### [Network Effect](https://www.goodreads.com/book/show/52381770-network-effect) by Martha Wells
 
 I really enjoy this series and thought this as an excellent addition to it.
 
@@ -152,8 +150,8 @@ Unsurprisingly, electronic books are still the dominate format.
 | paperback |    2 |    0 |    1 |    1 |    7 |    5 |    5 |    3 |    3 |
 ```
 
-Fiction continued to dominate this year with a large difference in number of books read.
-If I did this by page count I think it would be telling a different story, as I read quite a few short stories published as Kindle books and this skewed my fiction book count high.
+Fiction continued to dominate the book count this year.
+If I did this by page count I think it would tell a different story, as I read quite a few short stories published as Kindle books and this skewed my fiction book count high.
 
 
 ```org
@@ -174,3 +172,9 @@ Here is the star rating distribution.
 | non-fiction |       0 |       1 |       3 |       2 |
 ```
 
+## 2024 goals
+
+I'd like to maintain a regular reading practice.
+I think this means having a similar number of pages read this year.
+
+I have a massive stack of books at home that I haven't read through yet, I'd like to whittle that down some.
