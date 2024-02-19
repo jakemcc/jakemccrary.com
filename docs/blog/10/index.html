@@ -14,17 +14,17 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" lein-test-refresh has
-always supported notifying you of your tests' status through growl.
-With the release of version 0.3.4 it now will notify you &hellip;" />
+    <meta itemprop="description" content=" Last year
+I wrote about how I managed my windows under OS X, Windows, and Linux.
+I&rsquo;m a big fan of having an orderly layout and try to use grid &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" lein-test-refresh has
-always supported notifying you of your tests' status through growl.
-With the release of version 0.3.4 it now will notify you &hellip;" />
+    <meta name="twitter:description" content=" Last year
+I wrote about how I managed my windows under OS X, Windows, and Linux.
+I&rsquo;m a big fan of having an orderly layout and try to use grid &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -32,16 +32,16 @@ With the release of version 0.3.4 it now will notify you &hellip;" />
     <meta property="og:site_name" content="Writing by Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/10/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" lein-test-refresh has
-always supported notifying you of your tests' status through growl.
-With the release of version 0.3.4 it now will notify you &hellip;" />
+    <meta property="og:description" content=" Last year
+I wrote about how I managed my windows under OS X, Windows, and Linux.
+I&rsquo;m a big fan of having an orderly layout and try to use grid &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" lein-test-refresh has
-always supported notifying you of your tests' status through growl.
-With the release of version 0.3.4 it now will notify you &hellip;">
+    <meta name="description" content=" Last year
+I wrote about how I managed my windows under OS X, Windows, and Linux.
+I&rsquo;m a big fan of having an orderly layout and try to use grid &hellip;">
 
     
 
@@ -106,6 +106,103 @@ With the release of version 0.3.4 it now will notify you &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/03/30/managing-windows-in-osx-using-phoenix/">Managing windows in OS X using Phoenix</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-03-30T18:30:00-05:00'><span class='date'><span class='date-month'>Mar</span> <span class='date-day'>30</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>6:30 pm</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><a href="http://jakemccrary.com/blog/2013/04/15/manage-your-workspace-with-grids-under-linux-osx-and-windows/">Last year</a>
+I wrote about how I managed my windows under OS X, Windows, and Linux.
+I&rsquo;m a big fan of having an orderly layout and try to use grid
+managers. Since then I&rsquo;ve changed jobs and now my main machine is an
+MacBook Pro running OS X Mavericks with two 27 inch cinema displays.
+As a result I&rsquo;ve started experimenting with more OS X window managers.
+After trying a few out I&rsquo;m going to stick with
+<a href="https://github.com/sdegutis/Phoenix">Phoenix</a>.</p>
+
+<h3>Before Phoenix</h3>
+
+<p>Last year I was satisfied using <a href="http://spectacleapp.com/">Spectacle</a>.
+It is (or at least was, I haven&rsquo;t used it in a while) easy to install
+and had good defaults. I&rsquo;d still recommend it for most people.</p>
+
+<p>At the recommendation from a reader, I switched to
+<a href="https://github.com/jigish/slate">Slate</a>. Slate has a ton of features
+and I barely scratched the surface in how I used it. I used it as a
+replacement for Spectacle and didn&rsquo;t touch any of the advanced
+features. Before I had the urge to explore the advanced features I
+ended up becoming dissatisfied with Slate. I ran into an issue where
+after running for a while (talking at least a week) it would start to
+respond slowly. I&rsquo;d try to move a window to another monitor and it
+wouldn&rsquo;t move. Eventually I&rsquo;d be in another process and the
+command would register sending whatever window I was currently focused
+on to another monitor.</p>
+
+<h3>Introducing Phoenix</h3>
+
+<p>I was looking for solutions to Slate&rsquo;s unresponsiveness when I
+stumbled on <a href="https://github.com/sdegutis/Phoenix">Phoenix</a>. I was
+drawn in by its stated goal; it &ldquo;aims for efficiency and a very small
+footprint.&rdquo; The fact that it is still being actively developed was
+also a huge selling point. Knowing that any bugs I find have a
+potential to be fixed is great.</p>
+
+<p>Phoenix provides a
+<a href="https://github.com/sdegutis/Phoenix/wiki/JavaScript-API-documentation">JavaScript API</a>
+that allows you to interact with your running applications or launch
+applications. It doesn&rsquo;t provide anything out of the box; it is up to
+you to make it useful by writing your own (or taking another persons)
+configuration.</p>
+
+<p>This is a double-edged sword. This means you get exactly the features
+you want. It also means you might spend significant amounts of time
+figuring out how to get the features you want.</p>
+
+<p>Luckily there are <a href="https://github.com/sdegutis/Phoenix/wiki">examples</a>
+that you can use as a starting point. Browsing through the examples is
+a great way of becoming familiar with what is possible and can be
+inspiring.</p>
+
+<p>My
+<a href="https://github.com/jakemcc/dotfiles/blob/17a73f89a2f3f7b2c9aa07a63d1928b86cc5425d/home/.phoenix.js">configuration</a>
+is relatively minimal. I&rsquo;ve written
+<a href="https://github.com/jakemcc/dotfiles/blob/17a73f89a2f3f7b2c9aa07a63d1928b86cc5425d/home/.phoenix.js#L42-L87">code</a>
+to move windows between monitors (rotating between three added some
+complexity to this),
+<a href="https://github.com/jakemcc/dotfiles/blob/17a73f89a2f3f7b2c9aa07a63d1928b86cc5425d/home/.phoenix.js#L90-L122">start or focus</a>
+certain applications, and
+<a href="https://github.com/jakemcc/dotfiles/blob/17a73f89a2f3f7b2c9aa07a63d1928b86cc5425d/home/.phoenix.js#L11-L37">resize</a>
+windows. This is enough for me to feel efficient.</p>
+
+<p>I encourage you to use a tool to help manage your windows. Personally
+I think Phoenix is pretty great and don&rsquo;t mind tinkering with my
+configuration and strongly recommend it. As a bonus it is a young
+project where the maintainer is open to suggestions. If you have an
+idea for a useful
+<a href="https://github.com/sdegutis/Phoenix/issues/18">feature</a> it has a
+possibility of being added pretty quickly.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -980,89 +1077,6 @@ I was given this book to review by Packt Publishing. If you think you have somet
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/15/manage-your-workspace-with-grids-under-linux-osx-and-windows/">Manage your workspace with grids under Linux, OS X, and Windows</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2013-04-15T19:15:00-05:00'><span class='date'><span class='date-month'>Apr</span> <span class='date-day'>15</span><span class='date-suffix'>th</span>, <span class='date-year'>2013</span></span> <span class='time'>7:15 pm</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&rsquo;m the type of computer user that wants an organized
-workspace. To me this means having my active applications organized
-into a grid. Efficiently doing this is important to me. Before I jump
-into what tools I use let me give a quick explanation of what
-organized into a grid means to me.</p>
-
-<p>Imagine that your screen is divided both vertically and
-horizontally. To me a good tool for managing windows lets you take
-your active application and move it so it fits in any rectangle formed
-by the edges of your screen and those two lines splitting your
-monitor. This means that with a keystroke you can make the active
-window take up the full screen, half screen, or quarter screen. Below
-I&rsquo;ve listed the tools that let me do that.</p>
-
-<h4>Linux</h4>
-
-<p>I&rsquo;ve switched to using <a href="http://i3wm.org/">i3</a>, a
-<a href="http://en.wikipedia.org/wiki/Tiling_window_manager">tiling window manager</a>
-instead of the default window manager on every distribution I use. When using
-i3 the tiling is done automatically. There are hotkeys for changing
-window layout and for moving focus between windows. The automatic tiling and
-shortcuts take a bit to get used to, but now that I am I can&rsquo;t believe
-I switched to using a tiling window manager sometime in the last eight
-months.</p>
-
-<h4>Windows</h4>
-
-<p>When developing under Windows I use
-<a href="http://winsplit-revolution.com/">Winsplit Revolution</a>. Unlike i3,
-Winsplit Revolution only provides hotkeys snapping windows to
-different locations. This is admittedly more approachable than i3 as
-the grid isn&rsquo;t forced on you. WinSplit Revolution is pretty flexible,
-you can change shortcuts and even define your own grid.</p>
-
-<p>I can&rsquo;t remember when I started using Winsplit Revolution but it has
-become a vital tool for when I&rsquo;m stuck doing development on a Windows
-machine.</p>
-
-<h4>OS X</h4>
-
-<p>My only OS X machine is my 13 inch MacBook Air. I always thought that
-with such a small screen being able to tile my windows wouldn&rsquo;t be as
-useful. I  was completely wrong. If anything it may be more useful
-because of the tiny screen real estate. The 13 inch screen is just wide
-enough to have an editor up on one half and documentation on the
-other.</p>
-
-<p>The tool I use to snap my windows to a grid is
-<a href="http://spectacleapp.com/">Spectacle</a>. Spectacle provides some
-sensible keystrokes for moving windows around. The hotkeys are
-similar to Winsplit Revolution&rsquo;s which makes switching between
-operating systems easy.</p>
-
-<p>If you haven&rsquo;t tried using a tool to help you organize your windows I
-highly recommend that you do. I&rsquo;ve introduced both technical and
-non-technical people to these tools and everyone has enjoyed them.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//11">&larr; Older</a>
@@ -1078,6 +1092,10 @@ non-technical people to these tools and everyone has enjoyed them.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2024/02/18/reading-in-2023/">Reading in 2023</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2023/01/14/reading-in-2022/">Reading in 2022</a>
@@ -1113,10 +1131,6 @@ non-technical people to these tools and everyone has enjoyed them.</p>
     
       <li class="post">
         <a href="/blog/2020/11/11/creating-a-custom-kindle-dictionary/">Creating a custom Kindle dictionary</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/10/03/go-create-silly-small-programs/">Go create silly, small programs</a>
       </li>
     
   </ul>

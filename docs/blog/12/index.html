@@ -14,13 +14,13 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" I often find myself browsing the Internet and then suddenly I want to have a Clojure REPL at my fingertips. As I&rsquo;ve become better with emacs &hellip;" />
+    <meta itemprop="description" content=" Recently I was writing some data mining Clojure code which needed to parse a log file and do some transforms of the data. Some of the transforms were &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" I often find myself browsing the Internet and then suddenly I want to have a Clojure REPL at my fingertips. As I&rsquo;ve become better with emacs &hellip;" />
+    <meta name="twitter:description" content=" Recently I was writing some data mining Clojure code which needed to parse a log file and do some transforms of the data. Some of the transforms were &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -28,12 +28,12 @@
     <meta property="og:site_name" content="Writing by Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/12/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" I often find myself browsing the Internet and then suddenly I want to have a Clojure REPL at my fingertips. As I&rsquo;ve become better with emacs &hellip;" />
+    <meta property="og:description" content=" Recently I was writing some data mining Clojure code which needed to parse a log file and do some transforms of the data. Some of the transforms were &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" I often find myself browsing the Internet and then suddenly I want to have a Clojure REPL at my fingertips. As I&rsquo;ve become better with emacs &hellip;">
+    <meta name="description" content=" Recently I was writing some data mining Clojure code which needed to parse a log file and do some transforms of the data. Some of the transforms were &hellip;">
 
     
 
@@ -98,6 +98,122 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2011/01/18/generating-test-cases-in-clojure/">Generating test cases in Clojure</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2011-01-18T00:00:00-06:00'><span class='date'><span class='date-month'>Jan</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2011</span></span> <span class='time'>12:00 am</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Recently I was writing some data mining Clojure code which needed to parse a log file and do some transforms of the data. Some of the transforms were dependent on data found across multiple lines. There was no ordering or proximity guarantees to these lines.</p>
+
+<p>This required the code to handle a variety of situations. After writing a couple simple tests and getting those passing I wanted to more extensively test my solution. I was lazy though and did not want to hand code all of the potential orderings.  Enter <code>permutations</code>.</p>
+
+<p><code>permutations</code> is a function out of <a href="http://clojure.github.com/clojure-contrib/combinatorics-api.html">clojure.contrib.combinatorics</a>. As the name suggests, you give it a collection and it returns a lazy sequence containing all the different permutations of the elements in that collection. An example is below.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nv">user&gt;</span><span class="p">(</span><span class="kd">ns </span><span class="nv">generate</span><span class="p">)</span>
+</span><span class='line'><span class="nv">generate&gt;</span><span class="p">(</span><span class="nf">use</span> <span class="o">&#39;</span><span class="p">[</span><span class="nv">clojure.contrib.combinatorics</span> <span class="ss">:only</span> <span class="p">[</span><span class="nv">permutations</span><span class="p">]])</span>
+</span><span class='line'><span class="nv">nil</span>
+</span><span class='line'><span class="nv">generate&gt;</span> <span class="p">(</span><span class="nf">permutations</span> <span class="p">[</span><span class="ss">:a</span> <span class="ss">:b</span> <span class="ss">:c</span><span class="p">])</span>
+</span><span class='line'><span class="p">((</span><span class="ss">:a</span> <span class="ss">:b</span> <span class="ss">:c</span><span class="p">)</span> <span class="p">(</span><span class="ss">:a</span> <span class="ss">:c</span> <span class="ss">:b</span><span class="p">)</span> <span class="p">(</span><span class="ss">:b</span> <span class="ss">:a</span> <span class="ss">:c</span><span class="p">)</span> <span class="p">(</span><span class="ss">:b</span> <span class="ss">:c</span> <span class="ss">:a</span><span class="p">)</span> <span class="p">(</span><span class="ss">:c</span> <span class="ss">:a</span> <span class="ss">:b</span><span class="p">)</span> <span class="p">(</span><span class="ss">:c</span> <span class="ss">:b</span> <span class="ss">:a</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can already see where this is going. I was able to use <code>permutations</code> to generate all the potential different orderings of the input. This saved me the trouble of having to do that by hand.</p>
+
+<p>One difficulty of generating test inputs pragmatically is telling what sort of inputs caused it to fail. To get around this I used the rarely used (at least in code I&rsquo;m working on) second argument of <a href="http://clojure.github.com/clojure/clojure.test-api.html#clojure.test/is">clojure.test&rsquo;s</a> <code>is</code>. This second argument is a message that prints on a failure.</p>
+
+<p>Below is a contrived example of using <code>permutations</code> to test an obviously wrong <code>silly-add</code> function. <code>silly-add</code> is defined below.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nv">generate&gt;</span> <span class="p">(</span><span class="kd">defn </span><span class="nv">silly-add</span>
+</span><span class='line'>              <span class="p">[</span><span class="nv">x</span> <span class="o">&amp;</span> <span class="nv">xs</span><span class="p">]</span>
+</span><span class='line'>              <span class="p">(</span><span class="k">if </span><span class="p">(</span><span class="nb">zero? </span><span class="nv">x</span><span class="p">)</span>
+</span><span class='line'>                  <span class="p">(</span><span class="nb">apply + </span><span class="mi">40</span> <span class="nv">xs</span><span class="p">)</span>
+</span><span class='line'>                  <span class="p">(</span><span class="nb">apply + </span><span class="nv">x</span> <span class="nv">xs</span><span class="p">)))</span>
+</span><span class='line'><span class="o">#</span><span class="ss">&#39;generate/silly-add</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Below is a test that uses <code>permutations</code> to exercise <code>silly-add</code> with all the potential orderings three input numbers. Note that it takes advantage of the second argument to <code>is</code>. Without this we would not know what input caused the failure.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nv">generate&gt;</span> <span class="p">(</span><span class="nf">use</span> <span class="ss">&#39;clojure.test</span><span class="p">)</span>
+</span><span class='line'><span class="nv">nil</span>
+</span><span class='line'><span class="nv">generate&gt;</span> <span class="p">(</span><span class="nf">deftest</span> <span class="nv">generate-some-tests</span>
+</span><span class='line'>            <span class="p">(</span><span class="nb">doseq </span><span class="p">[</span><span class="nv">input</span> <span class="p">(</span><span class="nf">permutations</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">9</span><span class="p">])]</span>
+</span><span class='line'>                   <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="mi">10</span> <span class="p">(</span><span class="nb">apply </span><span class="nv">silly-add</span> <span class="nv">input</span><span class="p">))</span>
+</span><span class='line'>                       <span class="p">(</span><span class="nb">str </span><span class="s">&quot;Failed on input: &quot;</span> <span class="p">(</span><span class="nb">seq </span><span class="nv">input</span><span class="p">)))))</span>
+</span><span class='line'><span class="o">#</span><span class="ss">&#39;generate/generate-some-tests</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Running the test we see that there is clearly an error.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nv">generate&gt;</span> <span class="p">(</span><span class="nf">run-tests</span><span class="p">)</span>
+</span><span class='line'><span class="nv">Testing</span> <span class="nv">generate</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">FAIL</span> <span class="nv">in</span> <span class="p">(</span><span class="nf">generate-some-tests</span><span class="p">)</span> <span class="p">(</span><span class="nf">NO_SOURCE_FILE</span><span class="ss">:1</span><span class="p">)</span>
+</span><span class='line'><span class="nv">Failed</span> <span class="nv">on</span> <span class="nv">input</span><span class="err">:</span> <span class="p">(</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">9</span><span class="p">)</span>
+</span><span class='line'><span class="nv">expected</span><span class="err">:</span> <span class="p">(</span><span class="nb">= </span><span class="mi">10</span> <span class="p">(</span><span class="nb">apply </span><span class="nv">silly-add</span> <span class="nv">input</span><span class="p">))</span>
+</span><span class='line'>  <span class="nv">actual</span><span class="err">:</span> <span class="p">(</span><span class="nb">not </span><span class="p">(</span><span class="nb">= </span><span class="mi">10</span> <span class="mi">50</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">FAIL</span> <span class="nv">in</span> <span class="p">(</span><span class="nf">generate-some-tests</span><span class="p">)</span> <span class="p">(</span><span class="nf">NO_SOURCE_FILE</span><span class="ss">:1</span><span class="p">)</span>
+</span><span class='line'><span class="nv">Failed</span> <span class="nv">on</span> <span class="nv">input</span><span class="err">:</span> <span class="p">(</span><span class="mi">0</span> <span class="mi">9</span> <span class="mi">1</span><span class="p">)</span>
+</span><span class='line'><span class="nv">expected</span><span class="err">:</span> <span class="p">(</span><span class="nb">= </span><span class="mi">10</span> <span class="p">(</span><span class="nb">apply </span><span class="nv">silly-add</span> <span class="nv">input</span><span class="p">))</span>
+</span><span class='line'>  <span class="nv">actual</span><span class="err">:</span> <span class="p">(</span><span class="nb">not </span><span class="p">(</span><span class="nb">= </span><span class="mi">10</span> <span class="mi">50</span><span class="p">))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>permutations</code> saved me a bit of time and let me test some situations that I otherwise would not have tested. This actually exposed a subtle bug in my code. Hopefully it can do the same for you.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -549,6 +665,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2024/02/18/reading-in-2023/">Reading in 2023</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2023/01/14/reading-in-2022/">Reading in 2022</a>
       </li>
     
@@ -582,10 +702,6 @@
     
       <li class="post">
         <a href="/blog/2020/11/11/creating-a-custom-kindle-dictionary/">Creating a custom Kindle dictionary</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/10/03/go-create-silly-small-programs/">Go create silly, small programs</a>
       </li>
     
   </ul>

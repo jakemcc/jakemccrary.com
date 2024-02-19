@@ -14,19 +14,17 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" I was recently reading
-Jeff Ramnani&rsquo;s about page and I
-was somewhat inspired by it. It loads quickly and links to
-Designing blogs for readers, &hellip;" />
+    <meta itemprop="description" content=" A few months ago I was implementing some changes to
+Lumanu&rsquo;s user interface. Lumanu is a tool I&rsquo;ve
+been working on that helps its users &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" I was recently reading
-Jeff Ramnani&rsquo;s about page and I
-was somewhat inspired by it. It loads quickly and links to
-Designing blogs for readers, &hellip;" />
+    <meta name="twitter:description" content=" A few months ago I was implementing some changes to
+Lumanu&rsquo;s user interface. Lumanu is a tool I&rsquo;ve
+been working on that helps its users &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -34,18 +32,16 @@ Designing blogs for readers, &hellip;" />
     <meta property="og:site_name" content="Writing by Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/7/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" I was recently reading
-Jeff Ramnani&rsquo;s about page and I
-was somewhat inspired by it. It loads quickly and links to
-Designing blogs for readers, &hellip;" />
+    <meta property="og:description" content=" A few months ago I was implementing some changes to
+Lumanu&rsquo;s user interface. Lumanu is a tool I&rsquo;ve
+been working on that helps its users &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" I was recently reading
-Jeff Ramnani&rsquo;s about page and I
-was somewhat inspired by it. It loads quickly and links to
-Designing blogs for readers, &hellip;">
+    <meta name="description" content=" A few months ago I was implementing some changes to
+Lumanu&rsquo;s user interface. Lumanu is a tool I&rsquo;ve
+been working on that helps its users &hellip;">
 
     
 
@@ -110,6 +106,67 @@ Designing blogs for readers, &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2016/05/14/use-google-to-get-a-sites-favicon/">Use Google to get a site's favicon</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2016-05-14T09:10:00-05:00'><span class='date'><span class='date-month'>May</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>9:10 am</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>A few months ago I was implementing some changes to
+<a href="https://lumanu.com">Lumanu&rsquo;s</a> user interface. Lumanu is a tool I&rsquo;ve
+been working on that helps its users create, discover, and curate
+engaging content.</p>
+
+<p>This interface change was to our discovery view. This is the view that
+surfaces interesting content to our users. The change involved
+showing the favicon of content&rsquo;s origin in our interface.</p>
+
+<p>I often browse the Internet with the network tab of the Chrome
+Developer Tools open. I do this because I find it interesting to see
+what services other web applications are using. I had the network tab
+open while browsing a site that displayed many favicons and noticed a
+lot fetches from google.com. This surprised me, so I took a deeper
+look at the requests and saw they were hitting a URL that appeared to
+provide favicons. It turns out you can query Google for favicons.</p>
+
+<h3>Example</h3>
+
+<p>Let&rsquo;s pretend we want to get the favicon for <code>jakemccrary.com</code>. You
+simply construct a URL that looks like
+<a href="https://www.google.com/s2/favicons?domain=jakemccrary.com"><code>https://www.google.com/s2/favicons?domain=jakemccrary.com</code></a>
+and all of a sudden you have the favicon. Just replace
+<code>jakemccrary.com</code> with the domain you care about and you&rsquo;ll be
+rewarded with that domain&rsquo;s favicon.</p>
+
+<p><img src="https://www.google.com/s2/favicons?domain=jakemccrary.com" title="Favicon from Google" alt="My favicon from Google" /></p>
+
+<p>This definitely isn&rsquo;t a new feature. If you search online you&rsquo;ll see
+people talking about it years ago. I had never heard of it before and
+discovering it saved us an unknown amount of time. It allowed us to
+iterate on our interface without having to figure out the nuances of
+favicons. We were able to quickly try out the interface change and
+then throw it away without costing us too much time.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1365,65 +1422,6 @@ the flow that it is worth using.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2015/06/18/emacs-automatically-require-common-namespaces/">Emacs: automatically require common namespaces</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2015-06-18T12:52:00-05:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>18</span><span class='date-suffix'>th</span>, <span class='date-year'>2015</span></span> <span class='time'>12:52 pm</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>If you&rsquo;re writing Clojure in Emacs you should check out
-<a href="https://github.com/clojure-emacs/clj-refactor.el">clj-refactor</a>. It
-provides some neat functionality. Some examples include the ability to
-extract functions, introduce <code>let</code> forms, and inline symbols. It also
-has a feature called &ldquo;magic requires&rdquo; that automatically requires
-common namespaces when you type their short form.</p>
-
-<p>Out of the box five short forms are supported. They are <code>io</code> for
-<code>clojure.java.io</code>, <code>set</code> for <code>clojure.set</code>, <code>str</code> for
-<code>clojure.string</code>, <code>walk</code> for <code>clojure.walk</code>, and <code>zip</code> for
-<code>clojure.zip</code>. If you type <code>(str/</code> then <code>(:require
-[clojure.string :as str])</code> will be added to your <code>ns</code> form. It is
-pretty awesome. This feature is on by default but you can turn it off
-by adding <code>(setq cljr-magic-requires nil)</code> to your Emacs
-configuration.</p>
-
-<p>This feature is also extensible. You can add your own mappings of
-short form to namespace. The following snippet of elisp adds mappings
-for <code>maps</code>, <code>seqs</code>, and <code>string</code>.</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>(dolist (mapping '(("maps" . "outpace.util.maps")
-</span><span class='line'>                   ("seqs" . "outpace.util.seqs")
-</span><span class='line'>                   ("string" . "clojure.string")))
-</span><span class='line'>  (add-to-list 'cljr-magic-require-namespaces mapping t))</span></code></pre></td></tr></table></div></figure>
-
-
-<p>It doesn&rsquo;t take a lot of code but having it is awesome. If there are
-namespaces you frequently require I highly recommend setting this up.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//8">&larr; Older</a>
@@ -1439,6 +1437,10 @@ namespaces you frequently require I highly recommend setting this up.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2024/02/18/reading-in-2023/">Reading in 2023</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2023/01/14/reading-in-2022/">Reading in 2022</a>
@@ -1474,10 +1476,6 @@ namespaces you frequently require I highly recommend setting this up.</p>
     
       <li class="post">
         <a href="/blog/2020/11/11/creating-a-custom-kindle-dictionary/">Creating a custom Kindle dictionary</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/10/03/go-create-silly-small-programs/">Go create silly, small programs</a>
       </li>
     
   </ul>
