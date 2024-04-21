@@ -68,7 +68,7 @@ This is a shockingly good Thai place with Anj claiming the soup he received was 
 
 Christine and I got an earlier start on Saturday and managed to make it to the park by 9 a.m.
 We jumped on Tower of Babel and Corner of Revelation as warm-ups.
-Then we checked back out Ferne Clyff Wall and thought that Raindance (5.9) looked dry enough.
+Then we checked back out Ferne Clyffe Wall and thought that Raindance (5.9) looked dry enough.
 It was dry enough, though a useful hold was wet at near the top.
 
 After Raindance, we went back to The Devil's Staircase and climbed Schism (5.9).
@@ -135,9 +135,9 @@ While we only climbed relatively easy routes, this area does have routes into th
 There are quite a few highly rated 5.10-5.12 climbs here.
 I'd definitely come back to Ferne Clyff, perhaps even attempt to camp there, and climb again.
 
-I'm glad we went to Ferne Clyff and not Jackson Falls.
+I'm glad we went to Ferne Clyffe and not Jackson Falls.
 Reports from other climbers said Jackson Falls was a zoo, with so many people coming to southern Illinois to double dip on an eclipse and climbing trip.
 We met a group that drove from Philadelphia (~16 hours!) because of the total eclipse lining up with the available climbing.
 
-While the walls aren't as epic as those found in Kentucky, Ferne Clyff is closer to Chicago, which makes this a slightly more suitable trip for a normal weekend.
+While the walls aren't as epic as those found in Kentucky, Ferne Clyffe is closer to Chicago, which makes this a slightly more suitable trip for a normal weekend.
 The climbing is extremely accessible; you could see a quite a bit of the rock from the parking lot and the trails are decent.
