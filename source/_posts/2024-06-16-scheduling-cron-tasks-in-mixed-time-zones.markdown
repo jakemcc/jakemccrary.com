@@ -1,12 +1,12 @@
 ---
 layout: post
-title: "Scheduling cron tasks in mixed time zones"
-date: 2023-12-21 09:26:42 -0600
+title: Scheduling cron tasks in mixed time zones
+date: 2024-06-16 13:32 -0500
 comments: true
-published: false
+published: true
 description: Ever want to schedule cron tasks in different time zones? Here is how.
-keywords: 'cron, time zone, linux'
-categories: 
+keywords: cron, time zone, linux
+categories:
 - linux
 - cron
 ---
