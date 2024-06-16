@@ -14,13 +14,25 @@
     
 
     <meta itemprop="name" content="Jake McCrary" />
-    <meta itemprop="description" content=" The time has come for another end-of-year summary of my reading from the previous year. Here are links to my previous end-of-year reflections: 2013, &hellip;" />
+    <meta itemprop="description" content=" The 2.2.0 release1
+of
+expectations adds
+a
+clojure.test
+compatible syntax. The release
+adds the defexpect macro which forces you to name your test but &hellip;" />
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:site" content="@jakemcc" />
     <meta name="twitter:title" content="Jake McCrary" />
-    <meta name="twitter:description" content=" The time has come for another end-of-year summary of my reading from the previous year. Here are links to my previous end-of-year reflections: 2013, &hellip;" />
+    <meta name="twitter:description" content=" The 2.2.0 release1
+of
+expectations adds
+a
+clojure.test
+compatible syntax. The release
+adds the defexpect macro which forces you to name your test but &hellip;" />
     <meta name="twitter:creator" content="@jakemcc" />
     <meta name="twitter:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
 
@@ -28,12 +40,24 @@
     <meta property="og:site_name" content="Writing by Jake McCrary" />
     <meta property="og:url" content="https://jakemccrary.com/blog/6/" />
     <meta property="og:title" content="Jake McCrary" />
-    <meta property="og:description" content=" The time has come for another end-of-year summary of my reading from the previous year. Here are links to my previous end-of-year reflections: 2013, &hellip;" />
+    <meta property="og:description" content=" The 2.2.0 release1
+of
+expectations adds
+a
+clojure.test
+compatible syntax. The release
+adds the defexpect macro which forces you to name your test but &hellip;" />
     <meta property="og:image" content="https://jakemccrary.com/images/jake-surprised-eyes-brighter.jpg" />
     
     
 
-    <meta name="description" content=" The time has come for another end-of-year summary of my reading from the previous year. Here are links to my previous end-of-year reflections: 2013, &hellip;">
+    <meta name="description" content=" The 2.2.0 release1
+of
+expectations adds
+a
+clojure.test
+compatible syntax. The release
+adds the defexpect macro which forces you to name your test but &hellip;">
 
     
 
@@ -98,6 +122,199 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2017/02/27/using-lein-test-refresh-with-expectations/">Using lein-test-refresh with expectations</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2017-02-27T09:19:00-06:00'><span class='date'><span class='date-month'>Feb</span> <span class='date-day'>27</span><span class='date-suffix'>th</span>, <span class='date-year'>2017</span></span> <span class='time'>9:19 am</span></time>
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The 2.2.0 release<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>
+of
+<a href="https://github.com/clojure-expectations/expectations/blob/master/CHANGELOG.md#changes-in-version-220">expectations</a> adds
+a
+<code>clojure.test</code>
+<a href="https://clojure-expectations.github.io/clojure-test.html">compatible syntax</a>. The release
+adds the <code>defexpect</code> macro which forces you to name your test but then
+generates code that is compatible with <code>clojure.test</code>.</p>
+
+<p>Why would you want this? Because <code>clojure.test</code> is the built-in
+testing library for Clojure, an entire ecosystem has been built around
+it. Tool support for <code>clojure.test</code> is always going to be ahead of
+support for the original <code>expectations</code>. By using the new
+<code>clojure.test</code> compatible syntax, <code>expectations</code> can take
+advantage of all the tools built for <code>clojure.test</code>.</p>
+
+<h3>Using lein-test-refresh with expectations</h3>
+
+<p>If you move to the new <code>clojure.test</code> compatible syntax, you can start
+using
+<a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a> to
+automatically rerun your tests when your code
+changes. <code>lein-test-refresh</code> is a fork of the original expectations autorunner, <a href="https://github.com/clojure-expectations/lein-autoexpect">lein-autoexpect</a>, but it has grown to have more features than its original inspiration. Now you can use it with <code>expectations</code><sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>.</p>
+
+<p>Below is a sample <code>project.clj</code> that uses <code>lein-test-refresh</code> with the latest expectations.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">defproject </span><span class="nv">expectations-project</span> <span class="s">&quot;0.1.0-SNAPSHOT&quot;</span>
+</span><span class='line'>  <span class="ss">:description</span> <span class="s">&quot;Sample project using expectations&quot;</span>
+</span><span class='line'>  <span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">org.clojure/clojure</span> <span class="s">&quot;1.8.0&quot;</span><span class="p">]]</span>
+</span><span class='line'>  <span class="ss">:plugins</span> <span class="p">[[</span><span class="nv">com.jakemccrary/lein-test-refresh</span>  <span class="s">&quot;0.18.1&quot;</span><span class="p">]]</span>
+</span><span class='line'>  <span class="ss">:profiles</span> <span class="p">{</span><span class="ss">:dev</span> <span class="p">{</span><span class="ss">:dependencies</span> <span class="p">[[</span><span class="nv">expectations</span> <span class="s">&quot;2.2.0-beta1&quot;</span><span class="p">]]}})</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here is an example test file.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="p">(</span><span class="kd">ns </span><span class="nv">expectations-project.core-test</span>
+</span><span class='line'>  <span class="p">(</span><span class="ss">:require</span> <span class="p">[</span><span class="nv">expectations</span> <span class="ss">:refer</span> <span class="ss">:all</span><span class="p">]</span>
+</span><span class='line'>            <span class="p">[</span><span class="nv">expectations.clojure.test</span> <span class="ss">:refer</span> <span class="p">[</span><span class="nv">defexpect</span><span class="p">]]))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">defexpect</span> <span class="nv">two</span>
+</span><span class='line'>  <span class="mi">2</span> <span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="mi">1</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">defexpect</span> <span class="nv">three</span>
+</span><span class='line'>  <span class="mi">3</span> <span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="mi">1</span><span class="p">))</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">(</span><span class="nf">defexpect</span> <span class="nv">group</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">expect</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">]</span> <span class="p">(</span><span class="nb">conj </span><span class="p">[]</span> <span class="mi">1</span> <span class="mi">5</span><span class="p">))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">expect</span> <span class="o">#</span><span class="p">{</span><span class="mi">1</span> <span class="mi">2</span><span class="p">}</span> <span class="p">(</span><span class="nb">conj </span><span class="o">#</span><span class="p">{}</span> <span class="mi">1</span> <span class="mi">2</span><span class="p">))</span>
+</span><span class='line'>  <span class="p">(</span><span class="nf">expect</span> <span class="p">{</span><span class="mi">1</span> <span class="mi">2</span><span class="p">}</span> <span class="p">(</span><span class="nb">assoc </span><span class="p">{}</span> <span class="mi">1</span> <span class="mi">3</span><span class="p">)))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And here is the result of running <code>lein test-refresh</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nv">$</span> <span class="nv">lein</span> <span class="nv">test-refresh</span>
+</span><span class='line'><span class="nv">*********************************************</span>
+</span><span class='line'><span class="nv">***************</span> <span class="nv">Running</span> <span class="nv">tests</span> <span class="nv">***************</span>
+</span><span class='line'><span class="ss">:reloading</span> <span class="p">(</span><span class="nf">expectations-project.core-test</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">FAIL</span> <span class="nv">in</span> <span class="p">(</span><span class="nf">group</span><span class="p">)</span> <span class="p">(</span><span class="nf">expectations_project/core_test.clj</span><span class="ss">:11</span><span class="p">)</span>
+</span><span class='line'><span class="nv">expected</span><span class="err">:</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span><span class="p">]</span>
+</span><span class='line'>  <span class="nv">actual</span><span class="err">:</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">5</span><span class="p">]</span> <span class="nv">from</span> <span class="p">(</span><span class="nb">conj </span><span class="p">[]</span> <span class="mi">1</span> <span class="mi">5</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">FAIL</span> <span class="nv">in</span> <span class="p">(</span><span class="nf">group</span><span class="p">)</span> <span class="p">(</span><span class="nf">expectations_project/core_test.clj</span><span class="ss">:11</span><span class="p">)</span>
+</span><span class='line'><span class="nv">expected</span><span class="err">:</span> <span class="p">{</span><span class="mi">1</span> <span class="mi">2</span><span class="p">}</span>
+</span><span class='line'>  <span class="nv">actual</span><span class="err">:</span> <span class="p">{</span><span class="mi">1</span> <span class="mi">3</span><span class="p">}</span> <span class="nv">from</span> <span class="p">(</span><span class="nb">assoc </span><span class="p">{}</span> <span class="mi">1</span> <span class="mi">3</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">FAIL</span> <span class="nv">in</span> <span class="p">(</span><span class="nf">three</span><span class="p">)</span> <span class="p">(</span><span class="nf">expectations_project/core_test.clj</span><span class="ss">:8</span><span class="p">)</span>
+</span><span class='line'><span class="nv">expected</span><span class="err">:</span> <span class="mi">3</span>
+</span><span class='line'>  <span class="nv">actual</span><span class="err">:</span> <span class="mi">2</span> <span class="nv">from</span> <span class="p">(</span><span class="nb">+ </span><span class="mi">1</span> <span class="mi">1</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">Ran</span> <span class="mi">3</span> <span class="nv">tests</span> <span class="nv">containing</span> <span class="mi">5</span> <span class="nv">assertions.n</span>
+</span><span class='line'><span class="mi">3</span> <span class="nv">failures</span>, <span class="mi">0</span> <span class="nv">errors.</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">Failed</span> <span class="mi">3</span> <span class="nv">of</span> <span class="mi">5</span> <span class="nv">assertions</span>
+</span><span class='line'><span class="nv">Finished</span> <span class="nv">at</span> <span class="mi">11</span><span class="ss">:53:06.281</span> <span class="p">(</span><span class="nf">run</span> <span class="nv">time</span><span class="err">:</span> <span class="mf">0.270</span><span class="nv">s</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>After some quick edits to fix the test errors and saving the file, here is the output from the tests re-running.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='clojure'><span class='line'><span class="nv">*********************************************</span>
+</span><span class='line'><span class="nv">***************</span> <span class="nv">Running</span> <span class="nv">tests</span> <span class="nv">***************</span>
+</span><span class='line'><span class="ss">:reloading</span> <span class="p">(</span><span class="nf">expectations-project.core-test</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">Ran</span> <span class="mi">3</span> <span class="nv">tests</span> <span class="nv">containing</span> <span class="mi">5</span> <span class="nv">assertions.</span>
+</span><span class='line'><span class="mi">0</span> <span class="nv">failures</span>, <span class="mi">0</span> <span class="nv">errors.</span>
+</span><span class='line'><span class="ss">:reloading</span> <span class="p">()</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">Ran</span> <span class="mi">3</span> <span class="nv">tests</span> <span class="nv">containing</span> <span class="mi">5</span> <span class="nv">assertions.</span>
+</span><span class='line'><span class="mi">0</span> <span class="nv">failures</span>, <span class="mi">0</span> <span class="nv">errors.</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">Passed</span> <span class="nv">all</span> <span class="nv">tests</span>
+</span><span class='line'><span class="nv">Finished</span> <span class="nv">at</span> <span class="mi">11</span><span class="ss">:53:59.045</span> <span class="p">(</span><span class="nf">run</span> <span class="nv">time</span><span class="err">:</span> <span class="mf">0.013</span><span class="nv">s</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you&rsquo;re using <code>expectations</code> and switch to the new
+<code>clojure.test</code> compatible syntax, I&rsquo;d encourage you to start
+using
+<a href="https://github.com/jakemcc/lein-test-refresh">lein-test-refresh</a>.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+As of 2016-02-27 <code>2.2.0</code> isn&rsquo;t out yet, but <code>2.2.0-beta1</code> has been released and has the changes.<a href="#fnref:1" rev="footnote">&#8617;</a></li>
+<li id="fn:2">
+In fact, you have to use it if you use Leiningen and the new syntax and want your tests to run automatically.<a href="#fnref:2" rev="footnote">&#8617;</a></li>
+</ol>
+</div>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -1010,181 +1227,6 @@ testing Clojure code and getting extremely fast feedback.</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2016/06/14/tips-for-working-from-home/">Tips for working from home</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2016-06-14T10:05:00-05:00'><span class='date'><span class='date-month'>Jun</span> <span class='date-day'>14</span><span class='date-suffix'>th</span>, <span class='date-year'>2016</span></span> <span class='time'>10:05 am</span></time>
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><blockquote><p>See all of my remote/working-from-home <a href="/blog/categories/remote/">articles here</a>.</p></blockquote>
-
-<p>I&rsquo;ve been working remotely since October 2013. I can barely believe
-that nearly three years have passed and I&rsquo;ve probably spent about two
-weeks in a traditional office.</p>
-
-<p>It took me a bit of time to adjust to working remotely. I&rsquo;m better at
-it now than I was three years ago. The rest of this post describes
-some of my learnings.</p>
-
-<p>But first, some background. My remote experience comes from working at
-<a href="http://outpace.com">Outpace</a> and <a href="https://lumanu.com">Lumanu</a>. Both
-are remote first companies, almost everyone works remotely with a few
-people occasionally working in a San Francisco office. The work is
-remote but it is not asynchronous. Both companies value pair
-programming and real time collaboration and, as a result, employees
-tend to work a core set of hours. My observations are probably most
-applicable in a similar environment.</p>
-
-<h3>Setup a home workspace</h3>
-
-<p>Before working remotely I did not have a great home computing setup. I
-worked using a 13-inch MacBook Air either sitting on my couch or at my
-dinner table. This worked fine for the occasional work-from-home day
-and for evening and weekend programming. It didn&rsquo;t work fine when I
-was spending extended hours at a computer every day.</p>
-
-<p>I&rsquo;ve written about my setup
-<a href="/blog/2015/03/31/my-home-work-space/">before</a>. Below is a list of the
-improvements I made to my home working environment.</p>
-
-<ol>
-<li>Outpace provided a beefy MacBook Pro and two 27-inch Apple Cinema displays.</li>
-<li>I upgraded my chair to to a <a href="http://amzn.to/1XNWKru">Herman Miller Setu</a>.</li>
-<li>I bought a <a href="http://www.amazon.com/gp/product/B000OOYECC/=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=390957&amp;creativeASIN=B000OOYECC&amp;linkCode=as2&amp;tag=jakemccrary08-20&amp;linkId=L5THOTZHJ6FPJSAL">mStand Laptop Stand</a> to raise my laptop to a better viewing height.</li>
-<li>I upgraded my desk to a sit-stand desk.</li>
-<li>I built my own <a href="/blog/2014/07/27/building-the-ergodox-keyboard/">ErgoDox keyboard</a>.</li>
-<li>I switched to an adjustable monitor arm so I could adjust my monitor height.</li>
-</ol>
-
-
-<p>With each change my working experience improved. Each improvement left
-me feeling better at the end of my day. Many, if not all, of these
-improvements are things I&rsquo;d expect to have in a traditional
-office. Don&rsquo;t skimp on your setup because it is in your home. Part of
-your home is your office now.</p>
-
-<h3>Introduce a habit that delineates work from after-work</h3>
-
-<p>One of the great things about working from home is that you no longer
-have a commute. You don&rsquo;t have to dodge cars on your bicycle, squeeze
-into a train, or sit in traffic while driving. This is a huge benefit.</p>
-
-<p>A downside of not having a commute is that you lose a forced
-intermission between work and non-work. My commute was either a
-30-minute bicycle ride or a 30-minute public transit ride. That time
-acted as a forced decompression period where I focused on something
-that wasn&rsquo;t computing.</p>
-
-<p>It took me months to realize that not having this intermission was
-stressing me out. The intermission helped me shift between working
-and non-working mindsets.</p>
-
-<p>I reintroduced a decompression activity between work and non-work and
-became less stressed and generally happier. I&rsquo;ve replaced my commute
-intermission with reading, cooking, or riding my bicycle. I&rsquo;ve found
-doing a non-computer activity benefits me the most.</p>
-
-<h3>Stop working</h3>
-
-<p>When I first started working from home I was very guilty of
-overworking. It was so easy to just keep working. I would get invested
-in a problem and all sudden realize it was time to go to bed. Or I&rsquo;d
-actually stop working, only to find myself checking our application&rsquo;s
-monitoring or pulling up the codebase when I originally sat down to do
-some personal task.</p>
-
-<p>In an office you have signals; your coworkers leaving, the cleaning
-crew vacuuming, air conditioning turning off, etc., that provide a
-hint that you should think about stopping. You don&rsquo;t have these
-signals when you are working remotely. There also isn&rsquo;t that spatial
-boundary between your office and your home.</p>
-
-<p>You can search online and find many articles about how overwork is
-detrimental. You and your employer benefit if you are <strong>not</strong>
-overworked.</p>
-
-<h3>Get out of your house</h3>
-
-<p>I live in Chicago. During the winter the weather is very cold. Chicago
-is also a big city, so all sorts of food delivery options (both cooked
-and uncooked) exist. The cold weather combined with food delivery
-makes it easy to stay inside. During the winter, I&rsquo;ve realized many
-times that I haven&rsquo;t left my apartment for days. My girlfriend can
-tell when I haven&rsquo;t gotten outside because I&rsquo;m grumpier.</p>
-
-<p>If I get out of the apartment for a while I almost always come back
-feeling better. It barely matters what I do when I leave, after an
-extended period of time inside of my home just getting outside and
-doing anything helps. A change of scenery is good for you.</p>
-
-<h3>Don&rsquo;t just talk about business with your remote coworkers</h3>
-
-<p>When you work in an office you are pretty much forced to have non-work
-related chats with coworkers. You should do the same with your remote
-team.</p>
-
-<p>Having non-work related conversations helps you make better
-connections with your coworkers. These better connections can lead to
-better communication, both with voice and text, and humanize the person
-on the other side of the screen.</p>
-
-<p>Its even better if you can do this in a video conference. Then you get
-to learn the facial expressions and tone of voice of your
-coworker. This can make it easier to interpret text communication in
-the way they actually mean it.</p>
-
-<h3>Meet in person occasionally</h3>
-
-<p>It is great that technology and Internet speeds have progressed enough
-that working remotely works well. If you want, you can make it feel
-like your pair is sitting right next to you. This is great.</p>
-
-<p>There are still benefits to meeting in person though. The main one is
-that it helps you make connections with coworkers. You can eat a meal
-together or play board games (though, you can do this online as well
-but it is a different experience). It can also be easier to have
-certain types of group discussions (video conferences do have
-limitations).</p>
-
-<p>When you meet in person, I&rsquo;d recommend doing something different than
-your normal day-to-day work. Don&rsquo;t just exchange remote pairing for
-local pairing. Try to identify that are difficult to do remotely and
-do them in person.</p>
-
-<p>I don&rsquo;t have a concrete recommendation for how often your remote
-company should meet but I think it should be infrequent enough where
-you don&rsquo;t feel pressure to do normal work.</p>
-
-<h2>End</h2>
-
-<p>Working from home has its challenges but with those challenges come
-many benefits. It is a different experience than working in an office
-and that experience isn&rsquo;t for everyone. The above recommendations are
-things that have helped me adjust to working remotely. Some of these
-tips are actionable at an individual level and some require buy in
-from the company. Hopefully this list can help give guidance towards
-improving your remote work situation.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog//7">&larr; Older</a>
@@ -1200,6 +1242,10 @@ improving your remote work situation.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2024/06/16/scheduling-cron-tasks-in-mixed-time-zones/">Scheduling cron tasks in mixed time zones</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2024/02/18/reading-in-2023/">Reading in 2023</a>
@@ -1235,10 +1281,6 @@ improving your remote work situation.</p>
     
       <li class="post">
         <a href="/blog/2020/11/14/speeding-up-magit/">Speeding up magit</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2020/11/11/creating-a-custom-kindle-dictionary/">Creating a custom Kindle dictionary</a>
       </li>
     
   </ul>

@@ -4,7 +4,7 @@
   <title><![CDATA[Jake McCrary]]></title>
   <link href="https://jakemccrary.com/atom.xml" rel="self"/>
   <link href="https://jakemccrary.com/"/>
-  <updated>2024-02-18T18:21:12-06:00</updated>
+  <updated>2024-06-16T13:44:26-05:00</updated>
   <id>https://jakemccrary.com/</id>
   <author>
     <name><![CDATA[Jake McCrary]]></name>
@@ -12,6 +12,75 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Scheduling cron tasks in mixed time zones]]></title>
+    <link href="https://jakemccrary.com/blog/2024/06/16/scheduling-cron-tasks-in-mixed-time-zones/"/>
+    <updated>2024-06-16T13:32:00-05:00</updated>
+    <id>https://jakemccrary.com/blog/2024/06/16/scheduling-cron-tasks-in-mixed-time-zones</id>
+    <content type="html"><![CDATA[<p>Have you ever needed to schedule a repeating task on a Linux host?
+If so, you&rsquo;ve probably reached for cron.
+cron is widely available and reliable; it is a great choice for scheduling tasks.</p>
+
+<p>Sometimes you find yourself scheduling a task and, ideally, you&rsquo;d be scheduling that task referencing a different time zone.
+This is a common need if your programs are interacting with systems hosted in different areas of the world.
+If one system you interact with starts up at 7 AM <code>Europe/London</code> and another at 8 AM <code>America/New_York</code>, it would be much better to schedule your program to run using times specified in those time zones.</p>
+
+<p>Why is that preferred?</p>
+
+<ul>
+<li>If you schedule in your host time zone, you have to convert from the other time zone to your own. This is error prone.</li>
+<li>Different time zones have different Daylights savings shifts. Having to adjust your schedule when your host or target time zone shifts is error prone.</li>
+</ul>
+
+
+<p>Luckily, you can do this with cron!
+At least, with the cronie implementation.</p>
+
+<p>You do this by specifying the time zone in the crontab with the <code>CRON_TZ</code> variable.
+Any line after a <code>CRON_TZ</code> specification is scheduled in the specified time zone.
+This persists until the next <code>CRON_TZ</code> value is specified.</p>
+
+<p>Below is a sample crontab that schedules four tasks.
+One is scheduled in the host time zone, two in <code>America/New_York</code>, and one in <code>Europe/London</code>.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>0 7 * * * echo "run at 7 AM in the host time zone"
+</span><span class='line'>
+</span><span class='line'>CRON_TZ=America/New_York
+</span><span class='line'>0 7 * * * echo "Run at 7 AM New York"
+</span><span class='line'>10 7 * * * echo "Run at 7:10 AM New York"
+</span><span class='line'>
+</span><span class='line'>CRON_TZ=Europe/London
+</span><span class='line'>* 8 * * * echo "Run at 8 AM London"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The one gotcha with this is that cronie&rsquo;s behavior is unspecified if the scheduled time ends up in the daylights savings shift of the host machine<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.
+So make sure you don&rsquo;t do that.</p>
+
+<p>My team at work has been taking advantage of this feature since early 2023 for scheduling all of our processes start and end times.
+It has been working great.
+Prior to figuring<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup> this out, the fall and spring time shifts were sources of issues as various countries shifted on different days.
+That entire source of problems has been solved through scheduling tasks in the proper time zone.</p>
+<div class="footnotes">
+<hr/>
+<ol>
+<li id="fn:1">
+We have unit tests that confirm someone hasn&rsquo;t configured a task to run within one of these periods.<a href="#fnref:1" rev="footnote">&#8617;</a></li>
+<li id="fn:2">
+Figuring this out was a bit of a chore. Even the Linux experts I talked to weren&rsquo;t aware of being able to do this. Digging through the source of cronie was how I figured this out. Hopefully this article makes it easier for the next person. Though, now that I know the <code>CRON_TZ</code> solution, it is pretty easy to search and find other folks talking about this.<a href="#fnref:2" rev="footnote">&#8617;</a></li>
+</ol>
+</div>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Reading in 2023]]></title>
@@ -2710,135 +2779,6 @@ These are also useful for in-person meetings.<a href="#fnref:3" rev="footnote">&
 No, not the middle finger.<a href="#fnref:4" rev="footnote">&#8617;</a></li>
 </ol>
 </div>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Auto-syncing a git repository]]></title>
-    <link href="https://jakemccrary.com/blog/2020/02/25/auto-syncing-a-git-repository/"/>
-    <updated>2020-02-25T21:09:00-06:00</updated>
-    <id>https://jakemccrary.com/blog/2020/02/25/auto-syncing-a-git-repository</id>
-    <content type="html"><![CDATA[<p>I&rsquo;m currently keep notes on my computer using plain text and <a href="https://orgmode.org/">Org mode</a>.</p>
-
-<p>I keep my notes in a git repository in my home directory, <code>~/org/</code>.
-I want my notes to be synced between my computers without me thinking about it.
-Historically, I&rsquo;ve reached for something like Google Drive or Dropbox to do this but this time I reached for git and GitHub.</p>
-
-<p>Below is the script that I ended up cobbling together from various sources found online.
-The script pushes and pulls changes from a remote repository and works on my macOS and linux machines.</p>
-
-<p>The loop starting on line 38 does the work.
-Whenever a file-watcher notices a change or 10 minutes passes, the loop pulls changes from a remote repository, commits any local changes, and pushes to the remote repository.
-The lines before this are mostly checking that needed programs exist on the host.</p>
-
-<p>I keep this running in a background terminal and I check periodically to confirm it is still running.
-I could do something fancier but this isn&rsquo;t a critical system and the overhead of checking every couple days is nearly zero.
-Most of the time checking happens by accident when I accidentally maximize the terminal that runs the script.</p>
-
-<p>I&rsquo;ve been using this script for a long time now and I&rsquo;ve found it quite useful. I hope you do too.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-<span class='line-number'>46</span>
-<span class='line-number'>47</span>
-<span class='line-number'>48</span>
-<span class='line-number'>49</span>
-<span class='line-number'>50</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c">#!/bin/bash</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">set</span> -e
-</span><span class='line'>
-</span><span class='line'><span class="nv">TARGETDIR</span><span class="o">=</span><span class="s2">&quot;$HOME/org/&quot;</span>
-</span><span class='line'>
-</span><span class='line'>stderr <span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>    <span class="nb">echo</span> <span class="s2">&quot;$1&quot;</span> &gt;<span class="p">&amp;</span>2
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'>is_command<span class="o">()</span> <span class="o">{</span>
-</span><span class='line'>    <span class="nb">command</span> -v <span class="s2">&quot;$1&quot;</span> <span class="p">&amp;</span>&gt;/dev/null
-</span><span class='line'><span class="o">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$(uname)&quot;</span> !<span class="o">=</span> <span class="s2">&quot;Darwin&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-</span><span class='line'>    <span class="nv">INW</span><span class="o">=</span><span class="s2">&quot;inotifywait&quot;</span><span class="p">;</span>
-</span><span class='line'>    <span class="nv">EVENTS</span><span class="o">=</span><span class="s2">&quot;close_write,move,delete,create&quot;</span><span class="p">;</span>
-</span><span class='line'>    <span class="nv">INCOMMAND</span><span class="o">=</span><span class="s2">&quot;\&quot;$INW\&quot; -qr -e \&quot;$EVENTS\&quot; --exclude \&quot;\.git\&quot; \&quot;$TARGETDIR\&quot;&quot;</span>
-</span><span class='line'><span class="k">else</span> <span class="c"># if Mac, use fswatch</span>
-</span><span class='line'>    <span class="nv">INW</span><span class="o">=</span><span class="s2">&quot;fswatch&quot;</span><span class="p">;</span>
-</span><span class='line'>    <span class="c"># default events specified via a mask, see</span>
-</span><span class='line'>    <span class="c"># https://emcrisostomo.github.io/fswatch/doc/1.14.0/fswatch.html/Invoking-fswatch.html#Numeric-Event-Flags</span>
-</span><span class='line'>    <span class="c"># default of 414 = MovedTo + MovedFrom + Renamed + Removed + Updated + Created</span>
-</span><span class='line'>    <span class="c">#                = 256 + 128+ 16 + 8 + 4 + 2</span>
-</span><span class='line'>    <span class="nv">EVENTS</span><span class="o">=</span><span class="s2">&quot;--event=414&quot;</span>
-</span><span class='line'>    <span class="nv">INCOMMAND</span><span class="o">=</span><span class="s2">&quot;\&quot;$INW\&quot; --recursive \&quot;$EVENTS\&quot; --exclude \&quot;\.git\&quot; --one-event \&quot;$TARGETDIR\&quot;&quot;</span>
-</span><span class='line'><span class="k">fi</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">for</span> cmd in <span class="s2">&quot;git&quot;</span> <span class="s2">&quot;$INW&quot;</span> <span class="s2">&quot;timeout&quot;</span><span class="p">;</span> <span class="k">do</span>
-</span><span class='line'>    <span class="c"># in OSX: `timeout` =&gt; brew install coreutils</span>
-</span><span class='line'>    <span class="c"># in OSX: `fswatch` =&gt; brew install fswatch</span>
-</span><span class='line'>    is_command <span class="s2">&quot;$cmd&quot;</span> <span class="o">||</span> <span class="o">{</span> stderr <span class="s2">&quot;Error: Required command &#39;$cmd&#39; not found&quot;</span><span class="p">;</span> <span class="nb">exit </span>1<span class="p">;</span> <span class="o">}</span>
-</span><span class='line'><span class="k">done</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">cd</span> <span class="s2">&quot;$TARGETDIR&quot;</span>
-</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;$INCOMMAND&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">while</span> <span class="nb">true</span><span class="p">;</span> <span class="k">do</span>
-</span><span class='line'>    <span class="nb">eval</span> <span class="s2">&quot;timeout 600 $INCOMMAND&quot;</span> <span class="o">||</span> <span class="nb">true</span>
-</span><span class='line'><span class="nb">    </span>git pull
-</span><span class='line'>    sleep 5
-</span><span class='line'>    <span class="nv">STATUS</span><span class="o">=</span><span class="k">$(</span>git status -s<span class="k">)</span>
-</span><span class='line'>    <span class="k">if</span> <span class="o">[</span> -n <span class="s2">&quot;$STATUS&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
-</span><span class='line'>        <span class="nb">echo</span> <span class="s2">&quot;$STATUS&quot;</span>
-</span><span class='line'>        <span class="nb">echo</span> <span class="s2">&quot;commit!&quot;</span>
-</span><span class='line'>        git add .
-</span><span class='line'>        git commit -m <span class="s2">&quot;autocommit&quot;</span>
-</span><span class='line'>        git push origin
-</span><span class='line'>    <span class="k">fi</span>
-</span><span class='line'><span class="k">done</span>
-</span></code></pre></td></tr></table></div></figure>
 
 ]]></content>
   </entry>
