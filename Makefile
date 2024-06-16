@@ -36,7 +36,7 @@ publish_draft: ## Publishes a draft
 
 .PHONY: unpublished
 unpublished: ## List drafts
-	@ag -l 'published: false' source/_posts/
+	@rg -l 'published: false' source/_posts/
 
 .PHONY: build
 build: ## Generate site
