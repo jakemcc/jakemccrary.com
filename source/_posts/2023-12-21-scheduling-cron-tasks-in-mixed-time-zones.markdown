@@ -57,8 +57,3 @@ That entire source of problems has been solved through scheduling tasks in the p
 
 [^2]: Figuring this out was a bit of a chore. Even the Linux experts I talked to weren't aware of being able to do this. Digging through the source of cronie was how I figured this out. Hopefully this article makes it easier for the next person. Though, now that I know the `CRON_TZ` solution, it is pretty easy to search and find other folks talking about this.
 
-
-
-
-
-
