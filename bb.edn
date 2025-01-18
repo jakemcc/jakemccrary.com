@@ -1,0 +1,5 @@
+;; bb.edn
+{:paths ["bb"]
+ :deps {markdown-clj/markdown-clj {:mvn/version "1.11.2"}
+        org.babashka/http-server {:mvn/version "0.1.11"}
+        selmer/selmer {:mvn/version "1.12.53"}}}
