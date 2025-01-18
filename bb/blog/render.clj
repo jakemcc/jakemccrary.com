@@ -15,7 +15,11 @@
 (def template-dir "templates")
 
 (def default-render-opts
-  {:site {:title "Jake McCrary"}})
+  {:site {:title "Jake McCrary"
+          :subscribe-email "https://jakemccrary.substack.com/welcome"
+          :subscribe-rss "rss"
+          :url "https://jakemccrary.com"
+          :short-url "jakemccrary.com"}})
 
 (defn output-file [post]
   (let [sub-dirs (->> (fs/components (:input-file post))
