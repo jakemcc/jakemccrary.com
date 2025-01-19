@@ -23,14 +23,28 @@
           :url "https://jakemccrary.com"
           :short-url "jakemccrary.com"}})
 
-(defn output-file [post]
-  (let [sub-dirs (->> (fs/components (:input-file post))
+(defn left-pad [s padding n]
+  (if (< (count s) n)
+    (recur (str padding s) padding n)
+    s))
+
+(defn output-file [source]
+  (let [sub-dirs (->> (fs/components (:input-file source))
                       (rest)
                       (butlast))
-        name (clojure.string/replace (fs/file-name (:input-file post))
-                                     ".markdown"
-                                     ".html")]
-    (apply fs/file (concat sub-dirs [name]))))
+        name (fs/strip-ext (fs/file-name (:input-file source)))
+        year-month-day (when (-> source :metadata :dated-url)
+                         [(str (.getYear (-> source :metadata :local-date)))
+                          (left-pad (str (.getMonthValue (-> source :metadata :local-date))) "0" 2)
+                          (left-pad (str (.getDayOfMonth (-> source :metadata :local-date))) "0" 2)])]
+    (apply fs/file (concat sub-dirs
+                           year-month-day
+                           [(dbg (cond-> (dbg name)
+                                   (dbg (boolean (-> source :metadata :dated-url)))
+                                   (clojure.string/replace-first
+                                    (re-pattern (dbg (str (clojure.string/join "-" year-month-day) "-")))
+                                    "")))
+                            "index.html"]))))
 
 (defn load-template [post]
   (let [template "default" #_ (or (-> post :metadata :layout) "default")
@@ -108,14 +122,6 @@
         (assoc source :output-file (output-file source))
         (assoc source :template (load-template source))))))
 
-(defn write-post! [source]
-  (let [out-file (fs/file output-dir (:output-file source))]
-    (fs/create-dirs (fs/parent out-file))
-    (spit out-file
-          (selmer.parser/render (:template source)
-                                (assoc default-render-opts
-                                       :body (:html source))))))
-
 (defn blog-article? [{:keys [input-file]}]
   (clojure.string/includes? (str input-file) "/blog/"))
 
@@ -125,37 +131,46 @@
 
 (defn write-html! [output-file m]
   (fs/create-dirs (fs/parent output-file))
+  (when (fs/exists? output-file)
+    (throw (Exception. "Tried to write file but it already exists:" (str output-file))))
   (spit output-file
         (selmer.parser/render
-         (slurp (fs/file template-dir "default.html"))
+         (or (:template m) (slurp (fs/file template-dir "default.html")))
          (merge default-render-opts m))))
 
+(defn write-post! [source]
+  (let [out-file (fs/file output-dir (:output-file source))]
+    (fs/create-dirs (fs/parent out-file))
+    (write-html! out-file
+                 {:body (:html source)
+                  :template (:template source)})))
+
+(defn blog-url [path]
+  (-> path
+      (clojure.string/replace "index.html" "")
+      (cond->> (not (clojure.string/starts-with? path "/")) (str "/"))))
+
+(defn- article-list [articles]
+  [:ul
+   (for [article articles
+         :let [metadata (:metadata article)]]
+     [:li
+      [:time (str (:local-date metadata))] " "
+      [:a
+       {:href (blog-url (:output-file article))}
+       (:title metadata)]])])
+
 (defn write-index! [sources]
-  (let [articles (filterv blog-article? sources)]
-    (spit (fs/file output-dir "index.html")
-          (selmer.parser/render
-           (slurp (fs/file template-dir "default.html"))
-           (assoc default-render-opts
-                  :body (hiccup/html
-                         [:div 
-                          (for [article articles
-                                :let [out-file (:output-file article)]]
-                            [:a {:href (str out-file)}
-                             (or (-> article :metadata :title) "A title")])]))))))
+  (write-html! (fs/file output-dir "index.html")
+               {:body (hiccup/html
+                       [:div (article-list (reverse (blog-articles sources)))])}))
 
 (defn write-archive! [sources]
   (let [articles (reverse (blog-articles sources))]
     (write-html! (fs/file output-dir "blog" "archives" "index.html")
                  {:body (hiccup/html
                          [:div {:id "blog-archives"}
-                          [:ul
-                           (for [article articles
-                                 :let [metadata (:metadata article)]]
-                             [:li
-                              [:time (str (:local-date metadata))] " "
-                              [:a
-                               {:href (str "/" (:output-file article))}
-                               (:title metadata)]])]])})))
+                          (article-list articles)])})))
 
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
