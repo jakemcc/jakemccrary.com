@@ -1,12 +1,22 @@
-* TODO Decide on overall design of site
+* TODO Pages
+** DONE archive page
+CLOSED: [2025-01-19 Sun 15:30]
+- CLOSING NOTE [2025-01-19 Sun 15:30]
+** TODO category pages
+- These are just the Archive page filtered!
+** CANCELED tag pages?
+CLOSED: [2025-01-19 Sun 16:06]
+** DONE about page
+CLOSED: [2025-01-19 Sun 16:06]
+- CLOSING NOTE [2025-01-19 Sun 16:06]
+** TODO adventure pages
+** TODO RSS feed
 * TODO Output path of existing posts should be the same as current blog (date and everything :frown:)
+* TODO drafts vs non-drafts
 * TODO output path of new posts should just be titles
 * TODO Sort the posts list on the main page
-* TODO Category pages
-* TODO RSS feed
-* TODO tag pages
+* TODO Decide on overall design of site
 * TODO styling
 * TODO preview on posts or full text on index / archive page?
 * TODO Code syntax highlighting?
-* TODO Archives page?
-* TODO drafts vs non-drafts
+* TODO images
