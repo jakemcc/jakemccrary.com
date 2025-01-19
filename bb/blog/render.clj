@@ -177,6 +177,11 @@
                          [:div {:id "blog-archives"}
                           (article-list articles)])})))
 
+(defn- copy-resources []
+  (doseq [f (fs/glob (fs/file source-dir) "**/*.{png,gif,jpeg,jpg,svg}")
+            :let [out (apply fs/file output-dir (rest (fs/components f)))]]
+      (fs/create-dirs (fs/parent out))
+      (fs/copy f out)))
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defn render []
@@ -185,10 +190,7 @@
     (fs/create-dir output-dir))
 
   (let [sources (load-sources)]
-    (doseq [f (fs/glob (fs/file source-dir) "**/*.{png,gif,jpeg,jpg,svg}")
-            :let [out (apply fs/file output-dir (rest (fs/components f)))]]
-      (fs/create-dirs (fs/parent out))
-      (fs/copy f out))
+    (copy-resources)
     (run! write-post! sources)
     (write-index! sources)
     (write-archive! sources)))
