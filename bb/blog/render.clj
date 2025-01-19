@@ -185,6 +185,10 @@
     (fs/create-dir output-dir))
 
   (let [sources (load-sources)]
+    (doseq [f (fs/glob (fs/file source-dir) "**/*.{png,gif,jpeg,jpg,svg}")
+            :let [out (apply fs/file output-dir (rest (fs/components f)))]]
+      (fs/create-dirs (fs/parent out))
+      (fs/copy f out))
     (run! write-post! sources)
     (write-index! sources)
     (write-archive! sources)))
