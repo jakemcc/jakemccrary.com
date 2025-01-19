@@ -1,4 +1,5 @@
 ---
+dated-url: true
 comments: true
 layout: post
 title: A simple way of testing disconnect logic

@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: "Working on multiple Clojure projects at once"
 date: 2012-03-28 21:18

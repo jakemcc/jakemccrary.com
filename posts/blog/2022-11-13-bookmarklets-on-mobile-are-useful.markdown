@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Bookmarklets on mobile are useful
 date: 2022-11-13 18:36 -0600

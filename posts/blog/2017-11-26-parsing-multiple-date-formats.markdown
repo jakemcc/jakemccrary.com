@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Parsing multiple date formats with clj-time
 date: 2017-11-26 09:52 -0600

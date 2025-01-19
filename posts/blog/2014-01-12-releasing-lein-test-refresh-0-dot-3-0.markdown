@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: "Releasing lein-test-refresh 0.3.0"
 date: 2014-01-12 20:12

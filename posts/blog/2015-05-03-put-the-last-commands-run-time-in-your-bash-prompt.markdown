@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Put the last command's run time in your Bash prompt
 date: 2015-05-03 20:37

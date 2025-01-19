@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: "Books that changed my life"
 date: 2020-01-11 13:21:19 -0600

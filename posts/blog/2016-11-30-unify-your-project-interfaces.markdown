@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Unify your project interfaces
 date: 2016-11-30 17:51 -0600

@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: My favorite clj-refactor features
 date: 2015-06-30 08:40

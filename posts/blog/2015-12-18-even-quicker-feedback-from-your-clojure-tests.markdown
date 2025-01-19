@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Even quicker feedback from your Clojure tests
 date: 2015-12-18 15:29 -0600

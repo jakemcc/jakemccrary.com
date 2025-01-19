@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: "Emacs: Generating project shortcuts"
 date: 2014-04-27 16:38

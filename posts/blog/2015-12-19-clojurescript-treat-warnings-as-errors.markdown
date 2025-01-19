@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: ! 'ClojureScript: Treat warnings as errors'
 date: 2015-12-19 17:09 -0600

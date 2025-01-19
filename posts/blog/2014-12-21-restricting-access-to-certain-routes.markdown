@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Restricting access to certain routes
 date: 2014-12-21 16:48

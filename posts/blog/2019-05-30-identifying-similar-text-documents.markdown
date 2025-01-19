@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: "Identifying similar text documents"
 date: 2019-05-30 13:40:35 -0500

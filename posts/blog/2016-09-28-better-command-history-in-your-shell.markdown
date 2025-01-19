@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Better command history in your shell
 date: 2016-09-28 11:42 -0500

@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: How to use Leiningen test selectors to filter by test name
 date: 2019-01-28 21:27 -0600

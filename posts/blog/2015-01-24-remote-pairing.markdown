@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Remote Pairing
 date: 2015-01-24 15:19

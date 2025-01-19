@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Speeding up my blog
 date: 2016-04-30 23:42 -0500

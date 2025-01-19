@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: How to be automatically notified when long running processes finish
 date: 2020-05-04 20:35 -0500

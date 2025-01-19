@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Speeding up magit
 date: 2020-11-14 16:37 -0600

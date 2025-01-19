@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Notifications with tmux and lein-test-refresh
 date: 2019-01-06 16:55 -0600

@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Scheduling cron tasks in mixed time zones
 date: 2024-06-16 13:32 -0500

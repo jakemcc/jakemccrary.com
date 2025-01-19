@@ -1,4 +1,5 @@
 ---
+dated-url: true
 comments: true
 layout: post
 title: Quickly starting a powerful Clojure REPL

@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Using my phone's voice control for a month
 date: 2017-07-28 09:06 -0500

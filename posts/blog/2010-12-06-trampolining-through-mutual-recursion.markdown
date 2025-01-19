@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 comments: true
 title: Trampolining through mutual recursion with Clojure

@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: "Continuous testing with Clojure and expectations"
 date: 2011-12-16 09:30

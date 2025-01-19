@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: "Reading from a Zipfile in Clojure"
 date: 2019-04-22 22:14:24 -0500

@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: A more helpful makefile
 date: 2018-12-27 21:21 -0600

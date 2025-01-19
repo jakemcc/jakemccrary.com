@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: A guide to distributed work
 date: 2017-10-31 18:30 -0500

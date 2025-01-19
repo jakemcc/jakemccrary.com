@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Building an Atreus keyboard
 date: 2019-10-12 15:43 -0500

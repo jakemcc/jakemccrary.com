@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: "Quicker Feedback From Failing Tests"
 date: 2014-05-31 13:14

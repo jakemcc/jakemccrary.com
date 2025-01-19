@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Adding a JSON Feed to an Octopress/Jekyll generated site
 date: 2017-05-30 22:31 -0500

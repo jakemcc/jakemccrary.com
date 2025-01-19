@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Which Clojure testing library is most used?
 date: 2017-03-31 21:54 -0500

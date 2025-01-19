@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: "Manage your workspace with grids under Linux, OS X, and Windows"
 date: 2013-04-15 19:15

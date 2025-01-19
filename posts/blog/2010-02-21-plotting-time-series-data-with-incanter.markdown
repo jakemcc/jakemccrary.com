@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 comments: true
 categories: [code, clojure]

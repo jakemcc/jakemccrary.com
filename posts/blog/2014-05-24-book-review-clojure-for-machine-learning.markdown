@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: "Book Review: Clojure for Machine Learning"
 date: 2014-05-24 10:09

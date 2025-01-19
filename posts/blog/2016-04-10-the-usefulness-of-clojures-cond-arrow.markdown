@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: The usefulness of Clojure's cond->
 date: 2016-04-10 18:45 -0500

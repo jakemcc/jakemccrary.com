@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Using comm to verify file content matches
 date: 2017-05-29 10:45 -0500

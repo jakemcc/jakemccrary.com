@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: "Releasing the Functional JavaScript Companion"
 date: 2013-07-09 20:22

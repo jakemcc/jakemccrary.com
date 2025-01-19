@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: "Emacs: Capture shell command output in temporary buffer"
 date: 2013-08-10 14:33

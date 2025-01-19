@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Creating a custom Kindle dictionary
 date: 2020-11-11 19:23 -0600

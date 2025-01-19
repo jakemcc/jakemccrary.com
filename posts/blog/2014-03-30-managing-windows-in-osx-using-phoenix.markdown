@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: "Managing windows in OS X using Phoenix"
 date: 2014-03-30 18:30

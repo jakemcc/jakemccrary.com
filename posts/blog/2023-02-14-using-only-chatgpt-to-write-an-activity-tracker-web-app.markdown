@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: "Using only ChatGPT to write an activity tracker web app"
 date: 2023-02-14 20:56:06 -0600

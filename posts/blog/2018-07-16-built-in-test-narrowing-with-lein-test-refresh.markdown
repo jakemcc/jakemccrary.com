@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Built-in test narrowing with lein-test-refresh
 date: 2018-07-16 14:47 -0500

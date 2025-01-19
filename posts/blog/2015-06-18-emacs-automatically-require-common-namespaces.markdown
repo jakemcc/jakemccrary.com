@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: ! 'Emacs: automatically require common namespaces'
 date: 2015-06-18 12:52

@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: "Comparing Clojure Testing Libraries: Output"
 date: 2014-06-22 21:16

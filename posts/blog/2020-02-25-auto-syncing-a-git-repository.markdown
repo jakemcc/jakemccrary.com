@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Auto-syncing a git repository
 date: 2020-02-25 21:09 -0600

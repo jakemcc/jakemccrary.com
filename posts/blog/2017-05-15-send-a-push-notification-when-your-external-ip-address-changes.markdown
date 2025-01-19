@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Send a push notification when your external IP address changes
 date: 2017-05-15 22:15 -0500

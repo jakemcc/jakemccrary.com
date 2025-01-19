@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: "Running clojure.test tests on file changes"
 date: 2013-11-11 20:02

@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: My current Leiningen profiles.clj
 date: 2017-08-27 19:06 -0500

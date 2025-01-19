@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: ! 'Advanced Leiningen checkouts: configuring what ends up on your classpath'
 date: 2015-03-24 21:29

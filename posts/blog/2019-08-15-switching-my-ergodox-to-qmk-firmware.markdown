@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Switching my Ergodox to QMK firmware
 date: 2019-08-15 19:07 -0500

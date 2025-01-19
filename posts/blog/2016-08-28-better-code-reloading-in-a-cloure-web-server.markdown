@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Better code reloading in a Clojure web server
 date: 2016-08-28 17:20 -0500

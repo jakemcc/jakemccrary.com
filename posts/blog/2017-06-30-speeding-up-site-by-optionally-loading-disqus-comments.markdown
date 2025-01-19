@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Speeding up this site by optionally loading Disqus comments
 date: 2017-06-30 19:37 -0500

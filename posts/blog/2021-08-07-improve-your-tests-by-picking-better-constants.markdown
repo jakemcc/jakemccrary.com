@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Improve your tests by picking better constants
 date: 2021-08-07 19:58 -0500

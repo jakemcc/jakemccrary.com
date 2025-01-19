@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Creating serverless applications with ClojureScript and Firebase
 date: 2018-02-20 11:30 -0600

@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: "Releasing lein-autoexpect 1.0"
 date: 2013-08-05 19:50

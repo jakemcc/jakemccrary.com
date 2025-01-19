@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: "Reflections on Stanford's online class experiment"
 date: 2011-12-29 18:42

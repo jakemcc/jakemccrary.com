@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: "Measuring aggregate performance in Clojure"
 date: 2017-09-29 08:48:01 -0500

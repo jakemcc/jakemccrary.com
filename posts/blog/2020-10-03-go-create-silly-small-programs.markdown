@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Go create silly, small programs
 date: 2020-10-03 13:24 -0500

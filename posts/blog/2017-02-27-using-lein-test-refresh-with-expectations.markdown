@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Using lein-test-refresh with expectations
 date: 2017-02-27 09:19 -0600

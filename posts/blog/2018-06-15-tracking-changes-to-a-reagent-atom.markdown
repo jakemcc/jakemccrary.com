@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Tracking changes to a Reagent atom
 date: 2018-06-15 09:05 -0500

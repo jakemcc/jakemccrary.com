@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: 7 tips for a successful remote meeting
 date: 2016-06-28 09:36 -0500

@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: How to hang a hangboard using a doorway pull-up bar
 date: 2020-04-26 20:42 -0500

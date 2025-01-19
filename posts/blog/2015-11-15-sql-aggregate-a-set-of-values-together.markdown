@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: ! 'SQL: Aggregate a set of values together'
 date: 2015-11-15 19:45 -0600

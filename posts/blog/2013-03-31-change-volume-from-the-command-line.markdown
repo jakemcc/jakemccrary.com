@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Change volume from the command line
 date: 2013-03-31 16:17

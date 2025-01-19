@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: "Maintaining Directory Layout When Selectively Copying Files"
 date: 2013-02-03 12:24

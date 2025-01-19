@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: ! 'Book Review: Haskell Data Analysis Cookbook'
 date: 2014-09-01 13:49

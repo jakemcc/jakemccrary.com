@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: 'Book review: Serverless Single Page Apps'
 date: 2016-04-08 10:15 -0500

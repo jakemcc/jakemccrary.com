@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Tips for working from home
 date: 2016-06-14 10:05 -0500

@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Using Clojure macros for nicer error handling
 date: 2018-02-18 11:24 -0600

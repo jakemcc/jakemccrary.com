@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Overview of my Leiningen profiles.clj
 date: 2015-01-11 22:12

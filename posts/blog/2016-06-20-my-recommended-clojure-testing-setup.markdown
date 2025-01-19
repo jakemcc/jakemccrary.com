@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: My recommended Clojure testing setup
 date: 2016-06-20 21:03 -0500

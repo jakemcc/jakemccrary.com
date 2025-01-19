@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Speeding up Magit with the native-comp branch of Emacs
 date: 2020-12-30 20:08 -0600

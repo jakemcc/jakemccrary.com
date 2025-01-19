@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: A retrospective format for remote or co-located teams
 date: 2020-03-16 12:52 -0500

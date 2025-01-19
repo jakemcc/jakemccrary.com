@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: "Using Incanter to review my 2013 reading"
 date: 2014-01-01 17:31

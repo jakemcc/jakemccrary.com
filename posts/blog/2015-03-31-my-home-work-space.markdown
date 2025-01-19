@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: My home work space
 date: 2015-03-31 20:09

@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: "Fast feedback is important"
 date: 2019-10-08 18:10:02 -0500

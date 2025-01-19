@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: GitHub Code Reviews
 date: 2015-07-03 11:22 -0500

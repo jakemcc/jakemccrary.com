@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: 'Making code fast: Measure what you intend to measure'
 date: 2016-12-31 10:52 -0600

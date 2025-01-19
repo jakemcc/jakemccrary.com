@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Building a Onewheel stand
 date: 2019-08-23 20:34 -0500

@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Using Bazel to help fix flaky tests
 date: 2020-06-28 18:28 -0500

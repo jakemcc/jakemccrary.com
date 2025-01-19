@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Tests are living documentation
 date: 2021-09-11 18:20 -0500

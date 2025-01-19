@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Preventing duplicate long-running invocations in Clojure
 date: 2018-06-14 09:47 -0500

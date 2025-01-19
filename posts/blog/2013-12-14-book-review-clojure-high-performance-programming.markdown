@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: "Book Review: Clojure High Performance Programming"
 date: 2013-12-14 16:39

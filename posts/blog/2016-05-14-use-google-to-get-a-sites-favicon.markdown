@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Use Google to get a site's favicon
 date: 2016-05-14 09:10 -0500

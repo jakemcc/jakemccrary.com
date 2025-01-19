@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: HTML markup for better sharing on social media
 date: 2016-10-28 10:05 -0500

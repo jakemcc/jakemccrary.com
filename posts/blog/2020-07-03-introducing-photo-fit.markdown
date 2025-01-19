@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Introducing Photo Fit
 date: 2020-07-03 18:37 -0500

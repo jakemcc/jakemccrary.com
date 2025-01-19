@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Breaking change and more in lein-test-refresh 0.24.1
 date: 2019-03-20 21:30 -0500

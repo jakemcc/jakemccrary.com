@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Use git pre-commit hooks to stop unwanted commits
 date: 2015-05-31 11:51

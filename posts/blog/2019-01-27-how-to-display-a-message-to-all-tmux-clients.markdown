@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: How to display a message to all tmux clients
 date: 2019-01-27 17:03 -0600

@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Testing asynchronous JavaScript with Jasmine
 date: 2019-02-13 17:46 -0600

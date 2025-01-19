@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Building the ErgoDox Keyboard
 date: 2014-07-27 21:05

@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: "Book Review: Clojure Data Analysis Cookbook"
 date: 2013-05-06 07:00

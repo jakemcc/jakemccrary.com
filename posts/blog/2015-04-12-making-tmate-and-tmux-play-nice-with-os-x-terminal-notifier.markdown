@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Making tmate and tmux play nice with OS X terminal-notifier
 date: 2015-04-12 17:47

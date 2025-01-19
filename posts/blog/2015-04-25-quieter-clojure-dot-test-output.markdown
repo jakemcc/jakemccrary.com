@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Quieter clojure.test output
 date: 2015-04-25 15:40

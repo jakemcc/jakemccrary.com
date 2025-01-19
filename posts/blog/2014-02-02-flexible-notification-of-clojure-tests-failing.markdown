@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: "Flexible notification of Clojure tests failing"
 date: 2014-02-02 18:11

@@ -1,4 +1,5 @@
 ---
+dated-url: true
 layout: post
 title: Using Bash-Preexec for monitoring the runtime of your last command
 date: 2020-04-21 18:22 -0500
