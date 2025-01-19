@@ -7,6 +7,11 @@
   (:import (java.time LocalDateTime LocalDate ZoneId)
            (java.time.format DateTimeFormatter DateTimeParseException)))
 
+(defn left-pad [s padding n]
+  (if (< (count s) n)
+    (recur (str padding s) padding n)
+    s))
+
 (defmacro dbg [& args]
   `(let [r# (do ~@args)]
      (println (str "dbg: " (quote ~@args) " => " r#))
@@ -23,28 +28,28 @@
           :url "https://jakemccrary.com"
           :short-url "jakemccrary.com"}})
 
-(defn left-pad [s padding n]
-  (if (< (count s) n)
-    (recur (str padding s) padding n)
-    s))
-
 (defn output-file [source]
   (let [sub-dirs (->> (fs/components (:input-file source))
                       (rest)
                       (butlast))
         name (fs/strip-ext (fs/file-name (:input-file source)))
-        year-month-day (when (-> source :metadata :dated-url)
+        year-month-day (when (-> source :metadata :local-date)
                          [(str (.getYear (-> source :metadata :local-date)))
                           (left-pad (str (.getMonthValue (-> source :metadata :local-date))) "0" 2)
                           (left-pad (str (.getDayOfMonth (-> source :metadata :local-date))) "0" 2)])]
     (apply fs/file (concat sub-dirs
-                           year-month-day
-                           [(dbg (cond-> (dbg name)
-                                   (dbg (boolean (-> source :metadata :dated-url)))
-                                   (clojure.string/replace-first
-                                    (re-pattern (dbg (str (clojure.string/join "-" year-month-day) "-")))
-                                    "")))
+                           (when (-> source :metadata :dated-url)
+                               year-month-day)
+                           ;; TODO(probably not going to work with adventure formats)
+                           [(clojure.string/replace-first name #"\d\d\d\d-\d\d-\d\d-" "")
                             "index.html"]))))
+(comment
+  (= "blog/reading-in-2024/index.html"
+     (str (output-file {:input-file (fs/file "posts/blog/2024-01-05-reading-in-2024.markdown")
+                        :metadata {:date "2025-01-05 16:23 -0600"
+                                   :local-date (LocalDate/of 2025 1 5)}})))
+  ;;
+  )
 
 (defn load-template [post]
   (let [template "default" #_ (or (-> post :metadata :layout) "default")

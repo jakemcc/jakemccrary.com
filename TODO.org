@@ -11,9 +11,12 @@ CLOSED: [2025-01-19 Sun 16:06]
 - CLOSING NOTE [2025-01-19 Sun 16:06]
 ** TODO adventure pages
 ** TODO RSS feed
-* TODO Output path of existing posts should be the same as current blog (date and everything :frown:)
+* DONE Output path of existing posts should be the same as current blog (date and everything :frown:)
+CLOSED: [2025-01-19 Sun 16:47]
+- CLOSING NOTE [2025-01-19 Sun 16:47]
 * TODO drafts vs non-drafts
-* TODO output path of new posts should just be titles
+* CANCELED output path of new posts should just be titles
+CLOSED: [2025-01-19 Sun 16:47]
 * TODO Sort the posts list on the main page
 * TODO Decide on overall design of site
 * TODO styling
