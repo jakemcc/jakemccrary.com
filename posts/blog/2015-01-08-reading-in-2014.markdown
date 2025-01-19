@@ -1,0 +1,155 @@
+---
+layout: post
+title: Reading in 2014
+date: 2015-01-08 22:59
+comments: true
+published: true
+categories:
+- books
+---
+
+At the beginning of last year I took some time and
+[reviewed](http://jakemccrary.com/blog/2014/01/01/using-incanter-to-review-my-2013-reading/)
+my 2013 reading using Clojure and Incanter to generate some stats. It
+was a useful exercise to reflect back on my reading and play around
+with Incanter again.
+
+Over the last couple of weeks I've taken a similar look at my
+2014 reading. The rest of this post highlights some of the top books
+from the previous year and then posts some numbers at the end.
+
+I review every book I read using
+[Goodreads](https://www.goodreads.com/). If you want to see more of
+what I've been reading you can find me
+[here](https://www.goodreads.com/user/show/3431614-jake-mccrary). I
+track and review every book I read and have found this practice to be
+extremely rewarding.
+
+### 2014 Goals ###
+
+I entered 2014 without a volume goal. Unlike 2013, I didn't have a
+page or book count goal. I entered 2014 with the desire to reread two
+specific books and the nebulous goal of reading more non-fiction.
+
+### 2014 Results ###
+
+I ended up setting a new volume record. I read 69 books for a total of
+almost 23,000 pages. I also read every week of
+[Day One](http://www.amazon.com/gp/product/B00FDWVIHO/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B00FDWVIHO&linkCode=as2&tag=jakemccrary08-20&linkId=S6TWD3DEAED3EDBF),
+a weekly literary journal containing one short story and one poem from
+new authors. This doesn't count towards my page or book count but is
+reading I enjoy. It exposes me to many different styles.
+
+More than a third of my reading was non-fiction. I don't
+have numbers for 2013 but that feels like an increase. I consider my
+goal of reading more non-fiction achieved.
+
+I also reread the two books I had planned on rereading. I wanted to
+reread
+[Infinite Jest](http://www.amazon.com/gp/product/B000S1M9LY/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B000S1M9LY&linkCode=as2&tag=jakemccrary08-20&linkId=XEJIFRILDRUSJXWG)
+and
+[Hard-Boiled Wonderland and the End of the World](http://www.amazon.com/Hard-Boiled-Wonderland-World-Haruki-Murakami-ebook/dp/B004AP9W1O/ref=sr_1_1?ie=UTF8&qid=1420159468&sr=8-1&keywords=a+hard+boiled+wonderland)
+and succeeded in rereading both of them.
+
+### Recommendations ###
+
+I awarded seven books a five out of five star rating. I've listed them
+below in (in no particular order). Each book I'd recommend without
+hesitation. Instead of reworking or copying my previous reviews I've
+provided links to Goodreads. The titles link to Amazon.
+
+* [Working Effectively with Unit Tests](http://www.amazon.com/gp/product/B00QS2HXUO/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B00QS2HXUO&linkCode=as2&tag=jakemccrary08-20&linkId=RWTY2PCQBTCXMLOK) by Jay Fields ([my review](https://www.goodreads.com/review/show/984963558))
+* [The Secrets of Consulting](http://www.amazon.com/gp/product/B004J35LHQ/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B004J35LHQ&linkCode=as2&tag=jakemccrary08-20&linkId=FP26VU2OR4JMMDOZ) by Gerald Weinberg ([my review](https://www.goodreads.com/review/show/519452572))
+* [Extreme Programming Explained](http://www.amazon.com/gp/product/B00N1ZN6C0/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B00N1ZN6C0&linkCode=as2&tag=jakemccrary08-20&linkId=LW3CLVNSZMRLBDVW) by Kent Beck ([my review](https://www.goodreads.com/review/show/1119479193))
+* [Meditations](http://www.amazon.com/gp/product/B000FC1JAI/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B000FC1JAI&linkCode=as2&tag=jakemccrary08-20&linkId=5TFM37LOXWLSBMUD) by Marcus Aurelious and translated by Gregory Hays ([my review](https://www.goodreads.com/review/show/998010207))
+* [A Man Without a Country](http://www.amazon.com/gp/product/B000QUELZ4/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B000QUELZ4&linkCode=as2&tag=jakemccrary08-20&linkId=56W5DEBPW3LU6XZX) by Kurt Vonnegut ([my review](https://www.goodreads.com/review/show/93929432))
+* [Infinite Jest](http://www.amazon.com/gp/product/B000S1M9LY/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B000S1M9LY&linkCode=as2&tag=jakemccrary08-20&linkId=XEJIFRILDRUSJXWG) by David Foster Wallace ([my first review](https://www.goodreads.com/review/show/509610965), [second review](https://www.goodreads.com/review/show/880349659))
+* [The Bone Clocks](http://www.amazon.com/gp/product/B00IHMF9KE/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B00IHMF9KE&linkCode=as2&tag=jakemccrary08-20&linkId=WPOULKSHDQDXKMLZ) by David Mitchell ([my review](https://www.goodreads.com/review/show/1030027657))
+
+I'm recommending a specific translation of _Meditations_. I attempted
+to read different one first and it was so painful to read I ended up
+giving up. The linked translation is modern and contains a useful
+forward giving you background information on the time.
+
+I only read one series this year but it was a good one.
+[The Magicians](http://www.amazon.com/gp/bookseries/B00HUQBPWE/kindle/?ie=UTF8&camp=1789&creative=390957&linkCode=ur2&tag=jakemccrary08-20&linkId=ABX4JPELH5GKERZP),
+by Lev Grossman, was recommended by a friend who described it as
+"Harry Potter but with characters battling depression." I'm not sure
+that fully captures the feel of the series but it is a start. The
+series introduces you to a world like our own but with magic. You
+follow cynical, self-absorbed students as they attend school,
+graduate, and grow up living in both the magical and non-magical
+world. The first book in the series is the weakest so if you read that
+and find it enjoyable you should definitely pick up the next two
+books.
+
+### 2015 Goals ###
+
+2015 isn't going to have an easily measured goal. I don't feel the
+need to set number of books or pages goals any more. I'm hoping to
+increase the quality of my reading. This is a pretty unclear goal. To
+me this doesn't mean increasing the average rating of books I read but
+instead I want to get more out of what I read. I want to think a bit
+deeper about the subjects I'm reading.
+
+### 2014 Measurements ###
+
+Below are some random measurements that are probably only interesting
+to me.
+
+This year I recorded the format of the books I read. This was the year
+of the ebook; over 90% of the books I read were electronic. I'd guess
+that this is a higher percentage of ebooks than previous years. I wish
+I had recorded the formats read in previous years.
+
+```
+| Binding   | Number of books |
+|-----------+-----------------|
+| Hardcover |               1 |
+| Paperback |               4 |
+| Kindle    |              64 |
+```
+
+My average rating has been going down over the last four years.
+
+```
+| Year | Average Rating |
+|------+----------------|
+| 2011 | 3.84           |
+| 2012 | 3.66           |
+| 2013 | 3.67           |
+| 2014 | 3.48           |
+```
+
+In 2014, three authors composed nearly 25% of my reading (by page count). The
+top six authors by page count are below.
+
+```
+| Author               | My Average Rating | Number of Books | Number of Pages | Percent of Total Page Count |
+|----------------------+-------------------+-----------------+-----------------+-----------------------------|
+| David Mitchell       |                 4 |               5 |            2334 |                      10.19% |
+| David Foster Wallace |       4.333333333 |               3 |            1753 |                       7.65% |
+| Lev Grossman         |       3.666666667 |               3 |            1244 |                       5.43% |
+| Marisha Pessl        |               3.5 |               2 |            1153 |                       5.03% |
+| Haruki Murakami      |               3.5 |               2 |             768 |                       3.35% |
+| Cormac McCarthy      |               3.5 |               2 |             650 |                       2.84% |
+```
+
+My top six authors by average rating (with ties broken by number of
+books) are below.
+
+```
+| Author               | My Average Rating | Number of Books | Number of Pages | Percent of Total Page Count |
+|----------------------+-------------------+-----------------+-----------------+-----------------------------|
+| Gerald M. Weinberg   |                 5 |               1 |             228 |                       1.00% |
+| Kent Beck            |                 5 |               1 |             224 |                       0.98% |
+| Jay Fields           |                 5 |               1 |             204 |                       0.89% |
+| Kurt Vonnegut        |               4.5 |               2 |             377 |                       1.65% |
+| David Foster Wallace |       4.333333333 |               3 |            1753 |                       7.65% |
+| David Mitchell       |                 4 |               5 |            2334 |                      10.19% |
+```
+
+I did top six for both of these because otherwise David Mitchell would
+not have been in the second one. I've devoured his writing in the last
+year and a half for a reason. I'm consistently rating his books
+highly.

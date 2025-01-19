@@ -1,0 +1,12 @@
+* TODO Decide on overall design of site
+* TODO Output path of existing posts should be the same as current blog (date and everything :frown:)
+* TODO output path of new posts should just be titles
+* TODO Sort the posts list on the main page
+* TODO Category pages
+* TODO RSS feed
+* TODO tag pages
+* TODO styling
+* TODO preview on posts or full text on index / archive page?
+* TODO Code syntax highlighting?
+* TODO Archives page?
+* TODO drafts vs non-drafts

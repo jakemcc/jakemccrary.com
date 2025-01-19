@@ -1,0 +1,265 @@
+---
+layout: post
+title: Reading in 2021
+date: 2022-01-02 12:14 -0600
+comments: true
+published: true
+description: A look back at my reading done in the year 2021.
+keywords: 2021, books, book review, reading
+categories:
+- books
+---
+
+At the beginning of every year, I reflect on books I've read in the previous year.
+I take a look at my records, fix errors, and think about reading goals for the upcoming year.
+
+Here are links to my previous end-of-year reflections: [2013](/blog/2014/01/01/using-incanter-to-review-my-2013-reading/), [2014](/blog/2015/01/08/reading-in-2014/), [2015](/blog/2016/03/13/reading-in-2015/), [2016](/blog/2017/01/04/reading-in-2016/), [2017](/blog/2018/03/03/reading-in-2017/), [2018](/blog/2019/01/21/reading-in-2018/), [2019](/blog/2020/01/11/reading-in-2019/), and [2020](/blog/2021/01/24/reading-in-2020/).
+
+I've continued to keep track of my reading using [Goodreads](http://goodreads.com).
+My [profile](https://www.goodreads.com/user/show/3431614-jake-mccrary) has nearly the full list of the books I've read since 2010.
+[Here](https://www.goodreads.com/review/list/3431614-jake-mccrary?shelf=read_2021) is my 2021.
+
+## 2021 Goals
+
+Last year I wrote:
+
+> I have quite a few unread books sitting on my virtual and physical bookshelf.
+> This feels like setting a really low-bar but this year I'd like to read some of these unread-but-owned books.
+
+> I'm also planning on reading at least one book on writing and one book on climbing. 
+> This goal is almost a subset of the above goal as I have books on both these topics sitting on my shelf.
+
+Did I achieve those goals?
+No.
+
+Looking through my list of read books, I think only one of those a book I owned at the beginning of 2021.
+I did not read _some_ already owned books; I read a single already owned book.
+
+I did read a book on writing, George Saunders' _A Swim in a Pond in the Rain_, and multiple climbing books, _Rock Climbing Technique_ by John Kettle and _[Rock Climbing in Kentucky's Red River Gorge](https://www.goodreads.com/book/show/57691814-rock-climbing-in-kentucky-s-red-river-gorge)_ by James Maples.
+
+Early in 2020, at the request of some readers of this site, I started a [mailing list]({{ site.subscribe_email }}).
+During 2020 I used this newsletter as a way to notify subscribers of new articles posted to this website and write up short blurbs on books I had finished.
+Except for a single email, I also didn't send out any updates to the newsletter.
+
+This is partially because I didn't write many articles last year.
+I generally try to write about one article a month but I did not do that in 2021.
+We'll see if I pick back up this habit in 2022.
+
+## Highlights
+
+Below are some highlights from 2021.
+The titles link to Goodreads.
+
+I didn't write many reviews on Goodreads this year and did not write detailed reviews in this article.
+I'd encourage you to click the links and read reviews on Goodreads.
+
+### Five-star books
+
+#### [Dune](https://www.goodreads.com/book/show/44767458-dune) by Frank Herbert
+
+This was my third time reading Dune.
+I read it in preparation for seeing the 2021 film.
+
+I'm a huge fan of Dune but parts of it definitely haven't aged well.
+I think the story manages to be complex and have plenty of movement but somehow isn't overwhelming.
+I thought the film did a pretty good job of capturing that.
+
+The first time I read Dune, I also made the very first [Kindle Dune Dictionary](https://jakemcc.gumroad.com/l/dune-dictionary).
+If you are reading on a Kindle and haven't read the book before, I'd recommend purchasing the dictionary.
+I didn't find it useful  on my third time through the book but it made my first read through better.
+
+#### [Memory](https://www.goodreads.com/book/show/12621704-memory) by Lois McMaster Bujold
+
+In August and September, I pretty much devoured the entire [Vorkosigan Saga](https://www.goodreads.com/series/98250-vorkosigan-saga-publication-order).
+I read all these books pretty much back to back and can barely distinguish them.
+
+I'd recommend the series.
+It was a fun series and there are quite a few books in it.
+For some reason, this book stood out and is the only one I gave five stars.
+
+#### [A Memory Called Empire](https://www.goodreads.com/book/show/39873472-a-memory-called-empire) and [A Desolation Called Peace](https://www.goodreads.com/book/show/45154547-a-desolation-called-peace) by Arkady Martine
+
+These are two incredible books.
+Arkady Martine built a great world.
+Politics, aliens, and poetry all show up in these books and it is great.
+
+Go read some reviews (perhaps [this](https://www.goodreads.com/review/show/2754542016?book_show_action=true) and [this](https://www.goodreads.com/review/show/3361651782?book_show_action=true)) and then go start this series.
+
+#### [The Overstory](https://www.goodreads.com/book/show/36075657-the-overstory) by Richard Powers
+
+The book starts with what feels like a collection of short stories and grows into a story of struggle, triumph, and failure.
+I can't point to what made this book stand out to me but a I really enjoyed it.
+It might have had some moments that dragged a bit but I still loved it.
+
+#### [This Is How You Lose the Time War](https://www.goodreads.com/book/show/55710260-this-is-how-you-lose-the-time-war) by Amal El-Mohtar
+
+I went into this book knowing nothing about it and found it beautiful.
+The writing is lyrical and the way the story is told worked really well.
+
+The book isn't that long and I absolutely devoured it.
+
+#### [Zikora](https://www.goodreads.com/book/show/55612579-zikora) by Chimamanda Ngozi Adichie
+
+This is a 35 page short story.
+Go spend the short time it takes to read it.
+And then go read the rest of Adichie's writing.
+
+#### [A Swim in a Pond in the Rain: In Which Four Russians Give a Master Class on Writing, Reading, and Life](https://www.goodreads.com/book/show/53487237-a-swim-in-a-pond-in-the-rain) by George Saunders
+
+This book is fantastic.
+Generally, the format of the book is that you read a short story and then read George Saunders' thoughts about that story.
+
+This book slightly changed how I think about stories.
+
+#### [Dept. of Speculation](https://www.goodreads.com/book/show/19635587-dept-of-speculation) by Jenny Offill
+
+This is a relatively short, beautiful book.
+I experienced a full range of emotions while reading it.
+
+#### [Think Again: The Power of Knowing What You Don't Know](https://www.goodreads.com/book/show/55614248-think-again) by Adam M. Grant
+
+A solid book on the benefits of rethinking your positions.
+A very short summary is that it is good to update your beliefs and be curious.
+There is little benefit to being wrong longer.
+Learn how to rejoice in correcting your beliefs and embrace updating your viewpoints.
+
+There is a some overlap of concepts in this book and the book Moral Tribes.
+If you are also well-versed in cognitive biases, parts of this book will be a repeat.
+
+#### [The DevOps Handbook: How to Create World-Class Agility, Reliability, and Security in Technology Organizations](https://www.goodreads.com/book/show/32605769-the-devops-handbook) by Gene Kim
+
+I think a second edition came out immediately after I finished reading the first edition.
+Hopefully the second edition has high quality updates as the original edition of this book is pretty solid.
+I've lived the vision promoted by this book and it is a good place to be.
+
+#### [Rock Climbing Technique: The Practical Guide to Movement Mastery](https://www.goodreads.com/book/show/40526042-rock-climbing-technique) by John Kettle
+
+A short book full of specific drills that are intended to improve your skill in climbing.
+This book isn't about improving your strength, flexibility, or endurance.
+It is all about getting better at movement and paying attention to your movement patterns.
+
+I've taken some of these drills and incorporated them into my climbing practice.
+I plan on digging back into this book and incorporating more of them.
+
+#### [Drug Use for Grown-Ups: Chasing Liberty in the Land of Fear](https://www.goodreads.com/book/show/54965614-drug-use-for-grown-ups) by Carl L. Hart
+
+This book is a mix of the author's personal experience, policy, and science and makes the argument that drugs should be legal.
+Probably worth reading if you have any sort of reaction to that last sentence.
+
+Reading some reviews on Goodreads gives a fairly balanced view of what this book is about.
+Even if I personally gave this book five stars, I find myself agreeing with a wide range of reviews by others.
+
+### Other Highlights
+
+#### [A Psalm for the Wild-Built](https://www.goodreads.com/book/show/40864002-a-psalm-for-the-wild-built) by Becky Chambers
+
+A couple other reviews ([one](https://www.goodreads.com/review/show/3567191782?book_show_action=true), [two](https://www.goodreads.com/review/show/3762535675?book_show_action=true)) described this book as comforting science fiction.
+I think that is a great description.
+
+The world feels cozy.
+It is full of generally nice folks going about their lives and interacting with each other over tea.
+This main character in this book is non-binary and you get to hang out with them as they live their life.
+It feels like a nice place to be with reasonable folks and respect between humans, nature, and robots.
+
+It is a relaxing read that feels like a gentle fable that muses on life and what it means to exist.
+
+#### [Rock Climbing in Kentucky's Red River Gorge](https://www.goodreads.com/book/show/57691814-rock-climbing-in-kentucky-s-red-river-gorge) by James Maples
+
+This book has a very narrow audience.
+If you have heard about the Red River Gorge, rock climb, and are interested in the history of the area you should read this book.
+
+I learned a lot about one of my favorite places to rock climb.
+
+#### [Crossroads](https://www.goodreads.com/book/show/56247202-crossroads) by Jonathan Franzen
+
+There is a really good chance I should have given this book five stars.
+It was great.
+This book tells the story of the Hildebrandt family through interweaving perspectives of the family's members.
+The characters are complex and the perspectives are interesting.
+I hope Franzen can continue to deliver this level of story in the sequels.
+
+This [goodreads review](https://www.goodreads.com/review/show/4264230041?book_show_action=true) does a great job of selling the book.
+
+#### [The Art of Gathering](https://www.goodreads.com/book/show/38466356-the-art-of-gathering) by Priya Parker
+
+This book does a wonderful job of describing what makes a gathering great.
+It was a bit hopeful to read this book early in 2021.
+
+#### [All Systems Red](https://www.goodreads.com/book/show/32758901-all-systems-red) by Martha Wells
+
+A fun novella told from the perspective of an android.
+
+#### [Klara and the Sun](https://www.goodreads.com/book/show/54250259-klara-and-the-sun) by Kazuo Ishiguro
+
+This book was beautiful.
+It manages to feel slightly off and this is completely appropriate given the narrator.
+This leads to some really amusing bits of writing.
+
+## Stats
+
+I thought I had read less this year than I had in recent years but I was wrong.
+I read 57 books and 19,564 pages in 2021.
+
+```org
+| Year | # of Pages | # of Books |
+|------+------------+------------|
+| 2021 |      19564 |         57 |
+| 2020 |      12093 |         43 |
+| 2019 |      15994 |         42 |
+| 2018 |      13538 |         36 |
+| 2017 |      18317 |         48 |
+| 2016 |      22790 |         59 |
+| 2015 |      21689 |         51 |
+| 2014 |      24340 |         71 |
+| 2013 |      19815 |         60 |
+| 2012 |      14208 |         44 |
+| 2011 |       9179 |         19 |
+| 2010 |      14667 |         46 |
+```
+
+Here is a breakdown of books finished by month.
+I can tell from looking at August and September that I started and finished the Vorkosigan series during those months.
+
+![Book and pages count by month](/images/reading-by-month-2021.png "Number of books and pages for each month")
+
+Electronic books continue to be the dominant format.
+
+```org
+|           | 2021 | 2020 | 2019 | 2018 | 2017 | 2016 | 2015 |
+|-----------+------+------+------+------+------+------+------|
+| audiobook |    0 |    1 |    0 |    0 |    0 |    0 |    0 |
+| ebook     |   56 |   41 |   43 |   37 |   37 |   56 |   47 |
+| hardcover |    0 |    0 |    1 |    1 |    7 |    0 |    1 |
+| paperback |    1 |    1 |    7 |    5 |    5 |    3 |    3 |
+```
+
+Fiction dominated this year.
+
+```org
+|                           |   2021 |   2020 |   2019 |   2018 |
+|---------------------------+--------+--------+--------+--------|
+| fiction                   |     46 |     26 |     28 |     29 |
+| non-fiction               |     11 |     17 |     23 |     14 |
+| fiction:non-fiction ratio | 4.18:1 | 1.53:1 | 1.22:1 | 2.07:1 |
+
+```
+
+Here is the star rating distribution.
+
+```org
+|             | 2 stars | 3 stars | 4 stars | 5 stars |
+|-------------+---------+---------+---------+---------|
+| fiction     |       2 |      17 |      19 |       8 |
+| non-fiction |       1 |       2 |       3 |       5 |
+```
+
+## 2022 goals
+
+I used to be pretty good at capturing some thoughts upon completion of a book.
+I haven't been doing a great job of that.
+I'd like to do better this year.
+
+We'll see what that entails but it might take the form of having more discipline around sending out some thoughts in the [newsletter]({{ site.subscribe_email }}).
+
+Have any book recommendations?
+Please shoot me an email or leave a comment.

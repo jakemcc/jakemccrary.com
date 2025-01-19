@@ -1,0 +1,246 @@
+---
+layout: post
+title: Reading in 2020
+date: 2021-01-24 17:14 -0600
+comments: true
+published: true
+description: A look back at my reading done in the year 2020.
+keywords: 2020, books, book review, reading
+categories:
+- books
+---
+
+At the beginning of every year I reflect on my reading from the previous year.
+I take a look at my records, fix errors, and think about reading goals for the upcoming year.
+
+Here are links to my previous end-of-year reflections: [2013](/blog/2014/01/01/using-incanter-to-review-my-2013-reading/), [2014](/blog/2015/01/08/reading-in-2014/), [2015](/blog/2016/03/13/reading-in-2015/), [2016](/blog/2017/01/04/reading-in-2016/), [2017](/blog/2018/03/03/reading-in-2017/), [2018](/blog/2019/01/21/reading-in-2018/), and [2019](/blog/2020/01/11/reading-in-2019/).
+
+I've continued to keep track of my reading using [Goodreads](http://goodreads.com).
+My [profile](https://www.goodreads.com/user/show/3431614-jake-mccrary) has nearly the full list of the books I've read since 2010.
+[Here](https://www.goodreads.com/review/list/3431614-jake-mccrary?shelf=read_2020) is my 2020.
+
+## 2020 Goals
+
+Last year I wrote:
+
+> I was encouraged by how many non-fiction books I read this year and how many of them ended up earning a five star rating. I'd like to continue that trend of reading high-quality non-fiction books.
+
+> I've also been reading a lot of books but I haven't always been the best at trying to consciously apply the lessons from those books. I'm going to try to improve that this year.
+
+> Those are pretty fuzzy goals but I'm alright with that.
+
+I'll come back at the end of this article and reflect on if I hit it or not.
+
+## Highlights
+
+Here are my five star books from 2020.
+The titles are affiliate links to Amazon.
+If you click one and make a purchase I get a small kickback.
+
+If I wrote a review on Goodreads then the `my review` link will take you there.
+In the last couple of years, I've been writing fewer reviews on Goodreads than in the past so many books do not have a review there.
+
+If you're missing these reviews, I have started sending out an email every month or two and it frequently includes small reviews of what I've read since the previous email.
+You can subscribe to that [here]({{ site.subscribe_email }}).
+
+Here are the 2020 five star books:
+
+- [The Hard Truth: Simple Ways to Become a Better Climber](https://www.amazon.com/Hard-Truth-Simple-Become-Climber/dp/1734103604/ref=as_li_ss_tl?crid=HR017VVZNWCS&dchild=1&keywords=the+hard+truth+simple+ways+to+become+a+better+climber&qid=1611004871&sprefix=the+hard+truth+simple+way%2Caps%2C211&sr=8-1&linkCode=ll1&tag=jakemccrary08-20&linkId=c83f83a7274f1a1cea8ff971a794c2f9&language=en_US) by Kris Hampton ([my review](https://www.goodreads.com/review/show/3315020265))
+- [The Body Keeps the Score: Brain, Mind, and Body in the Healing of Trauma](https://www.amazon.com/Body-Keeps-Score-Healing-Trauma/dp/0143127748/ref=as_li_ss_tl?crid=1UWC4YYXTHFVP&dchild=1&keywords=the+body+keeps+the+score&qid=1611004915&sprefix=the+body+keeps+th%2Caps%2C172&sr=8-1&linkCode=ll1&tag=jakemccrary08-20&linkId=fdf8e6c322e906aa75d8691969b1c468&language=en_US) by Bessel A. van der Kolk
+- [Come as You Are: The Surprising New Science that Will Transform Your Sex Life](https://www.amazon.com/Come-You-Are-Surprising-Transform/dp/1476762090/ref=as_li_ss_tl?crid=158Q447OV8IIE&dchild=1&keywords=come+as+you+are+by+emily+nagoski%2C+ph.d&qid=1611004953&sprefix=come+as+you+are%2Caps%2C167&sr=8-1&linkCode=ll1&tag=jakemccrary08-20&linkId=ad0be17fcbbd0d6ed581e30074190100&language=en_US) by Emily Nagoski
+- [How to Change Your Mind: What the New Science of Psychedelics Teaches Us About Consciousness, Dying, Addiction, Depression, and Transcendence](https://www.amazon.com/Change-Your-Mind-Consciousness-Transcendence/dp/0735224153/ref=as_li_ss_tl?crid=1JXZXVQ4SQFXP&dchild=1&keywords=how+to+change+your+mind+michael+pollan&qid=1611004978&sprefix=how+to+change+your+mind%2Caps%2C163&sr=8-1&linkCode=ll1&tag=jakemccrary08-20&linkId=c691a83d70d6af89b38e7d3ecccd420c&language=en_US) by Michael Pollan
+- [Why I’m No Longer Talking to White People About Race](https://www.amazon.com/Longer-Talking-White-People-About-ebook/dp/B06WWPX2YF/ref=as_li_ss_tl?crid=3LCGSZKDGGRVP&dchild=1&keywords=why+i%27m+no+longer+talking+to+white+people&qid=1611005016&sprefix=why+I%27m+no+longer+ta%2Caps%2C156&sr=8-2&linkCode=ll1&tag=jakemccrary08-20&linkId=dba1c9c72ad391d03a333a0b570ab4cb&language=en_US) by Reni Eddo-Lodge
+- [Dear Ijeawele; or, A Feminist Manifesto in Fifteen Suggestions](https://www.amazon.com/Ijeawele-Feminist-Manifesto-Fifteen-Suggestions/dp/0525434801/ref=as_li_ss_tl?crid=76YYCBFPPCSH&dchild=1&keywords=dear+ijeawele+or+a+feminist+manifesto+in+fifteen+suggestions&qid=1611005047&sprefix=dear+ijeaw%2Caps%2C158&sr=8-1&linkCode=ll1&tag=jakemccrary08-20&linkId=31bff14ff5f72d40ee717b4d5da458c9&language=en_US) by Chimamanda Ngozi Adichie
+- [Americanah](https://www.amazon.com/Americanah-Ala-Notable-Books-Adults-ebook/dp/B00A9ET4MC/ref=as_li_ss_tl?crid=3MUB23ST8F04Q&dchild=1&keywords=americanah+by+chimamanda+ngozi+adichie+book&qid=1611005073&sprefix=americanah%2Caps%2C160&sr=8-1&linkCode=ll1&tag=jakemccrary08-20&linkId=c945ffab6a264388de83f1e3a61720ec&language=en_US) by Chimamanda Ngozi Adichie
+- [Half of a Yellow Sun](https://www.amazon.com/Half-Yellow-Chimamanda-Ngozi-Adichie/dp/1400095204/ref=as_li_ss_tl?dchild=1&keywords=half+of+a+y+by+chimamanda+ngozi+adichie+book&qid=1611005101&sr=8-2&linkCode=ll1&tag=jakemccrary08-20&linkId=2e71046586a7338ea10a933a0177c9a9&language=en_US) by Chimamanda Ngozi Adichie
+- [The Diamond Age](https://www.amazon.com/Diamond-Age-Illustrated-Primer-Spectra-ebook/dp/B000FBJCKI/ref=as_li_ss_tl?dchild=1&keywords=the+diamond+age&qid=1611005129&sr=8-1&linkCode=ll1&tag=jakemccrary08-20&linkId=7377224dfabc477c46cf2b3ae1bc1f57&language=en_US) by Neal Stephenson ([my review](https://www.goodreads.com/review/show/94072683))
+- [Parable of the Sower (Earthseed, #1)](https://www.amazon.com/Parable-Talents-Octavia-Butler-ebook/dp/B008HALPHC/ref=as_li_ss_tl?crid=18SX9LQL8JAJ9&dchild=1&keywords=parable+of+the+sower&qid=1611005149&sprefix=parabl%2Caps%2C181&sr=8-2&linkCode=ll1&tag=jakemccrary08-20&linkId=f36e3d762a09f9b4fad105be6cefd280&language=en_US) by Octavia E. Butler
+- [Parable of the Talents (Earthseed, #2)](https://www.amazon.com/Parable-Sower-Octavia-Butler/dp/1538732181/ref=as_li_ss_tl?crid=18SX9LQL8JAJ9&dchild=1&keywords=parable+of+the+sower&qid=1611005149&sprefix=parabl%2Caps%2C181&sr=8-1&linkCode=ll1&tag=jakemccrary08-20&linkId=3bf57baa6c0f62b1e17c59a85b4b77a9&language=en_US) by Octavia E. Butler
+
+#### The Hard Truth: Simple Ways to Become a Better Climber by Kris Hampton
+
+This is an excellent dose of wisdom about climbing and improving your performance.
+It does this through suggestions of how to change your mental relationship with climbing.
+Improving is about putting in the work, reflecting, and trying hard.
+
+#### The Body Keeps the Score: Brain, Mind, and Body in the Healing of Trauma by Bessel A. van der Kolk
+
+I really enjoyed this book and made hundreds of highlights while reading it on my Kindle.
+I'd suggest reading reviews on [Goodreads](https://www.goodreads.com/book/show/22268254-the-body-keeps-the-score) and seeing if it is something that would be interesting for you.
+
+#### Come as You Are: The Surprising New Science that Will Transform Your Sex Life by Emily Nagoski
+
+This was a good book that, unlike what the subtitle claims, did not transform my sex life.
+But I didn't go into it expecting that.
+I'm not the main audience for this book but still got some value from it.
+I particularly enjoyed the parts that talked about stress, responses to stress, and emotional systems.
+
+#### How to Change Your Mind by Michael Pollan
+
+This book is about psychedelics, such as LSD and psilocybin.
+It combines the history of these substances, old and new research being done with them, and sort of a travelogue of Michael Pollan's growing experience with these substances.
+
+#### Why I’m No Longer Talking to White People About Race by Reni Eddo-Lodge
+
+I'll just link to a [friend's review](https://www.goodreads.com/review/show/2697985490?book_show_action=false) of this book.
+
+#### The author Chimamanda Ngozi Adichie
+
+I devoured all of her writing this year, both fiction and non-fiction, and the highlights are above.
+None of her writing earned less than four stars.
+
+Between starting and finishing writing this article, I learned she published a new short story, _Zikora_, and immediately read it.
+It was pretty great.
+
+One of the reasons I enjoy reading fiction is that it provides a window into the experiences of others.
+Chimamanda Ngozi Adichie's writing does exactly this and does it with beautiful prose and compelling stories.
+
+#### The Diamond Age by Neal Stephenson
+
+This was a reread of the first Neal Stephenson book I read.
+I wanted to reread this book as I had been recommending it as a relatively short introduction to Neal Stephenson's writing but I was second guessing how much I enjoyed it.
+
+I was wrong to second guess that.
+This story was still great the second time through.
+This book covers so much and feels prescient despite being read 25 years after it was originally published (February 1995).
+
+#### Parable of the Sower and Parable of the Talents by Octavia E. Butler
+
+Octavia Butler builds a new religion in this series and, honestly, that religion is tempting.
+These are fantastic science fiction reads that explore human connections and what we could be as a species.
+
+### Other notable reads
+
+These are books that for some reason I didn't give five stars but I still think they are worth recommending.
+All links below are to Goodreads.
+
+#### [Piranesi](https://www.goodreads.com/book/show/52702097-piranesi) by Susanna Clark
+
+This book was weird and I enjoyed it.
+You follow a character that lives in a weird, infinite building made of corridors lined with statues.
+
+#### [Why We're Polarized](https://www.goodreads.com/book/show/52655150-why-we-re-polarized) by Ezra Klein
+
+This covers the American political system and how we got to our modern form with deeply polarized parties.
+I thought it was a pretty interesting read.
+
+#### [The Will to Change: Men, Masculinity, and Love](https://www.goodreads.com/book/show/6656720-the-will-to-change) by bell hooks
+
+I read this at the very beginning of 2020 and think that everyone should read it.
+I highlighted a ton of passages and plan on going back and reviewing those passages.
+
+#### [You're Not Listening: What You're Missing and Why It Matters](https://www.goodreads.com/book/show/52355815-you-re-not-listening) by Kate Murphy
+
+I read this at the very beginning of 2020 and highlighted a ton of passages.
+The book is about listening and how we do a bad job at it.
+It includes suggestions about how to get better.
+
+Pair this book with [I hear you](https://www.goodreads.com/book/show/35522033-i-hear-you), a book I read last year, and you'll have the tools to become a better listener.
+
+#### [Diaspora](https://www.goodreads.com/book/show/18886790-diaspora) by Greg Egan
+
+This was a stupendous science fiction read.
+It takes you on a wild journey into a far future where sentient beings can exist in software.
+
+This was very close to receiving five stars but I kept getting bogged down in some of the explanations.
+I know this is why some folks enjoy hard science fiction but that isn't why I'm reading these stories.
+This book delivers an interesting, complex, and very speculative far future.
+If the blurb sounds interesting to you and you're willing to put up some with advanced theoretical (real? fake? I don't know) physics then pick this book up.
+
+## Stats
+
+I read 43 books and 12,093 pages in 2020.
+The data also doesn't capture three books that I've started but have yet to finish.
+
+```org
+| Year | # of Pages | # of Books |
+|------+------------+------------|
+| 2020 |      12093 |         43 |
+| 2019 |      15994 |         42 |
+| 2018 |      13538 |         36 |
+| 2017 |      18317 |         48 |
+| 2016 |      22790 |         59 |
+| 2015 |      21689 |         51 |
+| 2014 |      24340 |         71 |
+| 2013 |      19815 |         60 |
+| 2012 |      14208 |         44 |
+| 2011 |       9179 |         19 |
+| 2010 |      14667 |         46 |
+```
+
+Last year marks a decade of me tracking my reading and it was the second lowest page count in that decade.
+For many reasons 2020 was an unforgettable year and one where I spent a lot of time at home.
+
+I would have thought that would have lead to a large number of pages read but I think much of my time ended up being taken up by non-book reading activities.
+For better or worse (probably worse), a lot of my time was spent reading articles about the on-going global pandemic, the USA election, and the other non-stop news cycle of 2020.
+Between that and the increase in newsletters and podcasts I'm consuming, I'm not that surprised my book reading has taken a hit.
+
+Here is a breakdown of books finished by month.
+
+![Book and pages count by month](/images/reading-2020/books-by-month-2020.png "Number of books and pages for each month")
+
+This graph tells a slightly different story than the one I presented above.
+I did not finish many pages in January through March, the pre-pandemic time period in the United States.
+
+Those months I was extremely dedicated to training for climbing and was starting a new relationship.
+I'm very happy both of those took up my non-working hours during those months.
+
+I was still commuting to an office from January till mid-March and would have expected more pages finished on the train.
+I'll blame podcasts for that as this year I did start listening to those while commuting, since I can enjoy those while walking to and from the train as well.
+
+The number of books read in February is high because I read a short story collection where each story was published individually on Amazon.
+
+Unsurprisingly, electronic books continue to be the dominant format.
+
+```org
+|           | 2020 | 2019 | 2018 | 2017 | 2016 | 2015 |
+|-----------+------+------+------+------+------+------|
+| audiobook |    1 |    0 |    0 |    0 |    0 |    0 |
+| ebook     |   41 |   43 |   37 |   37 |   56 |   47 |
+| hardcover |    0 |    1 |    1 |    7 |    0 |    1 |
+| paperback |    1 |    7 |    5 |    5 |    3 |    3 |
+```
+
+Below is the breakdown of fiction vs non-fiction books.
+Fiction started to regain its dominance after having non-fiction catch up in 2019.
+
+```org
+|                           |   2020 |   2019 |   2018 |
+|---------------------------+--------+--------+--------|
+| fiction                   |     26 |     28 |     29 |
+| non-fiction               |     17 |     23 |     14 |
+| fiction:non-fiction ratio | 1.53:1 | 1.22:1 | 2.07:1 |
+
+```
+
+Here is the star rating distribution.
+
+```org
+|             | 2 stars | 3 stars | 4 stars | 5 stars |
+|-------------+---------+---------+---------+---------|
+| fiction     |       1 |       8 |      12 |       5 |
+| non-fiction |       0 |       4 |       7 |       6 |
+```
+
+## Did I hit my 2020 goals?
+
+I succeeded in reading a solid number of non-fiction books that earned a high rating.
+I read fewer non-fiction books than fiction but managed to have more 5 star ratings.
+I'm going to count this as successfully hitting the non-fiction part of my 2020 goal.
+
+Did I get better at applying the lessons from books?
+Not at all and I barely even tried to do so.
+Definite failure here.
+
+## 2021 goals
+
+I have quite a few unread books sitting on my virtual and physical bookshelf.
+This feels like setting a really low-bar but this year I'd like to read some of these unread-but-owned books.
+
+I'm also planning on reading at least one book on writing and one book on climbing.
+This goal is almost a subset of the above goal as I have books on both these topics sitting on my shelf.
+
+It is interesting to have been collecting this data for a decade now.
+I haven't done much in the way around looking at multi-year trends but I think it might be interesting to do so.
+
+If you have a book recommendation, feel free to reach out and contact me.
