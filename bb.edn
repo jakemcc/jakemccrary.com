@@ -5,5 +5,5 @@
         selmer/selmer {:mvn/version "1.12.53"}}
 
  :tasks
- {render {:task (do (require 'blog.render)
-                    ((resolve 'blog.render/render)))}}}
+ {:requires ([blog.render])
+  render {:task (blog.render/render)}}}
