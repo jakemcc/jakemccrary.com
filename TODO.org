@@ -1,11 +1,15 @@
 * TODO Pages
+** TODO adventure pages
 ** DONE [#A] RSS feed
 CLOSED: [2025-01-20 Mon 10:44]
 - CLOSING NOTE [2025-01-20 Mon 10:44]
 - [X] timestamps are off compared to old but I don't think I really care?
-** TODO category pages
-** TODO category rss feeds?
-** TODO adventure pages
+** DONE category pages
+CLOSED: [2025-01-20 Mon 11:20]
+- CLOSING NOTE [2025-01-20 Mon 11:20]
+** DONE category rss feeds?
+CLOSED: [2025-01-20 Mon 11:20]
+- CLOSING NOTE [2025-01-20 Mon 11:20]
 ** DONE archive page
 CLOSED: [2025-01-19 Sun 15:30]
 - CLOSING NOTE [2025-01-19 Sun 15:30]
@@ -15,7 +19,6 @@ CLOSED: [2025-01-19 Sun 16:06]
 ** CANCELED tag pages?
 CLOSED: [2025-01-19 Sun 16:06]
 * TODO Decide on overall design of site
-* TODO styling
 * DONE preview on posts or full text on index / archive page?
 CLOSED: [2025-01-20 Mon 10:10]
 - CLOSING NOTE [2025-01-20 Mon 10:10]
