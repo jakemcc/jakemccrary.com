@@ -22,4 +22,7 @@ CLOSED: [2025-01-19 Sun 16:47]
 * TODO styling
 * TODO preview on posts or full text on index / archive page?
 * TODO Code syntax highlighting?
-* TODO images
+* TODO images specified using ~{%~ syntax in articles
+* DONE images
+CLOSED: [2025-01-19 Sun 17:35]
+- CLOSING NOTE [2025-01-19 Sun 17:35]

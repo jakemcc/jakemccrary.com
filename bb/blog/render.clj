@@ -121,11 +121,14 @@
 
 (defn load-sources []
   (when (fs/exists? source-dir)
-    (for [path (fs/glob source-dir "**.markdown")]
-      (as-> (markdown->source path) source
-        (assoc source :input-file (fs/file path))
-        (assoc source :output-file (output-file source))
-        (assoc source :template (load-template source))))))
+    (for [path (fs/glob source-dir "**.markdown")
+          :let [source (as-> (markdown->source path) source
+                         (assoc source :input-file (fs/file path))
+                         (assoc source :output-file (output-file source))
+                         (assoc source :template (load-template source)))]
+          :when (or (not (contains? (:metadata source) :published))
+                    (-> source :metadata :published))]
+      source)))
 
 (defn blog-article? [{:keys [input-file]}]
   (clojure.string/includes? (str input-file) "/blog/"))
@@ -156,14 +159,15 @@
       (cond->> (not (clojure.string/starts-with? path "/")) (str "/"))))
 
 (defn- article-list [articles]
-  [:ul
+  [:ul {:class "post-list"}
    (for [article articles
          :let [metadata (:metadata article)]]
      [:li
-      [:time (str (:local-date metadata))] " "
-      [:a
-       {:href (blog-url (:output-file article))}
-       (:title metadata)]])])
+      [:div.post-meta
+       [:time (str (:local-date metadata))] " "
+       [:h2 [:a {:href (blog-url (:output-file article))} (:title metadata)]]]
+      (when-not (clojure.string/blank? (:description metadata))
+        [:p.post-description (:description metadata)])])])
 
 (defn write-index! [sources]
   (write-html! (fs/file output-dir "index.html")
@@ -178,7 +182,7 @@
                           (article-list articles)])})))
 
 (defn- copy-resources []
-  (doseq [f (fs/glob (fs/file source-dir) "**/*.{png,gif,jpeg,jpg,svg}")
+  (doseq [f (fs/glob (fs/file source-dir) "**.{css,png,gif,jpeg,jpg,svg}")
             :let [out (apply fs/file output-dir (rest (fs/components f)))]]
       (fs/create-dirs (fs/parent out))
       (fs/copy f out)))
