@@ -41,11 +41,22 @@
                           (left-pad (str (.getDayOfMonth (-> source :metadata :local-date))) "0" 2)])]
     (apply fs/file (concat sub-dirs
                            (when (-> source :metadata :dated-url)
-                               year-month-day)
-                           ;; TODO(probably not going to work with adventure formats)
-                           [(clojure.string/replace-first name #"\d\d\d\d-\d\d-\d\d-" "")
+                             year-month-day)
+                           [(cond-> name
+                              (some (comp #{"blog"} str) sub-dirs)
+                              (clojure.string/replace-first #"^\d\d\d\d-\d\d-\d\d-" ""))
                             "index.html"]))))
 (comment
+  (= "adventures/2022-10-14-2022-10-18-a-beautiful-fall-trip-to-the-red-river-gorge/index.html"
+     (str (output-file {:metadata
+                        {:layout "page",
+                         :published true,
+                         :title "A beautiful fall trip to the Red River Gorge",
+                         :date "2022-11-27 18:01:46 -0600",
+                         :start_date #inst "2022-10-14T00:00:00.000-00:00",
+                         :end_date #inst "2022-10-18T00:00:00.000-00:00",
+                         :description "A long weekend with Jenn climbing and camping in the Red River Gorge"},
+                        :input-file (fs/file "posts/adventures/2022-10-14-2022-10-18-a-beautiful-fall-trip-to-the-red-river-gorge.markdown")})))
   (= "blog/reading-in-2024/index.html"
      (str (output-file {:input-file (fs/file "posts/blog/2024-01-05-reading-in-2024.markdown")
                         :metadata {:date "2025-01-05 16:23 -0600"
@@ -157,12 +168,13 @@
          (merge default-render-opts m))))
 
 (defn write-post! [source]
-  (let [out-file (fs/file output-dir (:output-file source))]
-    (fs/create-dirs (fs/parent out-file))
-    (write-html! out-file
-                 {:body (:html source)
-                  :page (:metadata source)
-                  :template (:template source)})))
+  (when-not (clojure.string/blank? (:html source))
+    (let [out-file (fs/file output-dir (:output-file source))]
+      (fs/create-dirs (fs/parent out-file))
+      (write-html! out-file
+                   {:body (:html source)
+                    :page (:metadata source)
+                    :template (:template source)}))))
 
 (defn blog-url
   ([path] (blog-url "" path))
@@ -170,7 +182,8 @@
    (-> path
        (clojure.string/replace "index.html" "")
        (clojure.string/replace-first #"^/" "")
-       (cond-> (not (clojure.string/ends-with? path "/")) (str "/"))
+       (clojure.string/replace #"/$" "")
+       (str "/")
        (->> (str root "/")))))
 
 (defn- article-list [articles]
@@ -281,7 +294,9 @@
          :let [metadata (:metadata article)]]
      [:li
       [:div.post-meta
-       [:h2 [:a {:href (blog-url (:output-file article))} (:title metadata)]]
+       [:h2 (if (clojure.string/blank? (:html article))
+              (:title metadata)
+              [:a {:href (blog-url (:output-file article))} (:title metadata)])]
        [:div (clojure.string/join " "
                                   (cons (yyyy-MM-dd (:start_date metadata))
                                         (when (:end_date metadata)
@@ -321,6 +336,8 @@
   (def adventures (filterv adventure? sources))
   (yyyy-MM-dd (:start_date (:metadata (first adventures))))
 
+  (def r *1)
+
 
   (write-adventures! sources)
   (type (:start_date (:metadata (first adventures))))
@@ -336,7 +353,6 @@
              articles)
        (sort-by first))
 
-  (parse-datetime "Sat Jun 05 19:00:00 CDT 2010")
 ;; :description => preview on main page?
 
 ;;
