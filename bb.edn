@@ -6,4 +6,4 @@
 
  :tasks
  {:requires ([blog.render])
-  render {:task (blog.render/render)}}}
+  render {:task (exec 'blog.render/render)}}}

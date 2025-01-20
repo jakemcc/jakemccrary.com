@@ -3,8 +3,9 @@
             [clojure.string]
             [hiccup2.core :as hiccup]
             [markdown.core :as markdown]
-            [selmer.parser])
-  (:import (java.time LocalDateTime LocalDate ZoneId)
+            [selmer.parser]
+            [clojure.data.xml :as xml])
+  (:import (java.time LocalDateTime LocalDate ZoneId ZonedDateTime)
            (java.time.format DateTimeFormatter DateTimeParseException)))
 
 (defn left-pad [s padding n]
@@ -20,6 +21,7 @@
 (def source-dir "posts")
 (def output-dir "output")
 (def template-dir "templates")
+(def ^:dynamic *preview* false)
 
 (def default-render-opts
   {:site {:title "Jake McCrary"
@@ -104,7 +106,10 @@
                              (parse-datetime d))]
                 (if (instance? LocalDate parsed)
                   parsed
-                  (.toLocalDate parsed))))))
+                  (.toLocalDate parsed))))
+    (-> source :metadata :categories)
+    (update-in [:metadata :categories]
+               #(into #{} (mapv clojure.string/lower-case %)))))
 
 (defn markdown->source [file]
   (let [markdown (slurp (fs/file file))]
@@ -126,8 +131,9 @@
                          (assoc source :input-file (fs/file path))
                          (assoc source :output-file (output-file source))
                          (assoc source :template (load-template source)))]
-          :when (or (not (contains? (:metadata source) :published))
-                    (-> source :metadata :published))]
+          :when (or *preview*
+                    (or (not (contains? (:metadata source) :published))
+                        (-> source :metadata :published)))]
       source)))
 
 (defn blog-article? [{:keys [input-file]}]
@@ -140,7 +146,7 @@
 (defn write-html! [output-file m]
   (fs/create-dirs (fs/parent output-file))
   (when (fs/exists? output-file)
-    (throw (Exception. "Tried to write file but it already exists:" (str output-file))))
+    (throw (Exception. (str "Tried to write file but it already exists:" output-file))))
   (spit output-file
         (selmer.parser/render
          (or (:template m) (slurp (fs/file template-dir "default.html")))
@@ -153,10 +159,14 @@
                  {:body (:html source)
                   :template (:template source)})))
 
-(defn blog-url [path]
-  (-> path
-      (clojure.string/replace "index.html" "")
-      (cond->> (not (clojure.string/starts-with? path "/")) (str "/"))))
+(defn blog-url
+  ([path] (blog-url "" path))
+  ([root path]
+   (-> path
+       (clojure.string/replace "index.html" "")
+       (clojure.string/replace-first #"^/" "")
+       (cond-> (not (clojure.string/ends-with? path "/")) (str "/"))
+       (->> (str root "/")))))
 
 (defn- article-list [articles]
   [:ul {:class "post-list"}
@@ -181,29 +191,107 @@
                          [:div {:id "blog-archives"}
                           (article-list articles)])})))
 
+(xml/alias-uri 'atom "http://www.w3.org/2005/Atom")
+
+(defn- rfc-3339-now []
+  (let [fmt (DateTimeFormatter/ofPattern "yyyy-MM-dd'T'HH:mm:ssxxx")
+        now (java.time.ZonedDateTime/now java.time.ZoneOffset/UTC)]
+    (.format now fmt)))
+
+(defn- rfc-3339 [local-date]
+  (let [fmt (DateTimeFormatter/ofPattern "yyyy-MM-dd'T'HH:mm:ssxxx")
+        now (java.time.ZonedDateTime/of (.atTime local-date 23 59 59)
+                                        java.time.ZoneOffset/UTC)]
+    (.format now fmt)))
+
+(defn- atom-feed
+  ;; validate at https://validator.w3.org/feed/check.cgi
+  ([articles] (atom-feed nil articles))
+  ([category articles]
+   (let [blog-root "https://jakemccrary.com/"]
+     (-> (xml/sexp-as-element
+          [::atom/feed
+           {:xmlns "http://www.w3.org/2005/Atom"}
+           [::atom/title [:-cdata (str "Jake McCrary's articles"
+                                       (when category
+                                         (str " on " category)))]]
+           [::atom/link {:href "https://jakemccrary.com/atom.xml" :rel "self"}]
+           [::atom/link {:href blog-root}]
+           [::atom/updated (rfc-3339-now)]
+           [::atom/id blog-root]
+           [::atom/author
+            [::atom/name [:-cdata "Jake McCrary"]]]
+           (for [article articles
+                 :let [output-file (:output-file article)
+                       {:keys [title local-date published]} (:metadata article)]
+                 :when published
+                 :let [link (str blog-root (str output-file))]]
+             [::atom/entry
+              [::atom/id link]
+              [::atom/link {:href link}]
+              [::atom/title [:-cdata title]]
+              [::atom/updated (rfc-3339 local-date)]
+              [::atom/content {:type "html"}
+               [:-cdata (:html article)]]])])
+         xml/indent-str))))
+
 (defn- copy-resources []
   (doseq [f (fs/glob (fs/file source-dir) "**.{css,png,gif,jpeg,jpg,svg}")
-            :let [out (apply fs/file output-dir (rest (fs/components f)))]]
-      (fs/create-dirs (fs/parent out))
-      (fs/copy f out)))
+          :let [out (apply fs/file output-dir (rest (fs/components f)))]]
+    (fs/create-dirs (fs/parent out))
+    (fs/copy f out)))
+
+(defn- write-main-feed! [sources]
+  (spit (fs/file output-dir "atom.xml")
+        (atom-feed (reverse (blog-articles sources)))))
+
+(defn- write-category-page! [category articles]
+  (write-html! (fs/file output-dir "blog" "categories" (dbg category) "index.html")
+               {:body (hiccup/html
+                       [:div
+                        [:h2 "Category: " category]
+                        [:p [:a {:href (str "/blog/categories/" category "/atom.xml")}
+                             "RSS feed"]]
+                        (article-list articles)])})
+  (spit (fs/file output-dir "blog" "categories" category "atom.xml")
+        (atom-feed category articles)))
+
+(defn- write-category-pages! [sources]
+  (let [articles (reverse (blog-articles sources))
+        categories (into #{}
+                         (comp (map :metadata) (mapcat :categories))
+                         articles)]
+    (doseq [category categories]
+      (write-category-page! category
+                            (filter #(contains? (-> % :metadata :categories) category)
+                                    articles)))))
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
-(defn render []
-  (println "Rendering")
+
+(defn render [{:keys [preview] :as args}]
+  (println "Rendering " args)
   (when-not (fs/exists? output-dir)
     (fs/create-dir output-dir))
 
-  (let [sources (load-sources)]
-    (copy-resources)
-    (run! write-post! sources)
-    (write-index! sources)
-    (write-archive! sources)))
+  (binding [*preview* (boolean preview)]
+    (let [sources (load-sources)]
+      (copy-resources)
+      (run! write-post! sources)
+      (write-index! sources)
+      (write-archive! sources)
+      (write-category-pages! sources)
+      (write-main-feed! sources))))
 
 (comment
   (def sources (load-sources))
   (def articles (blog-articles sources))
 
-  (:metadata (first articles))
+  (mapv (comp :title :metadata)
+        (filterv (fn [{:keys [metadata]}]
+                   (some char? (:categories metadata)))
+                 articles))
+  (into #{} (mapcat (comp :categories :metadata)) articles)
+  
 
   (->> (mapv (juxt #(get-in % [:metadata :local-date])
                    #(get-in % [:metadata :date]))

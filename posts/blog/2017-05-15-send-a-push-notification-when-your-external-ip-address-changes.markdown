@@ -8,7 +8,7 @@ published: true
 description: Use dig and curl to send a push notification when your external IP address
   changes.
 keywords: bash, pushover, external ip
-categories: bash
+categories: [bash]
 ---
 
 I need to know when my external IP address changes. Whenever it changes, I need to update an IP whitelist and need to re-login to a few sites. I sometimes don't notice for a couple of days and, during that time, some automatic processes fail.

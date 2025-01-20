@@ -8,7 +8,8 @@ published: true
 description: Short, no nonsense guide to improving how your articles appear when shared
   on social media.
 keywords: Facebook, HTML, markup, social media, twitter
-categories: blog
+categories: 
+- blog
 ---
 
 For a bit more than a year I worked on a project that crawled the web

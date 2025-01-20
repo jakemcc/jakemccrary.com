@@ -1,29 +1,40 @@
 * TODO Pages
+** DONE [#A] RSS feed
+CLOSED: [2025-01-20 Mon 10:44]
+- CLOSING NOTE [2025-01-20 Mon 10:44]
+- [X] timestamps are off compared to old but I don't think I really care?
+** TODO category pages
+** TODO category rss feeds?
+** TODO adventure pages
 ** DONE archive page
 CLOSED: [2025-01-19 Sun 15:30]
 - CLOSING NOTE [2025-01-19 Sun 15:30]
-** TODO category pages
-- These are just the Archive page filtered!
-** CANCELED tag pages?
-CLOSED: [2025-01-19 Sun 16:06]
 ** DONE about page
 CLOSED: [2025-01-19 Sun 16:06]
 - CLOSING NOTE [2025-01-19 Sun 16:06]
-** TODO adventure pages
-** TODO RSS feed
-* DONE Output path of existing posts should be the same as current blog (date and everything :frown:)
-CLOSED: [2025-01-19 Sun 16:47]
-- CLOSING NOTE [2025-01-19 Sun 16:47]
-* TODO drafts vs non-drafts
-* CANCELED output path of new posts should just be titles
-CLOSED: [2025-01-19 Sun 16:47]
-* TODO Sort the posts list on the main page
+** CANCELED tag pages?
+CLOSED: [2025-01-19 Sun 16:06]
 * TODO Decide on overall design of site
 * TODO styling
-* TODO preview on posts or full text on index / archive page?
+* DONE preview on posts or full text on index / archive page?
+CLOSED: [2025-01-20 Mon 10:10]
+- CLOSING NOTE [2025-01-20 Mon 10:10]
 * TODO Code syntax highlighting?
 * TODO images specified using ~{%~ syntax in articles
 * DONE images
 CLOSED: [2025-01-19 Sun 17:35]
 - CLOSING NOTE [2025-01-19 Sun 17:35]
 * TODO maybe useful to keep files-that-don't-change separate from the sources? Could just copy the entire tree over than?
+* TODO footnotes seem janky
+* DONE Output path of existing posts should be the same as current blog (date and everything :frown:)
+CLOSED: [2025-01-19 Sun 16:47]
+- CLOSING NOTE [2025-01-19 Sun 16:47]
+* DONE [#A] drafts vs non-drafts
+CLOSED: [2025-01-20 Mon 10:16]
+- CLOSING NOTE [2025-01-20 Mon 10:16]
+- [X] need a way to render drafts, env arg? program arg?
+* CANCELED output path of new posts should just be titles
+CLOSED: [2025-01-19 Sun 16:47]
+* DONE Sort the posts list on the main page
+CLOSED: [2025-01-19 Sun 21:16]
+- CLOSING NOTE [2025-01-19 Sun 21:16]
