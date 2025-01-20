@@ -26,3 +26,4 @@ CLOSED: [2025-01-19 Sun 16:47]
 * DONE images
 CLOSED: [2025-01-19 Sun 17:35]
 - CLOSING NOTE [2025-01-19 Sun 17:35]
+* TODO maybe useful to keep files-that-don't-change separate from the sources? Could just copy the entire tree over than?
