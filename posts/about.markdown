@@ -4,7 +4,7 @@ title: about
 sharing: false
 ---
 
-<img class="right" src="/images/speaking-at-in-clojure.png" width="350" title="Picture of Jake McCrary">
+<img class="left mr1" src="/images/speaking-at-in-clojure.png" width="350" title="Picture of Jake McCrary">
 
 I'm an experienced software developer.
 I enjoy coming up with simple solutions to seemingly complex problems.
