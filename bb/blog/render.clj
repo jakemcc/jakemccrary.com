@@ -174,7 +174,7 @@
          :let [metadata (:metadata article)]]
      [:li
       [:div.post-meta
-       [:time (str (:local-date metadata))] " "
+       [:time (str (:local-date metadata))]
        [:h2 [:a {:href (blog-url (:output-file article))} (:title metadata)]]]
       (when-not (clojure.string/blank? (:description metadata))
         [:p.post-description (:description metadata)])])])

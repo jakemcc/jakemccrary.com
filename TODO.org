@@ -29,6 +29,12 @@ CLOSED: [2025-01-19 Sun 17:35]
 - CLOSING NOTE [2025-01-19 Sun 17:35]
 * TODO maybe useful to keep files-that-don't-change separate from the sources? Could just copy the entire tree over than?
 * TODO footnotes seem janky
+* TODO comments?
+* TODO disclaimers?
+- [ ] hosted on github
+- [ ] goes through cloudflare
+- [ ] If I do comments => something about those
+* TODO remove amazon affiliates?
 * DONE Output path of existing posts should be the same as current blog (date and everything :frown:)
 CLOSED: [2025-01-19 Sun 16:47]
 - CLOSING NOTE [2025-01-19 Sun 16:47]
