@@ -77,7 +77,8 @@
    (DateTimeFormatter/ofPattern "yyyy-MM-dd HH:mm")     
    (DateTimeFormatter/ofPattern "yyyy-MM-dd")           
    (DateTimeFormatter/ofPattern "yyyy-MM-dd HH:mm:ss Z")
-   (DateTimeFormatter/ofPattern "yyyy-MM-dd HH:mm:ss")])
+   (DateTimeFormatter/ofPattern "yyyy-MM-dd HH:mm:ss")
+   (DateTimeFormatter/ofPattern "yyyy-MM-dd'T'HH:mm:ssZ")])
 
 (defn parse-datetime [s]
   (let [parse (fn [f] (try
@@ -139,6 +140,9 @@
 (defn blog-article? [{:keys [input-file]}]
   (clojure.string/includes? (str input-file) "/blog/"))
 
+(defn adventure? [{:keys [input-file]}]
+  (clojure.string/includes? (str input-file) "/adventures/"))
+
 (defn blog-articles [sources]
   (sort-by (comp :local-date :metadata)
            (filter blog-article? sources)))
@@ -196,13 +200,12 @@
 
 (defn- rfc-3339-now []
   (let [fmt (DateTimeFormatter/ofPattern "yyyy-MM-dd'T'HH:mm:ssxxx")
-        now (java.time.ZonedDateTime/now java.time.ZoneOffset/UTC)]
+        now (ZonedDateTime/now java.time.ZoneOffset/UTC)]
     (.format now fmt)))
 
 (defn- rfc-3339 [local-date]
   (let [fmt (DateTimeFormatter/ofPattern "yyyy-MM-dd'T'HH:mm:ssxxx")
-        now (java.time.ZonedDateTime/of (.atTime local-date 23 59 59)
-                                        java.time.ZoneOffset/UTC)]
+        now (ZonedDateTime/of (.atTime local-date 23 59 59) java.time.ZoneOffset/UTC)]
     (.format now fmt)))
 
 (defn- atom-feed
@@ -247,7 +250,7 @@
         (atom-feed (reverse (blog-articles sources)))))
 
 (defn- write-category-page! [category articles]
-  (write-html! (fs/file output-dir "blog" "categories" (dbg category) "index.html")
+  (write-html! (fs/file output-dir "blog" "categories" category "index.html")
                {:body (hiccup/html
                        [:div
                         [:h2 "Category: " category]
@@ -267,6 +270,34 @@
                             (filter #(contains? (-> % :metadata :categories) category)
                                     articles)))))
 
+(defn- yyyy-MM-dd [date]
+  (let [fmt (DateTimeFormatter/ofPattern "yyyy-MM-dd")]
+    (.format (.toLocalDate (.atZone (.toInstant date) (ZoneId/of "UTC")))
+             fmt)))
+
+(defn- adventure-list [articles]
+  [:ul {:class "post-list"}
+   (for [article articles
+         :let [metadata (:metadata article)]]
+     [:li
+      [:div.post-meta
+       [:h2 [:a {:href (blog-url (:output-file article))} (:title metadata)]]
+       [:div (clojure.string/join " "
+                                  (cons (yyyy-MM-dd (:start_date metadata))
+                                        (when (:end_date metadata)
+                                          ["to" (yyyy-MM-dd (:end_date metadata))])))]]
+      (when-not (clojure.string/blank? (:description metadata))
+        [:p.post-description (:description metadata)])])])
+
+(defn- write-adventures! [sources]
+  (let [adventures (->> sources
+                        (filterv adventure?)
+                        (sort-by (comp :start_date :metadata))
+                        reverse)]
+    (write-html! (fs/file output-dir "adventures" "index.html")
+                 {:body (hiccup/html
+                         (adventure-list adventures))})))
+
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 
 (defn render [{:keys [preview] :as args}]
@@ -280,19 +311,25 @@
       (run! write-post! sources)
       (write-index! sources)
       (write-archive! sources)
+      (write-adventures! sources)
       (write-category-pages! sources)
       (write-main-feed! sources))))
 
 (comment
   (def sources (load-sources))
   (def articles (blog-articles sources))
+  (def adventures (filterv adventure? sources))
+  (yyyy-MM-dd (:start_date (:metadata (first adventures))))
+
+
+  (write-adventures! sources)
+  (type (:start_date (:metadata (first adventures))))
 
   (mapv (comp :title :metadata)
         (filterv (fn [{:keys [metadata]}]
                    (some char? (:categories metadata)))
                  articles))
   (into #{} (mapcat (comp :categories :metadata)) articles)
-  
 
   (->> (mapv (juxt #(get-in % [:metadata :local-date])
                    #(get-in % [:metadata :date]))
