@@ -26,7 +26,7 @@
 (def default-render-opts
   {:site {:title "Jake McCrary"
           :subscribe-email "https://jakemccrary.substack.com/welcome"
-          :subscribe-rss "rss"
+          :subscribe-rss "http://feeds.feedburner.com/JakeMccrarysMusings"
           :url "https://jakemccrary.com"
           :short-url "jakemccrary.com"}})
 
@@ -157,6 +157,7 @@
     (fs/create-dirs (fs/parent out-file))
     (write-html! out-file
                  {:body (:html source)
+                  :page (:metadata source)
                   :template (:template source)})))
 
 (defn blog-url
