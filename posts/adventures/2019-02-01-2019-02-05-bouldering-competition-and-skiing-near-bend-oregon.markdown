@@ -1,6 +1,6 @@
 ---
 layout: page
-published: false
+published: true
 title: "Bouldering Competition and Downhill Skiing near Bend, Oregon"
 date: 2019-02-10 16:59:38 -0600
 start_date: 2019-02-01

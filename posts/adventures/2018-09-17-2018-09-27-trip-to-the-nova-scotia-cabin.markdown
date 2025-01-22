@@ -1,6 +1,6 @@
 ---
 layout: page
-published: false
+published: true
 title: "Trip to the Nova Scotia cabin"
 date: 2018-12-27 20:31:43 -0600
 start_date: 2018-09-17

@@ -1,6 +1,6 @@
 ---
 layout: page
-published: false
+published: true
 title: "Holy Boulders: The Pilgrimage 2023"
 date: 2023-11-19 18:13:23 -0600
 start_date: 2023-11-03

@@ -1,6 +1,6 @@
 ---
 layout: page
-published: false
+published: true
 title: "Tattoo tourism in New York City"
 date: 2018-12-27 20:23:54 -0600
 start_date: 2018-08-22

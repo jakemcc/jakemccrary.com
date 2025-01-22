@@ -1,6 +1,6 @@
 ---
 layout: page
-published: false
+published: true
 title: "Denver SUP and scooter"
 date: 2018-12-27 20:17:58 -0600
 start_date: 2018-07-27

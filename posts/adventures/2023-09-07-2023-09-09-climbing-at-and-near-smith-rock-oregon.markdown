@@ -1,6 +1,6 @@
 ---
 layout: page
-published: false
+published: true
 title: "Climbing at and near Smith Rock, Oregon"
 date: 2023-11-19 16:54:24 -0600
 start_date: 2023-09-07

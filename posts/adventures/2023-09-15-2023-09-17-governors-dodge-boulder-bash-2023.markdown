@@ -1,6 +1,6 @@
 ---
 layout: page
-published: false
+published: true
 title: "Governor Dodge: Boulder Bash 2023"
 date: 2023-11-26 13:17:17 -0600
 start_date: 2023-09-15

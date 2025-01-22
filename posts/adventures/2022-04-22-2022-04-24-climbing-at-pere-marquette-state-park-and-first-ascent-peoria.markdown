@@ -1,6 +1,6 @@
 ---
 layout: page
-published: false
+published: true
 title: "Climbing at Pere Marquette State Park and First Ascent Peoria"
 date: 2022-05-01 19:43:02 -0500
 start_date: 2022-04-22

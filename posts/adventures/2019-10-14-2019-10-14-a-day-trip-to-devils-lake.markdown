@@ -1,6 +1,6 @@
 ---
 layout: page
-published: false
+published: true
 title: "A day trip to Devil's Lake"
 date: 2019-10-19 19:02:12 -0500
 start_date: 2019-10-14

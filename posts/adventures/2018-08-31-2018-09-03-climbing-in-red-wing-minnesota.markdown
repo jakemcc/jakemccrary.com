@@ -1,6 +1,6 @@
 ---
 layout: page
-published: false
+published: true
 title: "Climbing in Red Wing, Minnesota"
 date: 2018-12-27 20:27:17 -0600
 start_date: 2018-08-31

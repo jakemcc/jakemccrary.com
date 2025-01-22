@@ -1,6 +1,6 @@
 ---
 layout: page
-published: false
+published: true
 title: "Climbing in Red Rocks, Nevada"
 date: 2017-09-03 08:48:50 -0400
 start_date: 2012-01-27

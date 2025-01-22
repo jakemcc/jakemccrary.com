@@ -1,6 +1,6 @@
 ---
 layout: page
-published: false
+published: true
 title: "Climbing in the Red River Gorge"
 date: 2017-09-21 11:51:34 -0500
 start_date: 2017-09-15

@@ -1,6 +1,6 @@
 ---
 layout: page
-published: false
+published: true
 title: "Climbing at Pere Marquette State Park"
 date: 2022-05-01 19:42:24 -0500
 start_date: 2022-03-26

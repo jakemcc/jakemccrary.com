@@ -1,6 +1,6 @@
 ---
 layout: page
-published: false
+published: true
 title: "A hot Red River Gorge climbing trip"
 date: 2019-05-28 18:10:03 -0500
 start_date: 2019-05-24

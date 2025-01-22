@@ -1,6 +1,6 @@
 ---
 layout: page
-published: false
+published: true
 title: "A weekend birthday trip to a cabin on a river in southern Illinois"
 date: 2018-12-27 20:11:15 -0600
 start_date: 2018-07-13
