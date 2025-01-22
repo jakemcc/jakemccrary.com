@@ -1,5 +1,9 @@
-* TODO Pages
-** TODO adventure pages
+* DONE Pages
+CLOSED: [2025-01-21 Tue 19:32]
+- CLOSING NOTE [2025-01-21 Tue 19:32]
+** DONE adventure pages
+CLOSED: [2025-01-21 Tue 19:32]
+- CLOSING NOTE [2025-01-21 Tue 19:32]
 ** DONE [#A] RSS feed
 CLOSED: [2025-01-20 Mon 10:44]
 - CLOSING NOTE [2025-01-20 Mon 10:44]
@@ -23,6 +27,7 @@ CLOSED: [2025-01-19 Sun 16:06]
 CLOSED: [2025-01-20 Mon 10:10]
 - CLOSING NOTE [2025-01-20 Mon 10:10]
 * TODO Code syntax highlighting?
+* TODO Diff output paths and confirm if any links will be broken
 * TODO images specified using ~{%~ syntax in articles
 * DONE images
 CLOSED: [2025-01-19 Sun 17:35]
