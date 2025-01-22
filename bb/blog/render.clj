@@ -1,11 +1,15 @@
 (ns blog.render
   (:require [babashka.fs :as fs]
+            [babashka.process]
+            [clojure.data.xml :as xml]
             [clojure.string]
             [hiccup2.core :as hiccup]
             [markdown.core :as markdown]
-            [selmer.parser]
-            [clojure.data.xml :as xml])
-  (:import (java.time LocalDateTime LocalDate ZoneId ZonedDateTime)
+            [selmer.parser])
+  (:import (java.time LocalDate
+                      LocalDateTime
+                      ZoneId
+                      ZonedDateTime)
            (java.time.format DateTimeFormatter DateTimeParseException)))
 
 (defn left-pad [s padding n]
@@ -317,7 +321,8 @@
 
 (defn render [{:keys [preview] :as args}]
   (println "Rendering " args)
-  (when-not (fs/exists? output-dir)
+  (if (fs/exists? output-dir)
+    (run! fs/delete-tree (fs/list-dir output-dir))
     (fs/create-dir output-dir))
 
   (binding [*preview* (boolean preview)]
