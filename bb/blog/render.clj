@@ -136,7 +136,7 @@
                                               :footnotes? true
                                               :code-style
                                               (fn [lang]
-                                                (format "class=\"lang-%s\"" lang)))
+                                                (format "class=\"language-%s\"" lang)))
         post-process-metadata
         #_#_        :html
         post-process-markdown)))
@@ -258,7 +258,7 @@
          xml/indent-str))))
 
 (defn- copy-resources []
-  (doseq [f (fs/glob (fs/file source-dir) "**.{css,png,gif,jpeg,jpg,svg}")
+  (doseq [f (fs/glob (fs/file source-dir) "**.{css,png,gif,jpeg,jpg,svg,js}")
           :let [out (apply fs/file output-dir (rest (fs/components f)))]]
     (fs/create-dirs (fs/parent out))
     (fs/copy f out)))

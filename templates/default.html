@@ -162,10 +162,10 @@
      color: #374151;
    }
   </style>
-
+  <link rel="stylesheet" href="/highlight/base16/tomorrow-night.min.css">
 </head>
 <body>
-  <header>
+<header>
     <h1><a href="/">{{ site.title }}</a></h1>
   </header>
   <nav role="navigation" class="main-nav">
@@ -188,5 +188,8 @@
   <h1>{{ page.title }}</h1>
   {% endif %}
   {{ body | safe }}
+  <script src="/highlight/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script></script>
 </body>
 </html>
