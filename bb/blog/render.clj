@@ -258,7 +258,7 @@
          xml/indent-str))))
 
 (defn- copy-resources []
-  (doseq [f (fs/glob (fs/file source-dir) "**.{css,png,gif,jpeg,jpg,svg,js}")
+  (doseq [f (fs/glob (fs/file source-dir) "**.{css,png,gif,jpeg,jpg,svg,js,webm,mp4}")
           :let [out (apply fs/file output-dir (rest (fs/components f)))]]
     (fs/create-dirs (fs/parent out))
     (fs/copy f out)))
