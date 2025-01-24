@@ -89,7 +89,7 @@ Of the four options, I know Firebase will work.
 I've resisted just taking screenshots of the conversation but here I'm going to need to.
 The layout of the response is important and recreating it well is going to be too challenging.
 
-{% img /images/chatgpt/directory-layout.png %}
+![](/images/chatgpt/directory-layout.png)
 
 This is pretty reasonable.
 To nitpick it, ChatGPT suggested a `src/components/button.js` file but then didn't explain what it is, though it does explain what the containing directory is for.
@@ -194,12 +194,12 @@ I did not run this code but I have some familarity with Firebase and I'm pretty 
 
 I didn't run it because I wanted to see if I could prompt ChatGPT to use `const` instead of `var`.
 
-{% img /images/chatgpt/update-to-const.png %}
+![](/images/chatgpt/update-to-const.png)
 
 Well, it started to do it and then just paused mid response.
 So I asked it to continue.
 
-{% img /images/chatgpt/update-to-const-rest.png %}
+![](/images/chatgpt/update-to-const-rest.png)
 
 🤷‍♂️ It tried.
 The code was updated to use `const` but it definitely failed formatting.
@@ -210,7 +210,7 @@ So I asked about it.
 
 ## What's the deal with button.js?
 
-{% img /images/chatgpt/first-button-js-response.png %}
+![](/images/chatgpt/first-button-js-response.png)
 
 This is an ok response.
 
@@ -229,14 +229,14 @@ Bad parts:
 If I keep doing experiments like this, maybe I'll get better at prompting and will be able to get fuller responses.
 I followed up with more questions.
 
-{% img /images/chatgpt/second-button-response.png %}
+![](/images/chatgpt/second-button-response.png)
 
 This is nice, now we have an updated `script.js`.
 I haven't written JavaScript that uses `import` before, so at this point I don't know what else needs to change or if this will just work.
 
 So I asked if `index.html` needed to change.
 
-{% img /images/chatgpt/third-button-response.png %}
+![](/images/chatgpt/third-button-response.png)
 
 Well, that response made me think (sortof, I was quite skeptical) that it might just all work.
 
@@ -248,7 +248,7 @@ So I asked how[1].
 
 [1]: I don't think someone without programming experience would think about this question.
 
-{% img /images/chatgpt/how-to-test-locally.png %}
+![](/images/chatgpt/how-to-test-locally.png)
 
 This is a pretty reasonable response.
 It is partially wrong in that Firebase **can** work locally, though I still haven't configured it yet.
@@ -264,7 +264,7 @@ I asked ChatGPT about the error.
 
 [3]: Yet another moment where having experience doing web programming came in handy.
 
-{% img /images/chatgpt/cannot-use-import-statement.png %}
+![](/images/chatgpt/cannot-use-import-statement.png)
 
 One thing that is great about this response is that the bottom `html` code block tells us what line to change in `index.html`.
 That is great.
@@ -285,7 +285,7 @@ Maybe that is right but I refused to open `script-compiled.js` or dig into what 
 
 At this point, I gave up on having a separate `button.js` and asked ChatGPT to inline `Button` into `script.js`
 
-{% img /images/chatgpt/first-inlined-button-class.png %}
+![](/images/chatgpt/first-inlined-button-class.png)
 
 This was an interesting response.
 
@@ -301,7 +301,7 @@ ChatGPT seems to be remembering my preference.
 Since `script.js` changed from querying for buttons to creating them, I knew `index.html` would need to be updated.
 I asked ChatGPT for what `index.html` looks like with the updated `script.js` and it gave a good response.
 
-{% img /images/chatgpt/updated-index-html-after-inline-button.png %}
+![](/images/chatgpt/updated-index-html-after-inline-button.png)
 
 This is pretty good.
 The html is solid.
@@ -320,7 +320,7 @@ It was getting late and I didn't feel like setting up Firebase, so I asked ChatG
 
 I prompted "For now, lets replace firebase with just printing to the javascript console so I can run this locally and get some feedback"
 
-{% img /images/chatgpt/after-replacing-firebase-with-console.png %}
+![](/images/chatgpt/after-replacing-firebase-with-console.png)
 
 This is kind of an amazing response.
 Sure, we're back to querying the DOM for pre-existing `<button>` elements but it did it.
@@ -340,9 +340,9 @@ At this point, I went to bed.
 Four days later, I picked back up the project and rejoined the conversation with ChatGPT.
 I continued the conversation as if I had never left.
 
-{% img /images/chatgpt/restarting-the-conversation.png %}
+![](/images/chatgpt/restarting-the-conversation.png)
 
-{% img /images/chatgpt/first-instructions-for-readding-firebase.png %}
+![](/images/chatgpt/first-instructions-for-readding-firebase.png)
 
 This numbered list with a link to Firebase is a pretty solid response.
 Step 6 and the code provided is a bit off as the previous code did not have a `recordActivity` function.
@@ -357,8 +357,8 @@ It's response was good, saying ot add it to `script.js` and call it from the `on
 
 I was still trying to not type any code myself, so I asked it to show me what that would look like.
 
-{% img /images/chatgpt/code-after-adding-record-activity.png %}
-{% img /images/chatgpt/code-after-adding-record-activity-continued.png %}
+![](/images/chatgpt/code-after-adding-record-activity.png)
+![](/images/chatgpt/code-after-adding-record-activity-continued.png)
 
 This response has good parts and bad parts.
 We've switched back to use the Realtime Database and `import` statements have shown up again.
@@ -593,7 +593,7 @@ buttons.forEach((button) => button.appendTo(document.body));
 I tried loading the page and received an error about the Firebase Realtime Database URL being wrong.
 ChatGPT to the rescue!
 
-{% img /images/chatgpt/url-error.png %}
+![](/images/chatgpt/url-error.png)
 
 This was a useful response.
 I **hadn't** noticed that the earlier numbered instructions had me setup a Firebase Firestore and not a Realtime Database.
@@ -608,19 +608,19 @@ Kind of.
 Now I was getting a permission error.
 But that was progress.
 
-{% img /images/chatgpt/open-permissions.png %}
+![](/images/chatgpt/open-permissions.png)
 
 This is a good response and it even warns that it isn't a recommended configuration.
 For this experiment, I could have just gone with the completely open permissions but I wanted to do better.
 
-{% img /images/chatgpt/some-permissions.png %}
+![](/images/chatgpt/some-permissions.png)
 
 I updated the code and tried again.
 Still getting permission issues because `script.js` isn't doing any sort of logging in.
 
 I remembereed that the first `recordActivity` implementation had a line in it about signing in with email and password, so I asked ChatGPT about that.
 
-{% img /images/chatgpt/email-and-passord.png %}
+![](/images/chatgpt/email-and-passord.png)
 
 Not bad.
 I setup a user in the Firebase console, copied the above code into `script.js`, and hard-coded an email and password[5].
@@ -629,7 +629,7 @@ You know what I'm going to do next.
 
 [5]: Not a good idea for deploying into the wild but good enough for running locally and this experiment.
 
-{% img /images/chatgpt/grab-auth.png %}
+![](/images/chatgpt/grab-auth.png)
 
 Pretty near perfect response.
 I added the suggested `<script>` tag, noticed the version was different from the other tags, and updated the version to match the others.
@@ -643,18 +643,18 @@ I pulled up the Firebase Realtime Database UI and can see activities! 🎉
 We're in a great spot now; data is flowing.
 But we really need to display the activities in our UI.
 
-{% img /images/chatgpt/first-display.png %}
+![](/images/chatgpt/first-display.png)
 
 I updated `script.js` and `index.html` based off this response and now there was a list of activities on the page.
 Unfortunately, `activity.time` did not exist since the current `recordActivity` was not recording time like that, so that part of the string just said `null`.
 But this was still pretty good.
 
-{% img /images/chatgpt/persist-time.png %}
+![](/images/chatgpt/persist-time.png)
 
 Not a bad response but it switched us back to using Firestore and recorded the timestamp in `timestamp` field instead of `time`.
 Time to try to switch back.
 
-{% img /images/chatgpt/back-to-realtime-database.png %}
+![](/images/chatgpt/back-to-realtime-database.png)
 
 This worked!
 
