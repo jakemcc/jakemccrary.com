@@ -16,13 +16,13 @@ categories:
 Earlier this year, I wanted to use a landscape photo as my background on my phone.
 It wasn't the photo below but we can use it as an example.
 
-{% img center /images/photo-fit/keyboard-new-keycaps.jpg "Landscape image of my keyboard" "Landscape image of my keyboard" %}
+![Landscape image of my keyboard](/images/photo-fit/keyboard-new-keycaps.jpg "Landscape image of my keyboard")
 
 When I made it my background, my phone[^1] zoomed in to make it fit the portrait orientation of the phone.
 
 [^1]: A Samsung S8 running Android 9 
 
-{% img center /images/photo-fit/phone-background-before.jpg "Screenshot of phone with zoomed in keyboard photo" "Screenshot of phone with zoomed in keyboard photo" %}
+![Screenshot of phone with zoomed in keyboard photo](/images/photo-fit/phone-background-before.jpg "Screenshot of phone with zoomed in keyboard photo")
 
 This is not great.
 I don't want a zoomed in version that fits my vertical phone.
@@ -36,7 +36,7 @@ I didn't do that.
 Instead, I wrote a little TypeScript[^2] web app that adds the bars for you.
 You open the website on your phone, select an image, and then download a properly sized image.
 
-{% img center /images/photo-fit/phone-background-after.jpg "Screenshot of phone with properly fitting image" "Screenshot of phone with properly fitting image" %}
+![Screenshot of phone with properly fitting image](/images/photo-fit/phone-background-after.jpg "Screenshot of phone with properly fitting image")
 
 The tool uses the canvas API and does all of the work in the browser itself.
 It was a fun, bite-sized project and it gave me an excuse to write some TypeScript and do some web programming.
