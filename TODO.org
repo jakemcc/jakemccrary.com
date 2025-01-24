@@ -22,26 +22,15 @@ CLOSED: [2025-01-19 Sun 16:06]
 - CLOSING NOTE [2025-01-19 Sun 16:06]
 ** CANCELED tag pages?
 CLOSED: [2025-01-19 Sun 16:06]
-* TODO Decide on overall design of site
-* DONE preview on posts or full text on index / archive page?
-CLOSED: [2025-01-20 Mon 10:10]
-- CLOSING NOTE [2025-01-20 Mon 10:10]
-* TODO Code syntax highlighting?
-* TODO Diff output paths and confirm if any links will be broken
-* TODO images specified using ~{%~ syntax in articles
-* DONE images
-CLOSED: [2025-01-19 Sun 17:35]
-- CLOSING NOTE [2025-01-19 Sun 17:35]
-* TODO maybe useful to keep files-that-don't-change separate from the sources? Could just copy the entire tree over than?
 * DONE footnotes seem janky
 CLOSED: [2025-01-21 Tue 20:06]
 - CLOSING NOTE [2025-01-21 Tue 20:06]
-* TODO comments?
-* TODO disclaimers?
-- [ ] hosted on github
-- [ ] goes through cloudflare
-- [ ] If I do comments => something about those
-* TODO remove amazon affiliates?
+* DONE preview on posts or full text on index / archive page?
+CLOSED: [2025-01-20 Mon 10:10]
+- CLOSING NOTE [2025-01-20 Mon 10:10]
+* DONE images
+CLOSED: [2025-01-19 Sun 17:35]
+- CLOSING NOTE [2025-01-19 Sun 17:35]
 * DONE Output path of existing posts should be the same as current blog (date and everything :frown:)
 CLOSED: [2025-01-19 Sun 16:47]
 - CLOSING NOTE [2025-01-19 Sun 16:47]
@@ -54,3 +43,16 @@ CLOSED: [2025-01-19 Sun 16:47]
 * DONE Sort the posts list on the main page
 CLOSED: [2025-01-19 Sun 21:16]
 - CLOSING NOTE [2025-01-19 Sun 21:16]
+* TODO remove amazon affiliates?
+* TODO disclaimers?
+- [ ] hosted on github
+- [ ] goes through cloudflare
+- [ ] If I do comments => something about those
+* TODO comments?
+* TODO maybe useful to keep files-that-don't-change separate from the sources? Could just copy the entire tree over than?
+* TODO images specified using ~{%~ syntax in articles
+* TODO Diff output paths and confirm if any links will be broken
+* TODO Code syntax highlighting?
+* TODO Decide on overall design of site
+* DONE spacing on code blocks
+* TODO footer?
