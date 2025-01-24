@@ -40,7 +40,7 @@ This script converts seconds into a more readable string (example: 310 to `5m10s
 
 Here is a screenshot of everything in action (with a reduced prompt, my normal one includes git and other info).
 
-{% img /images/runtime-humane-example.png 320 150 "Command line prompt showing runtimes of previous commands" "Command line prompt showing runtimes of previous commands" %}
+<img src="/images/runtime-humane-example.png" alt="Command line prompt showing runtimes of previous commands" width=320 height=150>
 
 Below is a simplified snippet from my `.bashrc` that provides runtimes using both of these additions.
 
