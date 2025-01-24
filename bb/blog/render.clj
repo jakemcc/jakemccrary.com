@@ -19,7 +19,7 @@
 
 (defmacro dbg [& args]
   `(let [r# (do ~@args)]
-     (println (str "dbg: " (quote ~@args) " => " r#))
+     (println (str "dbg: " (quote ~@args) " => " (pr-str r#)))
      r#))
 
 (def source-dir "posts")
@@ -344,7 +344,6 @@
 
   (def r *1)
 
-
   (write-adventures! sources)
   (type (:start_date (:metadata (first adventures))))
 
@@ -359,7 +358,56 @@
              articles)
        (sort-by first))
 
-;; :description => preview on main page?
+
+
+
+;;
+  )
+
+
+(defn fix-spacing [{:keys [lines] :as art}]
+  (reduce (fn [{:keys [n-spaces in-block] :as r} line]
+            (dbg n-spaces)
+            (dbg in-block)
+            (dbg line)
+            (if (and in-block (not (clojure.string/starts-with? line "```")))
+              (let [n-spaces (or n-spaces (dbg (count (second (dbg (re-find #"(^.*?)\S.*" line))))))]
+                (-> r
+                    (update :formatted (fnil conj []) (dbg (cond-> line
+                                                             (not (clojure.string/blank? line))
+                                                             (subs n-spaces))))
+                    (assoc :n-spaces n-spaces)))
+              (-> r
+                  (update :formatted (fnil conj []) line)
+                  (dissoc :n-spaces)
+                  (assoc :in-block
+                         (cond
+                           (and in-block (clojure.string/starts-with? line "```"))
+                           false
+
+                           (clojure.string/starts-with? line "```")
+                           true
+
+                           :else in-block)))))
+          art
+          lines))
+
+(comment
+  (def blog-files (mapv fs/file (fs/list-dir "posts/blog")))
+
+  (def with-data (mapv (fn [f] {:file f
+                                :lines (clojure.string/split-lines (slurp f))})
+                       blog-files))
+
+  (filter #(clojure.string/includes? % "tramp")  (map (comp str :file) with-data))
+  (def tramp-article (first (filter (fn [{:keys [file]}] (clojure.string/includes? (str file) "tramp"))
+                                    with-data)))
+
+
+
+  (def fixed (fix-spacing tramp-article))
+
+  (spit (:file fixed) (clojure.string/join \newline (:formatted fixed)))
 
 ;;
   )
