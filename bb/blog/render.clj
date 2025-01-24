@@ -403,10 +403,11 @@
   (def tramp-article (first (filter (fn [{:keys [file]}] (clojure.string/includes? (str file) "tramp"))
                                     with-data)))
 
-
-
   (def fixed (fix-spacing tramp-article))
 
+  (doseq [art with-data]
+    (dbg (:file art))
+    (spit (:file art) (clojure.string/join \newline (:formatted (fix-spacing art)))))
   (spit (:file fixed) (clojure.string/join \newline (:formatted fixed)))
 
 ;;

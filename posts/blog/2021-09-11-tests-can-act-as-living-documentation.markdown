@@ -54,4 +54,3 @@ You can write comments near the assertions letting future readers know about the
 
 Any example in a comment or other non-executable documentation should be an assertion in a unit test.
 You've already taken the time to document the behavior; take the time to figure out how to document it in a way that will fail if the behavior changes.
-

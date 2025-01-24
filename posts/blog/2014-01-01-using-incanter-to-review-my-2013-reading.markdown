@@ -32,11 +32,11 @@ some of the book's page counts were missing [^2].
 Now that I have data it is time to start playing with it. Run `lein new goodreads-summary` and edit the `project.clj` file to have a dependency on Incanter.
 
 ``` clojure
-    (defproject goodreads-summary "0.1.0-SNAPSHOT"
-      :dependencies [[org.clojure/clojure "1.5.1"]
-                     [org.clojure/data.csv "0.1.2"]
-                     [incanter "1.5.4"]
-                     [clj-time "0.6.0"]])
+(defproject goodreads-summary "0.1.0-SNAPSHOT"
+  :dependencies [[org.clojure/clojure "1.5.1"]
+                 [org.clojure/data.csv "0.1.2"]
+                 [incanter "1.5.4"]
+                 [clj-time "0.6.0"]])
 ```
 
 Next I'm going to take the csv file and transform it into an Incanter
@@ -49,17 +49,17 @@ and dealing with spaces in keywords is a pain. The snippet below has
 all of the necessary requires for the remainder of the examples.
 
 ``` clojure
-    (ns goodreads-summary.core
-      (:require [clojure.data.csv :as csv]
-                [clojure.string :as str]
-                [incanter.core :as incanter]
-                [incanter.io :as io]
-                [incanter.charts :as charts]
-                [clj-time.core :as tc]
-                [clj-time.format :as tf]))
+(ns goodreads-summary.core
+  (:require [clojure.data.csv :as csv]
+            [clojure.string :as str]
+            [incanter.core :as incanter]
+            [incanter.io :as io]
+            [incanter.charts :as charts]
+            [clj-time.core :as tc]
+            [clj-time.format :as tf]))
     
-    (defn read-csv [filepath]
-      (io/read-dataset filepath :header true :keyword-headers false))
+(defn read-csv [filepath]
+  (io/read-dataset filepath :header true :keyword-headers false))
 ```
 
 Calling `read-csv` with the path to the exported goodreads data
@@ -70,8 +70,8 @@ grid of with all the data. I don't care about most of the columns so
 lets define a function that selects out the few I care about.
 
 ``` clojure
-    (defn select-columns [dataset]
-      (incanter/sel dataset :cols ["Number of Pages" "Date Read" "Bookshelves" "Exclusive Shelf"]))
+(defn select-columns [dataset]
+  (incanter/sel dataset :cols ["Number of Pages" "Date Read" "Bookshelves" "Exclusive Shelf"]))
 ```
 
 Selecting columns is done with
@@ -87,8 +87,8 @@ Goodreads has three default shelves **to-read**,
 filter of the **Exclusive Shelf** column for **read** books.
 
 ``` clojure
-    (defn finished [dataset]
-      (incanter/$where {"Exclusive Shelf" "read"} dataset))
+(defn finished [dataset]
+  (incanter/$where {"Exclusive Shelf" "read"} dataset))
 ```
 
 Filtering for books read in 2013 is a bit more complicated. First I
@@ -101,24 +101,24 @@ the filtering in `finished`. Here I'm providing a predicate to
 use instead of just doing an equality comparison.
 
 ``` clojure
-    (defn parse-date [date-str]
-      (if date-str
-        (tf/parse (tf/formatter "yyyy/MM/dd") date-str)
-        (tc/date-time 0)))
+(defn parse-date [date-str]
+  (if date-str
+    (tf/parse (tf/formatter "yyyy/MM/dd") date-str)
+    (tc/date-time 0)))
     
-    (defn transform-date-read-column [dataset]
-      (incanter/transform-col dataset "Date Read" parse-date))
+(defn transform-date-read-column [dataset]
+  (incanter/transform-col dataset "Date Read" parse-date))
     
-    (defn date-greater-than-pred [date]
-      (fn [challenger]
-        (> (.compareTo challenger date) 0)))
+(defn date-greater-than-pred [date]
+  (fn [challenger]
+    (> (.compareTo challenger date) 0)))
     
-    (defn books-read-in-2013 [dataset]
-      (let [finished (finished (select-columns dataset))
-            with-dates (incanter/$where {"Date Read" {:fn identity}} finished)
-            with-date-objects (transform-date-read-column with-dates)]
-        (incanter/$where {"Date Read" {:fn (date-greater-than-pred (parse-date "2012/12/31"))}}
-                         with-date-objects)))
+(defn books-read-in-2013 [dataset]
+  (let [finished (finished (select-columns dataset))
+        with-dates (incanter/$where {"Date Read" {:fn identity}} finished)
+        with-date-objects (transform-date-read-column with-dates)]
+    (incanter/$where {"Date Read" {:fn (date-greater-than-pred (parse-date "2012/12/31"))}}
+                     with-date-objects)))
 ```
 
 Now we have a dataset that that contains only books read in 2013
@@ -130,11 +130,11 @@ makes a dataset with the new data, and then adds that to the original
 dataset.
 
 ``` clojure
-    (defn add-month-read-column [dataset]
-      (let [month-read (incanter/$map tc/month "Date Read" dataset)
-            month-dataset (incanter/dataset ["Month"] month-read)
-            with-month-read (incanter/conj-cols dataset month-dataset)]
-        with-month-read))
+(defn add-month-read-column [dataset]
+  (let [month-read (incanter/$map tc/month "Date Read" dataset)
+        month-dataset (incanter/dataset ["Month"] month-read)
+        with-month-read (incanter/conj-cols dataset month-dataset)]
+    with-month-read))
 ```
 
 When I wrote the above code it seemed like there should be a better
@@ -143,27 +143,27 @@ way. While writing this post I stumbled across
 Switching to `add-derived-column` makes `add-month-read-column` almost trivial.
 
 ``` clojure
-    (defn add-month-read-column [dataset]
-      (incanter/add-derived-column "Month" ["Date Read"] tc/month dataset))
+(defn add-month-read-column [dataset]
+  (incanter/add-derived-column "Month" ["Date Read"] tc/month dataset))
 ```
 
 Now that we have `add-month-read-column`  we can now start aggregating
 some stats. Lets write code for calculating the pages read per month.
 
 ``` clojure
-    (defn pages-by-month [dataset]
-      (let [with-month-read (add-month-read-column dataset)]
-        (->> (incanter/$rollup :sum "Number of Pages" "Month" with-month-read)
-             (incanter/$order "Month" :asc))))
+(defn pages-by-month [dataset]
+  (let [with-month-read (add-month-read-column dataset)]
+    (->> (incanter/$rollup :sum "Number of Pages" "Month" with-month-read)
+         (incanter/$order "Month" :asc))))
 ```
 
 That was pretty easy. Lets write a function to count the number of books read per month.
 
 ``` clojure
-    (defn book-count-by-month [dataset]
-      (let [with-month-read (add-month-read-column dataset)]
-        (->> (incanter/$rollup :count "Number of books" "Month" with-month-read)
-             (incanter/$order "Month" :asc))))
+(defn book-count-by-month [dataset]
+  (let [with-month-read (add-month-read-column dataset)]
+    (->> (incanter/$rollup :count "Number of books" "Month" with-month-read)
+         (incanter/$order "Month" :asc))))
 ```
 
 `pages-by-month` and `book-count-by-month` are very similar. Each uses [incanter.core/$rollup](http://liebke.github.io/incanter/core-api.html#incanter.core/$rollup) to calculate per month stats. The first argument to `$rollup` can be a function that takes a sequence of values or one of the supported magical "function identifier keywords".
@@ -171,15 +171,15 @@ That was pretty easy. Lets write a function to count the number of books read pe
 Next lets combine the data together so we can print out a nice table. While we are at it lets add another column.
 
 ``` clojure
-    (defn stats-by-month [dataset]
-      (->> (incanter/$join ["Month" "Month"]
-                         (pages-by-month dataset)
-                         (book-count-by-month dataset))
-           (incanter/rename-cols {"Number of Pages" "Page Count"
-                                  "Number of books" "Book Count"})
-           (incanter/add-derived-column "Pages/Books"
-                                      ["Page Count" "Book Count"]
-                                      (fn [p b] (Math/round (double (/ p b)))))))
+(defn stats-by-month [dataset]
+  (->> (incanter/$join ["Month" "Month"]
+                     (pages-by-month dataset)
+                     (book-count-by-month dataset))
+       (incanter/rename-cols {"Number of Pages" "Page Count"
+                              "Number of books" "Book Count"})
+       (incanter/add-derived-column "Pages/Books"
+                                  ["Page Count" "Book Count"]
+                                  (fn [p b] (Math/round (double (/ p b)))))))
 ```
 
 `stats-by-month` returns a dataset which when printed looks like the following table. It joins the data, renames columns, and adds a derived column.
@@ -203,24 +203,24 @@ Next lets combine the data together so we can print out a nice table. While we a
 Great. Now we have a little ascii table. Lets get graphical and make some bar charts.
 
 ``` clojure
-    (defn chart-column-by-month [column dataset]
-      (let [select (fn [column] (incanter/sel dataset :cols column))
-            months (select "Month")]
-        (charts/bar-chart months (select column)
-                          :y-label column :x-label "Month")))
+(defn chart-column-by-month [column dataset]
+  (let [select (fn [column] (incanter/sel dataset :cols column))
+        months (select "Month")]
+    (charts/bar-chart months (select column)
+                      :y-label column :x-label "Month")))
     
-    (defn chart-page-count-by-month [dataset]
-      (chart-column-by-month "Page Count" dataset))
+(defn chart-page-count-by-month [dataset]
+  (chart-column-by-month "Page Count" dataset))
     
-    (defn chart-book-count-by-month [dataset]
-      (chart-column-by-month "Book Count" dataset))
+(defn chart-book-count-by-month [dataset]
+  (chart-column-by-month "Book Count" dataset))
 
-    (defn view-page-count-chart []
-      (-> (read-csv "goodreads_export.csv")
-          books-read-in-2013
-          stats-by-month
-          chart-page-count-by-month
-          incanter/view))
+(defn view-page-count-chart []
+  (-> (read-csv "goodreads_export.csv")
+      books-read-in-2013
+      stats-by-month
+      chart-page-count-by-month
+      incanter/view))
 ```
 
 Running the snippet `view-page-count-chart` produces a pop-up with the

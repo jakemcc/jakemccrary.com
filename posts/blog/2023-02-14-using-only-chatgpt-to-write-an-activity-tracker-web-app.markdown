@@ -747,4 +747,3 @@ I think so.
 It was definitely useful to have experience writing these style of programs before.
 Knowing the direction I wanted the code to go definitely helped me write prompts to get there.
 I'd be really interested in observing a non-programmer attempt this same task.
-

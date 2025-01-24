@@ -99,4 +99,3 @@ highly recommend you add it to yours.
 original code sample broke if you didn't already have something set as
 your `$PROMPT_COMMAND`. I've updated the original snippet to reflect
 his [changes](https://twitter.com/gfredericks_/status/595249998838800384).
-

@@ -157,5 +157,3 @@ things that have helped me adjust to working remotely. Some of these
 tips are actionable at an individual level and some require buy in
 from the company. Hopefully this list can help give guidance towards
 improving your remote work situation.
-
-

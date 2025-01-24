@@ -198,4 +198,3 @@ is expensive or not but this article cost a bit less than seven
 dollars to write. This doesn't seem too outrageous to me.
 
 Based on my limited usage of BigQuery, it is something I'd look into further if I needed its capabilities.
-

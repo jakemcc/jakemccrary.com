@@ -35,4 +35,3 @@ My coworkers and I used this script frequently.
 
 By combining `selecta` with other stdin/stdout friendly command-line tools you can build really enjoyable, time-saving tools.
 [Selecta](https://github.com/garybernhardt/selecta) is a useful utility to add to your toolkit.
-

@@ -28,9 +28,3 @@ This dictionary isn't perfect but it did improve my reading experience. One exam
 This was definitely a larger challenge than creating my custom [Dune dictionary](http://gum.co/dune-dictionary). It forced me to dive into the Amazon documentation a bit and figure out more of the markup language. I have notes on my experience creating Kindle dictionaries and sometime in the future will be writing a post with details about what I've learned.
 
 I can't recommend Fogus's [Functional JavaScript](http://www.amazon.com/gp/product/B00D624AQO/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B00D624AQO&linkCode=as2&tag=jakemccrary08-20&linkId=CUEYRNJIQSFNKUSM) enough. If you do read it give my [dictionary](http://db.tt/eJzkIVfS) a shot. I think it makes the reading experience a bit nicer.
-
-
-
-
-
-

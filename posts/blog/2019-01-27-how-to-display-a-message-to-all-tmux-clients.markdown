@@ -70,5 +70,3 @@ tmux list-clients -F "#{client_name}" \
 ```
 
 ![Example using notify script](/images/tmux-notify-script.gif)
-
-

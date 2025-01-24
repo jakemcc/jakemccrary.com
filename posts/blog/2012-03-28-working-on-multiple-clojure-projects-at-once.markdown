@@ -13,32 +13,32 @@ This is accomplished by using the `checkouts` directory feature of Leiningen. Th
 
 In case the above paragraph isn't clear, here is an example of the main projects directory structure.
 ``` bash
-    $ pwd
-    src/main-project
-    $ tree
-    .
-    ├── checkouts
-    │   └── subproject -> /Users/jmccrary/src/temp/subproject/
-    ├── project.clj
-    ├── src
-    │   └── main_project
-    │       └── core.clj
-    └── test
-        └── main_project
-            └── core_test.clj
-    $ ls checkouts/subproject/
-    README project.clj src test
+$ pwd
+src/main-project
+$ tree
+.
+├── checkouts
+│   └── subproject -> /Users/jmccrary/src/temp/subproject/
+├── project.clj
+├── src
+│   └── main_project
+│       └── core.clj
+└── test
+    └── main_project
+        └── core_test.clj
+$ ls checkouts/subproject/
+README project.clj src test
 ```
 
 Running a `lein classpath` in the main project directory and we can see the classpath has the subproject in it. I've edited the `lein classpath` output to remove most entries not related to subproject and to make it easier to read. As the example shows the subproject has been added to the classpath.
 
 ``` bash
-    $ lein classpath
-    ...:
-    src/main-project/checkouts/subproject/src
-    src/main-project/checkouts/subproject/classes
-    src/main-project/checkouts/subproject/resources
-    src/main-project/lib/clojure-1.3.0.jar
+$ lein classpath
+...:
+src/main-project/checkouts/subproject/src
+src/main-project/checkouts/subproject/classes
+src/main-project/checkouts/subproject/resources
+src/main-project/lib/clojure-1.3.0.jar
 ```
 
 The Leiningen checkouts directory option is pretty useful. This feature isn't there to discourage you from releasing versions of a library, but instead is there to facilitate quicker development cycles. I'd encourage you to experiment with it and figure out of it makes you more effective.

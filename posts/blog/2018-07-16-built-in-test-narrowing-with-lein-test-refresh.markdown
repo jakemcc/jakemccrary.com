@@ -29,4 +29,3 @@ Below is an example of what this looks like.
 ```
 
 This functionality has only been available for a short period of time and I've already found it useful. I think you will too. Enjoy.
-

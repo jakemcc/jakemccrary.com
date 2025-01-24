@@ -78,4 +78,3 @@ I post occasionally to Instagram both using the story feature and normal posts. 
 So that is how I consume social media. It mostly happens on my computer and I use a subset of features a platform offers. I've reached a point where I feel like I'm getting a lot of the pros without too many of the cons.
 
 It is an area in which I'll keep experimenting. I'd encourage you to as well. Try a different usage pattern for an extended period of time and then reflect on your changed behavior. Keep the changes that have made a positive impact.
-

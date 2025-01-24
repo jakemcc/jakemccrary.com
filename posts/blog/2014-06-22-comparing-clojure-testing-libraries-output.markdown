@@ -121,10 +121,10 @@ string test and its output.
 ```
 
 ``` console Speclj
-  9) String comparisons have nice error message
-     Expected: "space"
-          got: "spice" (using =)
-     /Users/jake/src/jakemcc/example/spec/example/string_spec.clj:7
+9) String comparisons have nice error message
+   Expected: "space"
+        got: "spice" (using =)
+   /Users/jake/src/jakemcc/example/spec/example/string_spec.clj:7
 ```
 
 **Speclj**'s test output above is an improvement over **clojure.test**. You
@@ -269,20 +269,20 @@ is below. They both improve over **clojure.test** by making it easy to see
 the expected and actual value. They both don't do anything beyond that.
 
 ``` console Speclj
-  4) map comparisons have nice error messages when extra entries keys present
-     Expected: {:sheep 1}
-          got: {:cheese 1, :sheep 1} (using =)
-     /Users/jake/src/jakemcc/example/spec/example/map_spec.clj:7
+4) map comparisons have nice error messages when extra entries keys present
+   Expected: {:sheep 1}
+        got: {:cheese 1, :sheep 1} (using =)
+   /Users/jake/src/jakemcc/example/spec/example/map_spec.clj:7
 
-  5) map comparisons have nice error messages when missing an entry
-     Expected: {:cheese 1, :sheep 1}
-          got: {:sheep 1} (using =)
-     /Users/jake/src/jakemcc/example/spec/example/map_spec.clj:9
+5) map comparisons have nice error messages when missing an entry
+   Expected: {:cheese 1, :sheep 1}
+        got: {:sheep 1} (using =)
+   /Users/jake/src/jakemcc/example/spec/example/map_spec.clj:9
 
-  6) map comparisons have nice error messages when mismatched values
-     Expected: {:cheese 5, :sheep 1}
-          got: {:cheese 1, :sheep 1} (using =)
-     /Users/jake/src/jakemcc/example/spec/example/map_spec.clj:11
+6) map comparisons have nice error messages when mismatched values
+   Expected: {:cheese 5, :sheep 1}
+        got: {:cheese 1, :sheep 1} (using =)
+   /Users/jake/src/jakemcc/example/spec/example/map_spec.clj:11
 ```
 
 ``` console Midje
@@ -377,15 +377,15 @@ failure in (set_expectations.clj:5) : example.set-expectations
 **Speclj** and **Midje** both have better output than the basic **clojure.test**.
 
 ``` console Speclj
-  7) set comparisons have nice error messages when missing item
-     Expected: #{:b :a}
-          got: #{:c :b :a} (using =)
-     /Users/jake/src/jakemcc/example/spec/example/set_spec.clj:9
+7) set comparisons have nice error messages when missing item
+   Expected: #{:b :a}
+        got: #{:c :b :a} (using =)
+   /Users/jake/src/jakemcc/example/spec/example/set_spec.clj:9
 
-  8) set comparisons have nice error messages when more items
-     Expected: #{:c :b :a}
-          got: #{:b :a} (using =)
-     /Users/jake/src/jakemcc/example/spec/example/set_spec.clj:11
+8) set comparisons have nice error messages when more items
+   Expected: #{:c :b :a}
+        got: #{:b :a} (using =)
+   /Users/jake/src/jakemcc/example/spec/example/set_spec.clj:11
 ```
 
 ``` console Midje
@@ -500,20 +500,20 @@ again don't go beyond making easy to find the expected and actual
 values.
 
 ``` console Speclj
-  1) List/vector comparisons when there is an extra element
-     Expected: (1 2 3)
-          got: (1 2 3 4) (using =)
-     /Users/jake/src/jakemcc/example/spec/example/string_spec.clj:7
+1) List/vector comparisons when there is an extra element
+   Expected: (1 2 3)
+        got: (1 2 3 4) (using =)
+   /Users/jake/src/jakemcc/example/spec/example/string_spec.clj:7
 
-  2) List/vector comparisons when there is a mismatched element
-     Expected: (1 2 4)
-          got: (1 2 3) (using =)
-     /Users/jake/src/jakemcc/example/spec/example/string_spec.clj:9
+2) List/vector comparisons when there is a mismatched element
+   Expected: (1 2 4)
+        got: (1 2 3) (using =)
+   /Users/jake/src/jakemcc/example/spec/example/string_spec.clj:9
 
-  3) List/vector comparisons when comparing different types
-     Expected: (9 8 7)
-          got: [1 2 3] (using =)
-     /Users/jake/src/jakemcc/example/spec/example/string_spec.clj:11
+3) List/vector comparisons when comparing different types
+   Expected: (9 8 7)
+        got: [1 2 3] (using =)
+   /Users/jake/src/jakemcc/example/spec/example/string_spec.clj:11
 ```
 
 ``` console Midje
@@ -556,4 +556,3 @@ that Speclj provides `should==`. `should==` checks that the expected
 and actual value have the same contents. He provided a
 [gist](https://gist.github.com/trptcolin/7e1ece5179581085730f) that
 shows the difference.
-

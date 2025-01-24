@@ -31,38 +31,37 @@ First, using Leiningen 1.4.0, I ran `lein install swank-clojure 1.3.0-SNAPSHOT`.
 Next I wrote a function in [elisp](http://en.wikipedia.org/wiki/Emacs_Lisp) that gives emacs the ability to call the newly installed swank-clojure script, wait for the swank server to start, and then connect to it. This function, `clojure-swank`, can be seen below. It creates a buffer named `*clojure-swank*`, runs the newly installed script, and captures the output in the freshly created buffer. When the "Connection opened" line appears `slime-connect` is called, connecting emacs to the freshly started swank server. After this we are at the REPL with all the advantages that emacs and paredit give us.
 
 ``` cl
-    (defun clojure-swank ()
-      "Launch swank-clojure from users homedir/.lein/bin"
-      (interactive)
-      (let ((buffer (get-buffer-create "*clojure-swank*")))
-        (flet ((display-buffer (buffer-or-name &optional not-this-window frame) nil))
-              (bury-buffer buffer)
-              (shell-command "~/.lein/bin/swank-clojure &" buffer))
-        (set-process-filter (get-buffer-process buffer)
-                            (lambda (process output)
-                               (with-current-buffer "*clojure-swank*" (insert output))
-                               (when (string-match "Connection opened on local port +\\([0-9]+\\)" output)
-                                 (slime-connect "localhost" (match-string 1 output))
-                                 (set-process-filter process nil))))
-        (message "Starting swank.. ")))
+(defun clojure-swank ()
+  "Launch swank-clojure from users homedir/.lein/bin"
+  (interactive)
+  (let ((buffer (get-buffer-create "*clojure-swank*")))
+    (flet ((display-buffer (buffer-or-name &optional not-this-window frame) nil))
+          (bury-buffer buffer)
+          (shell-command "~/.lein/bin/swank-clojure &" buffer))
+    (set-process-filter (get-buffer-process buffer)
+                        (lambda (process output)
+                           (with-current-buffer "*clojure-swank*" (insert output))
+                           (when (string-match "Connection opened on local port +\\([0-9]+\\)" output)
+                             (slime-connect "localhost" (match-string 1 output))
+                             (set-process-filter process nil))))
+    (message "Starting swank.. ")))
 ```
 
 I've also written a `clojure-kill-swank` function for stopping the swank server.
 
 ``` cl
-    (defun clojure-kill-swank ()
-      "Kill swank process started by lein swank."
-      (interactive)
-      (let ((process (get-buffer-process "*clojure-swank*")))
-        (when process
-          (ignore-errors (slime-quit-lisp))
-          (let ((timeout 10))
-            (while (and (> timeout 0)
-                        (eql 'run (process-status process)))
-              (sit-for 1)
-              (decf timeout)))
-          (ignore-errors (kill-buffer "*clojure-swank*")))))
+(defun clojure-kill-swank ()
+  "Kill swank process started by lein swank."
+  (interactive)
+  (let ((process (get-buffer-process "*clojure-swank*")))
+    (when process
+      (ignore-errors (slime-quit-lisp))
+      (let ((timeout 10))
+        (while (and (> timeout 0)
+                    (eql 'run (process-status process)))
+          (sit-for 1)
+          (decf timeout)))
+      (ignore-errors (kill-buffer "*clojure-swank*")))))
 ```
 
 Both of those functions need to be added to a location where they will get defined on emacs start-up. Once this is done the powerful REPL you are used to emacs providing can be at your finger tips in practically no time at all.
-

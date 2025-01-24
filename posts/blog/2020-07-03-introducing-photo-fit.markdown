@@ -51,4 +51,3 @@ It might not work!
 If you do try it and something weird happens, plese let me know.
 
 [^2]: I recently learned some TypeScript through [Execute Program](https://www.executeprogram.com). Execute program is a really neat application of spaced repetition for learning programming concepts.
-

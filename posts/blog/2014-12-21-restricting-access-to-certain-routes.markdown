@@ -133,4 +133,3 @@ There we have it. A solution without duplication that still responds
 properly to requests for non-existent resources.
 `compojure/wrap-routes` is a useful function to know about.
   
-

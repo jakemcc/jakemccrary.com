@@ -23,4 +23,3 @@ Lying - Sam Harris
 Stoner - John Williams
 Structure and Interpretation of Computer Programs - Abelson
 Stranger in a Strange Land - Heinlein
-

@@ -25,4 +25,3 @@ notified of test success and failures through
 [lein-autoexpect](https://github.com/jakemcc/lein-autoexpect))
 provides the growl notification is my favorite feature. I'd highly
 recommend giving it a shot.
-

@@ -33,4 +33,3 @@ More specifically we used the [simhash](https://en.wikipedia.org/wiki/SimHash) t
 # What is simhash?
 # Applying it to articles on this website
 # End
-

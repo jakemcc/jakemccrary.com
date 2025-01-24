@@ -16,10 +16,10 @@ To make my Mac whisper my the results of running my tests I can use
 the following project.clj
 
 ``` clojure
-    (defproject sample "1.2.3"
-      :dependencies [[org.clojure/clojure "1.5.1"]]
-      :profiles {:dev {:plugins [[com.jakemccrary/lein-test-refresh "0.3.4"]]}}
-      :test-refresh {:notify-command ["say" "-v" "Whisper"]})
+(defproject sample "1.2.3"
+  :dependencies [[org.clojure/clojure "1.5.1"]]
+  :profiles {:dev {:plugins [[com.jakemccrary/lein-test-refresh "0.3.4"]]}}
+  :test-refresh {:notify-command ["say" "-v" "Whisper"]})
 ```
 
 The specification of the command is found in the `:test-refresh

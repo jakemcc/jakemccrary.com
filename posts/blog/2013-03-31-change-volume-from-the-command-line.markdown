@@ -14,14 +14,14 @@ Ubuntu uses [PulseAudio](http://www.freedesktop.org/wiki/Software/PulseAudio) to
 The below script makes changing volume with `pacmd` straightforward. I'm using Perl convert a percentage into the proper units for the <sink-volume> argument. Using this script if you want to pull a [Spinal Tap](http://www.youtube.com/watch?v=EbVKWCpNFhY) and go above 100% you simply pass in a number greater than 100.
 
 ``` bash
-    #!/bin/bash
+#!/bin/bash
 
-    if [ "$1" == "" ]; then
-      echo "Need to supply a percentage"
-      exit 1
-    fi
+if [ "$1" == "" ]; then
+  echo "Need to supply a percentage"
+  exit 1
+fi
 
-    vol=$(perl -e "print int(65536 * ($1 / 100))")
-    echo "Setting volume to $1 ($vol)"
-    pacmd set-sink-volume 0 $vol
+vol=$(perl -e "print int(65536 * ($1 / 100))")
+echo "Setting volume to $1 ($vol)"
+pacmd set-sink-volume 0 $vol
 ```

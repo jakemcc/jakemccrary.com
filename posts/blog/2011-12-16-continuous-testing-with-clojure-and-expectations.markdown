@@ -24,20 +24,20 @@ To fix my problem I wrote [`lein-autoexpect`](https://github.com/jakemcc/lein-au
 To use `lein-autoexpect` simply add `[lein-autoexpect "0.0.2"]` to your `project.clj` file and fetch the dependency. Then at the command line run `lein autoexpect`. You'll see your tests run and then it will just hang there, eagerly waiting for code to change.
 
 ``` bash
-    $ lein autoexpect
-    *********************************************
-    *************** Running tests ***************
-    Ran 3 tests containing 3 assertions in 16 msecs
-    0 failures, 0 errors.
+$ lein autoexpect
+*********************************************
+*************** Running tests ***************
+Ran 3 tests containing 3 assertions in 16 msecs
+0 failures, 0 errors.
 ```
 
 Next time you end up saving you'll see your tests run again and the following example output appears.
 
 ``` bash
-    *********************************************
-    *************** Running tests ***************
-    Ran 4 tests containing 4 assertions in 3 msecs
-    0 failures, 0 errors.
+*********************************************
+*************** Running tests ***************
+Ran 4 tests containing 4 assertions in 3 msecs
+0 failures, 0 errors.
 ```
 
 `lein-autoexpect` tries to clearly delimit each test session with the banner made of `*`. This helps keep different runs separate when scrolling through your terminal.
