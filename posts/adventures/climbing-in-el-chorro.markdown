@@ -11,7 +11,10 @@ keywords: 'climbing, travel, spain'
 
 From March 20th to 30th I was traveling in Spain. Most of this time was spent climbing in El Chorro.
 
-{% imgcap /images/el-chorro/spain-map.jpg El Chorro is the pin %}
+<figure>
+    <img src="/images/el-chorro/spain-map.jpg" alt="El Chorro is the pin">
+    <figcaption>El Chorro is the pin</figcaption>
+</figure>
 
 El Chorro is a small town found in the mountains of southern Spain. The views around town are inspiring. Almost any direction you look contains beautiful cliffs or rolling green hills.
 
@@ -37,7 +40,10 @@ We had an hour to kill before the Málaga to El Chorro train and spent that time
 
 The train rides may have made it obvious, but we did not rent a car for this trip. That meant our next step was to hike up to the Olive Branch from the El Chorro train station. Luckily, about halfway through the hike, some locals pulled over and offered us a ride.
 
-{% imgcap /images/el-chorro/path-to-olive-branch.png The hike to the Olive Branch %}
+<figure>
+    <img src="/images/el-chorro/path-to-olive-branch.png" alt="The hike to the Olive Branch">
+    <figcaption>The hike to the Olive Branch</figcaption>
+</figure>
 
 The walk from the train station to the Olive Branch should take about 30 minutes. The walk is mostly uphill and carrying all of our gear was a pain. We had been carrying our gear all day, and our shoulders were raw. It was great to be picked up.
 
@@ -45,7 +51,13 @@ We get to the Olive Branch and check-in. For our first few nights, we stay in an
 
 **March 22nd**
 
-[{% imgcap /images/el-chorro/view-from-sector-cocina-caliente-small.jpg View from Cocina Caliente %}](/images/el-chorro/view-from-sector-cocina-caliente-full.jpg)
+<figure>
+    <a href="/images/el-chorro/view-from-sector-cocina-caliente-full.jpg">
+        <img src="/images/el-chorro/view-from-sector-cocina-caliente-small.jpg" alt="View from Cocina Caliente">
+    </a>
+    <figcaption>View from Cocina Caliente</figcaption>
+</figure>
+
 
 We were eager to get on the rocks, so we opted to climb at one of the closest sectors (what I usually call crags), to the Olive Branch. We hiked about ten minutes to [Cocina Caliente](https://elchorronewroutes.blogspot.com/2014/04/new-sector-cocina-caliente.html).
 
@@ -65,7 +77,12 @@ We had a blast here. It was great knocking out so much climbing in a single day,
 - El Nazareno, 6a, 25m
 - ¡Soy Caliente!, 6a+, 25m
 
-[{% imgcap /images/el-chorro/happiness-is-a-warm-pasty-small.jpg Happiness is a warm pasty %}](/images/el-chorro/happiness-is-a-warm-pasty-full.jpg)
+<figure>
+    <a href="/images/el-chorro/happiness-is-a-warm-pasty-full.jpg">
+	    <img src="/images/el-chorro/happiness-is-a-warm-pasty-small.jpg" alt="Happiness is a warm pasty">
+    </a>
+    <figcaption>Happiness is a warm pasty</figcaption>
+</figure>
 
 **March 23rd**
 
@@ -77,7 +94,12 @@ While making our way to Los Albercones we stopped at The Solarium. There we knoc
 
 Next up was climbing in Los Albercones. We started with La chica pelirroja, an incredible 6a+ that felt like it just kept going and going (probably 30+ meters). This was one of my highlight routes of the trip. The climbing was pretty much vertical until you hit some slab near the top. Your toes disappeared into tiny slots as you edged your way up.
 
-[{% imgcap /images/el-chorro/los-albercones-small.jpg Staring up Los Albercones %}](/images/el-chorro/los-albercones-full.jpg)
+<figure>
+    <a href="/images/el-chorro/los-albercones-full.jpg">
+        <img src="/images/el-chorro/los-albercones-small.jpg" alt="Staring up Los Albercones">
+    </a>
+    <figcaption>Staring up Los Albercones</figcaption>
+</figure>
 
 The other route we climbed at Los Albercones was Putifero. This 30-meter route had a 5 rating in our Rockfax guidebook and, at the time of publication, it was considered one of the top 50 climbs in El Chorro. This route gets a lot of traffic, and it shows. The start of this route is extremely polished, and this makes the lower part of this climb the crux. Still a fun climb, but I thought La chica pelirroja was much more enjoyable.
 
@@ -88,7 +110,12 @@ After those two routes, we started the hike back to Olive Branch. We were unsure
 
 **March 24th**
 
-[{% imgcap /images/el-chorro/view-from-alcazaba-small.jpg View from Alcazaba %}](/images/el-chorro/view-from-alcazaba-full.jpg)
+<figure>
+    <a href="/images/el-chorro/view-from-alcazaba-full.jpg">
+	  <img src="/images/el-chorro/view-from-alcazaba-small.jpg" alt="View from Alcazaba">
+  </a>
+    <figcaption>View from Alcazaba</figcaption>
+</figure>
 
 We took today off climbing and rode the morning train into Málaga. We spent the morning walking around [Alcazaba](http://www.malagaturismo.com/en/tourist-resources/detail/alcazaba/6) and the [Roman Theatre](http://www.malagaturismo.com/en/tourist-resources/detail/teatro-romano/413). Málaga is on Spain's southern coast, and we were able to enjoy beautiful ocean views from the walls of Alcazaba.
 
@@ -98,11 +125,19 @@ Eventually, we made our way back to the train station and, while we waited for t
 
 **March 25th**
 
-[{% imgcap /images/el-chorro/las-encantadas-small.jpg Las Encantadas %}](/images/el-chorro/las-encantadas-full.jpg)
+<figure>
+    <a href="/images/el-chorro/las-encantadas-full.jpg">
+        <img src="/images/el-chorro/las-encantadas-small.jpg" alt="Las Encantadas">
+    </a>
+    <figcaption>Las Encantadas</figcaption>
+</figure>
 
 We wanted to get Seamus on some rock as quickly as possible, so we opted to climb at Las Encantadas. This crag is within a ten-minute walk of Olive Branch, and you'd only have problems finding it if you hiked with your eyes closed.
 
-{% imgcap /images/el-chorro/seamus-double-pinky-monos.jpg Seamus pulling the double pinky monos %}
+<figure>
+	 <img src="/images/el-chorro/seamus-double-pinky-monos.jpg" alt="Seamus pulling the double pinky monos">
+    <figcaption>Seamus pulling the double pinky monos</figcaption>
+</figure>
 
 The Rockfax book is particularly out of date with this crag. Luckily, we were able to download a topo from the [Climbing Lodge](http://www.klettern-in-spanien.de/en/el-chorro/topo-download/).
 
@@ -116,7 +151,10 @@ Below are the routes we climbed. One of the highlights of this crag was Crisis d
 - La de Seba, 6b
 - Geisha, 6a
 
-{% imgcap /images/el-chorro/jake-setting-up-for-pulling-bulge-small.jpg Me before the bulge on Crisis de identidad %}
+<figure>
+	  <img src="/images/el-chorro/jake-setting-up-for-pulling-bulge-small.jpg" alt="Me before the bulge on Crisis de identidad">
+    <figcaption>Me before the bulge on Crisis de identidad</figcaption>
+</figure>
 
 **March 26th**
 
@@ -130,7 +168,10 @@ We continued hiking and made it to Sector Suizo. Once again, I’m not sure what
 
 One of the neat things about climbing in El Chorro is that occasionally you'll hear some bells ringing and getting closer. This ringing is a shepherd grazing a herd of sheep. The sheep will get quite close to you. This happened to us at Sector Suizo.
 
-{% imgcap /images/el-chorro/sheep-up-close.jpg Sheep trying to be our new friends %}
+<figure>
+	  <img src="/images/el-chorro/sheep-up-close.jpg" alt="Sheep trying to be our new friends">
+    <figcaption>Sheep trying to be our new friends</figcaption>
+</figure>
 
 **March 27th**
 
@@ -156,11 +197,17 @@ We have an Airbnb a few blocks away from the train station and check-in. It is a
 
 We spend the day walking through the streets, meandering our way towards the [Mercado San Miguel](https://www.tripadvisor.com/Attraction_Review-g187514-d1520183-Reviews-Mercado_San_Miguel-Madrid.html). We didn’t realize this was a market that sold many delicious looking things and stopped and ate at [Cafeteria Alces Resaurante](https://foursquare.com/v/cafeteria-alces-restaurante/4bbf1173006dc9b68bf5fb3f). There we had a hilarious experience of having the Spanish menu translated into Cantonese to Edwin which he then translated to English.
 
-{% imgcap /images/el-chorro/overlooking-madrid.jpg Edwin and I %}
+<figure>
+	  <img src="/images/el-chorro/overlooking-madrid.jpg" alt="Edwin and I">
+    <figcaption>Edwin and I</figcaption>
+</figure>
 
 The weather and beautiful scenery made our walk great. We went through the [Plaza de Oriente](https://foursquare.com/v/plaza-de-oriente/4adcda37f964a520203c21e3) and just kept walking through parks around there enjoying views, statues, and buildings. We managed to be on of the last groups let into the [Templo de Debod](https://foursquare.com/v/templo-de-debod/4adcda37f964a520113c21e3).
 
-{% imgcap /images/el-chorro/templo-de-debod.jpg Templo de Debod %}
+<figure>
+	  <img src="/images/el-chorro/templo-de-debod.jpg" alt="Templo de Debod">
+    <figcaption>Templo de Debod</figcaption>
+</figure>
 
 We ate dinner at [Asador de Aranda](https://foursquare.com/v/asador-de-aranda/4adcda3af964a520263d21e3) and stopped in an Irish bar to catch some of the Spain vs. France soccer friendly. We then had drinks and tapas at [Matador](https://foursquare.com/v/matador/4b8311b5f964a520b9f530e3). I’d recommend Matador. It was a great place for grabbing a snack and drink. We finished the night with some outdoor beers from [Automático](https://foursquare.com/v/autom%C3%A1tico/4adcda34f964a520213b21e3).
 
