@@ -10,7 +10,8 @@
                       LocalDateTime
                       ZoneId
                       ZonedDateTime)
-           (java.time.format DateTimeFormatter DateTimeParseException)))
+           (java.time.format DateTimeFormatter DateTimeParseException FormatStyle)
+           [java.util Locale]))
 
 (defn left-pad [s padding n]
   (if (< (count s) n)
@@ -110,22 +111,31 @@
           t
           (recur formatters))))))
 
+(defn date->yyyy-MM-dd [d]
+  (.format d (DateTimeFormatter/ofPattern "yyyy-MM-dd")))
+
+(defn date->human-readable [d]
+  (.format d (.withLocale (DateTimeFormatter/ofLocalizedDate FormatStyle/LONG) Locale/ENGLISH)))
+
 (defn post-process-metadata [source]
-  (cond-> source
-    (-> source :metadata :date)
-    (assoc-in [:metadata :local-date]
-              (let [d (-> source :metadata :date)
-                    parsed (cond
-                             (inst? d)
-                             (LocalDateTime/ofInstant (.toInstant d) (ZoneId/of "America/Chicago"))
-                             :else
-                             (parse-datetime d))]
-                (if (instance? LocalDate parsed)
-                  parsed
-                  (.toLocalDate parsed))))
-    (-> source :metadata :categories)
-    (update-in [:metadata :categories]
-               #(into #{} (mapv clojure.string/lower-case %)))))
+  (let [date (when (-> source :metadata :date)
+               (let [d (-> source :metadata :date)
+                     parsed (cond
+                              (inst? d)
+                              (LocalDateTime/ofInstant (.toInstant d) (ZoneId/of "America/Chicago"))
+                              :else
+                              (parse-datetime d))]
+                 (if (instance? LocalDate parsed)
+                   parsed
+                   (.toLocalDate parsed))))]
+    (cond-> source
+      date
+      (-> (assoc-in [:metadata :local-date] date)
+          (assoc-in [:metadata :published-yymmdd] (date->yyyy-MM-dd date))
+          (assoc-in [:metadata :published-readable] (date->human-readable date)))
+      (-> source :metadata :categories)
+      (update-in [:metadata :categories]
+                 #(into #{} (mapv clojure.string/lower-case %))))))
 
 (defn markdown->source [file]
   (let [markdown (slurp (fs/file file))]
@@ -342,6 +352,7 @@
   (def adventures (filterv adventure? sources))
   (yyyy-MM-dd (:start_date (:metadata (first adventures))))
 
+  (:metadata (last articles))
   (def r *1)
 
   (write-adventures! sources)
@@ -357,9 +368,6 @@
                    #(get-in % [:metadata :date]))
              articles)
        (sort-by first))
-
-
-
 
 ;;
   )
