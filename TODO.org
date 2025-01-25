@@ -43,6 +43,7 @@ CLOSED: [2025-01-19 Sun 16:47]
 * DONE Sort the posts list on the main page
 CLOSED: [2025-01-19 Sun 21:16]
 - CLOSING NOTE [2025-01-19 Sun 21:16]
+* DONE spacing on code blocks
 * TODO remove amazon affiliates?
 * TODO disclaimers?
 - [ ] hosted on github
@@ -53,6 +54,7 @@ CLOSED: [2025-01-19 Sun 21:16]
 * TODO images specified using ~{%~ syntax in articles
 * TODO Diff output paths and confirm if any links will be broken
 * TODO Code syntax highlighting?
+- [ ] kind of working!
+- [ ] could write a bit that checks that every language has a highlight.js
 * TODO Decide on overall design of site
-* DONE spacing on code blocks
 * TODO footer?
