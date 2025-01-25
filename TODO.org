@@ -47,26 +47,25 @@ CLOSED: [2025-01-19 Sun 21:16]
 * DONE images specified using ~{%~ syntax in articles
 CLOSED: [2025-01-25 Sat 11:52]
 - CLOSING NOTE [2025-01-25 Sat 11:52]
-* TODO remove amazon affiliates?
-* TODO disclaimers?
-- [ ] hosted on github
-- [ ] goes through cloudflare
-- [ ] If I do comments => something about those
-* TODO comments?
+* DONE sitemap.xml
+CLOSED: [2025-01-25 Sat 16:26]
+- CLOSING NOTE [2025-01-25 Sat 16:26]
+* DONE feed.json
+CLOSED: [2025-01-25 Sat 16:26]
+- CLOSING NOTE [2025-01-25 Sat 16:26]
+- ehh, maybe, might need to escape the html fields? or something
 * CANCELED Decide on overall design of site
 CLOSED: [2025-01-25 Sat 11:59]
 - CLOSING NOTE [2025-01-25 Sat 11:59]
-* TODO maybe useful to keep files-that-don't-change separate from the sources? Could just copy the entire tree over than?
-* STARTED Code syntax highlighting?
-- [X] kind of working!
-- [ ] could write a bit that checks that every language has a highlight.js
-* TODO footer?
-* TODO not a huge fan of the inline code formatting
 * STARTED Diff output paths and confirm if any links will be broken
 - quick look using below command: missing experiments, breath, cname, 403/404, maybe an off by 1 error on some dates
  #+begin_src bash
  diff --brief --recursive output/ ../blog/public/ | less
  #+end_src
+* STARTED Code syntax highlighting?
+- [X] kind of working!
+- [ ] could write a bit that checks that every language has a highlight.js
+* TODO adventure-camp.html could be under /adventures?
 * TODO license
 If gointo put a copyright year, have it be from first year published to last year published
 - year
@@ -78,8 +77,16 @@ If gointo put a copyright year, have it be from first year published to last yea
   <p xmlns:cc="http://creativecommons.org/ns#" >This work by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://jakemccrary.com">Jake McCrary</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""></a></p> 
 #+end_src
 
-* TODO adventure-camp.html could be under /adventures?
-* TODO sitemap.xml
-* TODO feed.json
-- ehh, maybe, might need to escape the html fields? or something
+* TODO not a huge fan of the inline code formatting
+* TODO footer?
+- [ ] link to disclosure
+- [ ] copyright / CC-by
+* TODO maybe useful to keep files-that-don't-change separate from the sources? Could just copy the entire tree over than?
+* TODO comments?
+* TODO disclaimers?
+- [ ] hosted on github
+- [ ] goes through cloudflare
+- [ ] If I do comments => something about those
+* TODO remove amazon affiliates?
+- [ ] update disclosure policy
 * TODO display categories for posts?
