@@ -67,3 +67,4 @@ CLOSED: [2025-01-25 Sat 11:59]
  #+begin_src bash
  diff --brief --recursive output/ ../blog/public/ | less
  #+end_src
+* TODO adventure-camp.html could be under /adventures?
