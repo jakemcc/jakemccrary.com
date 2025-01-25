@@ -285,7 +285,7 @@
 
 (defn- copy-resources []
   (doseq [f (remove (fn [path] (= "markdown" (fs/extension path)))
-                    (fs/glob (fs/file source-dir) "**"))
+                    (fs/glob (fs/file source-dir) "**" {:hidden true}))
           :let [out (apply fs/file output-dir (rest (fs/components f)))]]
     (fs/create-dirs (fs/parent out))
     (fs/copy f out)))
