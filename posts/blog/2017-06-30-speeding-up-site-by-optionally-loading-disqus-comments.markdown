@@ -26,7 +26,6 @@ The template adds an `insertDisqus` function that inserts a `<script>` element w
 
 My exact template might not work for you, but I'd encourage you to think about optionally loading Disqus and other non-required JavaScript. Your readers will thank you.
 
-{% raw %}
 ```html
 {% if site.disqus_short_name and page.comments == true %}
   <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
@@ -43,4 +42,3 @@ My exact template might not work for you, but I'd encourage you to think about o
   </div>
 {% endif %}
 ```
-{% endraw %}
