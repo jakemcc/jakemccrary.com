@@ -81,4 +81,5 @@ If gointo put a copyright year, have it be from first year published to last yea
 * TODO adventure-camp.html could be under /adventures?
 * TODO sitemap.xml
 * TODO feed.json
+- ehh, maybe, might need to escape the html fields? or something
 * TODO display categories for posts?

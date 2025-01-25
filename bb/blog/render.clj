@@ -1,11 +1,14 @@
 (ns blog.render
   (:require [babashka.fs :as fs]
             [babashka.process]
+            [cheshire.core]
             [clojure.data.xml :as xml]
             [clojure.string]
             [hiccup2.core :as hiccup]
             [markdown.core :as markdown]
-            [selmer.parser])
+            [selmer.parser]
+            [camel-snake-kebab.core :as csk]
+            [camel-snake-kebab.extras :as cske])
   (:import (java.time LocalDate
                       LocalDateTime
                       ZoneId
@@ -23,6 +26,7 @@
      (println (str "dbg: " (quote ~@args) " => " (pr-str r#)))
      r#))
 
+(def blog-root "https://jakemccrary.com/")
 (def source-dir "posts")
 (def output-dir "output")
 (def template-dir "templates")
@@ -139,7 +143,9 @@
                  (-> source :metadata :start-date)
                  (update-in [:metadata :start-date] #(.toLocalDate (.atZone (.toInstant %) (ZoneId/of "UTC"))))
                  (-> source :metadata :end-date)
-                 (update-in [:metadata :end-date] #(.toLocalDate (.atZone (.toInstant %) (ZoneId/of "UTC")))))]
+                 (update-in [:metadata :end-date] #(.toLocalDate (.atZone (.toInstant %) (ZoneId/of "UTC"))))
+                 (-> source :metadata :updated)
+                 (update-in [:metadata :updated] #(.toLocalDate (.atZone (.toInstant %) (ZoneId/of "UTC")))))]
     (cond-> source
       date
       (-> (assoc-in [:metadata :local-date] date)
@@ -193,6 +199,13 @@
 (defn blog-articles [sources]
   (sort-by (comp :local-date :metadata)
            (filter blog-article? sources)))
+
+(defn- categories [sources]
+  (disj (into #{}
+              (comp (map :metadata)
+                    (mapcat :categories))
+              sources)
+        nil))
 
 (defn write-html! [output-file m]
   (fs/create-dirs (fs/parent output-file))
@@ -261,32 +274,55 @@
   ;; validate at https://validator.w3.org/feed/check.cgi
   ([articles] (atom-feed nil articles))
   ([category articles]
-   (let [blog-root "https://jakemccrary.com/"]
-     (-> (xml/sexp-as-element
-          [::atom/feed
-           {:xmlns "http://www.w3.org/2005/Atom"}
-           [::atom/title [:-cdata (str "Jake McCrary's articles"
-                                       (when category
-                                         (str " on " category)))]]
-           [::atom/link {:href "https://jakemccrary.com/atom.xml" :rel "self"}]
-           [::atom/link {:href blog-root}]
-           [::atom/updated (rfc-3339-now)]
-           [::atom/id blog-root]
-           [::atom/author
-            [::atom/name [:-cdata "Jake McCrary"]]]
-           (for [article articles
-                 :let [output-file (:output-file article)
-                       {:keys [title local-date published]} (:metadata article)]
-                 :when published
-                 :let [link (str blog-root (str output-file))]]
-             [::atom/entry
-              [::atom/id link]
-              [::atom/link {:href link}]
-              [::atom/title [:-cdata title]]
-              [::atom/updated (rfc-3339 local-date)]
-              [::atom/content {:type "html"}
-               [:-cdata (:html article)]]])])
-         xml/indent-str))))
+   (-> (xml/sexp-as-element
+        [::atom/feed
+         {:xmlns "http://www.w3.org/2005/Atom"}
+         [::atom/title [:-cdata (str "Jake McCrary's articles"
+                                     (when category
+                                       (str " on " category)))]]
+         [::atom/link {:href "https://jakemccrary.com/atom.xml" :rel "self"}]
+         [::atom/link {:href blog-root}]
+         [::atom/updated (rfc-3339-now)]
+         [::atom/id blog-root]
+         [::atom/author
+          [::atom/name [:-cdata "Jake McCrary"]]]
+         (for [article articles
+               :let [output-file (:output-file article)
+                     {:keys [title local-date published]} (:metadata article)]
+               :when published
+               :let [link (str blog-root (str output-file))]]
+           [::atom/entry
+            [::atom/id link]
+            [::atom/link {:href link}] ;;TODO: check this
+            [::atom/title [:-cdata title]]
+            [::atom/updated (rfc-3339 local-date)]
+            [::atom/content {:type "html"}
+             [:-cdata (:html article)]]])])
+       xml/indent-str)))
+
+(defn- sitemap
+  [sources]
+  (-> (xml/sexp-as-element
+       [:urlset
+        {"xmlns" "http://www.sitemaps.org/schemas/sitemap/0.9"
+         "xmlns:xsi" "http://www.w3.org/2001/XMLSchema-instance"
+         "xsi:schemaLocation" "http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd"}
+        (concat (for [source sources
+                      :when (not (clojure.string/blank? (:html source)))]
+                  [:url
+                   [:loc (str blog-root (str (:output-file source)))]
+                   (when (-> source :metadata :local-date)
+                     [:lastmod (rfc-3339 (or (-> source :metadata :updated)
+                                             (-> source :metadata :local-date)))])])
+                (for [category (categories sources)]
+                  [:url [:loc (str blog-root "/blog/categories/" category "/")]])
+                [[:url
+                  [:loc blog-root]
+                  [:lastmod (rfc-3339-now)]]])])
+      xml/indent-str))
+
+(defn- write-sitemap! [sources]
+  (spit (fs/file output-dir "sitemap.xml") (sitemap sources)))
 
 (defn- copy-resources []
   (doseq [f (->> (fs/glob (fs/file source-dir) "**" {:hidden true})
@@ -300,6 +336,33 @@
   (spit (fs/file output-dir "atom.xml")
         (atom-feed (reverse (blog-articles sources)))))
 
+(defn- write-json-feed! [sources]
+  (spit (fs/file output-dir "feed.json")
+        (cheshire.core/generate-string
+         (cske/transform-keys
+          csk/->snake_case
+          {:version "https://jsonfeed.org/version/1.1"
+           :title "Jake McCrary's articles"
+           :home-page-url "https://jakemccrary.com/"
+           :feed-url "https://jakemccrary.com/feed.json"
+           :favicon "https://jakemccrary.com/favicon.png"
+           :author {:name "Jake McCrary"}
+           :items (vec (for [article (take 20 (reverse (blog-articles sources)))
+                             :let [output-file (:output-file article)
+                                   {:keys [title local-date published]} (:metadata article)]
+                             :when published
+                             :let [link (str blog-root (str output-file))]]
+                         (cond-> {:id link
+                                  :url link
+                                  :content-text (:html article)
+                                  :title title
+                                  :author {:name "Jake McCrary"}
+                                  :date-published (rfc-3339 local-date)}
+                           (:description article)
+                           (assoc :summary (:description article)))))}))))
+
+
+
 (defn- write-category-page! [category articles]
   (write-html! (fs/file output-dir "blog" "categories" category "index.html")
                {:body (hiccup/html
@@ -312,14 +375,12 @@
         (atom-feed category articles)))
 
 (defn- write-category-pages! [sources]
-  (let [articles (reverse (blog-articles sources))
-        categories (into #{}
-                         (comp (map :metadata) (mapcat :categories))
-                         articles)]
-    (doseq [category categories]
-      (write-category-page! category
-                            (filter #(contains? (-> % :metadata :categories) category)
-                                    articles)))))
+  (let [articles (reverse (blog-articles sources))]
+    (doseq [category (categories articles)
+            :let [related (filterv #(contains? (-> % :metadata :categories) category)
+                                   articles)]
+            :when (seq related)]
+      (write-category-page! category related))))
 
 (defn- adventure-list [articles]
   [:ul {:class "post-list"}
@@ -346,6 +407,7 @@
                  {:body (hiccup/html
                          (adventure-list adventures))})))
 
+
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defn render [{:keys [preview] :as args}]
   (println "Rendering " args)
@@ -361,7 +423,9 @@
       (write-archive! sources)
       (write-adventures! sources)
       (write-category-pages! sources)
-      (write-main-feed! sources))))
+      (write-main-feed! sources)
+      (write-json-feed! sources)
+      (write-sitemap! sources))))
 
 (comment
   (def sources (doall (load-sources)))
