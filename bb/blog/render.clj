@@ -129,7 +129,7 @@
                (let [d (-> source :metadata :date)
                      parsed (cond
                               (inst? d)
-                              (LocalDateTime/ofInstant (.toInstant d) (ZoneId/of "America/Chicago"))
+                              (LocalDateTime/ofInstant (.toInstant d) (ZoneId/of "UTC"))
                               :else
                               (parse-datetime d))]
                  (if (instance? LocalDate parsed)
@@ -151,7 +151,12 @@
       (assoc-in [:metadata :end-date-readable] (date->human-readable (-> source :metadata :end-date)))
       (-> source :metadata :categories)
       (update-in [:metadata :categories]
-                 #(into #{} (mapv clojure.string/lower-case %))))))
+                 (fn [categories]
+                   (into #{}
+                         (comp
+                          (map clojure.string/lower-case)
+                          (map #(clojure.string/replace % " " "-")))
+                         categories))))))
 
 (defn markdown->source [file]
   (let [markdown (slurp (fs/file file))]
@@ -284,8 +289,9 @@
          xml/indent-str))))
 
 (defn- copy-resources []
-  (doseq [f (remove (fn [path] (= "markdown" (fs/extension path)))
-                    (fs/glob (fs/file source-dir) "**" {:hidden true}))
+  (doseq [f (->> (fs/glob (fs/file source-dir) "**" {:hidden true})
+                 (remove (fn [path] (= "markdown" (fs/extension path))))
+                 (remove (fn [path] (= ".DS_Store" (fs/file-name path)))))
           :let [out (apply fs/file output-dir (rest (fs/components f)))]]
     (fs/create-dirs (fs/parent out))
     (fs/copy f out)))
@@ -341,7 +347,6 @@
                          (adventure-list adventures))})))
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
-
 (defn render [{:keys [preview] :as args}]
   (println "Rendering " args)
   (if (fs/exists? output-dir)
