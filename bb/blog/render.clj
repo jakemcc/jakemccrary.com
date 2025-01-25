@@ -47,25 +47,32 @@
     (apply fs/file (concat sub-dirs
                            (when (-> source :metadata :dated-url)
                              year-month-day)
-                           [(cond-> name
-                              (some (comp #{"blog"} str) sub-dirs)
-                              (clojure.string/replace-first #"^\d\d\d\d-\d\d-\d\d-" ""))
-                            "index.html"]))))
+                           (if (:as-html-page (:metadata source))
+                             [(str name ".html")]
+                             [(cond-> name
+                                (some (comp #{"blog"} str) sub-dirs)
+                                (clojure.string/replace-first #"^\d\d\d\d-\d\d-\d\d-" ""))
+                              "index.html"])))))
 (comment
-  (= "adventures/2022-10-14-2022-10-18-a-beautiful-fall-trip-to-the-red-river-gorge/index.html"
-     (str (output-file {:metadata
-                        {:layout "page",
-                         :published true,
-                         :title "A beautiful fall trip to the Red River Gorge",
-                         :date "2022-11-27 18:01:46 -0600",
-                         :start-date #inst "2022-10-14T00:00:00.000-00:00",
-                         :end-date #inst "2022-10-18T00:00:00.000-00:00",
-                         :description "A long weekend with Jenn climbing and camping in the Red River Gorge"},
-                        :input-file (fs/file "posts/adventures/2022-10-14-2022-10-18-a-beautiful-fall-trip-to-the-red-river-gorge.markdown")})))
-  (= "blog/reading-in-2024/index.html"
-     (str (output-file {:input-file (fs/file "posts/blog/2024-01-05-reading-in-2024.markdown")
-                        :metadata {:date "2025-01-05 16:23 -0600"
-                                   :local-date (LocalDate/of 2025 1 5)}})))
+  [(= "404.html"
+      (str (output-file {:metadata  {:layout "page", :title "Not found", :as-html-page true}
+                         :html "<p>:(</p>"
+                         :input-file (fs/file "posts" "404.markdown")})))
+
+   (= "adventures/2022-10-14-2022-10-18-a-beautiful-fall-trip-to-the-red-river-gorge/index.html"
+      (str (output-file {:metadata
+                         {:layout "page",
+                          :published true,
+                          :title "A beautiful fall trip to the Red River Gorge",
+                          :date "2022-11-27 18:01:46 -0600",
+                          :start-date #inst "2022-10-14T00:00:00.000-00:00",
+                          :end-date #inst "2022-10-18T00:00:00.000-00:00",
+                          :description "A long weekend with Jenn climbing and camping in the Red River Gorge"},
+                         :input-file (fs/file "posts/adventures/2022-10-14-2022-10-18-a-beautiful-fall-trip-to-the-red-river-gorge.markdown")})))
+   (= "blog/reading-in-2024/index.html"
+      (str (output-file {:input-file (fs/file "posts/blog/2024-01-05-reading-in-2024.markdown")
+                         :metadata {:date "2025-01-05 16:23 -0600"
+                                    :local-date (LocalDate/of 2025 1 5)}})))]
   ;;
   )
 
@@ -277,7 +284,8 @@
          xml/indent-str))))
 
 (defn- copy-resources []
-  (doseq [f (fs/glob (fs/file source-dir) "**.{css,png,gif,jpeg,jpg,svg,js,webm,mp4}")
+  (doseq [f (remove (fn [path] (= "markdown" (fs/extension path)))
+                    (fs/glob (fs/file source-dir) "**"))
           :let [out (apply fs/file output-dir (rest (fs/components f)))]]
     (fs/create-dirs (fs/parent out))
     (fs/copy f out)))

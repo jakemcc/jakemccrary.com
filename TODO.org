@@ -44,18 +44,26 @@ CLOSED: [2025-01-19 Sun 16:47]
 CLOSED: [2025-01-19 Sun 21:16]
 - CLOSING NOTE [2025-01-19 Sun 21:16]
 * DONE spacing on code blocks
+* DONE images specified using ~{%~ syntax in articles
+CLOSED: [2025-01-25 Sat 11:52]
+- CLOSING NOTE [2025-01-25 Sat 11:52]
 * TODO remove amazon affiliates?
 * TODO disclaimers?
 - [ ] hosted on github
 - [ ] goes through cloudflare
 - [ ] If I do comments => something about those
 * TODO comments?
+* CANCELED Decide on overall design of site
+CLOSED: [2025-01-25 Sat 11:59]
+- CLOSING NOTE [2025-01-25 Sat 11:59]
 * TODO maybe useful to keep files-that-don't-change separate from the sources? Could just copy the entire tree over than?
-* TODO images specified using ~{%~ syntax in articles
-* TODO Diff output paths and confirm if any links will be broken
 * STARTED Code syntax highlighting?
 - [X] kind of working!
 - [ ] could write a bit that checks that every language has a highlight.js
-* TODO Decide on overall design of site
 * TODO footer?
 * TODO not a huge fan of the inline code formatting
+* TODO Diff output paths and confirm if any links will be broken
+- quick look using below command: missing experiments, breath, cname, 403/404, maybe an off by 1 error on some dates
+ #+begin_src bash
+ diff --brief --recursive output/ ../blog/public/ | less
+ #+end_src
