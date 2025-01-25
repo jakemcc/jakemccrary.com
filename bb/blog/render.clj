@@ -111,7 +111,7 @@
           t
           (recur formatters))))))
 
-(defn date->yyyy-MM-dd [d]
+(defn ->yyyy-MM-dd [d]
   (.format d (DateTimeFormatter/ofPattern "yyyy-MM-dd")))
 
 (defn date->human-readable [d]
@@ -127,12 +127,21 @@
                               (parse-datetime d))]
                  (if (instance? LocalDate parsed)
                    parsed
-                   (.toLocalDate parsed))))]
+                   (.toLocalDate parsed))))
+        source (cond-> source
+                 (-> source :metadata :start_date)
+                 (update-in [:metadata :start_date] #(.toLocalDate (.atZone (.toInstant %) (ZoneId/of "UTC"))))
+                 (-> source :metadata :end_date)
+                 (update-in [:metadata :end_date] #(.toLocalDate (.atZone (.toInstant %) (ZoneId/of "UTC")))))]
     (cond-> source
       date
       (-> (assoc-in [:metadata :local-date] date)
-          (assoc-in [:metadata :published-yymmdd] (date->yyyy-MM-dd date))
+          (assoc-in [:metadata :published-yyyymmdd] (->yyyy-MM-dd date))
           (assoc-in [:metadata :published-readable] (date->human-readable date)))
+      (-> source :metadata :start_date)
+      (assoc-in [:metadata :start-date-readable] (date->human-readable (-> source :metadata :start_date)))
+      (-> source :metadata :end_date)
+      (assoc-in [:metadata :end-date-readable] (date->human-readable (-> source :metadata :end_date)))
       (-> source :metadata :categories)
       (update-in [:metadata :categories]
                  #(into #{} (mapv clojure.string/lower-case %))))))
@@ -298,11 +307,6 @@
                             (filter #(contains? (-> % :metadata :categories) category)
                                     articles)))))
 
-(defn- yyyy-MM-dd [date]
-  (let [fmt (DateTimeFormatter/ofPattern "yyyy-MM-dd")]
-    (.format (.toLocalDate (.atZone (.toInstant date) (ZoneId/of "UTC")))
-             fmt)))
-
 (defn- adventure-list [articles]
   [:ul {:class "post-list"}
    (for [article articles
@@ -313,9 +317,9 @@
               (:title metadata)
               [:a {:href (blog-url (:output-file article))} (:title metadata)])]
        [:div (clojure.string/join " "
-                                  (cons (yyyy-MM-dd (:start_date metadata))
+                                  (cons (->yyyy-MM-dd (:start_date metadata))
                                         (when (:end_date metadata)
-                                          ["to" (yyyy-MM-dd (:end_date metadata))])))]]
+                                          ["to" (->yyyy-MM-dd (:end_date metadata))])))]]
       (when-not (clojure.string/blank? (:description metadata))
         [:p.post-description (:description metadata)])])])
 
@@ -347,10 +351,10 @@
       (write-main-feed! sources))))
 
 (comment
-  (def sources (load-sources))
+  (def sources (doall (load-sources)))
   (def articles (blog-articles sources))
   (def adventures (filterv adventure? sources))
-  (yyyy-MM-dd (:start_date (:metadata (first adventures))))
+  (->yyyy-MM-dd (:start_date (:metadata (first adventures))))
 
   (:metadata (last articles))
   (def r *1)

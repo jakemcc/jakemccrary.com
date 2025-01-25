@@ -77,7 +77,7 @@
      margin-bottom: 0.25rem;
    }
 
-   time {
+   .post-meta time {
      color: #666;
      margin-right: 0.5rem;
    }
@@ -218,9 +218,13 @@
   {% if page.title %}
   <div class="page-header">
     <h1>{{ page.title }}</h1>
-    {% if page.published-yymmdd %}
+    {% if page.start-date-readable %}
+    <p class="publication-date">Adventure from <time datetime="{{ page.start-date-readable }}">{{ page.start-date-readable }}</time> to <time datetime="{{ page.end-date-readable }}">{{ page.end-date-readable }}</time>
+    </p>
+    {% endif %}
+    {% if page.published-yyyymmdd %}
     <p class="publication-date">Published on 
-      <time datetime="{{ page.published-yymmdd }}">{{ page.published-readable }}</time>
+      <time datetime="{{ page.published-yyyymmdd }}">{{ page.published-readable }}</time>
     </p>
     {% endif %}
   </div>
