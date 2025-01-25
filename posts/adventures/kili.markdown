@@ -2,8 +2,8 @@
 layout: page
 title: Journey to the top of Africa
 date: 2017-06-08T19:00:00-0500
-start_date: 2010-09-21
-end_date: 2010-10-01
+start-date: 2010-09-21
+end-date: 2010-10-01
 description: A trip to Tanzania with five friends to hike Mount Kilimanjaro.
 ---
 

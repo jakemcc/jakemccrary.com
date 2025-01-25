@@ -3,8 +3,8 @@ layout: page
 published: true
 title: "Spring trip to the Red River Gorge"
 date: 2022-05-22 15:21:47 -0500
-start_date: 2022-05-05
-end_date: 2022-05-08
+start-date: 2022-05-05
+end-date: 2022-05-08
 description: A rainy, long weekend trip to the beautiful Red River Gorge
 ---
 

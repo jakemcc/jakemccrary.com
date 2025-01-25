@@ -3,8 +3,8 @@ layout: page
 published: true
 title: "Climbing in the Red River Gorge"
 date: 2017-09-21 11:27:20 -0500
-start_date: 2017-09-08
-end_date: 2017-09-10
+start-date: 2017-09-08
+end-date: 2017-09-10
 description: A short weekend with Seamus climbing in Kentucky. Drove down Friday and climbed Saturday and Sunday. On Saturday we climbed in Muir Valley at the Inner Sanctum crag. Sunday we climbed at Purple Valley.
 ---
 

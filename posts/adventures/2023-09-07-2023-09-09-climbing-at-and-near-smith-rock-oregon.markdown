@@ -3,8 +3,8 @@ layout: page
 published: true
 title: "Climbing at and near Smith Rock, Oregon"
 date: 2023-11-19 16:54:24 -0600
-start_date: 2023-09-07
-end_date: 2023-09-09
+start-date: 2023-09-07
+end-date: 2023-09-09
 description: Jenn and I took a trip to Bend, Oregon for a wedding and snuck in three days of climbing!
 ---
 

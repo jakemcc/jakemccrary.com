@@ -3,8 +3,8 @@ layout: page
 published: true
 title: "Holy Boulders: The Pilgrimage"
 date: 2022-11-27 18:03:30 -0600
-start_date: 2022-11-04
-end_date: 2022-11-06
+start-date: 2022-11-04
+end-date: 2022-11-06
 description: I participated in the annual Holy Boulders competition in Southern Illinois. It was a blast.
 ---
 

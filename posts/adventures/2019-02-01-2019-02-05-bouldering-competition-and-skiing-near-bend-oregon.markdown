@@ -3,8 +3,8 @@ layout: page
 published: true
 title: "Bouldering Competition and Downhill Skiing near Bend, Oregon"
 date: 2019-02-10 16:59:38 -0600
-start_date: 2019-02-01
-end_date: 2019-02-05
+start-date: 2019-02-01
+end-date: 2019-02-05
 description: This was a short trip out to Bend, Oregon with McKenzie to watch a bouldering competition and go downhill skiing.
 ---
 

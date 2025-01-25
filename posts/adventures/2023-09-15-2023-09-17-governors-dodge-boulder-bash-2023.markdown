@@ -3,8 +3,8 @@ layout: page
 published: true
 title: "Governor Dodge: Boulder Bash 2023"
 date: 2023-11-26 13:17:17 -0600
-start_date: 2023-09-15
-end_date: 2023-09-17
+start-date: 2023-09-15
+end-date: 2023-09-17
 description: The Wisconsin Climbing Association hosted a bouldering festival / competition at Governor Dodge park. It was great!
 ---
 

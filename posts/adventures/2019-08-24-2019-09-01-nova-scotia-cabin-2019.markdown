@@ -3,8 +3,8 @@ layout: page
 published: true
 title: "Nova Scotia Cabin 2019"
 date: 2019-09-08 15:19:30 -0500
-start_date: 2019-08-24
-end_date: 2019-09-01
+start-date: 2019-08-24
+end-date: 2019-09-01
 description: Another year and another trip to the Nova Scotia cabin.
 ---
 

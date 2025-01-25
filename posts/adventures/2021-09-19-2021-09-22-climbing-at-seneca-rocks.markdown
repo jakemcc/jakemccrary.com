@@ -3,8 +3,8 @@ layout: page
 published: true
 title: "Climbing at Seneca Rocks"
 date: 2021-10-03 14:45:01 -0500
-start_date: 2021-09-19
-end_date: 2021-09-22
+start-date: 2021-09-19
+end-date: 2021-09-22
 description: This was an extremely fun two days of multi-pitch trad climbing. It felt adventurous.
 ---
 

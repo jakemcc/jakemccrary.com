@@ -3,8 +3,8 @@ layout: page
 published: true
 title: "A Fall weekend in Red Wing, Minnesota"
 date: 2019-10-28 17:05:00 -0500
-start_date: 2019-10-25
-end_date: 2019-10-27
+start-date: 2019-10-25
+end-date: 2019-10-27
 description: A short weekend trip to Red Wing, Minnesota.
 ---
 

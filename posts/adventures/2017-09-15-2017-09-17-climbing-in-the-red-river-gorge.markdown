@@ -3,8 +3,8 @@ layout: page
 published: true
 title: "Climbing in the Red River Gorge"
 date: 2017-09-21 11:51:34 -0500
-start_date: 2017-09-15
-end_date: 2017-09-17
+start-date: 2017-09-15
+end-date: 2017-09-17
 description: Another weekend trip to the Red River Gorge in Kentucky. This time with Alina, Christine, Edwin, and Nori (Alina's dog). We stayed at Lil Abners and climbed Saturday at The Gallery in the PMRP and Sunday at the Secret Garden in Miller Fork. Read more for details of the trip.
 ---
 

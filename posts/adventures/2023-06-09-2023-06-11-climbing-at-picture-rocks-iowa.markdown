@@ -3,8 +3,8 @@ layout: page
 published: true
 title: "Climbing at Picture Rocks, Iowa"
 date: 2023-11-19 18:37:43 -0600
-start_date: 2023-06-09
-end_date: 2023-06-11
+start-date: 2023-06-09
+end-date: 2023-06-11
 description: Weekend trip to Iowa to climb at Picture Rocks.
 ---
 

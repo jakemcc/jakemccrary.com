@@ -3,8 +3,8 @@ layout: page
 published: true
 title: "Climbing in the Red River Gorge"
 date: 2018-05-07 09:18:03 -0500
-start_date: 2018-04-13
-end_date: 2018-04-15
+start-date: 2018-04-13
+end-date: 2018-04-15
 description: Another short weekend trip to Kentucky to climb in the Red River Gorge. This time the group was McKenzie, Alina, Christine, Nori (Alina's Dog) and me.
 ---
 

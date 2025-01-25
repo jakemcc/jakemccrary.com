@@ -3,8 +3,8 @@ layout: page
 published: true
 title: "A day trip to Devil's Lake"
 date: 2019-10-19 19:02:12 -0500
-start_date: 2019-10-14
-end_date: 2019-10-14
+start-date: 2019-10-14
+end-date: 2019-10-14
 description: This was a beautiful fall day spent flying and climbing in Wisconsin.
 ---
 

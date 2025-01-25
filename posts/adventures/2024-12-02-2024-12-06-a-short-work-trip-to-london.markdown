@@ -3,8 +3,8 @@ layout: page
 published: false
 title: "A short work trip to London"
 date: 2024-12-06 18:13:23 -0600
-start_date: 2024-12-02
-end_date: 2024-13-06
+start-date: 2024-12-02
+end-date: 2024-13-06
 description: A short trip to London to work
 ---
 

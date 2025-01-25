@@ -3,8 +3,8 @@ layout: page
 published: true
 title: "A terrifying adventure in the Red River Gorge"
 date: 2018-05-11 17:53:08 -0500
-start_date: 2018-04-24
-end_date: 2018-04-29
+start-date: 2018-04-24
+end-date: 2018-04-29
 description: An extended climbing trip in Kentucky takes a terrifying turn.
 ---
 

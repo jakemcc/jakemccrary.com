@@ -3,8 +3,8 @@ layout: page
 published: true
 title: "A hot Red River Gorge climbing trip"
 date: 2019-05-28 18:10:03 -0500
-start_date: 2019-05-24
-end_date: 2019-05-27
+start-date: 2019-05-24
+end-date: 2019-05-27
 description: This was a hot extended Memorial Day weekend trip to the Red River Gorge in Kentucky.
 ---
 

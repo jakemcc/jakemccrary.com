@@ -2,8 +2,8 @@
 layout: page
 title: "Climbing in El Chorro, Spain"
 date: 2017-06-08 19:00:00 -0500
-start_date: 2017-03-20
-end_date: 2017-03-30
+start-date: 2017-03-20
+end-date: 2017-03-30
 image: images/el-chorro/las-encantadas-small.jpg
 description: Trip report from spending some time climbing in El Chorro, Spain.
 keywords: 'climbing, travel, spain'

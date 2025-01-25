@@ -3,8 +3,8 @@ layout: page
 published: true
 title: "Trip to the Nova Scotia cabin"
 date: 2018-12-27 20:31:43 -0600
-start_date: 2018-09-17
-end_date: 2018-09-27
+start-date: 2018-09-17
+end-date: 2018-09-27
 description: Another trip to the Nova Scotia cabin. The entire time it was only Preethi, Steve, and myself.  This is the latest I've been at the cabin and as a result I got to be part of getting the cabin ready for winter.
 ---
 

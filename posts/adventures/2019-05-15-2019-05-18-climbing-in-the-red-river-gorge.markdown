@@ -3,8 +3,8 @@ layout: page
 published: true
 title: "Climbing in the Red River Gorge"
 date: 2019-05-21 15:53:07 -0500
-start_date: 2019-05-15
-end_date: 2019-05-18
+start-date: 2019-05-15
+end-date: 2019-05-18
 description: This was a sport climbing trip to the Red River Gorge in Kentucky.
 ---
 
