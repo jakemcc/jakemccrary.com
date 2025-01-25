@@ -53,8 +53,9 @@ CLOSED: [2025-01-19 Sun 21:16]
 * TODO maybe useful to keep files-that-don't-change separate from the sources? Could just copy the entire tree over than?
 * TODO images specified using ~{%~ syntax in articles
 * TODO Diff output paths and confirm if any links will be broken
-* TODO Code syntax highlighting?
-- [ ] kind of working!
+* STARTED Code syntax highlighting?
+- [X] kind of working!
 - [ ] could write a bit that checks that every language has a highlight.js
 * TODO Decide on overall design of site
 * TODO footer?
+* TODO not a huge fan of the inline code formatting

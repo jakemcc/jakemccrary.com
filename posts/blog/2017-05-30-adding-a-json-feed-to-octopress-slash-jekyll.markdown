@@ -16,9 +16,8 @@ I went to a coffee shop this last weekend with the intention of writing up a [qu
 
 JSON Feed is an alternative to [Atom](https://tools.ietf.org/html/rfc4287) and [RSS](http://cyber.harvard.edu/rss/rss.html) that uses JSON instead of XML. I figured I could add support for it in less than the time it would take to enjoy my coffee and maybe some readers would find it useful. I’d be shocked if anyone actually finds this useful, but it was a fun little exercise anyway.
 
-An old version of Octopress (2.something), which uses an old version of Jekyll (2.5.3), generates this site. Despite this, I don’t think the template would need to change much if I moved to a new version. The template below is saved as [source/feed.json](https://github.com/jakemcc/jakemccrary.com/blob/master/source/feed.json) in my git repository.
+An old version of Octopress (2.something), which uses an old version of Jekyll (2.5.3), generates this site. Despite this, I don’t think the template would need to change much if I moved to a new version. The template below is saved as [source/feed.json](https://github.com/jakemcc/jakemccrary.com/blob/00d4b0416ab2591be5702286b735091a3d2e2105/source/feed.json) in my git repository.
 
-{% raw %}
 ``` javascript
 ---
 layout: null
@@ -50,11 +49,10 @@ layout: null
   ]
 }
 ```
-{% endraw %}
 
-I approached this problem by reading the [JSON Feed Version 1 spec](https://jsonfeed.org/version/1) and cribbing values from the template for my Atom feed. The trickiest part was filling in the `"content_html"` value. It took me a while to find figure out that `jsonify` needed to be at the end of {% raw %}`{{ post.content | expand_urls: site.url | jsonify }}`{% endraw %}. That translates the post's HTML content into its JSON representation. You’ll notice that any template expression with `jsonify` at the end also isn’t wrapped in quotes. This is because `jsonify` is doing that for me.
+I approached this problem by reading the [JSON Feed Version 1 spec](https://jsonfeed.org/version/1) and cribbing values from the template for my Atom feed. The trickiest part was filling in the `"content_html"` value. It took me a while to find figure out that `jsonify` needed to be at the end of `{{ post.content | expand_urls: site.url | jsonify }}`. That translates the post's HTML content into its JSON representation. You’ll notice that any template expression with `jsonify` at the end also isn’t wrapped in quotes. This is because `jsonify` is doing that for me.
 
-The {% raw %}`{% if forloop.last == false %},{% endif %}`{% endraw %} is also important. Without this, the generated JSON has an extra `,` after the final element in items. This isn’t valid JSON.
+The `{% if forloop.last == false %},{% endif %}` is also important. Without this, the generated JSON has an extra `,` after the final element in items. This isn’t valid JSON.
 
 I caught that by using the command line tool [json](http://trentm.com/json/). If you ever edit JSON by hand or generate it from a template then you should add this tool to your toolbox. It will prevent you from creating invalid JSON.
 
