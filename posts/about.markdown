@@ -2,6 +2,7 @@
 layout: page
 title: about
 sharing: false
+as-html-page: true
 ---
 
 <img class="left mr1" src="/images/speaking-at-in-clojure.png" width="350" title="Picture of Jake McCrary">
