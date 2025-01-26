@@ -30,7 +30,7 @@
      r#))
 
 (def blog-root "https://jakemccrary.com/")
-(def source-dir "posts")
+(def source-dir "source")
 (def output-dir "output")
 (def template-dir "templates")
 (def ^:dynamic *preview* false)

@@ -90,7 +90,9 @@ CLOSED: [2025-01-26 Sun 14:01]
 * DONE not a huge fan of the inline code formatting
 CLOSED: [2025-01-26 Sun 13:48]
 - CLOSING NOTE [2025-01-26 Sun 13:48]
-* TODO adventure-camp.html could be under /adventures?
+* DONE adventure-camp.html could be under /adventures?
+CLOSED: [2025-01-26 Sun 14:12]
+- CLOSING NOTE [2025-01-26 Sun 14:12]
 * TODO maybe useful to keep files-that-don't-change separate from the sources? Could just copy the entire tree over than?
 * TODO [#C] comments?
 * TODO disclaimers?
@@ -102,6 +104,7 @@ CLOSED: [2025-01-26 Sun 13:48]
 * TODO [#C] display categories for posts?
 * TODO check out previous markup for help with sharing / description metadata
 * TODO line numbers on code blocks?
+* TODO check adventure-camp.html redirect
 * TODO [#C] ways of encouraging folks to browse around
 - [ ] sidebar with recent posts
 - [ ] sidebar with rss and newsletter
