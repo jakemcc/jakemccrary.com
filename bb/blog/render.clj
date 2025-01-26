@@ -22,6 +22,7 @@
     (recur (str padding s) padding n)
     s))
 
+#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defmacro dbg [& args]
   `(let [r# (do ~@args)]
      (println (str "dbg: " (quote ~@args) " => " (pr-str r#)))
@@ -411,7 +412,7 @@
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defn render [{:keys [preview] :as args}]
-  (println "Rendering " args)
+  (println "Rendering" args)
   (if (fs/exists? output-dir)
     (run! fs/delete-tree (fs/list-dir output-dir))
     (fs/create-dir output-dir))
@@ -445,6 +446,7 @@
                       sort
                       (clojure.string/join ", ")))))))
 
+#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defn test [& args]
   (binding [*preview* true]
     (let [error (assert-code-highlighting! (load-sources))]
