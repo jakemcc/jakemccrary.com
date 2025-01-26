@@ -64,11 +64,6 @@ CLOSED: [2025-01-25 Sat 18:40]
  #+begin_src bash
  diff --brief --recursive output/ ../blog/public/ | less
  #+end_src
-* STARTED Code syntax highlighting?
-- [X] kind of working!
-- [ ] could write a bit that checks that every language has a highlight.js
-* TODO adventure-camp.html could be under /adventures?
-* TODO not a huge fan of the inline code formatting
 * DONE [#A] footer?
 CLOSED: [2025-01-26 Sun 13:16]
 - CLOSING NOTE [2025-01-26 Sun 13:16]
@@ -87,6 +82,11 @@ If gointo put a copyright year, have it be from first year published to last yea
   <p xmlns:cc="http://creativecommons.org/ns#" >This work by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://jakemccrary.com">Jake McCrary</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""></a></p> 
 #+end_src
 
+* STARTED Code syntax highlighting?
+- [X] kind of working!
+- [ ] could write a bit that checks that every language has a highlight.js
+* TODO adventure-camp.html could be under /adventures?
+* TODO not a huge fan of the inline code formatting
 * TODO maybe useful to keep files-that-don't-change separate from the sources? Could just copy the entire tree over than?
 * TODO [#C] comments?
 * TODO disclaimers?
