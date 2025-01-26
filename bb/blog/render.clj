@@ -4,6 +4,7 @@
             [cheshire.core]
             [clojure.data.xml :as xml]
             [clojure.string]
+            [clojure.set]
             [hiccup2.core :as hiccup]
             [markdown.core :as markdown]
             [selmer.parser]
@@ -166,7 +167,7 @@
 
 (defn markdown->source [file]
   (let [markdown (slurp (fs/file file))]
-    (println "Processing markdown for file:" (str file))
+    ;; (println "Processing markdown for file:" (str file))
     (-> markdown
         ;; pre-process-markdown
         (markdown/md-to-html-string-with-meta :reference-links? true
@@ -427,9 +428,34 @@
       (write-json-feed! sources)
       (write-sitemap! sources))))
 
+(defn extract-languages [source]
+  (set (map second (re-seq #"language-(\w+)" (:html source)))))
+
+(defn assert-code-highlighting! [sources]
+  (let [supported-languages #{"clojure"}
+        required-languages (into #{}
+                                 (mapcat extract-languages)
+                                 sources)]
+    (when-let [missing (seq (clojure.set/difference required-languages
+                                                    supported-languages))]
+      (with-out-str
+        (println "Missing" (clojure.string/join ", " (sort missing)) "from highlight.js")
+        (println "Go regenerate at URL with languages:"
+                 (->> (clojure.set/union supported-languages required-languages)
+                      sort
+                      (clojure.string/join ", ")))))))
+
+(defn test [& args]
+  (binding [*preview* true]
+    (let [error (assert-code-highlighting! (load-sources))]
+      (when error
+        (println error)
+        (System/exit -1)))))
+
 (comment
   (def sources (doall (load-sources)))
   (def articles (blog-articles sources))
+
   (def adventures (filterv adventure? sources))
   (->yyyy-MM-dd (:start-date (:metadata (first adventures))))
 
@@ -450,6 +476,6 @@
              articles)
        (sort-by first))
 
-;;
+  ;;
   )
 

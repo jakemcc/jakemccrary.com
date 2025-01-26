@@ -69,10 +69,14 @@ CLOSED: [2025-01-25 Sat 18:40]
 - [ ] could write a bit that checks that every language has a highlight.js
 * TODO adventure-camp.html could be under /adventures?
 * TODO not a huge fan of the inline code formatting
-* TODO [#A] footer?
+* DONE [#A] footer?
+CLOSED: [2025-01-26 Sun 13:16]
+- CLOSING NOTE [2025-01-26 Sun 13:16]
 - [X] link to disclosure
 - [ ] copyright / CC-by
-* TODO [#A] license
+* DONE [#A] license
+CLOSED: [2025-01-26 Sun 13:16]
+- CLOSING NOTE [2025-01-26 Sun 13:16]
 If gointo put a copyright year, have it be from first year published to last year published
 - year
 #+begin_src html
