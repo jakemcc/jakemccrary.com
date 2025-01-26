@@ -2,9 +2,9 @@
 layout: page
 title: High Profile Adventure Camp 2011
 as-html-page: true
+start-date: 2011-04-01
+end-date: 2011-04-03
 ---
-
-_Camp took place during April 1 - 3, 2011_
 
 Over the weekend of April 1st, 2011 myself and two friends, Dave and Chris, went to Mount Carroll, Illinois and took part in the High Profile Adventure Camp. We stayed at a YMCA camp (Camp Benson). While this was our first time at the camp this was the sixth time the camp has been held.
 
