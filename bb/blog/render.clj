@@ -1,4 +1,5 @@
 (ns blog.render
+  (:refer-clojure :exclude [test])
   (:require [babashka.fs :as fs]
             [babashka.process]
             [cheshire.core]
@@ -59,47 +60,37 @@
                                 (some (comp #{"blog"} str) sub-dirs)
                                 (clojure.string/replace-first #"^\d\d\d\d-\d\d-\d\d-" ""))
                               "index.html"])))))
-(comment
-  [(= "404.html"
-      (str (output-file {:metadata  {:layout "page", :title "Not found", :as-html-page true}
-                         :html "<p>:(</p>"
-                         :input-file (fs/file "posts" "404.markdown")})))
 
-   (= "adventures/2022-10-14-2022-10-18-a-beautiful-fall-trip-to-the-red-river-gorge/index.html"
-      (str (output-file {:metadata
-                         {:layout "page",
-                          :published true,
-                          :title "A beautiful fall trip to the Red River Gorge",
-                          :date "2022-11-27 18:01:46 -0600",
-                          :start-date #inst "2022-10-14T00:00:00.000-00:00",
-                          :end-date #inst "2022-10-18T00:00:00.000-00:00",
-                          :description "A long weekend with Jenn climbing and camping in the Red River Gorge"},
-                         :input-file (fs/file "posts/adventures/2022-10-14-2022-10-18-a-beautiful-fall-trip-to-the-red-river-gorge.markdown")})))
-   (= "blog/reading-in-2024/index.html"
-      (str (output-file {:input-file (fs/file "posts/blog/2024-01-05-reading-in-2024.markdown")
-                         :metadata {:date "2025-01-05 16:23 -0600"
-                                    :local-date (LocalDate/of 2025 1 5)}})))]
-  ;;
-  )
+(defn assert-output-files! []
+  (let [r [(= "404.html"
+              (str (output-file {:metadata  {:layout "page", :title "Not found", :as-html-page true}
+                                 :html "<p>:(</p>"
+                                 :input-file (fs/file "posts" "404.markdown")})))
 
-(defn load-template [post]
+           (= "adventures/2022-10-14-2022-10-18-a-beautiful-fall-trip-to-the-red-river-gorge/index.html"
+              (str (output-file {:metadata
+                                 {:layout "page",
+                                  :published true,
+                                  :title "A beautiful fall trip to the Red River Gorge",
+                                  :date "2022-11-27 18:01:46 -0600",
+                                  :start-date #inst "2022-10-14T00:00:00.000-00:00",
+                                  :end-date #inst "2022-10-18T00:00:00.000-00:00",
+                                  :description "A long weekend with Jenn climbing and camping in the Red River Gorge"},
+                                 :input-file (fs/file "posts/adventures/2022-10-14-2022-10-18-a-beautiful-fall-trip-to-the-red-river-gorge.markdown")})))
+           (= "blog/reading-in-2024/index.html"
+              (str (output-file {:input-file (fs/file "posts/blog/2024-01-05-reading-in-2024.markdown")
+                                 :metadata {:date "2025-01-05 16:23 -0600"
+                                            :local-date (LocalDate/of 2025 1 5)}})))]]
+    (when (some false? r)
+      (with-out-str
+        (println "Problem with output-file paths, results:" r)))))
+
+(defn load-template [_post]
   (let [template "default" #_ (or (-> post :metadata :layout) "default")
         file (fs/file template-dir (str template ".html"))]
     (if (fs/exists? file)
       (slurp file)
       (throw (Exception. (str "template not found: " (str file)))))))
-
-(defn pre-process-markdown [markdown]
-  (-> markdown
-      (clojure.string/replace #"--" (fn [_] "$$NDASH$$"))
-      (clojure.string/replace #"\[[^\]]+\n"
-                   (fn [match]
-                     (clojure.string/replace match "\n" "$$RET$$")))))
-
-(defn post-process-markdown [html]
-  (-> html
-      (clojure.string/replace "$$NDASH$$" "--")
-      (clojure.string/replace "$$RET$$" "\n")))
 
 (def formatters
   [(DateTimeFormatter/ofPattern "yyyy-MM-dd HH:mm Z")   
@@ -112,10 +103,10 @@
 (defn parse-datetime [s]
   (let [parse (fn [f] (try
                         (LocalDateTime/parse s f)
-                        (catch DateTimeParseException e
+                        (catch DateTimeParseException _
                           (try
                             (LocalDate/parse s f)
-                            (catch DateTimeParseException e
+                            (catch DateTimeParseException _
                               nil)))))]
     (loop [[format & formatters] formatters]
       (if-not format
@@ -447,11 +438,12 @@
                       (clojure.string/join ", ")))))))
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
-(defn test [& args]
+(defn test [& _args]
   (binding [*preview* true]
-    (let [error (assert-code-highlighting! (load-sources))]
-      (when error
-        (println error)
+    (let [errors (remove nil? [(assert-code-highlighting! (load-sources))
+                               (assert-output-files!)])]
+      (when (seq errors)
+        (run! println errors)
         (System/exit -1)))))
 
 (comment
