@@ -86,7 +86,9 @@ If gointo put a copyright year, have it be from first year published to last yea
 - [X] kind of working!
 - [ ] could write a bit that checks that every language has a highlight.js
 * TODO adventure-camp.html could be under /adventures?
-* TODO not a huge fan of the inline code formatting
+* DONE not a huge fan of the inline code formatting
+CLOSED: [2025-01-26 Sun 13:48]
+- CLOSING NOTE [2025-01-26 Sun 13:48]
 * TODO maybe useful to keep files-that-don't-change separate from the sources? Could just copy the entire tree over than?
 * TODO [#C] comments?
 * TODO disclaimers?
@@ -97,6 +99,7 @@ If gointo put a copyright year, have it be from first year published to last yea
 - [ ] update disclosure policy
 * TODO [#C] display categories for posts?
 * TODO check out previous markup for help with sharing / description metadata
+* TODO line numbers on code blocks?
 * TODO [#C] ways of encouraging folks to browse around
 - [ ] sidebar with recent posts
 - [ ] sidebar with rss and newsletter
