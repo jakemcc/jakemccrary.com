@@ -8,6 +8,7 @@ Redirect 301 /blog/2010/12/07/quickily-starting-a-powerful-clojure-repl.html htt
 Redirect 301 /blog/2010/12/06/trampolining-through-mutual-recursion.html http://jakemccrary.com/blog/2010/12/06/trampolining-through-mutual-recursion
 Redirect 301 /blog/2010/06/06/inserting-values-into-a-nested-map-in-clojure.html http://jakemccrary.com/blog/2010/06/06/inserting-values-into-a-nested-map-in-clojure
 Redirect 301 /blog/2010/02/21/plotting-time-series-data-with-incanter.html http://jakemccrary.com/blog/2010/02/21/plotting-time-series-data-with-incanter
+Redirect 301 /kili.html https://jakemccrary.com/adventures/kili
 Options All -Indexes
 ErrorDocument 404 /404.html
 ErrorDocument 403 /403.html
