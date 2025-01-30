@@ -20,10 +20,10 @@ Since then, I've continued to take a careful look at how I use social media and 
 
 The following books have helped shape my thinking towards digital distractions. They've put into words some of the practices I stumbled into. They've affected how I use smart phones and how I approach social media.
 
-- [Deep Work](https://amzn.to/2UJu1V7) by Cal Newport
-- [Digital Minimalism](https://amzn.to/2WfLYMv) by Cal Newport
-- [Essentialism](https://amzn.to/2XX6imC) by Greg Mckeown
-- [The Distracted Mind](https://amzn.to/2X3Tzjz) by Adam Gazzaley & Larry D. Rosen
+- [Deep Work](https://www.amazon.com/Deep-Work-Focused-Success-Distracted-ebook/dp/B00X47ZVXM) by Cal Newport
+- [Digital Minimalism](https://www.amazon.com/dp/B07DBRBP7G) by Cal Newport
+- [Essentialism](https://www.amazon.com/dp/B00G1J1D28) by Greg Mckeown
+- [The Distracted Mind](https://www.amazon.com/Distracted-Mind-MIT-Press-High-Tech/dp/0262534436) by Adam Gazzaley & Larry D. Rosen
 
 One of the ideas in both *Digital Minimalism* and *Essentialism* is that you can pick and choose what you add to your life. This extends to individual features of products you use. This is something I arrived at prior to reading these books and it was nice hearing others putting this idea into words.
 

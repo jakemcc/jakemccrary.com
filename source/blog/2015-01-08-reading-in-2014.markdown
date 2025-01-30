@@ -36,7 +36,7 @@ specific books and the nebulous goal of reading more non-fiction.
 
 I ended up setting a new volume record. I read 69 books for a total of
 almost 23,000 pages. I also read every week of
-[Day One](http://www.amazon.com/gp/product/B00FDWVIHO/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B00FDWVIHO&linkCode=as2&tag=jakemccrary08-20&linkId=S6TWD3DEAED3EDBF),
+[Day One](http://www.amazon.com/gp/product/B00FDWVIHO),
 a weekly literary journal containing one short story and one poem from
 new authors. This doesn't count towards my page or book count but is
 reading I enjoy. It exposes me to many different styles.
@@ -47,7 +47,7 @@ goal of reading more non-fiction achieved.
 
 I also reread the two books I had planned on rereading. I wanted to
 reread
-[Infinite Jest](http://www.amazon.com/gp/product/B000S1M9LY/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B000S1M9LY&linkCode=as2&tag=jakemccrary08-20&linkId=XEJIFRILDRUSJXWG)
+[Infinite Jest](http://www.amazon.com/gp/product/B000S1M9LY)
 and
 [Hard-Boiled Wonderland and the End of the World](http://www.amazon.com/Hard-Boiled-Wonderland-World-Haruki-Murakami-ebook/dp/B004AP9W1O/ref=sr_1_1?ie=UTF8&qid=1420159468&sr=8-1&keywords=a+hard+boiled+wonderland)
 and succeeded in rereading both of them.
@@ -59,13 +59,13 @@ below in (in no particular order). Each book I'd recommend without
 hesitation. Instead of reworking or copying my previous reviews I've
 provided links to Goodreads. The titles link to Amazon.
 
-* [Working Effectively with Unit Tests](http://www.amazon.com/gp/product/B00QS2HXUO/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B00QS2HXUO&linkCode=as2&tag=jakemccrary08-20&linkId=RWTY2PCQBTCXMLOK) by Jay Fields ([my review](https://www.goodreads.com/review/show/984963558))
-* [The Secrets of Consulting](http://www.amazon.com/gp/product/B004J35LHQ/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B004J35LHQ&linkCode=as2&tag=jakemccrary08-20&linkId=FP26VU2OR4JMMDOZ) by Gerald Weinberg ([my review](https://www.goodreads.com/review/show/519452572))
-* [Extreme Programming Explained](http://www.amazon.com/gp/product/B00N1ZN6C0/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B00N1ZN6C0&linkCode=as2&tag=jakemccrary08-20&linkId=LW3CLVNSZMRLBDVW) by Kent Beck ([my review](https://www.goodreads.com/review/show/1119479193))
-* [Meditations](http://www.amazon.com/gp/product/B000FC1JAI/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B000FC1JAI&linkCode=as2&tag=jakemccrary08-20&linkId=5TFM37LOXWLSBMUD) by Marcus Aurelious and translated by Gregory Hays ([my review](https://www.goodreads.com/review/show/998010207))
-* [A Man Without a Country](http://www.amazon.com/gp/product/B000QUELZ4/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B000QUELZ4&linkCode=as2&tag=jakemccrary08-20&linkId=56W5DEBPW3LU6XZX) by Kurt Vonnegut ([my review](https://www.goodreads.com/review/show/93929432))
-* [Infinite Jest](http://www.amazon.com/gp/product/B000S1M9LY/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B000S1M9LY&linkCode=as2&tag=jakemccrary08-20&linkId=XEJIFRILDRUSJXWG) by David Foster Wallace ([my first review](https://www.goodreads.com/review/show/509610965), [second review](https://www.goodreads.com/review/show/880349659))
-* [The Bone Clocks](http://www.amazon.com/gp/product/B00IHMF9KE/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B00IHMF9KE&linkCode=as2&tag=jakemccrary08-20&linkId=WPOULKSHDQDXKMLZ) by David Mitchell ([my review](https://www.goodreads.com/review/show/1030027657))
+* [Working Effectively with Unit Tests](http://www.amazon.com/gp/product/B00QS2HXUO) by Jay Fields ([my review](https://www.goodreads.com/review/show/984963558))
+* [The Secrets of Consulting](http://www.amazon.com/gp/product/B004J35LHQ) by Gerald Weinberg ([my review](https://www.goodreads.com/review/show/519452572))
+* [Extreme Programming Explained](http://www.amazon.com/gp/product/B00N1ZN6C0) by Kent Beck ([my review](https://www.goodreads.com/review/show/1119479193))
+* [Meditations](http://www.amazon.com/gp/product/B000FC1JAI) by Marcus Aurelious and translated by Gregory Hays ([my review](https://www.goodreads.com/review/show/998010207))
+* [A Man Without a Country](http://www.amazon.com/gp/product/B000QUELZ4) by Kurt Vonnegut ([my review](https://www.goodreads.com/review/show/93929432))
+* [Infinite Jest](http://www.amazon.com/gp/product/B000S1M9LY) by David Foster Wallace ([my first review](https://www.goodreads.com/review/show/509610965), [second review](https://www.goodreads.com/review/show/880349659))
+* [The Bone Clocks](http://www.amazon.com/gp/product/B00IHMF9KE) by David Mitchell ([my review](https://www.goodreads.com/review/show/1030027657))
 
 I'm recommending a specific translation of _Meditations_. I attempted
 to read different one first and it was so painful to read I ended up
@@ -73,7 +73,7 @@ giving up. The linked translation is modern and contains a useful
 forward giving you background information on the time.
 
 I only read one series this year but it was a good one.
-[The Magicians](http://www.amazon.com/gp/bookseries/B00HUQBPWE/kindle/?ie=UTF8&camp=1789&creative=390957&linkCode=ur2&tag=jakemccrary08-20&linkId=ABX4JPELH5GKERZP),
+[The Magicians](http://www.amazon.com/gp/bookseries/B00HUQBPWE),
 by Lev Grossman, was recommended by a friend who described it as
 "Harry Potter but with characters battling depression." I'm not sure
 that fully captures the feel of the series but it is a start. The

@@ -36,21 +36,23 @@ I read 43 books for a total of 16,213 pages. This is a bit less than last year b
 
 ## Highlights
 
-Below is a list of my five star books from 2018. The book titles link to Amazon and are affiliate links. The other links are to my Goodreads review. Unfortunately, this year I didn't do a great job of always writing a review so some of them are missing or very short.
+Below is a list of my five star books from 2018.
+I've linked to my Goodreads reviews when I've written one.
+ Unfortunately, this year I didn't do a great job of always writing a review so some of them are missing or very short.
 
 I generally highlight a lot of passages while reading and then rarely go back to look at them. I've included links to my highlights. Are they worthwhile without the context of the book? I have no idea. I've reread them and got something out of them but many are also so far removed from my memory that they are almost useless.
 
-- [Being Mortal: Medicine and What Matters in the End by Atul Gawande](https://amzn.to/2TYyeo2) ([my review](https://www.goodreads.com/review/show/1380346555), [my highlights](https://www.goodreads.com/notes/23290548-being-mortal/3431614-jake-mccrary))
-- [Sapiens: A Brief History of Humankind by Yuval Noah Harari](https://amzn.to/2TaFJZb) ([my review](https://www.goodreads.com/review/show/1679140092), [my highlights](https://www.goodreads.com/notes/20873740-sapiens/3431614-jake-mccrary))
-- [Essentialism: The Disciplined Pursuit of Less by Greg McKeown](https://amzn.to/2FP8jvk) ([my review](https://www.goodreads.com/review/show/1178908716), [my highlights](https://www.goodreads.com/notes/19776547-essentialism/3431614-jake-mccrary))
-- [Crucial Conversations Tools for Talking When Stakes Are High by Kerry Patterson,  Joseph Grenny, Ron McMillan, Al Switzler](https://amzn.to/2Docah1) ([my highlights](https://www.goodreads.com/notes/13041257-crucial-conversations-tools-for-talking-when-stakes-are-high/3431614-jake-mccrary))
-- [Rediscovering JavaScript: Master ES6, ES7, and ES8 by Venkat Subramaniam](https://amzn.to/2sAWpNB) ([my review](https://www.goodreads.com/review/show/2450809712))
-- [CivilWarLand in Bad Decline by George Saunders](https://amzn.to/2U2QDjy) ([my review](https://www.goodreads.com/review/show/104227855))
-- [The Obelisk Gate (The Broken Earth #2) by N.K. Jemisin](https://amzn.to/2Do2fIt)
-- [The Stone Sky (The Broken Earth, #3) by N.K. Jemisin](https://amzn.to/2FLwbje) ([my review](https://www.goodreads.com/review/show/2467372092))
-- [The Hate U Give by Angie Thomas](https://amzn.to/2FNdgo8) ([my review](https://www.goodreads.com/review/show/2221117127))
-- [Six of Crows (Six of Crows, #1) by Leigh Bardugo](https://amzn.to/2T4PUy9) ([my review](https://www.goodreads.com/review/show/2309941150))
-- [Crooked Kingdom (Six of Crows #2) by Leigh Bardugo](https://amzn.to/2RZOzeG)
+- Being Mortal: Medicine and What Matters in the End by Atul Gawande ([my review](https://www.goodreads.com/review/show/1380346555), [my highlights](https://www.goodreads.com/notes/23290548-being-mortal/3431614-jake-mccrary))
+- Sapiens: A Brief History of Humankind by Yuval Noah Harari ([my review](https://www.goodreads.com/review/show/1679140092), [my highlights](https://www.goodreads.com/notes/20873740-sapiens/3431614-jake-mccrary))
+- Essentialism: The Disciplined Pursuit of Less by Greg McKeown ([my review](https://www.goodreads.com/review/show/1178908716), [my highlights](https://www.goodreads.com/notes/19776547-essentialism/3431614-jake-mccrary))
+- Crucial Conversations Tools for Talking When Stakes Are High by Kerry Patterson,  Joseph Grenny, Ron McMillan, Al Switzler ([my highlights](https://www.goodreads.com/notes/13041257-crucial-conversations-tools-for-talking-when-stakes-are-high/3431614-jake-mccrary))
+- Rediscovering JavaScript: Master ES6, ES7, and ES8 by Venkat Subramaniam ([my review](https://www.goodreads.com/review/show/2450809712))
+- CivilWarLand in Bad Decline by George Saunders ([my review](https://www.goodreads.com/review/show/104227855))
+- The Obelisk Gate (The Broken Earth #2) by N.K. Jemisin
+- The Stone Sky (The Broken Earth, #3) by N.K. Jemisin ([my review](https://www.goodreads.com/review/show/2467372092))
+- The Hate U Give by Angie Thomas ([my review](https://www.goodreads.com/review/show/2221117127))
+- Six of Crows (Six of Crows, #1) by Leigh Bardugo ([my review](https://www.goodreads.com/review/show/2309941150))
+- Crooked Kingdom (Six of Crows #2) by Leigh Bardugo
 
 #### Being Mortal: Medicine and What Matters in the End by Atul Gawande
 
@@ -118,13 +120,13 @@ The series is a young adult series. It isn't complex. The reading isn't difficul
 
 #### Life 3.0: Being Human in the Age of Artificial Intelligence by Max Tegmark
 
-[amazon](https://amzn.to/2AU6B8E), [my highlights](https://www.goodreads.com/notes/35881748-life-3-0/3431614-jake-mccrary)
+[my highlights](https://www.goodreads.com/notes/35881748-life-3-0/3431614-jake-mccrary)
 
 I thought this was a really interesting book.
 
 #### When: The Scientific Secrets of Perfect Timing by Daniel H. Pink 
 
-[amazon](https://amzn.to/2RV2v9W), [my review](https://www.goodreads.com/review/show/2278408888), [my highlights](https://www.goodreads.com/notes/35786699-when/3431614-jake-mccrary)
+[my review](https://www.goodreads.com/review/show/2278408888), [my highlights](https://www.goodreads.com/notes/35786699-when/3431614-jake-mccrary)
 
 I really enjoyed this. Pink references other works to build a narrative about how timing matters. When should you take a nap? Is it better to go do the doctors in the morning or afternoon? How do are cognitive abilities generally change throughout the day? How should you try to end your vacations?
 
@@ -132,7 +134,7 @@ I did take some notes on the book while reading it and I have referenced them. I
 
 #### Bloodchild and Other Stories by Octavia E. Butler
 
-[amazon](https://amzn.to/2MreMxO), [my review](https://www.goodreads.com/review/show/2293497979), [my highlights](https://www.goodreads.com/notes/40274755-bloodchild-and-other-stories/3431614-jake-mccrary)
+[my review](https://www.goodreads.com/review/show/2293497979), [my highlights](https://www.goodreads.com/notes/40274755-bloodchild-and-other-stories/3431614-jake-mccrary)
 
 This is a great collection of short stories and non-fiction articles written by Octavia Butler. I really love her writing. I've read a few of her works and still enjoy [Lilith's Brood](https://www.goodreads.com/book/show/60926.Lilith_s_Brood) the most.
 
@@ -142,13 +144,13 @@ Below is a quote from her about science fiction that really resonated with me. I
 
 #### Eeeee Eee Eeee by Tao Lin
 
-[amazon](https://amzn.to/2AUSrnJ), [my review](https://www.goodreads.com/review/show/1788752328)
+[my review](https://www.goodreads.com/review/show/1788752328)
 
 This book is real bizarre. For some reason I liked it.
 
 #### Factfulness: Ten Reasons We're Wrong About the World--and Why Things Are Better Than You Think by Hans Rosling
 
-[amazon](https://amzn.to/2FQBmP8), [my review](https://www.goodreads.com/review/show/2402596250), [my highlights](https://www.goodreads.com/notes/36185940-factfulness/3431614-jake-mccrary)
+[my review](https://www.goodreads.com/review/show/2402596250), [my highlights](https://www.goodreads.com/notes/36185940-factfulness/3431614-jake-mccrary)
 
 This book is great. It is very approachable and dispels some wrong common knowledge.
 

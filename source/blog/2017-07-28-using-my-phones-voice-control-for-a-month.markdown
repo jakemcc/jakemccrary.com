@@ -59,7 +59,7 @@ Setting alarms, starting countdown timers, adding reminders, and checking the we
 
 ### I wish it worked all the time
 
-I suppose this is an argument for getting a [Google Home](https://store.google.com/us/product/google_home?hl=en-US) or [Amazon Echo](http://amzn.to/2vctz9A). I have to wake up my phone to use voice commands with it. This limits the usefulness of voice commands since I need be within reach of my phone.
+I suppose this is an argument for getting a [Google Home](https://store.google.com/us/product/google_home?hl=en-US) or Amazon Echo. I have to wake up my phone to use voice commands with it. This limits the usefulness of voice commands since I need be within reach of my phone.
 
 ### I wish it could do more
 

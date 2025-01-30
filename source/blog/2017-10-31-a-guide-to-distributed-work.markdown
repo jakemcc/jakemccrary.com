@@ -53,7 +53,7 @@ You get to choose where you work. For many, this will be in a home office. This 
 
 Do you like to work in a cave? Paint the walls a dark color, block out the windows and enjoy your cave-like experience. Do you prefer sunlight and plants? Work near a window and add houseplants to your space. Do you want an awesome sit-stand desk and chair? Buy [them](/blog/2015/03/31/my-home-work-space/).
 
-One of my former colleagues likes to walk on a treadmill while standing or, if sitting, he enjoyed having [pedals](http://amzn.to/2gRypQD) under his desk. These are customizations he would have a hard time getting at most offices.
+One of my former colleagues likes to walk on a treadmill while standing or, if sitting, he enjoyed having [pedals](https://www.amazon.com/DeskCycle-Exercise-Pedal-Exerciser-White/dp/B00B1VDNQA) under his desk. These are customizations he would have a hard time getting at most offices.
 
 ### Eat the food you want to eat
 
@@ -394,7 +394,7 @@ This article came to life from the notes and research I did prior to speaking at
 
 ## Other references
 
-- [Remote - Jason Fried and David Heinemeier Hansson](http://amzn.to/2geZYlw)
+- [Remote - Jason Fried and David Heinemeier Hansson](https://www.amazon.com/Remote-Office-Required-Jason-Fried/dp/0804137501)
 - [The Ultimate Guide to Remote Work - Zapier](https://zapier.com/learn/the-ultimate-guide-to-remote-working/)
 - [Remote != Distributed - Paul Stadig](http://paul.stadig.name/2013/07/remote-distributed.html)
 - [Remote worker vs distributed team - Bob Mcwhirter](http://bob.mcwhirter.org/blog/2010/09/13/remote-worker-distributed-team/)

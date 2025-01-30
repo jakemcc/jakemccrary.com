@@ -52,10 +52,10 @@ better and you'll stop your pair from hearing themselves through your
 computer.
 
 I use
-[these headphones](http://www.amazon.com/gp/product/B005VAORH6/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B005VAORH6&linkCode=as2&tag=jakemccrary08-20&linkId=3AX26BCB4ZHZWLC5).
+[these headphones](http://www.amazon.com/gp/product/B005VAORH6).
 They are cheap, light, and open-eared but are wired. I've been told I
 sound the best when I'm using them. I also own these
-[wireless headphones](http://www.amazon.com/gp/product/B003VANOFY/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B003VANOFY&linkCode=as2&tag=jakemccrary08-20&linkId=LDHRWNCUOO45B7G4).
+[wireless headphones](http://www.amazon.com/gp/product/B003VANOFY).
 They are closed-ear, heavier, and wireless. The wireless is great but
 the closed-ear design causes me to talk differently and by the end of
 the day my throat is hoarse. Both of these headphones are widely used
@@ -64,7 +64,7 @@ by my colleagues and I don't think you can go wrong with either one.
 Some people don't like wearing headphones all day. If you are one of
 those I'd recommend picking up a directional microphone. Many of my
 colleagues use a
-[Snowball](http://www.amazon.com/gp/product/B002OO333Q/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B002OO333Q&linkCode=as2&tag=jakemccrary08-20&linkId=XVNYHVNXTAC3J2RD).
+[Snowball](http://www.amazon.com/gp/product/B002OO333Q).
 
 ## Connecting the machines
 
@@ -76,7 +76,7 @@ At Outpace we've somewhat cheated and have standardized our
 development hardware. Everyone has a computer running OS X and, if
 they want it, at least one 27 inch monitor (mostly Apple 27 inch
 displays or a
-[Dell](http://www.amazon.com/gp/product/B009H0XQQY/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B009H0XQQY&linkCode=as2&tag=jakemccrary08-20&linkId=JJLKLYNESYPKCRKZ))
+[Dell](http://www.amazon.com/gp/product/B009H0XQQY))
 with a resolution of 2560x1440. Since everyone has nearly identical
 hardware and software we are able to pair using OS X's built-in screen
 sharing. This allows full sharing of the host's desktop. This full

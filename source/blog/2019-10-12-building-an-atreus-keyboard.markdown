@@ -34,7 +34,7 @@ This would be a good first keyboard project.
 
 I already had USB cable, key switches, key caps, and a micro-controller so I purchased the partial kit from Phil.
 It came with everything else, except for something to coat the wood, that you need to build the keyboard.
-I wanted to connect the keyboard to USB C ports, so I used a [micro to USB C cable](https://amzn.to/2IJqItO).
+I wanted to connect the keyboard to USB C ports, so I used a [micro to USB C cable](https://www.amazon.com/gp/product/B07CWDYP18).
 
 I enjoyed the color of the laser cut wood and appreciated the burn marks.
 I didn't want to lose the color or burns so I coated the wood with a water based clear polyurethane with a satin finish.

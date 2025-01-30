@@ -8,7 +8,7 @@ categories: [kindle, dictionary]
 ---
 
 You may have seen me [tweeting](https://twitter.com/jakemcc/status/352893242473328641) [about](https://twitter.com/jakemcc/status/349709102986969088) building custom Kindle dictionaries. A few months ago I made a
-[custom Kindle dictionary](http://gum.co/dune-dictionary) for [Dune](http://www.amazon.com/gp/product/B00B7NPRY8/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B00B7NPRY8&linkCode=as2&tag=jakemccrary08-20&linkId=LC2NFEXWA7JXW57B) and my reading experience greatly improved. Being able to look up unknown terms as easily as English words was amazing. Ever since I've been looking for other books that could benefit from having a custom dictionary. While reading Fogus's [Functional JavaScript](http://www.amazon.com/gp/product/B00D624AQO/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B00D624AQO&linkCode=as2&tag=jakemccrary08-20&linkId=CUEYRNJIQSFNKUSM) I saw the opportunity to make a another.
+[custom Kindle dictionary](http://gum.co/dune-dictionary) for [Dune](http://www.amazon.com/gp/product/B00B7NPRY8) and my reading experience greatly improved. Being able to look up unknown terms as easily as English words was amazing. Ever since I've been looking for other books that could benefit from having a custom dictionary. While reading Fogus's [Functional JavaScript](http://www.amazon.com/gp/product/B00D624AQO/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B00D624AQO&linkCode=as2&tag=jakemccrary08-20&linkId=CUEYRNJIQSFNKUSM) I saw the opportunity to make a another.
 
 I was taking my time reading Fogus's book and, as a result, found myself forgetting the implementation of functions defined earlier in the book. I wanted to be able to look up implementations easily and realized that a dictionary of function names to implementations would solve my problem.
 
@@ -27,4 +27,4 @@ This dictionary isn't perfect but it did improve my reading experience. One exam
 
 This was definitely a larger challenge than creating my custom [Dune dictionary](http://gum.co/dune-dictionary). It forced me to dive into the Amazon documentation a bit and figure out more of the markup language. I have notes on my experience creating Kindle dictionaries and sometime in the future will be writing a post with details about what I've learned.
 
-I can't recommend Fogus's [Functional JavaScript](http://www.amazon.com/gp/product/B00D624AQO/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B00D624AQO&linkCode=as2&tag=jakemccrary08-20&linkId=CUEYRNJIQSFNKUSM) enough. If you do read it give my [dictionary](http://db.tt/eJzkIVfS) a shot. I think it makes the reading experience a bit nicer.
+I can't recommend Fogus's [Functional JavaScript](http://www.amazon.com/gp/product/B00D624AQO) enough. If you do read it give my [dictionary](http://db.tt/eJzkIVfS) a shot. I think it makes the reading experience a bit nicer.

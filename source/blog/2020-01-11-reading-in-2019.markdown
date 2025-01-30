@@ -41,29 +41,26 @@ Beyond that I didn't do anything.
 ## Highlights
 
 Here are my five star books from 2019.
-The titles are affiliate links to Amazon, so if you click one of those and make a purchase I get a small kickback[^1].
 
-[^1]: I'm not really sure why I bother doing this. I'd write these posts without this incentive and I think my lifetime earnings are maybe in the double digits.
-
-- [Accelerate: Building and Scaling High-Performing Technology Organizations by Nicole Forsgren, Jez Humble, and Gene Kim](https://amzn.to/2QFelCv) ([my review](https://www.goodreads.com/review/show/2411886698))
-- [Elements of Clojure by Zachary Tellman](https://amzn.to/39BjDHx) ([my review](https://www.goodreads.com/review/show/2684688658))
-- [A Tour of C++ by Bjarne Stroustrup](https://amzn.to/2FdqV6n) ([my review](https://www.goodreads.com/review/show/2822201641))
-- [Developer Hegemony: The Future of Labor](https://amzn.to/2N5mLSL) ([my review](https://www.goodreads.com/review/show/2795008954))
-- [Digital Minimalism: Choosing a Focused Life in a Noisy World by Cal Newport](https://amzn.to/2MPwOed)
-- [Effective Java by Joshua Bloch](https://amzn.to/2QGW1Ja) ([my review](https://www.goodreads.com/review/show/2701581699))
-- [21 Lessons for the 21st Century by Yuval Noah Harari](https://amzn.to/2rOgd3g) ([my review](https://www.goodreads.com/review/show/2562286276))
-- [Draft No. 4: On the Writing Process by John McPhee](https://amzn.to/2toADQZ) ([my review](https://www.goodreads.com/review/show/2300752363))
-- [The Push: A Climber's Journey of Endurance, Risk and Going Beyond Limits by Tommy Caldwell](https://amzn.to/2MPuAeO) ([my review](https://www.goodreads.com/review/show/2200390288))
-- [The Nickel Boys by Colson Whitehead](https://amzn.to/2rONP0V)
-- [The Great Believers by Rebecca Makkai](https://amzn.to/37sUGMK) ([my review](https://www.goodreads.com/review/show/3020415147))
-- [The Bonfire of the Vanities by Tom Wolfe](https://amzn.to/2tr2eRi) ([my review](https://www.goodreads.com/review/show/2847590304))
-- [The Paper Menagerie and Other Stories by Ken Liu](https://amzn.to/2tljYOf) ([my review](https://www.goodreads.com/review/show/1827462108))
-- [Exhalation: Stories by Ted Chiang](https://amzn.to/36kyAvO) ([my review](https://www.goodreads.com/review/show/2804306157))
-- [Golden Son (Red Rising, #2) by Pierce Brown](https://amzn.to/36lAZGn)
-- [Morning Star (Red Rising Saga, #3) by Pierce Brown](https://amzn.to/2ZLAdjz)
-- [Iron Gold (Red Rising Saga, #4) by Pierce Brown](https://amzn.to/36fNKlU) ([my review](https://www.goodreads.com/review/show/2760320870))
-- [Dark Age (Red Rising Saga #5) by Pierce Brown](https://amzn.to/36mab95)
-- [Animal Farm by George Orwell](https://amzn.to/2MPkjQ1) ([my review](https://www.goodreads.com/review/show/2811868686))
+- Accelerate: Building and Scaling High-Performing Technology Organizations by Nicole Forsgren, Jez Humble, and Gene Kim ([my review](https://www.goodreads.com/review/show/2411886698))
+- Elements of Clojure by Zachary Tellman ([my review](https://www.goodreads.com/review/show/2684688658))
+- A Tour of C++ by Bjarne Stroustrup ([my review](https://www.goodreads.com/review/show/2822201641))
+- Developer Hegemony: The Future of Labor ([my review](https://www.goodreads.com/review/show/2795008954))
+- Digital Minimalism: Choosing a Focused Life in a Noisy World by Cal Newport
+- Effective Java by Joshua Bloch ([my review](https://www.goodreads.com/review/show/2701581699))
+- 21 Lessons for the 21st Century by Yuval Noah Harari ([my review](https://www.goodreads.com/review/show/2562286276))
+- Draft No. 4: On the Writing Process by John McPhee ([my review](https://www.goodreads.com/review/show/2300752363))
+- The Push: A Climber's Journey of Endurance, Risk and Going Beyond Limits by Tommy Caldwell ([my review](https://www.goodreads.com/review/show/2200390288))
+- The Nickel Boys by Colson Whitehead
+- The Great Believers by Rebecca Makkai ([my review](https://www.goodreads.com/review/show/3020415147))
+- The Bonfire of the Vanities by Tom Wolfe ([my review](https://www.goodreads.com/review/show/2847590304))
+- The Paper Menagerie and Other Stories by Ken Liu ([my review](https://www.goodreads.com/review/show/1827462108))
+- Exhalation: Stories by Ted Chiang ([my review](https://www.goodreads.com/review/show/2804306157))
+- Golden Son (Red Rising, #2) by Pierce Brown
+- Morning Star (Red Rising Saga, #3) by Pierce Brown
+- Iron Gold (Red Rising Saga, #4) by Pierce Brown ([my review](https://www.goodreads.com/review/show/2760320870))
+- Dark Age (Red Rising Saga #5) by Pierce Brown
+- Animal Farm by George Orwell ([my review](https://www.goodreads.com/review/show/2811868686))
 
 #### Accelerate: Building and Scaling High-Performing Technology Organizations by Nicole Forsgren, Jez Humble, and Gene Kim
 
@@ -190,12 +187,12 @@ Reading it in 2019 and mapping in book behavior to the modern political climate 
 
 ### Non-Five Star highlights
 
-- [Irresistible: The Rise of Addictive Technology and the Business of Keeping Us Hooked by Adam Alter](https://amzn.to/2QFFkz5) ([my review](https://www.goodreads.com/review/show/1966643946))
-- [Permanent Record by Edward Snowden](https://amzn.to/2FDh9e1) ([my review](https://www.goodreads.com/review/show/2983575511))
-- [Atonement by Ian McEwan](https://amzn.to/2N9YYRC) ([my review](https://www.goodreads.com/review/show/1697924044))
-- [I Hear You by Michael S. Sorensen](https://amzn.to/2sRX9Sp) ([my review](https://www.goodreads.com/review/show/2923747300))
-- [Recursion by Blake Crouch](https://amzn.to/2t64fCF) ([my review](https://www.goodreads.com/review/show/2923743967))
-- [Version Control by Dexter Palmer](https://amzn.to/2NedZBE) ([my review](https://www.goodreads.com/review/show/1827462266))
+- Irresistible: The Rise of Addictive Technology and the Business of Keeping Us Hooked by Adam Alter ([my review](https://www.goodreads.com/review/show/1966643946))
+- Permanent Record by Edward Snowden ([my review](https://www.goodreads.com/review/show/2983575511))
+- Atonement by Ian McEwan ([my review](https://www.goodreads.com/review/show/1697924044))
+- I Hear You by Michael S. Sorensen ([my review](https://www.goodreads.com/review/show/2923747300))
+- Recursion by Blake Crouch ([my review](https://www.goodreads.com/review/show/2923743967))
+- Version Control by Dexter Palmer ([my review](https://www.goodreads.com/review/show/1827462266))
 
 #### Irresistible: The Rise of Addictive Technology and the Business of Keeping Us Hooked by Adam Alter
 

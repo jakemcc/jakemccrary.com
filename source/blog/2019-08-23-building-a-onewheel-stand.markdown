@@ -15,9 +15,9 @@ categories:
 
 I've owned a [Onewheel XR](https://onewheel.com/products/xr) for about a year now. It is a one-wheeled electric skateboard-like device that is super fun for zipping around Chicago.
 
-When I first got it, I purchased a [small guitar stand](https://amzn.to/31Z39Ez). It worked but it was always a bit finicky and I was never satisfied with it. I had to sit the Onewheel on it just right to have it stay on it without causing the legs of the stand to spread too wide.
+When I first got it, I purchased a [small guitar stand](https://www.amazon.com/gp/product/B06XPCNFRQ). It worked but it was always a bit finicky and I was never satisfied with it. I had to sit the Onewheel on it just right to have it stay on it without causing the legs of the stand to spread too wide.
 
-This resulted in me buying a [second guitar stand](https://amzn.to/2NrrGOI) and trying that out. This one was even worse.
+This resulted in me buying a [second guitar stand](https://www.amazon.com/gp/product/B01C5G2TQY) and trying that out. This one was even worse.
 
 I grew frustrated with these non-purpose built stands and started looking into purchasing a Onewheel stand. There are plenty of beautiful stands out there, both officially from [Future Motion](https://onewheel.com/collections/onewheel-xr-accessories/products/onewheel-deep-shack-rack) and from third party vendors like [The Float Life](https://float-supply.com/product-category/stands/).
 

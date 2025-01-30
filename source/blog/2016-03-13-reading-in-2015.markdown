@@ -48,20 +48,19 @@ between 2014 and 2015 is entirely found in two and three star books.
 
 I awarded ten books a five star rating. This is more five stars than
 any other year. Each of the five star books I'd recommend without
-hesitation. Below is my list of five star books. The titles are
-affiliate links to Amazon and the _my review_ text links to
+hesitation. Below is my list of five star books. The _my review_ text links to
 Goodreads.
 
-* [David Foster Wallace - The Pale King](http://amzn.to/24YyEvJ) ([my review](https://www.goodreads.com/review/show/882190236))
-* [Donna Tartt - The Goldfinch](http://amzn.to/1QPjLV6) ([my review](https://www.goodreads.com/review/show/1168264855))
-* [Donna Tartt - The Secret History](http://amzn.to/1M0BjhZ) ([my review](https://www.goodreads.com/review/show/1225842414))
-* [James Clavell - Shogun](http://amzn.to/1pFcZZg) ([my review](https://www.goodreads.com/review/show/1284160882))
-* [John Williams - Stoner](http://amzn.to/1P6YKAX) ([my review](https://www.goodreads.com/review/show/1152858937))
-* [Michael L. Anderson - The Rock Climber's Training Manual](http://amzn.to/1QPjSA2) ([my review](https://www.goodreads.com/review/show/1420673577))
-* [Neal Stephenson - Cryptonomicon](http://amzn.to/1P6YMbY) ([my review](https://www.goodreads.com/review/show/799153387))
-* [Neal Stephenson - Reamde](http://amzn.to/24Yy8xF) ([my review](https://www.goodreads.com/review/show/927872107))
-* [Neal Stephenson - Snow Crash](http://amzn.to/1pFd3bo) ([my review](https://www.goodreads.com/review/show/799153414))
-* [Sam Newman - Building Microservices](http://amzn.to/1YO1HOf) ([my review](https://www.goodreads.com/review/show/1202873191))
+* David Foster Wallace - The Pale King ([my review](https://www.goodreads.com/review/show/882190236))
+* Donna Tartt - The Goldfinch ([my review](https://www.goodreads.com/review/show/1168264855))
+* Donna Tartt - The Secret History ([my review](https://www.goodreads.com/review/show/1225842414))
+* James Clavell - Shogun ([my review](https://www.goodreads.com/review/show/1284160882))
+* John Williams - Stoner ([my review](https://www.goodreads.com/review/show/1152858937))
+* Michael L. Anderson - The Rock Climber's Training Manual ([my review](https://www.goodreads.com/review/show/1420673577))
+* Neal Stephenson - Cryptonomicon ([my review](https://www.goodreads.com/review/show/799153387))
+* Neal Stephenson - Reamde ([my review](https://www.goodreads.com/review/show/927872107))
+* Neal Stephenson - Snow Crash ([my review](https://www.goodreads.com/review/show/799153414))
+* Sam Newman - Building Microservices ([my review](https://www.goodreads.com/review/show/1202873191))
 
 One of the great things about writing this post is that it forces me
 to pause and reflect on the previous years books. Its great seeing
@@ -71,14 +70,14 @@ _The Pale King_.
 
 There were also a ton of great four star books this year. One that
 stands out is Joseph Heller's
-[Something Happened](http://amzn.to/1pFcQFc)
+[Something Happened](https://www.amazon.com/SOMETHING-HAPPENED-Joseph-Heller-ebook/dp/B005IQZ894)
 ([my review](https://www.goodreads.com/review/show/189671091)). Kurt
 Vonnegut wrote a brilliant
 [review](http://www.nytimes.com/books/98/02/15/home/heller-something.html)
 of this book which I encourage you to read.
 
 Dave MacLeod's
-[Make or Break: Don't Let Climbing Injuries Dictate Your Success](http://amzn.to/1pFcVIV)
+[Make or Break: Don't Let Climbing Injuries Dictate Your Success](https://www.amazon.com/Make-Break-Climbing-Injuries-Dictate/dp/0956428134)
 ([my review](https://www.goodreads.com/review/show/1236422760))
 deserves a mention. I highly recommend this book to any climber. We
 push our bodies hard and this book will help you prevent and recover

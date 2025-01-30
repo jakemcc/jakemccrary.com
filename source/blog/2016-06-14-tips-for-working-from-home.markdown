@@ -44,8 +44,8 @@ I've written about my setup
 improvements I made to my home working environment.
 
 1. Outpace provided a beefy MacBook Pro and two 27-inch Apple Cinema displays.
-1. I upgraded my chair to to a [Herman Miller Setu](http://amzn.to/1XNWKru).
-1. I bought a [mStand Laptop Stand](http://www.amazon.com/gp/product/B000OOYECC/=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B000OOYECC&linkCode=as2&tag=jakemccrary08-20&linkId=L5THOTZHJ6FPJSAL) to raise my laptop to a better viewing height.
+1. I upgraded my chair to to a [Herman Miller Setu](https://www.amazon.com/Setu-Chair-Herman-Miller-Standard/dp/B004VSL6E6).
+1. I bought a [mStand Laptop Stand](http://www.amazon.com/gp/product/B000OOYECC/) to raise my laptop to a better viewing height.
 1. I upgraded my desk to a sit-stand desk.
 1. I built my own [ErgoDox keyboard](/blog/2014/07/27/building-the-ergodox-keyboard/).
 1. I switched to an adjustable monitor arm so I could adjust my monitor height.

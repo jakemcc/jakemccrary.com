@@ -37,13 +37,13 @@ a 15 inch MacBook Pro. The picture doesn't show it, but I actively use
 all the monitors.
 
 My laptop is raised by a
-[mStand Laptop Stand](http://www.amazon.com/gp/product/B000OOYECC/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B000OOYECC&linkCode=as2&tag=jakemccrary08-20&linkId=L5THOTZHJ6FPJSAL).
+[mStand Laptop Stand](http://www.amazon.com/gp/product/B000OOYECC).
 While I'm sitting this stand puts the laptop at a comfortable height.
 I highly recommend getting one.
 
 The middle monitor, the one I use the most, has had the standard stand
 (you can see it in the right monitor) replaced with an
-[ErgoTech Freedom Arm](http://www.amazon.com/gp/product/B00BZC05WU/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B00BZC05WU&linkCode=as2&tag=jakemccrary08-20&linkId=ADQ435RJ65U5DK3C).
+[ErgoTech Freedom Arm](http://www.amazon.com/gp/product/B00BZC05WU).
 This lets me raise the monitor to a comfortable height when I'm
 standing (as seen in this picture). It also allows me to rotate the
 monitor vertically, though I have only done that once since installing
@@ -62,12 +62,12 @@ long enough that I want to bring a large monitor.
 
 ## The Chair
 
-My desk chair is a Herman Miller [Setu](http://amzn.to/1XNWKru). It
+My desk chair is a Herman Miller [Setu](https://www.amazon.com/Setu-Chair-Herman-Miller-Standard/dp/B004VSL6E6). It
 is a very comfortable chair that boasts only a single adjustment. You
 can only raise or lower it.
 
 I moved to this chair from a Herman Miller
-[Aeron](http://amzn.to/1tjeuxJ). The Aeron had been my primary chair
+[Aeron](https://www.amazon.com/Aeron-Task-Chair-Herman-Miller/dp/B0014YGGKE). The Aeron had been my primary chair
 for eight years prior to me buying the Setu.
 
 They are both great chairs. I haven't missed the extreme amount of
@@ -103,8 +103,7 @@ hear me type in every room of my one bedroom apartment. When I'm
 remote pairing with other developers, they can here me type through my
 microphone.
 
-For my mouse I use
-[Apple's Magic Trackpad](https://www.amazon.com/Apple-MC380Z-A-Magic-Trackpad/dp/B003XLYAWC/ref=as_sl_pc_ss_til?tag=jakemccrary08-20&linkCode=w01&linkId=7FVKQDGTRNAJ7BCL&creativeASIN=B003XLYAWC).
+For my mouse I use Apple's Magic Trackpad.
 I definitely have problems doing precise mouse work (though I rarely
 find myself needing this) but I really enjoy the gestures in enables.
 I've been using one of these trackpads for years now. I really don't
@@ -114,24 +113,23 @@ want to go back to using a mouse.
 
 I'm a fan of using pens and paper to keep track of notes. My tools of
 choice are
-[Leuchturm Whitelines](http://www.amazon.com/gp/product/B00IYL90B2/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B00IYL90B2&linkCode=as2&tag=jakemccrary08-20&linkId=VNOMEHJO7O2NBRKG)
+[Leuchturm Whitelines](http://www.amazon.com/gp/product/B00IYL90B2)
 notebook with dotted paper and a
-[TWSBI 580](http://www.amazon.com/gp/product/B00BT1BLRU/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B00BT1BLRU&linkCode=as2&tag=jakemccrary08-20&linkId=EG7HCYOI2SNHO2OI)
+[TWSBI 580](http://www.amazon.com/gp/product/B00BT1BLRU)
 fountain pen with a fine nib. I've been using fountain pens[^1] for a
 couple years now and find them much more enjoyable to use than other
 pen styles. The way you glide across the page is amazing. I usually
 have my pen inked with
-[Noodler's 54th Massachusetts](http://www.amazon.com/gp/product/B00DJAKBAW/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B00DJAKBAW&linkCode=as2&tag=jakemccrary08-20&linkId=WMW6D6HT3VGKGUW2).
+[Noodler's 54th Massachusetts](http://www.amazon.com/gp/product/B00DJAKBAW).
 The ink is a beautiful blue black color and very permanent.
 
-[^1]: If you want to try out fountain pens I highly recommend the [Pilot Metropolitan](http://www.amazon.com/gp/product/B009X9Z2FW/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B009X9Z2FW&linkCode=as2&tag=jakemccrary08-20&linkId=ZPSKZSRYGAQZ5ISB). It is widely regarded as the best introduction to fountain pens. The medium nib is about the same width as my fine. It is a great introduction to fountain pens. Another great intro pen (that includes a smiling face on the nib) is the [Pilot Kakuno](http://www.amazon.com/gp/product/B00IOOOBU4/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B00IOOOBU4&linkCode=as2&tag=jakemccrary08-20&linkId=WT2WE3JE675WCFCC).
+[^1]: If you want to try out fountain pens I highly recommend the [Pilot Metropolitan](http://www.amazon.com/gp/product/B009X9Z2FW). It is widely regarded as the best introduction to fountain pens. The medium nib is about the same width as my fine. It is a great introduction to fountain pens. Another great intro pen (that includes a smiling face on the nib) is the [Pilot Kakuno](http://www.amazon.com/gp/product/B00IOOOBU4).
 
 No desk is complete without a few fun desk toys. My set of toys
 includes a bobble head of myself (this was a gift from a good friend),
 a 3d printed
 [Success Kid](http://www.shapeways.com/product/MLX77XRTT/success-kid),
-a
-[keyboard switch sampler](http://www.amazon.com/gp/product/B00E71W4O8/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B00E71W4O8&linkCode=as2&tag=jakemccrary08-20&linkId=JR3A5AXJUGQ2Z3AD),
+a keyboard switch sampler,
 a few more 3d printed objects, and some climbing related hand toys.
 
 ## End
