@@ -118,6 +118,16 @@
 (defn ->yyyy-MM-dd [d]
   (.format d (DateTimeFormatter/ofPattern "yyyy-MM-dd")))
 
+(defn- rfc-3339-now []
+  (let [fmt (DateTimeFormatter/ofPattern "yyyy-MM-dd'T'HH:mm:ssxxx")
+        now (ZonedDateTime/now java.time.ZoneOffset/UTC)]
+    (.format now fmt)))
+
+(defn- rfc-3339 [local-date]
+  (let [fmt (DateTimeFormatter/ofPattern "yyyy-MM-dd'T'HH:mm:ssxxx")
+        now (ZonedDateTime/of (.atTime local-date 23 59 59) java.time.ZoneOffset/UTC)]
+    (.format now fmt)))
+
 (defn date->human-readable [d]
   (.format d (.withLocale (DateTimeFormatter/ofLocalizedDate FormatStyle/LONG) Locale/ENGLISH)))
 
@@ -143,7 +153,8 @@
       date
       (-> (assoc-in [:metadata :local-date] date)
           (assoc-in [:metadata :published-yyyymmdd] (->yyyy-MM-dd date))
-          (assoc-in [:metadata :published-readable] (date->human-readable date)))
+          (assoc-in [:metadata :published-readable] (date->human-readable date))
+          (assoc-in [:metadata :published-rfc3339] (rfc-3339 date)))
       (-> source :metadata :start-date)
       (assoc-in [:metadata :start-date-readable] (date->human-readable (-> source :metadata :start-date)))
       (-> source :metadata :end-date)
@@ -171,13 +182,24 @@
         #_#_        :html
         post-process-markdown)))
 
+(defn blog-url
+  ([path] (blog-url "" path))
+  ([root path]
+   (-> path
+       (clojure.string/replace "index.html" "")
+       (clojure.string/replace-first #"^/" "")
+       (clojure.string/replace #"/$" "")
+       (str "/")
+       (->> (str root "/")))))
+
 (defn load-sources []
   (when (fs/exists? source-dir)
     (for [path (fs/glob source-dir "**.markdown")
           :let [source (as-> (markdown->source path) source
                          (assoc source :input-file (fs/file path))
                          (assoc source :output-file (output-file source))
-                         (assoc source :template (load-template source)))]
+                         (assoc source :template (load-template source))
+                         (assoc-in source [:metadata :canonical] (blog-url blog-root (:output-file source))))]
           :when (or *preview*
                     (or (not (contains? (:metadata source) :published))
                         (-> source :metadata :published)))]
@@ -218,16 +240,6 @@
                     :page (:metadata source)
                     :template (:template source)}))))
 
-(defn blog-url
-  ([path] (blog-url "" path))
-  ([root path]
-   (-> path
-       (clojure.string/replace "index.html" "")
-       (clojure.string/replace-first #"^/" "")
-       (clojure.string/replace #"/$" "")
-       (str "/")
-       (->> (str root "/")))))
-
 (defn- article-list [articles]
   [:ul {:class "post-list"}
    (for [article articles
@@ -252,16 +264,6 @@
                           (article-list articles)])})))
 
 (xml/alias-uri 'atom "http://www.w3.org/2005/Atom")
-
-(defn- rfc-3339-now []
-  (let [fmt (DateTimeFormatter/ofPattern "yyyy-MM-dd'T'HH:mm:ssxxx")
-        now (ZonedDateTime/now java.time.ZoneOffset/UTC)]
-    (.format now fmt)))
-
-(defn- rfc-3339 [local-date]
-  (let [fmt (DateTimeFormatter/ofPattern "yyyy-MM-dd'T'HH:mm:ssxxx")
-        now (ZonedDateTime/of (.atTime local-date 23 59 59) java.time.ZoneOffset/UTC)]
-    (.format now fmt)))
 
 (defn- atom-feed
   ;; validate at https://validator.w3.org/feed/check.cgi
