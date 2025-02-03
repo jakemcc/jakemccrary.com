@@ -1,0 +1,118 @@
+* DONE Pages
+CLOSED: [2025-01-21 Tue 19:32]
+- CLOSING NOTE [2025-01-21 Tue 19:32]
+** DONE adventure pages
+CLOSED: [2025-01-21 Tue 19:32]
+- CLOSING NOTE [2025-01-21 Tue 19:32]
+** DONE [#A] RSS feed
+CLOSED: [2025-01-20 Mon 10:44]
+- CLOSING NOTE [2025-01-20 Mon 10:44]
+- [X] timestamps are off compared to old but I don't think I really care?
+** DONE category pages
+CLOSED: [2025-01-20 Mon 11:20]
+- CLOSING NOTE [2025-01-20 Mon 11:20]
+** DONE category rss feeds?
+CLOSED: [2025-01-20 Mon 11:20]
+- CLOSING NOTE [2025-01-20 Mon 11:20]
+** DONE archive page
+CLOSED: [2025-01-19 Sun 15:30]
+- CLOSING NOTE [2025-01-19 Sun 15:30]
+** DONE about page
+CLOSED: [2025-01-19 Sun 16:06]
+- CLOSING NOTE [2025-01-19 Sun 16:06]
+** CANCELED tag pages?
+CLOSED: [2025-01-19 Sun 16:06]
+* DONE footnotes seem janky
+CLOSED: [2025-01-21 Tue 20:06]
+- CLOSING NOTE [2025-01-21 Tue 20:06]
+* DONE preview on posts or full text on index / archive page?
+CLOSED: [2025-01-20 Mon 10:10]
+- CLOSING NOTE [2025-01-20 Mon 10:10]
+* DONE images
+CLOSED: [2025-01-19 Sun 17:35]
+- CLOSING NOTE [2025-01-19 Sun 17:35]
+* DONE Output path of existing posts should be the same as current blog (date and everything :frown:)
+CLOSED: [2025-01-19 Sun 16:47]
+- CLOSING NOTE [2025-01-19 Sun 16:47]
+* DONE [#A] drafts vs non-drafts
+CLOSED: [2025-01-20 Mon 10:16]
+- CLOSING NOTE [2025-01-20 Mon 10:16]
+- [X] need a way to render drafts, env arg? program arg?
+* CANCELED output path of new posts should just be titles
+CLOSED: [2025-01-19 Sun 16:47]
+* DONE Sort the posts list on the main page
+CLOSED: [2025-01-19 Sun 21:16]
+- CLOSING NOTE [2025-01-19 Sun 21:16]
+* DONE spacing on code blocks
+* DONE images specified using ~{%~ syntax in articles
+CLOSED: [2025-01-25 Sat 11:52]
+- CLOSING NOTE [2025-01-25 Sat 11:52]
+* DONE sitemap.xml
+CLOSED: [2025-01-25 Sat 16:26]
+- CLOSING NOTE [2025-01-25 Sat 16:26]
+* DONE feed.json
+CLOSED: [2025-01-25 Sat 16:26]
+- CLOSING NOTE [2025-01-25 Sat 16:26]
+- ehh, maybe, might need to escape the html fields? or something
+* CANCELED Decide on overall design of site
+CLOSED: [2025-01-25 Sat 11:59]
+- CLOSING NOTE [2025-01-25 Sat 11:59]
+* DONE Diff output paths and confirm if any links will be broken
+CLOSED: [2025-01-25 Sat 18:40]
+- CLOSING NOTE [2025-01-25 Sat 18:40]
+- quick look using below command: missing experiments, breath, cname, 403/404, maybe an off by 1 error on some dates
+ #+begin_src bash
+ diff --brief --recursive output/ ../blog/public/ | less
+ #+end_src
+* DONE [#A] footer?
+CLOSED: [2025-01-26 Sun 13:16]
+- CLOSING NOTE [2025-01-26 Sun 13:16]
+- [X] link to disclosure
+- [ ] copyright / CC-by
+* DONE [#A] license
+CLOSED: [2025-01-26 Sun 13:16]
+- CLOSING NOTE [2025-01-26 Sun 13:16]
+If gointo put a copyright year, have it be from first year published to last year published
+- year
+#+begin_src html
+ <p xmlns:cc="http://creativecommons.org/ns#" >This work by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://jakemccrary.com">Jake McCrary</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""></a></p> 
+#+end_src
+- no year
+#+begin_src html
+  <p xmlns:cc="http://creativecommons.org/ns#" >This work by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://jakemccrary.com">Jake McCrary</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""></a></p> 
+#+end_src
+
+* DONE Code syntax highlighting?
+CLOSED: [2025-01-26 Sun 14:01]
+- CLOSING NOTE [2025-01-26 Sun 14:01]
+- [X] kind of working!
+- [X] could write a bit that checks that every language has a highlight.js
+* DONE not a huge fan of the inline code formatting
+CLOSED: [2025-01-26 Sun 13:48]
+- CLOSING NOTE [2025-01-26 Sun 13:48]
+* DONE adventure-camp.html could be under /adventures?
+CLOSED: [2025-01-26 Sun 14:12]
+- CLOSING NOTE [2025-01-26 Sun 14:12]
+* DONE [#B] remove amazon affiliates?
+CLOSED: [2025-01-30 Thu 17:22]
+- CLOSING NOTE [2025-01-30 Thu 17:22]
+- [X] update disclosure policy
+* DONE check out previous markup for help with sharing / description metadata
+CLOSED: [2025-01-30 Thu 17:22]
+- CLOSING NOTE [2025-01-30 Thu 17:22]
+* TODO maybe useful to keep files-that-don't-change separate from the sources? Could just copy the entire tree over than?
+* TODO [#C] comments?
+* TODO disclaimers?
+- [ ] hosted on github
+- [ ] goes through cloudflare
+- [ ] If I do comments => something about those
+* TODO [#C] display categories for posts?
+* TODO [#C] line numbers on code blocks?
+* TODO check adventure-camp.html redirect
+* TODO maybe make dates care about timestamps? Be a bit less sloppy
+- :date is mostly a date string, except for a couple spots
+* TODO [#C] ways of encouraging folks to browse around
+- [ ] sidebar with recent posts
+- [ ] sidebar with rss and newsletter
+- [ ] bottom of post, next article, previous?
+

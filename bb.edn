@@ -1,0 +1,11 @@
+;; bb.edn
+{:paths ["bb"]
+ :deps {markdown-clj/markdown-clj {:mvn/version "1.11.2"}
+        org.babashka/http-server {:mvn/version "0.1.11"}
+        selmer/selmer {:mvn/version "1.12.53"}
+        camel-snake-kebab/camel-snake-kebab {:mvn/version "0.4.2"}}
+
+ :tasks
+ {:requires ([blog.render])
+  render {:task (exec 'blog.render/render)}
+  test {:task (exec 'blog.render/test)}}}

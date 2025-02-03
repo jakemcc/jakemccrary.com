@@ -1,0 +1,181 @@
+---
+dated-url: true
+layout: post
+title: Reading in 2023
+date: 2024-02-18 18:19 -0600
+comments: true
+published: true
+description: A look back at 2023 reading.
+keywords: 2023, books, book review, reading
+categories:
+- books
+---
+
+At the beginning of every year (not so much the beginning this year), I take the time to update my records of what I've read the previous year and write up a summary.
+
+
+Previous summaries: [2013](/blog/2014/01/01/using-incanter-to-review-my-2013-reading/), [2014](/blog/2015/01/08/reading-in-2014/), [2015](/blog/2016/03/13/reading-in-2015/), [2016](/blog/2017/01/04/reading-in-2016/), [2017](/blog/2018/03/03/reading-in-2017/), [2018](/blog/2019/01/21/reading-in-2018/), [2019](/blog/2020/01/11/reading-in-2019/), [2020](/blog/2021/01/24/reading-in-2020/), [2021](/blog/2022/01/02/reading-in-2021/), [2022](/blog/2023/01/14/reading-in-2022/).
+
+I've continued to keep track of my reading using [Goodreads](http://goodreads.com).
+My [profile](https://www.goodreads.com/user/show/3431614-jake-mccrary) has nearly the full list of the books I've read since 2010.
+
+## 2023 Goals
+
+Last year I wrote: 
+
+> I’d like to do a better job of keeping track of my reading. This should be pretty easy to do.
+
+> I don’t feel too bad about the reduction in reading but I’d like to read more this year. Some of my reading time has been replaced with worthwhile endeavors but not always.
+
+> Reading rejuvenates me. I need to keep it a regular part of my life.
+
+Well, I don't remember how poorly I did in 2022 of keeping tack of reading but I don't think I did a great job in 2023.
+Was it better than 2022? 
+Perhaps.
+
+I didn't write many reviews for specific books nor did I send out any emails about what I was reading throughout the year.
+But I did do fewer corrections of the data I had in Goodreads.
+
+I did read more than I did last year.
+
+If I were grading myself on how well I achieved my goal, I'd give myself a B.
+
+## Highlights
+
+Below are the highlights from 2023.
+Any title link will bring you to Goodreads.
+
+### Five-star books
+
+#### [Sea of Tranquility](https://www.goodreads.com/book/show/58601245-sea-of-tranquility) by Emily St. John Mandel
+
+I started off the year with this book and really enjoyed it.
+It is a pandemic story that has characters spanning hundreds of years.
+
+It is a little weird and beautiful.
+It did an excellent job of conveying feeling.
+
+This is one of the few books that I did a mini-review of when I finished it.
+That review: 
+
+> A beautiful novel. While reading, I found myself rereading parts. Not because the sentences were confusing but because they expressed such a clear feeling.
+
+I highly recommend this book.
+
+#### [The First Bad Man](https://www.goodreads.com/book/show/53440834-the-first-bad-man) by Miranda July
+
+This book is real weird and fantastic.
+The main character is extremely interesting.
+I had a blast reading this.
+
+#### [Network Effect](https://www.goodreads.com/book/show/52381770-network-effect) by Martha Wells
+
+I really enjoy this series and thought this as an excellent addition to it.
+
+#### [Tomorrow, and Tomorrow, and Tomorrow](https://www.goodreads.com/book/show/58916147-tomorrow-and-tomorrow-and-tomorrow) by Gabrielle Zevin
+
+This was an excellent book about friendship and creative, collaborative pursuits.
+
+#### [How to Live: 27 conflicting answers and one weird conclusion](https://www.goodreads.com/book/show/61351606-how-to-live) by Derek Sivers
+
+A friend offered to send copies of this books to anyone who was up to reading it and I'm glad I spoke up and asked.
+Each chapter presents a philosophy.
+And the next chapter usually presents a different, conflicting philosophy.
+Every chapter is small, so it is easy to read a bit and take some time to reflect.
+
+#### [The Little Book of Talent: 52 Tips for Improving Your Skills](https://www.goodreads.com/book/show/18652778-the-little-book-of-talent) by Daniel Coyle
+
+A bunch of distilled ideas around improvement.
+No fluff, just tips.
+
+#### [Wool Omnibus](https://www.goodreads.com/book/show/13453029-wool-omnibus) by Hugh Howey
+
+I have mixed feelings about including this book on the list.
+I reread this series when I was debating watching the television show.
+Even on a second read, I still enjoyed this story.
+
+Is it complex and view shattering science fiction?
+Nahh, not really.
+
+Is it entertaining?
+Yep.
+
+### Other highlights
+
+#### [Chain-Gang All-Stars](https://www.goodreads.com/book/show/61618096-chain-gang-all-stars) by Nana Kwame Adjei-Brenyah
+
+This is a really well done book that explores a modern gladiator system of punishment for criminals.
+It is dark and creative and a solid commentary on modern society.
+
+Maybe this should have been five-stars.
+
+#### [The Sparrow](https://www.goodreads.com/book/show/35162756-the-sparrow) by Mary Doria Russell
+
+I knew nothing about it going in and thought this was a interesting take on first contact with aliens.
+
+## Stats
+
+I read 53 books in 2023.
+
+```org
+| Year | # of Pages | # of Books |
+|------+------------+------------|
+| 2023 |      14956 |         53 |
+| 2022 |      10127 |         35 |
+| 2021 |      19564 |         57 |
+| 2020 |      12093 |         43 |
+| 2019 |      15994 |         42 |
+| 2018 |      13538 |         36 |
+| 2017 |      18317 |         48 |
+| 2016 |      22790 |         59 |
+| 2015 |      21689 |         51 |
+| 2014 |      24340 |         71 |
+| 2013 |      19815 |         60 |
+| 2012 |      14208 |         44 |
+| 2011 |       9179 |         19 |
+| 2010 |      14667 |         46 |
+```
+
+There are definitely some spiky months in the data.
+
+![Book and pages count by month](/images/reading-by-month-2023.svg "Number of books and pages for each month")
+
+Unsurprisingly, electronic books are still the dominate format.
+
+```org
+|           | 2023 | 2022 | 2021 | 2020 | 2019 | 2018 | 2017 | 2016 | 2015 |
+|-----------+------+------+------+------+------+------+------+------+------|
+| audiobook |    0 |    0 |    0 |    1 |    0 |    0 |    0 |    0 |    0 |
+| ebook     |   51 |   34 |   56 |   41 |   43 |   37 |   37 |   56 |   47 |
+| hardcover |    0 |    1 |    0 |    0 |    1 |    1 |    7 |    0 |    1 |
+| paperback |    2 |    0 |    1 |    1 |    7 |    5 |    5 |    3 |    3 |
+```
+
+Fiction continued to dominate the book count this year.
+If I did this by page count I think it would tell a different story, as I read quite a few short stories published as Kindle books and this skewed my fiction book count high.
+
+
+```org
+|                           |  2023 | 2022 |   2021 |   2020 |   2019 |   2018 |
+|---------------------------+-------+------+--------+--------+--------+--------|
+| fiction                   |    47 |   28 |     46 |     26 |     28 |     29 |
+| non-fiction               |     6 |    7 |     11 |     17 |     23 |     14 |
+| fiction:non-fiction ratio | 7.8:1 |  4:1 | 4.18:1 | 1.53:1 | 1.22:1 | 2.07:1 |
+
+```
+
+Here is the star rating distribution.
+
+```org
+|             | 2 stars | 3 stars | 4 stars | 5 stars |
+|-------------+---------+---------+---------+---------|
+| fiction     |       0 |      21 |      22 |       4 |
+| non-fiction |       0 |       1 |       3 |       2 |
+```
+
+## 2024 goals
+
+I'd like to maintain a regular reading practice.
+I think this means having a similar number of pages read this year.
+
+I have a massive stack of books at home that I haven't read through yet, I'd like to whittle that down some.
