@@ -12,6 +12,6 @@ cp -R output/* docs/
 
 git add docs
 git commit -am 'deploy'
-# git push
+git push
 
-# ./clear-cloudflare.sh
+./clear-cloudflare.sh
