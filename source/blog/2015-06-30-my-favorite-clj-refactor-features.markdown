@@ -77,7 +77,7 @@ I never have to type a namespace symbol again I'll be happy.
 Below is my entire clj-refactor setup from my Emacs init.el. It
 doesn't take much to get it to a state I like.
 
-```elisp
+```lisp
 (require 'clj-refactor)
 
 ;; Add custom magic requires.

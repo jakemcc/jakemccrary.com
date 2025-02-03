@@ -30,7 +30,7 @@ First, using Leiningen 1.4.0, I ran `lein install swank-clojure 1.3.0-SNAPSHOT`.
 
 Next I wrote a function in [elisp](http://en.wikipedia.org/wiki/Emacs_Lisp) that gives emacs the ability to call the newly installed swank-clojure script, wait for the swank server to start, and then connect to it. This function, `clojure-swank`, can be seen below. It creates a buffer named `*clojure-swank*`, runs the newly installed script, and captures the output in the freshly created buffer. When the "Connection opened" line appears `slime-connect` is called, connecting emacs to the freshly started swank server. After this we are at the REPL with all the advantages that emacs and paredit give us.
 
-```elisp
+```lisp
 (defun clojure-swank ()
   "Launch swank-clojure from users homedir/.lein/bin"
   (interactive)
@@ -49,7 +49,7 @@ Next I wrote a function in [elisp](http://en.wikipedia.org/wiki/Emacs_Lisp) that
 
 I've also written a `clojure-kill-swank` function for stopping the swank server.
 
-```elisp
+```lisp
 (defun clojure-kill-swank ()
   "Kill swank process started by lein swank."
   (interactive)

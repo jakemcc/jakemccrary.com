@@ -66,7 +66,7 @@ I use [use-package](https://github.com/jwiegley/use-package) to configure mine a
 Lines 20-25 remove the hooks.
 I also hard-code `magit-git-executable` to be the full path of the `git` executable on line 5 because folks said this made a difference on macOS.
 
-```elisp
+```lisp
 (use-package magit
   :ensure t
   :bind ("C-c g" . magit-status)

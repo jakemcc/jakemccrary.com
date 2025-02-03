@@ -426,7 +426,24 @@
   (set (map second (re-seq #"language-(\w+)" (:html source)))))
 
 (defn assert-code-highlighting! [sources]
-  (let [supported-languages #{"clojure"}
+  (let [supported-languages (set ["bash"
+                                  "c"
+                                  "clojure"
+                                  "clojure-repl"
+                                  "console" ;; not really there
+                                  "org" ;; not available :shrug:
+                                  "cpp"
+                                  "html" ;; not there but works with xml I guess?
+                                  "java"
+                                  "javascript"
+                                  "lisp"
+                                  "markdown"
+                                  "pgsql"
+                                  "ruby"
+                                  "shell"
+                                  "sql"
+                                  "typscript"
+                                  "xml"])
         required-languages (into #{}
                                  (mapcat extract-languages)
                                  sources)]
@@ -434,7 +451,7 @@
                                                     supported-languages))]
       (with-out-str
         (println "Missing" (clojure.string/join ", " (sort missing)) "from highlight.js")
-        (println "Go regenerate at URL with languages:"
+        (println "Go regenerate at https://highlightjs.org/download with languages:"
                  (->> (clojure.set/union supported-languages required-languages)
                       sort
                       (clojure.string/join ", ")))))))

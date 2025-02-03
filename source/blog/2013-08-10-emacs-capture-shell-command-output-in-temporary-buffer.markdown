@@ -29,7 +29,7 @@ do this so I thought I would share it here in hopes it might benefit others.
 
 First I'll show the code and then I'll explain what it is doing.
 
-``` cl
+```lisp
 (defun blog-example ()
   (interactive)
   (with-output-to-temp-buffer "*blog-example*"
@@ -68,7 +68,7 @@ My use case is a bit more complicated and involves saving the buffer
 I'm currently editing and then running a command against the saved
 file. Below is some sample code that does something similar.
 
-``` cl
+```lisp
 (defun example2 ()
   (interactive)
   (when (and (buffer-modified-p)

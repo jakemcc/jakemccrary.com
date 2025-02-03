@@ -12,7 +12,7 @@ time in Emacs. I'm working in a few different projects and
 wanted a quicker way to jump between them. My first attempt at this
 ended with me defining many functions that looked like the following.
 
-``` cl
+``` lisp
 (defun b/test-refresh ()
   (interactive)
   (find-file "~/src/jakemcc/lein-test-refresh/test-refresh/project.clj"))
@@ -34,7 +34,7 @@ Taking advantage of this structure I wrote some Emacs lisp to walk a
 directory and define functions that open up any found project.clj
 files.
 
-``` cl
+``` lisp
 ;; -*- lexical-binding: t -*-
 
 (defun open-file-fn (file) 
@@ -64,7 +64,7 @@ prefixed by `prefix`.
 With those two functions defined all that is left is to call
 `create-project-shortcuts`.
 
-``` cl
+``` lisp
 (create-project-shortcuts "b/" "~/src/jakemcc")
 ```
 
