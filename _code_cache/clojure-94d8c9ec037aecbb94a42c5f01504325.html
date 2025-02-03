@@ -1,9 +1,0 @@
-<div class="highlight"><pre><span class="nv">generate&gt;</span> <span class="p">(</span><span class="nf">use</span> <span class="ss">&#39;clojure</span><span class="o">.</span><span class="nv">test</span><span class="p">)</span>
-<span class="nv">nil</span>
-<span class="nv">generate&gt;</span> <span class="p">(</span><span class="nf">deftest</span> <span class="nv">generate-some-tests</span>
-            <span class="p">(</span><span class="nb">doseq </span><span class="p">[</span><span class="nv">input</span> <span class="p">(</span><span class="nf">permutations</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">9</span><span class="p">])]</span>
-                   <span class="p">(</span><span class="nf">is</span> <span class="p">(</span><span class="nb">= </span><span class="mi">10</span> <span class="p">(</span><span class="nb">apply </span><span class="nv">silly-add</span> <span class="nv">input</span><span class="p">))</span>
-                       <span class="p">(</span><span class="nb">str </span><span class="s">&quot;Failed on input: &quot;</span> <span class="p">(</span><span class="nb">seq </span><span class="nv">input</span><span class="p">)))))</span>
-<span class="o">#</span><span class="ss">&#39;generate/generate-some-tests</span>
-</pre>
-</div>

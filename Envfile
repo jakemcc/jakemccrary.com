@@ -1,2 +1,0 @@
-export PATH="$(pyenv root)/shims:${PATH}"
-export WAS_SOURCED=1
