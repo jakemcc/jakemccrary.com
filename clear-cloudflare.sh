@@ -21,6 +21,6 @@ if [ "x${CLOUDFLARE_AUTH_KEY}x" != "xx" ]; then
          -H "Content-Type:application/json" \
          --data '{"files":["http://jakemccrary.com/", "http://jakemccrary.com/index.html", "http://jakemccrary.com/atom.xml", "http://jakemccrary.com/feed.json", "http://www.jakemccrary.com/", "http://www.jakemccrary.com/index.html", "http://www.jakemccrary.com/atom.xml", "http://www.jakemccrary.com/feed.json", "https://jakemccrary.com/", "https://jakemccrary.com/index.html", "https://jakemccrary.com/atom.xml", "https://jakemccrary.com/feed.json", "https://www.jakemccrary.com/", "https://www.jakemccrary.com/index.html", "https://www.jakemccrary.com/atom.xml", "https://www.jakemccrary.com/feed.json", "https://jakemccrary.com/blog/archives/", "https://jakemccrary.com/blog/archives/index.html", "https://www.jakemccrary.com/blog/archives/", "https://www.jakemccrary.com/blog/archives/index.html", "http://jakemccrary.com/blog/archives/", "http://jakemccrary.com/blog/archives/index.html", "http://www.jakemccrary.com/blog/archives/", "http://www.jakemccrary.com/blog/archives/index.html"]}'
 else 
-    echo "No CLOUDFLAIR_AUTH_KEY set"
+    echo "No CLOUDFLARE_AUTH_KEY set"
     exit 1
 fi 
