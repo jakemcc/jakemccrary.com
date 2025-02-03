@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Jake McCrary's articles on process]]></title>
+  <link href="https://jakemccrary.com/atom.xml" rel="self"/>
+  <link href="https://jakemccrary.com/"/>
+  <updated>2025-02-03T00:51:56+00:00</updated>
+  <id>https://jakemccrary.com/</id>
+  <author>
+    <name><![CDATA[Jake McCrary]]></name>
+  </author>
+  <entry>
+    <id>https://jakemccrary.com/blog/2015/07/03/github-code-reviews/index.html</id>
+    <link href="https://jakemccrary.com/blog/2015/07/03/github-code-reviews/index.html"/>
+    <title><![CDATA[GitHub Code Reviews]]></title>
+    <updated>2015-07-03T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p>Last December I wrote about the <a href='/blog/2014/12/09/an-effective-code-review-process/'>effective code review process</a> I started at Outpace. The process works well; participants say it is the most effective review process they've experienced. The rest of this post is a summary of the process with a bit of an enhancement around setting up the code for review. I'd recommend you read the original <a href='/blog/2014/12/09/an-effective-code-review-process/'>post</a> for a bit more color on the process.</p><h3>Steps for GitHub code review</h3><ol><li>Select the code to review.</li><li>About a week before the review, create a branch and delete the code   you're reviewing.</li><li>Push this branch to GitHub and open a pull request. This pull   request provides a location where comments can be made on every   line of code.</li><li>Schedule the code review meeting. Make sure participants have two   to three days to asynchronously review the code in the pull   request.</li><li>Have the code review. Get everyone together (video chat or in person)   and go through the comments on the pull request and discuss. Add   action items as a comment. The leader of the code review keeps   discussion moving.</li></ol><p>It's a lightweight process. If you're already using GitHub it doesn't bring in any other tools and, unlike some dedicated code review software I've used, the GitHub pull request interface has good performance.</p><p>One complaint about this process is that the code you're reviewing appears as deleted in the pull request. It is a superficial complaint but seeing the entire code base as deleted can feel a bit weird.</p><p>For the most recent code review, I figured out how to have all the code appear as added. The snippet below contains the steps and example commands.</p><pre><code class="language-console">
+# cd to the repository you are reviewing.
+cd blog
+
+# Make a new branch.
+git checkout -b empty-repo
+
+# Copy all files in repo to a temporary directory.
+rm -rf /tmp/repo &amp;&amp; mkdir /tmp/repo &amp;&amp; cp -R &#42; /tmp/repo
+
+# Remove all files from repository, commit, and push to GitHub.
+rm -rf &#42;
+git commit -am 'remove all files'
+git push origin empty-repo
+
+# Create a new branch with the empty-repo as the parent.
+git checkout -b code-review
+
+# Copy back in the files and add the files you want to review.
+# Commit and push to GitHub.
+cp -R /tmp/repo/&#42; .
+git add files-to-review
+git commit -m 'adding files for review'
+git push origin code-review
+
+# Now, go to project on GitHub and switch to the code-review branch.
+# Open a pull request comparing the empty-repo and the code-review
+# branch.
+
+</code></pre><p>Voila, you now have a pull request with every line under review marked as added instead of deleted! It takes a little more than two times the number steps required to open a pull request with the code deleted but you might find it worth it. Seeing code as added instead of removed is a minor thing but minor things can make a process more enjoyable. It is nice to know it is possible.</p><p>If you aren't doing code reviews or have found them useless in the past, I recommend you try out this process. This post is the abbreviated version but it gives you enough to get started. If you haven't done one in this style before, I'd highly recommend reading the longer <a href='/blog/2014/12/09/an-effective-code-review-process/'>post</a> as it gives some details that I've left out here.</p>]]></content>
+  </entry>
+  <entry>
+    <id>https://jakemccrary.com/blog/2014/12/09/an-effective-code-review-process/index.html</id>
+    <link href="https://jakemccrary.com/blog/2014/12/09/an-effective-code-review-process/index.html"/>
+    <title><![CDATA[An Effective Code Review Process]]></title>
+    <updated>2014-12-09T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<blockquote><p> See all of my remote/working-from-home <a href='/blog/categories/remote/'>articles here</a>. </p></blockquote><p><a href='https://twitter.com/searls/status/540603801955471360'><img src="/images/justin-searls-code-reviews-harmful.png" alt="The way most organizations implement code reviews in teams is usually more harmful than helpful. I generally recommend going without them. - Justin Searls" title= "The way most organizations implement code reviews in teams is usually more harmful than helpful. I generally recommend going without them. - Justin Searls" /></a></p><p>The above was tweeted<a href='#fn-1' id='fnref1'><sup>1</sup></a> recently and it resulted in some decent discussion about code reviews. In the past six months at <a href='http://www.outpace.com'>Outpace</a>, I've been part of a handful of code review sessions that have been extremely productive. After the reviews many developers have expressed shock at the effectiveness of the process. A tweet-sized overview of the process we've followed can be found in <a href='https://twitter.com/gigasquid'>Carin Meier</a>'s <a href='https://twitter.com/gigasquid/status/540606002547425281'>responses</a> to the above tweet. Since you can't fit details into tweets the rest of this post expands on our code review process.</p><p>Some background before we dive into the details. <a href='http://www.outpace.com'>Outpace</a> is a software company that practices, despite every programmer working remotely, nearly 100% pair programming. In addition, the team Carin and I are on do most of our work through GitHub pull requests. Before merging with master, the pull requests are reviewed by other teammates. Between pairing and pull requests many eyes see every line of code as changes are made.</p><p>Even with all this, we've found value in having more traditional code reviews. We've found that different feedback and action items emerge from reviewing code that we already have than from reviews of code changes (e.g., pull requests).</p><p>In addition to working for the team described above, the process below has been successfully used to review an internal library where the reviewers where mostly interested users with a couple contributors. It has also been successful on teams that were not adherent to doing work through reviewed pull requests.</p><h3>The Code Review Process</h3><h4>Step 1: Select the code to review</h4><p>Typically we do this between a week and two weeks before the code review. Here we identify the code we want to review and create a two-hour meeting on a Friday at the end of day.</p><p>Having the meeting late on Friday helps create a relaxed environment. The review becomes a time to unwind, enjoy a beverage of choice, and talk about code. I haven't met a developer that doesn't enjoy discussing how to make code better and this lets everyone finish the week doing just that. The code review becomes an uplifting way to finish a week.</p><h4>Step 2: Open the code review</h4><p>A few days (typically late Tuesday or early Wednesday) before the Friday code review meeting we start the review. We do this by opening a <a href='https://github.com'>GitHub</a> pull request. The following steps will create a pull request where you can comment every line of code being reviewed.</p><ol><li>Create a local branch.</li><li>Delete the code being reviewed and commit locally.</li><li>Push the branch to GitHub.</li><li>Open a pull request.</li></ol><p>These steps are necessary because GitHub pull requests only let you view code that has changed. This process marks every line as deleted, which causes every line to appear the <i>Files changed</i> tab.</p><p>Opening the pull request a few days before the review meeting provides a location for pre-meeting comments to be added. This lets reviewers spend a couple days thinking about and commenting on the code. Comments on the pull request indicate a conversation should happen during the code review meeting.</p><h4>Step 3: The code review meeting</h4><p>Its finally Friday and time to review the code as a group. Everyone joins a video conference and someone volunteers to lead the code review. At least one other person volunteers to be a note taker.</p><p>The leader directs the code review and keeps it moving forward. To do this the leader shares their screen with the video conference and scrolls through the <i>Files changed</i> view of the pull request. When a comment appears on screen the leader stops scrolling and discussion starts.</p><p>The comments are read (often silently) and discussion happens. The leader tries to recognize when a conclusion has been reached or when further discussion, outside of the code review, needs to happen. When a conclusion is reached someone (often the leader) states a quick summary and a note taker records the next steps. The next steps are added as additional comments in the comment thread being discussed. As the next steps are recorded the leader moves on to the next comment.</p><p>This continues until either time runs out or the group runs out of things to discuss.</p><p>After the code review a volunteer turns the next steps comments into Trello cards and we take care of the code review items as part of our usual work.</p><h3>Results</h3><p>We've seen impressive improvements to code quality in the projects that have undergone this style of code review. Both small and large changes have happened as a result. Code has become simpler, clearer, and better understood. Additionally, the feeling of collective code ownership has increased.</p><p>Teammates have been surprised at how well this process has worked. More than a couple have said that historically they have not found code reviews useful but that these were.</p><p>This style of code review has worked in a few different settings and I encourage you to give it a shot. <ol class='footnotes'><li id='fn-1'>Reading through the discussion on Twitter after this tweet can give some hints as to what it takes to have an effective code review.<a href='#fnref1'>&#8617;</a></li></ol></p>]]></content>
+  </entry>
+</feed>

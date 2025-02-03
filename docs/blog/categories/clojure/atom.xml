@@ -1,0 +1,1253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Jake McCrary's articles on clojure]]></title>
+  <link href="https://jakemccrary.com/atom.xml" rel="self"/>
+  <link href="https://jakemccrary.com/"/>
+  <updated>2025-02-03T00:51:56+00:00</updated>
+  <id>https://jakemccrary.com/</id>
+  <author>
+    <name><![CDATA[Jake McCrary]]></name>
+  </author>
+  <entry>
+    <id>https://jakemccrary.com/blog/2019/03/20/breaking-change-and-more-in-lein-test-refresh-0-dot-24-dot-0/index.html</id>
+    <link href="https://jakemccrary.com/blog/2019/03/20/breaking-change-and-more-in-lein-test-refresh-0-dot-24-dot-0/index.html"/>
+    <title><![CDATA[Breaking change and more in lein-test-refresh 0.24.1]]></title>
+    <updated>2019-03-20T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p>Today I released <a href='https://github.com/jakemcc/lein-test-refresh'>lein-test-refresh</a> <code>0.24.1</code><a href='#fn-1' id='fnref1'><sup>1</sup></a>. I don't always announce new lein-test-refresh versions with an article but this release breaks some existing behavior so I thought it was worth it.</p><p>Each of these changes is the direct result of interacting with four different <code>lein-test-refresh</code> users. Some of this took place on GitHub and others through email. Thanks to all of you for taking the time to think about improvements and notice oddities and bring them to my attention.</p><h3>Breaking change: Monitoring keystrokes to perform actions</h3><p>Prior to this release, if you hit Ctrl-D then STDIN reads an EOF and <code>test-refresh</code> would quit. With version 0.24.1, <code>test-refresh</code> no longer does that. Instead, it stops monitoring for input and just keeps running tests. Since it stops monitoring for input it no longer notices when you hit Enter to cause your tests to rerun. You can still stop <code>lein test-refresh</code> by sending a SIGINT with Ctrl-C.</p><p>This change was made because there is some combination of environments where if <code>test-refresh</code> execs <code>/bin/bash</code> then it receives an EOF on STDIN. Before this change, that means <code>test-refresh</code> would quit unexpectedly. Now it will keep going.</p><p>Thanks <a href='https://github.com/cloojure'>Alan Thompson</a> for bringing this to my attention and taking the time to help diagnose the problem.</p><h3>You can supply your own narrowing test selector</h3><p>Being able to tell <code>test-refresh</code> to narrow its focus by adding <code>:test-refresh/focus</code> as metadata on a test or namespace has quickly become a favorite feature of many users. Now you can configure a shorter keyword by specifying configuration in your profile. See the <a href='https://github.com/jakemcc/lein-test-refresh/blob/1b5165660d9e40d9394809a95b148ec758a6d56b/sample.project.clj#L61-L65'>sample project.clj</a> for how to set this up.</p><p>Thanks <a href='https://github.com/metametadata'>Yuri Govorushchenko</a> for the suggestion.</p><h3>Experimental: Run in a repl</h3><p>I've turned down this feature in the past but a narrower request came up and I thought it seemed useful. <code>test-refresh</code> now exposes a function you can call in a repl to run <code>test-refresh</code> in that repl. This makes the repl useless for any other task. To do this, first add <code>lein-test-refresh</code> as a dependency instead of a plugin to your project.clj. Then, require the namespace and call the function passing in one or more paths to your test directories. Example below.</p><pre><code class="language-clojure">user=&gt; &#40;require 'com.jakemccrary.test-refresh&#41;
+nil
+user=&gt; &#40;com.jakemccrary.test-refresh/run-in-repl &quot;test&quot;&#41;
+&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;
+&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42; Running tests &#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;
+</code></pre><p><a href='https://github.com/jakemcc/lein-test-refresh/issues/80'>This request</a> was done so that you can run it in Cursive's repl and gain the ability to click on stacktraces. Thanks <a href='https://github.com/klauswuestefeld'>Klaus Wuestefeld</a> for bringing this up again with a really solid and focused use case.</p><h3>Better output on exceptions while reloading</h3><p>This was a <a href='https://github.com/jakemcc/lein-test-refresh/pull/81'>pull request</a> from <a href='https://github.com/minhtuannguyen'>Minh Tuan Nguyen</a>. Now figuring out where to look for the error will be a little easier.</p><h2>Thank you</h2><p>Thanks to all the users of lein-test-refresh. I've found it to be very valuable to the way I work and I'm very happy that others do as well. <ol class='footnotes'><li id='fn-1'>This was originally 0.24.0 but that had a bug in it. Sorry about that.<a href='#fnref1'>&#8617;</a></li></ol></p>]]></content>
+  </entry>
+  <entry>
+    <id>https://jakemccrary.com/blog/2019/01/28/how-to-use-leiningen-test-selectors-to-filter-by-test-name/index.html</id>
+    <link href="https://jakemccrary.com/blog/2019/01/28/how-to-use-leiningen-test-selectors-to-filter-by-test-name/index.html"/>
+    <title><![CDATA[How to use Leiningen test selectors to filter by test name]]></title>
+    <updated>2019-01-28T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p><!&ndash; Estimate: 30 minutes &ndash;> <!&ndash; First draft: 38 minutes &ndash;> <!&ndash; First edit: 13 minutes &ndash;> <!&ndash; Second edit: 8 minutes &ndash;></p><p>Leiningen test selectors are great. They allow you to filter what tests run by applying a function to the test's metadata. If that function returns a truthy value then that test will run. <a href='https://github.com/jakemcc/lein-test-refresh/blob/master/CHANGES.md#040'>lein-test-refresh</a> supports them and even includes a built in one for its <a href='https://github.com/jakemcc/lein-test-refresh#built-in-test-narrowing-test-selector'>focus feature</a>.</p><p>I was recently <a href='https://github.com/jakemcc/lein-test-refresh/issues/78'>asked</a> if test-refresh could support filtering tests using a regular expression against the name of a namespace or test. Lucky for me, test-refresh already supports this because of its support of test selectors.</p><p>Most of the examples of Leiningen test selectors show very simple functions that look for the existence of a keyword in the metadata. We can do more than that. We can write a predicate that does whatever we want with the metadata.</p><p>To take a look at a test's metadata, I generated a new project and looked at the generated default test file.</p><pre><code class="language-clojure">&#40;ns selector.core-test
+  &#40;:require &#91;clojure.test :refer :all&#93;
+            &#91;selector.core :refer :all&#93;&#41;&#41;
+
+&#40;deftest a-test
+  &#40;testing &quot;FIXME, I fail.&quot;
+    &#40;is &#40;= 0 1&#41;&#41;&#41;&#41;
+</code></pre><p>I then used my repl and to see what metadata was on the test.</p><pre><code class="language-clojure">selector.core-test&gt; &#40;meta #'a-test&#41;
+{:test #function&#91;selector.core-test/fn--17267&#93;,
+ :line 5,
+ :column 1,
+ :file &quot;/Users/jake/src/jakemcc/blog-examples/selector/test/selector/core&#95;test.clj&quot;,
+ :name a-test,
+ :ns #namespace&#91;selector.core-test&#93;}
+</code></pre><p>Given the metadata above, I wrote the selector below which lets us select only integration tests.</p><pre><code class="language-clojure">:test-selectors {:integration &#40;fn &#91;m&#93;
+                                &#40;or &#40;clojure.string/includes? &#40;str &#40;:ns m&#41;&#41;
+                                                              &quot;integration&quot;&#41;
+                                    &#40;clojure.string/includes? &#40;str &#40;:name m&#41;&#41;
+                                                              &quot;integration&quot;&#41;&#41;&#41;}
+</code></pre><p>You could write the above code is many different ways. Whatever you write, it needs to look for the existence of <code>integration</code> in either the test's name or namespace.</p><p>If you wanted to make <code>lein test</code> or <code>lein test-refresh</code> only run non-integration tests you can add a default test selector to the project.clj.</p><pre><code class="language-clojure">:test-selectors {:default &#40;fn &#91;m&#93;
+                            &#40;not &#40;or &#40;clojure.string/includes? &#40;str &#40;:ns m&#41;&#41;
+                                                               &quot;integration&quot;&#41;
+                                     &#40;clojure.string/includes? &#40;str &#40;:name m&#41;&#41;
+                                                               &quot;integration&quot;&#41;&#41;&#41;&#41;
+                 :integration &#40;fn &#91;m&#93;
+                                &#40;or &#40;clojure.string/includes? &#40;str &#40;:ns m&#41;&#41;
+                                                              &quot;integration&quot;&#41;
+                                    &#40;clojure.string/includes? &#40;str &#40;:name m&#41;&#41;
+                                                              &quot;integration&quot;&#41;&#41;&#41;}
+</code></pre><p>Enjoy! I hope this example helps you run a subset<a href='#fn-1' id='fnref1'><sup>1</sup></a> of your Clojure tests through Leiningen test selectors.</p><ol class='footnotes'><li id='fn-1'>Running a subset of your tests can be helpful and test-refresh has a few features that help you do that. If you can, I'd still recommend making all your tests fast enough to run them all the time.<a href='#fnref1'>&#8617;</a></li></ol>]]></content>
+  </entry>
+  <entry>
+    <id>https://jakemccrary.com/blog/2019/01/06/notifications-with-tmux-and-lein-test-refresh/index.html</id>
+    <link href="https://jakemccrary.com/blog/2019/01/06/notifications-with-tmux-and-lein-test-refresh/index.html"/>
+    <title><![CDATA[Notifications with tmux and lein-test-refresh]]></title>
+    <updated>2019-01-06T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p>I've been using Emacs in a remote <a href='https://github.com/tmux/tmux'>tmux</a> session lately and I've been missing <a href='https://github.com/jakemcc/lein-test-refresh#notifications'>lein-test-refresh</a> notifications when my Clojure tests pass or fail. Luckily, it only took me a little bit of searching to figure out a solution for when I'm working inside of tmux.</p><p>Below is a GIF of the notifications I get as my tests run and pass or fail.</p><p><img src="/images/tmux-test-refresh.gif" alt="tmux and test-refresh notifications" title="tmux and test-refresh notifications" /></p><p>With the above notifications, I can keep my focus on my code and only switch to the tmux window with <code>lein test-refresh</code> running when a test fails.</p><p>This was pretty easy to setup. You can trigger a message in tmux by running <code>tmux display-message &lt;MESSAGE&#95;HERE&gt;</code>. To configure <a href='https://github.com/jakemcc/lein-test-refresh#notifications'>lein-test-refresh</a> to send notifications to tmux simply include the following in your <code>:test-refresh</code> section of your <code>project.clj</code> or <code>profiles.clj</code>.</p><pre><code class="language-clojure">:test-refresh {:notify-command &#91;&quot;tmux&quot; &quot;display-message&quot;&#93;}
+</code></pre><p>I hope you enjoy this. Its has made using a remote terminal with tmux and <a href='https://github.com/jakemcc/lein-test-refresh'>lein-test-refresh</a> more enjoyable.</p>]]></content>
+  </entry>
+  <entry>
+    <id>https://jakemccrary.com/blog/2018/07/16/built-in-test-narrowing-with-lein-test-refresh/index.html</id>
+    <link href="https://jakemccrary.com/blog/2018/07/16/built-in-test-narrowing-with-lein-test-refresh/index.html"/>
+    <title><![CDATA[Built-in test narrowing with lein-test-refresh]]></title>
+    <updated>2018-07-16T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p>If you follow my work you probably know that I value fast feedback cycles. Most of the open-source I maintain was developed to enable faster feedback cycles. This is why <a href='https://github.com/jakemcc/lein-test-refresh/'>lein-test-refresh</a> and <a href='https://github.com/clojure-expectations/lein-autoexpect'>lein-autoexpect</a> were originally created.</p><p>Leiningen supports <a href='https://github.com/technomancy/leiningen/blob/master/doc/TUTORIAL.md#tests'>test selectors</a> and lein-test-refresh <a href='https://github.com/jakemcc/lein-test-refresh/blob/master/CHANGES.md#040'>does as well</a>. This lets you start-up a testing session and only run tests or namespaces with certain metadata on them. This is a super useful feature as it lets you narrow your testing scope to one (or a handful) of tests while working on solving a specific problem.</p><p>lein-test-refresh now has built-in functionality that allows you to focus your test scope without restarting the Leiningen test process. If lein-test-refresh sees a <code>deftest</code> or <code>ns</code> form marked with <code>:test-refresh/focus true</code> in its metadata, then it will only run tests marked with <code>:test-refresh/focus</code>.</p><p>Below is an example of what this looks like.</p><pre><code class="language-clojure">&#40;deftest &#94;:test-refresh/focus test-addition
+  &#40;is &#40;= 2 &#40;+ 1 1&#41;&#41;&#41;&#41;
+</code></pre><p>This functionality has only been available for a short period of time and I've already found it useful. I think you will too. Enjoy.</p>]]></content>
+  </entry>
+  <entry>
+    <id>https://jakemccrary.com/blog/2018/06/14/clojure-prevent-multiple-simultaneous-invocations/index.html</id>
+    <link href="https://jakemccrary.com/blog/2018/06/14/clojure-prevent-multiple-simultaneous-invocations/index.html"/>
+    <title><![CDATA[Preventing duplicate long-running invocations in Clojure]]></title>
+    <updated>2018-06-14T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p>A couple months ago I was looking into a problem and noticed that there was a situation where an expensive operation could be running simultaneously multiple times. This was wasteful.</p><p>This operation happened on a timer and could also be triggered by a power user through the UI. A power user could accidentally (or purposefully) mash on a UI button and cause the instance they're interacting with to grind to a halt<a href='#fn-1' id='fnref1'><sup>1</sup></a>.</p><p>It was pretty easy to prevent. All I needed to introduce was an <code>atom</code> and lean on <code>compare-and-set!</code>. <code>compare-and-set!</code> is a pretty neat function (and concept found in many languages). Here is the docstring:</p><blockquote><p> Atomically sets the value of atom to newval if and only if the  current value of the atom is identical to oldval. Returns true if  set happened, else false </p></blockquote><p>Basically, <code>compare-and-set!</code> changes the value of an atom only if it starts from a specified value and returns a boolean letting you know if it did. </p><p>To prevent an operation from running multiple times, introduce an atom and wrap calling the operation in a conditional using <code>compare-and-set!</code>.  After doing the work, be sure to <code>reset!</code> your atom back to the starting value.</p><p>Below is the code.</p><pre><code class="language-clojure">&#40;defonce running? &#40;atom false&#41;&#41;
+
+&#40;defn- expensive-operation!' &#91;&#93;
+  ;; do work
+  &#41;
+
+&#40;defn expensive-operation! &#91;&#93;
+  &#40;when &#40;compare-and-set! running? false true&#41;
+    &#40;try
+      &#40;expensive-operation!'&#41;
+      &#40;finally
+        &#40;reset! running? false&#41;&#41;&#41;&#41;&#41;
+</code></pre><ol class='footnotes'><li id='fn-1'>OK, not really grind to a halt, but consume unnecessary resources.<a href='#fnref1'>&#8617;</a></li></ol>]]></content>
+  </entry>
+  <entry>
+    <id>https://jakemccrary.com/blog/2018/02/18/using-clojure-macros-for-nicer-error-handling/index.html</id>
+    <link href="https://jakemccrary.com/blog/2018/02/18/using-clojure-macros-for-nicer-error-handling/index.html"/>
+    <title><![CDATA[Using Clojure macros for nicer error handling]]></title>
+    <updated>2018-02-18T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p>In July 2017, I found myself editing some Clojure code that looked approximately like this.</p><pre><code class="language-clojure">&#40;defn validate-required-fields &#91;params&#93;
+  &#40;when-not &#40;contains? params :source&#41;
+    &quot;Missing source field&quot;&#41;&#41;
+
+&#40;defn validate-invariants &#91;params&#93;
+  &#40;when &#40;&gt;= &#40;:lower params&#41; &#40;:higher params&#41;&#41;
+    &quot;lower field must be smaller than higher&quot;&#41;&#41;
+
+;; route handler taken out of other routes
+&#40;GET &quot;/event-redirect/:event&#95;type&quot; request &#91;&#93;
+  &#40;let &#91;params &#40;:params request&#41;&#93;
+    &#40;if-let &#91;field-error &#40;validate-required-fields params&#41;&#93;
+      {:status 400 :body field-error}
+      &#40;if-let &#91;invariant-error &#40;validate-invariants params&#41;&#93;
+        {:status 400 :body invariant-error}
+        &#40;publish-and-redirect params&#41;&#41;&#41;&#41;&#41;
+</code></pre><p>This route handler validates its inputs, and if they fail validation, then it returns an error response. I found this pretty ugly. This small chunk of code has numerous <code>if</code> branches and quite a bit of nesting. All of this makes it hard to read and hurts understanding.</p><p>While adding a new feature to it, I remembered some code I wrote with <a href='https://github.com/snoe'>Case</a> back in late 2015. Back then we were working on Lumanu and wrote a Clojure macro that we called <code>halt-on-error-&gt;&gt;</code>. This macro worked similarly to <code>-&gt;&gt;</code>, except it allowed any step in the processing pipeline to halt execution and trigger an error handler. We were working on a web crawler at the time, and this macro significantly improved the readability of our data processing pipeline. There was a lot of error handling code throughout the web crawler, and this macro helped keep it readable.</p><p>I realized that using a similar macro would make this code easier to follow. I recreated <code>halt-on-error-&gt;&gt;</code> to allow any form to cause it to return early. The above code could then be written like below.</p><pre><code class="language-clojure">&#40;defn validate-required-fields &#91;params&#93;
+  &#40;if &#40;contains? params :source&#41;
+    params
+    &#40;exec/halt {:status 400 :body &quot;Missing source field&quot;}&#41;&#41;&#41;
+
+&#40;defn validate-invariants &#91;params&#93;
+  &#40;if &#40;&lt; &#40;:lower params&#41; &#40;:higher params&#41;&#41;
+    params
+    &#40;exec/halt {:status 400 :body &quot;lower field must be smaller than higher&quot;}&#41;&#41;&#41;
+
+&#40;GET &quot;/event-redirect/:event&#95;type&quot; request &#91;&#93;
+  &#40;exec/halt-on-error-&gt;&gt; request
+                         :params
+                         validate-required-fields
+                         validate-invariants
+                         publish-and-redirect&#41;&#41;
+</code></pre><p>Once you understand <code>halt-on-error-&gt;&gt;</code>, this chunk of code is much easier to read.     </p><p>Let's implement <code>halt-on-error-&gt;&gt;</code>.</p><h2>Implementing <code>halt-on-error-&gt;&gt;</code></h2><p>Here are some tests for that specify how <code>halt-on-error-&gt;&gt;</code> should work.</p><pre><code class="language-clojure">&#40;ns halt.execution-test
+  &#40;:require  &#91;halt.execution :as exec&#93;
+             &#91;clojure.test :refer :all&#93;&#41;&#41;
+
+&#40;def produce-error &#40;constantly &#40;exec/halt {:x &quot;foobar&quot;}&#41;&#41;&#41;
+
+&#40;defn success-fn
+  &quot;Weird function that appends suffix to s&quot;
+  &#91;suffix s&#93;
+  &#40;str s suffix&#41;&#41;
+
+&#40;deftest single-step
+  &#40;is &#40;= &quot;first&quot; &#40;exec/halt-on-error-&gt;&gt; &#40;success-fn &quot;first&quot; &quot;&quot;&#41;&#41;&#41;&#41;&#41;
+
+&#40;deftest two-steps-with-no-error
+  &#40;is &#40;= &quot;firstsecond&quot; &#40;exec/halt-on-error-&gt;&gt; &#40;success-fn &quot;first&quot; &quot;&quot;&#41;
+                                              &#40;success-fn &quot;second&quot;&#41;&#41;&#41;&#41;&#41;
+
+&#40;deftest error-as-first-step
+  &#40;is &#40;= {:x &quot;foobar&quot;} &#40;exec/halt-on-error-&gt;&gt; &#40;produce-error&#41;&#41;&#41;&#41;
+  &#40;is &#40;= {:x &quot;foobar&quot;} &#40;exec/halt-on-error-&gt;&gt; &#40;produce-error&#41;
+                                              &#40;success-fn &quot;first&quot;&#41;&#41;&#41;&#41;&#41;
+
+&#40;deftest error-after-first-step
+  &#40;is &#40;= {:x &quot;foobar&quot;} &#40;exec/halt-on-error-&gt;&gt; &#40;success-fn &quot;first&quot; &quot;&quot;&#41;
+                                              &#40;produce-error&#41;
+                                              &#40;success-fn &quot;second&quot;&#41;&#41;&#41;&#41;&#41;
+
+&#40;deftest works-with-anonymous-functions
+  &#40;is &#40;= 1 &#40;exec/halt-on-error-&gt;&gt; &#40;success-fn &quot;first&quot; &quot;&quot;&#41;
+                                  &#40;&#40;fn &#91;x&#93; &#40;exec/halt 1&#41;&#41;&#41;&#41;&#41;&#41;&#41;
+</code></pre><p>Below is an implementation of <code>halt-on-error-&gt;&gt;</code>.</p><pre><code class="language-clojure">&#40;ns halt.execution&#41;
+
+&#40;defrecord Stopper &#91;x&#93;&#41;
+
+&#40;defn halt &#91;data&#93;
+  &#40;Stopper. data&#41;&#41;
+
+&#40;defmacro halt-on-error-&gt;&gt; &#91;form &amp; forms&#93;
+  &#40;let &#91;g &#40;gensym&#41;
+        pstep &#40;fn &#91;step&#93; `&#40;if &#40;instance? Stopper &#126;g&#41; &#126;g &#40;-&gt;&gt; &#126;g &#126;step&#41;&#41;&#41;&#93;
+    `&#40;let &#91;&#126;g &#126;form
+           &#126;@&#40;interleave &#40;repeat g&#41; &#40;map pstep forms&#41;&#41;&#93;
+       &#40;if &#40;instance? Stopper &#126;g&#41;
+         &#40;.x &#126;g&#41;
+         &#126;g&#41;&#41;&#41;&#41;
+</code></pre><p>So what is this macro doing? First, it uses <code>gensym</code> to get a symbol with a unique name and stores this in <code>g</code>. It then defines a helper function called <code>pstep</code> for use in the code generation part of the macro.</p><p>This macro generates a <code>let</code> block that repeatedly executes a form and assigns the return value back to <code>g</code>. <code>g</code> is then checked to confirm execution should continue before it is threaded into the next form. If <code>g</code> is ever an instance of a <code>Stopper</code>, execution halts and the value wrapped in the <code>Stopper</code> is returned.</p><p>Looking at an expanded version of a macro can be easier to understand than a written explanation. Below is a macroexpanded version of one of the tests.</p><pre><code class="language-clojure">;; What is being expanded
+&#40;macroexpand-1 '&#40;exec/halt-on-error-&gt;&gt; &#40;success-fn &quot;first&quot; &quot;&quot;&#41;
+                                       &#40;produce-error&#41;
+                                       &#40;success-fn &quot;second&quot;&#41;&#41;&#41;
+
+;; The expansion
+&#40;let &#91;G&#95;&#95;15365 &#40;success-fn &quot;first&quot; &quot;&quot;&#41;
+      G&#95;&#95;15365 &#40;if &#40;instance? halt.execution.Stopper G&#95;&#95;15365&#41;
+                 G&#95;&#95;15365
+                 &#40;-&gt;&gt; G&#95;&#95;15365 &#40;produce-error&#41;&#41;&#41;
+      G&#95;&#95;15365 &#40;if &#40;instance? halt.execution.Stopper G&#95;&#95;15365&#41;
+                 G&#95;&#95;15365
+                 &#40;-&gt;&gt; G&#95;&#95;15365 &#40;success-fn &quot;second&quot;&#41;&#41;&#41;&#93;
+  &#40;if &#40;instance? halt.execution.Stopper G&#95;&#95;15365&#41;
+    &#40;.x G&#95;&#95;15365&#41;
+    G&#95;&#95;15365&#41;&#41;
+</code></pre><p>Looking at that expansion, you can see how we are using a <code>let</code> block to repeatedly assign to the same symbol and we check that return value before executing the next stop.</p><p>This isn't a new pattern. There are <a href='https://github.com/kumarshantanu/promenade'>libraries</a> that implement similar ideas. At IN/Clojure 2018, Varun Sharma gave a <a href='https://www.slideshare.net/VarunSharma143/elegant-errorhandling-for-a-more-civilized-age'>talk</a> about how this cleaned up their code. You can even get bogged down and throw around words like monad when talking about it.</p><p>I'd encourage you to look at your code and see if you have areas where error handling code is detracting from the readability. This might be an area where this, or something similar to it, would help.</p>]]></content>
+  </entry>
+  <entry>
+    <id>https://jakemccrary.com/blog/2017/11/26/parsing-multiple-date-formats/index.html</id>
+    <link href="https://jakemccrary.com/blog/2017/11/26/parsing-multiple-date-formats/index.html"/>
+    <title><![CDATA[Parsing multiple date formats with clj-time]]></title>
+    <updated>2017-11-26T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p>I recently needed to optimize the speed of some Clojure code. After investigating, I identified that a huge number of exceptions were being thrown and handling these was slowing down the process.</p><p>The code throwing the exceptions was parsing strings into Joda-Time DateTime objects using the <a href='https://github.com/clj-time/clj-time'>clj-time</a> library.</p><p>The code was calling <a href='https://github.com/clj-time/clj-time/blob/cce58248937bc05452ebfc8b65134961227a554e/src/clj_time/coerce.clj#L33-L38'>clj-time.coerce/from-string</a> which calls <a href='https://github.com/clj-time/clj-time/blob/cce58248937bc05452ebfc8b65134961227a554e/src/clj_time/format.clj#L156-L165'>clj-time.format/parse</a>. <code>format/parse</code> iterates through up to approximately 50 formatters in an attempt to parse whatever string you pass it. If one of these formatters doesn’t parse the string, it throws an exception which <code>format/parse</code> catches and ignores before attempting the next formatter.</p><p>This was pretty wasteful. This was especially wasteful in the code I was working in since it only needed to handle two different date formats.</p><p>Luckily, Joda-Time has a way to build a formatter that handles multiple formats and clj-time provides access to it. Below is code that creates a formatter that handles two different formats.</p><pre><code class="language-clojure">&#40;ns multiple-dates.core
+  &#40;:require &#91;clj-time.core :as time&#93;
+            &#91;clj-time.format :as time-format&#93;&#41;&#41;
+
+&#40;def multi-format
+  &#40;time-format/formatter time/utc
+                         &quot;YYYY-MM-dd&quot;
+                         &quot;YYYY-MM-dd'T'HH:mm:ss.SSSZ&quot;&#41;&#41;
+
+&#40;defn parse &#91;s&#93;
+  &#40;time-format/parse multi-format s&#41;&#41;
+</code></pre><p>And below are some examples of using it in the repl.</p><pre><code class="language-clojure">multiple-dates.core&gt; &#40;parse &quot;2017-09-04&quot;&#41;
+#object&#91;org.joda.time.DateTime 0x5d5e4cd7 &quot;2017-09-04T00:00:00.000Z&quot;&#93;
+
+multiple-dates.core&gt; &#40;parse &quot;2017-09-04T12:11:02.123Z&quot;&#41;
+#object&#91;org.joda.time.DateTime 0x174f3a5c &quot;2017-09-04T12:11:02.123Z&quot;&#93;
+
+multiple-dates.core&gt; &#40;parse &quot;2017-09-04-12:11:02.123Z&quot;&#41;
+IllegalArgumentException Invalid format: &quot;2017-09-04-12:11:02.123Z&quot; is malformed at &quot;-12:11:02.123Z&quot;  org.joda.time.format.DateTimeFormatter.parseDateTime &#40;DateTimeFormatter.java:945&#41;
+</code></pre><p>Looking back at that code, it seems pretty straightforward. I’ll admit that it took me and my pair a while to figure out how to do this using <code>clj-time</code>. I ended up looking at Joda-Time's documentation and implemented this using Java interop before I cracked how to use <code>clj-time.format/formatter</code> to do the same thing.</p>]]></content>
+  </entry>
+  <entry>
+    <id>https://jakemccrary.com/blog/2017/09/29/measure-aggregate-performance/index.html</id>
+    <link href="https://jakemccrary.com/blog/2017/09/29/measure-aggregate-performance/index.html"/>
+    <title><![CDATA[Measuring aggregate performance in Clojure]]></title>
+    <updated>2017-09-29T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p>Last time I needed to speed up some code, I wrote a Clojure macro that recorded the aggregate time spent executing the code wrapped by the macro. Aggregate timings were useful since the same functions were called multiple times in the code path we were trying to optimize. Seeing total times made it easier to identify where we should spend our time.</p><p>Below is the namespace I temporarily introduced into our codebase.</p><pre><code class="language-clojure">&#40;ns metrics&#41;
+
+&#40;defn msec-str
+  &quot;Returns a human readable version of milliseconds based upon scale&quot;
+  &#91;msecs&#93;
+  &#40;let &#91;s 1000
+        m &#40;&#42; 60 s&#41;
+        h &#40;&#42; 60 m&#41;&#93;
+    &#40;condp &gt;= msecs
+      1 &#40;format &quot;%.5f msecs&quot; &#40;float msecs&#41;&#41;
+      s &#40;format &quot;%.1f msecs&quot; &#40;float msecs&#41;&#41;
+      m &#40;format &quot;%.1f seconds&quot; &#40;float &#40;/ msecs s&#41;&#41;&#41;
+      h &#40;format &quot;%02dm:%02ds&quot; &#40;int &#40;/ msecs m&#41;&#41;
+                &#40;mod &#40;int &#40;/ msecs s&#41;&#41; 60&#41;&#41;
+      &#40;format &quot;%dh:%02dm&quot; &#40;int &#40;/ msecs h&#41;&#41;
+              &#40;mod &#40;int &#40;/ msecs m&#41;&#41; 60&#41;&#41;&#41;&#41;&#41;
+
+&#40;def aggregates &#40;atom {}&#41;&#41;
+
+&#40;defmacro record-aggregate
+  &quot;Records the total time spent executing body across invocations.&quot;
+  &#91;label &amp; body&#93;
+  `&#40;do
+     &#40;when-not &#40;contains? @aggregates &#126;label&#41;
+       &#40;swap! aggregates assoc &#126;label {:order &#40;inc &#40;count @aggregates&#41;&#41;}&#41;&#41;
+     &#40;let &#91;start-time# &#40;System/nanoTime&#41;
+           result# &#40;do &#126;@body&#41;
+           result# &#40;if &#40;and &#40;seq? result#&#41;
+                            &#40;instance? clojure.lang.IPending result#&#41;
+                            &#40;not &#40;realized? result#&#41;&#41;&#41;
+                     &#40;doall result#&#41;
+                     result#&#41;
+           end-time# &#40;System/nanoTime&#41;&#93;
+       &#40;swap! aggregates
+              update-in
+              &#91;&#126;label :msecs&#93;
+              &#40;fnil + 0&#41;
+              &#40;/ &#40;double &#40;- end-time# start-time#&#41;&#41; 1000000.0&#41;&#41;
+       result#&#41;&#41;&#41;
+
+&#40;defn log-times
+  &quot;Logs time recorded by record-aggregate and resets the aggregate times.&quot;
+  &#91;&#93;
+  &#40;doseq &#91;&#91;label data&#93; &#40;sort-by &#40;comp :order second&#41; @aggregates&#41;
+          :let &#91;msecs &#40;:msecs data&#41;&#93;&#93;
+    &#40;println &quot;Executing&quot; label &quot;took:&quot; &#40;msec-str msecs&#41;&#41;&#41;
+  &#40;reset! aggregates {}&#41;&#41;
+</code></pre><p><code>record-aggregate</code> takes a label and code and times how long that code takes to run. If the executed code returns an unrealized lazy sequence, it also evaluates the sequence<a href='#fn-1' id='fnref1'><sup>1</sup></a>.</p><p>Below is an example of using the above code. When we used it, we looked at the code path we needed to optimize and wrapped chunks of it in <code>record-aggregate</code>. At the end of the calculations, we inserted a call to <code>log-times</code> so timing data would show up in our logs.</p><pre><code class="language-clojure">&#40;ns work
+  &#40;:require &#91;metrics :as m&#93;&#41;&#41;
+
+&#40;defn calculation &#91;x&#93;
+  &#40;m/record-aggregate ::calculation
+                      &#40;Thread/sleep &#40;+ 300 &#40;rand-int 60&#41;&#41;&#41;
+                      x&#41;&#41;
+
+&#40;defn work &#91;x&#93;
+  &#40;m/record-aggregate ::work
+                      &#40;repeatedly 10 &#40;fn &#91;&#93;
+                                       &#40;Thread/sleep 5&#41;
+                                       x&#41;&#41;&#41;&#41;
+
+&#40;defn process-rows &#91;rows&#93;
+  &#40;let &#91;rows &#40;m/record-aggregate ::process-rows
+                                 &#40;-&gt;&gt; rows
+                                      &#40;mapv calculation&#41;
+                                      &#40;mapcat work&#41;&#41;&#41;&#93;
+    &#40;m/log-times&#41;
+    rows&#41;&#41;
+</code></pre><p>Now, when <code>&#40;process-rows &#91;:a :a&#93;&#41;</code> is called output similar to below is printed.</p><pre><code>Executing :work/process-rows took: 780.9 msecs
+Executing :work/calculation took: 664.6 msecs
+Executing :work/work took: 115.8 msecs
+</code></pre><p>Using this technique, we were able to identify slow parts of our process and were able to optimize those chunks of our code. There are potential flaws with measuring time like this, but they were not a problem in our situation<a href='#fn-2' id='fnref2'><sup>2</sup></a>.</p><ol class='footnotes'><li id='fn-1'>See <a href='/blog/2016/12/31/measure-what-you-intended-to-measure/'>Measure what you intend to measure</a><a href='#fnref1'>&#8617;</a></li><li id='fn-2'>See <a href='https://shipilev.net/blog/2014/nanotrusting-nanotime/'>Nanotrusting the Nanotime</a><a href='#fnref2'>&#8617;</a></li></ol>]]></content>
+  </entry>
+  <entry>
+    <id>https://jakemccrary.com/blog/2017/08/27/my-current-leiningen-profiles-dot-clj/index.html</id>
+    <link href="https://jakemccrary.com/blog/2017/08/27/my-current-leiningen-profiles-dot-clj/index.html"/>
+    <title><![CDATA[My current Leiningen profiles.clj]]></title>
+    <updated>2017-08-27T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p>Nearly three years ago I wrote an overview of my <a href='/blog/2015/01/11/overview-of-my-leiningen-profiles-dot-clj/'>Leiningen profiles.clj</a>. That post is one of my most visited articles, so I thought I'd give an update on what I currently keep in <code>&#126;/.lein/profiles.clj</code>.</p><pre><code class="language-clojure profiles.clj">{:user {:plugin-repositories &#91;&#91;&quot;private-plugins&quot; {:url &quot;private url&quot;}&#93;&#93;
+        :dependencies &#91;&#91;pjstadig/humane-test-output &quot;0.8.2&quot;&#93;&#93;
+        :injections &#91;&#40;require 'pjstadig.humane-test-output&#41;
+                     &#40;pjstadig.humane-test-output/activate!&#41;&#93;
+        :plugins &#91;&#91;io.sattvik/lein-ancient &quot;0.6.11&quot;&#93;
+                  &#91;lein-pprint &quot;1.1.2&quot;&#93;
+                  &#91;com.jakemccrary/lein-test-refresh &quot;0.21.1&quot;&#93;
+                  &#91;lein-autoexpect &quot;1.9.0&quot;&#93;&#93;
+        :signing {:gpg-key &quot;B38C2F8C&quot;}
+        :test-refresh {:notify-command &#91;&quot;terminal-notifier&quot; &quot;-title&quot; &quot;Tests&quot; &quot;-message&quot;&#93;
+                       :quiet true
+                       :changes-only true}}}
+</code></pre><p>The biggest difference between my <code>profiles.clj</code> from early 2015 and now is that I've removed all of the CIDER related plugins. I still use CIDER, but CIDER no longer requires you to list its dependencies explicitly.</p><p>I’ve also removed Eastwood and Kibit from my toolchain. I love static analysis, but these tools fail too frequently with my projects. As a result, I rarely used them and I’ve removed them. Instead, I’ve started using <a href='https://github.com/candid82/joker'>joker</a> for some basic static analysis and am really enjoying it. It is fast, and it has made refactoring in Emacs noticeably better.</p><p><a href='https://github.com/jakemcc/lein-test-refresh'>lein-test-refresh</a>, <a href='https://github.com/clojure-expectations/lein-autoexpect'>lein-autoexpect</a>, and <a href='https://github.com/pjstadig/humane-test-output'>humane-test-output</a> have stuck around and have been updated to the latest versions. These tools make testing Clojure much nicer.</p><p>I'm also taking advantage of some new features that <a href='https://github.com/jakemcc/lein-test-refresh'>lein-test-refresh</a> provides. These settings enable the most reliable, fastest feedback possible while writing tests. My <a href='/blog/2016/06/20/my-recommended-clojure-testing-setup/'>recommended testing setup</a> article goes into more details.</p><p><code>lein-ancient</code> and <code>lein-pprint</code> have stuck around. I rarely use <code>lein-pprint</code> but it comes in handy when debugging project.clj problems. <code>lein-ancient</code> is great for helping you keep your project's dependencies up to date. I use a forked version that contains some changes I need to work with my company's private repository.</p><p>And there you have it. My updated profiles.clj<a href='#fn-1' id='fnref1'><sup>1</sup></a>.</p><ol class='footnotes'><li id='fn-1'>Some of you might wonder why I don't just link to this file in version control somewhere? Well, it is kept encrypted in a git repository because it also contains some secrets that should not be public that I've removed for this post.<a href='#fnref1'>&#8617;</a></li></ol>]]></content>
+  </entry>
+  <entry>
+    <id>https://jakemccrary.com/blog/2017/04/17/what-are-the-most-used-clojure-libraries/index.html</id>
+    <link href="https://jakemccrary.com/blog/2017/04/17/what-are-the-most-used-clojure-libraries/index.html"/>
+    <title><![CDATA[What are the most used Clojure libraries?]]></title>
+    <updated>2017-04-17T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p>In a <a href='/blog/2017/03/31/what-clojure-testing-library-is-most-used/'>previous post</a>, we used Google's BigQuery and the public <a href='https://cloud.google.com/bigquery/public-data/github'>GitHub dataset</a> to discover the most used Clojure testing library. The answer wasn't surprising. The built-in <code>clojure.test</code> was by far the most used.</p><p>Let's use the dataset to answer a less obvious question, what are the most used libraries in Clojure projects? We'll measure this by counting references to libraries in <code>project.clj</code> and <code>build.boot</code> files.</p><p>Before we can answer that question, we'll need to transform the data. First, we create the Clojure subset of the GitHub dataset. I did this by executing the following queries and saving the results to tables<a href='#fn-1' id='fnref1'><sup>1</sup></a>.</p><pre><code class="language-sql">-- Save the results of this query to the clojure.files table
+SELECT
+  &#42;
+FROM
+  &#91;bigquery-public-data:github&#95;repos.files&#93;
+WHERE
+  RIGHT&#40;path, 4&#41; = '.clj'
+  OR RIGHT&#40;path, 5&#41; = '.cljc'
+  OR RIGHT&#40;path, 5&#41; = '.cljs'
+  OR RIGHT&#40;path, 10&#41; = 'boot.build'
+
+-- Save the results to clojure.contents
+SELECT &#42;
+FROM &#91;bigquery-public-data:github&#95;repos.contents&#93;
+WHERE id IN &#40;SELECT id FROM clojure.files&#41;
+</code></pre><p>Next we extract the dependencies from <code>build.boot</code> and <code>project.clj</code> files. Fortunately for us, both of these files specify dependencies in the same format, so we're able to use the same regular expression on both types.</p><p>The query below identifies <code>project.clj</code> and <code>build.boot</code> files, splits each file into lines, and extracts referenced library names and versions using a regular expression. Additional filtering is done get rid of some spurious results.</p><pre><code class="language-sql">SELECT
+  REGEXP&#95;EXTRACT&#40;line, r'\&#91;+&#40;\S+&#41;\s+&quot;\S+&quot;&#93;'&#41; AS library,
+  REGEXP&#95;EXTRACT&#40;line, r'\&#91;+\S+\s+&quot;&#40;\S+&#41;&quot;&#93;'&#41; AS version, 
+  COUNT&#40;&#42;&#41; AS count
+FROM &#40;
+  SELECT
+    SPLIT&#40;content, '\n'&#41; AS line
+  FROM
+    &#91;clojure.contents&#93;
+  WHERE
+    id IN &#40;
+    SELECT
+      id
+    FROM
+      &#91;clojure.files&#93;
+    WHERE
+      path LIKE '%project.clj'
+      OR path LIKE '%build.boot'&#41;
+      HAVING line contains '&#91;'&#41;
+GROUP BY
+  library, version
+HAVING library is not null and not library contains '&quot;'
+ORDER BY
+  count DESC
+</code></pre><p>The first five rows from the result are below. Let's save the entire result to a <code>clojure.libraries</code> table.</p><pre><code>| library             | version | count |
+|---------------------+---------+-------|
+| org.clojure/clojure | 1.6.0   | 7015  |
+| org.clojure/clojure | 1.5.1   | 4251  |
+| org.clojure/clojure | 1.7.0   | 4093  |
+| org.clojure/clojure | 1.8.0   | 3016  |
+| hiccup              | 1.0.5   | 1280  |
+</code></pre><p>Now we can start answering all sorts of interesting questions.</p><p>What is the most referenced library put out under the <code>org.clojure</code> group?</p><pre><code>SELECT library, sum&#40;count&#41; count
+FROM clojure.libraries
+WHERE library CONTAINS 'org.clojure'
+GROUP BY library
+ORDER BY count desc
+
+| Row | library                        | count |
+|-----+--------------------------------+-------|
+|   1 | org.clojure/clojure            | 20834 |
+|   2 | org.clojure/clojurescript      |  3080 |
+|   3 | org.clojure/core.async         |  2612 |
+|   4 | org.clojure/tools.logging      |  1579 |
+|   5 | org.clojure/data.json          |  1546 |
+|   6 | org.clojure/tools.nrepl        |  1244 |
+|   7 | org.clojure/java.jdbc          |  1064 |
+|   8 | org.clojure/tools.cli          |  1053 |
+|   9 | org.clojure/tools.namespace    |   982 |
+|  10 | org.clojure/test.check         |   603 |
+|  11 | org.clojure/core.match         |   578 |
+|  12 | org.clojure/math.numeric-tower |   503 |
+|  13 | org.clojure/data.csv           |   381 |
+|  14 | org.clojure/math.combinatorics |   372 |
+|  15 | org.clojure/tools.reader       |   368 |
+|  16 | org.clojure/clojure-contrib    |   335 |
+|  17 | org.clojure/data.xml           |   289 |
+|  18 | org.clojure/tools.trace        |   236 |
+|  19 | org.clojure/java.classpath     |   199 |
+|  20 | org.clojure/core.cache         |   179 |
+</code></pre><p>Clojure and ClojureScript are at the top, which isn't surprising. I'm surprised to see <code>tools.nrepl</code> in the next five results (rows 3-7). It is the only library out of the top that I haven't used.</p><p>What testing library is used the most? We already answered this in my <a href='/blog/2017/03/31/what-clojure-testing-library-is-most-used/'>last article</a> but let's see if we get the same answer when we're counting how many times a library is pulled into a project.</p><pre><code>SELECT library, sum&#40;count&#41; count
+FROM &#91;clojure.libraries&#93; 
+WHERE library in &#40;'midje', 'expectations', 'speclj', 'smidjen', 'fudje'&#41;
+GROUP BY library
+ORDER BY count desc
+
+| Row | library                | count |
+|-----+------------------------+-------|
+|   1 | midje                  |  1122 |
+|   2 | speclj                 |   336 |
+|   3 | expectations           |   235 |
+|   4 | smidjen                |     1 |
+</code></pre><p>Those results are close to the previous results. Of the non-clojure.test libraries, midje still ends up on top.</p><p>What groups (as identified by the Maven groupId) have their libraries referenced the most? Top 12 are below but the <a href='https://docs.google.com/a/jakemccrary.com/spreadsheets/d/1QGRRGSo5t5Pnpwizdv_H8negs8NBxtRour6KxWN6hVY/edit?usp=sharing'>full result</a> is available.</p><pre><code>SELECT REGEXP&#95;EXTRACT&#40;library, r'&#40;\S+&#41;/\S+'&#41; AS group, sum&#40;count&#41; AS count
+FROM &#91;clojure.libraries&#93;
+GROUP BY group
+HAVING group IS NOT null
+ORDER BY count DESC
+
+| Row | group                 | count |
+|-----+-----------------------+-------|
+|   1 | org.clojure           | 39611 |
+|   2 | ring                  |  5817 |
+|   3 | com.cemerick          |  2053 |
+|   4 | com.taoensso          |  1605 |
+|   5 | prismatic             |  1398 |
+|   6 | org.slf4j             |  1209 |
+|   7 | cljsjs                |   868 |
+|   8 | javax.servlet         |   786 |
+|   9 | com.stuartsierra      |   642 |
+|  10 | com.badlogicgames.gdx |   586 |
+|  11 | cider                 |   560 |
+|  12 | pjstadig              |   536 |
+</code></pre><p>And finally, the question that inspired this article, what is the most used library?</p><pre><code>SELECT library, sum&#40;count&#41; count
+FROM &#91;clojure.libraries&#93;
+WHERE library != 'org.clojure/clojure'
+GROUP BY library
+ORDER BY count desc
+
+| Row | library                     | count |
+|-----+-----------------------------+-------|
+|   1 | compojure                   |  3609 |
+|   2 | lein-cljsbuild              |  3413 |
+|   3 | org.clojure/clojurescript   |  3080 |
+|   4 | org.clojure/core.async      |  2612 |
+|   5 | lein-ring                   |  1809 |
+|   6 | cheshire                    |  1802 |
+|   7 | environ                     |  1763 |
+|   8 | ring                        |  1678 |
+|   9 | clj-http                    |  1648 |
+|  10 | clj-time                    |  1613 |
+|  11 | hiccup                      |  1591 |
+|  12 | lein-figwheel               |  1582 |
+|  13 | org.clojure/tools.logging   |  1579 |
+|  14 | org.clojure/data.json       |  1546 |
+|  15 | http-kit                    |  1423 |
+|  16 | lein-environ                |  1325 |
+|  17 | ring/ring-defaults          |  1302 |
+|  18 | org.clojure/tools.nrepl     |  1244 |
+|  19 | midje                       |  1122 |
+|  20 | com.cemerick/piggieback     |  1096 |
+|  21 | org.clojure/java.jdbc       |  1064 |
+|  22 | org.clojure/tools.cli       |  1053 |
+|  23 | enlive                      |  1001 |
+|  24 | ring/ring-core              |   995 |
+|  25 | org.clojure/tools.namespace |   982 |
+</code></pre><p><a href='https://github.com/weavejester/compojure'>Compojure</a> takes the top slot. <a href='https://docs.google.com/a/jakemccrary.com/spreadsheets/d/1-zmcOVPKLGrdRT_VkTrRUuRFyuxxmXi9eeH6Xzlt7yg/edit?usp=sharing'>Full results are available</a>.</p><p>Before doing this research I tried to predict what libraries I'd see in the top 10. I thought that clj-time and clj-http would be up there. I'm happy to see my guess was correct.</p><p>It was pretty pleasant using BigQuery to do this analysis. Queries took at most seconds to execute. This quick feedback let me play around in the web interface without feeling like I was waiting for computers to do work. This made the research into Clojure library usage painless and fun. <ol class='footnotes'><li id='fn-1'>I did this in early March 2017.<a href='#fnref1'>&#8617;</a></li></ol></p>]]></content>
+  </entry>
+  <entry>
+    <id>https://jakemccrary.com/blog/2017/03/31/what-clojure-testing-library-is-most-used/index.html</id>
+    <link href="https://jakemccrary.com/blog/2017/03/31/what-clojure-testing-library-is-most-used/index.html"/>
+    <title><![CDATA[Which Clojure testing library is most used?]]></title>
+    <updated>2017-03-31T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p>I've always assumed that the built-in <code>clojure.test</code> is the most widely used testing library in the Clojure community. Earlier this month I decided to test this assumption using the Google's BigQuery <a href='https://cloud.google.com/bigquery/public-data/github'>GitHub dataset</a>.</p><p>The BigQuery GitHub dataset contains over three terabytes of source code from more than 2.8 million open source GitHub repositories. BigQuery lets us quickly query this data using SQL.</p><p>Below is a table with the results (done in early March 2017) of my investigation. Surprising no one, <code>clojure.test</code> comes out as the winner and it is a winner by a lot.  </p><pre><code>| Library      | # Repos Using |
+|--------------+---------------|
+| clojure.test |         14304 |
+| midje        |          1348 |
+| expectations |           429 |
+| speclj       |           207 |
+| smidjen      |             1 |
+| fudje        |             1 |
+</code></pre><p>23,243 repositories were identified as containing Clojure (or ClojureScript) code. This means there were about 6,953 repositories that didn't use any testing library<a href='#fn-1' id='fnref1'><sup>1</sup></a>. This puts the "no tests or an obscure other way of testing" in a pretty solid second place.</p><p>You should take these numbers as ballpark figures and not exact answers. I know from using GitHub's search interface that there are three public projects using <a href='https://github.com/jimpil/fudje'>fudje</a><a href='#fn-2' id='fnref2'><sup>2</sup></a>.</p><p>So, why don't all three of those projects show up? The dataset only includes projects where Google could identify the project as open source and the GitHub licenses API is used to do that<a href='#fn-3' id='fnref3'><sup>3</sup></a>. Two of those three projects were probably unable to be identified as something with an appropriate license.</p><p>Another small problem is that since <code>expectations</code> is an actual word, it shows up outside of <code>ns</code> declarations. I ended up using a fairly simple query to generate this data and it only knows that <code>expectations</code> shows up somewhere in a file. I experimented with some more restrictive queries but they didn't drastically change the result and I wasn't sure they weren't wrong in other ways. If you subtract a number between 100 and 150 you'll probably have a more accurate expectations usage count.</p><p>Keep reading if you want to hear more about the steps to come up with the above numbers.</p><p>If you have other Clojure questions you think could be answered by querying this dataset, let me know in the comments or on <a href='https://twitter.com/jakemcc'>twitter</a>. I have some more ideas, so I wouldn't be surprised if at least one more article gets written.</p><h2>The Details</h2><p>The process was pretty straightforward. Most of my time was spent exploring the tables, figuring out what the columns represented, figuring out what queries worked well, and manually confirming some of the results. BigQuery is very fast. Very little of my time was spent waiting for results.</p><h3>1. Setup the data</h3><p>You get 1 TB of free BigQuery usage a month. You can blow through this in a single query. Google provides sample tables that contain less data but I wanted to operate on the full set of Clojure(Script) files, so my first step was to execute some queries to create tables that only contained Clojure data.</p><p>First, I queried the <code>github&#95;repos.files</code> table for all the Clojure(Script) files and saved that to a <code>clojure.files</code> table.</p><pre><code class="language-sql">SELECT
+  &#42;
+FROM
+  &#91;bigquery-public-data:github&#95;repos.files&#93;
+WHERE
+  &#40;RIGHT&#40;path, 4&#41; = '.clj'
+    OR RIGHT&#40;path, 5&#41; = '.cljc'
+    OR RIGHT&#40;path, 5&#41; = '.cljs'&#41;
+</code></pre><p>The above query took only 9.2 seconds to run and processed 328 GB of data.</p><p>Using the <code>clojure.files</code> table, we can select the source for all the Clojure code from the <code>github&#95;repos.contents</code>. I saved this to a <code>clojure.contents</code> table.</p><pre><code class="language-sql">SELECT &#42;
+FROM &#91;bigquery-public-data:github&#95;repos.contents&#93;
+WHERE id IN &#40;SELECT id FROM clojure.files&#41;
+</code></pre><p>This query processed 1.84 TB of data in 21.5 seconds. So fast. In just under 30 seconds, I've blown through the free limit.</p><h3>2. Identify what testing library (or libraries) a repo uses</h3><p>We can guess that a file uses a testing library if it contains certain string. The strings we'll search for are the namespaces we'd expect to see required or used in a <code>ns</code> declaration. The below query does this for each file and then rolls up the results by repository. It took 3 seconds to run and processed 611 MB of data.</p><pre><code>SELECT
+  files.repo&#95;name,
+  MAX&#40;uses&#95;clojure&#95;test&#41; uses&#95;clojure&#95;test,
+  MAX&#40;uses&#95;expectations&#41; uses&#95;expectations,
+  MAX&#40;uses&#95;midje&#41; uses&#95;midje,
+  MAX&#40;uses&#95;speclj&#41; uses&#95;speclj,
+  MAX&#40;uses&#95;fudje&#41; uses&#95;fudje,
+  MAX&#40;uses&#95;smidjen&#41; uses&#95;smidjen,
+FROM &#40;
+  SELECT
+    id,
+    contents.content LIKE '%clojure.test%' uses&#95;clojure&#95;test,
+    contents.content LIKE '%expectations%' uses&#95;expectations,
+    contents.content LIKE '%midje%' uses&#95;midje,
+    contents.content LIKE '%speclj%' uses&#95;speclj,
+    contents.content LIKE '%fudje%' uses&#95;fudje,
+    contents.content LIKE '%smidjen%' uses&#95;smidjen,
+  FROM
+    clojure.contents AS contents&#41; x
+JOIN
+  clojure.files files ON files.id = x.id
+GROUP BY
+  files.repo&#95;name
+</code></pre><p>Below is a screenshot of the first few rows in the result.</p><p><img src="/images/bigquery-testing-library-result.png" alt="BigQuery results for test library usage by repo" title="BigQuery results for test library usage by repo" /></p><h3>3. Export the data</h3><p>At this point, we could continue doing the analysis using SQL and the BigQuery UI but I opted to explore the data using Clojure and the repl. There were too many rows to directly download the query results as a csv file, so I ended up having to save the results as a table and then export it to Google's cloud storage and download from there.</p><p>The first few rows of the file look like this:</p><pre><code>files&#95;repo&#95;name,uses&#95;clojure&#95;test,uses&#95;expectations,uses&#95;midje,uses&#95;speclj,uses&#95;fudje,uses&#95;smidjen
+wangchunyang/clojure-liberator-examples,true,false,false,false,false,false
+yantonov/rex,false,false,false,false,false,false
+</code></pre><h3>4. Calculate some numbers</h3><p>The code takes the csv file and does some transformations. You could do this in Excel or using any language of your choice. I'm not going to include code here, as it isn't that interesting.</p><h2>BigQuery thoughts</h2><p>This was my first time using Google's BigQuery. This wasn't the most difficult analysis to do but I was impressed at the speed and ease of use. The web UI, which I used entirely for this, is neither really great or extremely terrible. It mostly just worked and I rarely had to look up documentation.</p><p>I don't really feel comfortable making a judgment call on if the cost is expensive or not but this article cost a bit less than seven dollars to write. This doesn't seem too outrageous to me.</p><p>Based on my limited usage of BigQuery, it is something I'd look into further if I needed its capabilities. <ol class='footnotes'><li id='fn-1'>Probably higher, as projects can and use more than one testing library.<a href='#fnref1'>&#8617;</a></li><li id='fn-2'>And those projects are <a href='https://github.com/jumarko/clojure-random'>jumarko/clojure-random</a>, <a href='https://github.com/dpassen1/great-sort'>dpassen1/great-sort</a>, and <a href='https://github.com/jimpil/fudje'>jimpil/fudje</a>.<a href='#fnref2'>&#8617;</a></li><li id='fn-3'><a href='https://news.ycombinator.com/item?id=12004644'>Source is a Google Developer Advocate's response on old HN post</a><a href='#fnref3'>&#8617;</a></li></ol></p>]]></content>
+  </entry>
+  <entry>
+    <id>https://jakemccrary.com/blog/2017/02/27/using-lein-test-refresh-with-expectations/index.html</id>
+    <link href="https://jakemccrary.com/blog/2017/02/27/using-lein-test-refresh-with-expectations/index.html"/>
+    <title><![CDATA[Using lein-test-refresh with expectations]]></title>
+    <updated>2017-02-27T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p>The 2.2.0 release<a href='#fn-1' id='fnref1'><sup>1</sup></a> of <a href='https://github.com/clojure-expectations/expectations/blob/master/CHANGELOG.md#changes-in-version-220'>expectations</a> adds a <code>clojure.test</code> <a href='https://clojure-expectations.github.io/clojure-test.html'>compatible syntax</a>. The release adds the <code>defexpect</code> macro which forces you to name your test but then generates code that is compatible with <code>clojure.test</code>.</p><p>Why would you want this? Because <code>clojure.test</code> is the built-in testing library for Clojure, an entire ecosystem has been built around it. Tool support for <code>clojure.test</code> is always going to be ahead of support for the original <code>expectations</code>. By using the new <code>clojure.test</code> compatible syntax, <code>expectations</code> can take advantage of all the tools built for <code>clojure.test</code>.</p><h3>Using lein-test-refresh with expectations</h3><p>If you move to the new <code>clojure.test</code> compatible syntax, you can start using <a href='https://github.com/jakemcc/lein-test-refresh'>lein-test-refresh</a> to automatically rerun your tests when your code changes. <code>lein-test-refresh</code> is a fork of the original expectations autorunner, <a href='https://github.com/clojure-expectations/lein-autoexpect'>lein-autoexpect</a>, but it has grown to have more features than its original inspiration. Now you can use it with <code>expectations</code><a href='#fn-2' id='fnref2'><sup>2</sup></a>.</p><p>Below is a sample <code>project.clj</code> that uses <code>lein-test-refresh</code> with the latest expectations.</p><pre><code class="language-clojure">&#40;defproject expectations-project &quot;0.1.0-SNAPSHOT&quot;
+  :description &quot;Sample project using expectations&quot;
+  :dependencies &#91;&#91;org.clojure/clojure &quot;1.8.0&quot;&#93;&#93;
+  :plugins &#91;&#91;com.jakemccrary/lein-test-refresh  &quot;0.18.1&quot;&#93;&#93;
+  :profiles {:dev {:dependencies &#91;&#91;expectations &quot;2.2.0-beta1&quot;&#93;&#93;}}&#41;
+</code></pre><p>Here is an example test file.</p><pre><code class="language-clojure">&#40;ns expectations-project.core-test
+  &#40;:require &#91;expectations :refer :all&#93;
+            &#91;expectations.clojure.test :refer &#91;defexpect&#93;&#93;&#41;&#41;
+
+&#40;defexpect two
+  2 &#40;+ 1 1&#41;&#41;
+
+&#40;defexpect three
+  3 &#40;+ 1 1&#41;&#41;
+
+&#40;defexpect group
+  &#40;expect &#91;1 2&#93; &#40;conj &#91;&#93; 1 5&#41;&#41;
+  &#40;expect #{1 2} &#40;conj #{} 1 2&#41;&#41;
+  &#40;expect {1 2} &#40;assoc {} 1 3&#41;&#41;&#41;
+</code></pre><p>And here is the result of running <code>lein test-refresh</code>.</p><pre><code>$ lein test-refresh
+&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;
+&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42; Running tests &#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;
+:reloading &#40;expectations-project.core-test&#41;
+
+FAIL in &#40;group&#41; &#40;expectations&#95;project/core&#95;test.clj:11&#41;
+expected: &#91;1 2&#93;
+  actual: &#91;1 5&#93; from &#40;conj &#91;&#93; 1 5&#41;
+
+FAIL in &#40;group&#41; &#40;expectations&#95;project/core&#95;test.clj:11&#41;
+expected: {1 2}
+  actual: {1 3} from &#40;assoc {} 1 3&#41;
+
+FAIL in &#40;three&#41; &#40;expectations&#95;project/core&#95;test.clj:8&#41;
+expected: 3
+  actual: 2 from &#40;+ 1 1&#41;
+
+Ran 3 tests containing 5 assertions.n
+3 failures, 0 errors.
+
+Failed 3 of 5 assertions
+Finished at 11:53:06.281 &#40;run time: 0.270s&#41;
+</code></pre><p>After some quick edits to fix the test errors and saving the file, here is the output from the tests re-running.</p><pre><code>&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;
+&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42; Running tests &#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;
+:reloading &#40;expectations-project.core-test&#41;
+
+Ran 3 tests containing 5 assertions.
+0 failures, 0 errors.
+:reloading &#40;&#41;
+
+Ran 3 tests containing 5 assertions.
+0 failures, 0 errors.
+
+Passed all tests
+Finished at 11:53:59.045 &#40;run time: 0.013s&#41;
+</code></pre><p>If you're using <code>expectations</code> and switch to the new <code>clojure.test</code> compatible syntax, I'd encourage you to start using <a href='https://github.com/jakemcc/lein-test-refresh'>lein-test-refresh</a>.</p><ol class='footnotes'><li id='fn-1'>As of 2016-02-27 <code>2.2.0</code> isn't out yet, but <code>2.2.0-beta1</code> has been released and has the changes.<a href='#fnref1'>&#8617;</a></li><li id='fn-2'>In fact, you have to use it if you use Leiningen and the new syntax and want your tests to run automatically.<a href='#fnref2'>&#8617;</a></li></ol>]]></content>
+  </entry>
+  <entry>
+    <id>https://jakemccrary.com/blog/2016/12/31/measure-what-you-intended-to-measure/index.html</id>
+    <link href="https://jakemccrary.com/blog/2016/12/31/measure-what-you-intended-to-measure/index.html"/>
+    <title><![CDATA[Making code fast: Measure what you intend to measure]]></title>
+    <updated>2016-12-31T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p>I’ve spent a significant portion of my career figuring out how to make software run faster. It is a problem I enjoy solving. One of the most important steps in an optimization task is to identify what you are trying to optimize and how you will measure it. Answer these questions wrong and you’ll waste your time solving the wrong problem.</p><p>Recently I joined a teammate on a task that involved identifying a bottleneck in a Clojure code base. We knew the code path we needed to optimize and turned to the  <a href='https://github.com/ptaoussanis/tufte'>Tufte</a> library to take timing measurements. This was my first time using Tufte and, with my tiny amount of usage, I like what I see.</p><p>At some point in the process, we had code<a href='#fn-1' id='fnref1'><sup>1</sup></a> that looked similar to the <code>translate</code> function below (lines 20-24).</p><pre><code class="language-clojure">&#40;ns bench.core
+  &#40;:require &#91;clojure.string :as string&#93;
+            &#91;taoensso.tufte :as tufte&#93;&#41;&#41;
+
+&#40;defn raw-&gt;maps &#91;lines&#93;
+  &#40;map &#40;fn &#91;line&#93;
+         &#40;zipmap &#91;:a :b :c&#93;
+                 &#40;map &#40;fn &#91;s&#93; &#40;Long/parseLong s&#41;&#41;
+                      &#40;string/split line #&quot;\|&quot;&#41;&#41;&#41;&#41;
+       lines&#41;&#41;
+
+&#40;defn summarize &#91;maps&#93;
+  &#40;reduce &#40;fn &#91;r m&#93;
+            &#40;-&gt; r
+                &#40;update :a &#40;fnil + 0&#41; &#40;:a m&#41;&#41;
+                &#40;update :b &#40;fnil + 0&#41; &#40;:b m&#41;&#41;
+                &#40;update :c &#40;fnil + 0&#41; &#40;:c m&#41;&#41;&#41;&#41;
+          maps&#41;&#41;
+
+&#40;defn translate &#91;lines&#93;
+  &#40;tufte/profile {}
+                 &#40;let &#91;maps &#40;tufte/p ::raw-&gt;maps &#40;raw-&gt;maps lines&#41;&#41;
+                       summary &#40;tufte/p ::summarize &#40;summarize maps&#41;&#41;&#93;
+                   summary&#41;&#41;&#41;
+</code></pre><p>Here is some Tufte output from running some data through <code>translate</code>.</p><pre><code>                  pId      nCalls       Min        Max       MAD      Mean   Time% Time
+:bench.core/summarize           1   346.0ms    346.0ms       0ns   346.0ms     100 346.0ms
+:bench.core/raw-&gt;maps           1    2.46µs     2.46µs       0ns    2.46µs       0 2.46µs
+           Clock Time                                                          100 346.05ms
+       Accounted Time                                                          100 346.0ms
+</code></pre><p>Notice anything surprising with the output?<a href='#fn-2' id='fnref2'><sup>2</sup></a></p><p>It surprised me that <code>raw-&gt;maps</code> took such a tiny amount of time compared to the <code>summarize</code> function. Then I realized that we had forgotten about Clojure’s lazy sequences. <code>summarize</code> is taking so much of the time because <code>raw-&gt;maps</code> is just creating a lazy sequence; all the work of realizing that sequence happens in <code>summarize</code>. By wrapping the call to <code>raw-&gt;maps</code> with a <code>doall</code> we were able to get the time measurements we intended.</p><p>This example demonstrates an important lesson. When you are profiling code, make sure you are measuring what you think you are measuring. This can be challenging in languages, such as Clojure, that have a concept of laziness. Reflect on your measurement results and perform a gut check that the results make sense with what you intended to measure. If anything feels off, confirm that you’re measuring what you meant to measure.</p><ol class='footnotes'><li id='fn-1'>Example built using clojure 1.8.0 and tufte 1.1.1. Also, sorry for the terrible names of functions. I was drawing a blank when coming up with this example.<a href='#fnref1'>&#8617;</a></li><li id='fn-2'>Imagine this output having 10 more lines in it. Now imagine it having 20. It starts getting quite a bit more difficult to notice oddities as more and more lines get added to this output. Try not to overwhelm yourself by having too much output.<a href='#fnref2'>&#8617;</a></li></ol>]]></content>
+  </entry>
+  <entry>
+    <id>https://jakemccrary.com/blog/2016/08/28/better-code-reloading-in-a-cloure-web-server/index.html</id>
+    <link href="https://jakemccrary.com/blog/2016/08/28/better-code-reloading-in-a-cloure-web-server/index.html"/>
+    <title><![CDATA[Better code reloading in a Clojure web server]]></title>
+    <updated>2016-08-28T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p>A couple weeks ago I released <a href='https://github.com/jakemcc/reload'>com.jakemccrary/reload</a>. This tiny library provides a ring middleware that uses <a href='https://github.com/clojure/tools.namespace'>org.clojure/tools.namespace</a>  to reload changed Clojure code on incoming http requests.</p><p>This middleware was created because my team was running into problems using ring's <code>wrap-reload</code> middleware. Unfortunately these problems happened about nine months ago and, since I didn't write this post back then, I've since forgotten these problems. Regardless, this project has been used since the beginning of this year and has helped make my team's development workflow smoother. If you are running into problems it might help you too.</p><h3>Usage</h3><p>If you'd like to give it a shot, then add the <a href='https://clojars.org/com.jakemccrary/reload'>latest version</a> (at the time of writing <code>&#91;com.jakemccrary/reload &quot;0.1.0&quot;&#93;</code>) to your project.clj. </p><p>Require <code>com.jakemccrary.middleware.reload</code> and wrap your handler with <code>wrap-reload</code>.</p><pre><code class="language-clojure">&#40;ns example
+  &#40;:require
+   ;; more deps
+   &#91;com.jakemccrary.middleware.reload :as reload&#93;&#41;&#41;
+
+;; wherever you are setting up your middleware stack
+&#40;reload/wrap-reload routes&#41;
+</code></pre><p><code>reload/wrap-reload</code> optionally takes a list of directories to monitor as a second parameter. By default it reloads the <code>src</code> directory.</p>]]></content>
+  </entry>
+  <entry>
+    <id>https://jakemccrary.com/blog/2016/06/20/my-recommended-clojure-testing-setup/index.html</id>
+    <link href="https://jakemccrary.com/blog/2016/06/20/my-recommended-clojure-testing-setup/index.html"/>
+    <title><![CDATA[My recommended Clojure testing setup]]></title>
+    <updated>2016-06-20T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p>Occasionally, either on Stack Overflow or in the <a href='http://clojurians.net/'>Clojurians</a> Slack group, someone will ask what tools they should use to test Clojure code. Below is what I would currently recommend. I've come to this recommendation through observing teams using a variety of testing tools and through my own use them.</p><blockquote><p> Use clojure.test with  <a href='https://github.com/pjstadig/humane-test-output'>humane-test-output</a>  and <a href='https://github.com/jakemcc/lein-test-refresh'>lein-test-refresh</a>. </p></blockquote><h3>Use clojure.test</h3><p>clojure.test is ubiquitous and not a big departure from other languages' testing libraries. It has its warts but your team will be able to understand it quickly and will be able to write maintainable tests.</p><h3>Use humane-test-output</h3><p>You should use clojure.test with <a href='https://github.com/pjstadig/humane-test-output'>humane-test-output</a>. Together they provide a testing library that has minimal additional syntax and good test failure reporting.</p><h3>Use lein-test-refresh</h3><p>If you're not using a tool that reloads and reruns your tests on file changes then you are wasting your time. The delay between changing code and seeing test results is drastically reduced by using a tool like <a href='https://github.com/jakemcc/lein-test-refresh'>lein-test-refresh</a>. Nearly everyone I know who tries adding lein-test-refresh to their testing toolbox continues to use it. Many of these converts were not newcomers to Clojure either, they had years of experience and had already developed workflows that worked for them.</p><h3>Use lein-test-refresh's advanced features</h3><p><a href='https://github.com/jakemcc/lein-test-refresh'>lein-test-refresh</a> makes development better even if you don't change any of its settings. It gets even better if you use some of its advanced features.</p><p>Below is a stripped down version of my <code>&#126;/.lein/profiles.clj</code>. The <code>:test-refresh</code> key points towards my recommended lein-test-refresh settings.</p><pre><code class="language-clojure">{:user {:dependencies &#91;&#91;pjstadig/humane-test-output &quot;0.8.0&quot;&#93;&#93;
+        :injections &#91;&#40;require 'pjstadig.humane-test-output&#41;
+                     &#40;pjstadig.humane-test-output/activate!&#41;&#93;
+        :plugins &#91;&#91;com.jakemccrary/lein-test-refresh &quot;0.16.0&quot;&#93;&#93;
+        :test-refresh {:notify-command &#91;&quot;terminal-notifier&quot; &quot;-title&quot; &quot;Tests&quot; &quot;-message&quot;&#93;
+                       :quiet true
+                       :changes-only true}}}
+</code></pre><p>These settings turn on notifications when my tests finish running (<code>:notify-command</code> setting), make clojure.test's output less verbose (<code>:quiet true</code>), and only run tests in namespaces affected by the previous code change (<code>:changes-only true</code>). These three settings give me the quickest feedback possible and free me from having the terminal running <code>lein test-refresh</code> visible.</p><p>Quick feedback lets you make changes faster. If you're going to write tests, and you should write tests, having them run quickly is powerful. After years of writing Clojure, this is my current go-to for testing Clojure code and getting extremely fast feedback.</p>]]></content>
+  </entry>
+  <entry>
+    <id>https://jakemccrary.com/blog/2016/04/10/the-usefulness-of-clojures-cond-arrow/index.html</id>
+    <link href="https://jakemccrary.com/blog/2016/04/10/the-usefulness-of-clojures-cond-arrow/index.html"/>
+    <title><![CDATA[The usefulness of Clojure's cond->]]></title>
+    <updated>2016-04-10T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p>Clojure's <a href='https://clojure.github.io/clojure/clojure.core-api.html#clojure.core/cond-%3E'><code>cond-&gt;</code></a> (and <code>cond-&gt;&gt;</code>) is a versatile macro. It isn't a new macro, it has been around since version 1.5, but I finally discovered and started using it sometime last year. It isn't a workhorse macro, you won't be using it everyday, but it comes in handy.</p><h3>What is <code>cond-&gt;</code>?</h3><p>Let's start by looking at the docstring.</p><pre><code>Usage: &#40;cond-&gt; expr &amp; clauses&#41;
+
+Takes an expression and a set of test/form pairs. Threads expr &#40;via -&gt;&#41;
+through each form for which the corresponding test
+expression is true. Note that, unlike cond branching, cond-&gt; threading does
+not short circuit after the first true test expression.
+</code></pre><p>So what does the docstring mean? Let's break it down with an example.</p><pre><code class="language-clojure">&#40;cond-&gt; 10
+  false inc&#41;
+=&gt; 10
+</code></pre><p>In the above example <code>10</code> is the <code>expr</code> mentioned in the docstring and everything after it are the <code>clauses</code>. Each clause is a pair made up of a test and a form. In this example there is a single clause with the value <code>false</code> as the test the function <code>inc</code> as the form. Since the test evaluates to a false value the expression is not threaded into the form. As a result the original expression, <code>10</code>, is returned.</p><p>Let's look at an example with a truthy test.</p><pre><code class="language-clojure">&#40;cond-&gt; 10
+  true &#40;- 2&#41;
+=&gt; 8
+</code></pre><p>Once again, <code>10</code> is the starting expression. The single clause has a test that evaluates to true so the expression is threaded into the first position of the form <code>&#40;- 2&#41;</code>. The result is <code>8</code> and this is returned.</p><p>Next is an example of a <code>cond-&gt;</code> with multiple clauses. Explanations are inline with the code.</p><pre><code class="language-clojure">&#40;cond-&gt; 10 ; start with 10
+  ;; test evaluates to true, so apply inc to 10. Current value is now 11.
+  true inc
+
+  ;; &#40;zero? 1&#41; evaluates to false, do not perform action. Current value stays 11.
+  &#40;zero? 1&#41; &#40;+ 2&#41;
+
+  ;; &#40;pos? 4&#41; evaluates to true, thread 11 into first position of form.
+  &#40;pos? 4&#41; &#40;- 5&#41;&#41;
+=&gt; 6 ; The result of &#40;- 11 5&#41; is 6.
+</code></pre><p>If you understand the above example then you have a good grasp of <code>cond-&gt;</code>. But when is this functionality useful?</p><h3>When do I use cond->?</h3><p>Looking through the codebases I work on, I almost primarily see <code>cond-&gt;</code> being used with the initial expression being a hash-map. It is being used in situations where we want to selectively <code>assoc</code>, <code>update</code>, or <code>dissoc</code> something from a map.</p><p>If <code>cond-&gt;</code> did not exist you would accomplish those selective modifications with code similar to below.</p><pre><code class="language-clojure">&#40;if &#40;some-pred? q&#41;
+  &#40;assoc m :a-key :a-value&#41;
+  m&#41;
+</code></pre><p>You can rewrite the above with <code>cond-&gt;</code>.</p><pre><code class="language-clojure">&#40;cond-&gt; m
+  &#40;some-pred? q&#41; &#40;assoc :a-key :a-value&#41;&#41;
+</code></pre><p>If you're not used to seeing <code>cond-&gt;</code> the above transformation might seem like a step backwards. I know it felt that way to me when I first saw <code>cond-&gt;</code>. Give yourself time to get familiar with it and you'll be glad you're using it.</p><p>A meatier example of using <code>cond-&gt;</code> is demonstrated below. Here we're manipulating data structures designed for use with <a href='https://github.com/jkk/honeysql'>honeysql</a> to generate SQL statements. We start with a <code>base-query</code> and selectively modify it based on incoming parameters.</p><pre><code class="language-clojure">&#40;defn query &#91;req-params&#93;
+  &#40;let &#91;and-clause &#40;fnil conj &#91;:and&#93;&#41;
+        base-query {:select &#91;:name :job&#93;
+                    :from &#91;:person&#93;}&#93;
+    &#40;cond-&gt; base-query
+      &#40;:job req-params&#41; &#40;update :where and-clause &#91;:= :job &#40;:job req-params&#41;&#93;&#41;
+      &#40;:name req-params&#41; &#40;update :where and-clause &#91;:= :name &#40;:name req-params&#41;&#93;&#41;
+      &#40;:min-age req-params&#41; &#40;update :where and-clause &#91;:&gt; :age &#40;:min-age req-params&#41;&#93;&#41;&#41;&#41;&#41;
+</code></pre><p>Hopefully this gives you a taste of <code>cond-&gt;</code>. I've found it to be quite useful. It has a place in every Clojure developer's toolbox.</p>]]></content>
+  </entry>
+  <entry>
+    <id>https://jakemccrary.com/blog/2015/12/19/clojurescript-treat-warnings-as-errors/index.html</id>
+    <link href="https://jakemccrary.com/blog/2015/12/19/clojurescript-treat-warnings-as-errors/index.html"/>
+    <title><![CDATA[ClojureScript: Treat warnings as errors]]></title>
+    <updated>2015-12-19T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p>Recently my team deployed a new version of our ClojureScript UI and it had a minor bug. It was trivial to fix the problem, a ClojureScript build warning pointed us to the cause. As a result we started thinking it would be nice to have build warnings count as errors and fail our ClojureScript build.</p><p>We use <a href='http://leiningen.org/'>Leiningen</a> (version 2.5.3) and <a href='https://github.com/emezeske/lein-cljsbuild'>lein-cljsbuild</a> (version 1.1.1). After some searching we found that lein-cljsbuild supports <a href='https://github.com/emezeske/lein-cljsbuild#custom-warning-handlers'>specifying custom warning handlers</a> as the value to the <code>:warning-handlers</code> key. The lein-cljsbuild README even provides an example, which we took and added a <code>&#40;System/exit 1&#41;</code> to the end of it. This resulted in a build configuration that looked similar to below.</p><pre><code class="language-clojure">{:id &quot;prod&quot;
+ :warning-handlers &#91;&#40;fn &#91;warning-type env extra&#93;
+                      &#40;when-let &#91;s &#40;cljs.analyzer/error-message warning-type extra&#41;&#93;
+                        &#40;binding &#91;&#42;out&#42; &#42;err&#42;&#93;
+                          &#40;println &quot;WARNING:&quot; &#40;cljs.analyzer/message env s&#41;&#41;&#41;
+                        &#40;System/exit 1&#41;&#41;&#41;&#93;
+ :source-paths &#91;&quot;src/cljc&quot; &quot;src/cljs&quot;&#93;
+ :compiler {:output-to &quot;resources/public/js/compiled/ui.js&quot;
+            :externs &#91;&quot;resources/intercom-externs.js&quot;
+                      &quot;resources/mixpanel-externs.js&quot;&#93;
+            :optimizations :advanced}}
+</code></pre><p>This worked! Well, it sort of worked. Our build failed whenever there was a warning but now we were seeing spurious warnings. We saw "Use of undeclared Var" warnings when functions created in a <code>letfn</code> where calling each other. Definitely not a situation that warrants a warning and definitely not a build failure.</p><p>We weren't seeing this warning before so we opened ClojureScript's source and found the <a href='https://github.com/clojure/clojurescript/blob/452edf43927566cc0ea0a3846706c0294cef235d/src/main/clojure/cljs/analyzer.cljc#L360-L366'>default warning handler</a>. The default handler checks that <code>warning-type</code> has a truthy value in the map <code>&#42;cljs-warnings&#42;</code>. Inspired by the default handler we added the same check to the start of our warning handler.</p><pre><code class="language-clojure">:warning-handlers &#91;&#40;fn &#91;warning-type env extra&#93;
+                     &#40;when &#40;warning-type cljs.analyzer/&#42;cljs-warnings&#42;&#41;
+                       &#40;when-let &#91;s &#40;cljs.analyzer/error-message warning-type extra&#41;&#93;
+                         &#40;binding &#91;&#42;out&#42; &#42;err&#42;&#93;
+                           &#40;println &quot;WARNING:&quot; &#40;cljs.analyzer/message env s&#41;&#41;&#41;
+                         &#40;System/exit 1&#41;&#41;&#41;&#41;&#93;
+</code></pre><p>Success! Now we no longer get incorrect warnings when compiling our <code>letfn</code> form and our build still fails if a warning occurs. Now we can build and deploy with a little more confidence.</p>]]></content>
+  </entry>
+  <entry>
+    <id>https://jakemccrary.com/blog/2015/12/18/even-quicker-feedback-from-your-clojure-tests/index.html</id>
+    <link href="https://jakemccrary.com/blog/2015/12/18/even-quicker-feedback-from-your-clojure-tests/index.html"/>
+    <title><![CDATA[Even quicker feedback from your Clojure tests]]></title>
+    <updated>2015-12-18T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p>I was recently inspired by a post on a mailing list to make the TDD cycle with <code>clojure.test</code> and <a href='https://github.com/jakemcc/lein-test-refresh'>lein-test-refresh</a> even faster. <code>lein-test-refresh</code> is a Leiningen tool that monitors your Clojure project's source, reloads changes, and then runs your tests. Tools like it provide some of the fastest feedback cycles possible.</p><p>To make the feedback cycle even faster I added the option to only run tests in changed namespaces. This means you're running the minimum number of tests after a change. Version 0.12.0 of <code>lein-test-refresh</code> was released earlier this week with this feature.</p><p>To use it add <code>&#91;com.jakemccrary/lein-test-refresh 0.12.0&#93;</code> as a plugin to your profiles.clj or project.clj. An example <a href='https://github.com/jakemcc/lein-test-refresh/blob/master/sample.project.clj#L3'>project.clj</a> can be found in the project's GitHub repo.</p><p>Once you're on the latest version you can toggle this feature from the command line by providing a <code>:changes-only</code> flag, `lein test-refresh :changes-only<code>, or by adding </code>:changes-only true` to your <code>:test-refresh</code> configuration section in your project.clj or profiles.clj. When the feature is on you can still run all your tests by hitting <code>enter</code> in the terminal running <code>lein test-refresh</code>.</p><p>Below is an example of the time difference between running all my tests and the tests in a single namespace.</p><pre><code>Ran 49 tests containing 219 assertions.
+0 failures, 0 errors.
+
+Passed all tests
+Finished at 14:42:41.655 &#40;run time: 2.006s&#41;
+&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;
+&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42; Running tests &#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;
+:reloading &#40;lumanu.utils-test&#41;
+
+Ran 1 tests containing 3 assertions.
+0 failures, 0 errors.
+
+Passed all tests
+Finished at 14:43:12.648 &#40;run time: 0.085s&#41;
+</code></pre><p>I've been using this feature for about a week now and am enjoying it. My whole test suite isn't particularly slow but even still I've been enjoying the faster feedback.</p>]]></content>
+  </entry>
+  <entry>
+    <id>https://jakemccrary.com/blog/2015/11/15/sql-aggregate-a-set-of-values-together/index.html</id>
+    <link href="https://jakemccrary.com/blog/2015/11/15/sql-aggregate-a-set-of-values-together/index.html"/>
+    <title><![CDATA[SQL: Aggregate a set of values together]]></title>
+    <updated>2015-11-15T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p>Lately I've been working on projects that use <a href='http://www.postgresql.org/'>Postgres</a> as our relational database. This has allowed us to simplify some of our Clojure code by leaning on some built-in features of Postgres. One SQL function supported by Postgres which has greatly simplified our code is the <code>array&#95;agg</code> <a href='http://www.postgresql.org/docs/9.4/static/functions-aggregate.html'>aggregate</a> function.</p><h2>What is <code>array&#95;agg</code>?</h2><p>The <code>array&#95;agg</code> function takes an argument and returns an array of the argument type. That sentence will make more sense after an example. The snippet below shows a simplified schema for a blog's database. There is a table called <code>blog&#95;posts</code> that contains details about posts, a table called <code>categories</code> that has labels that can be applied to blog posts, and a join table called <code>post&#95;categories</code> that links the two previous tables together.</p><pre><code class="language-sql">blog=# select id, title from blog&#95;posts;
+ id |    title
+----+--------------
+  1 | SQL Post
+  2 | Clojure Post
+
+blog=# select &#42; from categories;
+ id |   name
+----+----------
+  1 | sql
+  2 | emacs
+  3 | clojure
+  4 | postgres
+
+blog=# select &#42; from post&#95;categories;
+ blog&#95;post&#95;id | category&#95;id
+--------------+-------------
+            1 |           1
+            2 |           2
+            1 |           4
+            2 |           3
+</code></pre><p>Before I learned about <code>array&#95;agg</code>, if I wanted to know how each blog post had been categorized I might have written the following query.</p><pre><code>select title, name as category
+  from blog&#95;posts bp
+  join post&#95;categories pc on pc.blog&#95;post&#95;id = bp.id
+  join categories c on c.id = pc.category&#95;id
+  order by title;
+
+
+    title     | category
+--------------+----------
+ Clojure Post | emacs
+ Clojure Post | clojure
+ SQL Post     | sql
+ SQL Post     | postgres
+</code></pre><p>The result is readable but as the number of posts and categories grow it becomes harder to read. The query also doesn't answer the question, "How are my posts categorized?", well. The ideal answer is a single row per post that shows the post's categories. You can use <code>array&#95;agg</code> to get that ideal answer.</p><pre><code class="language-sql">select title, array&#95;agg&#40;name&#41; as categories
+  from blog&#95;posts bp
+  join post&#95;categories pc on pc.blog&#95;post&#95;id = bp.id
+  join categories c on c.id = pc.category&#95;id
+  group by title;
+
+    title     |   categories
+--------------+-----------------
+ SQL Post     | {sql,postgres}
+ Clojure Post | {emacs,clojure}
+</code></pre><p>I find the <code>array&#95;agg</code> version much nicer to read. The result answers the question in a very direct fashion and the query expresses the question well. Everything about the query expresses the question, you no longer have an extra <code>order by</code> clause to make the result more readable by human eyes.</p><h2>How did it make my Clojure code simpler?</h2><p>The above is great and it makes everything more readable for a human. Most of the time I'm not querying a SQL database so that a human can directly read the results; instead I'm using Clojure to manipulate results of a query. Fortunately, <code>array&#95;agg</code> simplifies my Clojure code as well.</p><p>I'm working with a schema that has many relationships similar to the above relationship. Continuing with the example from above the snippet below shows the data shape we'd get back from <code>clojure.java.jdbc</code> prior to using <code>array&#95;agg</code>. The data shape we actually want follows.</p><pre><code class="language-clojure">;; data shape you get from the non-array&#95;agg query.
+&#91;{:title &quot;Clojure Post&quot; :category &quot;emacs&quot;}
+ {:title &quot;SQL Post&quot; :category &quot;sql&quot;}
+ {:title &quot;Clojure Post&quot; :category &quot;clojure&quot;}
+ {:title &quot;SQL Post&quot; :category &quot;postgres&quot;}&#93;
+
+;; data shape you want
+&#91;{:title &quot;Clojure Post&quot; :categories &#91;&quot;emacs&quot; &quot;clojure&quot;&#93;}
+ {:title &quot;SQL Post&quot; :categories &#91;&quot;sql&quot; &quot;postgres&quot;&#93;}&#93;
+</code></pre><p>Since we're not getting data in our desired shape we need to write code that combines rows. One way of doing that is to use <code>reduce</code> and <code>map</code>.</p><pre><code class="language-clojure">&#40;defn squash-by-title &#91;rows&#93;
+  &#40;-&gt;&gt; rows
+       &#40;reduce &#40;fn &#91;r row&#93; &#40;update r &#40;:title row&#41; conj &#40;:category row&#41;&#41;&#41; {}&#41;
+       &#40;map &#40;fn &#91;&#91;title categories&#93;&#93; {:title title :categories categories}&#41;&#41;&#41;&#41;
+</code></pre><p>I've been writing Clojure for a long time and when I see code like above it still takes me a bit of time to figure out what is happening. Not only that, but eventually your project has different squash operations depending on what data you're pulling back from the database. They are probably mostly similar and eventually you abstract the differences and feel great. Then you come back months later and have to figure out how it all works. Luckily, if you're using a database that supports <code>array&#95;agg</code>, there is a better way.</p><p>The first step is to change your queries to use <code>array&#95;agg</code>. The second step is to extend the <code>clojure.java.jdbc/IResultSetReadColumn</code> protocol to the type returned by your jdbc driver. For my project that looks like the following code:</p><pre><code class="language-clojure">;; clojure.java.jdbc has been required as jdbc
+
+&#40;extend-protocol jdbc/IResultSetReadColumn
+  org.postgresql.jdbc4.Jdbc4Array
+  &#40;result-set-read-column &#91;pgobj metadata i&#93;
+    &#40;vec &#40;.getArray pgobj&#41;&#41;&#41;&#41;
+</code></pre><p>By changing my queries to use <code>array&#95;agg</code> and adding those four lines of code I'm able to delete all of my squashing functions and get data from my database in the shape I want. I also end up with easier to understand code and more expressive queries. Awesome.</p><p>_Thanks to <a href='http://timothypratley.blogspot.com/'>Timothy Pratley</a> for providing feedback on earlier versions of this post._</p>]]></content>
+  </entry>
+  <entry>
+    <id>https://jakemccrary.com/blog/2015/06/30/my-favorite-clj-refactor-features/index.html</id>
+    <link href="https://jakemccrary.com/blog/2015/06/30/my-favorite-clj-refactor-features/index.html"/>
+    <title><![CDATA[My favorite clj-refactor features]]></title>
+    <updated>2015-06-30T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p>If you write Clojure using Emacs you should check out <a href='https://github.com/clojure-emacs/clj-refactor.el'>clj-refactor</a>. It is working better than ever and makes developing Clojure more enjoyable.</p><p>I don't use all the features in clj-refactor. There are a lot of features I haven't had the need to use and many I just can't remember. Below are the features I use consistently.</p><h3>Favorite Features</h3><p>My favorite feature of clj-refactor is the <a href='/blog/2015/06/18/emacs-automatically-require-common-namespaces/'>magic requires</a>. This feature lets you type a prefix (such as <code>&#40;str/&#41;</code>) and have the namespace automatically added to your <code>ns</code> form (in this example <code>&#91;clojure.string :as str&#93;</code>). It is awesome. You can also add <a href='/blog/2015/06/18/emacs-automatically-require-common-namespaces/'>your own</a> prefix mappings.</p><p>My other most frequently used refactorings are <a href='https://github.com/clojure-emacs/clj-refactor.el/wiki/cljr-introduce-let'>introduce let</a>, <a href='https://github.com/clojure-emacs/clj-refactor.el/wiki/cljr-expand-let'>expand let</a>, and <a href='https://github.com/clojure-emacs/clj-refactor.el/wiki/cljr-move-to-let'>move to let</a>. These three are very complementary and are a quick way if introducing named locals.</p><p><a href='https://github.com/clojure-emacs/clj-refactor.el/wiki/cljr-add-missing-libspec'>Add missing libspec</a> is a recent discovery of mine. Have you ever paired with a developer who uses Intellij with Cursive and been a bit jealous of the auto-requiring? I have. This refactoring lets you do that. Type whatever symbol you want and clj-refactor tries to resolve it and then require the containing namespace with correct prefix. Recently I broke a massive namespace into a few smaller ones and this refactoring saved me a ton of time.</p><p>I used to use <a href='https://github.com/clojure-emacs/clj-refactor.el/wiki/cljr-move-form'>move form</a> when trying to reorganize namespaces but now I pretty much just cut and paste and use <a href='https://github.com/clojure-emacs/clj-refactor.el/wiki/cljr-add-missing-libspec'>add missing libspec</a> to fix the requires. I want to use <b>move form</b> but I haven't had a ton of success with it. <b>Add missing libspec</b> plus cut and paste is a few more steps but my success rate has been much higher.</p><p><a href='https://github.com/clojure-emacs/clj-refactor.el/wiki/cljr-sort-ns'>Sort ns</a> does exactly what it says, it sorts your <code>ns</code> form. Once you get used to keeping your <code>ns</code> forms sorted you won't go back.</p><p><a href='https://github.com/clojure-emacs/clj-refactor.el/wiki/cljr-extract-function'>Extract function</a> is another refactoring I recently stumbled upon. I've used it a few times since then and when it works it is pretty awesome. I've had unexpected behavior a couple of times but it was unclear if that was my fault or it not handling macros well. If you're extracting a function you might as well give it a shot.</p><p>The final feature is the <a href='https://github.com/clojure-emacs/clj-refactor.el/wiki#automatic-insertion-of-namespace-declaration'>automatic insertion of namespace declarations</a> when you create a new Clojure file. I nearly forgot to highlight this feature because it requires no action on my side and it is amazing. If I never have to type a namespace symbol again I'll be happy.</p><h3>Customization</h3><p>Below is my entire clj-refactor setup from my Emacs init.el. It doesn't take much to get it to a state I like.</p><pre><code class="language-lisp">&#40;require 'clj-refactor&#41;
+
+;; Add custom magic requires.
+&#40;dolist &#40;mapping '&#40;&#40;&quot;maps&quot; . &quot;outpace.util.maps&quot;&#41;
+                   &#40;&quot;seqs&quot; . &quot;outpace.util.seqs&quot;&#41;
+                   &#40;&quot;times&quot; . &quot;outpace.util.times&quot;&#41;
+                   &#40;&quot;repl&quot; . &quot;outpace.util.repl&quot;&#41;
+                   &#40;&quot;time&quot; . &quot;clj-time.core&quot;&#41;
+                   &#40;&quot;string&quot; . &quot;clojure.string&quot;&#41;&#41;&#41;
+  &#40;add-to-list 'cljr-magic-require-namespaces mapping t&#41;&#41;
+
+&#40;setq cljr-favor-prefix-notation nil&#41;
+
+&#40;add-hook 'clojure-mode-hook &#40;lambda &#40;&#41;
+                               &#40;clj-refactor-mode 1&#41;
+                               &#40;yas/minor-mode 1&#41;
+                               &#40;cljr-add-keybindings-with-prefix &quot;C-c C-x&quot;&#41;&#41;&#41;
+</code></pre><p>If you use Emacs and write Clojure you should check out clj-refactor. There are enough features that consistently work and help keep you in the flow that it is worth using.</p>]]></content>
+  </entry>
+  <entry>
+    <id>https://jakemccrary.com/blog/2015/06/18/emacs-automatically-require-common-namespaces/index.html</id>
+    <link href="https://jakemccrary.com/blog/2015/06/18/emacs-automatically-require-common-namespaces/index.html"/>
+    <title><![CDATA[Emacs: automatically require common namespaces]]></title>
+    <updated>2015-06-18T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p>If you're writing Clojure in Emacs you should check out <a href='https://github.com/clojure-emacs/clj-refactor.el'>clj-refactor</a>. It provides some neat functionality. Some examples include the ability to extract functions, introduce <code>let</code> forms, and inline symbols. It also has a feature called "magic requires" that automatically requires common namespaces when you type their short form.</p><p>Out of the box five short forms are supported. They are <code>io</code> for <code>clojure.java.io</code>, <code>set</code> for <code>clojure.set</code>, <code>str</code> for <code>clojure.string</code>, <code>walk</code> for <code>clojure.walk</code>, and <code>zip</code> for <code>clojure.zip</code>. If you type <code>&#40;str/</code> then `(:require [clojure.string :as str])<code> will be added to your </code>ns` form. It is pretty awesome. This feature is on by default but you can turn it off by adding <code>&#40;setq cljr-magic-requires nil&#41;</code> to your Emacs configuration.</p><p>This feature is also extensible. You can add your own mappings of short form to namespace. The following snippet of elisp adds mappings for <code>maps</code>, <code>seqs</code>, and <code>string</code>.</p><pre><code>&#40;dolist &#40;mapping '&#40;&#40;&quot;maps&quot; . &quot;outpace.util.maps&quot;&#41;
+                   &#40;&quot;seqs&quot; . &quot;outpace.util.seqs&quot;&#41;
+                   &#40;&quot;string&quot; . &quot;clojure.string&quot;&#41;&#41;&#41;
+  &#40;add-to-list 'cljr-magic-require-namespaces mapping t&#41;&#41;
+</code></pre><p>It doesn't take a lot of code but having it is awesome. If there are namespaces you frequently require I highly recommend setting this up.</p>]]></content>
+  </entry>
+  <entry>
+    <id>https://jakemccrary.com/blog/2015/04/25/quieter-clojure-dot-test-output/index.html</id>
+    <link href="https://jakemccrary.com/blog/2015/04/25/quieter-clojure-dot-test-output/index.html"/>
+    <title><![CDATA[Quieter clojure.test output]]></title>
+    <updated>2015-04-25T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p>If you use <code>clojure.test</code> then there is a good chance you've been annoyed by all the <a href='https://github.com/jakemcc/lein-test-refresh/issues/33'>output</a> when you run your tests in the terminal. When there is a test failure you have to scroll through pages of output to find the error.</p><p>With release <code>0.9.0</code> of <a href='https://github.com/jakemcc/lein-test-refresh'>lein-test-refresh</a> you can minimize the output of <code>clojure.test</code> and <strong>only</strong> see failure and summary messages. To enable this feature add <code>:quiet true</code> to the <code>:test-refresh</code> configuration map in either your project.clj or profiles.clj file. If you configure <code>lein-test-refresh</code> in <code>&#126;/.lein/profiles.clj</code> then turning on this feature looks like the following. <a href='#fn-1' id='fnref1'><sup>1</sup></a></p><pre><code class="language-clojure">{:user {:plugins &#91;&#91;com.jakemccrary/lein-test-refresh &quot;0.9.0&quot;&#93;&#93;
+        :test-refresh {:quiet true}}}
+</code></pre><p>Setting up your profiles.clj like above allows you to move to Clojure project in your terminal, run <code>lein test-refresh</code>, and have your <code>clojure.test</code>s run whenever a file changes. In addition, your terminal won't show the usual <i>Testing a.namespace</i> output.</p><p>Below is what you typically see when running <code>clojure.test</code> tests in a terminal. I had to cut most of the <i>Testing a.namespace</i> messages from the picture.</p><p><img src="/images/not-quiet-test-output.png" alt="Normal view of test output" /></p><p>The following picture is with quiet mode turned on in <code>lein-test-refresh</code>. No more <i>Testing a.namespace</i> messages! No more scrolling through all your namespaces to find the failure!</p><p><img src="/images/minimal-test-output.png" alt="Minimal output in console" /></p><p>I just released this feature so i haven't had a chance to use it too much. I imagine it may evolve to change the output more. <ol class='footnotes'><li id='fn-1'>More configuration options can be found <a href='https://github.com/jakemcc/lein-test-refresh/blob/master/sample.project.clj#L5-L24'>here</a><a href='#fnref1'>&#8617;</a></li></ol></p>]]></content>
+  </entry>
+  <entry>
+    <id>https://jakemccrary.com/blog/2015/03/24/advanced-leiningen-checkouts-configuring-what-ends-up-on-your-classpath/index.html</id>
+    <link href="https://jakemccrary.com/blog/2015/03/24/advanced-leiningen-checkouts-configuring-what-ends-up-on-your-classpath/index.html"/>
+    <title><![CDATA[Advanced Leiningen checkouts: configuring what ends up on your classpath]]></title>
+    <updated>2015-03-24T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p><a href='http://leiningen.org/'>Leiningen</a> checkout dependencies are a useful feature. Checkout dependencies allow you to work on a library and consuming project at the same time. By setting up checkout dependencies you can skip running <code>lein install</code> in the library project; it appears on the classpath of the consuming project. An example of what this looks like can be found in the <a href='https://github.com/technomancy/leiningen/blob/master/doc/TUTORIAL.md#checkout-dependencies'>Leiningen documentation</a> or in a <a href='http://jakemccrary.com/blog/2012/03/28/working-on-multiple-clojure-projects-at-once/'>previous post</a> of mine.</p><p>By default, Leiningen adds the <code>:source-paths</code>, <code>:test-paths</code>, <code>:resource-paths</code>, and <code>:compile-path</code> directories of the checkout projects to your consuming project's classpath. It also recurses and adds the checkouts of your checkouts (and keeps recursing).</p><p>You can override what gets added to your classpath by <code>:checkout-deps-shares</code> to your project.clj. This key's value should be a vector of functions that when applied to your checkouts' project map return the paths that should be included on the classpath. The default values can be found <a href='https://github.com/technomancy/leiningen/blob/ff84da697249184874b528950048981621ac0b61/leiningen-core/src/leiningen/core/project.clj#L488-L492'>here</a> and an example of overriding the default behavior can be found in the <a href='https://github.com/technomancy/leiningen/blob/ff84da697249184874b528950048981621ac0b61/sample.project.clj#L320-L321'>sample.project.clj</a>.</p><p>I ran into a situation this week where having my checkouts' <code>:test-paths</code> on the classpath caused issues my consuming project. My first pass at fixing this problem was to add `:checkout-deps-shares [:source-paths :resource-paths :compile-path]` to my project.clj. **This didn't work**. My project.clj looked like below.</p><pre><code class="language-clojure">&#40;defproject example &quot;1.2.3-SNAPSHOT&quot;
+  :dependencies &#91;&#91;library &quot;1.2.2&quot;&#93;
+                 &#91;org.clojure/clojure &quot;1.6.0&quot;&#93;&#93;
+  :checkout-deps-shares &#91;:source-paths :resource-paths :compile-path&#93;&#41;
+</code></pre><p>Why didn't it work? It didn't work because of how Leiningen merges duplicate keys in the project map. When Leiningen merges the various configuration maps (from merging profiles, merging defaults, etc) and it encounters values that are collections it combines them (more details found in <a href='https://github.com/technomancy/leiningen/blob/master/doc/PROFILES.md#merging'>documentation</a>). Using <code>lein pprint :checkout-deps-shares</code> shows what we end up with.</p><pre><code class="language-console">$ lein pprint :checkout-deps-shares
+&#40;:source-paths
+ :resource-paths
+ :compile-path
+ :source-paths
+ :test-paths
+ :resource-paths
+ :compile-path
+ #&lt;Var@43e3a075:
+   #&lt;classpath$checkout&#95;deps&#95;paths leiningen.core.classpath$checkout&#95;deps&#95;paths@6761b44b&gt;&gt;&#41;
+</code></pre><p>We've ended up with the default values and the values we specified in the project.clj. This isn't hard to fix. To tell Leiningen to replace the value instead of merging you add the <code>&#94;:replace</code> metadata to the value. Below is the same project.clj but with <code>&#94;:replace</code> added.</p><pre><code class="language-clojure">&#40;defproject example &quot;1.2.3-SNAPSHOT&quot;
+  :dependencies &#91;&#91;library &quot;1.2.2&quot;&#93;
+                 &#91;org.clojure/clojure &quot;1.6.0&quot;&#93;&#93;
+  :checkout-deps-shares &#94;:replace &#91;:source-paths :resource-paths :compile-path&#93;&#41;
+</code></pre><p>This solves the problem of <code>:test-paths</code> showing up on the classpath but it introduces another problem. Checkouts' checkout dependencies no longer show up on the classpath. This is because <code>leiningen.core.classpath/checkout-deps-paths</code> is no longer applied to the checkouts.</p><p>Without <code>leiningen.core.classpath/checkout-deps-paths</code> Leiningen stops recursing and, as a result, no longer picks up checkouts' checkout dependencies. My first attempt at fixing this was to modify my project.clj so the <code>:checkout-deps-shares</code> section looked like below.</p><pre><code class="language-clojure">:checkout-deps-shares &#94;:replace &#91;:source-paths :resource-paths :compile-path
+                                 leiningen.core.classpath/checkout-deps-paths&#93;
+</code></pre><p>The above fails. It runs but doesn't actually add the correct directories to the classpath. The next attempt is below.</p><pre><code class="language-clojure">:checkout-deps-shares &#94;:replace &#91;:source-paths :resource-paths :compile-path
+                                 #'leiningen.core.classpath/checkout-deps-paths&#93;
+</code></pre><p>This attempt failed quicker. Now an exception is thrown when trying to run Leiningen tasks.</p><p>The next one works. It takes advantage of dynamic eval through <a href='https://github.com/technomancy/leiningen/blob/master/doc/PROFILES.md#dynamic-eval'>read-eval</a> syntax. With the below snippet the checkouts' checkouts are added to the classpath.</p><pre><code class="language-clojure">:checkout-deps-shares &#94;:replace &#91;:source-paths :resource-paths :compile-path
+                                 #=&#40;eval leiningen.core.classpath/checkout-deps-paths&#41;&#93;
+</code></pre><p>Hopefully this is useful to someone else. It took a bit of digging to figure it out and many incorrect attempts to get correct. The full example project.clj is below.</p><pre><code class="language-clojure">&#40;defproject example &quot;1.2.3-SNAPSHOT&quot;
+  :dependencies &#91;&#91;library &quot;1.2.2&quot;&#93;
+                 &#91;org.clojure/clojure &quot;1.6.0&quot;&#93;&#93;
+  :checkout-deps-shares &#94;:replace &#91;:source-paths :resource-paths :compile-path
+                                   #=&#40;eval leiningen.core.classpath/checkout-deps-paths&#41;&#93;&#41;
+</code></pre>]]></content>
+  </entry>
+  <entry>
+    <id>https://jakemccrary.com/blog/2015/01/11/overview-of-my-leiningen-profiles-dot-clj/index.html</id>
+    <link href="https://jakemccrary.com/blog/2015/01/11/overview-of-my-leiningen-profiles-dot-clj/index.html"/>
+    <title><![CDATA[Overview of my Leiningen profiles.clj]]></title>
+    <updated>2015-01-11T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p><strong>2017-08-27: I've published an updated version <a href='/blog/2017/08/27/my-current-leiningen-profiles-dot-clj/'>here</a>.</strong></p><p><a href='https://github.com/technomancy/leiningen'>Leiningen</a>, a Clojure build tool, has the concept of <a href='https://github.com/technomancy/leiningen/blob/master/doc/PROFILES.md'>profiles</a>. One thing profiles are useful for is allowing you to have development tools available to a project without having them as dependencies when you release your project. An example of when you might want to do this is when you are using a testing library like <a href='https://github.com/jaycfields/expectations'>expectations</a>.</p><p>Some development tools, such as <a href='https://github.com/jakemcc/lein-test-refresh'>lein-test-refresh</a>, are useful to have across most of your Clojure projects. Rather nicely, Leiningen supports adding global profiles to <code>&#126;/.lein/profiles.clj</code>. These profiles are available in all your projects.</p><p>Below is most of my <code>profiles.clj</code>. I've removed some sensitive settings and what is left are the development tools that I find useful.</p><pre><code class="language-clojure Entire :user profile">{:user {:plugin-repositories &#91;&#91;&quot;private-plugins&quot; {:url &quot;private repo url&quot;}&#93;&#93;
+        :dependencies &#91;&#91;pjstadig/humane-test-output &quot;0.6.0&quot;&#93;&#93;
+        :injections &#91;&#40;require 'pjstadig.humane-test-output&#41;
+                     &#40;pjstadig.humane-test-output/activate!&#41;&#93;
+        :plugins &#91;&#91;cider/cider-nrepl &quot;0.8.2&quot;&#93;
+                  &#91;refactor-nrepl &quot;0.2.2&quot;&#93;
+                  &#91;com.jakemccrary/lein-test-refresh &quot;0.5.5&quot;&#93;
+                  &#91;lein-autoexpect &quot;1.4.2&quot;&#93;
+                  &#91;lein-ancient &quot;0.5.5&quot;&#93;
+                  &#91;jonase/eastwood &quot;0.2.1&quot;&#93;
+                  &#91;lein-kibit &quot;0.0.8&quot;&#93;
+                  &#91;lein-pprint &quot;1.1.2&quot;&#93;&#93;
+        :test-refresh {:notify-command &#91;&quot;terminal-notifier&quot; &quot;-title&quot; &quot;Tests&quot; &quot;-message&quot;&#93;}}}
+</code></pre><p><code>:plugin-repositories &#91;&#91;&quot;private-plugins&quot; {:url &quot;private repo url&quot;}&#93;&#93;</code> sets a private plugin repository. This allows me to use <a href='http://outpace.com/'>Outpace's</a> private Leiningen templates for setting up new projects for work.</p><p>The next few lines are all related. They setup <a href='https://github.com/pjstadig/humane-test-output'>humane-test-output</a>. <code>humane-test-output</code> makes <code>clojure.test</code> output more readable. It makes using <code>clojure.test</code> much more enjoyable. I highly recommend it. Sample output can be found in my <a href='/blog/2014/06/22/comparing-clojure-testing-libraries-output/'>Comparing Clojure Testing Libraries</a> post.</p><pre><code class="language-clojure humane-test-output setup in the :user profile">:dependencies &#91;&#91;pjstadig/humane-test-output &quot;0.6.0&quot;&#93;&#93;
+:injections &#91;&#40;require 'pjstadig.humane-test-output&#41;
+             &#40;pjstadig.humane-test-output/activate!&#41;&#93;
+</code></pre><p>Next we get to my <code>:plugins</code> section. This is the bulk of my <code>profiles.clj</code>.</p><pre><code class="language-clojure :plugins section of my :user profile">:plugins &#91;&#91;cider/cider-nrepl &quot;0.8.2&quot;&#93;
+          &#91;refactor-nrepl &quot;0.2.2&quot;&#93;
+          &#91;com.jakemccrary/lein-test-refresh &quot;0.5.5&quot;&#93;
+          &#91;lein-autoexpect &quot;1.4.2&quot;&#93;
+          &#91;lein-ancient &quot;0.5.5&quot;&#93;
+          &#91;jonase/eastwood &quot;0.2.1&quot;&#93;
+          &#91;lein-kibit &quot;0.0.8&quot;&#93;
+          &#91;lein-pprint &quot;1.1.2&quot;&#93;&#93;
+</code></pre><p>The first entry is for <code>cider/cider-nrepl</code>. I write Clojure using Emacs and <a href='https://github.com/clojure-emacs/cider'>CIDER</a> and much of CIDER's functionality exists in nrepl middleware found in <code>cider/cider-nrepl</code>. This dependency is required for me to be effective while writing Clojure.</p><p><code>refactor-nrepl</code> is next. <a href='https://github.com/clojure-emacs/clj-refactor.el'>clj-refactor.el</a> requires it for some refactorings. I actually don't use any of those refactorings (I only use move to let, extract to let, and introduce let refactorings) but I still keep it around.</p><p><code>com.jakemccrary/lein-test-refresh</code> is next. This lets me use <a href='https://github.com/jakemcc/lein-test-refresh'>lein-test-refresh</a> globally. <code>lein-test-refresh</code> runs your <code>clojure.test</code> tests whenever a file changes in your project. This is another key development tool in my process.</p><p>Up next is <code>lein-autoexpect</code>. It was the first Leiningen plugin I wrote and it enables continuous testing with <a href='https://github.com/jaycfields/expectations'>expectations</a>.</p><p>Both <code>lein-autoexpect</code> and <code>lein-test-refresh</code> are projects I created and maintain. Writing <code>lein-autoexpect</code> was my first exposure to continuous testing and it changed how I develop code. I find it frustrating to develop without such a tool.</p><p>Next up is <a href='https://github.com/xsc/lein-ancient'>lein-ancient</a>. It checks your project.clj for outdated dependencies and plugins. It isn't something that gets used every day but it is super useful when you need it.</p><p>The next two entries are for <a href='https://github.com/jonase/eastwood'>jonase/eastwood</a> and <a href='https://github.com/jonase/kibit'>lein-kibit</a>. They are both tools that look at your Clojure code and report common mistakes. I don't use either consistently but I do find them useful. I've found bugs with eastwood.</p><p>The final plugin is <code>lein-pprint</code>. <a href='https://github.com/technomancy/leiningen/tree/master/lein-pprint'>lein-pprint</a> prints out your project map. It is useful for trying to grasp what is going on when messing around with various Leiningen options.</p><p>The final part, seen below, of my <code>profiles.clj</code> is configuration for <code>lein-test-refresh.</code> It configures <code>lein-test-refresh</code> to use <a href='https://github.com/alloy/terminal-notifier'>terminal-notifier</a> to notify me when my tests pass or fail. Using a continuous tester that allows flexible notification is useful. Not having to glance at a terminal to see if your tests are passing or failing is great.</p><pre><code class="language-clojure">:test-refresh {:notify-command &#91;&quot;terminal-notifier&quot; &quot;-title&quot; &quot;Tests&quot; &quot;-message&quot;&#93;}
+</code></pre><p>That is my <code>&#126;/.lein/profiles.clj</code>. I don't think it contains anything mind blowing but it definitely contains a useful collection of Clojure development tools. I encourage you to check out them out and to think about what tools you should be putting into your global <code>:user</code> profile.</p>]]></content>
+  </entry>
+  <entry>
+    <id>https://jakemccrary.com/blog/2014/12/21/restricting-access-to-certain-routes/index.html</id>
+    <link href="https://jakemccrary.com/blog/2014/12/21/restricting-access-to-certain-routes/index.html"/>
+    <title><![CDATA[Restricting access to certain routes]]></title>
+    <updated>2014-12-21T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p>Recently I've been working on adding authentication and authorization to a Clojure web service. The project uses <a href='https://github.com/weavejester/compojure'>compojure</a> for routing and <a href='https://github.com/cemerick/friend'>friend</a> for authentication and authorization. My pair and I wanted to restrict access to specific routes while leaving some routes completely public. It took a few tries until we figured out how to do this in a way that made us happy.</p><p>The rest of this post shows the approximate path we took to our current solution. It focuses on using friend to restrict access to specific routes. It does not go into details about adding authentication to your web service.</p><p>Below is an example of the routes before adding authorization checks.</p><pre><code class="language-clojure">&#40;ns example.server
+  &#40;:require &#91;compojure.core :refer &#91;GET defroutes&#93; :as compojure&#93;
+            &#91;compojure.route :as route&#93;&#41;&#41;
+
+&#40;defroutes app
+  &#40;GET &quot;/status&quot; &#95; &#40;status&#41;&#41;
+  &#40;GET &quot;/cars&quot; &#95; &#40;fetch-cars&#41;&#41;
+  &#40;GET &quot;/attributes&quot; &#95; &#40;fetch-attributes&#41;&#41;
+  &#40;GET &quot;/drivers&quot; &#95; &#40;fetch-drivers&#41;&#41;
+  &#40;route/not-found &quot;NOT FOUND&quot;&#41;&#41;
+</code></pre><p>We wanted to make <code>/cars</code>, <code>/attributes</code>, and <code>/drivers</code> require that the request satisfies the <code>:example.server/user</code> role. Requesting <code>/status</code> should not require authorization. The first attempt left us with the following code.</p><pre><code class="language-clojure">&#40;ns example.server
+  &#40;:require &#91;compojure.core :refer &#91;GET defroutes&#93; :as compojure&#93;
+            &#91;compojure.route :as route&#93;
+            &#91;cemerick.friend :as friend&#93;&#41;&#41;
+
+&#40;defroutes app
+  &#40;GET &quot;/status&quot; &#95; &#40;status&#41;&#41;
+  &#40;GET &quot;/cars&quot; &#95;
+       &#40;friend/authorize #{::user}
+                         &#40;fetch-cars&#41;&#41;&#41;
+  &#40;GET &quot;/attributes&quot; &#95;
+       &#40;friend/authorize #{::user}
+                         &#40;fetch-attributes&#41;&#41;&#41;
+  &#40;GET &quot;/drivers&quot; &#95;
+       &#40;friend/authorize #{::user}
+                         &#40;fetch-drivers&#41;&#41;&#41;
+  &#40;route/not-found &quot;NOT FOUND&quot;&#41;&#41;
+</code></pre><p>The above works but it suffers from repetition. You could write a macro to minimize the repetition but we thought there must be a better way.</p><p>After reading more of <a href='https://github.com/cemerick/friend'>friend</a>'s documentation we discovered <code>friend/wrap-authorize</code>. This is middleware that only allows requests through if the request satisfies the required roles. Our first pass at using <code>friend/wrap-authorize</code> looked like the following example.</p><pre><code class="language-clojure">&#40;ns example.server
+  &#40;:require &#91;compojure.core :refer &#91;GET defroutes&#93; :as compojure&#93;
+            &#91;compojure.route :as route&#93;
+            &#91;cemerick.friend :as friend&#93;&#41;&#41;
+
+&#40;defroutes protected-routes
+  &#40;GET &quot;/cars&quot; &#95; &#40;fetch-cars&#41;&#41;
+  &#40;GET &quot;/attributes&quot; &#95; &#40;fetch-attributes&#41;&#41;
+  &#40;GET &quot;/drivers&quot; &#95; &#40;fetch-drivers&#41;&#41;&#41;
+
+&#40;defroutes app
+  &#40;GET &quot;/status&quot; &#95; &#40;status&#41;&#41;
+  &#40;friend/wrap-authorize protected-routes #{::user}&#41;
+  &#40;route/not-found &quot;NOT FOUND&quot;&#41;&#41;
+</code></pre><p>This is much nicer. The repetition is removed by extracting routes that require authorization into a separate <code>defroutes</code> and wrapping it with <code>friend/wrap-authorize</code>.</p><p>This introduces a subtle bug. A response with status code 404 is no longer returned if a non-existent resource is requested and the request is unauthorized. This is because the authorization check happens <i>before</i> matching a route. friend's documentation warns against this and suggests using <code>compojure/context</code> to scope usage of <code>friend/wrap-authorize</code>. This doesn't solve the problem but it at least narrows its scope. We can do better.</p><p>Compojure <a href='https://github.com/weavejester/compojure/blob/master/HISTORY.md'>1.2.0</a> introduced the function <code>wrap-routes</code>. <code>wrap-routes</code> applies middleware <i>after</i> a route is matched. By using this we can have all of the benefits of using <code>friend/wrap-authorize</code> without breaking returning 404 responses.</p><pre><code class="language-clojure">&#40;ns example.server
+  &#40;:require &#91;compojure.core :refer &#91;GET defroutes&#93; :as compojure&#93;
+            &#91;compojure.route :as route&#93;
+            &#91;cemerick.friend :as friend&#93;&#41;&#41;
+
+&#40;defroutes protected-routes
+  &#40;GET &quot;/cars&quot; &#95; &#40;fetch-cars&#41;&#41;
+  &#40;GET &quot;/attributes&quot; &#95; &#40;fetch-attributes&#41;&#41;
+  &#40;GET &quot;/drivers&quot; &#95; &#40;fetch-drivers&#41;&#41;&#41;
+
+&#40;defroutes app
+  &#40;GET &quot;/status&quot; &#95; &#40;status&#41;&#41;
+  &#40;compojure/wrap-routes protected-routes
+                         friend/wrap-authorize
+                         #{::user}&#41;
+  &#40;route/not-found &quot;NOT FOUND&quot;&#41;&#41;
+</code></pre><p>There we have it. A solution without duplication that still responds properly to requests for non-existent resources. <code>compojure/wrap-routes</code> is a useful function to know about.   </p>]]></content>
+  </entry>
+  <entry>
+    <id>https://jakemccrary.com/blog/2014/06/22/comparing-clojure-testing-libraries-output/index.html</id>
+    <link href="https://jakemccrary.com/blog/2014/06/22/comparing-clojure-testing-libraries-output/index.html"/>
+    <title><![CDATA[Comparing Clojure Testing Libraries: Output]]></title>
+    <updated>2014-06-22T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p>I recently became interested in how Clojure testing libraries help you when there is a test failure. This interest resulted in me <a href='https://github.com/jakemcc/clojure-test-bed'>exploring</a> different Clojure testing libraries. I created the same tests using <strong>clojure.test</strong> (with and without <a href='https://github.com/pjstadig/humane-test-output'>humane-test-output</a>), <a href='http://jayfields.com/expectations/'>expectations</a>, <a href='https://github.com/marick/Midje'>Midje</a>, and <a href='http://speclj.com/'>Speclj</a> and looked at the output.</p><p>I ran all of these examples using Leiningen. <strong>Midje</strong>, <strong>Speclj</strong>, and <strong>expectations</strong> color their output but I'm not going to try to reproduce that here. The color added by <strong>Midje</strong> and <strong>expectations</strong> is useful. <strong>Speclj</strong> color hurt its readability. I use a dark colored terminal and <strong>Speclj</strong> colors the line that tells where the failure occurs black. This made it hard to read.</p><p>I'm not going to show what the tests look like for each testing library past the first comparison. How a test in expressed is important but not what I want to focus on in this post.</p><h2>Comparing Strings</h2><p>Going to start off with a basic string comparison. The failing test compares two strings that only differ by one character.</p><h5>clojure.test</h5><p>Most (hopefully all) Clojure programmers should be familiar with <strong>clojure.test</strong>. It is the testing library that is included with Clojure.</p><pre><code class="language-clojure">&#40;ns example.string-test
+  &#40;:require &#91;clojure.test :refer :all&#93;&#41;&#41;
+
+&#40;deftest string-comparisons
+  &#40;is &#40;= &quot;strings equal&quot; &quot;strings equal&quot;&#41;&#41;
+  &#40;is &#40;= &quot;space&quot; &quot;spice&quot;&#41;&#41;&#41;
+</code></pre><p>The output below is what you get when the above test runs. Even in this simple example it isn't the easiest to read. It doesn't make it easy to find the expected or actual values.</p><pre><code class="language-console clojure.test output">FAIL in &#40;string-comparisons&#41; &#40;string&#95;test.clj:6&#41;
+expected: &#40;= &quot;space&quot; &quot;spice&quot;&#41;
+  actual: &#40;not &#40;= &quot;space&quot; &quot;spice&quot;&#41;&#41;
+</code></pre><p>Below is the same test but with <strong>humane-test-output</strong> enabled. It is easy to read the output and see the expected and actual value. It even provides a diff between them although in this situation it isn't that useful.</p><pre><code class="language-console clojure.test with humane-test-output">FAIL in &#40;string-comparisons&#41; &#40;string&#95;test.clj:6&#41;
+expected: &quot;space&quot;
+  actual: &quot;spice&quot;
+    diff: - &quot;space&quot;
+          + &quot;spice&quot;
+</code></pre><h5>expectations</h5><p>Another testing library is Jay Field's <a href='http://jayfields.com/expectations/'>expectations</a>. You can see from the example that it has a fairly minimal syntax.</p><pre><code class="language-clojure">&#40;ns example.string-expectations
+  &#40;:require &#91;expectations :refer :all&#93;&#41;&#41;
+
+&#40;expect &quot;strings equal&quot; &quot;strings equal&quot;&#41;
+&#40;expect &quot;space&quot; &quot;spice&quot;&#41;
+</code></pre><pre><code class="language-console expectations output">failure in &#40;string&#95;expectations.clj:5&#41; : example.string-expectations
+&#40;expect &quot;space&quot; &quot;spice&quot;&#41;
+
+           expected: &quot;space&quot;
+                was: &quot;spice&quot;
+
+           matches: &quot;sp&quot;
+           diverges: &quot;ace&quot;
+                  &amp;: &quot;ice&quot;
+</code></pre><p>The output from <strong>expectations</strong> is very readable. You can easily pick out the expected and actual values. It also shows you where the string starts to diverge.</p><h5>Speclj</h5><p>Before writing this post I had zero experience with Micah Martin's <a href='http://speclj.com/'>Speclj</a>. Below is my translation of the failing string test and its output.</p><pre><code class="language-clojure">&#40;ns example.string-spec
+  &#40;:require &#91;speclj.core :refer :all&#93;&#41;&#41;
+
+&#40;describe &quot;String comparisons&quot;
+  &#40;it &quot;have nice error message&quot;
+      &#40;should= &quot;space&quot; &quot;spice&quot;&#41;&#41;&#41;
+</code></pre><pre><code class="language-console Speclj">9&#41; String comparisons have nice error message
+   Expected: &quot;space&quot;
+        got: &quot;spice&quot; &#40;using =&#41;
+   /Users/jake/src/jakemcc/example/spec/example/string&#95;spec.clj:7
+</code></pre><p><strong>Speclj</strong>'s test output above is an improvement over <strong>clojure.test</strong>. You can easily find the expected and actual values. It doesn't provide any help with diagnosing how those values are different.</p><h5>Midje</h5><p>I have a little bit of experience with Brian Marick's <a href='https://github.com/marick/Midje'>Midje</a>. Unlike the other libraries it switches up the assertion syntax. In <strong>Midje</strong> the expected value is on the right side of <code>=&gt;</code>.</p><pre><code class="language-clojure">&#40;ns example.string-test
+  &#40;:require &#91;midje.sweet :refer :all&#93;&#41;&#41;
+
+&#40;fact &quot;strings are equal&quot;
+  &quot;string is equal&quot; =&gt; &quot;string is equal&quot;&#41;
+
+&#40;fact &quot;strings not equal&quot;
+   &quot;spice&quot; =&gt; &quot;space&quot;&#41;
+</code></pre><pre><code class="language-console Midje">FAIL &quot;strings not equal&quot; at &#40;string&#95;test.clj:8&#41;
+    Expected: &quot;space&quot;
+      Actual: &quot;spice&quot;
+</code></pre><p><strong>Midje</strong>'s output is similar to <strong>Speclj</strong>'s. You can quickly find the expected and actual values but it doesn't help you spot the difference.</p><h3>String Comparison Winner</h3><p><strong>expectations</strong> wins for best output. You can easily spot the expected and actual values and it also helps you find the difference between the strings.</p><p>The worst output comes from <strong>clojure.test</strong>. It doesn't make it easy to spot the difference or even find the expected and actual values.</p><h2>Comparing Maps</h2><p>For maps I've setup three assertions. The first has an extra key-value pair in the actual value. The second has an extra in the expected value. The final assertion has a different value for the <code>:cheese</code> key. The <strong>clojure.test</strong> example is below.</p><pre><code class="language-clojure">&#40;deftest map-comparisons
+  &#40;is &#40;= {:sheep 1} {:cheese 1 :sheep 1}&#41;&#41;
+  &#40;is &#40;= {:sheep 1 :cheese 1} {:sheep 1}&#41;&#41;
+  &#40;is &#40;= {:sheep 1 :cheese 1} {:sheep 1 :cheese 5}&#41;&#41;&#41;
+</code></pre><pre><code class="language-console clojure.test">FAIL in &#40;map-comparisons&#41; &#40;map&#95;test.clj:5&#41;
+expected: &#40;= {:sheep 1} {:cheese 1, :sheep 1}&#41;
+  actual: &#40;not &#40;= {:sheep 1} {:cheese 1, :sheep 1}&#41;&#41;
+
+FAIL in &#40;map-comparisons&#41; &#40;map&#95;test.clj:6&#41;
+expected: &#40;= {:sheep 1, :cheese 1} {:sheep 1}&#41;
+  actual: &#40;not &#40;= {:cheese 1, :sheep 1} {:sheep 1}&#41;&#41;
+
+FAIL in &#40;map-comparisons&#41; &#40;map&#95;test.clj:7&#41;
+expected: &#40;= {:sheep 1, :cheese 1} {:sheep 1, :cheese 5}&#41;
+  actual: &#40;not &#40;= {:cheese 1, :sheep 1} {:cheese 5, :sheep 1}&#41;&#41;
+</code></pre><p>Unsurprisingly the default <strong>clojure.test</strong> output for maps suffers from the same problems found in the string comparisons. To find the actual and expected values you need to manually parse the output.</p><pre><code class="language-console clojure.test with humane-test-output">FAIL in &#40;map-comparisons&#41; &#40;map&#95;test.clj:5&#41;
+expected: {:sheep 1}
+  actual: {:cheese 1, :sheep 1}
+    diff: + {:cheese 1}
+
+FAIL in &#40;map-comparisons&#41; &#40;map&#95;test.clj:6&#41;
+expected: {:cheese 1, :sheep 1}
+  actual: {:sheep 1}
+    diff: - {:cheese 1}
+
+FAIL in &#40;map-comparisons&#41; &#40;map&#95;test.clj:7&#41;
+expected: {:cheese 1, :sheep 1}
+  actual: {:cheese 5, :sheep 1}
+    diff: - {:cheese 1}
+          + {:cheese 5}
+</code></pre><p>Above is the output of using <strong>clojure.test</strong> with <strong>humane-test-output</strong>. It is a big improvement over the default <strong>clojure.test</strong>. You can quickly see the expected and actual values. Unlike with the string assertions the diff view is actually helpful. The diffs do a good job of helping you identify the error.</p><pre><code class="language-console expectations">failure in &#40;map&#95;expectations.clj:6&#41; : example.map-expectations
+&#40;expect {:sheep 1} {:sheep 1, :cheese 1}&#41;
+
+           expected: {:sheep 1}
+                was: {:cheese 1, :sheep 1}
+
+           in expected, not actual: null
+           in actual, not expected: {:cheese 1}
+
+failure in &#40;map&#95;expectations.clj:7&#41; : example.map-expectations
+&#40;expect {:sheep 1, :cheese 1} {:sheep 1}&#41;
+
+           expected: {:cheese 1, :sheep 1}
+                was: {:sheep 1}
+
+           in expected, not actual: {:cheese 1}
+           in actual, not expected: null
+
+failure in &#40;map&#95;expectations.clj:8&#41; : example.map-expectations
+&#40;expect {:sheep 1, :cheese 5} {:sheep 1, :cheese 1}&#41;
+
+           expected: {:cheese 5, :sheep 1}
+                was: {:cheese 1, :sheep 1}
+
+           in expected, not actual: {:cheese 5}
+           in actual, not expected: {:cheese 1}
+</code></pre><p><strong>expectations</strong> does a pretty good job helping you as well. As before, you can clearly read the expected and actual values. <strong>expectations</strong> also provides some hint as to what is different between the maps. I find the English descriptions a bit easier to read than <strong>humane-test-output</strong>'s diff view. Still seeing lines like line 7 (`in expected, not actual: null`) is a bit confusing and the output would be improved if it was suppressed.</p><p>I'm just going to lump <strong>Speclj</strong> and <strong>Midje</strong> together. The output for each is below. They both improve over <strong>clojure.test</strong> by making it easy to see the expected and actual value. They both don't do anything beyond that.</p><pre><code class="language-console Speclj">4&#41; map comparisons have nice error messages when extra entries keys present
+   Expected: {:sheep 1}
+        got: {:cheese 1, :sheep 1} &#40;using =&#41;
+   /Users/jake/src/jakemcc/example/spec/example/map&#95;spec.clj:7
+
+5&#41; map comparisons have nice error messages when missing an entry
+   Expected: {:cheese 1, :sheep 1}
+        got: {:sheep 1} &#40;using =&#41;
+   /Users/jake/src/jakemcc/example/spec/example/map&#95;spec.clj:9
+
+6&#41; map comparisons have nice error messages when mismatched values
+   Expected: {:cheese 5, :sheep 1}
+        got: {:cheese 1, :sheep 1} &#40;using =&#41;
+   /Users/jake/src/jakemcc/example/spec/example/map&#95;spec.clj:11
+</code></pre><pre><code class="language-console Midje">FAIL &quot;map is missing an entry&quot; at &#40;map&#95;test.clj:5&#41;
+    Expected: {:cheese 1, :sheep 1}
+      Actual: {:sheep 1}
+
+FAIL &quot;map has an extra entry&quot; at &#40;map&#95;test.clj:8&#41;
+    Expected: {:sheep 1}
+      Actual: {:cheese 1, :sheep 1}
+
+FAIL &quot;map has a different value&quot; at &#40;map&#95;test.clj:11&#41;
+    Expected: {:cheese 5, :sheep 1}
+      Actual: {:cheese 1, :sheep 1}
+</code></pre><h3>Map Comparison Winner</h3><p>Tie between <strong>humane-test-output</strong> and <strong>expectations</strong>. Both do a good job of helping the reader spot the difference.</p><h2>Comparing Sets</h2><p>Next up are sets. Only two assertions for this section. One with the actual value having an extra member and one test where it is missing a member.</p><pre><code class="language-clojure">&#40;ns example.set-test
+  &#40;:require &#91;clojure.test :refer :all&#93;&#41;&#41;
+
+&#40;deftest set-comparisons
+  &#40;is &#40;= #{:a :b} #{:a :b :c}&#41;&#41;
+  &#40;is &#40;= #{:a :b :c} #{:a :b}&#41;&#41;&#41;
+</code></pre><p>First up is the basic <strong>clojure.test</strong> output. It suffers from the same problem it has suffered this entire time. It doesn't make it easy to read the expected and actual values. </p><pre><code class="language-console clojure.test">FAIL in &#40;set-comparisons&#41; &#40;set&#95;test.clj:5&#41;
+expected: &#40;= #{:b :a} #{:c :b :a}&#41;
+  actual: &#40;not &#40;= #{:b :a} #{:c :b :a}&#41;&#41;
+
+FAIL in &#40;set-comparisons&#41; &#40;set&#95;test.clj:6&#41;
+expected: &#40;= #{:c :b :a} #{:b :a}&#41;
+  actual: &#40;not &#40;= #{:c :b :a} #{:b :a}&#41;&#41;
+</code></pre><p>No surprises with <strong>humane-test-output</strong>. It improves the <strong>clojure.test</strong> output by making it easy to read the expected and actual values. The diff view also helps figure out what is causing the assertion to fail.</p><pre><code class="language-console clojure.test with humane-test-output">FAIL in &#40;set-comparisons&#41; &#40;set&#95;test.clj:5&#41;
+expected: #{:b :a}
+  actual: #{:c :b :a}
+    diff: + #{:c}
+
+FAIL in &#40;set-comparisons&#41; &#40;set&#95;test.clj:6&#41;
+expected: #{:c :b :a}
+  actual: #{:b :a}
+    diff: - #{:c}
+</code></pre><p><strong>expectations</strong> once again delivers nice output. It continues to be easy to find the expected and actual values and helps you spot the differences with a diff view.</p><pre><code class="language-console expectations">failure in &#40;set&#95;expectations.clj:4&#41; : example.set-expectations
+&#40;expect #{:b :a} #{:c :b :a}&#41;
+
+           expected: #{:b :a}
+                was: #{:c :b :a}
+
+           in expected, not actual: null
+           in actual, not expected: #{:c}
+
+failure in &#40;set&#95;expectations.clj:5&#41; : example.set-expectations
+&#40;expect #{:c :b :a} #{:b :a}&#41;
+
+           expected: #{:c :b :a}
+                was: #{:b :a}
+
+           in expected, not actual: #{:c}
+           in actual, not expected: null
+</code></pre><p><strong>Speclj</strong> and <strong>Midje</strong> both have better output than the basic <strong>clojure.test</strong>.</p><pre><code class="language-console Speclj">7&#41; set comparisons have nice error messages when missing item
+   Expected: #{:b :a}
+        got: #{:c :b :a} &#40;using =&#41;
+   /Users/jake/src/jakemcc/example/spec/example/set&#95;spec.clj:9
+
+8&#41; set comparisons have nice error messages when more items
+   Expected: #{:c :b :a}
+        got: #{:b :a} &#40;using =&#41;
+   /Users/jake/src/jakemcc/example/spec/example/set&#95;spec.clj:11
+</code></pre><pre><code class="language-console Midje">FAIL &quot;set is superset of expected&quot; at &#40;set&#95;test.clj:5&#41;
+    Expected: #{:a :b}
+      Actual: #{:a :b :c}
+
+FAIL &quot;set is subset of expected&quot; at &#40;set&#95;test.clj:8&#41;
+    Expected: #{:a :b :c}
+      Actual: #{:a :b}
+</code></pre><h3>Set Comparison Winner</h3><p>Similar to the winner of the map comparisons I'm going to split the victory between <strong>expectations</strong> and <strong>humane-test-output</strong>.</p><h2>Comparing Lists</h2><p>Next up we compare lists (and lists to vectors). There are three comparisons; one with an extra element, one with same length but a mismatched element, and one comparing a vector and list with drastically different contents.</p><pre><code class="language-clojure">&#40;ns example.seq-test
+  &#40;:require &#91;clojure.test :refer :all&#93;&#41;&#41;
+
+&#40;deftest list-comparisons
+  &#40;is &#40;= '&#40;1 2 3&#41; '&#40;1 2 3 4&#41;&#41;&#41;
+  &#40;is &#40;= '&#40;1 2 4&#41; '&#40;1 2 3&#41;&#41;&#41;
+  &#40;is &#40;= '&#40;9 8 7&#41; &#91;1 2 3&#93;&#41;&#41;&#41;
+</code></pre><p>First up <strong>clojure.test</strong>. Same issues as with all the previous comparisons.</p><pre><code class="language-console clojure.test">FAIL in &#40;list-comparisons&#41; &#40;seq&#95;test.clj:5&#41;
+expected: &#40;= &#40;quote &#40;1 2 3&#41;&#41; &#40;quote &#40;1 2 3 4&#41;&#41;&#41;
+  actual: &#40;not &#40;= &#40;1 2 3&#41; &#40;1 2 3 4&#41;&#41;&#41;
+
+FAIL in &#40;list-comparisons&#41; &#40;seq&#95;test.clj:6&#41;
+expected: &#40;= &#40;quote &#40;1 2 4&#41;&#41; &#40;quote &#40;1 2 3&#41;&#41;&#41;
+  actual: &#40;not &#40;= &#40;1 2 4&#41; &#40;1 2 3&#41;&#41;&#41;
+
+FAIL in &#40;list-comparisons&#41; &#40;seq&#95;test.clj:7&#41;
+expected: &#40;= &#40;quote &#40;9 8 7&#41;&#41; &#91;1 2 3&#93;&#41;
+  actual: &#40;not &#40;= &#40;9 8 7&#41; &#91;1 2 3&#93;&#41;&#41;
+</code></pre><p>Once again <strong>humane-test-output</strong> improves upon <strong>clojure.test</strong>. Only interesting difference from previous comparisons is that the diff view ends up having <code>nil</code> values in it where the elements are the same.</p><pre><code class="language-console clojure.test with humane-test-output">FAIL in &#40;list-comparisons&#41; &#40;seq&#95;test.clj:5&#41;
+expected: &#40;1 2 3&#41;
+  actual: &#40;1 2 3 4&#41;
+    diff: + &#91;nil nil nil 4&#93;
+
+FAIL in &#40;list-comparisons&#41; &#40;seq&#95;test.clj:6&#41;
+expected: &#40;1 2 4&#41;
+  actual: &#40;1 2 3&#41;
+    diff: - &#91;nil nil 4&#93;
+          + &#91;nil nil 3&#93;
+
+FAIL in &#40;list-comparisons&#41; &#40;seq&#95;test.clj:7&#41;
+expected: &#40;9 8 7&#41;
+  actual: &#91;1 2 3&#93;
+    diff: - &#91;9 8 7&#93;
+          + &#91;1 2 3&#93;
+</code></pre><p><strong>expectations</strong> continues to have good output. It tries to help you out as well. You'll notice that it also has <code>nil</code> values inserted where the lists are the same.</p><pre><code class="language-console expectations">failure in &#40;list&#95;expectations.clj:4&#41; : example.list-expectations
+&#40;expect '&#40;1 2 3&#41; '&#40;1 2 3 4&#41;&#41;
+
+           expected: &#40;1 2 3&#41;
+                was: &#40;1 2 3 4&#41;
+
+           in expected, not actual: null
+           in actual, not expected: &#91;nil nil nil 4&#93;
+           actual is larger than expected
+
+failure in &#40;list&#95;expectations.clj:5&#41; : example.list-expectations
+&#40;expect '&#40;1 2 4&#41; '&#40;1 2 3&#41;&#41;
+
+           expected: &#40;1 2 4&#41;
+                was: &#40;1 2 3&#41;
+
+           in expected, not actual: &#91;nil nil 4&#93;
+           in actual, not expected: &#91;nil nil 3&#93;
+
+failure in &#40;list&#95;expectations.clj:6&#41; : example.list-expectations
+&#40;expect '&#40;9 8 7&#41; &#91;1 2 3&#93;&#41;
+
+           expected: &#40;9 8 7&#41;
+                was: &#91;1 2 3&#93;
+
+           in expected, not actual: &#91;9 8 7&#93;
+           in actual, not expected: &#91;1 2 3&#93;
+</code></pre><p>Unsurprisingly, <strong>Speclj</strong> and <strong>Midje</strong> are better than <strong>clojure.test</strong> but again don't go beyond making easy to find the expected and actual values.</p><pre><code class="language-console Speclj">1&#41; List/vector comparisons when there is an extra element
+   Expected: &#40;1 2 3&#41;
+        got: &#40;1 2 3 4&#41; &#40;using =&#41;
+   /Users/jake/src/jakemcc/example/spec/example/string&#95;spec.clj:7
+
+2&#41; List/vector comparisons when there is a mismatched element
+   Expected: &#40;1 2 4&#41;
+        got: &#40;1 2 3&#41; &#40;using =&#41;
+   /Users/jake/src/jakemcc/example/spec/example/string&#95;spec.clj:9
+
+3&#41; List/vector comparisons when comparing different types
+   Expected: &#40;9 8 7&#41;
+        got: &#91;1 2 3&#93; &#40;using =&#41;
+   /Users/jake/src/jakemcc/example/spec/example/string&#95;spec.clj:11
+</code></pre><pre><code class="language-console Midje">FAIL &quot;lists are different sizes&quot; at &#40;seq&#95;test.clj:5&#41;
+    Expected: &#40;1 2 3&#41;
+      Actual: &#40;1 2 3 4&#41;
+
+FAIL &quot;lists have different entries&quot; at &#40;seq&#95;test.clj:8&#41;
+    Expected: &#40;1 2 4&#41;
+      Actual: &#40;1 2 3&#41;
+
+FAIL &quot;compare very different list like values&quot; at &#40;seq&#95;test.clj:14&#41;
+    Expected: &#40;9 8 7&#41;
+      Actual: &#91;1 2 3&#93;
+</code></pre><h3>List Comparison Winner</h3><p>I find the <strong>clojure.test</strong> with <strong>humane-test-output</strong> to be a bit easier to read than <strong>expectations</strong>. Both have better output than the basic <strong>clojure.test</strong>, <strong>Speclj</strong>, and <strong>Midje</strong>.</p><h2>Overall Winner</h2><p>If I were picking a testing library based entirely on what a failing test looks like I would use <strong>expectations</strong>. My second pick would be <strong>clojure.test</strong> with <strong>humane-test-output</strong>.</p><p>It is great that Clojure ships with <strong>clojure.test</strong>. It is unfortunate that it does so little to help you read a failing test. Every library I tried has better output than <strong>clojure.test</strong>.</p><h3>Addendum</h3><p><i>Added 2014/06/23</i></p><p>Colin Jones <a href='http://jakemccrary.com/blog/2014/06/22/comparing-clojure-testing-libraries-output/#comment-1449451549'>points out</a> that Speclj provides <code>should==</code>. <code>should==</code> checks that the expected and actual value have the same contents. He provided a <a href='https://gist.github.com/trptcolin/7e1ece5179581085730f'>gist</a> that shows the difference.</p>]]></content>
+  </entry>
+</feed>

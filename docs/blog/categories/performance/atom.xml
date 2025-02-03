@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Jake McCrary's articles on performance]]></title>
+  <link href="https://jakemccrary.com/atom.xml" rel="self"/>
+  <link href="https://jakemccrary.com/"/>
+  <updated>2025-02-03T00:51:56+00:00</updated>
+  <id>https://jakemccrary.com/</id>
+  <author>
+    <name><![CDATA[Jake McCrary]]></name>
+  </author>
+  <entry>
+    <id>https://jakemccrary.com/blog/2017/09/29/measure-aggregate-performance/index.html</id>
+    <link href="https://jakemccrary.com/blog/2017/09/29/measure-aggregate-performance/index.html"/>
+    <title><![CDATA[Measuring aggregate performance in Clojure]]></title>
+    <updated>2017-09-29T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p>Last time I needed to speed up some code, I wrote a Clojure macro that recorded the aggregate time spent executing the code wrapped by the macro. Aggregate timings were useful since the same functions were called multiple times in the code path we were trying to optimize. Seeing total times made it easier to identify where we should spend our time.</p><p>Below is the namespace I temporarily introduced into our codebase.</p><pre><code class="language-clojure">&#40;ns metrics&#41;
+
+&#40;defn msec-str
+  &quot;Returns a human readable version of milliseconds based upon scale&quot;
+  &#91;msecs&#93;
+  &#40;let &#91;s 1000
+        m &#40;&#42; 60 s&#41;
+        h &#40;&#42; 60 m&#41;&#93;
+    &#40;condp &gt;= msecs
+      1 &#40;format &quot;%.5f msecs&quot; &#40;float msecs&#41;&#41;
+      s &#40;format &quot;%.1f msecs&quot; &#40;float msecs&#41;&#41;
+      m &#40;format &quot;%.1f seconds&quot; &#40;float &#40;/ msecs s&#41;&#41;&#41;
+      h &#40;format &quot;%02dm:%02ds&quot; &#40;int &#40;/ msecs m&#41;&#41;
+                &#40;mod &#40;int &#40;/ msecs s&#41;&#41; 60&#41;&#41;
+      &#40;format &quot;%dh:%02dm&quot; &#40;int &#40;/ msecs h&#41;&#41;
+              &#40;mod &#40;int &#40;/ msecs m&#41;&#41; 60&#41;&#41;&#41;&#41;&#41;
+
+&#40;def aggregates &#40;atom {}&#41;&#41;
+
+&#40;defmacro record-aggregate
+  &quot;Records the total time spent executing body across invocations.&quot;
+  &#91;label &amp; body&#93;
+  `&#40;do
+     &#40;when-not &#40;contains? @aggregates &#126;label&#41;
+       &#40;swap! aggregates assoc &#126;label {:order &#40;inc &#40;count @aggregates&#41;&#41;}&#41;&#41;
+     &#40;let &#91;start-time# &#40;System/nanoTime&#41;
+           result# &#40;do &#126;@body&#41;
+           result# &#40;if &#40;and &#40;seq? result#&#41;
+                            &#40;instance? clojure.lang.IPending result#&#41;
+                            &#40;not &#40;realized? result#&#41;&#41;&#41;
+                     &#40;doall result#&#41;
+                     result#&#41;
+           end-time# &#40;System/nanoTime&#41;&#93;
+       &#40;swap! aggregates
+              update-in
+              &#91;&#126;label :msecs&#93;
+              &#40;fnil + 0&#41;
+              &#40;/ &#40;double &#40;- end-time# start-time#&#41;&#41; 1000000.0&#41;&#41;
+       result#&#41;&#41;&#41;
+
+&#40;defn log-times
+  &quot;Logs time recorded by record-aggregate and resets the aggregate times.&quot;
+  &#91;&#93;
+  &#40;doseq &#91;&#91;label data&#93; &#40;sort-by &#40;comp :order second&#41; @aggregates&#41;
+          :let &#91;msecs &#40;:msecs data&#41;&#93;&#93;
+    &#40;println &quot;Executing&quot; label &quot;took:&quot; &#40;msec-str msecs&#41;&#41;&#41;
+  &#40;reset! aggregates {}&#41;&#41;
+</code></pre><p><code>record-aggregate</code> takes a label and code and times how long that code takes to run. If the executed code returns an unrealized lazy sequence, it also evaluates the sequence<a href='#fn-1' id='fnref1'><sup>1</sup></a>.</p><p>Below is an example of using the above code. When we used it, we looked at the code path we needed to optimize and wrapped chunks of it in <code>record-aggregate</code>. At the end of the calculations, we inserted a call to <code>log-times</code> so timing data would show up in our logs.</p><pre><code class="language-clojure">&#40;ns work
+  &#40;:require &#91;metrics :as m&#93;&#41;&#41;
+
+&#40;defn calculation &#91;x&#93;
+  &#40;m/record-aggregate ::calculation
+                      &#40;Thread/sleep &#40;+ 300 &#40;rand-int 60&#41;&#41;&#41;
+                      x&#41;&#41;
+
+&#40;defn work &#91;x&#93;
+  &#40;m/record-aggregate ::work
+                      &#40;repeatedly 10 &#40;fn &#91;&#93;
+                                       &#40;Thread/sleep 5&#41;
+                                       x&#41;&#41;&#41;&#41;
+
+&#40;defn process-rows &#91;rows&#93;
+  &#40;let &#91;rows &#40;m/record-aggregate ::process-rows
+                                 &#40;-&gt;&gt; rows
+                                      &#40;mapv calculation&#41;
+                                      &#40;mapcat work&#41;&#41;&#41;&#93;
+    &#40;m/log-times&#41;
+    rows&#41;&#41;
+</code></pre><p>Now, when <code>&#40;process-rows &#91;:a :a&#93;&#41;</code> is called output similar to below is printed.</p><pre><code>Executing :work/process-rows took: 780.9 msecs
+Executing :work/calculation took: 664.6 msecs
+Executing :work/work took: 115.8 msecs
+</code></pre><p>Using this technique, we were able to identify slow parts of our process and were able to optimize those chunks of our code. There are potential flaws with measuring time like this, but they were not a problem in our situation<a href='#fn-2' id='fnref2'><sup>2</sup></a>.</p><ol class='footnotes'><li id='fn-1'>See <a href='/blog/2016/12/31/measure-what-you-intended-to-measure/'>Measure what you intend to measure</a><a href='#fnref1'>&#8617;</a></li><li id='fn-2'>See <a href='https://shipilev.net/blog/2014/nanotrusting-nanotime/'>Nanotrusting the Nanotime</a><a href='#fnref2'>&#8617;</a></li></ol>]]></content>
+  </entry>
+  <entry>
+    <id>https://jakemccrary.com/blog/2016/12/31/measure-what-you-intended-to-measure/index.html</id>
+    <link href="https://jakemccrary.com/blog/2016/12/31/measure-what-you-intended-to-measure/index.html"/>
+    <title><![CDATA[Making code fast: Measure what you intend to measure]]></title>
+    <updated>2016-12-31T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p>I’ve spent a significant portion of my career figuring out how to make software run faster. It is a problem I enjoy solving. One of the most important steps in an optimization task is to identify what you are trying to optimize and how you will measure it. Answer these questions wrong and you’ll waste your time solving the wrong problem.</p><p>Recently I joined a teammate on a task that involved identifying a bottleneck in a Clojure code base. We knew the code path we needed to optimize and turned to the  <a href='https://github.com/ptaoussanis/tufte'>Tufte</a> library to take timing measurements. This was my first time using Tufte and, with my tiny amount of usage, I like what I see.</p><p>At some point in the process, we had code<a href='#fn-1' id='fnref1'><sup>1</sup></a> that looked similar to the <code>translate</code> function below (lines 20-24).</p><pre><code class="language-clojure">&#40;ns bench.core
+  &#40;:require &#91;clojure.string :as string&#93;
+            &#91;taoensso.tufte :as tufte&#93;&#41;&#41;
+
+&#40;defn raw-&gt;maps &#91;lines&#93;
+  &#40;map &#40;fn &#91;line&#93;
+         &#40;zipmap &#91;:a :b :c&#93;
+                 &#40;map &#40;fn &#91;s&#93; &#40;Long/parseLong s&#41;&#41;
+                      &#40;string/split line #&quot;\|&quot;&#41;&#41;&#41;&#41;
+       lines&#41;&#41;
+
+&#40;defn summarize &#91;maps&#93;
+  &#40;reduce &#40;fn &#91;r m&#93;
+            &#40;-&gt; r
+                &#40;update :a &#40;fnil + 0&#41; &#40;:a m&#41;&#41;
+                &#40;update :b &#40;fnil + 0&#41; &#40;:b m&#41;&#41;
+                &#40;update :c &#40;fnil + 0&#41; &#40;:c m&#41;&#41;&#41;&#41;
+          maps&#41;&#41;
+
+&#40;defn translate &#91;lines&#93;
+  &#40;tufte/profile {}
+                 &#40;let &#91;maps &#40;tufte/p ::raw-&gt;maps &#40;raw-&gt;maps lines&#41;&#41;
+                       summary &#40;tufte/p ::summarize &#40;summarize maps&#41;&#41;&#93;
+                   summary&#41;&#41;&#41;
+</code></pre><p>Here is some Tufte output from running some data through <code>translate</code>.</p><pre><code>                  pId      nCalls       Min        Max       MAD      Mean   Time% Time
+:bench.core/summarize           1   346.0ms    346.0ms       0ns   346.0ms     100 346.0ms
+:bench.core/raw-&gt;maps           1    2.46µs     2.46µs       0ns    2.46µs       0 2.46µs
+           Clock Time                                                          100 346.05ms
+       Accounted Time                                                          100 346.0ms
+</code></pre><p>Notice anything surprising with the output?<a href='#fn-2' id='fnref2'><sup>2</sup></a></p><p>It surprised me that <code>raw-&gt;maps</code> took such a tiny amount of time compared to the <code>summarize</code> function. Then I realized that we had forgotten about Clojure’s lazy sequences. <code>summarize</code> is taking so much of the time because <code>raw-&gt;maps</code> is just creating a lazy sequence; all the work of realizing that sequence happens in <code>summarize</code>. By wrapping the call to <code>raw-&gt;maps</code> with a <code>doall</code> we were able to get the time measurements we intended.</p><p>This example demonstrates an important lesson. When you are profiling code, make sure you are measuring what you think you are measuring. This can be challenging in languages, such as Clojure, that have a concept of laziness. Reflect on your measurement results and perform a gut check that the results make sense with what you intended to measure. If anything feels off, confirm that you’re measuring what you meant to measure.</p><ol class='footnotes'><li id='fn-1'>Example built using clojure 1.8.0 and tufte 1.1.1. Also, sorry for the terrible names of functions. I was drawing a blank when coming up with this example.<a href='#fnref1'>&#8617;</a></li><li id='fn-2'>Imagine this output having 10 more lines in it. Now imagine it having 20. It starts getting quite a bit more difficult to notice oddities as more and more lines get added to this output. Try not to overwhelm yourself by having too much output.<a href='#fnref2'>&#8617;</a></li></ol>]]></content>
+  </entry>
+</feed>

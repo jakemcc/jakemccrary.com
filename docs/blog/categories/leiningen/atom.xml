@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Jake McCrary's articles on leiningen]]></title>
+  <link href="https://jakemccrary.com/atom.xml" rel="self"/>
+  <link href="https://jakemccrary.com/"/>
+  <updated>2025-02-03T00:51:56+00:00</updated>
+  <id>https://jakemccrary.com/</id>
+  <author>
+    <name><![CDATA[Jake McCrary]]></name>
+  </author>
+  <entry>
+    <id>https://jakemccrary.com/blog/2019/01/28/how-to-use-leiningen-test-selectors-to-filter-by-test-name/index.html</id>
+    <link href="https://jakemccrary.com/blog/2019/01/28/how-to-use-leiningen-test-selectors-to-filter-by-test-name/index.html"/>
+    <title><![CDATA[How to use Leiningen test selectors to filter by test name]]></title>
+    <updated>2019-01-28T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p><!&ndash; Estimate: 30 minutes &ndash;> <!&ndash; First draft: 38 minutes &ndash;> <!&ndash; First edit: 13 minutes &ndash;> <!&ndash; Second edit: 8 minutes &ndash;></p><p>Leiningen test selectors are great. They allow you to filter what tests run by applying a function to the test's metadata. If that function returns a truthy value then that test will run. <a href='https://github.com/jakemcc/lein-test-refresh/blob/master/CHANGES.md#040'>lein-test-refresh</a> supports them and even includes a built in one for its <a href='https://github.com/jakemcc/lein-test-refresh#built-in-test-narrowing-test-selector'>focus feature</a>.</p><p>I was recently <a href='https://github.com/jakemcc/lein-test-refresh/issues/78'>asked</a> if test-refresh could support filtering tests using a regular expression against the name of a namespace or test. Lucky for me, test-refresh already supports this because of its support of test selectors.</p><p>Most of the examples of Leiningen test selectors show very simple functions that look for the existence of a keyword in the metadata. We can do more than that. We can write a predicate that does whatever we want with the metadata.</p><p>To take a look at a test's metadata, I generated a new project and looked at the generated default test file.</p><pre><code class="language-clojure">&#40;ns selector.core-test
+  &#40;:require &#91;clojure.test :refer :all&#93;
+            &#91;selector.core :refer :all&#93;&#41;&#41;
+
+&#40;deftest a-test
+  &#40;testing &quot;FIXME, I fail.&quot;
+    &#40;is &#40;= 0 1&#41;&#41;&#41;&#41;
+</code></pre><p>I then used my repl and to see what metadata was on the test.</p><pre><code class="language-clojure">selector.core-test&gt; &#40;meta #'a-test&#41;
+{:test #function&#91;selector.core-test/fn--17267&#93;,
+ :line 5,
+ :column 1,
+ :file &quot;/Users/jake/src/jakemcc/blog-examples/selector/test/selector/core&#95;test.clj&quot;,
+ :name a-test,
+ :ns #namespace&#91;selector.core-test&#93;}
+</code></pre><p>Given the metadata above, I wrote the selector below which lets us select only integration tests.</p><pre><code class="language-clojure">:test-selectors {:integration &#40;fn &#91;m&#93;
+                                &#40;or &#40;clojure.string/includes? &#40;str &#40;:ns m&#41;&#41;
+                                                              &quot;integration&quot;&#41;
+                                    &#40;clojure.string/includes? &#40;str &#40;:name m&#41;&#41;
+                                                              &quot;integration&quot;&#41;&#41;&#41;}
+</code></pre><p>You could write the above code is many different ways. Whatever you write, it needs to look for the existence of <code>integration</code> in either the test's name or namespace.</p><p>If you wanted to make <code>lein test</code> or <code>lein test-refresh</code> only run non-integration tests you can add a default test selector to the project.clj.</p><pre><code class="language-clojure">:test-selectors {:default &#40;fn &#91;m&#93;
+                            &#40;not &#40;or &#40;clojure.string/includes? &#40;str &#40;:ns m&#41;&#41;
+                                                               &quot;integration&quot;&#41;
+                                     &#40;clojure.string/includes? &#40;str &#40;:name m&#41;&#41;
+                                                               &quot;integration&quot;&#41;&#41;&#41;&#41;
+                 :integration &#40;fn &#91;m&#93;
+                                &#40;or &#40;clojure.string/includes? &#40;str &#40;:ns m&#41;&#41;
+                                                              &quot;integration&quot;&#41;
+                                    &#40;clojure.string/includes? &#40;str &#40;:name m&#41;&#41;
+                                                              &quot;integration&quot;&#41;&#41;&#41;}
+</code></pre><p>Enjoy! I hope this example helps you run a subset<a href='#fn-1' id='fnref1'><sup>1</sup></a> of your Clojure tests through Leiningen test selectors.</p><ol class='footnotes'><li id='fn-1'>Running a subset of your tests can be helpful and test-refresh has a few features that help you do that. If you can, I'd still recommend making all your tests fast enough to run them all the time.<a href='#fnref1'>&#8617;</a></li></ol>]]></content>
+  </entry>
+  <entry>
+    <id>https://jakemccrary.com/blog/2017/08/27/my-current-leiningen-profiles-dot-clj/index.html</id>
+    <link href="https://jakemccrary.com/blog/2017/08/27/my-current-leiningen-profiles-dot-clj/index.html"/>
+    <title><![CDATA[My current Leiningen profiles.clj]]></title>
+    <updated>2017-08-27T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p>Nearly three years ago I wrote an overview of my <a href='/blog/2015/01/11/overview-of-my-leiningen-profiles-dot-clj/'>Leiningen profiles.clj</a>. That post is one of my most visited articles, so I thought I'd give an update on what I currently keep in <code>&#126;/.lein/profiles.clj</code>.</p><pre><code class="language-clojure profiles.clj">{:user {:plugin-repositories &#91;&#91;&quot;private-plugins&quot; {:url &quot;private url&quot;}&#93;&#93;
+        :dependencies &#91;&#91;pjstadig/humane-test-output &quot;0.8.2&quot;&#93;&#93;
+        :injections &#91;&#40;require 'pjstadig.humane-test-output&#41;
+                     &#40;pjstadig.humane-test-output/activate!&#41;&#93;
+        :plugins &#91;&#91;io.sattvik/lein-ancient &quot;0.6.11&quot;&#93;
+                  &#91;lein-pprint &quot;1.1.2&quot;&#93;
+                  &#91;com.jakemccrary/lein-test-refresh &quot;0.21.1&quot;&#93;
+                  &#91;lein-autoexpect &quot;1.9.0&quot;&#93;&#93;
+        :signing {:gpg-key &quot;B38C2F8C&quot;}
+        :test-refresh {:notify-command &#91;&quot;terminal-notifier&quot; &quot;-title&quot; &quot;Tests&quot; &quot;-message&quot;&#93;
+                       :quiet true
+                       :changes-only true}}}
+</code></pre><p>The biggest difference between my <code>profiles.clj</code> from early 2015 and now is that I've removed all of the CIDER related plugins. I still use CIDER, but CIDER no longer requires you to list its dependencies explicitly.</p><p>I’ve also removed Eastwood and Kibit from my toolchain. I love static analysis, but these tools fail too frequently with my projects. As a result, I rarely used them and I’ve removed them. Instead, I’ve started using <a href='https://github.com/candid82/joker'>joker</a> for some basic static analysis and am really enjoying it. It is fast, and it has made refactoring in Emacs noticeably better.</p><p><a href='https://github.com/jakemcc/lein-test-refresh'>lein-test-refresh</a>, <a href='https://github.com/clojure-expectations/lein-autoexpect'>lein-autoexpect</a>, and <a href='https://github.com/pjstadig/humane-test-output'>humane-test-output</a> have stuck around and have been updated to the latest versions. These tools make testing Clojure much nicer.</p><p>I'm also taking advantage of some new features that <a href='https://github.com/jakemcc/lein-test-refresh'>lein-test-refresh</a> provides. These settings enable the most reliable, fastest feedback possible while writing tests. My <a href='/blog/2016/06/20/my-recommended-clojure-testing-setup/'>recommended testing setup</a> article goes into more details.</p><p><code>lein-ancient</code> and <code>lein-pprint</code> have stuck around. I rarely use <code>lein-pprint</code> but it comes in handy when debugging project.clj problems. <code>lein-ancient</code> is great for helping you keep your project's dependencies up to date. I use a forked version that contains some changes I need to work with my company's private repository.</p><p>And there you have it. My updated profiles.clj<a href='#fn-1' id='fnref1'><sup>1</sup></a>.</p><ol class='footnotes'><li id='fn-1'>Some of you might wonder why I don't just link to this file in version control somewhere? Well, it is kept encrypted in a git repository because it also contains some secrets that should not be public that I've removed for this post.<a href='#fnref1'>&#8617;</a></li></ol>]]></content>
+  </entry>
+  <entry>
+    <id>https://jakemccrary.com/blog/2015/12/19/clojurescript-treat-warnings-as-errors/index.html</id>
+    <link href="https://jakemccrary.com/blog/2015/12/19/clojurescript-treat-warnings-as-errors/index.html"/>
+    <title><![CDATA[ClojureScript: Treat warnings as errors]]></title>
+    <updated>2015-12-19T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p>Recently my team deployed a new version of our ClojureScript UI and it had a minor bug. It was trivial to fix the problem, a ClojureScript build warning pointed us to the cause. As a result we started thinking it would be nice to have build warnings count as errors and fail our ClojureScript build.</p><p>We use <a href='http://leiningen.org/'>Leiningen</a> (version 2.5.3) and <a href='https://github.com/emezeske/lein-cljsbuild'>lein-cljsbuild</a> (version 1.1.1). After some searching we found that lein-cljsbuild supports <a href='https://github.com/emezeske/lein-cljsbuild#custom-warning-handlers'>specifying custom warning handlers</a> as the value to the <code>:warning-handlers</code> key. The lein-cljsbuild README even provides an example, which we took and added a <code>&#40;System/exit 1&#41;</code> to the end of it. This resulted in a build configuration that looked similar to below.</p><pre><code class="language-clojure">{:id &quot;prod&quot;
+ :warning-handlers &#91;&#40;fn &#91;warning-type env extra&#93;
+                      &#40;when-let &#91;s &#40;cljs.analyzer/error-message warning-type extra&#41;&#93;
+                        &#40;binding &#91;&#42;out&#42; &#42;err&#42;&#93;
+                          &#40;println &quot;WARNING:&quot; &#40;cljs.analyzer/message env s&#41;&#41;&#41;
+                        &#40;System/exit 1&#41;&#41;&#41;&#93;
+ :source-paths &#91;&quot;src/cljc&quot; &quot;src/cljs&quot;&#93;
+ :compiler {:output-to &quot;resources/public/js/compiled/ui.js&quot;
+            :externs &#91;&quot;resources/intercom-externs.js&quot;
+                      &quot;resources/mixpanel-externs.js&quot;&#93;
+            :optimizations :advanced}}
+</code></pre><p>This worked! Well, it sort of worked. Our build failed whenever there was a warning but now we were seeing spurious warnings. We saw "Use of undeclared Var" warnings when functions created in a <code>letfn</code> where calling each other. Definitely not a situation that warrants a warning and definitely not a build failure.</p><p>We weren't seeing this warning before so we opened ClojureScript's source and found the <a href='https://github.com/clojure/clojurescript/blob/452edf43927566cc0ea0a3846706c0294cef235d/src/main/clojure/cljs/analyzer.cljc#L360-L366'>default warning handler</a>. The default handler checks that <code>warning-type</code> has a truthy value in the map <code>&#42;cljs-warnings&#42;</code>. Inspired by the default handler we added the same check to the start of our warning handler.</p><pre><code class="language-clojure">:warning-handlers &#91;&#40;fn &#91;warning-type env extra&#93;
+                     &#40;when &#40;warning-type cljs.analyzer/&#42;cljs-warnings&#42;&#41;
+                       &#40;when-let &#91;s &#40;cljs.analyzer/error-message warning-type extra&#41;&#93;
+                         &#40;binding &#91;&#42;out&#42; &#42;err&#42;&#93;
+                           &#40;println &quot;WARNING:&quot; &#40;cljs.analyzer/message env s&#41;&#41;&#41;
+                         &#40;System/exit 1&#41;&#41;&#41;&#41;&#93;
+</code></pre><p>Success! Now we no longer get incorrect warnings when compiling our <code>letfn</code> form and our build still fails if a warning occurs. Now we can build and deploy with a little more confidence.</p>]]></content>
+  </entry>
+  <entry>
+    <id>https://jakemccrary.com/blog/2015/03/24/advanced-leiningen-checkouts-configuring-what-ends-up-on-your-classpath/index.html</id>
+    <link href="https://jakemccrary.com/blog/2015/03/24/advanced-leiningen-checkouts-configuring-what-ends-up-on-your-classpath/index.html"/>
+    <title><![CDATA[Advanced Leiningen checkouts: configuring what ends up on your classpath]]></title>
+    <updated>2015-03-24T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p><a href='http://leiningen.org/'>Leiningen</a> checkout dependencies are a useful feature. Checkout dependencies allow you to work on a library and consuming project at the same time. By setting up checkout dependencies you can skip running <code>lein install</code> in the library project; it appears on the classpath of the consuming project. An example of what this looks like can be found in the <a href='https://github.com/technomancy/leiningen/blob/master/doc/TUTORIAL.md#checkout-dependencies'>Leiningen documentation</a> or in a <a href='http://jakemccrary.com/blog/2012/03/28/working-on-multiple-clojure-projects-at-once/'>previous post</a> of mine.</p><p>By default, Leiningen adds the <code>:source-paths</code>, <code>:test-paths</code>, <code>:resource-paths</code>, and <code>:compile-path</code> directories of the checkout projects to your consuming project's classpath. It also recurses and adds the checkouts of your checkouts (and keeps recursing).</p><p>You can override what gets added to your classpath by <code>:checkout-deps-shares</code> to your project.clj. This key's value should be a vector of functions that when applied to your checkouts' project map return the paths that should be included on the classpath. The default values can be found <a href='https://github.com/technomancy/leiningen/blob/ff84da697249184874b528950048981621ac0b61/leiningen-core/src/leiningen/core/project.clj#L488-L492'>here</a> and an example of overriding the default behavior can be found in the <a href='https://github.com/technomancy/leiningen/blob/ff84da697249184874b528950048981621ac0b61/sample.project.clj#L320-L321'>sample.project.clj</a>.</p><p>I ran into a situation this week where having my checkouts' <code>:test-paths</code> on the classpath caused issues my consuming project. My first pass at fixing this problem was to add `:checkout-deps-shares [:source-paths :resource-paths :compile-path]` to my project.clj. **This didn't work**. My project.clj looked like below.</p><pre><code class="language-clojure">&#40;defproject example &quot;1.2.3-SNAPSHOT&quot;
+  :dependencies &#91;&#91;library &quot;1.2.2&quot;&#93;
+                 &#91;org.clojure/clojure &quot;1.6.0&quot;&#93;&#93;
+  :checkout-deps-shares &#91;:source-paths :resource-paths :compile-path&#93;&#41;
+</code></pre><p>Why didn't it work? It didn't work because of how Leiningen merges duplicate keys in the project map. When Leiningen merges the various configuration maps (from merging profiles, merging defaults, etc) and it encounters values that are collections it combines them (more details found in <a href='https://github.com/technomancy/leiningen/blob/master/doc/PROFILES.md#merging'>documentation</a>). Using <code>lein pprint :checkout-deps-shares</code> shows what we end up with.</p><pre><code class="language-console">$ lein pprint :checkout-deps-shares
+&#40;:source-paths
+ :resource-paths
+ :compile-path
+ :source-paths
+ :test-paths
+ :resource-paths
+ :compile-path
+ #&lt;Var@43e3a075:
+   #&lt;classpath$checkout&#95;deps&#95;paths leiningen.core.classpath$checkout&#95;deps&#95;paths@6761b44b&gt;&gt;&#41;
+</code></pre><p>We've ended up with the default values and the values we specified in the project.clj. This isn't hard to fix. To tell Leiningen to replace the value instead of merging you add the <code>&#94;:replace</code> metadata to the value. Below is the same project.clj but with <code>&#94;:replace</code> added.</p><pre><code class="language-clojure">&#40;defproject example &quot;1.2.3-SNAPSHOT&quot;
+  :dependencies &#91;&#91;library &quot;1.2.2&quot;&#93;
+                 &#91;org.clojure/clojure &quot;1.6.0&quot;&#93;&#93;
+  :checkout-deps-shares &#94;:replace &#91;:source-paths :resource-paths :compile-path&#93;&#41;
+</code></pre><p>This solves the problem of <code>:test-paths</code> showing up on the classpath but it introduces another problem. Checkouts' checkout dependencies no longer show up on the classpath. This is because <code>leiningen.core.classpath/checkout-deps-paths</code> is no longer applied to the checkouts.</p><p>Without <code>leiningen.core.classpath/checkout-deps-paths</code> Leiningen stops recursing and, as a result, no longer picks up checkouts' checkout dependencies. My first attempt at fixing this was to modify my project.clj so the <code>:checkout-deps-shares</code> section looked like below.</p><pre><code class="language-clojure">:checkout-deps-shares &#94;:replace &#91;:source-paths :resource-paths :compile-path
+                                 leiningen.core.classpath/checkout-deps-paths&#93;
+</code></pre><p>The above fails. It runs but doesn't actually add the correct directories to the classpath. The next attempt is below.</p><pre><code class="language-clojure">:checkout-deps-shares &#94;:replace &#91;:source-paths :resource-paths :compile-path
+                                 #'leiningen.core.classpath/checkout-deps-paths&#93;
+</code></pre><p>This attempt failed quicker. Now an exception is thrown when trying to run Leiningen tasks.</p><p>The next one works. It takes advantage of dynamic eval through <a href='https://github.com/technomancy/leiningen/blob/master/doc/PROFILES.md#dynamic-eval'>read-eval</a> syntax. With the below snippet the checkouts' checkouts are added to the classpath.</p><pre><code class="language-clojure">:checkout-deps-shares &#94;:replace &#91;:source-paths :resource-paths :compile-path
+                                 #=&#40;eval leiningen.core.classpath/checkout-deps-paths&#41;&#93;
+</code></pre><p>Hopefully this is useful to someone else. It took a bit of digging to figure it out and many incorrect attempts to get correct. The full example project.clj is below.</p><pre><code class="language-clojure">&#40;defproject example &quot;1.2.3-SNAPSHOT&quot;
+  :dependencies &#91;&#91;library &quot;1.2.2&quot;&#93;
+                 &#91;org.clojure/clojure &quot;1.6.0&quot;&#93;&#93;
+  :checkout-deps-shares &#94;:replace &#91;:source-paths :resource-paths :compile-path
+                                   #=&#40;eval leiningen.core.classpath/checkout-deps-paths&#41;&#93;&#41;
+</code></pre>]]></content>
+  </entry>
+  <entry>
+    <id>https://jakemccrary.com/blog/2015/01/11/overview-of-my-leiningen-profiles-dot-clj/index.html</id>
+    <link href="https://jakemccrary.com/blog/2015/01/11/overview-of-my-leiningen-profiles-dot-clj/index.html"/>
+    <title><![CDATA[Overview of my Leiningen profiles.clj]]></title>
+    <updated>2015-01-11T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p><strong>2017-08-27: I've published an updated version <a href='/blog/2017/08/27/my-current-leiningen-profiles-dot-clj/'>here</a>.</strong></p><p><a href='https://github.com/technomancy/leiningen'>Leiningen</a>, a Clojure build tool, has the concept of <a href='https://github.com/technomancy/leiningen/blob/master/doc/PROFILES.md'>profiles</a>. One thing profiles are useful for is allowing you to have development tools available to a project without having them as dependencies when you release your project. An example of when you might want to do this is when you are using a testing library like <a href='https://github.com/jaycfields/expectations'>expectations</a>.</p><p>Some development tools, such as <a href='https://github.com/jakemcc/lein-test-refresh'>lein-test-refresh</a>, are useful to have across most of your Clojure projects. Rather nicely, Leiningen supports adding global profiles to <code>&#126;/.lein/profiles.clj</code>. These profiles are available in all your projects.</p><p>Below is most of my <code>profiles.clj</code>. I've removed some sensitive settings and what is left are the development tools that I find useful.</p><pre><code class="language-clojure Entire :user profile">{:user {:plugin-repositories &#91;&#91;&quot;private-plugins&quot; {:url &quot;private repo url&quot;}&#93;&#93;
+        :dependencies &#91;&#91;pjstadig/humane-test-output &quot;0.6.0&quot;&#93;&#93;
+        :injections &#91;&#40;require 'pjstadig.humane-test-output&#41;
+                     &#40;pjstadig.humane-test-output/activate!&#41;&#93;
+        :plugins &#91;&#91;cider/cider-nrepl &quot;0.8.2&quot;&#93;
+                  &#91;refactor-nrepl &quot;0.2.2&quot;&#93;
+                  &#91;com.jakemccrary/lein-test-refresh &quot;0.5.5&quot;&#93;
+                  &#91;lein-autoexpect &quot;1.4.2&quot;&#93;
+                  &#91;lein-ancient &quot;0.5.5&quot;&#93;
+                  &#91;jonase/eastwood &quot;0.2.1&quot;&#93;
+                  &#91;lein-kibit &quot;0.0.8&quot;&#93;
+                  &#91;lein-pprint &quot;1.1.2&quot;&#93;&#93;
+        :test-refresh {:notify-command &#91;&quot;terminal-notifier&quot; &quot;-title&quot; &quot;Tests&quot; &quot;-message&quot;&#93;}}}
+</code></pre><p><code>:plugin-repositories &#91;&#91;&quot;private-plugins&quot; {:url &quot;private repo url&quot;}&#93;&#93;</code> sets a private plugin repository. This allows me to use <a href='http://outpace.com/'>Outpace's</a> private Leiningen templates for setting up new projects for work.</p><p>The next few lines are all related. They setup <a href='https://github.com/pjstadig/humane-test-output'>humane-test-output</a>. <code>humane-test-output</code> makes <code>clojure.test</code> output more readable. It makes using <code>clojure.test</code> much more enjoyable. I highly recommend it. Sample output can be found in my <a href='/blog/2014/06/22/comparing-clojure-testing-libraries-output/'>Comparing Clojure Testing Libraries</a> post.</p><pre><code class="language-clojure humane-test-output setup in the :user profile">:dependencies &#91;&#91;pjstadig/humane-test-output &quot;0.6.0&quot;&#93;&#93;
+:injections &#91;&#40;require 'pjstadig.humane-test-output&#41;
+             &#40;pjstadig.humane-test-output/activate!&#41;&#93;
+</code></pre><p>Next we get to my <code>:plugins</code> section. This is the bulk of my <code>profiles.clj</code>.</p><pre><code class="language-clojure :plugins section of my :user profile">:plugins &#91;&#91;cider/cider-nrepl &quot;0.8.2&quot;&#93;
+          &#91;refactor-nrepl &quot;0.2.2&quot;&#93;
+          &#91;com.jakemccrary/lein-test-refresh &quot;0.5.5&quot;&#93;
+          &#91;lein-autoexpect &quot;1.4.2&quot;&#93;
+          &#91;lein-ancient &quot;0.5.5&quot;&#93;
+          &#91;jonase/eastwood &quot;0.2.1&quot;&#93;
+          &#91;lein-kibit &quot;0.0.8&quot;&#93;
+          &#91;lein-pprint &quot;1.1.2&quot;&#93;&#93;
+</code></pre><p>The first entry is for <code>cider/cider-nrepl</code>. I write Clojure using Emacs and <a href='https://github.com/clojure-emacs/cider'>CIDER</a> and much of CIDER's functionality exists in nrepl middleware found in <code>cider/cider-nrepl</code>. This dependency is required for me to be effective while writing Clojure.</p><p><code>refactor-nrepl</code> is next. <a href='https://github.com/clojure-emacs/clj-refactor.el'>clj-refactor.el</a> requires it for some refactorings. I actually don't use any of those refactorings (I only use move to let, extract to let, and introduce let refactorings) but I still keep it around.</p><p><code>com.jakemccrary/lein-test-refresh</code> is next. This lets me use <a href='https://github.com/jakemcc/lein-test-refresh'>lein-test-refresh</a> globally. <code>lein-test-refresh</code> runs your <code>clojure.test</code> tests whenever a file changes in your project. This is another key development tool in my process.</p><p>Up next is <code>lein-autoexpect</code>. It was the first Leiningen plugin I wrote and it enables continuous testing with <a href='https://github.com/jaycfields/expectations'>expectations</a>.</p><p>Both <code>lein-autoexpect</code> and <code>lein-test-refresh</code> are projects I created and maintain. Writing <code>lein-autoexpect</code> was my first exposure to continuous testing and it changed how I develop code. I find it frustrating to develop without such a tool.</p><p>Next up is <a href='https://github.com/xsc/lein-ancient'>lein-ancient</a>. It checks your project.clj for outdated dependencies and plugins. It isn't something that gets used every day but it is super useful when you need it.</p><p>The next two entries are for <a href='https://github.com/jonase/eastwood'>jonase/eastwood</a> and <a href='https://github.com/jonase/kibit'>lein-kibit</a>. They are both tools that look at your Clojure code and report common mistakes. I don't use either consistently but I do find them useful. I've found bugs with eastwood.</p><p>The final plugin is <code>lein-pprint</code>. <a href='https://github.com/technomancy/leiningen/tree/master/lein-pprint'>lein-pprint</a> prints out your project map. It is useful for trying to grasp what is going on when messing around with various Leiningen options.</p><p>The final part, seen below, of my <code>profiles.clj</code> is configuration for <code>lein-test-refresh.</code> It configures <code>lein-test-refresh</code> to use <a href='https://github.com/alloy/terminal-notifier'>terminal-notifier</a> to notify me when my tests pass or fail. Using a continuous tester that allows flexible notification is useful. Not having to glance at a terminal to see if your tests are passing or failing is great.</p><pre><code class="language-clojure">:test-refresh {:notify-command &#91;&quot;terminal-notifier&quot; &quot;-title&quot; &quot;Tests&quot; &quot;-message&quot;&#93;}
+</code></pre><p>That is my <code>&#126;/.lein/profiles.clj</code>. I don't think it contains anything mind blowing but it definitely contains a useful collection of Clojure development tools. I encourage you to check out them out and to think about what tools you should be putting into your global <code>:user</code> profile.</p>]]></content>
+  </entry>
+</feed>

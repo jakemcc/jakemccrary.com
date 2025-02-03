@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Jake McCrary's articles on macos]]></title>
+  <link href="https://jakemccrary.com/atom.xml" rel="self"/>
+  <link href="https://jakemccrary.com/"/>
+  <updated>2025-02-03T00:51:56+00:00</updated>
+  <id>https://jakemccrary.com/</id>
+  <author>
+    <name><![CDATA[Jake McCrary]]></name>
+  </author>
+  <entry>
+    <id>https://jakemccrary.com/blog/2020/08/31/utilities-i-like-selecta/index.html</id>
+    <link href="https://jakemccrary.com/blog/2020/08/31/utilities-i-like-selecta/index.html"/>
+    <title><![CDATA[Utilities I like: selecta]]></title>
+    <updated>2020-08-31T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p><a href='https://github.com/garybernhardt/selecta'>Selecta</a> is a command-line utility that gives you the power to fuzzy select items from a list of text. What does that mean? It means you pipe <code>selecta</code> a list of text on stdin, it helps you make a choice from items in that list, and then <code>selecta</code> prints that choice to stdout.</p><p>Here is an example of me using it to help me narrow in on what file I'd like to pass to <code>wc</code>.</p><p><video autoplay loop muted playsinline>   <source src="/images/selecta-search.webm" type="video/webm">   <source src="/images/selecta-search.mp4" type="video/mp4"> </video></p><p>In this example, I search for markdown files using <code>ripgrep</code> (<code>rg</code>), type part of a filename, hit enter to select the match, and then see the <code>wc</code> stats of that file. This isn't the greatest example of using <code>selecta</code> but it adequately shows what it does.</p><p>Some number of years ago, I wrote a script called <code>connect-db</code>. This script used <code>selecta</code>, along with <code>grep</code>, <code>sed</code>, and <code>cut</code>, to provide a very pleasant command-line experience for connecting to known databases. My coworkers and I used this script frequently.</p><p>By combining <code>selecta</code> with other stdin/stdout friendly command-line tools you can build really enjoyable, time-saving tools. <a href='https://github.com/garybernhardt/selecta'>Selecta</a> is a useful utility to add to your toolkit.</p>]]></content>
+  </entry>
+</feed>

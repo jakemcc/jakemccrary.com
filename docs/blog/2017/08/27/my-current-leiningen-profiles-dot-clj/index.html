@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>My current Leiningen profiles.clj - Jake McCrary</title>
+  <meta name="author" content="">
+  <!-- <link rel="stylesheet" href="/style.css"> -->
+
+  <meta itemprop="name" content="My current Leiningen profiles.clj - Jake McCrary" />
+  
+  <meta itemprop="description" content="Here is a snapshot of my current Leiningen profiles.clj" />
+  
+
+  <!-- Twitter Card data -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@jakemcc" />
+  <meta name="twitter:title" content="My current Leiningen profiles.clj - Jake McCrary" />
+  
+  <meta name="twitter:description" content="Here is a snapshot of my current Leiningen profiles.clj" />
+  
+  <meta name="twitter:creator" content="@jakemcc" />
+  <!-- <meta name="twitter:image" content="" /> -->
+
+  <!-- Open Graph data -->
+  <meta property="og:site_name" content="Writing by Jake McCrary" />
+  <meta property="og:url" content="https://jakemccrary.com//blog/2017/08/27/my-current-leiningen-profiles-dot-clj/" />
+  <meta property="og:title" content="My current Leiningen profiles.clj - Jake McCrary" />
+  
+  <meta property="og:description" content="Here is a snapshot of my current Leiningen profiles.clj" />
+  
+  <!-- <meta property="og:image" content="" /> -->
+  
+  <meta property="og:type" content="article" />
+  
+  
+  <!-- maybe rfc blahblahblah it? -->
+  <meta property="article:published_time" content="2017-08-27T23:59:59+00:00" />
+  
+
+  <link rel="canonical" href="https://jakemccrary.com//blog/2017/08/27/my-current-leiningen-profiles-dot-clj/">
+
+  <style>
+   body {
+     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+     max-width: 1200px;
+     margin: 0 auto;
+     padding: 1rem;
+     line-height: 1.5;
+   }
+
+   header {
+     margin-bottom: 0.5rem;
+   }
+
+   header h1 {
+     margin: 0;
+     font-size: 2.5rem;
+   }
+
+   header h1 a {
+     color: #333;
+     text-decoration: none;
+   }
+
+   .main-nav {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     padding: 0.5rem 0;
+     margin-bottom: 2rem;
+   }
+
+   .nav-list {
+     display: flex;
+     list-style: none;
+     margin: 0;
+     padding: 0;
+     gap: 1.5rem;
+   }
+
+   .nav-list a {
+     text-decoration: none;
+     color: #333;
+   }
+
+   .search-form fieldset {
+     border: none;
+     margin: 0;
+     padding: 0;
+   }
+
+   .search {
+     padding: 0.5rem;
+     border: none;
+     background: #f5f5f5;
+     border-radius: 4px;
+   }
+
+   /* Blog post list styling */
+   .post-list {
+     list-style: none;
+     padding: 0;
+     margin: 0;
+   }
+
+   .post-list li {
+     margin-bottom: 1.5rem;
+   }
+
+   .post-meta {
+     margin-bottom: 0.25rem;
+   }
+
+   .post-meta time {
+     color: #666;
+     margin-right: 0.5rem;
+   }
+
+   .post-list h2 {
+     display: inline;
+     font-size: 1.1rem;
+     font-weight: 500;
+     margin: 0;
+   }
+
+   .post-list h2 a {
+     color: #0066cc;
+     text-decoration: none;
+   }
+
+   .post-list h2 a:hover {
+     text-decoration: underline;
+   }
+
+   .post-description {
+     color: #444;
+     margin: 0.25rem 0 0 0;
+     line-height: 1.6;
+   }
+
+   .right {
+     float: right;
+   }
+   .left {
+     float: left;
+   }
+   .mr1 {
+     margin-right: 1em;
+   }
+   /* Style the footnote references in the text */
+   [id^="fnref"] sup {
+     font-size: 0.75em;
+     line-height: 0;
+     position: relative;
+     top: -0.5em;
+     padding: 0 0.3em;
+   }
+
+   [id^="fnref"] a {
+     text-decoration: none;
+     background-color: #f3f4f6;
+     color: #4b5563;
+     border-radius: 3px;
+     padding: 2px 6px;
+     transition: all 0.2s ease;
+   }
+
+   [id^="fnref"] a:hover {
+     background-color: #e5e7eb;
+     color: #1f2937;
+   }
+
+   /* Style the footnotes section */
+   .footnotes {
+     margin-top: 3rem;
+     padding-top: 2rem;
+     border-top: 2px solid #e5e7eb;
+   }
+
+   /* Create custom numbering for footnotes */
+   .footnotes li {
+     margin-bottom: 1rem;
+     color: #4b5563;
+   }
+   
+   /* Style the return links in footnotes */
+   .footnotes li a[href^="#fnref"] {
+     text-decoration: none;
+     color: #6b7280;
+     margin-left: 0.5rem;
+     font-size: 0.875rem;
+     transition: color 0.2s ease;
+   }
+
+   .footnotes li a[href^="#fnref"]:hover {
+     color: #374151;
+   }
+
+   blockquote {
+     border-left: 4px solid #d1d5db;
+     padding-left: 1em;
+     margin-left: 1em;
+     color: #4b5563;
+     font-style: italic;
+     background-color: #f9fafb;
+   }
+
+   figure {
+     margin: 1rem 0;
+     text-align: center;
+   }
+
+   figcaption {
+     color: #666;
+     font-size: 0.9em;
+     margin-top: 0.5rem;
+     font-style: italic;
+   }
+
+   .page-header h1 {
+     margin: 0
+   }
+
+   .page-header .publication-date {
+     color: #666;
+     font-size: 0.8em;
+     margin: 0;
+   }
+
+   body > footer {
+     font-size: .8em;
+	   color: #888;
+     margin-top: 1em;
+	   padding-top: 1em;
+     padding-bottom: 1em;
+   }
+   p code, li code {
+     display: inline-block;
+     white-space: nowrap;
+     border: 1px solid #ddd;
+     -moz-border-radius: .4em;
+     -webkit-border-radius: .4em;
+     border-radius: .4em;
+     padding: 0 .3em;
+     margin: -1px 0;
+   }
+
+  </style>
+  <link rel="stylesheet" href="/highlight/base16/tomorrow-night.min.css">
+</head>
+<body>
+<header>
+    <h1><a href="/">Jake McCrary</a></h1>
+  </header>
+  <nav role="navigation" class="main-nav">
+    <ul role="main-navigation" class="nav-list">
+      <li><a href="/">Articles</a></li>
+      <li><a href="/adventures/">Adventures</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/blog/archives/">Archives</a></li>
+      <li><a href="http://feeds.feedburner.com/JakeMccrarysMusings" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+      <li><a href="https://jakemccrary.substack.com/welcome" target="_blank" rel="subscribe-email" title="subscribe via email">Newsletter</a></li>
+    </ul>
+    <form class="search-form" action="https://google.com/search" method="get">
+      <fieldset role="search">
+        <input type="hidden" name="sitesearch" value="jakemccrary.com">
+        <input class="search" type="text" name="q" placeholder="Search">
+      </fieldset>
+    </form>
+  </nav>
+  
+  <div class="page-header">
+    <h1>My current Leiningen profiles.clj</h1>
+    
+    
+    <p class="publication-date">Published on 
+      <time datetime="2017-08-27">August 27, 2017</time>
+    </p>
+    
+  </div>
+  
+
+  <p>Nearly three years ago I wrote an overview of my <a href='/blog/2015/01/11/overview-of-my-leiningen-profiles-dot-clj/'>Leiningen profiles.clj</a>. That post is one of my most visited articles, so I thought I'd give an update on what I currently keep in <code>&#126;/.lein/profiles.clj</code>.</p><pre><code class="language-clojure profiles.clj">{:user {:plugin-repositories &#91;&#91;&quot;private-plugins&quot; {:url &quot;private url&quot;}&#93;&#93;
+        :dependencies &#91;&#91;pjstadig/humane-test-output &quot;0.8.2&quot;&#93;&#93;
+        :injections &#91;&#40;require 'pjstadig.humane-test-output&#41;
+                     &#40;pjstadig.humane-test-output/activate!&#41;&#93;
+        :plugins &#91;&#91;io.sattvik/lein-ancient &quot;0.6.11&quot;&#93;
+                  &#91;lein-pprint &quot;1.1.2&quot;&#93;
+                  &#91;com.jakemccrary/lein-test-refresh &quot;0.21.1&quot;&#93;
+                  &#91;lein-autoexpect &quot;1.9.0&quot;&#93;&#93;
+        :signing {:gpg-key &quot;B38C2F8C&quot;}
+        :test-refresh {:notify-command &#91;&quot;terminal-notifier&quot; &quot;-title&quot; &quot;Tests&quot; &quot;-message&quot;&#93;
+                       :quiet true
+                       :changes-only true}}}
+</code></pre><p>The biggest difference between my <code>profiles.clj</code> from early 2015 and now is that I've removed all of the CIDER related plugins. I still use CIDER, but CIDER no longer requires you to list its dependencies explicitly.</p><p>I’ve also removed Eastwood and Kibit from my toolchain. I love static analysis, but these tools fail too frequently with my projects. As a result, I rarely used them and I’ve removed them. Instead, I’ve started using <a href='https://github.com/candid82/joker'>joker</a> for some basic static analysis and am really enjoying it. It is fast, and it has made refactoring in Emacs noticeably better.</p><p><a href='https://github.com/jakemcc/lein-test-refresh'>lein-test-refresh</a>, <a href='https://github.com/clojure-expectations/lein-autoexpect'>lein-autoexpect</a>, and <a href='https://github.com/pjstadig/humane-test-output'>humane-test-output</a> have stuck around and have been updated to the latest versions. These tools make testing Clojure much nicer.</p><p>I'm also taking advantage of some new features that <a href='https://github.com/jakemcc/lein-test-refresh'>lein-test-refresh</a> provides. These settings enable the most reliable, fastest feedback possible while writing tests. My <a href='/blog/2016/06/20/my-recommended-clojure-testing-setup/'>recommended testing setup</a> article goes into more details.</p><p><code>lein-ancient</code> and <code>lein-pprint</code> have stuck around. I rarely use <code>lein-pprint</code> but it comes in handy when debugging project.clj problems. <code>lein-ancient</code> is great for helping you keep your project's dependencies up to date. I use a forked version that contains some changes I need to work with my company's private repository.</p><p>And there you have it. My updated profiles.clj<a href='#fn-1' id='fnref1'><sup>1</sup></a>.</p><ol class='footnotes'><li id='fn-1'>Some of you might wonder why I don't just link to this file in version control somewhere? Well, it is kept encrypted in a git repository because it also contains some secrets that should not be public that I've removed for this post.<a href='#fnref1'>&#8617;</a></li></ol>
+  <script src="/highlight/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script></script>
+  <footer>
+    <p xmlns:cc="http://creativecommons.org/ns#" >This work by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://jakemccrary.com">Jake McCrary</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""></a></p> 
+    <a href="/disclosure-policy">Disclosure Policy</a><br/>
+  </footer>
+</body>
+</html>

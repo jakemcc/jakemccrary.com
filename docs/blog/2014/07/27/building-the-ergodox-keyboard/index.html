@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>Building the ErgoDox Keyboard - Jake McCrary</title>
+  <meta name="author" content="">
+  <!-- <link rel="stylesheet" href="/style.css"> -->
+
+  <meta itemprop="name" content="Building the ErgoDox Keyboard - Jake McCrary" />
+  
+
+  <!-- Twitter Card data -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@jakemcc" />
+  <meta name="twitter:title" content="Building the ErgoDox Keyboard - Jake McCrary" />
+  
+  <meta name="twitter:creator" content="@jakemcc" />
+  <!-- <meta name="twitter:image" content="" /> -->
+
+  <!-- Open Graph data -->
+  <meta property="og:site_name" content="Writing by Jake McCrary" />
+  <meta property="og:url" content="https://jakemccrary.com//blog/2014/07/27/building-the-ergodox-keyboard/" />
+  <meta property="og:title" content="Building the ErgoDox Keyboard - Jake McCrary" />
+  
+  <!-- <meta property="og:image" content="" /> -->
+  
+  <meta property="og:type" content="article" />
+  
+  
+  <!-- maybe rfc blahblahblah it? -->
+  <meta property="article:published_time" content="2014-07-27T23:59:59+00:00" />
+  
+
+  <link rel="canonical" href="https://jakemccrary.com//blog/2014/07/27/building-the-ergodox-keyboard/">
+
+  <style>
+   body {
+     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+     max-width: 1200px;
+     margin: 0 auto;
+     padding: 1rem;
+     line-height: 1.5;
+   }
+
+   header {
+     margin-bottom: 0.5rem;
+   }
+
+   header h1 {
+     margin: 0;
+     font-size: 2.5rem;
+   }
+
+   header h1 a {
+     color: #333;
+     text-decoration: none;
+   }
+
+   .main-nav {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     padding: 0.5rem 0;
+     margin-bottom: 2rem;
+   }
+
+   .nav-list {
+     display: flex;
+     list-style: none;
+     margin: 0;
+     padding: 0;
+     gap: 1.5rem;
+   }
+
+   .nav-list a {
+     text-decoration: none;
+     color: #333;
+   }
+
+   .search-form fieldset {
+     border: none;
+     margin: 0;
+     padding: 0;
+   }
+
+   .search {
+     padding: 0.5rem;
+     border: none;
+     background: #f5f5f5;
+     border-radius: 4px;
+   }
+
+   /* Blog post list styling */
+   .post-list {
+     list-style: none;
+     padding: 0;
+     margin: 0;
+   }
+
+   .post-list li {
+     margin-bottom: 1.5rem;
+   }
+
+   .post-meta {
+     margin-bottom: 0.25rem;
+   }
+
+   .post-meta time {
+     color: #666;
+     margin-right: 0.5rem;
+   }
+
+   .post-list h2 {
+     display: inline;
+     font-size: 1.1rem;
+     font-weight: 500;
+     margin: 0;
+   }
+
+   .post-list h2 a {
+     color: #0066cc;
+     text-decoration: none;
+   }
+
+   .post-list h2 a:hover {
+     text-decoration: underline;
+   }
+
+   .post-description {
+     color: #444;
+     margin: 0.25rem 0 0 0;
+     line-height: 1.6;
+   }
+
+   .right {
+     float: right;
+   }
+   .left {
+     float: left;
+   }
+   .mr1 {
+     margin-right: 1em;
+   }
+   /* Style the footnote references in the text */
+   [id^="fnref"] sup {
+     font-size: 0.75em;
+     line-height: 0;
+     position: relative;
+     top: -0.5em;
+     padding: 0 0.3em;
+   }
+
+   [id^="fnref"] a {
+     text-decoration: none;
+     background-color: #f3f4f6;
+     color: #4b5563;
+     border-radius: 3px;
+     padding: 2px 6px;
+     transition: all 0.2s ease;
+   }
+
+   [id^="fnref"] a:hover {
+     background-color: #e5e7eb;
+     color: #1f2937;
+   }
+
+   /* Style the footnotes section */
+   .footnotes {
+     margin-top: 3rem;
+     padding-top: 2rem;
+     border-top: 2px solid #e5e7eb;
+   }
+
+   /* Create custom numbering for footnotes */
+   .footnotes li {
+     margin-bottom: 1rem;
+     color: #4b5563;
+   }
+   
+   /* Style the return links in footnotes */
+   .footnotes li a[href^="#fnref"] {
+     text-decoration: none;
+     color: #6b7280;
+     margin-left: 0.5rem;
+     font-size: 0.875rem;
+     transition: color 0.2s ease;
+   }
+
+   .footnotes li a[href^="#fnref"]:hover {
+     color: #374151;
+   }
+
+   blockquote {
+     border-left: 4px solid #d1d5db;
+     padding-left: 1em;
+     margin-left: 1em;
+     color: #4b5563;
+     font-style: italic;
+     background-color: #f9fafb;
+   }
+
+   figure {
+     margin: 1rem 0;
+     text-align: center;
+   }
+
+   figcaption {
+     color: #666;
+     font-size: 0.9em;
+     margin-top: 0.5rem;
+     font-style: italic;
+   }
+
+   .page-header h1 {
+     margin: 0
+   }
+
+   .page-header .publication-date {
+     color: #666;
+     font-size: 0.8em;
+     margin: 0;
+   }
+
+   body > footer {
+     font-size: .8em;
+	   color: #888;
+     margin-top: 1em;
+	   padding-top: 1em;
+     padding-bottom: 1em;
+   }
+   p code, li code {
+     display: inline-block;
+     white-space: nowrap;
+     border: 1px solid #ddd;
+     -moz-border-radius: .4em;
+     -webkit-border-radius: .4em;
+     border-radius: .4em;
+     padding: 0 .3em;
+     margin: -1px 0;
+   }
+
+  </style>
+  <link rel="stylesheet" href="/highlight/base16/tomorrow-night.min.css">
+</head>
+<body>
+<header>
+    <h1><a href="/">Jake McCrary</a></h1>
+  </header>
+  <nav role="navigation" class="main-nav">
+    <ul role="main-navigation" class="nav-list">
+      <li><a href="/">Articles</a></li>
+      <li><a href="/adventures/">Adventures</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/blog/archives/">Archives</a></li>
+      <li><a href="http://feeds.feedburner.com/JakeMccrarysMusings" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+      <li><a href="https://jakemccrary.substack.com/welcome" target="_blank" rel="subscribe-email" title="subscribe via email">Newsletter</a></li>
+    </ul>
+    <form class="search-form" action="https://google.com/search" method="get">
+      <fieldset role="search">
+        <input type="hidden" name="sitesearch" value="jakemccrary.com">
+        <input class="search" type="text" name="q" placeholder="Search">
+      </fieldset>
+    </form>
+  </nav>
+  
+  <div class="page-header">
+    <h1>Building the ErgoDox Keyboard</h1>
+    
+    
+    <p class="publication-date">Published on 
+      <time datetime="2014-07-27">July 27, 2014</time>
+    </p>
+    
+  </div>
+  
+
+  <p>Earlier this year I built an <a href='https://deskthority.net/wiki/ErgoDox'>ErgoDox</a>. The ErgoDox is a split hand mechanical keyboard whose design has been released under the GNU GPLv3. There are a few standard <a href='#fn-1' id='fnref1'><sup>1</sup></a> ways of getting the parts. It basically comes down to sourcing all the parts yourself or buying a bundle from <a href='https://www.massdrop.com/buy/ergodox'>Massdrop</a>. I opted to wait until Massdrop was selling them and bought a kit from them.</p><p><img src="/images/my-keyboard.jpg" alt="My ErgoDox" title="My ErgoDox" /></p><h3>Why?</h3><ol><li>I've used an ergonomic keyboard for years and was intrigued by the split hand design.</li><li>I wanted to try out Cherry MX key switches.</li><li>Using your thumb for more than just space bar made a lot of sense to me.</li><li>The firmware lets you have multiple layers. I thought this could be really useful.</li><li>The project sounded fun. I used to make physical devices and this   seemed like a good way to do that again.</li></ol><h3>Buying</h3><p>As mentioned earlier I bought my parts from Massdrop. In the buy I participated in I had the option of a full hand case or the traditional case and I opted for the full hand. As part of the buy I also bought additional aluminum top layers, a blank set of DSA <a href='#fn-2' id='fnref2'><sup>2</sup></a> keycaps, and Cherry MX blue key switches.</p><p>If I were doing it again I would not buy the extra aluminum top layer. I built one of my hands using the aluminum and the other with the basic acrylic top. I enjoy both the look and feel of the acrylic hand better.</p><p>I would also not buy the set of DSA keycaps from Massdrop. It was convenient and a bit cheaper to buy from them but had I known I could get different <a href='http://keyshop.pimpmykeyboard.com/products/full-keysets/dsa-blank-sets-1'>colors</a> from <a href='http://www.keycapsdirect.com/'>Signature Plastics</a> I would have done that.</p><p>I also bought eight "deep-dish" DSA keys direct from Signature Plastics. These keys feel different which lets me know when my fingers are above the home row. I'd recommend doing this. You can order from <a href='http://www.keycapsdirect.com/key-capsinventory.php'>this</a> page.</p><p>For key switches I bought Cherry MX Blues through Massdrop. Blues are extremely clicky. You can easily hear me typing in every room of my apartment. It is very satisfying.</p><p>After using the keyboard for about a week I also ended up buying some <a href='http://www.amazon.com/gp/product/B00897D3OQ'>pads</a> for my wrists. I occasionally rest my wrists on the keyboard and the keyboard's edge would dig into me.</p><h3>Building</h3><p>I followed Massdrop's step-by-step <a href='https://www.massdrop.com/ext/ergodox/assembly.php'>guide</a> and <a href='https://www.youtube.com/watch?v=x1irVrAl3Ts'>this</a> YouTube video. Another great resource is the community at <a href='http://geekhack.org/index.php?topic=22780.0'>GeekHack</a>. I'd recommend reading and watching as much as possible before starting your build.</p><p>I built this using a cheap soldering iron I've had for years, very thin solder, solder wick, and a multimeter. I don't know if this would have been easier with better tools or not but those got the job done.</p><p>While soldering the surface mount diodes I was in the zone and soldered a few locations that didn't actually need to be soldered. When you are soldering the diodes you should only be soldering them to the locations that have the key silk screen.</p><p>My system for minimizing errors while soldering the diodes is the following five steps.</p><ol><li>Lay down some solder on one of the pads.</li><li>Put the correct end of the diode on top of that solder, reheat and   push down.</li><li>Test the connection with a multimeter.</li><li>Solder the other half of the diode.</li><li>Test the connection.</li></ol><p>I batched up the steps. I'd do a whole row of the first step, then move to the second for the entire row, then do the third, etc. Being rigorous about testing every connection is important. Catching mistakes early makes it easier to fix the mistakes.</p><p>If you solder a diode on the wrong way there is a huge difference (at least for me using solder wick) between the difficulty of fixing the error when only one pad has been soldered versus two pads. I soldered more than one diode backwards and a mistake noticed after soldering only one pad was easy to fix. After soldering both pads it took serious effort.</p><p>Eventually you'll need to cut open a USB cable. I ended up removing the plastic housing using a Dremel. When soldering the wires to the USB holes I was too concerned with it looking pretty and did not leave plenty of wire. This made it harder to solder and as a result I ended up doing a poor job that resulted in a short. After desoldering and destroying another cable, but leaving more wire, I managed to do a better job. I originally noticed the short because I kept getting warnings from my computer about my USB Keyboard drawing too much power.</p><p>I've <a href='https://www.evernote.com/shard/s68/sh/4f51c3b2-b50b-47d3-8219-ea155cf5fef5/df239167726bcebf06cc2b5101ac8e42/'>annotated a copy</a> of Massdrop's instructions using Evernote. It contains the above tips inline.</p><h3>Firmware</h3><p>After you physically build your keyboard you need to build the firmware. There are a few different firmwares that can work and you can discover those on GeekHack. I'm using a fork of what Massdrop's <a href='https://www.massdrop.com/ext/ergodox'>graphical configuration</a> tool uses. It is based off <a href='https://github.com/benblazak/ergodox-firmware'>benblazak/ergodox-firmware</a>.</p><p>One of the exciting things about the ErgoDox is tweaking the firmware. I took the base firmware and modified it to have media key support and <a href='https://github.com/jakemcc/ergodox-firmware/commit/383f16a3f091b4e2dd031d098007c4289cc1a261'>light up the LEDs</a> when I'm on any layer besides the base. Some people have added the ability to record keyboard macros and other neat features. I encourage you to take a look at the source even if you use the graphical configuration tool. I haven't explored beyond <a href='https://github.com/benblazak/ergodox-firmware'>benblazak/ergodox-firmware</a> so I can't compare it to other firmwares.</p><h3>Conclusion</h3><p>I really enjoy it. Building it was both fun and frustrating <a href='#fn-3' id='fnref3'><sup>3</sup></a>.</p><p>After using the keyboard for a few months I've found that I really only use three (on each hand) of the thumb cluster keys. I also don't use the keyboard layers too often. I have three layers programmed and I always stay on the main one unless I want to hit a media key.</p><p>Would I recommend building your own ErgoDox? If you already can or are willing to learn to solder and this sounds at all interesting to you I would recommend it. The project can be frustrating but the result is great.</p><h3>The Future</h3><p>There is still a lot left to explore in the custom keyboard space. Even so I have no plans on leaving the ErgoDox anytime soon. In terms of improving my ErgoDox, I plan on poking around the different firmwares at some point. I'd also like to explore <a href='http://geekhack.org/index.php?topic=22780.msg1405792#msg1405792'>tenting</a> <a href='https://github.com/adereth/ergodox-tent'>options</a>.</p><h3>Resources</h3><ul><li><a href='http://geekhack.org/index.php?topic=22780.0'>GeekHack ErgoDox thread</a></li><li><a href='http://geekhack.org/index.php?topic=40501.0'>GeekHack FAQ</a>  Useful for general information about keyboard topics.</li><li><a href='http://geekhack.org/index.php?topic=40501.0#post_DD'>GeekHack Cherry actuation forces</a></li><li><a href='https://www.massdrop.com/buy/ergodox'>Massdrop Buy</a></li><li><a href='https://www.massdrop.com/ext/ergodox'>Massdrop Configuration Tool</a></li><li><a href='https://github.com/benblazak/ergodox-firmware'>benblazak/ergodox-firmware</a></li><li><a href='http://geekhack.org/index.php?topic=48106.0'>TMK firmware for ErgoDox</a>  One of the alternative firmwares.</li></ul><ol class='footnotes'><li id='fn-1'>I feel a bit odd using the word standard to describe acquiring parts to build a keyboard.<a href='#fnref1'>&#8617;</a></li><li id='fn-2'><a href='http://keycapsdirect.com/key-caps.php'>This</a> page has diagrams that shows the different keycap families.<a href='#fnref2'>&#8617;</a></li><li id='fn-3'>Those surface mount diodes are so tiny.<a href='#fnref3'>&#8617;</a></li></ol>
+  <script src="/highlight/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script></script>
+  <footer>
+    <p xmlns:cc="http://creativecommons.org/ns#" >This work by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://jakemccrary.com">Jake McCrary</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""></a></p> 
+    <a href="/disclosure-policy">Disclosure Policy</a><br/>
+  </footer>
+</body>
+</html>

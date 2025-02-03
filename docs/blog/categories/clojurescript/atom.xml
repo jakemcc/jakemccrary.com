@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Jake McCrary's articles on clojurescript]]></title>
+  <link href="https://jakemccrary.com/atom.xml" rel="self"/>
+  <link href="https://jakemccrary.com/"/>
+  <updated>2025-02-03T00:51:56+00:00</updated>
+  <id>https://jakemccrary.com/</id>
+  <author>
+    <name><![CDATA[Jake McCrary]]></name>
+  </author>
+  <entry>
+    <id>https://jakemccrary.com/blog/2018/06/15/tracking-changes-to-a-reagent-atom/index.html</id>
+    <link href="https://jakemccrary.com/blog/2018/06/15/tracking-changes-to-a-reagent-atom/index.html"/>
+    <title><![CDATA[Tracking changes to a Reagent atom]]></title>
+    <updated>2018-06-15T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p>I was recently having some difficulty debugging a problem in a ClojureScript single page application. The SPA was implemented using <a href='https://reagent-project.github.io/'>reagent</a><a href='#fn-1' id='fnref1'><sup>1</sup></a>.</p><p>This interface stores most of its state in a global <code>reagent.core/atom</code> called <code>db</code>. To debug the problem, I thought it would be useful to track how the global state changed as I interacted with the interface. How do we do that?</p><p>For the rest of this article, pretend that `(require '[reagent.core :as reagent])` has been executed.</p><p>First, let's define <code>db-history</code> in the same namespace as the global <code>reagent/atom</code>, <code>db</code>. This is where we'll collect the changes to <code>db</code>.</p><pre><code class="language-clojure">&#40;ns ui.data
+  &#40;:require &#91;reagent.core :as reagent&#93;&#41;&#41;
+
+&#40;defonce db &#40;reagent/atom {:app/current-page :offer-list}&#41;&#41;
+
+&#40;defonce db-history &#40;atom &#91;&#93;&#41;&#41;
+</code></pre><p>Next, let's write a function called <code>aggregate-state</code>. This function grabs the current value in <code>db</code> and <code>conj</code>s it onto <code>db-history</code>. It also limits the history to the most recent 101 states.</p><pre><code class="language-clojure">&#40;defn aggregate-state &#91;&#93;
+  &#40;let &#91;d @db&#93;
+    &#40;swap! db-history &#40;fn &#91;hist&#93;
+                        &#40;-&gt; &#40;take 100 hist&#41;
+                            vec
+                            &#40;conj d&#41;&#41;&#41;&#41;&#41;&#41;
+</code></pre><p>Now we need to invoke <code>aggregate-state</code> whenever <code>db</code> changes. We can do this using <code>reagent/track</code>. <code>reagent/track</code> takes a function and optional arguments and invokes that function whenever a <code>reagent/atom</code> that function depends on changes.</p><p><code>reagent/track!</code> is similar except it immediately invokes the function instead of waiting for the first change. We can use it to cause <code>aggregate-state</code> to get called whenever <code>db</code> changes.</p><pre><code class="language-clojure">&#40;defonce db-history-logger &#40;reagent/track! aggregate-state&#41;&#41;
+</code></pre><p>Now history of the global state is being tracked. But we need a way to access it. Below is what I ended up writing. When you call <code>ui.data.history&#40;&#41;</code> in Chrome's JavaScript console, it returns an object you can click on to explore. If you pass in strings as arguments to <code>history</code> then it only selects some of the data from the global <code>db</code> and history.</p><pre><code class="language-clojure">&#40;defn &#94;:export history &#91;&amp; args&#93;
+  &#40;let &#91;d @db
+        k &#40;if &#40;seq args&#41;
+            &#40;map keyword args&#41;
+            &#40;keys d&#41;&#41;&#93;
+    &#40;clj-&gt;js {:history &#40;mapv &#40;fn &#91;x&#93; &#40;select-keys x k&#41;&#41; @db-history&#41;
+              :current &#40;select-keys d k&#41;}&#41;&#41;&#41;
+</code></pre><p>It only took about fifteen lines of code to gain a view of our application's state changes over time. This view helped me solve my problem. Hopefully it will help you too. <ol class='footnotes'><li id='fn-1'>This particular project is nearly four years old and has had many hands on it over the years. Working in it reminds me of how useful re-frame is on larger applications like this one.<a href='#fnref1'>&#8617;</a></li></ol></p>]]></content>
+  </entry>
+  <entry>
+    <id>https://jakemccrary.com/blog/2018/02/20/creating-serverless-applications-with-clojurescript-and-firebase/index.html</id>
+    <link href="https://jakemccrary.com/blog/2018/02/20/creating-serverless-applications-with-clojurescript-and-firebase/index.html"/>
+    <title><![CDATA[Creating serverless applications with ClojureScript and Firebase]]></title>
+    <updated>2018-02-20T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p>Earlier this year, I traveled to India and gave a presentation at <a href='http://inclojure.org'>IN/Clojure</a>. I talked about building serverless ClojureScript applications that use <a href='https://firebase.com'>Firebase</a> to persist and sync data between clients.</p><p>I was pretty pleased with how the talk went. The people who talked to me after seemed to enjoy the presentation and were inspired to try out some of the techniques and tools I mentioned.</p><p>Here is the talk. I hope you enjoy it. It was fun to give.</p><p><iframe width="560" height="315" src="https://www.youtube.com/embed/rMqo3lgxe7o" frameborder="0" allow="encrypted-media" allowfullscreen></iframe></p>]]></content>
+  </entry>
+  <entry>
+    <id>https://jakemccrary.com/blog/2015/12/19/clojurescript-treat-warnings-as-errors/index.html</id>
+    <link href="https://jakemccrary.com/blog/2015/12/19/clojurescript-treat-warnings-as-errors/index.html"/>
+    <title><![CDATA[ClojureScript: Treat warnings as errors]]></title>
+    <updated>2015-12-19T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p>Recently my team deployed a new version of our ClojureScript UI and it had a minor bug. It was trivial to fix the problem, a ClojureScript build warning pointed us to the cause. As a result we started thinking it would be nice to have build warnings count as errors and fail our ClojureScript build.</p><p>We use <a href='http://leiningen.org/'>Leiningen</a> (version 2.5.3) and <a href='https://github.com/emezeske/lein-cljsbuild'>lein-cljsbuild</a> (version 1.1.1). After some searching we found that lein-cljsbuild supports <a href='https://github.com/emezeske/lein-cljsbuild#custom-warning-handlers'>specifying custom warning handlers</a> as the value to the <code>:warning-handlers</code> key. The lein-cljsbuild README even provides an example, which we took and added a <code>&#40;System/exit 1&#41;</code> to the end of it. This resulted in a build configuration that looked similar to below.</p><pre><code class="language-clojure">{:id &quot;prod&quot;
+ :warning-handlers &#91;&#40;fn &#91;warning-type env extra&#93;
+                      &#40;when-let &#91;s &#40;cljs.analyzer/error-message warning-type extra&#41;&#93;
+                        &#40;binding &#91;&#42;out&#42; &#42;err&#42;&#93;
+                          &#40;println &quot;WARNING:&quot; &#40;cljs.analyzer/message env s&#41;&#41;&#41;
+                        &#40;System/exit 1&#41;&#41;&#41;&#93;
+ :source-paths &#91;&quot;src/cljc&quot; &quot;src/cljs&quot;&#93;
+ :compiler {:output-to &quot;resources/public/js/compiled/ui.js&quot;
+            :externs &#91;&quot;resources/intercom-externs.js&quot;
+                      &quot;resources/mixpanel-externs.js&quot;&#93;
+            :optimizations :advanced}}
+</code></pre><p>This worked! Well, it sort of worked. Our build failed whenever there was a warning but now we were seeing spurious warnings. We saw "Use of undeclared Var" warnings when functions created in a <code>letfn</code> where calling each other. Definitely not a situation that warrants a warning and definitely not a build failure.</p><p>We weren't seeing this warning before so we opened ClojureScript's source and found the <a href='https://github.com/clojure/clojurescript/blob/452edf43927566cc0ea0a3846706c0294cef235d/src/main/clojure/cljs/analyzer.cljc#L360-L366'>default warning handler</a>. The default handler checks that <code>warning-type</code> has a truthy value in the map <code>&#42;cljs-warnings&#42;</code>. Inspired by the default handler we added the same check to the start of our warning handler.</p><pre><code class="language-clojure">:warning-handlers &#91;&#40;fn &#91;warning-type env extra&#93;
+                     &#40;when &#40;warning-type cljs.analyzer/&#42;cljs-warnings&#42;&#41;
+                       &#40;when-let &#91;s &#40;cljs.analyzer/error-message warning-type extra&#41;&#93;
+                         &#40;binding &#91;&#42;out&#42; &#42;err&#42;&#93;
+                           &#40;println &quot;WARNING:&quot; &#40;cljs.analyzer/message env s&#41;&#41;&#41;
+                         &#40;System/exit 1&#41;&#41;&#41;&#41;&#93;
+</code></pre><p>Success! Now we no longer get incorrect warnings when compiling our <code>letfn</code> form and our build still fails if a warning occurs. Now we can build and deploy with a little more confidence.</p>]]></content>
+  </entry>
+</feed>

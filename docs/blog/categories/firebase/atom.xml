@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Jake McCrary's articles on firebase]]></title>
+  <link href="https://jakemccrary.com/atom.xml" rel="self"/>
+  <link href="https://jakemccrary.com/"/>
+  <updated>2025-02-03T00:51:56+00:00</updated>
+  <id>https://jakemccrary.com/</id>
+  <author>
+    <name><![CDATA[Jake McCrary]]></name>
+  </author>
+  <entry>
+    <id>https://jakemccrary.com/blog/2018/02/20/creating-serverless-applications-with-clojurescript-and-firebase/index.html</id>
+    <link href="https://jakemccrary.com/blog/2018/02/20/creating-serverless-applications-with-clojurescript-and-firebase/index.html"/>
+    <title><![CDATA[Creating serverless applications with ClojureScript and Firebase]]></title>
+    <updated>2018-02-20T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p>Earlier this year, I traveled to India and gave a presentation at <a href='http://inclojure.org'>IN/Clojure</a>. I talked about building serverless ClojureScript applications that use <a href='https://firebase.com'>Firebase</a> to persist and sync data between clients.</p><p>I was pretty pleased with how the talk went. The people who talked to me after seemed to enjoy the presentation and were inspired to try out some of the techniques and tools I mentioned.</p><p>Here is the talk. I hope you enjoy it. It was fun to give.</p><p><iframe width="560" height="315" src="https://www.youtube.com/embed/rMqo3lgxe7o" frameborder="0" allow="encrypted-media" allowfullscreen></iframe></p>]]></content>
+  </entry>
+</feed>

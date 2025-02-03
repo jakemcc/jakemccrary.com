@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Jake McCrary's articles on cron]]></title>
+  <link href="https://jakemccrary.com/atom.xml" rel="self"/>
+  <link href="https://jakemccrary.com/"/>
+  <updated>2025-02-03T00:51:56+00:00</updated>
+  <id>https://jakemccrary.com/</id>
+  <author>
+    <name><![CDATA[Jake McCrary]]></name>
+  </author>
+  <entry>
+    <id>https://jakemccrary.com/blog/2024/06/16/scheduling-cron-tasks-in-mixed-time-zones/index.html</id>
+    <link href="https://jakemccrary.com/blog/2024/06/16/scheduling-cron-tasks-in-mixed-time-zones/index.html"/>
+    <title><![CDATA[Scheduling cron tasks in mixed time zones]]></title>
+    <updated>2024-06-16T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p>Have you ever needed to schedule a repeating task on a Linux host? If so, you've probably reached for cron. cron is widely available and reliable; it is a great choice for scheduling tasks.</p><p>Sometimes you find yourself scheduling a task and, ideally, you'd be scheduling that task referencing a different time zone. This is a common need if your programs are interacting with systems hosted in different areas of the world. If one system you interact with starts up at 7 AM <code>Europe/London</code> and another at 8 AM <code>America/New&#95;York</code>, it would be much better to schedule your program to run using times specified in those time zones.</p><p>Why is that preferred?</p><ul><li>If you schedule in your host time zone, you have to convert from the other time zone to your own. This is error prone.</li><li>Different time zones have different Daylights savings shifts. Having to adjust your schedule when your host or target time zone shifts is error prone.</li></ul><p>Luckily, you can do this with cron! At least, with the cronie implementation.</p><p>You do this by specifying the time zone in the crontab with the <code>CRON&#95;TZ</code> variable. Any line after a <code>CRON&#95;TZ</code> specification is scheduled in the specified time zone. This persists until the next <code>CRON&#95;TZ</code> value is specified.</p><p>Below is a sample crontab that schedules four tasks. One is scheduled in the host time zone, two in <code>America/New&#95;York</code>, and one in <code>Europe/London</code>.</p><pre><code>0 7 &#42; &#42; &#42; echo &quot;run at 7 AM in the host time zone&quot;
+
+CRON&#95;TZ=America/New&#95;York
+0 7 &#42; &#42; &#42; echo &quot;Run at 7 AM New York&quot;
+10 7 &#42; &#42; &#42; echo &quot;Run at 7:10 AM New York&quot;
+
+CRON&#95;TZ=Europe/London
+&#42; 8 &#42; &#42; &#42; echo &quot;Run at 8 AM London&quot;
+</code></pre><p>The one gotcha with this is that cronie's behavior is unspecified if the scheduled time ends up in the daylights savings shift of the host machine<a href='#fn-1' id='fnref1'><sup>1</sup></a>. So make sure you don't do that.</p><p>My team at work has been taking advantage of this feature since early 2023 for scheduling all of our processes start and end times. It has been working great. Prior to figuring<a href='#fn-2' id='fnref2'><sup>2</sup></a> this out, the fall and spring time shifts were sources of issues as various countries shifted on different days. That entire source of problems has been solved through scheduling tasks in the proper time zone.</p><ol class='footnotes'><li id='fn-1'>We have unit tests that confirm someone hasn't configured a task to run within one of these periods.<a href='#fnref1'>&#8617;</a></li><li id='fn-2'>Figuring this out was a bit of a chore. Even the Linux experts I talked to weren't aware of being able to do this. Digging through the source of cronie was how I figured this out. Hopefully this article makes it easier for the next person. Though, now that I know the <code>CRON&#95;TZ</code> solution, it is pretty easy to search and find other folks talking about this.<a href='#fnref2'>&#8617;</a></li></ol>]]></content>
+  </entry>
+</feed>

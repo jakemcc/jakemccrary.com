@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Jake McCrary's articles on experiment]]></title>
+  <link href="https://jakemccrary.com/atom.xml" rel="self"/>
+  <link href="https://jakemccrary.com/"/>
+  <updated>2025-02-03T00:51:56+00:00</updated>
+  <id>https://jakemccrary.com/</id>
+  <author>
+    <name><![CDATA[Jake McCrary]]></name>
+  </author>
+  <entry>
+    <id>https://jakemccrary.com/blog/2020/07/03/introducing-photo-fit/index.html</id>
+    <link href="https://jakemccrary.com/blog/2020/07/03/introducing-photo-fit/index.html"/>
+    <title><![CDATA[Introducing Photo Fit]]></title>
+    <updated>2020-07-03T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p>Earlier this year, I wanted to use a landscape photo as my background on my phone. It wasn't the photo below but we can use it as an example.</p><p><img src="/images/photo-fit/keyboard-new-keycaps.jpg" alt="Landscape image of my keyboard" title="Landscape image of my keyboard" /></p><p>When I made it my background, my phone<a href='#fn-1' id='fnref1'><sup>1</sup></a> zoomed in to make it fit the portrait orientation of the phone.</p><p><img src="/images/photo-fit/phone-background-before.jpg" alt="Screenshot of phone with zoomed in keyboard photo" title="Screenshot of phone with zoomed in keyboard photo" /></p><p>This is not great. I don't want a zoomed in version that fits my vertical phone. I want to see the whole photo with black bars at the top and bottom</p><p>I tried to find a way to add these bars using my phone. I couldn't find an easy way.</p><p>At this point, a reasonable solution would have been transferring the photo to a computer, editing it, and transferring it back to my phone. I didn't do that. Instead, I wrote a little TypeScript<a href='#fn-2' id='fnref2'><sup>2</sup></a> web app that adds the bars for you. You open the website on your phone, select an image, and then download a properly sized image.</p><p><img src="/images/photo-fit/phone-background-after.jpg" alt="Screenshot of phone with properly fitting image" title="Screenshot of phone with properly fitting image" /></p><p>The tool uses the canvas API and does all of the work in the browser itself. It was a fun, bite-sized project and it gave me an excuse to write some TypeScript and do some web programming. This was the first time I've written TypeScript since learning it and I haven't done any web programming in a while.</p><p>Making <a href='/experiments/photo-fit/'>Photo Fit</a> was not a fast approach to changing my phone's background. But, now the tool exists and anyone, including future me, can quickly resize their photo from the comfort of their own phone.</p><p><a href='/experiments/photo-fit/'>Photo Fit</a> is live and available for others to use. I've only tested it on my own phone and desktop browsers. It might not work! If you do try it and something weird happens, plese let me know.</p><ol class='footnotes'><li id='fn-1'>A Samsung S8 running Android 9<a href='#fnref1'>&#8617;</a></li><li id='fn-2'>I recently learned some TypeScript through <a href='https://www.executeprogram.com'>Execute Program</a>. Execute program is a really neat application of spaced repetition for learning programming concepts.<a href='#fnref2'>&#8617;</a></li></ol>]]></content>
+  </entry>
+</feed>

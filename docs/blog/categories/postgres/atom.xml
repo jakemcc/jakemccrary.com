@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Jake McCrary's articles on postgres]]></title>
+  <link href="https://jakemccrary.com/atom.xml" rel="self"/>
+  <link href="https://jakemccrary.com/"/>
+  <updated>2025-02-03T00:51:56+00:00</updated>
+  <id>https://jakemccrary.com/</id>
+  <author>
+    <name><![CDATA[Jake McCrary]]></name>
+  </author>
+  <entry>
+    <id>https://jakemccrary.com/blog/2015/11/15/sql-aggregate-a-set-of-values-together/index.html</id>
+    <link href="https://jakemccrary.com/blog/2015/11/15/sql-aggregate-a-set-of-values-together/index.html"/>
+    <title><![CDATA[SQL: Aggregate a set of values together]]></title>
+    <updated>2015-11-15T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p>Lately I've been working on projects that use <a href='http://www.postgresql.org/'>Postgres</a> as our relational database. This has allowed us to simplify some of our Clojure code by leaning on some built-in features of Postgres. One SQL function supported by Postgres which has greatly simplified our code is the <code>array&#95;agg</code> <a href='http://www.postgresql.org/docs/9.4/static/functions-aggregate.html'>aggregate</a> function.</p><h2>What is <code>array&#95;agg</code>?</h2><p>The <code>array&#95;agg</code> function takes an argument and returns an array of the argument type. That sentence will make more sense after an example. The snippet below shows a simplified schema for a blog's database. There is a table called <code>blog&#95;posts</code> that contains details about posts, a table called <code>categories</code> that has labels that can be applied to blog posts, and a join table called <code>post&#95;categories</code> that links the two previous tables together.</p><pre><code class="language-sql">blog=# select id, title from blog&#95;posts;
+ id |    title
+----+--------------
+  1 | SQL Post
+  2 | Clojure Post
+
+blog=# select &#42; from categories;
+ id |   name
+----+----------
+  1 | sql
+  2 | emacs
+  3 | clojure
+  4 | postgres
+
+blog=# select &#42; from post&#95;categories;
+ blog&#95;post&#95;id | category&#95;id
+--------------+-------------
+            1 |           1
+            2 |           2
+            1 |           4
+            2 |           3
+</code></pre><p>Before I learned about <code>array&#95;agg</code>, if I wanted to know how each blog post had been categorized I might have written the following query.</p><pre><code>select title, name as category
+  from blog&#95;posts bp
+  join post&#95;categories pc on pc.blog&#95;post&#95;id = bp.id
+  join categories c on c.id = pc.category&#95;id
+  order by title;
+
+
+    title     | category
+--------------+----------
+ Clojure Post | emacs
+ Clojure Post | clojure
+ SQL Post     | sql
+ SQL Post     | postgres
+</code></pre><p>The result is readable but as the number of posts and categories grow it becomes harder to read. The query also doesn't answer the question, "How are my posts categorized?", well. The ideal answer is a single row per post that shows the post's categories. You can use <code>array&#95;agg</code> to get that ideal answer.</p><pre><code class="language-sql">select title, array&#95;agg&#40;name&#41; as categories
+  from blog&#95;posts bp
+  join post&#95;categories pc on pc.blog&#95;post&#95;id = bp.id
+  join categories c on c.id = pc.category&#95;id
+  group by title;
+
+    title     |   categories
+--------------+-----------------
+ SQL Post     | {sql,postgres}
+ Clojure Post | {emacs,clojure}
+</code></pre><p>I find the <code>array&#95;agg</code> version much nicer to read. The result answers the question in a very direct fashion and the query expresses the question well. Everything about the query expresses the question, you no longer have an extra <code>order by</code> clause to make the result more readable by human eyes.</p><h2>How did it make my Clojure code simpler?</h2><p>The above is great and it makes everything more readable for a human. Most of the time I'm not querying a SQL database so that a human can directly read the results; instead I'm using Clojure to manipulate results of a query. Fortunately, <code>array&#95;agg</code> simplifies my Clojure code as well.</p><p>I'm working with a schema that has many relationships similar to the above relationship. Continuing with the example from above the snippet below shows the data shape we'd get back from <code>clojure.java.jdbc</code> prior to using <code>array&#95;agg</code>. The data shape we actually want follows.</p><pre><code class="language-clojure">;; data shape you get from the non-array&#95;agg query.
+&#91;{:title &quot;Clojure Post&quot; :category &quot;emacs&quot;}
+ {:title &quot;SQL Post&quot; :category &quot;sql&quot;}
+ {:title &quot;Clojure Post&quot; :category &quot;clojure&quot;}
+ {:title &quot;SQL Post&quot; :category &quot;postgres&quot;}&#93;
+
+;; data shape you want
+&#91;{:title &quot;Clojure Post&quot; :categories &#91;&quot;emacs&quot; &quot;clojure&quot;&#93;}
+ {:title &quot;SQL Post&quot; :categories &#91;&quot;sql&quot; &quot;postgres&quot;&#93;}&#93;
+</code></pre><p>Since we're not getting data in our desired shape we need to write code that combines rows. One way of doing that is to use <code>reduce</code> and <code>map</code>.</p><pre><code class="language-clojure">&#40;defn squash-by-title &#91;rows&#93;
+  &#40;-&gt;&gt; rows
+       &#40;reduce &#40;fn &#91;r row&#93; &#40;update r &#40;:title row&#41; conj &#40;:category row&#41;&#41;&#41; {}&#41;
+       &#40;map &#40;fn &#91;&#91;title categories&#93;&#93; {:title title :categories categories}&#41;&#41;&#41;&#41;
+</code></pre><p>I've been writing Clojure for a long time and when I see code like above it still takes me a bit of time to figure out what is happening. Not only that, but eventually your project has different squash operations depending on what data you're pulling back from the database. They are probably mostly similar and eventually you abstract the differences and feel great. Then you come back months later and have to figure out how it all works. Luckily, if you're using a database that supports <code>array&#95;agg</code>, there is a better way.</p><p>The first step is to change your queries to use <code>array&#95;agg</code>. The second step is to extend the <code>clojure.java.jdbc/IResultSetReadColumn</code> protocol to the type returned by your jdbc driver. For my project that looks like the following code:</p><pre><code class="language-clojure">;; clojure.java.jdbc has been required as jdbc
+
+&#40;extend-protocol jdbc/IResultSetReadColumn
+  org.postgresql.jdbc4.Jdbc4Array
+  &#40;result-set-read-column &#91;pgobj metadata i&#93;
+    &#40;vec &#40;.getArray pgobj&#41;&#41;&#41;&#41;
+</code></pre><p>By changing my queries to use <code>array&#95;agg</code> and adding those four lines of code I'm able to delete all of my squashing functions and get data from my database in the shape I want. I also end up with easier to understand code and more expressive queries. Awesome.</p><p>_Thanks to <a href='http://timothypratley.blogspot.com/'>Timothy Pratley</a> for providing feedback on earlier versions of this post._</p>]]></content>
+  </entry>
+</feed>

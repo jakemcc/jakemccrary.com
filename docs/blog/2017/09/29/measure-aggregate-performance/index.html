@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>Measuring aggregate performance in Clojure - Jake McCrary</title>
+  <meta name="author" content="">
+  <!-- <link rel="stylesheet" href="/style.css"> -->
+
+  <meta itemprop="name" content="Measuring aggregate performance in Clojure - Jake McCrary" />
+  
+  <meta itemprop="description" content="Short Clojure code for measuring the aggregate performance of chunks of code." />
+  
+
+  <!-- Twitter Card data -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@jakemcc" />
+  <meta name="twitter:title" content="Measuring aggregate performance in Clojure - Jake McCrary" />
+  
+  <meta name="twitter:description" content="Short Clojure code for measuring the aggregate performance of chunks of code." />
+  
+  <meta name="twitter:creator" content="@jakemcc" />
+  <!-- <meta name="twitter:image" content="" /> -->
+
+  <!-- Open Graph data -->
+  <meta property="og:site_name" content="Writing by Jake McCrary" />
+  <meta property="og:url" content="https://jakemccrary.com//blog/2017/09/29/measure-aggregate-performance/" />
+  <meta property="og:title" content="Measuring aggregate performance in Clojure - Jake McCrary" />
+  
+  <meta property="og:description" content="Short Clojure code for measuring the aggregate performance of chunks of code." />
+  
+  <!-- <meta property="og:image" content="" /> -->
+  
+  <meta property="og:type" content="article" />
+  
+  
+  <!-- maybe rfc blahblahblah it? -->
+  <meta property="article:published_time" content="2017-09-29T23:59:59+00:00" />
+  
+
+  <link rel="canonical" href="https://jakemccrary.com//blog/2017/09/29/measure-aggregate-performance/">
+
+  <style>
+   body {
+     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+     max-width: 1200px;
+     margin: 0 auto;
+     padding: 1rem;
+     line-height: 1.5;
+   }
+
+   header {
+     margin-bottom: 0.5rem;
+   }
+
+   header h1 {
+     margin: 0;
+     font-size: 2.5rem;
+   }
+
+   header h1 a {
+     color: #333;
+     text-decoration: none;
+   }
+
+   .main-nav {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     padding: 0.5rem 0;
+     margin-bottom: 2rem;
+   }
+
+   .nav-list {
+     display: flex;
+     list-style: none;
+     margin: 0;
+     padding: 0;
+     gap: 1.5rem;
+   }
+
+   .nav-list a {
+     text-decoration: none;
+     color: #333;
+   }
+
+   .search-form fieldset {
+     border: none;
+     margin: 0;
+     padding: 0;
+   }
+
+   .search {
+     padding: 0.5rem;
+     border: none;
+     background: #f5f5f5;
+     border-radius: 4px;
+   }
+
+   /* Blog post list styling */
+   .post-list {
+     list-style: none;
+     padding: 0;
+     margin: 0;
+   }
+
+   .post-list li {
+     margin-bottom: 1.5rem;
+   }
+
+   .post-meta {
+     margin-bottom: 0.25rem;
+   }
+
+   .post-meta time {
+     color: #666;
+     margin-right: 0.5rem;
+   }
+
+   .post-list h2 {
+     display: inline;
+     font-size: 1.1rem;
+     font-weight: 500;
+     margin: 0;
+   }
+
+   .post-list h2 a {
+     color: #0066cc;
+     text-decoration: none;
+   }
+
+   .post-list h2 a:hover {
+     text-decoration: underline;
+   }
+
+   .post-description {
+     color: #444;
+     margin: 0.25rem 0 0 0;
+     line-height: 1.6;
+   }
+
+   .right {
+     float: right;
+   }
+   .left {
+     float: left;
+   }
+   .mr1 {
+     margin-right: 1em;
+   }
+   /* Style the footnote references in the text */
+   [id^="fnref"] sup {
+     font-size: 0.75em;
+     line-height: 0;
+     position: relative;
+     top: -0.5em;
+     padding: 0 0.3em;
+   }
+
+   [id^="fnref"] a {
+     text-decoration: none;
+     background-color: #f3f4f6;
+     color: #4b5563;
+     border-radius: 3px;
+     padding: 2px 6px;
+     transition: all 0.2s ease;
+   }
+
+   [id^="fnref"] a:hover {
+     background-color: #e5e7eb;
+     color: #1f2937;
+   }
+
+   /* Style the footnotes section */
+   .footnotes {
+     margin-top: 3rem;
+     padding-top: 2rem;
+     border-top: 2px solid #e5e7eb;
+   }
+
+   /* Create custom numbering for footnotes */
+   .footnotes li {
+     margin-bottom: 1rem;
+     color: #4b5563;
+   }
+   
+   /* Style the return links in footnotes */
+   .footnotes li a[href^="#fnref"] {
+     text-decoration: none;
+     color: #6b7280;
+     margin-left: 0.5rem;
+     font-size: 0.875rem;
+     transition: color 0.2s ease;
+   }
+
+   .footnotes li a[href^="#fnref"]:hover {
+     color: #374151;
+   }
+
+   blockquote {
+     border-left: 4px solid #d1d5db;
+     padding-left: 1em;
+     margin-left: 1em;
+     color: #4b5563;
+     font-style: italic;
+     background-color: #f9fafb;
+   }
+
+   figure {
+     margin: 1rem 0;
+     text-align: center;
+   }
+
+   figcaption {
+     color: #666;
+     font-size: 0.9em;
+     margin-top: 0.5rem;
+     font-style: italic;
+   }
+
+   .page-header h1 {
+     margin: 0
+   }
+
+   .page-header .publication-date {
+     color: #666;
+     font-size: 0.8em;
+     margin: 0;
+   }
+
+   body > footer {
+     font-size: .8em;
+	   color: #888;
+     margin-top: 1em;
+	   padding-top: 1em;
+     padding-bottom: 1em;
+   }
+   p code, li code {
+     display: inline-block;
+     white-space: nowrap;
+     border: 1px solid #ddd;
+     -moz-border-radius: .4em;
+     -webkit-border-radius: .4em;
+     border-radius: .4em;
+     padding: 0 .3em;
+     margin: -1px 0;
+   }
+
+  </style>
+  <link rel="stylesheet" href="/highlight/base16/tomorrow-night.min.css">
+</head>
+<body>
+<header>
+    <h1><a href="/">Jake McCrary</a></h1>
+  </header>
+  <nav role="navigation" class="main-nav">
+    <ul role="main-navigation" class="nav-list">
+      <li><a href="/">Articles</a></li>
+      <li><a href="/adventures/">Adventures</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/blog/archives/">Archives</a></li>
+      <li><a href="http://feeds.feedburner.com/JakeMccrarysMusings" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+      <li><a href="https://jakemccrary.substack.com/welcome" target="_blank" rel="subscribe-email" title="subscribe via email">Newsletter</a></li>
+    </ul>
+    <form class="search-form" action="https://google.com/search" method="get">
+      <fieldset role="search">
+        <input type="hidden" name="sitesearch" value="jakemccrary.com">
+        <input class="search" type="text" name="q" placeholder="Search">
+      </fieldset>
+    </form>
+  </nav>
+  
+  <div class="page-header">
+    <h1>Measuring aggregate performance in Clojure</h1>
+    
+    
+    <p class="publication-date">Published on 
+      <time datetime="2017-09-29">September 29, 2017</time>
+    </p>
+    
+  </div>
+  
+
+  <p>Last time I needed to speed up some code, I wrote a Clojure macro that recorded the aggregate time spent executing the code wrapped by the macro. Aggregate timings were useful since the same functions were called multiple times in the code path we were trying to optimize. Seeing total times made it easier to identify where we should spend our time.</p><p>Below is the namespace I temporarily introduced into our codebase.</p><pre><code class="language-clojure">&#40;ns metrics&#41;
+
+&#40;defn msec-str
+  &quot;Returns a human readable version of milliseconds based upon scale&quot;
+  &#91;msecs&#93;
+  &#40;let &#91;s 1000
+        m &#40;&#42; 60 s&#41;
+        h &#40;&#42; 60 m&#41;&#93;
+    &#40;condp &gt;= msecs
+      1 &#40;format &quot;%.5f msecs&quot; &#40;float msecs&#41;&#41;
+      s &#40;format &quot;%.1f msecs&quot; &#40;float msecs&#41;&#41;
+      m &#40;format &quot;%.1f seconds&quot; &#40;float &#40;/ msecs s&#41;&#41;&#41;
+      h &#40;format &quot;%02dm:%02ds&quot; &#40;int &#40;/ msecs m&#41;&#41;
+                &#40;mod &#40;int &#40;/ msecs s&#41;&#41; 60&#41;&#41;
+      &#40;format &quot;%dh:%02dm&quot; &#40;int &#40;/ msecs h&#41;&#41;
+              &#40;mod &#40;int &#40;/ msecs m&#41;&#41; 60&#41;&#41;&#41;&#41;&#41;
+
+&#40;def aggregates &#40;atom {}&#41;&#41;
+
+&#40;defmacro record-aggregate
+  &quot;Records the total time spent executing body across invocations.&quot;
+  &#91;label &amp; body&#93;
+  `&#40;do
+     &#40;when-not &#40;contains? @aggregates &#126;label&#41;
+       &#40;swap! aggregates assoc &#126;label {:order &#40;inc &#40;count @aggregates&#41;&#41;}&#41;&#41;
+     &#40;let &#91;start-time# &#40;System/nanoTime&#41;
+           result# &#40;do &#126;@body&#41;
+           result# &#40;if &#40;and &#40;seq? result#&#41;
+                            &#40;instance? clojure.lang.IPending result#&#41;
+                            &#40;not &#40;realized? result#&#41;&#41;&#41;
+                     &#40;doall result#&#41;
+                     result#&#41;
+           end-time# &#40;System/nanoTime&#41;&#93;
+       &#40;swap! aggregates
+              update-in
+              &#91;&#126;label :msecs&#93;
+              &#40;fnil + 0&#41;
+              &#40;/ &#40;double &#40;- end-time# start-time#&#41;&#41; 1000000.0&#41;&#41;
+       result#&#41;&#41;&#41;
+
+&#40;defn log-times
+  &quot;Logs time recorded by record-aggregate and resets the aggregate times.&quot;
+  &#91;&#93;
+  &#40;doseq &#91;&#91;label data&#93; &#40;sort-by &#40;comp :order second&#41; @aggregates&#41;
+          :let &#91;msecs &#40;:msecs data&#41;&#93;&#93;
+    &#40;println &quot;Executing&quot; label &quot;took:&quot; &#40;msec-str msecs&#41;&#41;&#41;
+  &#40;reset! aggregates {}&#41;&#41;
+</code></pre><p><code>record-aggregate</code> takes a label and code and times how long that code takes to run. If the executed code returns an unrealized lazy sequence, it also evaluates the sequence<a href='#fn-1' id='fnref1'><sup>1</sup></a>.</p><p>Below is an example of using the above code. When we used it, we looked at the code path we needed to optimize and wrapped chunks of it in <code>record-aggregate</code>. At the end of the calculations, we inserted a call to <code>log-times</code> so timing data would show up in our logs.</p><pre><code class="language-clojure">&#40;ns work
+  &#40;:require &#91;metrics :as m&#93;&#41;&#41;
+
+&#40;defn calculation &#91;x&#93;
+  &#40;m/record-aggregate ::calculation
+                      &#40;Thread/sleep &#40;+ 300 &#40;rand-int 60&#41;&#41;&#41;
+                      x&#41;&#41;
+
+&#40;defn work &#91;x&#93;
+  &#40;m/record-aggregate ::work
+                      &#40;repeatedly 10 &#40;fn &#91;&#93;
+                                       &#40;Thread/sleep 5&#41;
+                                       x&#41;&#41;&#41;&#41;
+
+&#40;defn process-rows &#91;rows&#93;
+  &#40;let &#91;rows &#40;m/record-aggregate ::process-rows
+                                 &#40;-&gt;&gt; rows
+                                      &#40;mapv calculation&#41;
+                                      &#40;mapcat work&#41;&#41;&#41;&#93;
+    &#40;m/log-times&#41;
+    rows&#41;&#41;
+</code></pre><p>Now, when <code>&#40;process-rows &#91;:a :a&#93;&#41;</code> is called output similar to below is printed.</p><pre><code>Executing :work/process-rows took: 780.9 msecs
+Executing :work/calculation took: 664.6 msecs
+Executing :work/work took: 115.8 msecs
+</code></pre><p>Using this technique, we were able to identify slow parts of our process and were able to optimize those chunks of our code. There are potential flaws with measuring time like this, but they were not a problem in our situation<a href='#fn-2' id='fnref2'><sup>2</sup></a>.</p><ol class='footnotes'><li id='fn-1'>See <a href='/blog/2016/12/31/measure-what-you-intended-to-measure/'>Measure what you intend to measure</a><a href='#fnref1'>&#8617;</a></li><li id='fn-2'>See <a href='https://shipilev.net/blog/2014/nanotrusting-nanotime/'>Nanotrusting the Nanotime</a><a href='#fnref2'>&#8617;</a></li></ol>
+  <script src="/highlight/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script></script>
+  <footer>
+    <p xmlns:cc="http://creativecommons.org/ns#" >This work by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://jakemccrary.com">Jake McCrary</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""></a></p> 
+    <a href="/disclosure-policy">Disclosure Policy</a><br/>
+  </footer>
+</body>
+</html>

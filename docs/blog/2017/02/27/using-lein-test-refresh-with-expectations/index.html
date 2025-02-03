@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>Using lein-test-refresh with expectations - Jake McCrary</title>
+  <meta name="author" content="">
+  <!-- <link rel="stylesheet" href="/style.css"> -->
+
+  <meta itemprop="name" content="Using lein-test-refresh with expectations - Jake McCrary" />
+  
+  <meta itemprop="description" content="Quick introduction to using lein-test-refresh with expectations." />
+  
+
+  <!-- Twitter Card data -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@jakemcc" />
+  <meta name="twitter:title" content="Using lein-test-refresh with expectations - Jake McCrary" />
+  
+  <meta name="twitter:description" content="Quick introduction to using lein-test-refresh with expectations." />
+  
+  <meta name="twitter:creator" content="@jakemcc" />
+  <!-- <meta name="twitter:image" content="" /> -->
+
+  <!-- Open Graph data -->
+  <meta property="og:site_name" content="Writing by Jake McCrary" />
+  <meta property="og:url" content="https://jakemccrary.com//blog/2017/02/27/using-lein-test-refresh-with-expectations/" />
+  <meta property="og:title" content="Using lein-test-refresh with expectations - Jake McCrary" />
+  
+  <meta property="og:description" content="Quick introduction to using lein-test-refresh with expectations." />
+  
+  <!-- <meta property="og:image" content="" /> -->
+  
+  <meta property="og:type" content="article" />
+  
+  
+  <!-- maybe rfc blahblahblah it? -->
+  <meta property="article:published_time" content="2017-02-27T23:59:59+00:00" />
+  
+
+  <link rel="canonical" href="https://jakemccrary.com//blog/2017/02/27/using-lein-test-refresh-with-expectations/">
+
+  <style>
+   body {
+     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+     max-width: 1200px;
+     margin: 0 auto;
+     padding: 1rem;
+     line-height: 1.5;
+   }
+
+   header {
+     margin-bottom: 0.5rem;
+   }
+
+   header h1 {
+     margin: 0;
+     font-size: 2.5rem;
+   }
+
+   header h1 a {
+     color: #333;
+     text-decoration: none;
+   }
+
+   .main-nav {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     padding: 0.5rem 0;
+     margin-bottom: 2rem;
+   }
+
+   .nav-list {
+     display: flex;
+     list-style: none;
+     margin: 0;
+     padding: 0;
+     gap: 1.5rem;
+   }
+
+   .nav-list a {
+     text-decoration: none;
+     color: #333;
+   }
+
+   .search-form fieldset {
+     border: none;
+     margin: 0;
+     padding: 0;
+   }
+
+   .search {
+     padding: 0.5rem;
+     border: none;
+     background: #f5f5f5;
+     border-radius: 4px;
+   }
+
+   /* Blog post list styling */
+   .post-list {
+     list-style: none;
+     padding: 0;
+     margin: 0;
+   }
+
+   .post-list li {
+     margin-bottom: 1.5rem;
+   }
+
+   .post-meta {
+     margin-bottom: 0.25rem;
+   }
+
+   .post-meta time {
+     color: #666;
+     margin-right: 0.5rem;
+   }
+
+   .post-list h2 {
+     display: inline;
+     font-size: 1.1rem;
+     font-weight: 500;
+     margin: 0;
+   }
+
+   .post-list h2 a {
+     color: #0066cc;
+     text-decoration: none;
+   }
+
+   .post-list h2 a:hover {
+     text-decoration: underline;
+   }
+
+   .post-description {
+     color: #444;
+     margin: 0.25rem 0 0 0;
+     line-height: 1.6;
+   }
+
+   .right {
+     float: right;
+   }
+   .left {
+     float: left;
+   }
+   .mr1 {
+     margin-right: 1em;
+   }
+   /* Style the footnote references in the text */
+   [id^="fnref"] sup {
+     font-size: 0.75em;
+     line-height: 0;
+     position: relative;
+     top: -0.5em;
+     padding: 0 0.3em;
+   }
+
+   [id^="fnref"] a {
+     text-decoration: none;
+     background-color: #f3f4f6;
+     color: #4b5563;
+     border-radius: 3px;
+     padding: 2px 6px;
+     transition: all 0.2s ease;
+   }
+
+   [id^="fnref"] a:hover {
+     background-color: #e5e7eb;
+     color: #1f2937;
+   }
+
+   /* Style the footnotes section */
+   .footnotes {
+     margin-top: 3rem;
+     padding-top: 2rem;
+     border-top: 2px solid #e5e7eb;
+   }
+
+   /* Create custom numbering for footnotes */
+   .footnotes li {
+     margin-bottom: 1rem;
+     color: #4b5563;
+   }
+   
+   /* Style the return links in footnotes */
+   .footnotes li a[href^="#fnref"] {
+     text-decoration: none;
+     color: #6b7280;
+     margin-left: 0.5rem;
+     font-size: 0.875rem;
+     transition: color 0.2s ease;
+   }
+
+   .footnotes li a[href^="#fnref"]:hover {
+     color: #374151;
+   }
+
+   blockquote {
+     border-left: 4px solid #d1d5db;
+     padding-left: 1em;
+     margin-left: 1em;
+     color: #4b5563;
+     font-style: italic;
+     background-color: #f9fafb;
+   }
+
+   figure {
+     margin: 1rem 0;
+     text-align: center;
+   }
+
+   figcaption {
+     color: #666;
+     font-size: 0.9em;
+     margin-top: 0.5rem;
+     font-style: italic;
+   }
+
+   .page-header h1 {
+     margin: 0
+   }
+
+   .page-header .publication-date {
+     color: #666;
+     font-size: 0.8em;
+     margin: 0;
+   }
+
+   body > footer {
+     font-size: .8em;
+	   color: #888;
+     margin-top: 1em;
+	   padding-top: 1em;
+     padding-bottom: 1em;
+   }
+   p code, li code {
+     display: inline-block;
+     white-space: nowrap;
+     border: 1px solid #ddd;
+     -moz-border-radius: .4em;
+     -webkit-border-radius: .4em;
+     border-radius: .4em;
+     padding: 0 .3em;
+     margin: -1px 0;
+   }
+
+  </style>
+  <link rel="stylesheet" href="/highlight/base16/tomorrow-night.min.css">
+</head>
+<body>
+<header>
+    <h1><a href="/">Jake McCrary</a></h1>
+  </header>
+  <nav role="navigation" class="main-nav">
+    <ul role="main-navigation" class="nav-list">
+      <li><a href="/">Articles</a></li>
+      <li><a href="/adventures/">Adventures</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/blog/archives/">Archives</a></li>
+      <li><a href="http://feeds.feedburner.com/JakeMccrarysMusings" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+      <li><a href="https://jakemccrary.substack.com/welcome" target="_blank" rel="subscribe-email" title="subscribe via email">Newsletter</a></li>
+    </ul>
+    <form class="search-form" action="https://google.com/search" method="get">
+      <fieldset role="search">
+        <input type="hidden" name="sitesearch" value="jakemccrary.com">
+        <input class="search" type="text" name="q" placeholder="Search">
+      </fieldset>
+    </form>
+  </nav>
+  
+  <div class="page-header">
+    <h1>Using lein-test-refresh with expectations</h1>
+    
+    
+    <p class="publication-date">Published on 
+      <time datetime="2017-02-27">February 27, 2017</time>
+    </p>
+    
+  </div>
+  
+
+  <p>The 2.2.0 release<a href='#fn-1' id='fnref1'><sup>1</sup></a> of <a href='https://github.com/clojure-expectations/expectations/blob/master/CHANGELOG.md#changes-in-version-220'>expectations</a> adds a <code>clojure.test</code> <a href='https://clojure-expectations.github.io/clojure-test.html'>compatible syntax</a>. The release adds the <code>defexpect</code> macro which forces you to name your test but then generates code that is compatible with <code>clojure.test</code>.</p><p>Why would you want this? Because <code>clojure.test</code> is the built-in testing library for Clojure, an entire ecosystem has been built around it. Tool support for <code>clojure.test</code> is always going to be ahead of support for the original <code>expectations</code>. By using the new <code>clojure.test</code> compatible syntax, <code>expectations</code> can take advantage of all the tools built for <code>clojure.test</code>.</p><h3>Using lein-test-refresh with expectations</h3><p>If you move to the new <code>clojure.test</code> compatible syntax, you can start using <a href='https://github.com/jakemcc/lein-test-refresh'>lein-test-refresh</a> to automatically rerun your tests when your code changes. <code>lein-test-refresh</code> is a fork of the original expectations autorunner, <a href='https://github.com/clojure-expectations/lein-autoexpect'>lein-autoexpect</a>, but it has grown to have more features than its original inspiration. Now you can use it with <code>expectations</code><a href='#fn-2' id='fnref2'><sup>2</sup></a>.</p><p>Below is a sample <code>project.clj</code> that uses <code>lein-test-refresh</code> with the latest expectations.</p><pre><code class="language-clojure">&#40;defproject expectations-project &quot;0.1.0-SNAPSHOT&quot;
+  :description &quot;Sample project using expectations&quot;
+  :dependencies &#91;&#91;org.clojure/clojure &quot;1.8.0&quot;&#93;&#93;
+  :plugins &#91;&#91;com.jakemccrary/lein-test-refresh  &quot;0.18.1&quot;&#93;&#93;
+  :profiles {:dev {:dependencies &#91;&#91;expectations &quot;2.2.0-beta1&quot;&#93;&#93;}}&#41;
+</code></pre><p>Here is an example test file.</p><pre><code class="language-clojure">&#40;ns expectations-project.core-test
+  &#40;:require &#91;expectations :refer :all&#93;
+            &#91;expectations.clojure.test :refer &#91;defexpect&#93;&#93;&#41;&#41;
+
+&#40;defexpect two
+  2 &#40;+ 1 1&#41;&#41;
+
+&#40;defexpect three
+  3 &#40;+ 1 1&#41;&#41;
+
+&#40;defexpect group
+  &#40;expect &#91;1 2&#93; &#40;conj &#91;&#93; 1 5&#41;&#41;
+  &#40;expect #{1 2} &#40;conj #{} 1 2&#41;&#41;
+  &#40;expect {1 2} &#40;assoc {} 1 3&#41;&#41;&#41;
+</code></pre><p>And here is the result of running <code>lein test-refresh</code>.</p><pre><code>$ lein test-refresh
+&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;
+&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42; Running tests &#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;
+:reloading &#40;expectations-project.core-test&#41;
+
+FAIL in &#40;group&#41; &#40;expectations&#95;project/core&#95;test.clj:11&#41;
+expected: &#91;1 2&#93;
+  actual: &#91;1 5&#93; from &#40;conj &#91;&#93; 1 5&#41;
+
+FAIL in &#40;group&#41; &#40;expectations&#95;project/core&#95;test.clj:11&#41;
+expected: {1 2}
+  actual: {1 3} from &#40;assoc {} 1 3&#41;
+
+FAIL in &#40;three&#41; &#40;expectations&#95;project/core&#95;test.clj:8&#41;
+expected: 3
+  actual: 2 from &#40;+ 1 1&#41;
+
+Ran 3 tests containing 5 assertions.n
+3 failures, 0 errors.
+
+Failed 3 of 5 assertions
+Finished at 11:53:06.281 &#40;run time: 0.270s&#41;
+</code></pre><p>After some quick edits to fix the test errors and saving the file, here is the output from the tests re-running.</p><pre><code>&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;
+&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42; Running tests &#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;
+:reloading &#40;expectations-project.core-test&#41;
+
+Ran 3 tests containing 5 assertions.
+0 failures, 0 errors.
+:reloading &#40;&#41;
+
+Ran 3 tests containing 5 assertions.
+0 failures, 0 errors.
+
+Passed all tests
+Finished at 11:53:59.045 &#40;run time: 0.013s&#41;
+</code></pre><p>If you're using <code>expectations</code> and switch to the new <code>clojure.test</code> compatible syntax, I'd encourage you to start using <a href='https://github.com/jakemcc/lein-test-refresh'>lein-test-refresh</a>.</p><ol class='footnotes'><li id='fn-1'>As of 2016-02-27 <code>2.2.0</code> isn't out yet, but <code>2.2.0-beta1</code> has been released and has the changes.<a href='#fnref1'>&#8617;</a></li><li id='fn-2'>In fact, you have to use it if you use Leiningen and the new syntax and want your tests to run automatically.<a href='#fnref2'>&#8617;</a></li></ol>
+  <script src="/highlight/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script></script>
+  <footer>
+    <p xmlns:cc="http://creativecommons.org/ns#" >This work by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://jakemccrary.com">Jake McCrary</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""></a></p> 
+    <a href="/disclosure-policy">Disclosure Policy</a><br/>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title><![CDATA[Jake McCrary's articles on command-line]]></title>
+  <link href="https://jakemccrary.com/atom.xml" rel="self"/>
+  <link href="https://jakemccrary.com/"/>
+  <updated>2025-02-03T00:51:56+00:00</updated>
+  <id>https://jakemccrary.com/</id>
+  <author>
+    <name><![CDATA[Jake McCrary]]></name>
+  </author>
+  <entry>
+    <id>https://jakemccrary.com/blog/2020/08/31/utilities-i-like-selecta/index.html</id>
+    <link href="https://jakemccrary.com/blog/2020/08/31/utilities-i-like-selecta/index.html"/>
+    <title><![CDATA[Utilities I like: selecta]]></title>
+    <updated>2020-08-31T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p><a href='https://github.com/garybernhardt/selecta'>Selecta</a> is a command-line utility that gives you the power to fuzzy select items from a list of text. What does that mean? It means you pipe <code>selecta</code> a list of text on stdin, it helps you make a choice from items in that list, and then <code>selecta</code> prints that choice to stdout.</p><p>Here is an example of me using it to help me narrow in on what file I'd like to pass to <code>wc</code>.</p><p><video autoplay loop muted playsinline>   <source src="/images/selecta-search.webm" type="video/webm">   <source src="/images/selecta-search.mp4" type="video/mp4"> </video></p><p>In this example, I search for markdown files using <code>ripgrep</code> (<code>rg</code>), type part of a filename, hit enter to select the match, and then see the <code>wc</code> stats of that file. This isn't the greatest example of using <code>selecta</code> but it adequately shows what it does.</p><p>Some number of years ago, I wrote a script called <code>connect-db</code>. This script used <code>selecta</code>, along with <code>grep</code>, <code>sed</code>, and <code>cut</code>, to provide a very pleasant command-line experience for connecting to known databases. My coworkers and I used this script frequently.</p><p>By combining <code>selecta</code> with other stdin/stdout friendly command-line tools you can build really enjoyable, time-saving tools. <a href='https://github.com/garybernhardt/selecta'>Selecta</a> is a useful utility to add to your toolkit.</p>]]></content>
+  </entry>
+  <entry>
+    <id>https://jakemccrary.com/blog/2020/05/04/how-to-be-alerted-when-a-long-running-process-finishes/index.html</id>
+    <link href="https://jakemccrary.com/blog/2020/05/04/how-to-be-alerted-when-a-long-running-process-finishes/index.html"/>
+    <title><![CDATA[How to be automatically notified when long running processes finish]]></title>
+    <updated>2020-05-04T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p>Let me set the stage. I kick off the compilation of a large Scala codebase. This will take minutes to finish, so I switch to Slack and catch up on what coworkers have posted. Someone posted an interesting link and I follow it to an article. Fifteen minutes later, I notice the compilation finished twelve minutes ago. I silently grumble at myself, disappointed that I didn't start the next step twelve minutes ago.</p><p>Has some variation of the above happened to you?</p><p>It doesn't happen to me anymore because now my computer tells me when any long running process finishes. This might sound annoying but it is great. I no longer feel guilty<a href='#fn-1' id='fnref1'><sup>1</sup></a> for dropping into Slack and can immediately get back to the task at hand as soon the process finishes.</p><p>I've done this by enhancing on my setup for showing the <a href='/blog/2020/04/21/using-bash-preexec-for-monitoring-the-runtime-of-your-last-command/'>runtime of the previous command in my prompt</a>. You don't have to read that article for the rest of this one to make sense, but you should because it shows you how to add a very useful feature to your prompt.</p><p>Below is the code that causes my computer to tell me when it finishes running commands that takes longer than 30 seconds. It is found in my <code>&#126;/.bashrc</code>. An explanation follows the code snippet.</p><pre><code class="language-bash"># Using https://github.com/rcaloras/bash-preexec
+preexec&#40;&#41; {
+  &#95;last&#95;command=$1
+  if &#91; &quot;UNSET&quot; == &quot;${&#95;timer}&quot; &#93;; then
+    &#95;timer=$SECONDS
+  else 
+    &#95;timer=${&#95;timer:-$SECONDS}
+  fi 
+}
+
+&#95;maybe&#95;speak&#40;&#41; {
+    local elapsed&#95;seconds=$1
+    if &#40;&#40; elapsed&#95;seconds &gt; 30 &#41;&#41;; then
+        local c
+        c=$&#40;echo &quot;${&#95;last&#95;command}&quot; | cut -d' ' -f1&#41;
+        &#40; say &quot;finished ${c}&quot; &amp; &#41;
+    fi
+}
+
+precmd&#40;&#41; {
+  if &#91; &quot;UNSET&quot; == &quot;${&#95;timer}&quot; &#93;; then
+     timer&#95;show=&quot;0s&quot;
+  else 
+    elapsed&#95;seconds=$&#40;&#40;SECONDS - &#95;timer&#41;&#41;
+    &#95;maybe&#95;speak ${elapsed&#95;seconds}
+    timer&#95;show=&quot;$&#40;format-duration seconds $elapsed&#95;seconds&#41;&quot;
+  fi
+  &#95;timer=&quot;UNSET&quot;
+}
+
+# put at the bottom of my .bashrc
+&#91;&#91; -f &quot;$HOME/.bash-preexec.sh&quot; &#93;&#93; &amp;&amp; source &quot;$HOME/.bash-preexec.sh&quot;
+</code></pre><p><a href='https://github.com/rcaloras/bash-preexec'>Bash-Preexec</a> triggers the <code>preexec</code>, immediately before a command is execute, and <code>precmd</code> functions, immediately before the shell prompt reappears. Those two functions are enough to figure out how much time has elapsed while a command ran. You setup Bash-Preexec by downloading <a href='https://github.com/rcaloras/bash-preexec/blob/master/bash-preexec.sh'>bash-preexec.sh</a> and sourcing it in your <code>&#126;/.bashrc</code>.</p><p><code>preexec</code> is passed the command being ran and it captures it in <code>&#95;last&#95;command</code>. It also captures the current number of seconds the shell has been running as <code>&#95;timer</code>.</p><p><code>precmd</code> uses the value in <code>&#95;timer</code> to calculate the elapsed time in seconds and then calls the function <code>&#95;maybe&#95;speak</code> with this as an argument. It also does the work required for showing the elapsed time in my prompt.</p><p>If the elapsed time is greater than 30 seconds then <code>&#95;maybe&#95;speak</code> uses <code>cut</code> to discard the arguments of captured command, leaving me with the command itself. It then uses <code>say</code> to produce an audible alert of what command just finished. I discard the arguments because otherwise the <code>say</code> command can go on for a long time.</p><p><code>say</code> is a tool that ships with macOS. I haven't gotten around to it yet but I'll need to use something else on my Linux machines.</p><p>You may have noticed that I run <code>say</code> in the background and in a subshell. Running it in the background lets me continue interacting with my shell while <code>say</code> finishes executing and running it in a subshell prevents text from appearing in my shell when the background job finishes.</p><p>With this setup, I can kick off a slow compile or test run and not feel so bad about dropping into Slack or reading Reddit. It is wonderful and I'd recommend it (though, I'd more strongly recommend not having commands that take a while to run). <ol class='footnotes'><li id='fn-1'>I still feel a little guilty as doing so will break any momentum/flow I had going on, but that flow was already broken by the slowness of the command.<a href='#fnref1'>&#8617;</a></li></ol></p>]]></content>
+  </entry>
+  <entry>
+    <id>https://jakemccrary.com/blog/2020/04/21/using-bash-preexec-for-monitoring-the-runtime-of-your-last-command/index.html</id>
+    <link href="https://jakemccrary.com/blog/2020/04/21/using-bash-preexec-for-monitoring-the-runtime-of-your-last-command/index.html"/>
+    <title><![CDATA[Using Bash-Preexec for monitoring the runtime of your last command]]></title>
+    <updated>2020-04-21T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p>My article on <a href='/blog/2015/05/03/put-the-last-commands-run-time-in-your-bash-prompt/'>putting the runtime of your last command into your bash prompt</a> is one of my most surfaced-by-google articles. Why is this a great to your prompt?  To quote my previous article:</p><blockquote><p> I’m fairly certain the following scenario has happened to every terminal user. You run a command and, while it is running, realize you should have prefixed it with <code>time</code>. You momentarily struggle with the thought of killing the command and rerunning it with <code>time</code>. You decide not to and the command finishes without you knowing how long it took. You debate running it again. </p></blockquote><blockquote><p> For the last year I’ve lived in a world without this problem. Upon completion, a command’s approximate run time is displayed in my prompt. It is awesome. </p></blockquote><p>I've been living without the above problem since sometime in 2014 and not having that problem is still awesome.</p><p>I have made some changes since 2014.</p><p>One change was switching to using <a href='https://github.com/rcaloras/bash-preexec'>Bash-Preexec</a> instead of directly using <code>trap</code> and <code>$PROMPT&#95;COMMAND</code> for calling functions to start and stop tracking runtime. Bash-Preexec lets you trigger a function (or multiple) right after a command has been read and right before each prompt.</p><p>The usage is pretty straight forward. In the most basic case, you source <code>bash-preexec.sh</code> and then provide functions named <code>preexec</code>, which is invoked right before a command is executed, and/or <code>precmd</code>, which is invoked just before each prompt. <code>bash-preexec.sh</code> can be downloaded from <a href='https://github.com/rcaloras/bash-preexec/'>its repo</a>.  The changes required to move to Bash-Preexec pretty <a href='https://github.com/jakemcc/dotfiles/commit/46fc3dc9d4d7d0d73152c77b7383645af42b3d5d'>pretty minimal</a>.</p><p>The other change was introducing the script, <a href='https://github.com/jakemcc/dotfiles/blob/9c8c0315f35b55df6cef7e21261e3dcbbfac86e1/home/.bin/format-duration#L3-L4'>format-duration</a> by <a href='https://twitter.com/gfredericks_'>Gary Fredericks</a>, to humanely format the time. This script converts seconds into a more readable string (example: 310 to <code>5m10s</code>)</p><p>Here is a screenshot of everything in action (with a reduced prompt, my normal one includes git and other info).</p><p><img src="/images/runtime-humane-example.png" alt="Command line prompt showing runtimes of previous commands" width=320 height=150></p><p>Below is a simplified snippet from my <code>.bashrc</code> that provides runtimes using both of these additions.</p><pre><code class="language-bash">preexec&#40;&#41; {
+  if &#91; &quot;UNSET&quot; == &quot;${timer}&quot; &#93;; then
+    timer=$SECONDS
+  else 
+    timer=${timer:-$SECONDS}
+  fi 
+}
+
+precmd&#40;&#41; {
+  if &#91; &quot;UNSET&quot; == &quot;${timer}&quot; &#93;; then
+     timer&#95;show=&quot;0s&quot;
+  else 
+    the&#95;seconds=$&#40;&#40;SECONDS - timer&#41;&#41;
+    # use format-duration to make time more human readable
+    timer&#95;show=&quot;$&#40;format-duration seconds $the&#95;seconds&#41;&quot; 
+  fi
+  timer=&quot;UNSET&quot;
+}
+
+# Add $last&#95;show to the prompt.
+PS1='&#91;last: ${timer&#95;show}s&#93;&#91;\w&#93;$ '
+
+# a bunch more lines until the end of my .bashrc
+# where I include .bash-preexec.sh
+&#91;&#91; -f &quot;$HOME/.bash-preexec.sh&quot; &#93;&#93; &amp;&amp; source &quot;$HOME/.bash-preexec.sh&quot;
+</code></pre><p>No more wondering about the runtime of commands is great. Introducing <code>format-duration</code> made reading the time easier while Bash-Preexec made reading the implementation easier. I highly recommend setting up something similar for your shell.</p>]]></content>
+  </entry>
+  <entry>
+    <id>https://jakemccrary.com/blog/2018/12/27/a-more-helpful-makefile/index.html</id>
+    <link href="https://jakemccrary.com/blog/2018/12/27/a-more-helpful-makefile/index.html"/>
+    <title><![CDATA[A more helpful makefile]]></title>
+    <updated>2018-12-27T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p>In an <a href='/blog/2016/11/30/unify-your-project-interfaces/'>older article</a> of mine I extolled the virtues of having unified interfaces for interacting with your projects. I recently started working at Coinbase and the group I'm working with is mostly using makefiles as that common interface. We still have some more work to do to unify the makefile targets of the various projects but I've picked up one tip that makes switching between projects easier.</p><p>That tip is to have the default target of your makefile be one that prints out a helpful message. This looks like the following.</p><pre><code>.PHONY: help
+help:
+	@grep -E '&#94;&#91;0-9a-zA-Z&#95;-&#93;+:.&#42;?## .&#42;$$' $&#40;MAKEFILE&#95;LIST&#41; | \
+	 sort | \
+	 awk 'BEGIN {FS = &quot;:.&#42;?## &quot;}; {printf &quot;\033&#91;36m%-30s\033&#91;0m %s\n&quot;, $$1, $$2}'
+</code></pre><p>There is a lot going on there but it basically looks through your makefile targets and finds the ones that have a comment starting with <code>##</code> after the target dependencies. Those targets are printed to the console along with the comment.</p><p>As an example, the makefile for my website looks similar to the below file.</p><pre><code>.PHONY: help
+help:
+	@grep -E '&#94;&#91;0-9a-zA-Z&#95;-&#93;+:.&#42;?## .&#42;$$' $&#40;MAKEFILE&#95;LIST&#41; | \
+	 sort | \
+	 awk 'BEGIN {FS = &quot;:.&#42;?## &quot;}; {printf &quot;\033&#91;36m%-30s\033&#91;0m %s\n&quot;, $$1, $$2}'
+
+.PHONY: watch
+watch: ## Watch for changes and serve preview of site with drafts
+	bundle exec rake clean
+	bundle exec rake preview
+
+.PHONY: develop
+develop: ## Serve a preview of the site without drafts and refresh changes
+	bundle exec rake clean
+	bundle exec rake develop
+
+.PHONY: new&#95;adventure
+new&#95;adventure: ## Start a new adventure post
+	bundle exec rake new&#95;adventure
+
+.PHONY: new&#95;post
+new&#95;post: ## Start a new post
+	bundle exec rake new&#95;post 
+
+.PHONY: deploy
+deploy: ## deploy
+	./deploy.sh
+</code></pre><p>When this file, when I run <code>make</code> in this websites source, I get the following output.</p><pre><code>0 &#91;last: 0s&#93; 21:11:50 &#126;/src/jakemcc/blog &#40;master&#41;
+$ make
+deploy                         deploy
+develop                        Serve a preview of the site without drafts and refresh changes
+new&#95;adventure                  Start a new adventure post
+new&#95;post                       Start a new post
+watch                          Watch for changes and serve preview of site with drafts
+</code></pre><p>This is super useful when you're starting doing work in a new project. With this feature you can get a quick list of useful targets and a description. It allows you to quickly see what can be done in a project.</p>]]></content>
+  </entry>
+  <entry>
+    <id>https://jakemccrary.com/blog/2016/11/30/unify-your-project-interfaces/index.html</id>
+    <link href="https://jakemccrary.com/blog/2016/11/30/unify-your-project-interfaces/index.html"/>
+    <title><![CDATA[Unify your project interfaces]]></title>
+    <updated>2016-11-30T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p>Jeff Ramnani wrote an <a href='https://jefframnani.com/project-build-protocol/'>article</a> about unifying your command line interactions across programming projects. I recommend that you read it. The basic gist is that we often find ourselves working on multiple projects at a time. Frequently these projects are in different languages and use different build tools. Remembering the necessary incantations to interact with the various projects is difficult and we're lazy. We can do better by standardizing an interface to our projects.</p><p>This interface can take many forms. One option is to have a <code>bin</code> or <code>scripts</code> directory in each project and then consistently name the scripts you put in there (examples: <code>run</code>, <code>test</code>, and <code>build</code>). Another option is to use Makefiles with consistently named targets. Either way, your projects now have a standard way of interacting with them. This frees you from having to remember all the various commands and makes onboarding new developers easier.</p><p>I've been using a similar approach to Jeff Ramnani for years and highly recommend it. I'm a fan of the Makefile approach but either approach works. The unified targets I use across projects are the following:</p><ul><li><code>up</code> - Brings the system up</li><li><code>status</code> - Is the system up and running?</li><li><code>logs</code> - Show me the logs</li><li><code>local-db</code> - Connect to my local database</li><li><code>build</code> - Build the project</li><li><code>test</code> - Run the tests</li></ul><p>If you haven't created a common interface for your projects I recommend that you do it. It definitely makes moving between projects easier.</p>]]></content>
+  </entry>
+  <entry>
+    <id>https://jakemccrary.com/blog/2016/09/28/better-command-history-in-your-shell/index.html</id>
+    <link href="https://jakemccrary.com/blog/2016/09/28/better-command-history-in-your-shell/index.html"/>
+    <title><![CDATA[Better command history in your shell]]></title>
+    <updated>2016-09-28T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<p>My ideal command history would let me search the history of every shell but when I hit the up arrow it would only cycle through my current shell's history. In February, I was able to achieve this setup in large part because of a utility called <a href='https://github.com/dvorka/hstr'>hstr</a>.</p><h2>What is <code>hstr</code>?</h2><p>hstr is a neat Bash and Zsh utility that lets you easily search, view, and manage your command history. hstr provides a tool named <code>hh</code> that provides a text interface for manipulating your command history. To see what it looks like check out the <a href='https://github.com/dvorka/hstr/blob/master/README.md'>README</a> and this <a href='https://www.youtube.com/watch?v=sPF29NyXe2U'>video</a> tutorial. If you are running OS X and use Homebrew you can install it by running `brew install hh`.</p><h2>Making global history searchable but arrows cycle through local history</h2><p>hstr is a neat tool but my favorite part of my setup is how the global command history is searchable but only a shell's local history is cycled through with the arrow keys. This is achieved by manipulating where history is written and tweaking some environment variables.</p><p>The first step is to change your <code>$PROMPT&#95;COMMAND</code> to append your shell's history to a global history file. Below is the snippet that does this from my <code>.bashrc</code> file.</p><pre><code># Whenever a command is executed, write it to a global history
+PROMPT&#95;COMMAND=&quot;history -a &#126;/.bash&#95;history.global; $PROMPT&#95;COMMAND&quot;
+</code></pre><p>The next step is to bind a keystroke to run <code>hh</code>, which is what hstr provides, with <code>$HISTFILE</code> pointing to <code>&#126;/.bash&#95;history.global</code>. I wanted to fully replace the default command history searching (and I use Emacs style keyboard shortcuts) so I've bound these actions to ctrl-r.</p><pre><code class="language-bash"># On C-r set HISTFILE and run hh
+bind -x '&quot;\C-r&quot;: &quot;HISTFILE=&#126;/.bash&#95;history.global hh&quot;'
+</code></pre><p>With those two additions to my <code>.bashrc</code> I've achieved my ideal command history searching. When I hit ctrl-r I'm searching all of my history and yet I only cycle through a shell's local history with the arrow keys. This small addition<a href='#fn-1' id='fnref1'><sup>1</sup></a> made my command line productivity higher.</p><ol class='footnotes'><li id='fn-1'>My setup was inspired by <a href='https://unix.stackexchange.com/questions/200225/search-history-from-multiple-bash-session-only-when-ctrl-r-is-used-not-when-a'>this</a> StackExchange post.<a href='#fnref1'>&#8617;</a></li></ol>]]></content>
+  </entry>
+  <entry>
+    <id>https://jakemccrary.com/blog/2015/05/03/put-the-last-commands-run-time-in-your-bash-prompt/index.html</id>
+    <link href="https://jakemccrary.com/blog/2015/05/03/put-the-last-commands-run-time-in-your-bash-prompt/index.html"/>
+    <title><![CDATA[Put the last command's run time in your Bash prompt]]></title>
+    <updated>2015-05-03T23:59:59+00:00</updated>
+    <content type="html"><![CDATA[<blockquote><p> An updated version of this post can be found <a href='/blog/2020/04/21/using-bash-preexec-for-monitoring-the-runtime-of-your-last-command/'>here</a> </p></blockquote><p>I'm fairly certain the following scenario has happened to every terminal user. You run a command and, while it is running, realize you should have prefixed it with <a href='http://linux.die.net/man/1/time'><code>time</code></a>. You momentarily struggle with the thought of killing the command and rerunning it with <code>time</code>. You decide not to and the command finishes without you knowing how long it took. You debate running it again.</p><p>For the last year I've lived in a world without this problem. Upon completion, a command's approximate run time is displayed in my prompt. It is awesome.</p><h2>Overview</h2><p>Most of the code below is from a post on <a href='http://stackoverflow.com/a/1862762/491871'>Stack Overflow</a>. It has been slightly modified to support having multiple commands in your <code>$PROMPT&#95;COMMAND</code> variable. Below is a minimal snippet that could be included in your <code>.bashrc</code>.</p><pre><code class="language-bash">function timer&#95;start {
+  timer=${timer:-$SECONDS}
+}
+
+function timer&#95;stop {
+  timer&#95;show=$&#40;&#40;$SECONDS - $timer&#41;&#41;
+  unset timer
+}
+
+trap 'timer&#95;start' DEBUG
+
+if &#91; &quot;$PROMPT&#95;COMMAND&quot; == &quot;&quot; &#93;; then
+  PROMPT&#95;COMMAND=&quot;timer&#95;stop&quot;
+else
+  PROMPT&#95;COMMAND=&quot;$PROMPT&#95;COMMAND; timer&#95;stop&quot;
+fi
+
+PS1='&#91;last: ${timer&#95;show}s&#93;&#91;\w&#93;$ '
+</code></pre><p>Modify your <code>.bashrc</code> to include the above and you'll have a prompt that looks like the image below. It is a minimal prompt but it includes the time spent on the last command. This is great. No more wondering how long a command took.</p><p><img src="/images/prompt-timings.png" alt="Example of prompt" /></p><h2>The details</h2><p><code>timer&#95;start</code> is a function that sets <code>timer</code> to be its current value or, if <code>timer</code> is unset, sets it to the value of <code>$SECONDS</code>. <code>$SECONDS</code> is a special variable that contains the number of seconds since the shell was started. <code>timer&#95;start</code> is invoked after every simple command as a result of <code>trap 'timer&#95;start' DEBUG</code>.</p><p><code>timer&#95;stop</code> calculates the difference between <code>$SECONDS</code> and <code>timer</code> and stores it in <code>timer&#95;show</code>. It also unsets <code>timer</code>. Next time <code>timer&#95;start</code> is invoked <code>timer</code> will be set to the current value of <code>$SECONDS</code>. Because <code>timer&#95;stop</code> is part of the <code>$PROMPT&#95;COMMAND</code> it is executed prior to the prompt being printed.</p><p>It is the interaction between <code>timer&#95;start</code> and <code>timer&#95;stop</code> that captures the run time of commands. It is important that <code>timer&#95;stop</code> is the <strong>last</strong> command in the <code>$PROMPT&#95;COMMAND</code>. If there are other commands after it then those will be executed and their execution might cause <code>timer&#95;start</code> to be called. This results in you timing the length of time between the prior and current prompts being printed.</p><h2>My prompt</h2><p>My prompt is a bit more complicated. It shows the last exit code, last run time, time of day, directory, and git information. The run time of the last command is one of the more useful parts of my prompt. I highly recommend you add it to yours.</p><p><img src="/images/my-prompt.png" alt="My prompt" /></p><h2>Errata</h2><p><em>2015/5/04</em></p><p><a href='https://twitter.com/gfredericks_'>Gary Fredericks</a> noticed that the original code sample broke if you didn't already have something set as your <code>$PROMPT&#95;COMMAND</code>. I've updated the original snippet to reflect his <a href='https://twitter.com/gfredericks_/status/595249998838800384'>changes</a>.</p>]]></content>
+  </entry>
+</feed>

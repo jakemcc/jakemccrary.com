@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>Put the last command&#39;s run time in your Bash prompt - Jake McCrary</title>
+  <meta name="author" content="">
+  <!-- <link rel="stylesheet" href="/style.css"> -->
+
+  <meta itemprop="name" content="Put the last command&#39;s run time in your Bash prompt - Jake McCrary" />
+  
+
+  <!-- Twitter Card data -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@jakemcc" />
+  <meta name="twitter:title" content="Put the last command&#39;s run time in your Bash prompt - Jake McCrary" />
+  
+  <meta name="twitter:creator" content="@jakemcc" />
+  <!-- <meta name="twitter:image" content="" /> -->
+
+  <!-- Open Graph data -->
+  <meta property="og:site_name" content="Writing by Jake McCrary" />
+  <meta property="og:url" content="https://jakemccrary.com//blog/2015/05/03/put-the-last-commands-run-time-in-your-bash-prompt/" />
+  <meta property="og:title" content="Put the last command&#39;s run time in your Bash prompt - Jake McCrary" />
+  
+  <!-- <meta property="og:image" content="" /> -->
+  
+  <meta property="og:type" content="article" />
+  
+  
+  <!-- maybe rfc blahblahblah it? -->
+  <meta property="article:published_time" content="2015-05-03T23:59:59+00:00" />
+  
+
+  <link rel="canonical" href="https://jakemccrary.com//blog/2015/05/03/put-the-last-commands-run-time-in-your-bash-prompt/">
+
+  <style>
+   body {
+     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+     max-width: 1200px;
+     margin: 0 auto;
+     padding: 1rem;
+     line-height: 1.5;
+   }
+
+   header {
+     margin-bottom: 0.5rem;
+   }
+
+   header h1 {
+     margin: 0;
+     font-size: 2.5rem;
+   }
+
+   header h1 a {
+     color: #333;
+     text-decoration: none;
+   }
+
+   .main-nav {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     padding: 0.5rem 0;
+     margin-bottom: 2rem;
+   }
+
+   .nav-list {
+     display: flex;
+     list-style: none;
+     margin: 0;
+     padding: 0;
+     gap: 1.5rem;
+   }
+
+   .nav-list a {
+     text-decoration: none;
+     color: #333;
+   }
+
+   .search-form fieldset {
+     border: none;
+     margin: 0;
+     padding: 0;
+   }
+
+   .search {
+     padding: 0.5rem;
+     border: none;
+     background: #f5f5f5;
+     border-radius: 4px;
+   }
+
+   /* Blog post list styling */
+   .post-list {
+     list-style: none;
+     padding: 0;
+     margin: 0;
+   }
+
+   .post-list li {
+     margin-bottom: 1.5rem;
+   }
+
+   .post-meta {
+     margin-bottom: 0.25rem;
+   }
+
+   .post-meta time {
+     color: #666;
+     margin-right: 0.5rem;
+   }
+
+   .post-list h2 {
+     display: inline;
+     font-size: 1.1rem;
+     font-weight: 500;
+     margin: 0;
+   }
+
+   .post-list h2 a {
+     color: #0066cc;
+     text-decoration: none;
+   }
+
+   .post-list h2 a:hover {
+     text-decoration: underline;
+   }
+
+   .post-description {
+     color: #444;
+     margin: 0.25rem 0 0 0;
+     line-height: 1.6;
+   }
+
+   .right {
+     float: right;
+   }
+   .left {
+     float: left;
+   }
+   .mr1 {
+     margin-right: 1em;
+   }
+   /* Style the footnote references in the text */
+   [id^="fnref"] sup {
+     font-size: 0.75em;
+     line-height: 0;
+     position: relative;
+     top: -0.5em;
+     padding: 0 0.3em;
+   }
+
+   [id^="fnref"] a {
+     text-decoration: none;
+     background-color: #f3f4f6;
+     color: #4b5563;
+     border-radius: 3px;
+     padding: 2px 6px;
+     transition: all 0.2s ease;
+   }
+
+   [id^="fnref"] a:hover {
+     background-color: #e5e7eb;
+     color: #1f2937;
+   }
+
+   /* Style the footnotes section */
+   .footnotes {
+     margin-top: 3rem;
+     padding-top: 2rem;
+     border-top: 2px solid #e5e7eb;
+   }
+
+   /* Create custom numbering for footnotes */
+   .footnotes li {
+     margin-bottom: 1rem;
+     color: #4b5563;
+   }
+   
+   /* Style the return links in footnotes */
+   .footnotes li a[href^="#fnref"] {
+     text-decoration: none;
+     color: #6b7280;
+     margin-left: 0.5rem;
+     font-size: 0.875rem;
+     transition: color 0.2s ease;
+   }
+
+   .footnotes li a[href^="#fnref"]:hover {
+     color: #374151;
+   }
+
+   blockquote {
+     border-left: 4px solid #d1d5db;
+     padding-left: 1em;
+     margin-left: 1em;
+     color: #4b5563;
+     font-style: italic;
+     background-color: #f9fafb;
+   }
+
+   figure {
+     margin: 1rem 0;
+     text-align: center;
+   }
+
+   figcaption {
+     color: #666;
+     font-size: 0.9em;
+     margin-top: 0.5rem;
+     font-style: italic;
+   }
+
+   .page-header h1 {
+     margin: 0
+   }
+
+   .page-header .publication-date {
+     color: #666;
+     font-size: 0.8em;
+     margin: 0;
+   }
+
+   body > footer {
+     font-size: .8em;
+	   color: #888;
+     margin-top: 1em;
+	   padding-top: 1em;
+     padding-bottom: 1em;
+   }
+   p code, li code {
+     display: inline-block;
+     white-space: nowrap;
+     border: 1px solid #ddd;
+     -moz-border-radius: .4em;
+     -webkit-border-radius: .4em;
+     border-radius: .4em;
+     padding: 0 .3em;
+     margin: -1px 0;
+   }
+
+  </style>
+  <link rel="stylesheet" href="/highlight/base16/tomorrow-night.min.css">
+</head>
+<body>
+<header>
+    <h1><a href="/">Jake McCrary</a></h1>
+  </header>
+  <nav role="navigation" class="main-nav">
+    <ul role="main-navigation" class="nav-list">
+      <li><a href="/">Articles</a></li>
+      <li><a href="/adventures/">Adventures</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/blog/archives/">Archives</a></li>
+      <li><a href="http://feeds.feedburner.com/JakeMccrarysMusings" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+      <li><a href="https://jakemccrary.substack.com/welcome" target="_blank" rel="subscribe-email" title="subscribe via email">Newsletter</a></li>
+    </ul>
+    <form class="search-form" action="https://google.com/search" method="get">
+      <fieldset role="search">
+        <input type="hidden" name="sitesearch" value="jakemccrary.com">
+        <input class="search" type="text" name="q" placeholder="Search">
+      </fieldset>
+    </form>
+  </nav>
+  
+  <div class="page-header">
+    <h1>Put the last command&#39;s run time in your Bash prompt</h1>
+    
+    
+    <p class="publication-date">Published on 
+      <time datetime="2015-05-03">May 3, 2015</time>
+    </p>
+    
+  </div>
+  
+
+  <blockquote><p> An updated version of this post can be found <a href='/blog/2020/04/21/using-bash-preexec-for-monitoring-the-runtime-of-your-last-command/'>here</a> </p></blockquote><p>I'm fairly certain the following scenario has happened to every terminal user. You run a command and, while it is running, realize you should have prefixed it with <a href='http://linux.die.net/man/1/time'><code>time</code></a>. You momentarily struggle with the thought of killing the command and rerunning it with <code>time</code>. You decide not to and the command finishes without you knowing how long it took. You debate running it again.</p><p>For the last year I've lived in a world without this problem. Upon completion, a command's approximate run time is displayed in my prompt. It is awesome.</p><h2>Overview</h2><p>Most of the code below is from a post on <a href='http://stackoverflow.com/a/1862762/491871'>Stack Overflow</a>. It has been slightly modified to support having multiple commands in your <code>$PROMPT&#95;COMMAND</code> variable. Below is a minimal snippet that could be included in your <code>.bashrc</code>.</p><pre><code class="language-bash">function timer&#95;start {
+  timer=${timer:-$SECONDS}
+}
+
+function timer&#95;stop {
+  timer&#95;show=$&#40;&#40;$SECONDS - $timer&#41;&#41;
+  unset timer
+}
+
+trap 'timer&#95;start' DEBUG
+
+if &#91; &quot;$PROMPT&#95;COMMAND&quot; == &quot;&quot; &#93;; then
+  PROMPT&#95;COMMAND=&quot;timer&#95;stop&quot;
+else
+  PROMPT&#95;COMMAND=&quot;$PROMPT&#95;COMMAND; timer&#95;stop&quot;
+fi
+
+PS1='&#91;last: ${timer&#95;show}s&#93;&#91;\w&#93;$ '
+</code></pre><p>Modify your <code>.bashrc</code> to include the above and you'll have a prompt that looks like the image below. It is a minimal prompt but it includes the time spent on the last command. This is great. No more wondering how long a command took.</p><p><img src="/images/prompt-timings.png" alt="Example of prompt" /></p><h2>The details</h2><p><code>timer&#95;start</code> is a function that sets <code>timer</code> to be its current value or, if <code>timer</code> is unset, sets it to the value of <code>$SECONDS</code>. <code>$SECONDS</code> is a special variable that contains the number of seconds since the shell was started. <code>timer&#95;start</code> is invoked after every simple command as a result of <code>trap 'timer&#95;start' DEBUG</code>.</p><p><code>timer&#95;stop</code> calculates the difference between <code>$SECONDS</code> and <code>timer</code> and stores it in <code>timer&#95;show</code>. It also unsets <code>timer</code>. Next time <code>timer&#95;start</code> is invoked <code>timer</code> will be set to the current value of <code>$SECONDS</code>. Because <code>timer&#95;stop</code> is part of the <code>$PROMPT&#95;COMMAND</code> it is executed prior to the prompt being printed.</p><p>It is the interaction between <code>timer&#95;start</code> and <code>timer&#95;stop</code> that captures the run time of commands. It is important that <code>timer&#95;stop</code> is the <strong>last</strong> command in the <code>$PROMPT&#95;COMMAND</code>. If there are other commands after it then those will be executed and their execution might cause <code>timer&#95;start</code> to be called. This results in you timing the length of time between the prior and current prompts being printed.</p><h2>My prompt</h2><p>My prompt is a bit more complicated. It shows the last exit code, last run time, time of day, directory, and git information. The run time of the last command is one of the more useful parts of my prompt. I highly recommend you add it to yours.</p><p><img src="/images/my-prompt.png" alt="My prompt" /></p><h2>Errata</h2><p><em>2015/5/04</em></p><p><a href='https://twitter.com/gfredericks_'>Gary Fredericks</a> noticed that the original code sample broke if you didn't already have something set as your <code>$PROMPT&#95;COMMAND</code>. I've updated the original snippet to reflect his <a href='https://twitter.com/gfredericks_/status/595249998838800384'>changes</a>.</p>
+  <script src="/highlight/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script></script>
+  <footer>
+    <p xmlns:cc="http://creativecommons.org/ns#" >This work by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://jakemccrary.com">Jake McCrary</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""></a></p> 
+    <a href="/disclosure-policy">Disclosure Policy</a><br/>
+  </footer>
+</body>
+</html>

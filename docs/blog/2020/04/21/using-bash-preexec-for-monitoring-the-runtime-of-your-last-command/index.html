@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>Using Bash-Preexec for monitoring the runtime of your last command - Jake McCrary</title>
+  <meta name="author" content="">
+  <!-- <link rel="stylesheet" href="/style.css"> -->
+
+  <meta itemprop="name" content="Using Bash-Preexec for monitoring the runtime of your last command - Jake McCrary" />
+  
+  <meta itemprop="description" content="Put the runtime of your previous command in your terminal prompt using Bash-Preexec" />
+  
+
+  <!-- Twitter Card data -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@jakemcc" />
+  <meta name="twitter:title" content="Using Bash-Preexec for monitoring the runtime of your last command - Jake McCrary" />
+  
+  <meta name="twitter:description" content="Put the runtime of your previous command in your terminal prompt using Bash-Preexec" />
+  
+  <meta name="twitter:creator" content="@jakemcc" />
+  <!-- <meta name="twitter:image" content="" /> -->
+
+  <!-- Open Graph data -->
+  <meta property="og:site_name" content="Writing by Jake McCrary" />
+  <meta property="og:url" content="https://jakemccrary.com//blog/2020/04/21/using-bash-preexec-for-monitoring-the-runtime-of-your-last-command/" />
+  <meta property="og:title" content="Using Bash-Preexec for monitoring the runtime of your last command - Jake McCrary" />
+  
+  <meta property="og:description" content="Put the runtime of your previous command in your terminal prompt using Bash-Preexec" />
+  
+  <!-- <meta property="og:image" content="" /> -->
+  
+  <meta property="og:type" content="article" />
+  
+  
+  <!-- maybe rfc blahblahblah it? -->
+  <meta property="article:published_time" content="2020-04-21T23:59:59+00:00" />
+  
+
+  <link rel="canonical" href="https://jakemccrary.com//blog/2020/04/21/using-bash-preexec-for-monitoring-the-runtime-of-your-last-command/">
+
+  <style>
+   body {
+     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+     max-width: 1200px;
+     margin: 0 auto;
+     padding: 1rem;
+     line-height: 1.5;
+   }
+
+   header {
+     margin-bottom: 0.5rem;
+   }
+
+   header h1 {
+     margin: 0;
+     font-size: 2.5rem;
+   }
+
+   header h1 a {
+     color: #333;
+     text-decoration: none;
+   }
+
+   .main-nav {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     padding: 0.5rem 0;
+     margin-bottom: 2rem;
+   }
+
+   .nav-list {
+     display: flex;
+     list-style: none;
+     margin: 0;
+     padding: 0;
+     gap: 1.5rem;
+   }
+
+   .nav-list a {
+     text-decoration: none;
+     color: #333;
+   }
+
+   .search-form fieldset {
+     border: none;
+     margin: 0;
+     padding: 0;
+   }
+
+   .search {
+     padding: 0.5rem;
+     border: none;
+     background: #f5f5f5;
+     border-radius: 4px;
+   }
+
+   /* Blog post list styling */
+   .post-list {
+     list-style: none;
+     padding: 0;
+     margin: 0;
+   }
+
+   .post-list li {
+     margin-bottom: 1.5rem;
+   }
+
+   .post-meta {
+     margin-bottom: 0.25rem;
+   }
+
+   .post-meta time {
+     color: #666;
+     margin-right: 0.5rem;
+   }
+
+   .post-list h2 {
+     display: inline;
+     font-size: 1.1rem;
+     font-weight: 500;
+     margin: 0;
+   }
+
+   .post-list h2 a {
+     color: #0066cc;
+     text-decoration: none;
+   }
+
+   .post-list h2 a:hover {
+     text-decoration: underline;
+   }
+
+   .post-description {
+     color: #444;
+     margin: 0.25rem 0 0 0;
+     line-height: 1.6;
+   }
+
+   .right {
+     float: right;
+   }
+   .left {
+     float: left;
+   }
+   .mr1 {
+     margin-right: 1em;
+   }
+   /* Style the footnote references in the text */
+   [id^="fnref"] sup {
+     font-size: 0.75em;
+     line-height: 0;
+     position: relative;
+     top: -0.5em;
+     padding: 0 0.3em;
+   }
+
+   [id^="fnref"] a {
+     text-decoration: none;
+     background-color: #f3f4f6;
+     color: #4b5563;
+     border-radius: 3px;
+     padding: 2px 6px;
+     transition: all 0.2s ease;
+   }
+
+   [id^="fnref"] a:hover {
+     background-color: #e5e7eb;
+     color: #1f2937;
+   }
+
+   /* Style the footnotes section */
+   .footnotes {
+     margin-top: 3rem;
+     padding-top: 2rem;
+     border-top: 2px solid #e5e7eb;
+   }
+
+   /* Create custom numbering for footnotes */
+   .footnotes li {
+     margin-bottom: 1rem;
+     color: #4b5563;
+   }
+   
+   /* Style the return links in footnotes */
+   .footnotes li a[href^="#fnref"] {
+     text-decoration: none;
+     color: #6b7280;
+     margin-left: 0.5rem;
+     font-size: 0.875rem;
+     transition: color 0.2s ease;
+   }
+
+   .footnotes li a[href^="#fnref"]:hover {
+     color: #374151;
+   }
+
+   blockquote {
+     border-left: 4px solid #d1d5db;
+     padding-left: 1em;
+     margin-left: 1em;
+     color: #4b5563;
+     font-style: italic;
+     background-color: #f9fafb;
+   }
+
+   figure {
+     margin: 1rem 0;
+     text-align: center;
+   }
+
+   figcaption {
+     color: #666;
+     font-size: 0.9em;
+     margin-top: 0.5rem;
+     font-style: italic;
+   }
+
+   .page-header h1 {
+     margin: 0
+   }
+
+   .page-header .publication-date {
+     color: #666;
+     font-size: 0.8em;
+     margin: 0;
+   }
+
+   body > footer {
+     font-size: .8em;
+	   color: #888;
+     margin-top: 1em;
+	   padding-top: 1em;
+     padding-bottom: 1em;
+   }
+   p code, li code {
+     display: inline-block;
+     white-space: nowrap;
+     border: 1px solid #ddd;
+     -moz-border-radius: .4em;
+     -webkit-border-radius: .4em;
+     border-radius: .4em;
+     padding: 0 .3em;
+     margin: -1px 0;
+   }
+
+  </style>
+  <link rel="stylesheet" href="/highlight/base16/tomorrow-night.min.css">
+</head>
+<body>
+<header>
+    <h1><a href="/">Jake McCrary</a></h1>
+  </header>
+  <nav role="navigation" class="main-nav">
+    <ul role="main-navigation" class="nav-list">
+      <li><a href="/">Articles</a></li>
+      <li><a href="/adventures/">Adventures</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/blog/archives/">Archives</a></li>
+      <li><a href="http://feeds.feedburner.com/JakeMccrarysMusings" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+      <li><a href="https://jakemccrary.substack.com/welcome" target="_blank" rel="subscribe-email" title="subscribe via email">Newsletter</a></li>
+    </ul>
+    <form class="search-form" action="https://google.com/search" method="get">
+      <fieldset role="search">
+        <input type="hidden" name="sitesearch" value="jakemccrary.com">
+        <input class="search" type="text" name="q" placeholder="Search">
+      </fieldset>
+    </form>
+  </nav>
+  
+  <div class="page-header">
+    <h1>Using Bash-Preexec for monitoring the runtime of your last command</h1>
+    
+    
+    <p class="publication-date">Published on 
+      <time datetime="2020-04-21">April 21, 2020</time>
+    </p>
+    
+  </div>
+  
+
+  <p>My article on <a href='/blog/2015/05/03/put-the-last-commands-run-time-in-your-bash-prompt/'>putting the runtime of your last command into your bash prompt</a> is one of my most surfaced-by-google articles. Why is this a great to your prompt?  To quote my previous article:</p><blockquote><p> I’m fairly certain the following scenario has happened to every terminal user. You run a command and, while it is running, realize you should have prefixed it with <code>time</code>. You momentarily struggle with the thought of killing the command and rerunning it with <code>time</code>. You decide not to and the command finishes without you knowing how long it took. You debate running it again. </p></blockquote><blockquote><p> For the last year I’ve lived in a world without this problem. Upon completion, a command’s approximate run time is displayed in my prompt. It is awesome. </p></blockquote><p>I've been living without the above problem since sometime in 2014 and not having that problem is still awesome.</p><p>I have made some changes since 2014.</p><p>One change was switching to using <a href='https://github.com/rcaloras/bash-preexec'>Bash-Preexec</a> instead of directly using <code>trap</code> and <code>$PROMPT&#95;COMMAND</code> for calling functions to start and stop tracking runtime. Bash-Preexec lets you trigger a function (or multiple) right after a command has been read and right before each prompt.</p><p>The usage is pretty straight forward. In the most basic case, you source <code>bash-preexec.sh</code> and then provide functions named <code>preexec</code>, which is invoked right before a command is executed, and/or <code>precmd</code>, which is invoked just before each prompt. <code>bash-preexec.sh</code> can be downloaded from <a href='https://github.com/rcaloras/bash-preexec/'>its repo</a>.  The changes required to move to Bash-Preexec pretty <a href='https://github.com/jakemcc/dotfiles/commit/46fc3dc9d4d7d0d73152c77b7383645af42b3d5d'>pretty minimal</a>.</p><p>The other change was introducing the script, <a href='https://github.com/jakemcc/dotfiles/blob/9c8c0315f35b55df6cef7e21261e3dcbbfac86e1/home/.bin/format-duration#L3-L4'>format-duration</a> by <a href='https://twitter.com/gfredericks_'>Gary Fredericks</a>, to humanely format the time. This script converts seconds into a more readable string (example: 310 to <code>5m10s</code>)</p><p>Here is a screenshot of everything in action (with a reduced prompt, my normal one includes git and other info).</p><p><img src="/images/runtime-humane-example.png" alt="Command line prompt showing runtimes of previous commands" width=320 height=150></p><p>Below is a simplified snippet from my <code>.bashrc</code> that provides runtimes using both of these additions.</p><pre><code class="language-bash">preexec&#40;&#41; {
+  if &#91; &quot;UNSET&quot; == &quot;${timer}&quot; &#93;; then
+    timer=$SECONDS
+  else 
+    timer=${timer:-$SECONDS}
+  fi 
+}
+
+precmd&#40;&#41; {
+  if &#91; &quot;UNSET&quot; == &quot;${timer}&quot; &#93;; then
+     timer&#95;show=&quot;0s&quot;
+  else 
+    the&#95;seconds=$&#40;&#40;SECONDS - timer&#41;&#41;
+    # use format-duration to make time more human readable
+    timer&#95;show=&quot;$&#40;format-duration seconds $the&#95;seconds&#41;&quot; 
+  fi
+  timer=&quot;UNSET&quot;
+}
+
+# Add $last&#95;show to the prompt.
+PS1='&#91;last: ${timer&#95;show}s&#93;&#91;\w&#93;$ '
+
+# a bunch more lines until the end of my .bashrc
+# where I include .bash-preexec.sh
+&#91;&#91; -f &quot;$HOME/.bash-preexec.sh&quot; &#93;&#93; &amp;&amp; source &quot;$HOME/.bash-preexec.sh&quot;
+</code></pre><p>No more wondering about the runtime of commands is great. Introducing <code>format-duration</code> made reading the time easier while Bash-Preexec made reading the implementation easier. I highly recommend setting up something similar for your shell.</p>
+  <script src="/highlight/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script></script>
+  <footer>
+    <p xmlns:cc="http://creativecommons.org/ns#" >This work by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://jakemccrary.com">Jake McCrary</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""></a></p> 
+    <a href="/disclosure-policy">Disclosure Policy</a><br/>
+  </footer>
+</body>
+</html>

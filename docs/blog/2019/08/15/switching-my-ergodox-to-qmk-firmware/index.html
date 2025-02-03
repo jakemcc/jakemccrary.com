@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>Switching my Ergodox to QMK firmware - Jake McCrary</title>
+  <meta name="author" content="">
+  <!-- <link rel="stylesheet" href="/style.css"> -->
+
+  <meta itemprop="name" content="Switching my Ergodox to QMK firmware - Jake McCrary" />
+  
+  <meta itemprop="description" content="Here are some steps I followed for flashing my hand-built Ergodox to the QMK firmware." />
+  
+
+  <!-- Twitter Card data -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@jakemcc" />
+  <meta name="twitter:title" content="Switching my Ergodox to QMK firmware - Jake McCrary" />
+  
+  <meta name="twitter:description" content="Here are some steps I followed for flashing my hand-built Ergodox to the QMK firmware." />
+  
+  <meta name="twitter:creator" content="@jakemcc" />
+  <!-- <meta name="twitter:image" content="" /> -->
+
+  <!-- Open Graph data -->
+  <meta property="og:site_name" content="Writing by Jake McCrary" />
+  <meta property="og:url" content="https://jakemccrary.com//blog/2019/08/15/switching-my-ergodox-to-qmk-firmware/" />
+  <meta property="og:title" content="Switching my Ergodox to QMK firmware - Jake McCrary" />
+  
+  <meta property="og:description" content="Here are some steps I followed for flashing my hand-built Ergodox to the QMK firmware." />
+  
+  <!-- <meta property="og:image" content="" /> -->
+  
+  <meta property="og:type" content="article" />
+  
+  
+  <!-- maybe rfc blahblahblah it? -->
+  <meta property="article:published_time" content="2019-08-15T23:59:59+00:00" />
+  
+
+  <link rel="canonical" href="https://jakemccrary.com//blog/2019/08/15/switching-my-ergodox-to-qmk-firmware/">
+
+  <style>
+   body {
+     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+     max-width: 1200px;
+     margin: 0 auto;
+     padding: 1rem;
+     line-height: 1.5;
+   }
+
+   header {
+     margin-bottom: 0.5rem;
+   }
+
+   header h1 {
+     margin: 0;
+     font-size: 2.5rem;
+   }
+
+   header h1 a {
+     color: #333;
+     text-decoration: none;
+   }
+
+   .main-nav {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     padding: 0.5rem 0;
+     margin-bottom: 2rem;
+   }
+
+   .nav-list {
+     display: flex;
+     list-style: none;
+     margin: 0;
+     padding: 0;
+     gap: 1.5rem;
+   }
+
+   .nav-list a {
+     text-decoration: none;
+     color: #333;
+   }
+
+   .search-form fieldset {
+     border: none;
+     margin: 0;
+     padding: 0;
+   }
+
+   .search {
+     padding: 0.5rem;
+     border: none;
+     background: #f5f5f5;
+     border-radius: 4px;
+   }
+
+   /* Blog post list styling */
+   .post-list {
+     list-style: none;
+     padding: 0;
+     margin: 0;
+   }
+
+   .post-list li {
+     margin-bottom: 1.5rem;
+   }
+
+   .post-meta {
+     margin-bottom: 0.25rem;
+   }
+
+   .post-meta time {
+     color: #666;
+     margin-right: 0.5rem;
+   }
+
+   .post-list h2 {
+     display: inline;
+     font-size: 1.1rem;
+     font-weight: 500;
+     margin: 0;
+   }
+
+   .post-list h2 a {
+     color: #0066cc;
+     text-decoration: none;
+   }
+
+   .post-list h2 a:hover {
+     text-decoration: underline;
+   }
+
+   .post-description {
+     color: #444;
+     margin: 0.25rem 0 0 0;
+     line-height: 1.6;
+   }
+
+   .right {
+     float: right;
+   }
+   .left {
+     float: left;
+   }
+   .mr1 {
+     margin-right: 1em;
+   }
+   /* Style the footnote references in the text */
+   [id^="fnref"] sup {
+     font-size: 0.75em;
+     line-height: 0;
+     position: relative;
+     top: -0.5em;
+     padding: 0 0.3em;
+   }
+
+   [id^="fnref"] a {
+     text-decoration: none;
+     background-color: #f3f4f6;
+     color: #4b5563;
+     border-radius: 3px;
+     padding: 2px 6px;
+     transition: all 0.2s ease;
+   }
+
+   [id^="fnref"] a:hover {
+     background-color: #e5e7eb;
+     color: #1f2937;
+   }
+
+   /* Style the footnotes section */
+   .footnotes {
+     margin-top: 3rem;
+     padding-top: 2rem;
+     border-top: 2px solid #e5e7eb;
+   }
+
+   /* Create custom numbering for footnotes */
+   .footnotes li {
+     margin-bottom: 1rem;
+     color: #4b5563;
+   }
+   
+   /* Style the return links in footnotes */
+   .footnotes li a[href^="#fnref"] {
+     text-decoration: none;
+     color: #6b7280;
+     margin-left: 0.5rem;
+     font-size: 0.875rem;
+     transition: color 0.2s ease;
+   }
+
+   .footnotes li a[href^="#fnref"]:hover {
+     color: #374151;
+   }
+
+   blockquote {
+     border-left: 4px solid #d1d5db;
+     padding-left: 1em;
+     margin-left: 1em;
+     color: #4b5563;
+     font-style: italic;
+     background-color: #f9fafb;
+   }
+
+   figure {
+     margin: 1rem 0;
+     text-align: center;
+   }
+
+   figcaption {
+     color: #666;
+     font-size: 0.9em;
+     margin-top: 0.5rem;
+     font-style: italic;
+   }
+
+   .page-header h1 {
+     margin: 0
+   }
+
+   .page-header .publication-date {
+     color: #666;
+     font-size: 0.8em;
+     margin: 0;
+   }
+
+   body > footer {
+     font-size: .8em;
+	   color: #888;
+     margin-top: 1em;
+	   padding-top: 1em;
+     padding-bottom: 1em;
+   }
+   p code, li code {
+     display: inline-block;
+     white-space: nowrap;
+     border: 1px solid #ddd;
+     -moz-border-radius: .4em;
+     -webkit-border-radius: .4em;
+     border-radius: .4em;
+     padding: 0 .3em;
+     margin: -1px 0;
+   }
+
+  </style>
+  <link rel="stylesheet" href="/highlight/base16/tomorrow-night.min.css">
+</head>
+<body>
+<header>
+    <h1><a href="/">Jake McCrary</a></h1>
+  </header>
+  <nav role="navigation" class="main-nav">
+    <ul role="main-navigation" class="nav-list">
+      <li><a href="/">Articles</a></li>
+      <li><a href="/adventures/">Adventures</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/blog/archives/">Archives</a></li>
+      <li><a href="http://feeds.feedburner.com/JakeMccrarysMusings" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+      <li><a href="https://jakemccrary.substack.com/welcome" target="_blank" rel="subscribe-email" title="subscribe via email">Newsletter</a></li>
+    </ul>
+    <form class="search-form" action="https://google.com/search" method="get">
+      <fieldset role="search">
+        <input type="hidden" name="sitesearch" value="jakemccrary.com">
+        <input class="search" type="text" name="q" placeholder="Search">
+      </fieldset>
+    </form>
+  </nav>
+  
+  <div class="page-header">
+    <h1>Switching my Ergodox to QMK firmware</h1>
+    
+    
+    <p class="publication-date">Published on 
+      <time datetime="2019-08-15">August 15, 2019</time>
+    </p>
+    
+  </div>
+  
+
+  <p>Last fall I started to work in an office again. I've used a hand-built Ergodox for years now and really prefer working on it. This meant I needed another ergodox for the office. Luckily, now you don't have to build your own. I bought an <a href='https://ergodox-ez.com'>Ergodox EZ</a><a href='#fn-1' id='fnref1'><sup>1</sup></a>.</p><p>The Ergodox EZ uses the <a href='https://github.com/qmk/qmk_firmware'>QMK</a> firmware. This has a lot of fancier options than the firmware I had been using on my hand-built ergodox.</p><p>This mostly didn't matter and I just configured the Ergodox EZ to match my original Ergodox's layout. Then I started a new job and found myself programming in Scala using IntelliJ IDEA.</p><p>Shockingly, after not using IntelliJ for years, I still remembered many of the keyboard shortcuts. This was great! Unfortunately, in my years since last using IntelliJ, I created some conflicting keyboard shortcuts for managing my window layout. These were mostly shortcuts that involved holding Command + Alt and pushing an arrow key. Luckily, the QMK firmware supports a <em>Meh</em> key.</p><p>What is the <em>Meh</em> key? It is a key that presses Control + Alt + Shift all at the same time.</p><p>This is great for setting up shortcuts that don't conflict with ones found in most normal programs. This let me <a href='https://github.com/jakemcc/cljs-phoenix/commit/fa2186589d99a4763c7bf79e1f795cb910063a4e'>change my window manger</a> shortcuts to use the <em>Meh</em> key and I was then conflict free.</p><p>I can't handle having different shortcuts across different machines with the same OS, so I needed to needed to update my original Ergodox to use the QMK firmware so I could also have a <em>Meh</em> key at home. Luckily, the QMK firmware also works on it and, maybe even more luckily, the Ergodox EZ firmware just works with my original Ergodox.</p><p>This actually means I can simply take the compiled Ergodox EZ firmware and flash it straight to my Ergodox. Any time I've done this the keyboard keeps working.</p><p>Unfortunately, the LEDs in my original Ergodox are mostly hidden by non-translucent keys. These LEDs indicate when I'm not main layer and I find them really useful. I only have a single translucent keycap and would prefer only that LED to be used.</p><p>Here are the steps I took to make that change.</p><ol><li>Use the <a href='https://config.qmk.fm/#/ergodox_ez/LAYOUT_ergodox'>graphical QMK Configurator</a> to visually configure my keyboard layout. In the <strong>Keymap Name</strong> field, put <code>jakemcc</code>.</li><li>Click the <strong>Compile</strong> button in the above configurator.</li><li>Download the full source.</li><li>Unzip the source and edit <code>qmk&#95;firmware/keyboards/ergodox&#95;ez/keymaps/jakemcc/keymap.c</code> to include snippet of code below this list.</li><li>In <code>qmk&#95;firmware</code> run <code>make ergodox&#95;ez:jakemcc</code>.</li><li>Find <code>ergodox&#95;ez&#95;jakemcc.hex</code> and flash my original Ergodox.<pre><code class="language-c">uint32&#95;t layer&#95;state&#95;set&#95;user&#40;uint32&#95;t state&#41; {
+  if &#40;biton32&#40;state&#41; == 0&#41; {
+    ergodox&#95;right&#95;led&#95;1&#95;off&#40;&#41;;
+  } else {
+    ergodox&#95;right&#95;led&#95;1&#95;on&#40;&#41;;
+  }
+  return state;
+}
+</code></pre></li></ol><p>This snippet gets added to the bottom of the <code>keymap.c</code>. It only turns on led 1, which is the one under my translucent key, whenever my keyboard isn't on layer 0.</p><p>Now, I can use the fancy <em>Meh</em> key to be conflict free and easily tell when I'm not on my main layer. This is wonderful.  </p> <ol class='footnotes'><li id='fn-1'>I bought one with Cherry MX Clear switches. I've since switched them to Cherry MX Browns. The clears were too firm for me. I did not get Cherry MX Blues because I didn't want my fellow coworkers to be annoyed by the glorious clickty-clack of those switches.<a href='#fnref1'>&#8617;</a></li></ol>
+  <script src="/highlight/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script></script>
+  <footer>
+    <p xmlns:cc="http://creativecommons.org/ns#" >This work by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://jakemccrary.com">Jake McCrary</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""></a></p> 
+    <a href="/disclosure-policy">Disclosure Policy</a><br/>
+  </footer>
+</body>
+</html>

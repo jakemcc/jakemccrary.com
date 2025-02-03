@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>Speeding up magit - Jake McCrary</title>
+  <meta name="author" content="">
+  <!-- <link rel="stylesheet" href="/style.css"> -->
+
+  <meta itemprop="name" content="Speeding up magit - Jake McCrary" />
+  
+  <meta itemprop="description" content="Magit is great but on large repos it can be sluggish. Here is how you can speed it up." />
+  
+
+  <!-- Twitter Card data -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@jakemcc" />
+  <meta name="twitter:title" content="Speeding up magit - Jake McCrary" />
+  
+  <meta name="twitter:description" content="Magit is great but on large repos it can be sluggish. Here is how you can speed it up." />
+  
+  <meta name="twitter:creator" content="@jakemcc" />
+  <!-- <meta name="twitter:image" content="" /> -->
+
+  <!-- Open Graph data -->
+  <meta property="og:site_name" content="Writing by Jake McCrary" />
+  <meta property="og:url" content="https://jakemccrary.com//blog/2020/11/14/speeding-up-magit/" />
+  <meta property="og:title" content="Speeding up magit - Jake McCrary" />
+  
+  <meta property="og:description" content="Magit is great but on large repos it can be sluggish. Here is how you can speed it up." />
+  
+  <!-- <meta property="og:image" content="" /> -->
+  
+  <meta property="og:type" content="article" />
+  
+  
+  <!-- maybe rfc blahblahblah it? -->
+  <meta property="article:published_time" content="2020-11-14T23:59:59+00:00" />
+  
+
+  <link rel="canonical" href="https://jakemccrary.com//blog/2020/11/14/speeding-up-magit/">
+
+  <style>
+   body {
+     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+     max-width: 1200px;
+     margin: 0 auto;
+     padding: 1rem;
+     line-height: 1.5;
+   }
+
+   header {
+     margin-bottom: 0.5rem;
+   }
+
+   header h1 {
+     margin: 0;
+     font-size: 2.5rem;
+   }
+
+   header h1 a {
+     color: #333;
+     text-decoration: none;
+   }
+
+   .main-nav {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     padding: 0.5rem 0;
+     margin-bottom: 2rem;
+   }
+
+   .nav-list {
+     display: flex;
+     list-style: none;
+     margin: 0;
+     padding: 0;
+     gap: 1.5rem;
+   }
+
+   .nav-list a {
+     text-decoration: none;
+     color: #333;
+   }
+
+   .search-form fieldset {
+     border: none;
+     margin: 0;
+     padding: 0;
+   }
+
+   .search {
+     padding: 0.5rem;
+     border: none;
+     background: #f5f5f5;
+     border-radius: 4px;
+   }
+
+   /* Blog post list styling */
+   .post-list {
+     list-style: none;
+     padding: 0;
+     margin: 0;
+   }
+
+   .post-list li {
+     margin-bottom: 1.5rem;
+   }
+
+   .post-meta {
+     margin-bottom: 0.25rem;
+   }
+
+   .post-meta time {
+     color: #666;
+     margin-right: 0.5rem;
+   }
+
+   .post-list h2 {
+     display: inline;
+     font-size: 1.1rem;
+     font-weight: 500;
+     margin: 0;
+   }
+
+   .post-list h2 a {
+     color: #0066cc;
+     text-decoration: none;
+   }
+
+   .post-list h2 a:hover {
+     text-decoration: underline;
+   }
+
+   .post-description {
+     color: #444;
+     margin: 0.25rem 0 0 0;
+     line-height: 1.6;
+   }
+
+   .right {
+     float: right;
+   }
+   .left {
+     float: left;
+   }
+   .mr1 {
+     margin-right: 1em;
+   }
+   /* Style the footnote references in the text */
+   [id^="fnref"] sup {
+     font-size: 0.75em;
+     line-height: 0;
+     position: relative;
+     top: -0.5em;
+     padding: 0 0.3em;
+   }
+
+   [id^="fnref"] a {
+     text-decoration: none;
+     background-color: #f3f4f6;
+     color: #4b5563;
+     border-radius: 3px;
+     padding: 2px 6px;
+     transition: all 0.2s ease;
+   }
+
+   [id^="fnref"] a:hover {
+     background-color: #e5e7eb;
+     color: #1f2937;
+   }
+
+   /* Style the footnotes section */
+   .footnotes {
+     margin-top: 3rem;
+     padding-top: 2rem;
+     border-top: 2px solid #e5e7eb;
+   }
+
+   /* Create custom numbering for footnotes */
+   .footnotes li {
+     margin-bottom: 1rem;
+     color: #4b5563;
+   }
+   
+   /* Style the return links in footnotes */
+   .footnotes li a[href^="#fnref"] {
+     text-decoration: none;
+     color: #6b7280;
+     margin-left: 0.5rem;
+     font-size: 0.875rem;
+     transition: color 0.2s ease;
+   }
+
+   .footnotes li a[href^="#fnref"]:hover {
+     color: #374151;
+   }
+
+   blockquote {
+     border-left: 4px solid #d1d5db;
+     padding-left: 1em;
+     margin-left: 1em;
+     color: #4b5563;
+     font-style: italic;
+     background-color: #f9fafb;
+   }
+
+   figure {
+     margin: 1rem 0;
+     text-align: center;
+   }
+
+   figcaption {
+     color: #666;
+     font-size: 0.9em;
+     margin-top: 0.5rem;
+     font-style: italic;
+   }
+
+   .page-header h1 {
+     margin: 0
+   }
+
+   .page-header .publication-date {
+     color: #666;
+     font-size: 0.8em;
+     margin: 0;
+   }
+
+   body > footer {
+     font-size: .8em;
+	   color: #888;
+     margin-top: 1em;
+	   padding-top: 1em;
+     padding-bottom: 1em;
+   }
+   p code, li code {
+     display: inline-block;
+     white-space: nowrap;
+     border: 1px solid #ddd;
+     -moz-border-radius: .4em;
+     -webkit-border-radius: .4em;
+     border-radius: .4em;
+     padding: 0 .3em;
+     margin: -1px 0;
+   }
+
+  </style>
+  <link rel="stylesheet" href="/highlight/base16/tomorrow-night.min.css">
+</head>
+<body>
+<header>
+    <h1><a href="/">Jake McCrary</a></h1>
+  </header>
+  <nav role="navigation" class="main-nav">
+    <ul role="main-navigation" class="nav-list">
+      <li><a href="/">Articles</a></li>
+      <li><a href="/adventures/">Adventures</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/blog/archives/">Archives</a></li>
+      <li><a href="http://feeds.feedburner.com/JakeMccrarysMusings" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+      <li><a href="https://jakemccrary.substack.com/welcome" target="_blank" rel="subscribe-email" title="subscribe via email">Newsletter</a></li>
+    </ul>
+    <form class="search-form" action="https://google.com/search" method="get">
+      <fieldset role="search">
+        <input type="hidden" name="sitesearch" value="jakemccrary.com">
+        <input class="search" type="text" name="q" placeholder="Search">
+      </fieldset>
+    </form>
+  </nav>
+  
+  <div class="page-header">
+    <h1>Speeding up magit</h1>
+    
+    
+    <p class="publication-date">Published on 
+      <time datetime="2020-11-14">November 14, 2020</time>
+    </p>
+    
+  </div>
+  
+
+  <p><a href='https://github.com/magit/magit'>Magit</a> is a great Emacs tool and by far my favorite way of interacting with git repositories. I use Magit nearly every day.</p><p>Unfortunately, refreshing the <code>magit-status</code> buffer is sluggish when you are working in a large repository.</p><p>A few months ago, I became sick of waiting and investigated how to speed up refreshing the status buffer. After doing some research, I learned about the <code>magit-refresh-verbose</code> variable.</p><p>Setting <code>magit-refresh-verbose</code> to true causes Magit to print some very useful output to your <code>&#42;Messages&#42;</code> buffer. This output shows how many seconds each step of <code>magit-status</code> takes.</p><p>Here is the output for the large repo that caused me to look into this.</p><pre><code>Refreshing buffer ‘magit: example-repo’...
+  magit-insert-error-header                          1e-06
+  magit-insert-diff-filter-header                    2.3e-05
+  magit-insert-head-branch-header                    0.026227
+  magit-insert-upstream-branch-header                0.014285
+  magit-insert-push-branch-header                    0.005662
+  magit-insert-tags-header                           1.7119309999999999
+  magit-insert-status-headers                        1.767466
+  magit-insert-merge-log                             0.005947
+  magit-insert-rebase-sequence                       0.000115
+  magit-insert-am-sequence                           5.1e-05
+  magit-insert-sequencer-sequence                    0.000105
+  magit-insert-bisect-output                         5.3e-05
+  magit-insert-bisect-rest                           1.1e-05
+  magit-insert-bisect-log                            1e-05
+  magit-insert-untracked-files                       0.259485
+  magit-insert-unstaged-changes                      0.031528
+  magit-insert-staged-changes                        0.017763
+  magit-insert-stashes                               0.028514
+  magit-insert-unpushed-to-pushremote                0.911193
+  magit-insert-unpushed-to-upstream-or-recent        0.497709
+  magit-insert-unpulled-from-pushremote              7.2e-05
+  magit-insert-unpulled-from-upstream                0.446168
+Refreshing buffer ‘magit: example-repo’...done &#40;4.003s&#41;
+</code></pre><p>The total time is found in the last line and we can see it took four seconds. Four seconds is an incredibly long time to wait before interacting with Magit.</p><p>You can change how much work Magit does by removing functions from the <code>magit-status-sections-hook</code> with <code>remove-hook</code>. I looked at the timings and and tried removing anything I decided was slow and something I didn't think I'd miss. For me, that list includes <code>magit-insert-tags-header</code>, <code>magit-insert-status-headers</code>, <code>magit-insert-unpushed-to-pushremote</code>, <code>magit-insert-unpushed-to-upstream-or-recent</code>, and <code>magit-insert-unpulled-from-upstream</code>. I also removed <code>magit-insert-unpulled-from-pushremote</code>.</p><p>You remove a function from a hook by adding elisp similar to <code>&#40;remove-hook 'magit-status-sections-hook 'magit-insert-tags-header&#41;</code> to your Emacs configuration.</p><p>I use <a href='https://github.com/jwiegley/use-package'>use-package</a> to configure mine and below is what my <code>magit</code> section looks like.</p><p>Lines 20-25 remove the hooks. I also hard-code <code>magit-git-executable</code> to be the full path of the <code>git</code> executable on line 5 because folks said this made a difference on macOS.</p><pre><code class="language-lisp">&#40;use-package magit
+  :ensure t
+  :bind &#40;&quot;C-c g&quot; . magit-status&#41;
+  :custom
+  &#40;magit-git-executable &quot;/usr/local/bin/git&quot;&#41;
+  :init
+  &#40;use-package with-editor :ensure t&#41;
+
+  ;; Have magit-status go full screen and quit to previous
+  ;; configuration.  Taken from
+  ;; http://whattheemacsd.com/setup-magit.el-01.html#comment-748135498
+  ;; and http://irreal.org/blog/?p=2253
+  &#40;defadvice magit-status &#40;around magit-fullscreen activate&#41;
+    &#40;window-configuration-to-register :magit-fullscreen&#41;
+    ad-do-it
+    &#40;delete-other-windows&#41;&#41;
+  &#40;defadvice magit-quit-window &#40;after magit-restore-screen activate&#41;
+    &#40;jump-to-register :magit-fullscreen&#41;&#41;
+  :config
+  &#40;remove-hook 'magit-status-sections-hook 'magit-insert-tags-header&#41;
+  &#40;remove-hook 'magit-status-sections-hook 'magit-insert-status-headers&#41;
+  &#40;remove-hook 'magit-status-sections-hook 'magit-insert-unpushed-to-pushremote&#41;
+  &#40;remove-hook 'magit-status-sections-hook 'magit-insert-unpulled-from-pushremote&#41;
+  &#40;remove-hook 'magit-status-sections-hook 'magit-insert-unpulled-from-upstream&#41;
+  &#40;remove-hook 'magit-status-sections-hook 'magit-insert-unpushed-to-upstream-or-recent&#41;&#41;
+</code></pre><p>After this change, my <code>magit-status</code> buffer refreshes in under half a second.</p><pre><code>Refreshing buffer ‘magit: example-repo’...
+  magit-insert-merge-log                             0.005771
+  magit-insert-rebase-sequence                       0.000118
+  magit-insert-am-sequence                           5.3e-05
+  magit-insert-sequencer-sequence                    0.0001
+  magit-insert-bisect-output                         5.5e-05
+  magit-insert-bisect-rest                           1.1e-05
+  magit-insert-bisect-log                            1.1e-05
+  magit-insert-untracked-files                       0.247723
+  magit-insert-unstaged-changes                      0.024989
+  magit-insert-staged-changes                        0.018397
+  magit-insert-stashes                               0.026055
+Refreshing buffer ‘magit: example-repo’...done &#40;0.348s&#41;
+</code></pre><p>What did I lose from the <code>magit-status</code> buffer as a result of these changes? Here is screenshot of the original buffer.</p><p><img src="/images/magit-speed/magit-before.png" alt="Buffer before changes" /></p><p>And here is the buffer after.</p><p><img src="/images/magit-speed/magit-after.png" alt="Buffer after changes" /></p><p>The difference is drastic<a href='#fn-1' id='fnref1'><sup>1</sup></a>. And so is the speed difference.</p><p>The increased speed is worth losing the additional information. I interact with <code>git</code> very often and much prefer using Magit to do so. Before these changes, I found myself regressing to using <code>git</code> at the command line and I don't find that to be nearly as enjoyable. Since I've made these changes, I'm back to doing 99% of my <code>git</code> interactions through Magit.</p><p>Don't settle for slow interactions with your computer. Aggressively shorten your feedback cycles and you'll change how you interact with the machine.</p><h4>Versions used when writing this article</h4><p>This post was written with Magit version <code>20201111.1436</code> and Emacs <code>26.3</code> on macOS <code>10.15.7</code>. I've been using these changes for a few months but do not remember or have a record of what Magit version I was using at the time I originally made these changes.</p><p><strong>edit on 2020/12/15</strong>: I recently upgraded Emacs to tryout the native-comp work and can report this still works with with Emacs <code>28.0.50</code>, Magit <code>20201212.929</code>, and Git <code>2.29.2</code> running in macOS <code>11.0.1</code>.</p><p><strong>Warning</strong>: This reduces the information Magit shows you. The status buffer will be blank if you have no changes. I find this tradeoff to be worth it. <ol class='footnotes'><li id='fn-1'>The before image is even missing some sections that would have gone missing in the after shot since I didn't want to put the effort.<a href='#fnref1'>&#8617;</a></li></ol></p>
+  <script src="/highlight/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script></script>
+  <footer>
+    <p xmlns:cc="http://creativecommons.org/ns#" >This work by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://jakemccrary.com">Jake McCrary</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""></a></p> 
+    <a href="/disclosure-policy">Disclosure Policy</a><br/>
+  </footer>
+</body>
+</html>

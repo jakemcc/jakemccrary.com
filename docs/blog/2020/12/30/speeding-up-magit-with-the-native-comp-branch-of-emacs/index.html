@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>Speeding up Magit with the native-comp branch of Emacs - Jake McCrary</title>
+  <meta name="author" content="">
+  <!-- <link rel="stylesheet" href="/style.css"> -->
+
+  <meta itemprop="name" content="Speeding up Magit with the native-comp branch of Emacs - Jake McCrary" />
+  
+  <meta itemprop="description" content="Here is a summary of trying out the native-comp branch of Emacs and how it changed Magit&#39;s performance on a large git repository." />
+  
+
+  <!-- Twitter Card data -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@jakemcc" />
+  <meta name="twitter:title" content="Speeding up Magit with the native-comp branch of Emacs - Jake McCrary" />
+  
+  <meta name="twitter:description" content="Here is a summary of trying out the native-comp branch of Emacs and how it changed Magit&#39;s performance on a large git repository." />
+  
+  <meta name="twitter:creator" content="@jakemcc" />
+  <!-- <meta name="twitter:image" content="" /> -->
+
+  <!-- Open Graph data -->
+  <meta property="og:site_name" content="Writing by Jake McCrary" />
+  <meta property="og:url" content="https://jakemccrary.com//blog/2020/12/30/speeding-up-magit-with-the-native-comp-branch-of-emacs/" />
+  <meta property="og:title" content="Speeding up Magit with the native-comp branch of Emacs - Jake McCrary" />
+  
+  <meta property="og:description" content="Here is a summary of trying out the native-comp branch of Emacs and how it changed Magit&#39;s performance on a large git repository." />
+  
+  <!-- <meta property="og:image" content="" /> -->
+  
+  <meta property="og:type" content="article" />
+  
+  
+  <!-- maybe rfc blahblahblah it? -->
+  <meta property="article:published_time" content="2020-12-30T23:59:59+00:00" />
+  
+
+  <link rel="canonical" href="https://jakemccrary.com//blog/2020/12/30/speeding-up-magit-with-the-native-comp-branch-of-emacs/">
+
+  <style>
+   body {
+     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+     max-width: 1200px;
+     margin: 0 auto;
+     padding: 1rem;
+     line-height: 1.5;
+   }
+
+   header {
+     margin-bottom: 0.5rem;
+   }
+
+   header h1 {
+     margin: 0;
+     font-size: 2.5rem;
+   }
+
+   header h1 a {
+     color: #333;
+     text-decoration: none;
+   }
+
+   .main-nav {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     padding: 0.5rem 0;
+     margin-bottom: 2rem;
+   }
+
+   .nav-list {
+     display: flex;
+     list-style: none;
+     margin: 0;
+     padding: 0;
+     gap: 1.5rem;
+   }
+
+   .nav-list a {
+     text-decoration: none;
+     color: #333;
+   }
+
+   .search-form fieldset {
+     border: none;
+     margin: 0;
+     padding: 0;
+   }
+
+   .search {
+     padding: 0.5rem;
+     border: none;
+     background: #f5f5f5;
+     border-radius: 4px;
+   }
+
+   /* Blog post list styling */
+   .post-list {
+     list-style: none;
+     padding: 0;
+     margin: 0;
+   }
+
+   .post-list li {
+     margin-bottom: 1.5rem;
+   }
+
+   .post-meta {
+     margin-bottom: 0.25rem;
+   }
+
+   .post-meta time {
+     color: #666;
+     margin-right: 0.5rem;
+   }
+
+   .post-list h2 {
+     display: inline;
+     font-size: 1.1rem;
+     font-weight: 500;
+     margin: 0;
+   }
+
+   .post-list h2 a {
+     color: #0066cc;
+     text-decoration: none;
+   }
+
+   .post-list h2 a:hover {
+     text-decoration: underline;
+   }
+
+   .post-description {
+     color: #444;
+     margin: 0.25rem 0 0 0;
+     line-height: 1.6;
+   }
+
+   .right {
+     float: right;
+   }
+   .left {
+     float: left;
+   }
+   .mr1 {
+     margin-right: 1em;
+   }
+   /* Style the footnote references in the text */
+   [id^="fnref"] sup {
+     font-size: 0.75em;
+     line-height: 0;
+     position: relative;
+     top: -0.5em;
+     padding: 0 0.3em;
+   }
+
+   [id^="fnref"] a {
+     text-decoration: none;
+     background-color: #f3f4f6;
+     color: #4b5563;
+     border-radius: 3px;
+     padding: 2px 6px;
+     transition: all 0.2s ease;
+   }
+
+   [id^="fnref"] a:hover {
+     background-color: #e5e7eb;
+     color: #1f2937;
+   }
+
+   /* Style the footnotes section */
+   .footnotes {
+     margin-top: 3rem;
+     padding-top: 2rem;
+     border-top: 2px solid #e5e7eb;
+   }
+
+   /* Create custom numbering for footnotes */
+   .footnotes li {
+     margin-bottom: 1rem;
+     color: #4b5563;
+   }
+   
+   /* Style the return links in footnotes */
+   .footnotes li a[href^="#fnref"] {
+     text-decoration: none;
+     color: #6b7280;
+     margin-left: 0.5rem;
+     font-size: 0.875rem;
+     transition: color 0.2s ease;
+   }
+
+   .footnotes li a[href^="#fnref"]:hover {
+     color: #374151;
+   }
+
+   blockquote {
+     border-left: 4px solid #d1d5db;
+     padding-left: 1em;
+     margin-left: 1em;
+     color: #4b5563;
+     font-style: italic;
+     background-color: #f9fafb;
+   }
+
+   figure {
+     margin: 1rem 0;
+     text-align: center;
+   }
+
+   figcaption {
+     color: #666;
+     font-size: 0.9em;
+     margin-top: 0.5rem;
+     font-style: italic;
+   }
+
+   .page-header h1 {
+     margin: 0
+   }
+
+   .page-header .publication-date {
+     color: #666;
+     font-size: 0.8em;
+     margin: 0;
+   }
+
+   body > footer {
+     font-size: .8em;
+	   color: #888;
+     margin-top: 1em;
+	   padding-top: 1em;
+     padding-bottom: 1em;
+   }
+   p code, li code {
+     display: inline-block;
+     white-space: nowrap;
+     border: 1px solid #ddd;
+     -moz-border-radius: .4em;
+     -webkit-border-radius: .4em;
+     border-radius: .4em;
+     padding: 0 .3em;
+     margin: -1px 0;
+   }
+
+  </style>
+  <link rel="stylesheet" href="/highlight/base16/tomorrow-night.min.css">
+</head>
+<body>
+<header>
+    <h1><a href="/">Jake McCrary</a></h1>
+  </header>
+  <nav role="navigation" class="main-nav">
+    <ul role="main-navigation" class="nav-list">
+      <li><a href="/">Articles</a></li>
+      <li><a href="/adventures/">Adventures</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/blog/archives/">Archives</a></li>
+      <li><a href="http://feeds.feedburner.com/JakeMccrarysMusings" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+      <li><a href="https://jakemccrary.substack.com/welcome" target="_blank" rel="subscribe-email" title="subscribe via email">Newsletter</a></li>
+    </ul>
+    <form class="search-form" action="https://google.com/search" method="get">
+      <fieldset role="search">
+        <input type="hidden" name="sitesearch" value="jakemccrary.com">
+        <input class="search" type="text" name="q" placeholder="Search">
+      </fieldset>
+    </form>
+  </nav>
+  
+  <div class="page-header">
+    <h1>Speeding up Magit with the native-comp branch of Emacs</h1>
+    
+    
+    <p class="publication-date">Published on 
+      <time datetime="2020-12-30">December 30, 2020</time>
+    </p>
+    
+  </div>
+  
+
+  <p>In my last article, <a href='/blog/2020/11/14/speeding-up-magit/'>Speeding up Magit</a>, I showed how removing elements from Magit's status buffer drastically reduces the time it takes to refresh this buffer when working in a large repository (from 4 seconds to around 0.348 seconds). In a <a href='https://www.reddit.com/r/emacs/comments/k3xfa1/speeding_up_magit/ge5o0e0/?utm_source=reddit&utm_medium=web2x&context=3'>comment on r/emacs</a>, someone wondered if the <code>native-comp</code> feature of Emacs might improve the Magit status refresh time.</p><p>This reddit thread was the first time I had heard of the <code>native-comp</code> feature. This feature lives on the <code>feature/native-comp</code> branch of the Emacs repository and it compiles Elisp code into native code. Many users have reported noticeable speed improvements using it. The <a href='http://akrl.sdf.org/gccemacs.html'>official development log</a> and <a href='https://www.emacswiki.org/emacs/GccEmacs'>Emacs Wiki</a> have more information about it.</p><p>I'll provide more information about getting <code>native-comp</code> working on macOS after I answer the Magit speed question.</p><h2>How did it change refresh times of the Magit status buffer?</h2><p>The quick answer is that running Emacs with <code>native-comp</code> improved the refresh times of the Magit status buffer. Below is a table of the various times.</p><pre><code>| Experiment                              | magit-status refresh time |
+|-----------------------------------------+---------------------------|
+| full magit-status with native-comp      | 3.152 seconds             |
+| full magit-status without native-comp   | 4.003 seconds             |
+| magit-status with many sections removed | 0.348 seconds             |
+</code></pre><p>Using <code>native-comp</code>, we've cut off about 0.85 seconds. That is a pretty solid improvement. Even still, that isn't fast enough for how often I use Magit so I'll be sticking with my <a href='/blog/2020/11/14/speeding-up-magit/'>Magit setup</a> with many sections removed.</p><p>As a caveat, the timing with <code>native-comp</code> also includes upgrading Emacs from <code>26.3</code> to <code>28.0.50</code> (so I could have <code>native-comp</code>) and Magit from <code>20201111.1436</code> to <code>20201212.929</code>. As a result, the comparison to <code>full magit-status without native-comp</code> isn't entirely fair as multiple variables have changed. The comparison to time with sections removed is fair as I'm still using that setup (but with native-comp) and the timing is pretty much the same.</p><h2>Getting <code>native-comp</code> on macOS</h2><p>To enable <code>native-comp</code> you need to build Emacs from source. I've done this before on Linux systems but this was the first time I've done this on macOS.</p><p>When browsing reddit, I found the <a href='https://github.com/jimeh/build-emacs-for-macos'>build-emacs-for-macos</a> project which has some helpful instructions for doing this. I followed the instructions from the readme and picked the latest known good commit from <a href='https://github.com/jimeh/build-emacs-for-macos/issues/6'>this issue</a> (at the time I did this <code>be907b0ba82c2a65e0468d50653cae8a7cf5f16b</code>). I then updated my <a href='https://github.com/jakemcc/emacs.d/commit/72cf37a497b72b8990956395e2eaa87285ea7c81'>init.el</a> based on instructions from in the <code>build-emacs-for-macos</code> project.</p><p>I haven't had any issues since switching to this very new Emacs. I don't have numbers to back this up but it does feel faster.</p><h2>Recommendation</h2><p>I'd recommend giving the <code>native-comp</code> feature of Emacs a shot. It wasn't terribly challenging to get setup and it is nice to get a glimpse of what the future of Emacs might be. That future is a bit snappier.</p>
+  <script src="/highlight/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script></script>
+  <footer>
+    <p xmlns:cc="http://creativecommons.org/ns#" >This work by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://jakemccrary.com">Jake McCrary</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""></a></p> 
+    <a href="/disclosure-policy">Disclosure Policy</a><br/>
+  </footer>
+</body>
+</html>

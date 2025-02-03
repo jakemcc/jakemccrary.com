@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>Command line arguments in Clojure - Jake McCrary</title>
+  <meta name="author" content="">
+  <!-- <link rel="stylesheet" href="/style.css"> -->
+
+  <meta itemprop="name" content="Command line arguments in Clojure - Jake McCrary" />
+  
+
+  <!-- Twitter Card data -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@jakemcc" />
+  <meta name="twitter:title" content="Command line arguments in Clojure - Jake McCrary" />
+  
+  <meta name="twitter:creator" content="@jakemcc" />
+  <!-- <meta name="twitter:image" content="" /> -->
+
+  <!-- Open Graph data -->
+  <meta property="og:site_name" content="Writing by Jake McCrary" />
+  <meta property="og:url" content="https://jakemccrary.com//blog/2011/04/12/command-line-arguments-in-clojure/" />
+  <meta property="og:title" content="Command line arguments in Clojure - Jake McCrary" />
+  
+  <!-- <meta property="og:image" content="" /> -->
+  
+  <meta property="og:type" content="article" />
+  
+  
+  <!-- maybe rfc blahblahblah it? -->
+  <meta property="article:published_time" content="2011-04-12T23:59:59+00:00" />
+  
+
+  <link rel="canonical" href="https://jakemccrary.com//blog/2011/04/12/command-line-arguments-in-clojure/">
+
+  <style>
+   body {
+     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+     max-width: 1200px;
+     margin: 0 auto;
+     padding: 1rem;
+     line-height: 1.5;
+   }
+
+   header {
+     margin-bottom: 0.5rem;
+   }
+
+   header h1 {
+     margin: 0;
+     font-size: 2.5rem;
+   }
+
+   header h1 a {
+     color: #333;
+     text-decoration: none;
+   }
+
+   .main-nav {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     padding: 0.5rem 0;
+     margin-bottom: 2rem;
+   }
+
+   .nav-list {
+     display: flex;
+     list-style: none;
+     margin: 0;
+     padding: 0;
+     gap: 1.5rem;
+   }
+
+   .nav-list a {
+     text-decoration: none;
+     color: #333;
+   }
+
+   .search-form fieldset {
+     border: none;
+     margin: 0;
+     padding: 0;
+   }
+
+   .search {
+     padding: 0.5rem;
+     border: none;
+     background: #f5f5f5;
+     border-radius: 4px;
+   }
+
+   /* Blog post list styling */
+   .post-list {
+     list-style: none;
+     padding: 0;
+     margin: 0;
+   }
+
+   .post-list li {
+     margin-bottom: 1.5rem;
+   }
+
+   .post-meta {
+     margin-bottom: 0.25rem;
+   }
+
+   .post-meta time {
+     color: #666;
+     margin-right: 0.5rem;
+   }
+
+   .post-list h2 {
+     display: inline;
+     font-size: 1.1rem;
+     font-weight: 500;
+     margin: 0;
+   }
+
+   .post-list h2 a {
+     color: #0066cc;
+     text-decoration: none;
+   }
+
+   .post-list h2 a:hover {
+     text-decoration: underline;
+   }
+
+   .post-description {
+     color: #444;
+     margin: 0.25rem 0 0 0;
+     line-height: 1.6;
+   }
+
+   .right {
+     float: right;
+   }
+   .left {
+     float: left;
+   }
+   .mr1 {
+     margin-right: 1em;
+   }
+   /* Style the footnote references in the text */
+   [id^="fnref"] sup {
+     font-size: 0.75em;
+     line-height: 0;
+     position: relative;
+     top: -0.5em;
+     padding: 0 0.3em;
+   }
+
+   [id^="fnref"] a {
+     text-decoration: none;
+     background-color: #f3f4f6;
+     color: #4b5563;
+     border-radius: 3px;
+     padding: 2px 6px;
+     transition: all 0.2s ease;
+   }
+
+   [id^="fnref"] a:hover {
+     background-color: #e5e7eb;
+     color: #1f2937;
+   }
+
+   /* Style the footnotes section */
+   .footnotes {
+     margin-top: 3rem;
+     padding-top: 2rem;
+     border-top: 2px solid #e5e7eb;
+   }
+
+   /* Create custom numbering for footnotes */
+   .footnotes li {
+     margin-bottom: 1rem;
+     color: #4b5563;
+   }
+   
+   /* Style the return links in footnotes */
+   .footnotes li a[href^="#fnref"] {
+     text-decoration: none;
+     color: #6b7280;
+     margin-left: 0.5rem;
+     font-size: 0.875rem;
+     transition: color 0.2s ease;
+   }
+
+   .footnotes li a[href^="#fnref"]:hover {
+     color: #374151;
+   }
+
+   blockquote {
+     border-left: 4px solid #d1d5db;
+     padding-left: 1em;
+     margin-left: 1em;
+     color: #4b5563;
+     font-style: italic;
+     background-color: #f9fafb;
+   }
+
+   figure {
+     margin: 1rem 0;
+     text-align: center;
+   }
+
+   figcaption {
+     color: #666;
+     font-size: 0.9em;
+     margin-top: 0.5rem;
+     font-style: italic;
+   }
+
+   .page-header h1 {
+     margin: 0
+   }
+
+   .page-header .publication-date {
+     color: #666;
+     font-size: 0.8em;
+     margin: 0;
+   }
+
+   body > footer {
+     font-size: .8em;
+	   color: #888;
+     margin-top: 1em;
+	   padding-top: 1em;
+     padding-bottom: 1em;
+   }
+   p code, li code {
+     display: inline-block;
+     white-space: nowrap;
+     border: 1px solid #ddd;
+     -moz-border-radius: .4em;
+     -webkit-border-radius: .4em;
+     border-radius: .4em;
+     padding: 0 .3em;
+     margin: -1px 0;
+   }
+
+  </style>
+  <link rel="stylesheet" href="/highlight/base16/tomorrow-night.min.css">
+</head>
+<body>
+<header>
+    <h1><a href="/">Jake McCrary</a></h1>
+  </header>
+  <nav role="navigation" class="main-nav">
+    <ul role="main-navigation" class="nav-list">
+      <li><a href="/">Articles</a></li>
+      <li><a href="/adventures/">Adventures</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/blog/archives/">Archives</a></li>
+      <li><a href="http://feeds.feedburner.com/JakeMccrarysMusings" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+      <li><a href="https://jakemccrary.substack.com/welcome" target="_blank" rel="subscribe-email" title="subscribe via email">Newsletter</a></li>
+    </ul>
+    <form class="search-form" action="https://google.com/search" method="get">
+      <fieldset role="search">
+        <input type="hidden" name="sitesearch" value="jakemccrary.com">
+        <input class="search" type="text" name="q" placeholder="Search">
+      </fieldset>
+    </form>
+  </nav>
+  
+  <div class="page-header">
+    <h1>Command line arguments in Clojure</h1>
+    
+    
+    <p class="publication-date">Published on 
+      <time datetime="2011-04-12">April 12, 2011</time>
+    </p>
+    
+  </div>
+  
+
+  <p><i>This post is now out of date. The library recommended by this post is now a contrib library. Check out <a href='https://github.com/clojure/tools.cli'>tools.cli</a> for great documentation about handling command line arguments in Clojure.</i></p><hr/><p>Write enough Clojure and eventually you will need to handle command line arguments. There are numerous ways of doing this. Keep reading for a brief introduction to three.</p><h3>Using built-in features</h3><p>There exists a sequence named <code>&#42;command-line-args&#42;</code> which contains the arguments to your application. Using it is simple, it is just a sequence after all, and it is always available to you. No need to pull in external dependencies that others may not be familiar with.</p><p>This simplicity is also a downside. Because only a sequence is provided for you it is up to you to actually figure out the arguments. If you want to do any sort of verification that certain arguments are supplied you write the code that does the verifying. If you want to move away from positional arguments to using command line flags once again it is up to you to write it.</p><p>Because of the amount of code required to do any sort of advanced argument handling I tend to use <code>&#42;command-line-args&#42;</code> only for applications that take a single type of argument, for example a file path, and require one or more of this type of argument.</p><h3>Setup for next two sections</h3><p>For the next two sections I'm using version 1.5.0 of Leiningen and the specified versions of libraries as stated in the below <code>project.clj</code> file.</p><pre><code class="language-clojure">&#40;defproject blogpost &quot;1.0.0-SNAPSHOT&quot;
+  :dependencies &#91;&#91;org.clojure/clojure &quot;1.2.0&quot;&#93;
+                 &#91;org.clojure/clojure-contrib &quot;1.2.0&quot;&#93;
+                 &#91;clargon &quot;1.0.0&quot;&#93;&#93;
+  :dev-dependencies &#91;&#91;swank-clojure &quot;1.2.1&quot;&#93;&#93;
+  :run-aliases {:clargon clargon-example
+                :cc command-line-example}&#41;
+</code></pre><p>I'm using <code>lein run</code> to run the examples. <code>lein run :cc</code> runs the clojure.contrib example. Likewise, running <code>lein run :clargon</code> will run the clargon examples. Both of these commands can be followed by additional arguments that get passed to the application.</p><h3>Using clojure.contrib.command-line</h3><p>The next step after using <code>&#42;command-line-args&#42;</code> is to use the library <code>clojure.contrib.command-line</code>. This library provides the function <code>with-command-line</code> that allows you specify requirements and then handles the parsing of the command line arguments for you.</p><p>Positives of using <code>clojure.contrib.command-line</code>:</p><ul><li>Part of <code>clojure.contrib</code>. Probably extremely low friction to start using it.</li><li>No longer need to write your own command line parsing code.</li><li>Responds to <code>-h</code> and <code>--help</code>.</li></ul><p>A negative of using <code>clojure.contrib.command-line</code> is that the documentation is pretty sparse. This can lead to some fumbling around as you learn how to use it. Another downside is that there isn't a way of specifying whether an argument is required or optional. This means you must manually check for required arguments and give appropriate error messages to the user.</p><p>Below is an example of using <code>clojure.contrib.command-line</code>. It specifies a few different arguments. The <code>--cow</code> argument has a default value of "cow". <code>--chicken</code> has no default value, if it is left unspecified it will be <code>nil</code>. The line with <code>milk?</code> specifies a boolean value. If <code>--milk</code> (or <code>-m</code> because of the <code>m?</code> specification) is specified at the command line then <code>milk?</code> will be true. <code>extras</code> will collect any additional arguments.</p><pre><code class="language-clojure">&#40;ns command-line-example
+  &#40;:require &#91;clojure.contrib.command-line :as ccl&#93;&#41;&#41;
+
+&#40;defn -main &#91;&amp; args&#93;
+  &#40;ccl/with-command-line args
+    &quot;Command line demo&quot;
+    &#91;&#91;cow &quot;This is the cows name&quot; &quot;cow&quot;&#93;
+     &#91;chicken &quot;This specifies the chickens name&quot;&#93;
+     &#91;milk? m? &quot;Should you milk the cow?&quot;&#93;
+     extras&#93;
+    &#40;println &quot;cow's name: &quot; cow&#41;
+    &#40;println &quot;chicken's name: &quot; chicken&#41;
+    &#40;println &quot;milk?: &quot; milk?&#41;
+    &#40;println &quot;extra args: &quot; extras&#41;&#41;&#41;
+</code></pre><p>And here is an example of calling that <code>-main</code> function from the repl.</p><pre><code class="language-bash">$ lein run :cc --cow Herb --milk other args
+cow's name:  Herb
+chicken's name:  nil
+milk?:  true
+extra args:  &#91;other args&#93;
+</code></pre><h3>Using some other library</h3><p>Another option is to use some library that isn't found in <code>clojure.contrib</code>. One example of this is <a href='https://github.com/gar3thjon3s/clargon'>clargon</a>. Clargon is a library that <a href='http://blog.gaz-jones.com/'>Gaz Jones</a> (his blog post <a href='http://blog.gaz-jones.com/post/2528825514/command-line-applications-in-clojure'>here</a>) wrote. The documentation (both in his blog post and through the github page and tests) is the primary reason I started using it.</p><p>Pros of clargon:</p><ul><li>Great documentation. Makes it quick to get started.</li><li>Can specify functions to transform arguments prior to gaining access to them</li><li>You specify if an argument is required or optional.</li><li>Responds to <code>-h</code> and <code>--help</code>.</li></ul><p>One potential negative of using clargon is that it isn't a <code>clojure.contrib</code> library. This means there is slightly more friction to start using it on your project as, unlike <code>clojure.contrib</code>, you are probably not already depending on it.</p><p>Below is an example similar to the above <code>clojure.contrib.command-line</code> example. One important difference is that some arguments are now specified as either required or optional. If a required argument is not specified then an error is printed and execution stops.</p><pre><code class="language-clojure">&#40;ns clargon-example
+  &#40;:require &#91;clargon.core :as c&#93;&#41;&#41;
+
+&#40;defn -main
+  &#91;&amp; args&#93;
+  &#40;let &#91;opts
+        &#40;c/clargon
+         args
+         &#40;c/optional &#91;&quot;--cow&quot; &quot;Specify the cow's name&quot; :default &quot;cow&quot;&#93;&#41;
+         &#40;c/required &#91;&quot;--chicken&quot; &quot;Chicken's name&quot;&#93;&#41;
+         &#40;c/optional &#91;&quot;-m?&quot; &quot;--milk?&quot; &quot;should you milk the cow?&quot;&#93;&#41;&#41;&#93;
+    &#40;println args&#41;
+    &#40;println opts&#41;&#41;&#41;
+</code></pre><p><code>optional</code> and <code>required</code> both take a vector that defines the specification of a flag. Starting with the first element in that vector, each element that is a string and starts with a '-' is considered a potential flag for that argument. The last flag is stripped of leading '-' characters and is considered the name of that flag (unless a <code>:name</code> option is specified later). The name is used to look up the value of the argument in the option map that is returned by the <code>clargon</code> function. If the next element after the last flag is a string then it is considered the documentation for that flag. When clargon runs into a non-string element then it and everything after it are considered options and should be specified as key value pairs. Options that do something are <code>:default</code>, <code>:name</code>, and <code>:required</code>.</p><p><code>optional</code> and <code>required</code> both can take a function as a second argument. This function will be passed the argument for that flag and should return a transformed version of it. Below is an example using this functionality to specify a required flag that takes a comma separated list of files. These comma separated files are split apart and stuck into a vector.</p><pre><code class="language-clojure">&#40;ns clargon-example
+  &#40;:require &#91;clargon.core :as c&#93;&#41;&#41;
+
+&#40;defn -main
+  &#91;&amp; args&#93;
+  &#40;let &#91;opts &#40;c/clargon
+              args
+              &#40;c/required &#91;&quot;--files&quot; &quot;Files to process&quot;&#93;
+                          #&#40;vec &#40;.split % &quot;,&quot;&#41;&#41;&#41;&#41;&#93;
+    &#40;println &quot;Parsed opts: &quot; opts&#41;&#41;&#41;
+</code></pre><p>Below is the above example being ran.</p><pre><code class="language-clojure">$ lein run :clargon --files one.txt,two.txt,three.txt
+Parsed opts:  {:files &#91;one.txt two.txt three.txt&#93;}
+</code></pre><p>Clargon supports some more advanced nested argument handling that I'm not going to go into here. If you want to know more about clargon I'd recommend reading reading Gaz's <a href='http://blog.gaz-jones.com/post/2528825514/command-line-applications-in-clojure'>blog post</a> and the <a href='https://github.com/gar3thjon3s/clargon'>clargon</a> readme and tests.</p><h3>End</h3><p>There are many more ways to handle command line parsing in Clojure. You are not limited to any of the three above. I've personally found clargon to hit all of my needs and plan on continuing to use it.</p>
+  <script src="/highlight/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script></script>
+  <footer>
+    <p xmlns:cc="http://creativecommons.org/ns#" >This work by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://jakemccrary.com">Jake McCrary</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""></a></p> 
+    <a href="/disclosure-policy">Disclosure Policy</a><br/>
+  </footer>
+</body>
+</html>

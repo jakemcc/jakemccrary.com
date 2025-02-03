@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>A retrospective format for remote or co-located teams - Jake McCrary</title>
+  <meta name="author" content="">
+  <!-- <link rel="stylesheet" href="/style.css"> -->
+
+  <meta itemprop="name" content="A retrospective format for remote or co-located teams - Jake McCrary" />
+  
+  <meta itemprop="description" content="Retrospectives are useful regardless of being located in an office or working remotely. Here is a simple format for running remote or in-person retros" />
+  
+
+  <!-- Twitter Card data -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@jakemcc" />
+  <meta name="twitter:title" content="A retrospective format for remote or co-located teams - Jake McCrary" />
+  
+  <meta name="twitter:description" content="Retrospectives are useful regardless of being located in an office or working remotely. Here is a simple format for running remote or in-person retros" />
+  
+  <meta name="twitter:creator" content="@jakemcc" />
+  <!-- <meta name="twitter:image" content="" /> -->
+
+  <!-- Open Graph data -->
+  <meta property="og:site_name" content="Writing by Jake McCrary" />
+  <meta property="og:url" content="https://jakemccrary.com//blog/2020/03/16/a-retrospective-format/" />
+  <meta property="og:title" content="A retrospective format for remote or co-located teams - Jake McCrary" />
+  
+  <meta property="og:description" content="Retrospectives are useful regardless of being located in an office or working remotely. Here is a simple format for running remote or in-person retros" />
+  
+  <!-- <meta property="og:image" content="" /> -->
+  
+  <meta property="og:type" content="article" />
+  
+  
+  <!-- maybe rfc blahblahblah it? -->
+  <meta property="article:published_time" content="2020-03-16T23:59:59+00:00" />
+  
+
+  <link rel="canonical" href="https://jakemccrary.com//blog/2020/03/16/a-retrospective-format/">
+
+  <style>
+   body {
+     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+     max-width: 1200px;
+     margin: 0 auto;
+     padding: 1rem;
+     line-height: 1.5;
+   }
+
+   header {
+     margin-bottom: 0.5rem;
+   }
+
+   header h1 {
+     margin: 0;
+     font-size: 2.5rem;
+   }
+
+   header h1 a {
+     color: #333;
+     text-decoration: none;
+   }
+
+   .main-nav {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     padding: 0.5rem 0;
+     margin-bottom: 2rem;
+   }
+
+   .nav-list {
+     display: flex;
+     list-style: none;
+     margin: 0;
+     padding: 0;
+     gap: 1.5rem;
+   }
+
+   .nav-list a {
+     text-decoration: none;
+     color: #333;
+   }
+
+   .search-form fieldset {
+     border: none;
+     margin: 0;
+     padding: 0;
+   }
+
+   .search {
+     padding: 0.5rem;
+     border: none;
+     background: #f5f5f5;
+     border-radius: 4px;
+   }
+
+   /* Blog post list styling */
+   .post-list {
+     list-style: none;
+     padding: 0;
+     margin: 0;
+   }
+
+   .post-list li {
+     margin-bottom: 1.5rem;
+   }
+
+   .post-meta {
+     margin-bottom: 0.25rem;
+   }
+
+   .post-meta time {
+     color: #666;
+     margin-right: 0.5rem;
+   }
+
+   .post-list h2 {
+     display: inline;
+     font-size: 1.1rem;
+     font-weight: 500;
+     margin: 0;
+   }
+
+   .post-list h2 a {
+     color: #0066cc;
+     text-decoration: none;
+   }
+
+   .post-list h2 a:hover {
+     text-decoration: underline;
+   }
+
+   .post-description {
+     color: #444;
+     margin: 0.25rem 0 0 0;
+     line-height: 1.6;
+   }
+
+   .right {
+     float: right;
+   }
+   .left {
+     float: left;
+   }
+   .mr1 {
+     margin-right: 1em;
+   }
+   /* Style the footnote references in the text */
+   [id^="fnref"] sup {
+     font-size: 0.75em;
+     line-height: 0;
+     position: relative;
+     top: -0.5em;
+     padding: 0 0.3em;
+   }
+
+   [id^="fnref"] a {
+     text-decoration: none;
+     background-color: #f3f4f6;
+     color: #4b5563;
+     border-radius: 3px;
+     padding: 2px 6px;
+     transition: all 0.2s ease;
+   }
+
+   [id^="fnref"] a:hover {
+     background-color: #e5e7eb;
+     color: #1f2937;
+   }
+
+   /* Style the footnotes section */
+   .footnotes {
+     margin-top: 3rem;
+     padding-top: 2rem;
+     border-top: 2px solid #e5e7eb;
+   }
+
+   /* Create custom numbering for footnotes */
+   .footnotes li {
+     margin-bottom: 1rem;
+     color: #4b5563;
+   }
+   
+   /* Style the return links in footnotes */
+   .footnotes li a[href^="#fnref"] {
+     text-decoration: none;
+     color: #6b7280;
+     margin-left: 0.5rem;
+     font-size: 0.875rem;
+     transition: color 0.2s ease;
+   }
+
+   .footnotes li a[href^="#fnref"]:hover {
+     color: #374151;
+   }
+
+   blockquote {
+     border-left: 4px solid #d1d5db;
+     padding-left: 1em;
+     margin-left: 1em;
+     color: #4b5563;
+     font-style: italic;
+     background-color: #f9fafb;
+   }
+
+   figure {
+     margin: 1rem 0;
+     text-align: center;
+   }
+
+   figcaption {
+     color: #666;
+     font-size: 0.9em;
+     margin-top: 0.5rem;
+     font-style: italic;
+   }
+
+   .page-header h1 {
+     margin: 0
+   }
+
+   .page-header .publication-date {
+     color: #666;
+     font-size: 0.8em;
+     margin: 0;
+   }
+
+   body > footer {
+     font-size: .8em;
+	   color: #888;
+     margin-top: 1em;
+	   padding-top: 1em;
+     padding-bottom: 1em;
+   }
+   p code, li code {
+     display: inline-block;
+     white-space: nowrap;
+     border: 1px solid #ddd;
+     -moz-border-radius: .4em;
+     -webkit-border-radius: .4em;
+     border-radius: .4em;
+     padding: 0 .3em;
+     margin: -1px 0;
+   }
+
+  </style>
+  <link rel="stylesheet" href="/highlight/base16/tomorrow-night.min.css">
+</head>
+<body>
+<header>
+    <h1><a href="/">Jake McCrary</a></h1>
+  </header>
+  <nav role="navigation" class="main-nav">
+    <ul role="main-navigation" class="nav-list">
+      <li><a href="/">Articles</a></li>
+      <li><a href="/adventures/">Adventures</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/blog/archives/">Archives</a></li>
+      <li><a href="http://feeds.feedburner.com/JakeMccrarysMusings" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+      <li><a href="https://jakemccrary.substack.com/welcome" target="_blank" rel="subscribe-email" title="subscribe via email">Newsletter</a></li>
+    </ul>
+    <form class="search-form" action="https://google.com/search" method="get">
+      <fieldset role="search">
+        <input type="hidden" name="sitesearch" value="jakemccrary.com">
+        <input class="search" type="text" name="q" placeholder="Search">
+      </fieldset>
+    </form>
+  </nav>
+  
+  <div class="page-header">
+    <h1>A retrospective format for remote or co-located teams</h1>
+    
+    
+    <p class="publication-date">Published on 
+      <time datetime="2020-03-16">March 16, 2020</time>
+    </p>
+    
+  </div>
+  
+
+  <blockquote><p> See all of my remote/working-from-home <a href='/blog/categories/remote/'>articles here</a>. </p></blockquote><p><a href='https://retrospectivewiki.org/index.php?title=Agile_Retrospective_Resource_Wiki'>Retrospectives</a> are a useful type of meeting to have periodically with your team. There are many different <a href='https://retrospectivewiki.org/index.php?title=Retrospective_Plans'>formats</a> of retrospectives.</p><p>One of them can be summarized in the following steps:</p><ol><li>Gather the team together</li><li>Set the stage</li><li>Brainstorm answers to the questions <code>What went well?</code> and <code>What needs improvement?</code></li><li>Discuss the answers</li></ol><p>Let's talk about each step and see how each works with an co-located or remote team.</p><h3>Step 1: Gather the team</h3><p>This step is self explanatory. If you are an in-person team, then this is gathering everyone together in a room for some allotted about of time. If you are a remote team, or have remote folks on your team, then this is gathering everyone together in a video conference.</p><p>Preferably everyone in the retro is communicating in same way. This means if <strong>anyone</strong> is remote, it is preferable that <strong>everyone</strong> join the video conference from their own computer instead of using a single screen and video from a shared conference room. My earlier article about <a href='/blog/2016/06/28/seven-tips-for-successful-remote-meetings/'>tips for remote meetings</a> goes into more details on this topic.</p><p>Everyone using the same communication method puts everyone on the same page and dramatically improves the experience for the remote folks. With a mixed group, we'll want to use some remote collaboration tools anyway, so it is useful for everyone to have their own computer with them. They might as well use it for video communication as well.</p><h3>Step 2: Set the stage</h3><p>This part doesn't differ between an entirely in-person meeting, mixed, or entirely remote meeting.</p><p>Take the time to set the stage for the meeting. Remind everyone that we're here to improve and to listen with an open mind. Remind everyone to try to not make things personal and not take things personally. This is a good time to read the <a href='https://retrospectivewiki.org/index.php?title=The_Prime_Directive'>Prime Directive</a>.</p><p>This is also a good time to set the boundaries of the discussion. What is the retrospective covering? Is it covering the last few weeks? The last quarter? The new working from home experience? Pick a topic so everyone in the meeting focuses on the same things.</p><h3>Step 3: Answer the questions</h3><p>In this step, we will answer the questions <code>What went well?</code> and <code>What needs improvement?</code> and use those answers for discussion in the remainder of the meeting. Timebox this step to 5 to 10 minutes.</p><p>In an in-person setting, this is often done through the use of <a href='https://www.post-it.com/3M/en_US/post-it/products/~/Post-it-Products/Notes/Super-Sticky/?N=4327+5927575+7568222+3294529207+3294857497&rt=r3'>Post-it</a> notes. Give each attendee a marker and a stack of notes and have each person write down as many answers as they can come up with, one per post-it note, to the two questions. Dedicate a section of a whiteboard or wall for each question and have people bring the generated answers to the respective sections. Try to group the answers by topics.</p><p>With a remote meeting, you don't have the physical whiteboard and cards. That is perfectly fine! Once you figure out your remote collaboration tools, this part of the retrospective isn't difficult.</p><p>I've mostly done remote retrospectives using <a href='https://trello.com/'>Trello</a>. Trello works great for this as it is multi-user and does a great job of presenting lists to a group. Here is how previous teams I've worked with setup Trello for remote retrospectives.</p><p>First, make a Trello board and make sure everyone has an invite to view and edit the board. Second, add the following columns to the board.</p><p><img src="/images/remote-retros/retros-first-three-columns.png" alt="First three columns before any cards" title="First three columns before any cards" /></p><p>The first column is for Step 2 of the process and is there to remind everyone why we're all spending time in this meeting.</p><p>Columns two and three are used in this step. Have attendees add cards to these columns as they come up with answers If anyone notices duplicates during this time frame, move them near each other by dragging them up or down in the column. If you notice someone else has already put a card that you'd put up there, don't bother putting it down again (this differs from the in-person meeting).</p><p><img src="/images/remote-retros/first-three-before-voting.png" alt="First three columns with cards before voting" /></p><h4>[remote only] Step 3.5: Vote on cards</h4><p>This step sneaks into the remote retrospective and is missing from the in-person retro. In the in-person retro, duplication of post-it notes serves as this voting stage.</p><p>Once all the answers have been generated, or time is up, it is time to vote on what will be discussed in the next step. Only have people vote on the <code>What needs improvement?</code> answers.</p><p>There are at least two ways of doing this in Trello but my favorite is having attendees hover their mouse cursor over the card and then hit <code>space bar</code><a href='#fn-1' id='fnref1'><sup>1</sup></a>. This sticks their avatar on the card (in Trello speak, I believe this is called joining a card). You can either restrict folks to a certain number of votes, say 3, or let them go wild and vote as many times as they want. I haven't found the outcomes to be much different and find infinite votes more fun.</p><p><img src="/images/remote-retros/first-three-columns-with-votes.png" alt="First three columns with votes" /></p><p>Once voting is finished (again, timer or when it seems to have reached an end), have one person sort the cards by number of votes with the highest votes at the top of the list.</p><p><img src="/images/remote-retros/first-three-columns-votes-sorted.png" alt="First three columns with cards sorted by votes" /></p><h3>Step 4: Discuss the answers</h3><p>With in-person or remote retros, go over the answers to <code>What went well?</code> first. This starts the discussion with positive feelings. This part usually goes pretty fast as we're just celebrating wins and not having a long discussions about them.</p><p>Next, start discussing the answers to <code>What needs improvement?</code></p><p>For each topic being discussed, set a five minute timer. At the end of the five minutes, do a quick poll of the attendees on if the topic should be continued or not. If it should be continued, start a three minute timer and continue discussion. At the end of those three minutes, repeat the vote for continuing or not.</p><p>Throughout the discussion, try to be mindful of people dominating conversation and give everyone a chance to voice their thoughts. Try to figure out some next steps to take to actually start making improvements on what needs to be improved.</p><p>The above is generic advice for remote or in-person retros. When you're running a remote retro using Trello, it can be useful to do the following as well.</p><p>You should add two more columns, <code>Next Steps</code> and <code>Discussed</code>, to the right of the <code>What needs improvement?</code> column.</p><p><img src="/images/remote-retros/last-three-columns-before-discussion.png" alt="Additional columns added to board" /></p><p>Since your cards are sorted in the <code>What needs improvement?</code> column, you'll always be talking about the top card. As discussion finishes, move it from the top of the <code>What needs improvement?</code> column into the <code>Discussed</code> column. As <code>Next Steps</code> are discovered, add cards to the <code>Next Steps</code> column and assign the people responsible for following up to the card. Below is an example of those three columns after discussing two cards.</p><p><img src="/images/remote-retros/final-three-columns-post-discussion.png" alt="Final state of last three columns" /></p><p>When voting on continuing discussion or not, it can be useful to have a hand signal for taking the vote and for continuing or ending the discussion. We'd do a quick thumbs up or thumbs down and if half the team wants to keep going then we'd seamlessly start the next timer.</p><h2>Conclusion</h2><p>Retrospectives can be a very handy tool for a team's continuous improvement. If time isn't provided for reflecting, then reflecting does not happen and this makes improving harder.</p><p>Remote retrospectives provide a challenge since most of us only have experience using physical sticky notes or whiteboards for collecting answers. We don't need to recreate the same form factor for remote retrospectives. Using remote collaboration tools, such as Trello, that don't recreate the sticky-note-on-wall experience can lead to initial confusion but, once familiar with them, the experience is pleasant and allows for greater participation.</p><p>How is participation increased? Well, in an in-person retrospective you often are unable to read what everyone else has stuck up on the wall because of physical distance. With a remote retro, you're able to read every answer added to the lists.</p><p>Don't be afraid of running a remote retrospective. They can be incredibly useful. <ol class='footnotes'><li id='fn-1'>The alternative method I'm aware of is to use a Trello Power-up to enable voting on cards. But why bother doing this when you can just stick faces on cards.<a href='#fnref1'>&#8617;</a></li></ol></p>
+  <script src="/highlight/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script></script>
+  <footer>
+    <p xmlns:cc="http://creativecommons.org/ns#" >This work by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://jakemccrary.com">Jake McCrary</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""></a></p> 
+    <a href="/disclosure-policy">Disclosure Policy</a><br/>
+  </footer>
+</body>
+</html>

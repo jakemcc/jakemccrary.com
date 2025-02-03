@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>Using Incanter to review my 2013 reading - Jake McCrary</title>
+  <meta name="author" content="">
+  <!-- <link rel="stylesheet" href="/style.css"> -->
+
+  <meta itemprop="name" content="Using Incanter to review my 2013 reading - Jake McCrary" />
+  
+
+  <!-- Twitter Card data -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@jakemcc" />
+  <meta name="twitter:title" content="Using Incanter to review my 2013 reading - Jake McCrary" />
+  
+  <meta name="twitter:creator" content="@jakemcc" />
+  <!-- <meta name="twitter:image" content="" /> -->
+
+  <!-- Open Graph data -->
+  <meta property="og:site_name" content="Writing by Jake McCrary" />
+  <meta property="og:url" content="https://jakemccrary.com//blog/2014/01/01/using-incanter-to-review-my-2013-reading/" />
+  <meta property="og:title" content="Using Incanter to review my 2013 reading - Jake McCrary" />
+  
+  <!-- <meta property="og:image" content="" /> -->
+  
+  <meta property="og:type" content="article" />
+  
+  
+  <!-- maybe rfc blahblahblah it? -->
+  <meta property="article:published_time" content="2014-01-01T23:59:59+00:00" />
+  
+
+  <link rel="canonical" href="https://jakemccrary.com//blog/2014/01/01/using-incanter-to-review-my-2013-reading/">
+
+  <style>
+   body {
+     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+     max-width: 1200px;
+     margin: 0 auto;
+     padding: 1rem;
+     line-height: 1.5;
+   }
+
+   header {
+     margin-bottom: 0.5rem;
+   }
+
+   header h1 {
+     margin: 0;
+     font-size: 2.5rem;
+   }
+
+   header h1 a {
+     color: #333;
+     text-decoration: none;
+   }
+
+   .main-nav {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     padding: 0.5rem 0;
+     margin-bottom: 2rem;
+   }
+
+   .nav-list {
+     display: flex;
+     list-style: none;
+     margin: 0;
+     padding: 0;
+     gap: 1.5rem;
+   }
+
+   .nav-list a {
+     text-decoration: none;
+     color: #333;
+   }
+
+   .search-form fieldset {
+     border: none;
+     margin: 0;
+     padding: 0;
+   }
+
+   .search {
+     padding: 0.5rem;
+     border: none;
+     background: #f5f5f5;
+     border-radius: 4px;
+   }
+
+   /* Blog post list styling */
+   .post-list {
+     list-style: none;
+     padding: 0;
+     margin: 0;
+   }
+
+   .post-list li {
+     margin-bottom: 1.5rem;
+   }
+
+   .post-meta {
+     margin-bottom: 0.25rem;
+   }
+
+   .post-meta time {
+     color: #666;
+     margin-right: 0.5rem;
+   }
+
+   .post-list h2 {
+     display: inline;
+     font-size: 1.1rem;
+     font-weight: 500;
+     margin: 0;
+   }
+
+   .post-list h2 a {
+     color: #0066cc;
+     text-decoration: none;
+   }
+
+   .post-list h2 a:hover {
+     text-decoration: underline;
+   }
+
+   .post-description {
+     color: #444;
+     margin: 0.25rem 0 0 0;
+     line-height: 1.6;
+   }
+
+   .right {
+     float: right;
+   }
+   .left {
+     float: left;
+   }
+   .mr1 {
+     margin-right: 1em;
+   }
+   /* Style the footnote references in the text */
+   [id^="fnref"] sup {
+     font-size: 0.75em;
+     line-height: 0;
+     position: relative;
+     top: -0.5em;
+     padding: 0 0.3em;
+   }
+
+   [id^="fnref"] a {
+     text-decoration: none;
+     background-color: #f3f4f6;
+     color: #4b5563;
+     border-radius: 3px;
+     padding: 2px 6px;
+     transition: all 0.2s ease;
+   }
+
+   [id^="fnref"] a:hover {
+     background-color: #e5e7eb;
+     color: #1f2937;
+   }
+
+   /* Style the footnotes section */
+   .footnotes {
+     margin-top: 3rem;
+     padding-top: 2rem;
+     border-top: 2px solid #e5e7eb;
+   }
+
+   /* Create custom numbering for footnotes */
+   .footnotes li {
+     margin-bottom: 1rem;
+     color: #4b5563;
+   }
+   
+   /* Style the return links in footnotes */
+   .footnotes li a[href^="#fnref"] {
+     text-decoration: none;
+     color: #6b7280;
+     margin-left: 0.5rem;
+     font-size: 0.875rem;
+     transition: color 0.2s ease;
+   }
+
+   .footnotes li a[href^="#fnref"]:hover {
+     color: #374151;
+   }
+
+   blockquote {
+     border-left: 4px solid #d1d5db;
+     padding-left: 1em;
+     margin-left: 1em;
+     color: #4b5563;
+     font-style: italic;
+     background-color: #f9fafb;
+   }
+
+   figure {
+     margin: 1rem 0;
+     text-align: center;
+   }
+
+   figcaption {
+     color: #666;
+     font-size: 0.9em;
+     margin-top: 0.5rem;
+     font-style: italic;
+   }
+
+   .page-header h1 {
+     margin: 0
+   }
+
+   .page-header .publication-date {
+     color: #666;
+     font-size: 0.8em;
+     margin: 0;
+   }
+
+   body > footer {
+     font-size: .8em;
+	   color: #888;
+     margin-top: 1em;
+	   padding-top: 1em;
+     padding-bottom: 1em;
+   }
+   p code, li code {
+     display: inline-block;
+     white-space: nowrap;
+     border: 1px solid #ddd;
+     -moz-border-radius: .4em;
+     -webkit-border-radius: .4em;
+     border-radius: .4em;
+     padding: 0 .3em;
+     margin: -1px 0;
+   }
+
+  </style>
+  <link rel="stylesheet" href="/highlight/base16/tomorrow-night.min.css">
+</head>
+<body>
+<header>
+    <h1><a href="/">Jake McCrary</a></h1>
+  </header>
+  <nav role="navigation" class="main-nav">
+    <ul role="main-navigation" class="nav-list">
+      <li><a href="/">Articles</a></li>
+      <li><a href="/adventures/">Adventures</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/blog/archives/">Archives</a></li>
+      <li><a href="http://feeds.feedburner.com/JakeMccrarysMusings" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+      <li><a href="https://jakemccrary.substack.com/welcome" target="_blank" rel="subscribe-email" title="subscribe via email">Newsletter</a></li>
+    </ul>
+    <form class="search-form" action="https://google.com/search" method="get">
+      <fieldset role="search">
+        <input type="hidden" name="sitesearch" value="jakemccrary.com">
+        <input class="search" type="text" name="q" placeholder="Search">
+      </fieldset>
+    </form>
+  </nav>
+  
+  <div class="page-header">
+    <h1>Using Incanter to review my 2013 reading</h1>
+    
+    
+    <p class="publication-date">Published on 
+      <time datetime="2014-01-01">January 1, 2014</time>
+    </p>
+    
+  </div>
+  
+
+  <p>I use <a href='https://goodreads.com'>goodreads</a> to keep track of <a href='https://www.goodreads.com/user/show/3431614-jake-mccrary'>my reading</a> and have since early 2010. I find very useful for capturing what I want to read and reminding me of how I felt about books I've read. I thought it would be fun to take a closer look at what I read in 2013. I'm doing this using <a href='http://clojure.org/'>Clojure</a> with <a href='http://incanter.org/'>Incanter</a>. I haven't used Incanter since I wrote <a href='http://jakemccrary.com/blog/2010/02/21/plotting-time-series-data-with-incanter/'>this</a> post and thought this would be a good opportunity to visit it again.</p><p>First I need to get my data out of goodreads. I've worked with the Goodreads API before <a href='#fn-1' id='fnref1'><sup>1</sup></a> but am not going to use it for this exercise. Instead I'm using the goodreads export functionality (at goodreads follow the links: My Books > import/export) to export a csv file. Having the csv file also lets me cleanup some of the data since some of the book's page counts were missing <a href='#fn-2' id='fnref2'><sup>2</sup></a>.</p><p>Now that I have data it is time to start playing with it. Run <code>lein new goodreads-summary</code> and edit the <code>project.clj</code> file to have a dependency on Incanter.</p><pre><code class="language-clojure">&#40;defproject goodreads-summary &quot;0.1.0-SNAPSHOT&quot;
+  :dependencies &#91;&#91;org.clojure/clojure &quot;1.5.1&quot;&#93;
+                 &#91;org.clojure/data.csv &quot;0.1.2&quot;&#93;
+                 &#91;incanter &quot;1.5.4&quot;&#93;
+                 &#91;clj-time &quot;0.6.0&quot;&#93;&#93;&#41;
+</code></pre><p>Next I'm going to take the csv file and transform it into an Incanter dataset. This is easily done with <a href='http://liebke.github.io/incanter/io-api.html#incanter.io/read-dataset'>incanter.io/read-dataset</a>. It isn't well documented but by passing <code>:keyword-headers false</code> to <code>read-dataset</code> the headers from the csv are not converted to keywords. I'm doing this because some of the goodreads headers contain spaces and dealing with spaces in keywords is a pain. The snippet below has all of the necessary requires for the remainder of the examples.</p><pre><code class="language-clojure">&#40;ns goodreads-summary.core
+  &#40;:require &#91;clojure.data.csv :as csv&#93;
+            &#91;clojure.string :as str&#93;
+            &#91;incanter.core :as incanter&#93;
+            &#91;incanter.io :as io&#93;
+            &#91;incanter.charts :as charts&#93;
+            &#91;clj-time.core :as tc&#93;
+            &#91;clj-time.format :as tf&#93;&#41;&#41;
+    
+&#40;defn read-csv &#91;filepath&#93;
+  &#40;io/read-dataset filepath :header true :keyword-headers false&#41;&#41;
+</code></pre><p>Calling <code>read-csv</code> with the path to the exported goodreads data results in dataset. If you want to view the data use <a href='http://liebke.github.io/incanter/core-api.html#incanter.core/view'>incanter.core/view</a>. Running <code>&#40;incanter/view &#40;read-csv &quot;goodreads&#95;export.csv&quot;&#41;&#41;</code> pops up a grid of with all the data. I don't care about most of the columns so lets define a function that selects out the few I care about.</p><pre><code class="language-clojure">&#40;defn select-columns &#91;dataset&#93;
+  &#40;incanter/sel dataset :cols &#91;&quot;Number of Pages&quot; &quot;Date Read&quot; &quot;Bookshelves&quot; &quot;Exclusive Shelf&quot;&#93;&#41;&#41;
+</code></pre><p>Selecting columns is done with <a href='http://liebke.github.io/incanter/core-api.html#incanter.core/sel'>incanter.core/sel</a>. Like most Incanter functions it has many overloads. One way to use it is to pass a dataset with a vector of columns you want to select.</p><p>Filtering a dataset is done using <a href='http://liebke.github.io/incanter/core-api.html#incanter.core/$where'>incanter.core/$where</a>. Goodreads has three default shelves <strong>to-read</strong>, <strong>currently-reading</strong>, and <strong>read</strong>. To select all your read books you filter of the <strong>Exclusive Shelf</strong> column for <strong>read</strong> books.</p><pre><code class="language-clojure">&#40;defn finished &#91;dataset&#93;
+  &#40;incanter/$where {&quot;Exclusive Shelf&quot; &quot;read&quot;} dataset&#41;&#41;
+</code></pre><p>Filtering for books read in 2013 is a bit more complicated. First I convert the <strong>Date Read</strong> column from a string to a <code>org.joda.time.DateTime</code>. This is done with the combination of <code>transform-date-read-column</code> and <code>parse-date</code>. Some of the my data is missing a <strong>Date Read</strong> value. I'm choosing to handle this by treating missing data as the result of <code>&#40;clj-time.core/date-time 0&#41;</code>.</p><p>The <code>$where</code> in <code>books-read-in-2013</code> is a bit more complicated than the filtering in <code>finished</code>. Here I'm providing a predicate to use instead of just doing an equality comparison.</p><pre><code class="language-clojure">&#40;defn parse-date &#91;date-str&#93;
+  &#40;if date-str
+    &#40;tf/parse &#40;tf/formatter &quot;yyyy/MM/dd&quot;&#41; date-str&#41;
+    &#40;tc/date-time 0&#41;&#41;&#41;
+    
+&#40;defn transform-date-read-column &#91;dataset&#93;
+  &#40;incanter/transform-col dataset &quot;Date Read&quot; parse-date&#41;&#41;
+    
+&#40;defn date-greater-than-pred &#91;date&#93;
+  &#40;fn &#91;challenger&#93;
+    &#40;&gt; &#40;.compareTo challenger date&#41; 0&#41;&#41;&#41;
+    
+&#40;defn books-read-in-2013 &#91;dataset&#93;
+  &#40;let &#91;finished &#40;finished &#40;select-columns dataset&#41;&#41;
+        with-dates &#40;incanter/$where {&quot;Date Read&quot; {:fn identity}} finished&#41;
+        with-date-objects &#40;transform-date-read-column with-dates&#41;&#93;
+    &#40;incanter/$where {&quot;Date Read&quot; {:fn &#40;date-greater-than-pred &#40;parse-date &quot;2012/12/31&quot;&#41;&#41;}}
+                     with-date-objects&#41;&#41;&#41;
+</code></pre><p>Now we have a dataset that that contains only books read in 2013 (well, until I read a book in 2014 and the filter above also grabs books in 2014). Now to generate some analytic for each month. First lets add a <strong>Month</strong> column to our data. Originally I wrote the function below. It uses <code>incanter.core/$map</code> to generate the data, makes a dataset with the new data, and then adds that to the original dataset.</p><pre><code class="language-clojure">&#40;defn add-month-read-column &#91;dataset&#93;
+  &#40;let &#91;month-read &#40;incanter/$map tc/month &quot;Date Read&quot; dataset&#41;
+        month-dataset &#40;incanter/dataset &#91;&quot;Month&quot;&#93; month-read&#41;
+        with-month-read &#40;incanter/conj-cols dataset month-dataset&#41;&#93;
+    with-month-read&#41;&#41;
+</code></pre><p>When I wrote the above code it seemed like there should be a better way. While writing this post I stumbled across <a href='http://liebke.github.io/incanter/core-api.html#incanter.core/add-derived-column'>incanter.core/add-derived-column</a>. Switching to <code>add-derived-column</code> makes <code>add-month-read-column</code> almost trivial.</p><pre><code class="language-clojure">&#40;defn add-month-read-column &#91;dataset&#93;
+  &#40;incanter/add-derived-column &quot;Month&quot; &#91;&quot;Date Read&quot;&#93; tc/month dataset&#41;&#41;
+</code></pre><p>Now that we have <code>add-month-read-column</code>  we can now start aggregating some stats. Lets write code for calculating the pages read per month.</p><pre><code class="language-clojure">&#40;defn pages-by-month &#91;dataset&#93;
+  &#40;let &#91;with-month-read &#40;add-month-read-column dataset&#41;&#93;
+    &#40;-&gt;&gt; &#40;incanter/$rollup :sum &quot;Number of Pages&quot; &quot;Month&quot; with-month-read&#41;
+         &#40;incanter/$order &quot;Month&quot; :asc&#41;&#41;&#41;&#41;
+</code></pre><p>That was pretty easy. Lets write a function to count the number of books read per month.</p><pre><code class="language-clojure">&#40;defn book-count-by-month &#91;dataset&#93;
+  &#40;let &#91;with-month-read &#40;add-month-read-column dataset&#41;&#93;
+    &#40;-&gt;&gt; &#40;incanter/$rollup :count &quot;Number of books&quot; &quot;Month&quot; with-month-read&#41;
+         &#40;incanter/$order &quot;Month&quot; :asc&#41;&#41;&#41;&#41;
+</code></pre><p><code>pages-by-month</code> and <code>book-count-by-month</code> are very similar. Each uses <a href='http://liebke.github.io/incanter/core-api.html#incanter.core/$rollup'>incanter.core/$rollup</a> to calculate per month stats. The first argument to <code>$rollup</code> can be a function that takes a sequence of values or one of the supported magical "function identifier keywords".</p><p>Next lets combine the data together so we can print out a nice table. While we are at it lets add another column.</p><pre><code class="language-clojure">&#40;defn stats-by-month &#91;dataset&#93;
+  &#40;-&gt;&gt; &#40;incanter/$join &#91;&quot;Month&quot; &quot;Month&quot;&#93;
+                     &#40;pages-by-month dataset&#41;
+                     &#40;book-count-by-month dataset&#41;&#41;
+       &#40;incanter/rename-cols {&quot;Number of Pages&quot; &quot;Page Count&quot;
+                              &quot;Number of books&quot; &quot;Book Count&quot;}&#41;
+       &#40;incanter/add-derived-column &quot;Pages/Books&quot;
+                                  &#91;&quot;Page Count&quot; &quot;Book Count&quot;&#93;
+                                  &#40;fn &#91;p b&#93; &#40;Math/round &#40;double &#40;/ p b&#41;&#41;&#41;&#41;&#41;&#41;&#41;
+</code></pre><p><code>stats-by-month</code> returns a dataset which when printed looks like the following table. It joins the data, renames columns, and adds a derived column.</p><pre><code>| Month | Book Count | Page Count | Pages/Books |
+|-------+------------+------------+-------------|
+|     1 |          6 |       1279 |         213 |
+|     2 |          2 |       1251 |         626 |
+|     3 |          8 |       2449 |         306 |
+|     4 |          5 |       1667 |         333 |
+|     5 |          6 |       2447 |         408 |
+|     6 |          5 |       1609 |         322 |
+|     7 |          5 |       1445 |         289 |
+|     8 |          5 |       2229 |         446 |
+|     9 |          2 |        963 |         482 |
+|    10 |          5 |       1202 |         240 |
+|    11 |          5 |       2248 |         450 |
+|    12 |          7 |       1716 |         245 |</code></pre><p>Great. Now we have a little ascii table. Lets get graphical and make some bar charts.</p><pre><code class="language-clojure">&#40;defn chart-column-by-month &#91;column dataset&#93;
+  &#40;let &#91;select &#40;fn &#91;column&#93; &#40;incanter/sel dataset :cols column&#41;&#41;
+        months &#40;select &quot;Month&quot;&#41;&#93;
+    &#40;charts/bar-chart months &#40;select column&#41;
+                      :y-label column :x-label &quot;Month&quot;&#41;&#41;&#41;
+    
+&#40;defn chart-page-count-by-month &#91;dataset&#93;
+  &#40;chart-column-by-month &quot;Page Count&quot; dataset&#41;&#41;
+    
+&#40;defn chart-book-count-by-month &#91;dataset&#93;
+  &#40;chart-column-by-month &quot;Book Count&quot; dataset&#41;&#41;
+
+&#40;defn view-page-count-chart &#91;&#93;
+  &#40;-&gt; &#40;read-csv &quot;goodreads&#95;export.csv&quot;&#41;
+      books-read-in-2013
+      stats-by-month
+      chart-page-count-by-month
+      incanter/view&#41;&#41;
+</code></pre><p>Running the snippet <code>view-page-count-chart</code> produces a pop-up with the below bar chart. The chart actually surprises me as I fully expected to have higher page counts during the winter months than the summer months. This chart and analysis is pretty useless though without knowing the difficulty of the pages read. For example, last February I read <a href='http://www.amazon.com/gp/product/0316920045'>Infinite Jest</a>. Knowing that I don't feel like having a low page count in that month is slacking at all.</p><p><img src="/images/page-count-by-month.png" alt="Bar chart of total page count by month" title="Bar chart of total page count by month" /></p><h3>2013 Summary</h3><p>2013 was a pretty big year of reading. I read more books this past year than all other years that I have data. I also read some of the best books I've ever read. Not only that but I actually created multiple <a href='#fn-3' id='fnref3'><sup>3</sup></a> custom Kindle dictionaries to help improve my (and others) reading experience.</p><p>Summary table <a href='#fn-4' id='fnref4'><sup>4</sup></a>:</p><pre><code>|   :shelf | :books | :pages |
+|----------+--------+--------|
+| non-tech |     51 |  17798 |
+|     tech |     10 |   2707 |
+|     read |     61 |  20505 |
+</code></pre><h3>Plans for 2014</h3><p>I'm planning on reading a similar amount in this upcoming year but will probably have a bit more non-fiction books. First step towards doing that is to start classifying my books as non-fiction or fiction. I'm also planning on rereading at least two books that I've read in the last few years. This is unusual for me because I don't often reread books that quickly.</p><p>If you have any book recommendations feel free to leave them in the comments or contact me through twitter or email. <ol class='footnotes'><li id='fn-1'>A project on Heroku that takes your to-read list from goodreads and queries the Chicago Public Library to see if books are available. Someday I'll give it some love and make it usable by others.<a href='#fnref1'>&#8617;</a></li><li id='fn-2'>I've also applied to be a goodreads librarian so I can actually fix their data as well.<a href='#fnref2'>&#8617;</a></li><li id='fn-3'>One for <a href='http://jakemccrary.com/blog/2013/07/09/releasing-the-functional-javascript-companion/'>Functional JavaScript</a> and another for <a href='http://gum.co/dune-dictionary'>Dune</a>. If you want a custom Kindle dictionary made feel free to reach out.<a href='#fnref3'>&#8617;</a></li><li id='fn-4'>tech shelf only includes programming books.<a href='#fnref4'>&#8617;</a></li></ol></p>
+  <script src="/highlight/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script></script>
+  <footer>
+    <p xmlns:cc="http://creativecommons.org/ns#" >This work by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://jakemccrary.com">Jake McCrary</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""></a></p> 
+    <a href="/disclosure-policy">Disclosure Policy</a><br/>
+  </footer>
+</body>
+</html>

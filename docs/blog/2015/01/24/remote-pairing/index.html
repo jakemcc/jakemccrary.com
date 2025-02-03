@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>Remote Pairing - Jake McCrary</title>
+  <meta name="author" content="">
+  <!-- <link rel="stylesheet" href="/style.css"> -->
+
+  <meta itemprop="name" content="Remote Pairing - Jake McCrary" />
+  
+
+  <!-- Twitter Card data -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@jakemcc" />
+  <meta name="twitter:title" content="Remote Pairing - Jake McCrary" />
+  
+  <meta name="twitter:creator" content="@jakemcc" />
+  <!-- <meta name="twitter:image" content="" /> -->
+
+  <!-- Open Graph data -->
+  <meta property="og:site_name" content="Writing by Jake McCrary" />
+  <meta property="og:url" content="https://jakemccrary.com//blog/2015/01/24/remote-pairing/" />
+  <meta property="og:title" content="Remote Pairing - Jake McCrary" />
+  
+  <!-- <meta property="og:image" content="" /> -->
+  
+  <meta property="og:type" content="article" />
+  
+  
+  <!-- maybe rfc blahblahblah it? -->
+  <meta property="article:published_time" content="2015-01-24T23:59:59+00:00" />
+  
+
+  <link rel="canonical" href="https://jakemccrary.com//blog/2015/01/24/remote-pairing/">
+
+  <style>
+   body {
+     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+     max-width: 1200px;
+     margin: 0 auto;
+     padding: 1rem;
+     line-height: 1.5;
+   }
+
+   header {
+     margin-bottom: 0.5rem;
+   }
+
+   header h1 {
+     margin: 0;
+     font-size: 2.5rem;
+   }
+
+   header h1 a {
+     color: #333;
+     text-decoration: none;
+   }
+
+   .main-nav {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     padding: 0.5rem 0;
+     margin-bottom: 2rem;
+   }
+
+   .nav-list {
+     display: flex;
+     list-style: none;
+     margin: 0;
+     padding: 0;
+     gap: 1.5rem;
+   }
+
+   .nav-list a {
+     text-decoration: none;
+     color: #333;
+   }
+
+   .search-form fieldset {
+     border: none;
+     margin: 0;
+     padding: 0;
+   }
+
+   .search {
+     padding: 0.5rem;
+     border: none;
+     background: #f5f5f5;
+     border-radius: 4px;
+   }
+
+   /* Blog post list styling */
+   .post-list {
+     list-style: none;
+     padding: 0;
+     margin: 0;
+   }
+
+   .post-list li {
+     margin-bottom: 1.5rem;
+   }
+
+   .post-meta {
+     margin-bottom: 0.25rem;
+   }
+
+   .post-meta time {
+     color: #666;
+     margin-right: 0.5rem;
+   }
+
+   .post-list h2 {
+     display: inline;
+     font-size: 1.1rem;
+     font-weight: 500;
+     margin: 0;
+   }
+
+   .post-list h2 a {
+     color: #0066cc;
+     text-decoration: none;
+   }
+
+   .post-list h2 a:hover {
+     text-decoration: underline;
+   }
+
+   .post-description {
+     color: #444;
+     margin: 0.25rem 0 0 0;
+     line-height: 1.6;
+   }
+
+   .right {
+     float: right;
+   }
+   .left {
+     float: left;
+   }
+   .mr1 {
+     margin-right: 1em;
+   }
+   /* Style the footnote references in the text */
+   [id^="fnref"] sup {
+     font-size: 0.75em;
+     line-height: 0;
+     position: relative;
+     top: -0.5em;
+     padding: 0 0.3em;
+   }
+
+   [id^="fnref"] a {
+     text-decoration: none;
+     background-color: #f3f4f6;
+     color: #4b5563;
+     border-radius: 3px;
+     padding: 2px 6px;
+     transition: all 0.2s ease;
+   }
+
+   [id^="fnref"] a:hover {
+     background-color: #e5e7eb;
+     color: #1f2937;
+   }
+
+   /* Style the footnotes section */
+   .footnotes {
+     margin-top: 3rem;
+     padding-top: 2rem;
+     border-top: 2px solid #e5e7eb;
+   }
+
+   /* Create custom numbering for footnotes */
+   .footnotes li {
+     margin-bottom: 1rem;
+     color: #4b5563;
+   }
+   
+   /* Style the return links in footnotes */
+   .footnotes li a[href^="#fnref"] {
+     text-decoration: none;
+     color: #6b7280;
+     margin-left: 0.5rem;
+     font-size: 0.875rem;
+     transition: color 0.2s ease;
+   }
+
+   .footnotes li a[href^="#fnref"]:hover {
+     color: #374151;
+   }
+
+   blockquote {
+     border-left: 4px solid #d1d5db;
+     padding-left: 1em;
+     margin-left: 1em;
+     color: #4b5563;
+     font-style: italic;
+     background-color: #f9fafb;
+   }
+
+   figure {
+     margin: 1rem 0;
+     text-align: center;
+   }
+
+   figcaption {
+     color: #666;
+     font-size: 0.9em;
+     margin-top: 0.5rem;
+     font-style: italic;
+   }
+
+   .page-header h1 {
+     margin: 0
+   }
+
+   .page-header .publication-date {
+     color: #666;
+     font-size: 0.8em;
+     margin: 0;
+   }
+
+   body > footer {
+     font-size: .8em;
+	   color: #888;
+     margin-top: 1em;
+	   padding-top: 1em;
+     padding-bottom: 1em;
+   }
+   p code, li code {
+     display: inline-block;
+     white-space: nowrap;
+     border: 1px solid #ddd;
+     -moz-border-radius: .4em;
+     -webkit-border-radius: .4em;
+     border-radius: .4em;
+     padding: 0 .3em;
+     margin: -1px 0;
+   }
+
+  </style>
+  <link rel="stylesheet" href="/highlight/base16/tomorrow-night.min.css">
+</head>
+<body>
+<header>
+    <h1><a href="/">Jake McCrary</a></h1>
+  </header>
+  <nav role="navigation" class="main-nav">
+    <ul role="main-navigation" class="nav-list">
+      <li><a href="/">Articles</a></li>
+      <li><a href="/adventures/">Adventures</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/blog/archives/">Archives</a></li>
+      <li><a href="http://feeds.feedburner.com/JakeMccrarysMusings" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+      <li><a href="https://jakemccrary.substack.com/welcome" target="_blank" rel="subscribe-email" title="subscribe via email">Newsletter</a></li>
+    </ul>
+    <form class="search-form" action="https://google.com/search" method="get">
+      <fieldset role="search">
+        <input type="hidden" name="sitesearch" value="jakemccrary.com">
+        <input class="search" type="text" name="q" placeholder="Search">
+      </fieldset>
+    </form>
+  </nav>
+  
+  <div class="page-header">
+    <h1>Remote Pairing</h1>
+    
+    
+    <p class="publication-date">Published on 
+      <time datetime="2015-01-24">January 24, 2015</time>
+    </p>
+    
+  </div>
+  
+
+  <blockquote><p> See all of my remote/working-from-home <a href='/blog/categories/remote/'>articles here</a>. </p></blockquote><p>Over a year ago I joined <a href='http://outpace.com'>Outpace</a>. All of Outpace's developers are remote but we still practice pair programming. As a result I've done a lot of remote pairing. I was skeptical before joining that it would work well and I'm happy to report that I was wrong. Remote pairing works.</p><h2>Why remote pairing?</h2><p>The usual pair programming <a href='http://c2.com/cgi/wiki?PairProgrammingBenefits'>benefits</a> apply to remote pairing; more people know the code, quality is higher, and it provides an opportunity for mentorship. Another benefit, more beneficial in a remote setting, is that it increases **social interaction**.</p><p>The most common response I receive when I tell someone I work from my apartment is "I'd miss the interaction with co-workers." When you work remote you do miss out on the usual in office interaction. Pair programming helps replace some of this. It helps you build and maintain relationships with your remote colleagues.</p><h2>Communication</h2><p>Communication is an important part of pair programming. When you're pairing in person you use both physical and vocal communication. When remote pairing you primarily use vocal communication. You can pick up on some physical cues with video chat but it is hard. You will never notice your pair reaching for their keyboard.</p><p>I've used Google Hangouts, <a href='http://zoom.us'>Zoom</a>, and Skype for communication. Currently I'm primarily using Zoom. It offers high quality video and audio and usually doesn't consume too many resources.</p><p>I recommend not using your computers built-in microphone. You should use headphones with a mic or a directional microphone. You'll sound better and you'll stop your pair from hearing themselves through your computer.</p><p>I use <a href='http://www.amazon.com/gp/product/B005VAORH6'>these headphones</a>. They are cheap, light, and open-eared but are wired. I've been told I sound the best when I'm using them. I also own these <a href='http://www.amazon.com/gp/product/B003VANOFY'>wireless headphones</a>. They are closed-ear, heavier, and wireless. The wireless is great but the closed-ear design causes me to talk differently and by the end of the day my throat is hoarse. Both of these headphones are widely used by my colleagues and I don't think you can go wrong with either one.</p><p>Some people don't like wearing headphones all day. If you are one of those I'd recommend picking up a directional microphone. Many of my colleagues use a <a href='http://www.amazon.com/gp/product/B002OO333Q'>Snowball</a>.</p><h2>Connecting the machines</h2><p>So now you can communicate with your pair. It is time to deal with the main problem in remote pairing. How do you actually work on the same code with someone across the world?</p><p>At Outpace we've somewhat cheated and have standardized our development hardware. Everyone has a computer running OS X and, if they want it, at least one 27 inch monitor (mostly Apple 27 inch displays or a <a href='http://www.amazon.com/gp/product/B009H0XQQY'>Dell</a>) with a resolution of 2560x1440. Since everyone has nearly identical hardware and software we are able to pair using OS X's built-in screen sharing. This allows full sharing of the host's desktop. This full desktop sharing is the best way to emulate working physically next to your pair. This enable the use of any editor and lets you both look at the same browser windows (useful for testing UIs or reading reference material). With decent internet connections both programmers can write code with minimal lag. This is my preferred way of pairing.</p><p>Another option that works well is <a href='http://tmate.io/'>tmate</a>. tmate is a fork of tmux that makes remote pairing easy. It makes it dead simple to have remote developer connect to your machine and share your terminal. This means you are stuck using tools that work in a terminal and, if you are working on a user interface, you need to share that some other way. There generally is less lag when the remote developer is typing.</p><p>A third option is to have the host programmer share their screen using screen sharing built-in to Google Hangouts or <a href='http://zoom.us'>Zoom</a>. This is a quick way to share a screen and is my preferred way of sharing GUIs with more than one other person. With both Zoom and Google Hangouts the remote developer can control the host's machine but it isn't a great experience. If you are pairing this way the remote developer rarely touches the keyboard.</p><h2>Soloing</h2><p>It might seem weird to have a section on soloing in an article about remote pairing. Soloing happens and even in an environment that almost entirely pairs it is important. Not everyone can or wants to pair 100% of the time. Soloing can be recharging. It is important to be self-aware and recognize if you need solo time. Below are a few tips for getting that solo time.</p><p>One way to introduce solo time is to take your lunch at a different time than your pair. This provides both of you and your pair with an opportunity to do a bit of soloing.</p><p>Other short soloing opportunities happen because of meetings and interviews. It isn't uncommon for half of a pair to leave for a bit to join a meeting, give an interview, or jump over to help out another developer for a bit.</p><p>Soloing also happens as a result of uneven team numbers. If your team is odd numbered than there are plenty of opportunities for being a solo developer. Try to volunteer to be the solo developer but be aware of becoming too isolated.</p><h2>Conclusion</h2><p>Remote pairing works. Working at <a href='http://outpace.com'>Outpace</a> has shown me how well it can work. Reasonably fast Internet paired with modern tools can make it seem like you're almost in the same room as your pair.</p>
+  <script src="/highlight/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+  <script></script>
+  <footer>
+    <p xmlns:cc="http://creativecommons.org/ns#" >This work by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://jakemccrary.com">Jake McCrary</a> is licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1" alt=""><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1" alt=""></a></p> 
+    <a href="/disclosure-policy">Disclosure Policy</a><br/>
+  </footer>
+</body>
+</html>
