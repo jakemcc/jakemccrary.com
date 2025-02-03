@@ -2,11 +2,6 @@
 
 set -ex 
 
-if [ -z ${WAS_SOURCED+x} ]; then
-    echo "source Envfile"
-    exit 1
-fi
-
 rm -rf output/*
 bb test
 bb render
