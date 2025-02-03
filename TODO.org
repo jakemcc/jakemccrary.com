@@ -93,19 +93,26 @@ CLOSED: [2025-01-26 Sun 13:48]
 * DONE adventure-camp.html could be under /adventures?
 CLOSED: [2025-01-26 Sun 14:12]
 - CLOSING NOTE [2025-01-26 Sun 14:12]
+* DONE [#B] remove amazon affiliates?
+CLOSED: [2025-01-30 Thu 17:22]
+- CLOSING NOTE [2025-01-30 Thu 17:22]
+- [X] update disclosure policy
+* DONE check out previous markup for help with sharing / description metadata
+CLOSED: [2025-01-30 Thu 17:22]
+- CLOSING NOTE [2025-01-30 Thu 17:22]
 * TODO maybe useful to keep files-that-don't-change separate from the sources? Could just copy the entire tree over than?
 * TODO [#C] comments?
 * TODO disclaimers?
 - [ ] hosted on github
 - [ ] goes through cloudflare
 - [ ] If I do comments => something about those
-* TODO [#B] remove amazon affiliates?
-- [ ] update disclosure policy
 * TODO [#C] display categories for posts?
-* TODO check out previous markup for help with sharing / description metadata
-* TODO line numbers on code blocks?
+* TODO [#C] line numbers on code blocks?
 * TODO check adventure-camp.html redirect
+* TODO maybe make dates care about timestamps? Be a bit less sloppy
+- :date is mostly a date string, except for a couple spots
 * TODO [#C] ways of encouraging folks to browse around
 - [ ] sidebar with recent posts
 - [ ] sidebar with rss and newsletter
 - [ ] bottom of post, next article, previous?
+
