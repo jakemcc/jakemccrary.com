@@ -190,7 +190,8 @@
        (clojure.string/replace-first #"^/" "")
        (clojure.string/replace #"/$" "")
        (str "/")
-       (->> (str root "/")))))
+       (->> (str root (when-not (clojure.string/ends-with? root "/")
+                        "/"))))))
 
 (defn load-sources []
   (when (fs/exists? source-dir)
