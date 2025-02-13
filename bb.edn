@@ -8,4 +8,5 @@
  :tasks
  {:requires ([blog.render])
   render {:task (exec 'blog.render/render)}
+  publish {:task (exec 'blog.render/publish)}
   test {:task (exec 'blog.render/test)}}}

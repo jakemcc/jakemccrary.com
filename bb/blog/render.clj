@@ -2,15 +2,16 @@
   (:refer-clojure :exclude [test])
   (:require [babashka.fs :as fs]
             [babashka.process]
+            [camel-snake-kebab.core :as csk]
+            [camel-snake-kebab.extras :as cske]
             [cheshire.core]
             [clojure.data.xml :as xml]
-            [clojure.string]
+            [clojure.java.io]
             [clojure.set]
+            [clojure.string]
             [hiccup2.core :as hiccup]
             [markdown.core :as markdown]
-            [selmer.parser]
-            [camel-snake-kebab.core :as csk]
-            [camel-snake-kebab.extras :as cske])
+            [selmer.parser])
   (:import (java.time LocalDate
                       LocalDateTime
                       ZoneId
@@ -193,7 +194,7 @@
        (->> (str root (when-not (clojure.string/ends-with? root "/")
                         "/"))))))
 
-(defn load-sources []
+(defn load-sources [include-drafts?]
   (when (fs/exists? source-dir)
     (for [path (fs/glob source-dir "**.markdown")
           :let [source (as-> (markdown->source path) source
@@ -201,7 +202,7 @@
                          (assoc source :output-file (output-file source))
                          (assoc source :template (load-template source))
                          (assoc-in source [:metadata :canonical] (blog-url blog-root (:output-file source))))]
-          :when (or *preview*
+          :when (or include-drafts?
                     (or (not (contains? (:metadata source) :published))
                         (-> source :metadata :published)))]
       source)))
@@ -411,17 +412,16 @@
     (run! fs/delete-tree (fs/list-dir output-dir))
     (fs/create-dir output-dir))
 
-  (binding [*preview* (boolean preview)]
-    (let [sources (load-sources)]
-      (copy-resources)
-      (run! write-post! sources)
-      (write-index! sources)
-      (write-archive! sources)
-      (write-adventures! sources)
-      (write-category-pages! sources)
-      (write-main-feed! sources)
-      (write-json-feed! sources)
-      (write-sitemap! sources))))
+  (let [sources (load-sources (boolean preview))]
+    (copy-resources)
+    (run! write-post! sources)
+    (write-index! sources)
+    (write-archive! sources)
+    (write-adventures! sources)
+    (write-category-pages! sources)
+    (write-main-feed! sources)
+    (write-json-feed! sources)
+    (write-sitemap! sources)))
 
 (defn extract-languages [source]
   (set (map second (re-seq #"language-(\w+)" (:html source)))))
@@ -460,36 +460,57 @@
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defn test [& _args]
   (binding [*preview* true]
-    (let [errors (remove nil? [(assert-code-highlighting! (load-sources))
+    (let [errors (remove nil? [(assert-code-highlighting! (load-sources true))
                                (assert-output-files!)])]
       (when (seq errors)
         (run! println errors)
         (System/exit -1)))))
 
+(defn- publish-draft [source]
+  (println "Publishing" (-> source :metadata :title))
+  (let [lines (clojure.string/split-lines (slurp (:input-file source)))]
+    (with-open [w (clojure.java.io/writer (:input-file source))]
+      (binding [*out* w]
+        (doseq [line lines]
+          (cond
+            (= line "published: false")
+            (println "published: true")
+
+            (clojure.string/starts-with? line "date: ")
+            (println "date:" (rfc-3339-now))
+
+            :else
+            (println line)))))))
+
+(defn publish [& _args]
+  (binding [*preview* true]
+    (let [unpublished (filterv (fn [source] (false? (-> source :metadata :published)))
+                               (load-sources true))]
+      (println "Select a draft to publish:")
+      (doseq [[i s] (map vector (range) unpublished)]
+        (println (format "%s) %s" i (-> s :metadata :title))))
+      (print "Enter a number: ")
+      (flush)
+      (let [selection (read)]
+        (when-not (<= 0 selection (count unpublished))
+          (println "Must pick a valid option")
+          (System/exit 1))
+        (publish-draft (first (drop selection unpublished))))))
+
+  ;;
+  )
+
 (comment
-  (def sources (doall (load-sources)))
+  (def sources (load-sources true))
   (def articles (blog-articles sources))
 
-  (def adventures (filterv adventure? sources))
-  (->yyyy-MM-dd (:start-date (:metadata (first adventures))))
+  (def source (first (filter (fn [a] (clojure.string/includes? (-> a :metadata :title) "2024"))
+                                  sources)))
 
-  (:metadata (last articles))
-  (def r *1)
 
-  (write-adventures! sources)
-  (type (:start-date (:metadata (first adventures))))
-
-  (mapv (comp :title :metadata)
-        (filterv (fn [{:keys [metadata]}]
-                   (some char? (:categories metadata)))
-                 articles))
-  (into #{} (mapcat (comp :categories :metadata)) articles)
-
-  (->> (mapv (juxt #(get-in % [:metadata :local-date])
-                   #(get-in % [:metadata :date]))
-             articles)
-       (sort-by first))
-
+  (publish-draft reading2024)
+  (keys source) ;; (:metadata :html :input-file :output-file :template)
+  
   ;;
   )
 
