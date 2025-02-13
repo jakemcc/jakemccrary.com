@@ -34,7 +34,6 @@
 (def source-dir "source")
 (def output-dir "output")
 (def template-dir "templates")
-(def ^:dynamic *preview* false)
 
 (def default-render-opts
   {:site {:title "Jake McCrary"
@@ -186,13 +185,29 @@
 (defn blog-url
   ([path] (blog-url "" path))
   ([root path]
-   (-> path
-       (clojure.string/replace "index.html" "")
-       (clojure.string/replace-first #"^/" "")
-       (clojure.string/replace #"/$" "")
-       (str "/")
-       (->> (str root (when-not (clojure.string/ends-with? root "/")
-                        "/"))))))
+   (as-> path $
+     (clojure.string/replace $ "index.html" "")
+     (clojure.string/replace-first $ #"^/" "")
+     (clojure.string/replace $ #"/$" "")
+     (cond-> $
+       (not (re-find #".*\..*$" $))
+       (str "/"))
+     (str root
+          (when-not (clojure.string/ends-with? root "/")
+            "/")
+          $))))
+
+(defn assert-blog-url! []
+  (let [r [(= "/hello/" (blog-url "hello"))
+           (= "https://jakemccrary.com/hello/" (blog-url blog-root "hello"))
+           (= "https://jakemccrary.com/hello/" (blog-url blog-root "/hello"))
+           (= "https://jakemccrary.com/hello/" (blog-url blog-root "/hello/"))
+           (= "https://jakemccrary.com/about.html" (blog-url blog-root "/about.html"))
+           (= "https://jakemccrary.com/adventures/deep-water-soloing-over-kinkaid-lake/"
+              (blog-url blog-root "adventures/deep-water-soloing-over-kinkaid-lake/index.html"))]]
+    (when (some false? r)
+      (with-out-str
+        (println "Problem with blog-url, results:" r)))))
 
 (defn load-sources [include-drafts?]
   (when (fs/exists? source-dir)
@@ -459,12 +474,12 @@
 
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defn test [& _args]
-  (binding [*preview* true]
-    (let [errors (remove nil? [(assert-code-highlighting! (load-sources true))
-                               (assert-output-files!)])]
-      (when (seq errors)
-        (run! println errors)
-        (System/exit -1)))))
+  (let [errors (remove nil? [(assert-code-highlighting! (load-sources true))
+                             (assert-output-files!)
+                             (assert-blog-url!)])]
+    (when (seq errors)
+      (run! println errors)
+      (System/exit -1))))
 
 (defn- publish-draft [source]
   (println "Publishing" (-> source :metadata :title))
@@ -483,34 +498,32 @@
             (println line)))))))
 
 (defn publish [& _args]
-  (binding [*preview* true]
-    (let [unpublished (filterv (fn [source] (false? (-> source :metadata :published)))
-                               (load-sources true))]
-      (println "Select a draft to publish:")
-      (doseq [[i s] (map vector (range) unpublished)]
-        (println (format "%s) %s" i (-> s :metadata :title))))
-      (print "Enter a number: ")
-      (flush)
-      (let [selection (read)]
-        (when-not (<= 0 selection (count unpublished))
-          (println "Must pick a valid option")
-          (System/exit 1))
-        (publish-draft (first (drop selection unpublished))))))
+  (let [unpublished (filterv (fn [source] (false? (-> source :metadata :published)))
+                             (load-sources true))]
+    (println "Select a draft to publish:")
+    (doseq [[i s] (map vector (range) unpublished)]
+      (println (format "%s) %s" i (-> s :metadata :title))))
+    (print "Enter a number: ")
+    (flush)
+    (let [selection (read)]
+      (when-not (<= 0 selection (count unpublished))
+        (println "Must pick a valid option")
+        (System/exit 1))
+      (publish-draft (first (drop selection unpublished)))))
 
   ;;
   )
 
 (comment
-  (def sources (load-sources true))
+  (def sources (doall (load-sources true)))
   (def articles (blog-articles sources))
-
+  (map #(-> % :output-file) sources)
   (def source (first (filter (fn [a] (clojure.string/includes? (-> a :metadata :title) "2024"))
-                                  sources)))
-
+                             sources)))
 
   (publish-draft reading2024)
   (keys source) ;; (:metadata :html :input-file :output-file :template)
-  
+
   ;;
   )
 
