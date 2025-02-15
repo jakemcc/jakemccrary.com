@@ -1,4 +1,3 @@
-;; bb.edn
 {:paths ["bb"]
  :deps {markdown-clj/markdown-clj {:mvn/version "1.11.2"}
         org.babashka/http-server {:mvn/version "0.1.11"}
@@ -9,4 +8,5 @@
  {:requires ([blog.render])
   render {:task (exec 'blog.render/render)}
   publish {:task (exec 'blog.render/publish)}
-  test {:task (exec 'blog.render/test)}}}
+  test {:task (exec 'blog.render/test)}
+  list-drafts {:task (exec 'blog.render/list-drafts)}}}

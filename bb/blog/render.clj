@@ -497,6 +497,7 @@
             :else
             (println line)))))))
 
+#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defn publish [& _args]
   (let [unpublished (filterv (fn [source] (false? (-> source :metadata :published)))
                              (load-sources true))]
@@ -509,10 +510,22 @@
       (when-not (<= 0 selection (count unpublished))
         (println "Must pick a valid option")
         (System/exit 1))
-      (publish-draft (first (drop selection unpublished)))))
+      (publish-draft (first (drop selection unpublished))))))
 
-  ;;
-  )
+#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
+(defn list-drafts [& _args]
+  (println "Listing all draft posts:")
+  (println "------------------------")
+  (doseq [draft (filter (fn [source]
+                         (false? (-> source :metadata :published)))
+                       (load-sources true))
+          :let [title (-> draft :metadata :title)
+                date (-> draft :metadata :local-date)]]
+    (if date
+      (println (format "%s (dated: %s)" 
+                      title 
+                      (date->human-readable date)))
+      (println title))))
 
 (comment
   (def sources (doall (load-sources true)))
