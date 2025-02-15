@@ -4,6 +4,9 @@
   <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
   <meta name="author" content="{{ site.author }}">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% if page.redirect_to %}
+  <meta http-equiv="refresh" content="0; url={{ page.redirect_to }}">
+  {% endif %}
   <!-- <link rel="stylesheet" href="/style.css"> -->
 
   <meta itemprop="name" content="{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}" />
