@@ -1,7 +1,3 @@
-ifeq ($(WAS_SOURCED),)
-  $(error WAS_SOURCED is not set, source Envfile)
-endif
-
 .PHONY: help
 help:
 	@grep -E '^[0-9a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | \
@@ -10,13 +6,11 @@ help:
 
 .PHONY: watch
 watch: ## Watch for changes and serve preview of site with drafts
-	bundle exec rake clean
-	bundle exec rake preview
+	./watch-preview.sh
 
 .PHONY: develop
 develop: ## Serve a preview of the site without drafts and refresh changes
-	bundle exec rake clean
-	bundle exec rake develop
+	./watch.sh
 
 .PHONY: new_adventure
 new_adventure: ## Start a new adventure post
@@ -32,12 +26,16 @@ deploy: ## deploy
 
 .PHONY: publish_draft
 publish_draft: ## Publishes a draft
-	bundle exec rake publish_draft
+	bb publish
 
 .PHONY: unpublished
 unpublished: ## List drafts
-	@rg  -g '*markdown' -l 'published: false' source/_posts
+	bb list-drafts
 
-.PHONY: build
-build: ## Generate site
-	bundle exec rake generate
+.PHONY: render
+render: ## Generate site using bb render
+	bb render
+
+.PHONY: render-preview
+render-preview: ## Generate site with drafts using bb render
+	bb render --preview true
