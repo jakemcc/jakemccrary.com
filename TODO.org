@@ -6,7 +6,9 @@
 - [ ] If I do comments => something about those
 * TODO [#C] display categories for posts?
 * TODO [#C] line numbers on code blocks?
-* TODO check adventure-camp.html redirect
+* DONE check adventure-camp.html redirect
+CLOSED: [2025-02-15 Sat 12:53]
+- CLOSING NOTE [2025-02-15 Sat 12:53]
 * TODO maybe make dates care about timestamps? Be a bit less sloppy
 - :date is mostly a date string, except for a couple spots
 * TODO [#C] ways of encouraging folks to browse around
