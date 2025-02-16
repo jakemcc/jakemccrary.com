@@ -527,16 +527,38 @@
                       (date->human-readable date)))
       (println title))))
 
-(comment
-  (def sources (doall (load-sources true)))
-  (def articles (blog-articles sources))
-  (map #(-> % :output-file) sources)
-  (def source (first (filter (fn [a] (clojure.string/includes? (-> a :metadata :title) "2024"))
-                             sources)))
+(defn create-new-post [title]
+  (let [now (ZonedDateTime/now (ZoneId/of "America/Chicago"))
+        date-str (.format now (DateTimeFormatter/ofPattern "yyyy-MM-dd HH:mm Z"))
+        filename (str (->yyyy-MM-dd now)
+                     "-"
+                     (-> title
+                         clojure.string/lower-case
+                         (clojure.string/replace #"\s+" "-")
+                         (clojure.string/replace #"[^a-z0-9-]" ""))
+                     ".markdown")
+        file-path (fs/file source-dir "blog" filename)
+        content (str "---\n"
+                    "layout: post\n"
+                    "title: " title "\n"
+                    "date: " date-str "\n"
+                    "comments: true\n"
+                    "published: false\n"
+                    "description: TODO\n"
+                    "categories:\n"
+                    "- TODO\n"
+                    "---\n\n"
+                    "TODO: Write content\n")]
+    (fs/create-dirs (fs/parent file-path))
+    (spit file-path content)
+    (println "Created new post:" (str file-path))))
 
-  (publish-draft reading2024)
-  (keys source) ;; (:metadata :html :input-file :output-file :template)
-
-  ;;
-  )
+#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
+(defn new-post [& _args]
+  (print "Enter post title: ")
+  (flush)
+  (let [title (read-line)]
+    (if (clojure.string/blank? title)
+      (println "Title cannot be blank")
+      (create-new-post title))))
 

@@ -9,4 +9,6 @@
   render {:task (exec 'blog.render/render)}
   publish {:task (exec 'blog.render/publish)}
   test {:task (exec 'blog.render/test)}
-  list-drafts {:task (exec 'blog.render/list-drafts)}}}
+  list-drafts {:task (exec 'blog.render/list-drafts)}
+  new-post {:doc "Create a new blog post"
+            :task (exec 'blog.render/new-post)}}}

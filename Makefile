@@ -18,7 +18,7 @@ new_adventure: ## Start a new adventure post
 
 .PHONY: new_post
 new_post: ## Start a new post
-	bundle exec rake new_post 
+	bb new-post
 
 .PHONY: deploy
 deploy: ## deploy
