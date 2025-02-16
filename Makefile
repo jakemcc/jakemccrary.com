@@ -14,7 +14,7 @@ develop: ## Serve a preview of the site without drafts and refresh changes
 
 .PHONY: new_adventure
 new_adventure: ## Start a new adventure post
-	bundle exec rake new_adventure
+	bb new-adventure
 
 .PHONY: new_post
 new_post: ## Start a new post

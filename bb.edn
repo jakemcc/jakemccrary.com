@@ -11,4 +11,6 @@
   test {:task (exec 'blog.render/test)}
   list-drafts {:task (exec 'blog.render/list-drafts)}
   new-post {:doc "Create a new blog post"
-            :task (exec 'blog.render/new-post)}}}
+            :task (exec 'blog.render/new-post)}
+  new-adventure {:doc "Create a new adventure post"
+                 :task (exec 'blog.render/new-adventure)}}}

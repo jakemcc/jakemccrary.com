@@ -562,3 +562,61 @@
       (println "Title cannot be blank")
       (create-new-post title))))
 
+(defn parse-date [date-str]
+  (try
+    (LocalDate/parse date-str (DateTimeFormatter/ofPattern "yyyy-MM-dd"))
+    (catch DateTimeParseException _
+      nil)))
+
+(defn prompt-date [prompt]
+  (print prompt)
+  (flush)
+  (let [input (read-line)]
+    (if-let [date (parse-date input)]
+      date
+      (do
+        (println "Invalid date format. Please use YYYY-MM-DD")
+        (recur prompt)))))
+
+(defn create-new-adventure [title start-date end-date]
+  (let [now (ZonedDateTime/now (ZoneId/of "America/Chicago"))
+        date-str (.format now (DateTimeFormatter/ofPattern "yyyy-MM-dd HH:mm Z"))
+        start-date-str (->yyyy-MM-dd start-date)
+        end-date-str (->yyyy-MM-dd end-date)
+        filename (str start-date-str
+                     "-"
+                     end-date-str
+                     "-"
+                     (-> title
+                         clojure.string/lower-case
+                         (clojure.string/replace #"\s+" "-")
+                         (clojure.string/replace #"[^a-z0-9-]" ""))
+                     ".markdown")
+        file-path (fs/file source-dir "adventures" filename)
+        content (str "---\n"
+                    "layout: adventure\n"
+                    "title: " title "\n"
+                    "date: " date-str "\n"
+                    "start-date: " start-date-str "\n"
+                    "end-date: " end-date-str "\n"
+                    "published: false\n"
+                    "description: TODO\n"
+                    "---\n\n"
+                    "TODO: Write content\n")]
+    (fs/create-dirs (fs/parent file-path))
+    (spit file-path content)
+    (println "Created new adventure:" (str file-path))))
+
+#_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
+(defn new-adventure [& _args]
+  (print "Enter adventure title: ")
+  (flush)
+  (let [title (read-line)]
+    (if (clojure.string/blank? title)
+      (println "Title cannot be blank")
+      (let [start-date (prompt-date "Enter start date (YYYY-MM-DD): ")
+            end-date (prompt-date "Enter end date (YYYY-MM-DD): ")]
+        (if (.isAfter start-date end-date)
+          (println "Start date cannot be after end date")
+          (create-new-adventure title start-date end-date))))))
+
