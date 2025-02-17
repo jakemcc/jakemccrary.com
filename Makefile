@@ -28,8 +28,8 @@ deploy: ## deploy
 publish_draft: ## Publishes a draft
 	bb publish
 
-.PHONY: unpublished
-unpublished: ## List drafts
+.PHONY: list-drafts
+list-drafts: ## List drafts
 	bb list-drafts
 
 .PHONY: render

@@ -5,12 +5,13 @@
         camel-snake-kebab/camel-snake-kebab {:mvn/version "0.4.2"}}
 
  :tasks
- {:requires ([blog.render])
+ {:requires ([blog.render]
+             [blog.articles])
   render {:task (exec 'blog.render/render)}
-  publish {:task (exec 'blog.render/publish)}
+  publish {:task (exec 'blog.articles/publish)}
   test {:task (exec 'blog.render/test)}
-  list-drafts {:task (exec 'blog.render/list-drafts)}
+  list-drafts {:task (exec 'blog.articles/list-drafts)}
   new-post {:doc "Create a new blog post"
-            :task (exec 'blog.render/new-post)}
+            :task (exec 'blog.articles/new-post)}
   new-adventure {:doc "Create a new adventure post"
-                 :task (exec 'blog.render/new-adventure)}}}
+                 :task (exec 'blog.articles/new-adventure)}}}
