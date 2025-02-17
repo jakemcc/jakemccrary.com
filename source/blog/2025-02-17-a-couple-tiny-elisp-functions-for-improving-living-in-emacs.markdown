@@ -1,9 +1,9 @@
 ---
 layout: post
 title: A couple tiny elisp functions for improving living in Emacs
-date: 2025-02-17 12:27 -0600
+date: 2025-02-17T19:35:02+00:00
 comments: true
-published: false
+published: true
 description: Elisp functions for quickly change font size and switch window split orientation
 categories:
 - emacs
@@ -88,4 +88,3 @@ AI tools drastically lower the bar for making small routine operations more effi
 [![xkcd: Is It Worth The Time?](https://imgs.xkcd.com/comics/is_it_worth_the_time.png)](https://xkcd.com/1205)
 
 [^1]: And test and make minor edits as needed.
-
