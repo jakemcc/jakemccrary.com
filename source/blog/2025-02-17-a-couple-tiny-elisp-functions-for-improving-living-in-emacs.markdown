@@ -1,6 +1,6 @@
 ---
 layout: post
-title: A few useful emacs functions
+title: A couple tiny elisp functions for improving living in Emacs
 date: 2025-02-17 12:27 -0600
 comments: true
 published: false
@@ -10,11 +10,11 @@ categories:
 - elisp
 ---
 
-I've been using emacs for nearly twenty years but have struggled to quickly knock out tiny eplisp functions for making my experience nicer.
-Despite that, I've managed to write both small and medium sized helpers for enhancing my emacs experience.
-Now that LLMs exist and are reasonably good, it has lowered the bar for me modifying my emacs environment with little helper functions.
+I've been using Emacs for nearly twenty years but have struggled to quickly knock out tiny eplisp functions for making my experience nicer.
+Despite that, I've managed to write both small and medium sized helpers for enhancing my Emacs experience.
+Now that LLMs exist and are reasonably good, it has lowered the bar for me modifying my Emacs environment with little helper functions.
 
-These have only been tested and used in emacs 29.4 on macOS.
+These have only been tested and used in Emacs 29.4 on macOS.
 
 ## Quickly change font sizes
 
@@ -33,13 +33,13 @@ This function lets me quickly switch between font sizes.
 
 ## Change window split orientation
 
-First some definitions from the emacs manual.
+First some definitions from the Emacs manual.
 
 > A frame is a screen object that contains one or more Emacs windows (see Windows). It is the kind of object called a “window” in the terminology of graphical environments; but we can’t call it a “window” here, because Emacs uses that word in a different way. 
-> - [emacs manual](https://www.gnu.org/software/emacs/manual/html_node/elisp/Frames.html)
+> - [Emacs manual](https://www.gnu.org/software/emacs/manual/html_node/elisp/Frames.html)
 
 > A window is an area of the screen that can be used to display a buffer (see Buffers). Windows are grouped into frames (see Frames). Each frame contains at least one window; the user can subdivide a frame into multiple, non-overlapping windows to view several buffers at once.
-> - [emacs manual](https://www.gnu.org/software/emacs/manual/html_node/elisp/Basic-Windows.html)
+> - [Emacs manual](https://www.gnu.org/software/emacs/manual/html_node/elisp/Basic-Windows.html)
 
 I primarily work with a single frame split into at most two windows.
 I haven't found a setup that I like for working with more than two windows, so I try to avoid it.
