@@ -1,38 +1,35 @@
 <!DOCTYPE html>
 <head lang="en">
   <meta charset="utf-8">
-  <title>Continuous testing with Clojure and expectations - Jake McCrary</title>
+  <title>Newsletter - Jake McCrary</title>
   <meta name="author" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
   <!-- <link rel="stylesheet" href="/style.css"> -->
 
-  <meta itemprop="name" content="Continuous testing with Clojure and expectations - Jake McCrary" />
+  <meta itemprop="name" content="Newsletter - Jake McCrary" />
   
 
   <!-- Twitter Card data -->
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@jakemcc" />
-  <meta name="twitter:title" content="Continuous testing with Clojure and expectations - Jake McCrary" />
+  <meta name="twitter:title" content="Newsletter - Jake McCrary" />
   
   <meta name="twitter:creator" content="@jakemcc" />
   <!-- <meta name="twitter:image" content="" /> -->
 
   <!-- Open Graph data -->
   <meta property="og:site_name" content="Writing by Jake McCrary" />
-  <meta property="og:url" content="https://jakemccrary.com/blog/2011/12/16/continuous-testing-with-clojure-and-expectations/" />
-  <meta property="og:title" content="Continuous testing with Clojure and expectations - Jake McCrary" />
+  <meta property="og:url" content="https://jakemccrary.com/newsletter/" />
+  <meta property="og:title" content="Newsletter - Jake McCrary" />
   
   <!-- <meta property="og:image" content="" /> -->
   
   <meta property="og:type" content="article" />
   
   
-  <!-- maybe rfc blahblahblah it? -->
-  <meta property="article:published_time" content="2011-12-16T23:59:59+00:00" />
-  
 
-  <link rel="canonical" href="https://jakemccrary.com/blog/2011/12/16/continuous-testing-with-clojure-and-expectations/">
+  <link rel="canonical" href="https://jakemccrary.com/newsletter/">
 
   <style>
    body {
@@ -270,26 +267,13 @@
   </nav>
   
   <div class="page-header">
-    <h1>Continuous testing with Clojure and expectations</h1>
+    <h1>Newsletter</h1>
     
-    
-    <p class="publication-date">Published on 
-      <time datetime="2011-12-16">December 16, 2011</time>
-    </p>
     
   </div>
   
 
-  <p>I've recently started using <a href='http://jayfields.com/'>Jay Fields'</a> Clojure testing library, <a href='https://github.com/jaycfields/expectations'><code>expectations</code></a>. I'm not going to explain <code>expectations</code>, Jay already did a great job on his <a href='http://blog.jayfields.com/2011/11/clojure-expectations-introduction.html'>blog</a>, but I will quote its <a href='https://github.com/jaycfields/expectations'>Github</a> page.</p><blockquote><p>expectations is a minimalist's testing framework </p></blockquote><p>The above quote is absolutely true, which is one of the major reasons I'm liking <code>expectations</code>. It hasn't been all sunshine though, when I first started using it I had a major problem. It slowed down my usual Clojure workflow.</p><p>Up until this point I had stuck to using <code>clojure.test</code>. Combined with emacs, slime, swank, and <code>clojure-test-mode</code> I found the time between making a change to code and running tests to be minimal.</p><p>When I switched to <code>expectations</code> the time it took between making a code change and running tests increased. With <code>expectations</code> I couldn't reevaluate my buffer to get the new tests in my repl environment. Doing so caused the new tests to be there along with the old tests. This meant I needed to switch to the command line to run my tests. This caused me to incur the startup costs of the jvm simply to run my expectations (tests). This was a huge cost compared to what I was used to before.</p><h2>Introducing <code>lein-autoexpect</code></h2><p>To fix my problem I wrote <a href='https://github.com/jakemcc/lein-autoexpect'><code>lein-autoexpect</code></a>. <code>lein-autoexpect</code> is a <a href='https://github.com/technomancy/leiningen/'><code>Leiningen</code></a> plugin that monitors a project's source and test directory and when a Clojure file changes it reloads the affected namespaces and runs all the expectations. Using this plugin my turn around time from modifying code to running all of my expectations is practically nothing. Without the cost of the jvm startup there is practically no time wasted between when code is saved and tests are run.</p><p>To use <code>lein-autoexpect</code> simply add <code>&#91;lein-autoexpect &quot;0.0.2&quot;&#93;</code> to your <code>project.clj</code> file and fetch the dependency. Then at the command line run <code>lein autoexpect</code>. You'll see your tests run and then it will just hang there, eagerly waiting for code to change.</p><pre><code class="language-bash">$ lein autoexpect
-&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;
-&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42; Running tests &#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;
-Ran 3 tests containing 3 assertions in 16 msecs
-0 failures, 0 errors.
-</code></pre><p>Next time you end up saving you'll see your tests run again and the following example output appears.</p><pre><code class="language-bash">&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;
-&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42; Running tests &#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;&#42;
-Ran 4 tests containing 4 assertions in 3 msecs
-0 failures, 0 errors.
-</code></pre><p><code>lein-autoexpect</code> tries to clearly delimit each test session with the banner made of <code>&#42;</code>. This helps keep different runs separate when scrolling through your terminal.</p><p>This style of testing is called <a href='http://blog.objectmentor.com/articles/2007/09/20/continuous-testing-explained'>continuous testing</a>. If you haven't tried it, I would highly recommend giving it a shot. Even just using it for the last few days changed how I think testing should be done.</p><p>Source can be found on <a href='https://github.com/jakemcc/lein-autoexpect'>Github</a>.</p>
+  <p>Enough readers demanded a way of getting notified about new posts thorough email, so a newsletter exists. Besides periodically notifying about new articles, it also includes notes on books and other media I've been consuming.</p><p>If that interests you, you can sign up over at <a href='https://jakemccrary.substack.com/welcome'>Substack</a>.</p><p>If you want timely notifications when new articles are published, I'd encourage you to subscribe to the <a href='http://feeds.feedburner.com/JakeMccrarysMusings'>RSS feed</a>.</p>
   <script src="/highlight/highlight.min.js"></script>
   <script>hljs.highlightAll();</script>
   <script></script>
