@@ -117,6 +117,9 @@
     <loc>https://jakemccrary.com/disclosure-policy/index.html</loc>
   </url>
   <url>
+    <loc>https://jakemccrary.com/adventure-camp.html</loc>
+  </url>
+  <url>
     <loc>https://jakemccrary.com/blog/2017/10/31/a-guide-to-distributed-work/index.html</loc>
     <lastmod>2017-10-31T23:59:59+00:00</lastmod>
   </url>
@@ -565,6 +568,10 @@
     <lastmod>2019-03-20T23:59:59+00:00</lastmod>
   </url>
   <url>
+    <loc>https://jakemccrary.com/blog/a-couple-tiny-elisp-functions-for-improving-living-in-emacs/index.html</loc>
+    <lastmod>2025-02-17T23:59:59+00:00</lastmod>
+  </url>
+  <url>
     <loc>https://jakemccrary.com/blog/2016/11/30/unify-your-project-interfaces/index.html</loc>
     <lastmod>2016-11-30T23:59:59+00:00</lastmod>
   </url>
@@ -790,6 +797,6 @@
   </url>
   <url>
     <loc>https://jakemccrary.com/</loc>
-    <lastmod>2025-02-13T02:16:33+00:00</lastmod>
+    <lastmod>2025-02-17T19:36:40+00:00</lastmod>
   </url>
 </urlset>
