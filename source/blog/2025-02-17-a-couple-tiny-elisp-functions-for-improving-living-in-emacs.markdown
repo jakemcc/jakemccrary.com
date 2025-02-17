@@ -77,3 +77,15 @@ Below is a demo and code that enables this functionality.
           (if this-win-2nd (other-window 1))))))
 ```
 
+## End
+
+Could those functions be written better?
+I don't know, maybe.
+I had to read the documentation these functions wouldn't exist because the return on investment of the time spent reading that documention just isn't there for me.
+These functions only exist because the time to generate them[^1] is so small that it becomes worth it.
+AI tools drastically lower the bar for making small routine operations more efficient.
+
+[![xkcd: Is It Worth The Time?](https://imgs.xkcd.com/comics/is_it_worth_the_time.png)](https://xkcd.com/1205)
+
+[^1]: And test and make minor edits as needed.
+
