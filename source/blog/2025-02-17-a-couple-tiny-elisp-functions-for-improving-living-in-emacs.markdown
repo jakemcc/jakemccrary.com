@@ -10,9 +10,10 @@ categories:
 - elisp
 ---
 
-I've been using Emacs for nearly twenty years but have struggled to quickly knock out tiny eplisp functions for making my experience nicer.
-Despite that, I've managed to write both small and medium sized helpers for enhancing my Emacs experience.
-Now that LLMs exist and are reasonably good, it has lowered the bar for me modifying my Emacs environment with little helper functions.
+I've been using Emacs for nearly twenty years but have struggled to quickly knock out tiny elisp functions for making my experience nicer.
+Despite that, I've managed to write both small and medium sized helpers for enhancing my Emacs experience but I often haven't bothered with small annoyances that are solved relatively easily with other ways.
+Now that LLMs exist and are reasonably good, it has lowered the bar for creating small quality of life enhancements.
+Below are two of them.
 
 These have only been tested and used in Emacs 29.4 on macOS.
 
@@ -41,11 +42,10 @@ First some definitions from the Emacs manual.
 > A window is an area of the screen that can be used to display a buffer (see Buffers). Windows are grouped into frames (see Frames). Each frame contains at least one window; the user can subdivide a frame into multiple, non-overlapping windows to view several buffers at once.
 > - [Emacs manual](https://www.gnu.org/software/emacs/manual/html_node/elisp/Basic-Windows.html)
 
-I primarily work with a single frame split into at most two windows.
-I haven't found a setup that I like for working with more than two windows, so I try to avoid it.
-I find myself often wanting to toggle between a vertical split and a horizontal split
-A picture is worth a thousand words and a gif even more.
-Below is a demo and code that enables this functionality.
+I primarily work in a single frame split into at most two windows.
+I haven't found a setup that I like for working with more than two windows, so I avoid it.
+Often, I'll want to change the split from vertical to horizontal or horizontal to vertical.
+I hear a picture is worth a thousand words and a gif even more so below is a demo and and enabling code.
 
 ![Demo of toggling window orientation](/images/toggle-window-orientation.gif) 
 
@@ -81,8 +81,8 @@ Below is a demo and code that enables this functionality.
 
 Could those functions be written better?
 I don't know, maybe.
-I had to read the documentation these functions wouldn't exist because the return on investment of the time spent reading that documention just isn't there for me.
-These functions only exist because the time to generate them[^1] is so small that it becomes worth it.
+If I had to read the documentation and write these entirely on my down, these functions wouldn't exist because the return on investment just wouldn't be there.
+These only exist because the time to generate them[^1] is so small that it becomes worth it.
 AI tools drastically lower the bar for making small routine operations more efficient.
 
 [![xkcd: Is It Worth The Time?](https://imgs.xkcd.com/comics/is_it_worth_the_time.png)](https://xkcd.com/1205)
