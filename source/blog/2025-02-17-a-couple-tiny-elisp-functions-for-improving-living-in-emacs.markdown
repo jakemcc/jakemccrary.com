@@ -11,9 +11,9 @@ categories:
 ---
 
 I've been using Emacs for nearly twenty years but have struggled to quickly knock out tiny elisp functions for making my experience nicer.
-Despite that, I've managed to write both small and medium sized helpers for enhancing my Emacs experience but I often haven't bothered with small annoyances that are solved relatively easily with other ways.
-Now that LLMs exist and are reasonably good, it has lowered the bar for creating small quality of life enhancements.
-Below are two of them.
+Despite that, I've written elisp to enhance my Emacs experience but I often don't bother fixing small annoyances that are solved relatively easily in other ways.
+Now that LLMs exist and are reasonably good, they have lowered the bar for creating small quality of life enhancements.
+Below are two such enhancements.
 
 These have only been tested and used in Emacs 29.4 on macOS.
 
@@ -45,7 +45,7 @@ First some definitions from the Emacs manual.
 I primarily work in a single frame split into at most two windows.
 I haven't found a setup that I like for working with more than two windows, so I avoid it.
 Often, I'll want to change the split from vertical to horizontal or horizontal to vertical.
-I hear a picture is worth a thousand words and a gif even more so below is a demo and and enabling code.
+I hear a picture is worth a thousand words and a gif even more so below is a demo and and the enabling code.
 
 ![Demo of toggling window orientation](/images/toggle-window-orientation.gif) 
 
