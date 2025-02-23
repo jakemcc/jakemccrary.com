@@ -36,11 +36,10 @@ This function lets me quickly switch between font sizes.
 
 First some definitions from the Emacs manual.
 
-> A frame is a screen object that contains one or more Emacs windows (see Windows). It is the kind of object called a “window” in the terminology of graphical environments; but we can’t call it a “window” here, because Emacs uses that word in a different way. 
-> - [Emacs manual](https://www.gnu.org/software/emacs/manual/html_node/elisp/Frames.html)
+> A frame is a screen object that contains one or more Emacs windows (see Windows). It is the kind of object called a “window” in the terminology of graphical environments; but we can’t call it a “window” here, because Emacs uses that word in a different way. - [Emacs manual](https://www.gnu.org/software/emacs/manual/html_node/elisp/Frames.html)
 
-> A window is an area of the screen that can be used to display a buffer (see Buffers). Windows are grouped into frames (see Frames). Each frame contains at least one window; the user can subdivide a frame into multiple, non-overlapping windows to view several buffers at once.
-> - [Emacs manual](https://www.gnu.org/software/emacs/manual/html_node/elisp/Basic-Windows.html)
+
+> A window is an area of the screen that can be used to display a buffer (see Buffers). Windows are grouped into frames (see Frames). Each frame contains at least one window; the user can subdivide a frame into multiple, non-overlapping windows to view several buffers at once. - [Emacs manual](https://www.gnu.org/software/emacs/manual/html_node/elisp/Basic-Windows.html)
 
 I primarily work in a single frame split into at most two windows.
 I haven't found a setup that I like for working with more than two windows, so I avoid it.
