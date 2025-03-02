@@ -10,7 +10,7 @@ categories:
 - elisp
 ---
 
-I've been using Emacs for nearly twenty years but have struggled to quickly knock out tiny elisp functions for making my experience nicer.
+I've been using Emacs for nearly twenty years but find it challenging to craft even tiny elisp functions to enhance my workflow.
 Despite that, I've written elisp to enhance my Emacs experience but I often don't bother fixing small annoyances that are solved relatively easily in other ways.
 Now that LLMs exist and are reasonably good, they have lowered the bar for creating small quality of life enhancements.
 Below are two such enhancements.
