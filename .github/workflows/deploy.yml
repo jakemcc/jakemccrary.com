@@ -17,31 +17,34 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-      - name: Setup Babashka
-        uses: turtlequeue/setup-babashka@v1.7.0
-        with:
-          babashka-version: 1.12.197
-      - name: Ensure build.sh is executable
-        run: chmod +x ./build.sh
-      - name: Run build script
-        run: ./build.sh
-  deploy:
+  generate:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Setup Babashka
+        uses: turtlequeue/setup-babashka@v1.7.0
+        with:
+          babashka-version: 1.12.197
+
+      - name: Ensure build.sh is executable
+        run: chmod +x ./build.sh
+
+      - name: Run build script
+        run: ./build.sh
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: 'docs/'
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
