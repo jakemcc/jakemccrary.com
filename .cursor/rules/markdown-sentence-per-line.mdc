@@ -1,0 +1,27 @@
+---
+description: 
+globs: *.md, *.markdown
+alwaysApply: false
+---
+# Cursor AI Markdown Rules File
+# This file defines formatting rules for Markdown where each sentence is output on its own line.
+# This approach helps with diff clarity and makes reviewing changes easier.
+
+version: "1.0"
+name: "Markdown Sentence-Per-Line Formatter"
+description: >
+  Enforces a style where each sentence in a Markdown document is placed on its own line.
+  Each sentence is expected to end with a punctuation mark (period, exclamation point, or question mark)
+  and be immediately followed by a newline.
+
+settings:
+  language: markdown
+  sentence_per_line: true
+  trim_trailing_whitespace: true
+
+rules:
+  - id: split_sentences
+    description: "Insert a newline after sentence-ending punctuation (., !, or ?)."
+    # The regex matches space(s) following a punctuation mark that ends a sentence.
+    pattern: "(?<=[.!?])\\s+"
+    replacement: "\n"
