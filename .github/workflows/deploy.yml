@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -17,8 +17,8 @@ jobs:
         with:
           babashka-version: 1.12.197
 
-      - name: Ensure deploy.sh is executable
-        run: chmod +x ./deploy.sh
+      - name: Ensure build.sh is executable
+        run: chmod +x ./build.sh
 
-      - name: Run deploy script
-        run: ./deploy.sh
+      - name: Run build script
+        run: ./build.sh
