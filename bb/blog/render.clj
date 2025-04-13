@@ -373,8 +373,6 @@
                            (:description article)
                            (assoc :summary (:description article)))))}))))
 
-
-
 (defn- write-category-page! [category articles]
   (write-html! (fs/file output-dir "blog" "categories" category "index.html")
                {:body (hiccup/html
@@ -393,6 +391,20 @@
                                    articles)]
             :when (seq related)]
       (write-category-page! category related))))
+
+(defn- write-categories-index! [sources]
+  (let [articles (blog-articles sources)
+        category->count (frequencies (mapcat (comp :categories :metadata) articles))]
+    (write-html! (fs/file output-dir "categories" "index.html")
+                 {:body (hiccup/html
+                         [:div.categories-page
+                          [:ul.category-list
+                           (for [category (sort (categories articles))]
+                             [:li
+                              [:a {:href (str "/blog/categories/" category "/")}
+                               category
+                               [:span.count (str " (" (get category->count category 0) ")")]]])]])
+                  :page {:title "Categories"}})))
 
 (defn- adventure-list [articles]
   [:ul {:class "post-list"}
@@ -419,7 +431,6 @@
                  {:body (hiccup/html
                          (adventure-list adventures))})))
 
-
 #_{:clj-kondo/ignore [:clojure-lsp/unused-public-var]}
 (defn render [{:keys [preview] :as args}]
   (println "Rendering" args)
@@ -433,6 +444,7 @@
     (write-index! sources)
     (write-archive! sources)
     (write-adventures! sources)
+    (write-categories-index! sources)
     (write-category-pages! sources)
     (write-main-feed! sources)
     (write-json-feed! sources)

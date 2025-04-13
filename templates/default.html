@@ -253,6 +253,38 @@
      margin: -1px 0;
    }
 
+   .categories-page .category-list {
+     list-style: none;
+     padding: 0;
+     margin: 1rem 0;
+     display: flex;
+     flex-wrap: wrap;
+     gap: 0.5rem;
+   }
+
+   .categories-page .category-list li {
+     margin: 0;
+   }
+
+   .categories-page .category-list a {
+     display: inline-block;
+     padding: 0.3rem 0.8rem;
+     background: #f5f5f5;
+     border-radius: 4px;
+     color: #333;
+     text-decoration: none;
+     transition: background-color 0.2s;
+   }
+
+   .categories-page .category-list a:hover {
+     background: #e5e5e5;
+   }
+
+   .categories-page .category-list .count {
+     color: #666;
+     font-size: 0.9em;
+   }
+
   </style>
   <link rel="stylesheet" href="/highlight/base16/tomorrow-night.min.css" media="print" onload="this.media='all'">
 </head>
@@ -266,6 +298,7 @@
       <li><a href="/adventures/">Adventures</a></li>
       <li><a href="/about.html">About</a></li>
       <li><a href="/blog/archives/">Archives</a></li>
+      <li><a href="/categories/">Categories</a></li>
       <li><a href="{{ site.subscribe-rss }}" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
       <li><a href="/newsletter" rel="subscribe-email" title="subscribe via email">Newsletter</a></li>
     </ul>
