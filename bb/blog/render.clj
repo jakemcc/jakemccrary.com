@@ -393,13 +393,15 @@
       (write-category-page! category related))))
 
 (defn- write-categories-index! [sources]
-  (let [articles (blog-articles sources)
-        category->count (frequencies (mapcat (comp :categories :metadata) articles))]
+  (let [category->count (->> (blog-articles sources)
+                             (mapcat (comp :categories :metadata))
+                             frequencies)]
     (write-html! (fs/file output-dir "categories" "index.html")
                  {:body (hiccup/html
                          [:div.categories-page
                           [:ul.category-list
-                           (for [category (sort (categories articles))]
+                           (for [category (sort (keys category->count))
+                                 :when category]
                              [:li
                               [:a {:href (str "/blog/categories/" category "/")}
                                category
