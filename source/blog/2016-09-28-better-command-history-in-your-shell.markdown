@@ -29,8 +29,7 @@ provides a text interface for manipulating your command
 history. To see what it looks like check out
 the [README](https://github.com/dvorka/hstr/blob/master/README.md) and
 this [video](https://www.youtube.com/watch?v=sPF29NyXe2U) tutorial. If
-you are running OS X and use Homebrew you can install it by running `brew
-install hh`.
+you are running OS X and use Homebrew you can install it by running `brew install hh`.
 
 ## Making global history searchable but arrows cycle through local history
 
