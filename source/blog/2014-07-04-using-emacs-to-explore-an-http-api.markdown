@@ -9,12 +9,10 @@ categories:
 - Emacs
 ---
 
-Recently I rediscovered an Emacs package that allows you to interact
-with HTTP endpoints from the comfort of an Emacs buffer.
-[restclient.el](https://github.com/pashky/restclient.el) provides
-`restclient-mode`. This mode allows you to write and execute HTTP
-requests in an Emacs buffer. This package can be found in
-[MELPA](http://melpa.milkbox.net/#/restclient).
+Recently I rediscovered an Emacs package that allows you to interact with HTTP endpoints from the comfort of an Emacs buffer.
+[restclient.el](https://github.com/pashky/restclient.el) provides `restclient-mode`.
+This mode allows you to write and execute HTTP requests in an Emacs buffer.
+This package can be found in [MELPA](http://melpa.milkbox.net/#/restclient).
 
 Below is an example buffer that touches the GitHub API.
 
@@ -42,16 +40,17 @@ Title
 -----
 ```
 
-The example above has a few interesting snippets. `:github` is an
-example of a variable. Lines 8-14 show an example of posting json to
-an endpoint. You put the data you want to send below the query. The
-last POST shows how to set headers for a request.
+The example above has a few interesting snippets.
+`:github` is an example of a variable.
+Lines 8-14 show an example of posting json to an endpoint.
+You put the data you want to send below the query.
+The last POST shows how to set headers for a request.
 
-The location of your cursor decides what query to execute. Comments
-start with `#` and break your document into sections. The query in the
-same section as your cursor is the one that is executed. If the cursor
-is anywhere on lines 3-6 and I hit `C-c C-c` then Emacs queries GitHub
-for my organizations. Below is what pops up in a buffer.
+The location of your cursor decides what query to execute.
+Comments start with `#` and break your document into sections.
+The query in the same section as your cursor is the one that is executed.
+If the cursor is anywhere on lines 3-6 and I hit `C-c C-c` then Emacs queries GitHub for my organizations.
+Below is what pops up in a buffer.
 
 ``` javascript
 
@@ -86,15 +85,13 @@ for my organizations. Below is what pops up in a buffer.
 ```
 
 
-`C-c C-c` triggers `restclient-http-send-current` which runs a query
-and pretty prints the result. I could have used `C-c C-r` to trigger
-`restclient-http-send-current-raw` which executes a query and shows
-the raw result.
+`C-c C-c` triggers `restclient-http-send-current` which runs a query and pretty prints the result.
+I could have used `C-c C-r` to trigger `restclient-http-send-current-raw` which executes a query and shows the raw result.
 
-It isn't a perfect mode. One issue I've come across is that queries
-targeting `localhost` fail. The solution is to query `127.0.0.1`.
+It isn't a perfect mode.
+One issue I've come across is that queries targeting `localhost` fail.
+The solution is to query `127.0.0.1`.
 
-`restclient-mode` makes Emacs a useful tool for exploring and
-testing HTTP APIs. Since it operates on a simple text
-format it allows you to easily share executable documentation with
-others. I highly recommend **restclient.el**.
+`restclient-mode` makes Emacs a useful tool for exploring and testing HTTP APIs.
+Since it operates on a simple text format it allows you to easily share executable documentation with others.
+I highly recommend **restclient.el**.

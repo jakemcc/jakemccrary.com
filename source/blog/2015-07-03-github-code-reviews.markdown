@@ -11,44 +11,27 @@ categories:
 - github
 ---
 
-Last December I wrote about the
-[effective code review process](/blog/2014/12/09/an-effective-code-review-process/)
-I started at Outpace. The process works well; participants say it is
-the most effective review process they've experienced. The rest of
-this post is a summary of the process with a bit of an enhancement
-around setting up the code for review. I'd recommend you read the
-original
-[post](/blog/2014/12/09/an-effective-code-review-process/)
-for a bit more color on the process.
+Last December I wrote about the [effective code review process](/blog/2014/12/09/an-effective-code-review-process/) I started at Outpace.
+The process works well; participants say it is the most effective review process they've experienced.
+The rest of this post is a summary of the process with a bit of an enhancement around setting up the code for review.
+I'd recommend you read the original [post](/blog/2014/12/09/an-effective-code-review-process/) for a bit more color on the process.
 
 ### Steps for GitHub code review
 
 1. Select the code to review.
-1. About a week before the review, create a branch and delete the code
-   you're reviewing.
-1. Push this branch to GitHub and open a pull request. This pull
-   request provides a location where comments can be made on every
-   line of code.
-1. Schedule the code review meeting. Make sure participants have two
-   to three days to asynchronously review the code in the pull
-   request.
-1. Have the code review. Get everyone together (video chat or in person)
-   and go through the comments on the pull request and discuss. Add
-   action items as a comment. The leader of the code review keeps
-   discussion moving.
+1. About a week before the review, create a branch and delete the code you're reviewing.
+1. Push this branch to GitHub and open a pull request. This pull request provides a location where comments can be made on every line of code.
+1. Schedule the code review meeting. Make sure participants have two to three days to asynchronously review the code in the pull request.
+1. Have the code review. Get everyone together (video chat or in person) and go through the comments on the pull request and discuss. Add action items as a comment. The leader of the code review keeps discussion moving.
 
-It's a lightweight process. If you're already using GitHub it doesn't
-bring in any other tools and, unlike some dedicated code review
-software I've used, the GitHub pull request interface has good
-performance.
+It's a lightweight process.
+If you're already using GitHub it doesn't bring in any other tools and, unlike some dedicated code review software I've used, the GitHub pull request interface has good performance.
 
-One complaint about this process is that the code you're reviewing
-appears as deleted in the pull request. It is a superficial complaint
-but seeing the entire code base as deleted can feel a bit weird.
+One complaint about this process is that the code you're reviewing appears as deleted in the pull request.
+It is a superficial complaint but seeing the entire code base as deleted can feel a bit weird.
 
-For the most recent code review, I figured out how to have all the
-code appear as added. The snippet below contains the steps and example
-commands.
+For the most recent code review, I figured out how to have all the code appear as added.
+The snippet below contains the steps and example commands.
 
 ``` console
 
@@ -82,16 +65,11 @@ git push origin code-review
 
 ```
 
-Voila, you now have a pull request with every line under review marked
-as added instead of deleted! It takes a little more than two times the
-number steps required to open a pull request with the code deleted but
-you might find it worth it. Seeing code as added instead of removed is
-a minor thing but minor things can make a process more enjoyable. It
-is nice to know it is possible.
+Voila, you now have a pull request with every line under review marked as added instead of deleted!
+It takes a little more than two times the number steps required to open a pull request with the code deleted but you might find it worth it.
+Seeing code as added instead of removed is a minor thing but minor things can make a process more enjoyable.
+It is nice to know it is possible.
 
-If you aren't doing code reviews or have found them useless in the
-past, I recommend you try out this process. This post is the
-abbreviated version but it gives you enough to get started. If you
-haven't done one in this style before, I'd highly recommend reading
-the longer [post](/blog/2014/12/09/an-effective-code-review-process/)
-as it gives some details that I've left out here.
+If you aren't doing code reviews or have found them useless in the past, I recommend you try out this process.
+This post is the abbreviated version but it gives you enough to get started.
+If you haven't done one in this style before, I'd highly recommend reading the longer [post](/blog/2014/12/09/an-effective-code-review-process/) as it gives some details that I've left out here.

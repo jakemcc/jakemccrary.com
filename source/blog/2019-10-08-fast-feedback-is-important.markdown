@@ -45,8 +45,10 @@ Each step can cycle back to Step 1 (even Step 1).
 
 Why is focusing on fast feedback cycles important?
 
-Fast feedback cycles let you iterate on ideas faster. This lets you evolve quicker.
+Fast feedback cycles let you iterate on ideas faster.
+This lets you evolve quicker.
 
-Slowness in any step lets distraction get it. It also encourages larger batches.
+Slowness in any step lets distraction get it.
+It also encourages larger batches.
 
 Larger batches of changes brings more risk.

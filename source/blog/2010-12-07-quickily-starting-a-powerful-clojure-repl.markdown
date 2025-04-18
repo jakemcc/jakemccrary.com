@@ -7,7 +7,10 @@ categories: [clojure, emacs]
 date: "2010-12-07"
 ---
 
-I often find myself browsing the Internet and then suddenly I want to have a Clojure REPL at my fingertips. As I've become better with emacs and [paredit](http://www.emacswiki.org/ParEdit) I've become dependent on the powerful editing this combo affords. The rest of this post details how I changed my five step process into a two step process. It does not explain basic emacs/slime setup but rather explains how I cut a few steps out of a suboptimal workflow for getting a powerful Clojure REPL up and running in emacs.
+I often find myself browsing the Internet and then suddenly I want to have a Clojure REPL at my fingertips.
+As I've become better with emacs and [paredit](http://www.emacswiki.org/ParEdit) I've become dependent on the powerful editing this combo affords.
+The rest of this post details how I changed my five step process into a two step process.
+It does not explain basic emacs/slime setup but rather explains how I cut a few steps out of a suboptimal workflow for getting a powerful Clojure REPL up and running in emacs.
 
 My previous workflow was the following:
 
@@ -17,18 +20,28 @@ My previous workflow was the following:
 4. Start emacs
 5. Run `M-x slime-connect`
 
-This five step process was terrible. From me seeing something interesting to try to having a REPL open took too much time.
+This five step process was terrible.
+From me seeing something interesting to try to having a REPL open took too much time.
 
-Today I changed my process so it on takes two steps. They are:
+Today I changed my process so it on takes two steps.
+They are:
 
 1. Start emacs
 2. Run `M-x clojure-swank`
 
-This is a much better. I'll admit had a lot of room for improvement so it wasn't too hard to make it better. Below are the steps I took to cut three steps.
+This is a much better.
+I'll admit had a lot of room for improvement so it wasn't too hard to make it better.
+Below are the steps I took to cut three steps.
 
-First, using Leiningen 1.4.0, I ran `lein install swank-clojure 1.3.0-SNAPSHOT`. This installed a script called swank-clojure into $HOME/.lein/bin. When run, this script starts a swank server waiting for connections on port 4005.
+First, using Leiningen 1.4.0, I ran `lein install swank-clojure 1.3.0-SNAPSHOT`.
+This installed a script called swank-clojure into $HOME/.lein/bin.
+When run, this script starts a swank server waiting for connections on port 4005.
 
-Next I wrote a function in [elisp](http://en.wikipedia.org/wiki/Emacs_Lisp) that gives emacs the ability to call the newly installed swank-clojure script, wait for the swank server to start, and then connect to it. This function, `clojure-swank`, can be seen below. It creates a buffer named `*clojure-swank*`, runs the newly installed script, and captures the output in the freshly created buffer. When the "Connection opened" line appears `slime-connect` is called, connecting emacs to the freshly started swank server. After this we are at the REPL with all the advantages that emacs and paredit give us.
+Next I wrote a function in [elisp](http://en.wikipedia.org/wiki/Emacs_Lisp) that gives emacs the ability to call the newly installed swank-clojure script, wait for the swank server to start, and then connect to it.
+This function, `clojure-swank`, can be seen below.
+It creates a buffer named `*clojure-swank*`, runs the newly installed script, and captures the output in the freshly created buffer.
+When the "Connection opened" line appears `slime-connect` is called, connecting emacs to the freshly started swank server.
+After this we are at the REPL with all the advantages that emacs and paredit give us.
 
 ```lisp
 (defun clojure-swank ()
@@ -64,4 +77,5 @@ I've also written a `clojure-kill-swank` function for stopping the swank server.
       (ignore-errors (kill-buffer "*clojure-swank*")))))
 ```
 
-Both of those functions need to be added to a location where they will get defined on emacs start-up. Once this is done the powerful REPL you are used to emacs providing can be at your finger tips in practically no time at all.
+Both of those functions need to be added to a location where they will get defined on emacs start-up.
+Once this is done the powerful REPL you are used to emacs providing can be at your finger tips in practically no time at all.

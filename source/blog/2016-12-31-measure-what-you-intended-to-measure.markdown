@@ -13,10 +13,14 @@ categories:
 - performance
 ---
 
-I’ve spent a significant portion of my career figuring out how to make software run faster. It is a problem I enjoy solving. One of the most important steps in an optimization task is to identify what you are trying to optimize and how you will measure it. Answer these questions wrong and you’ll waste your time solving the wrong problem.
+I’ve spent a significant portion of my career figuring out how to make software run faster.
+It is a problem I enjoy solving.
+One of the most important steps in an optimization task is to identify what you are trying to optimize and how you will measure it.
+Answer these questions wrong and you’ll waste your time solving the wrong problem.
 
-Recently I joined a teammate on a task that involved identifying a bottleneck in a Clojure code base. We knew the code path we needed to optimize and turned to the 
-[Tufte](https://github.com/ptaoussanis/tufte) library to take timing measurements. This was my first time using Tufte and, with my tiny amount of usage, I like what I see.
+Recently I joined a teammate on a task that involved identifying a bottleneck in a Clojure code base.
+We knew the code path we needed to optimize and turned to the  [Tufte](https://github.com/ptaoussanis/tufte) library to take timing measurements.
+This was my first time using Tufte and, with my tiny amount of usage, I like what I see.
 
 At some point in the process, we had code[^1] that looked similar to the `translate` function below (lines 20-24).
 
@@ -59,9 +63,16 @@ Here is some Tufte output from running some data through `translate`.
 
 Notice anything surprising with the output?[^2]
 
-It surprised me that `raw->maps` took such a tiny amount of time compared to the `summarize` function. Then I realized that we had forgotten about Clojure’s lazy sequences. `summarize` is taking so much of the time because `raw->maps` is just creating a lazy sequence; all the work of realizing that sequence happens in `summarize`. By wrapping the call to `raw->maps` with a `doall` we were able to get the time measurements we intended.
+It surprised me that `raw->maps` took such a tiny amount of time compared to the `summarize` function.
+Then I realized that we had forgotten about Clojure’s lazy sequences.
+`summarize` is taking so much of the time because `raw->maps` is just creating a lazy sequence; all the work of realizing that sequence happens in `summarize`.
+By wrapping the call to `raw->maps` with a `doall` we were able to get the time measurements we intended.
 
-This example demonstrates an important lesson. When you are profiling code, make sure you are measuring what you think you are measuring. This can be challenging in languages, such as Clojure, that have a concept of laziness. Reflect on your measurement results and perform a gut check that the results make sense with what you intended to measure. If anything feels off, confirm that you’re measuring what you meant to measure.
+This example demonstrates an important lesson.
+When you are profiling code, make sure you are measuring what you think you are measuring.
+This can be challenging in languages, such as Clojure, that have a concept of laziness.
+Reflect on your measurement results and perform a gut check that the results make sense with what you intended to measure.
+If anything feels off, confirm that you’re measuring what you meant to measure.
 
 [^1]: Example built using clojure 1.8.0 and tufte 1.1.1. Also, sorry for the terrible names of functions. I was drawing a blank when coming up with this example.
 

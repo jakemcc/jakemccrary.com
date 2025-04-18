@@ -33,7 +33,8 @@ I keep this running in a background terminal and I check periodically to confirm
 I could do something fancier but this isn't a critical system and the overhead of checking every couple days is nearly zero.
 Most of the time checking happens by accident when I accidentally maximize the terminal that runs the script.
 
-I've been using this script for a long time now and I've found it quite useful. I hope you do too.
+I've been using this script for a long time now and I've found it quite useful.
+I hope you do too.
 
 ```bash
 #!/bin/bash

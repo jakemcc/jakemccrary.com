@@ -12,9 +12,12 @@ categories:
 - command-line
 ---
 
-In an [older article](/blog/2016/11/30/unify-your-project-interfaces/) of mine I extolled the virtues of having unified interfaces for interacting with your projects. I recently started working at Coinbase and the group I'm working with is mostly using makefiles as that common interface. We still have some more work to do to unify the makefile targets of the various projects but I've picked up one tip that makes switching between projects easier.
+In an [older article](/blog/2016/11/30/unify-your-project-interfaces/) of mine I extolled the virtues of having unified interfaces for interacting with your projects.
+I recently started working at Coinbase and the group I'm working with is mostly using makefiles as that common interface.
+We still have some more work to do to unify the makefile targets of the various projects but I've picked up one tip that makes switching between projects easier.
 
-That tip is to have the default target of your makefile be one that prints out a helpful message. This looks like the following.
+That tip is to have the default target of your makefile be one that prints out a helpful message.
+This looks like the following.
 
 ```
 .PHONY: help
@@ -24,7 +27,8 @@ help:
 	 awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 ```
 
-There is a lot going on there but it basically looks through your makefile targets and finds the ones that have a comment starting with `##` after the target dependencies. Those targets are printed to the console along with the comment.
+There is a lot going on there but it basically looks through your makefile targets and finds the ones that have a comment starting with `##` after the target dependencies.
+Those targets are printed to the console along with the comment.
 
 As an example, the makefile for my website looks similar to the below file.
 
@@ -70,4 +74,6 @@ new_post                       Start a new post
 watch                          Watch for changes and serve preview of site with drafts
 ```
 
-This is super useful when you're starting doing work in a new project. With this feature you can get a quick list of useful targets and a description. It allows you to quickly see what can be done in a project.
+This is super useful when you're starting doing work in a new project.
+With this feature you can get a quick list of useful targets and a description.
+It allows you to quickly see what can be done in a project.

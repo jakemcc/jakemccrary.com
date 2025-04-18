@@ -14,24 +14,16 @@ categories:
 - google
 ---
 
-In
-a
-[previous post](/blog/2017/03/31/what-clojure-testing-library-is-most-used/),
-we used Google's BigQuery and the
-public
-[GitHub dataset](https://cloud.google.com/bigquery/public-data/github)
-to discover the most used Clojure testing library. The answer wasn't
-surprising. The built-in `clojure.test` was by far the most used.
+In a [previous post](/blog/2017/03/31/what-clojure-testing-library-is-most-used/), we used Google's BigQuery and the public [GitHub dataset](https://cloud.google.com/bigquery/public-data/github) to discover the most used Clojure testing library.
+The answer wasn't surprising.
+The built-in `clojure.test` was by far the most used.
 
-Let's use the dataset to answer a less obvious question, what are the
-most used libraries in Clojure projects? We'll measure this by
-counting references to libraries in `project.clj` and `build.boot`
-files.
+Let's use the dataset to answer a less obvious question, what are the most used libraries in Clojure projects?
+We'll measure this by counting references to libraries in `project.clj` and `build.boot` files.
 
-Before we can answer that question, we'll need to transform the
-data. First, we create the Clojure subset of the GitHub dataset. I did
-this by executing the following queries and saving the results to
-tables[^1].
+Before we can answer that question, we'll need to transform the data.
+First, we create the Clojure subset of the GitHub dataset.
+I did this by executing the following queries and saving the results to tables[^1].
 
 [^1]: I did this in early March 2017.
 
@@ -53,14 +45,11 @@ FROM [bigquery-public-data:github_repos.contents]
 WHERE id IN (SELECT id FROM clojure.files)
 ```
 
-Next we extract the dependencies from `build.boot` and `project.clj`
-files. Fortunately for us, both of these files specify dependencies in
-the same format, so we're able to use the same regular expression on both types.
+Next we extract the dependencies from `build.boot` and `project.clj` files.
+Fortunately for us, both of these files specify dependencies in the same format, so we're able to use the same regular expression on both types.
 
-The query below identifies `project.clj` and `build.boot` files,
-splits each file into lines, and extracts referenced library names and
-versions using a regular expression. Additional filtering is done get
-rid of some spurious results.
+The query below identifies `project.clj` and `build.boot` files, splits each file into lines, and extracts referenced library names and versions using a regular expression.
+Additional filtering is done get rid of some spurious results.
 
 ```sql
 SELECT
@@ -89,8 +78,8 @@ ORDER BY
   count DESC
 ```
 
-The first five rows from the result are below. Let's save the entire
-result to a `clojure.libraries` table.
+The first five rows from the result are below.
+Let's save the entire result to a `clojure.libraries` table.
 
 ```
 | library             | version | count |
@@ -137,15 +126,12 @@ ORDER BY count desc
 |  20 | org.clojure/core.cache         |   179 |
 ```
 
-Clojure and ClojureScript are at the top, which isn't surprising. I'm
-surprised to see `tools.nrepl` in the next five results (rows 3-7). It
-is the only library out of the top that I haven't used.
+Clojure and ClojureScript are at the top, which isn't surprising.
+I'm surprised to see `tools.nrepl` in the next five results (rows 3-7).
+It is the only library out of the top that I haven't used.
 
-What testing library is used the most? We already answered this in
-my
-[last article](/blog/2017/03/31/what-clojure-testing-library-is-most-used/) but
-let's see if we get the same answer when we're counting how many times
-a library is pulled into a project.
+What testing library is used the most?
+We already answered this in my [last article](/blog/2017/03/31/what-clojure-testing-library-is-most-used/) but let's see if we get the same answer when we're counting how many times a library is pulled into a project.
 
 ```
 SELECT library, sum(count) count
@@ -162,9 +148,11 @@ ORDER BY count desc
 |   4 | smidjen                |     1 |
 ```
 
-Those results are close to the previous results. Of the non-clojure.test libraries, midje still ends up on top.
+Those results are close to the previous results.
+Of the non-clojure.test libraries, midje still ends up on top.
 
-What groups (as identified by the Maven groupId) have their libraries referenced the most? Top 12 are below but the [full result](https://docs.google.com/a/jakemccrary.com/spreadsheets/d/1QGRRGSo5t5Pnpwizdv_H8negs8NBxtRour6KxWN6hVY/edit?usp=sharing) is available.
+What groups (as identified by the Maven groupId) have their libraries referenced the most?
+Top 12 are below but the [full result](https://docs.google.com/a/jakemccrary.com/spreadsheets/d/1QGRRGSo5t5Pnpwizdv_H8negs8NBxtRour6KxWN6hVY/edit?usp=sharing) is available.
 
 ```
 SELECT REGEXP_EXTRACT(library, r'(\S+)/\S+') AS group, sum(count) AS count
@@ -227,15 +215,14 @@ ORDER BY count desc
 |  25 | org.clojure/tools.namespace |   982 |
 ```
 
-[Compojure](https://github.com/weavejester/compojure) takes the top
-slot. [Full results are available](https://docs.google.com/a/jakemccrary.com/spreadsheets/d/1-zmcOVPKLGrdRT_VkTrRUuRFyuxxmXi9eeH6Xzlt7yg/edit?usp=sharing).
+[Compojure](https://github.com/weavejester/compojure) takes the top slot.
+[Full results are available](https://docs.google.com/a/jakemccrary.com/spreadsheets/d/1-zmcOVPKLGrdRT_VkTrRUuRFyuxxmXi9eeH6Xzlt7yg/edit?usp=sharing).
 
-Before doing this research I tried to predict what libraries I'd see
-in the top 10. I thought that clj-time and clj-http would be up
-there. I'm happy to see my guess was correct.
+Before doing this research I tried to predict what libraries I'd see in the top 10.
+I thought that clj-time and clj-http would be up there.
+I'm happy to see my guess was correct.
 
-It was pretty pleasant using BigQuery to do this analysis. Queries
-took at most seconds to execute. This quick feedback let me play
-around in the web interface without feeling like I was waiting for
-computers to do work. This made the research into Clojure library
-usage painless and fun.
+It was pretty pleasant using BigQuery to do this analysis.
+Queries took at most seconds to execute.
+This quick feedback let me play around in the web interface without feeling like I was waiting for computers to do work.
+This made the research into Clojure library usage painless and fun.

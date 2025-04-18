@@ -59,7 +59,8 @@ Pick a topic so everyone in the meeting focuses on the same things.
 
 ### Step 3: Answer the questions
 
-In this step, we will answer the questions `What went well?` and `What needs improvement?` and use those answers for discussion in the remainder of the meeting. Timebox this step to 5 to 10 minutes.
+In this step, we will answer the questions `What went well?` and `What needs improvement?` and use those answers for discussion in the remainder of the meeting.
+Timebox this step to 5 to 10 minutes.
 
 In an in-person setting, this is often done through the use of [Post-it](https://www.post-it.com/3M/en_US/post-it/products/~/Post-it-Products/Notes/Super-Sticky/?N=4327+5927575+7568222+3294529207+3294857497&rt=r3) notes.
 Give each attendee a marker and a stack of notes and have each person write down as many answers as they can come up with, one per post-it note, to the two questions.
@@ -82,8 +83,7 @@ Second, add the following columns to the board.
 The first column is for Step 2 of the process and is there to remind everyone why we're all spending time in this meeting.
 
 Columns two and three are used in this step.
-Have attendees add cards to these columns as they come up with answers
-If anyone notices duplicates during this time frame, move them near each other by dragging them up or down in the column.
+Have attendees add cards to these columns as they come up with answers If anyone notices duplicates during this time frame, move them near each other by dragging them up or down in the column.
 If you notice someone else has already put a card that you'd put up there, don't bother putting it down again (this differs from the in-person meeting).
 
 ![First three columns with cards before voting](/images/remote-retros/first-three-before-voting.png)
@@ -139,7 +139,8 @@ Below is an example of those three columns after discussing two cards.
 
 ![Final state of last three columns](/images/remote-retros/final-three-columns-post-discussion.png)
 
-When voting on continuing discussion or not, it can be useful to have a hand signal for taking the vote and for continuing or ending the discussion. We'd do a quick thumbs up or thumbs down and if half the team wants to keep going then we'd seamlessly start the next timer.
+When voting on continuing discussion or not, it can be useful to have a hand signal for taking the vote and for continuing or ending the discussion.
+We'd do a quick thumbs up or thumbs down and if half the team wants to keep going then we'd seamlessly start the next timer.
 
 ## Conclusion
 

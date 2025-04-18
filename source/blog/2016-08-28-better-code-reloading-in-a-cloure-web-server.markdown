@@ -11,19 +11,13 @@ categories:
 - clojure
 ---
 
-A couple weeks ago I released
-[com.jakemccrary/reload](https://github.com/jakemcc/reload). This tiny
-library provides a ring middleware that uses
-[org.clojure/tools.namespace](https://github.com/clojure/tools.namespace)
- to reload changed Clojure code on incoming http requests.
+A couple weeks ago I released [com.jakemccrary/reload](https://github.com/jakemcc/reload).
+This tiny library provides a ring middleware that uses [org.clojure/tools.namespace](https://github.com/clojure/tools.namespace)  to reload changed Clojure code on incoming http requests.
 
-This middleware was created because my team was running into problems
-using ring's `wrap-reload` middleware. Unfortunately these problems
-happened about nine months ago and, since I didn't write this post
-back then, I've since forgotten these problems. Regardless, this
-project has been used since the beginning of this year and has helped
-make my team's development workflow smoother. If you are running into
-problems it might help you too.
+This middleware was created because my team was running into problems using ring's `wrap-reload` middleware.
+Unfortunately these problems happened about nine months ago and, since I didn't write this post back then, I've since forgotten these problems.
+Regardless, this project has been used since the beginning of this year and has helped make my team's development workflow smoother.
+If you are running into problems it might help you too.
 
 ### Usage 
 
@@ -41,5 +35,5 @@ Require `com.jakemccrary.middleware.reload` and wrap your handler with `wrap-rel
 (reload/wrap-reload routes)
 ```
 
-`reload/wrap-reload` optionally takes a list of directories to monitor
-as a second parameter. By default it reloads the `src` directory.
+`reload/wrap-reload` optionally takes a list of directories to monitor as a second parameter.
+By default it reloads the `src` directory.

@@ -7,7 +7,8 @@ date: 2010-06-06
 title: Inserting values into a nested map in Clojure
 ---
 
-Recently I was writing some Clojure with a coworker and we needed to insert values into a nested map structure. Our first solution (and example of using it at the repl) looked something like this.
+Recently I was writing some Clojure with a coworker and we needed to insert values into a nested map structure.
+Our first solution (and example of using it at the repl) looked something like this.
 
 ``` clojure
 (defn add-to-cache [cache key1 key2 data]
@@ -22,7 +23,9 @@ user> (-> (add-to-cache {} :chicago :lakeview :jake)
 ```
 
 
-This worked but seemed overly verbose for doing what (in our minds) should have been a simple operation. After some digging around in the docs we found the function `assoc-in`. This useful function allowed us to greatly simplify the code.
+This worked but seemed overly verbose for doing what (in our minds) should have been a simple operation.
+After some digging around in the docs we found the function `assoc-in`.
+This useful function allowed us to greatly simplify the code.
 
 ``` clojure
 (defn add-to-cache [cache key1 key2 data]
@@ -34,7 +37,8 @@ user> (-> (add-to-cache {} :chicago :lakeview :jake)
 {:sf {:mission :dan}, :chicago {:wickerpark :alex, :lakeview :jake}}
 ```
 
-Much simpler and easier to read. The next person to look at the code will be able to quickly skim and tell what the code is doing.
+Much simpler and easier to read.
+The next person to look at the code will be able to quickly skim and tell what the code is doing.
 
 `assoc-in` can also be used with nested associative structures like vectors.
 

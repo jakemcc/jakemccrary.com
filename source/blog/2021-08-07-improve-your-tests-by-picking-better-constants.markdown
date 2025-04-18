@@ -61,8 +61,7 @@ You have to either keep the value of `config` in your brain or keep glancing up 
 This isn't great.
 This adds cognitive overhead that doesn't need to be there.
 
-There are a few ways these tests could be improved
-One way is through using better constants.
+There are a few ways these tests could be improved One way is through using better constants.
 Let's do a quick rewrite.
 
 ```clojure

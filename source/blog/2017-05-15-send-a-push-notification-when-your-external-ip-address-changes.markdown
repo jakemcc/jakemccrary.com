@@ -11,11 +11,16 @@ keywords: bash, pushover, external ip
 categories: [bash]
 ---
 
-I need to know when my external IP address changes. Whenever it changes, I need to update an IP whitelist and need to re-login to a few sites. I sometimes don't notice for a couple of days and, during that time, some automatic processes fail.
+I need to know when my external IP address changes.
+Whenever it changes, I need to update an IP whitelist and need to re-login to a few sites.
+I sometimes don't notice for a couple of days and, during that time, some automatic processes fail.
 
 After the last time this happened, I whipped up a script that sends me a push notification when my IP address changes.
 
-The script uses [Pushover](https://pushover.net/) to send the push notification. Pushover is great. I have used it for years to get notifications from my headless computers. If you use the below script, replace `${PUSHOVER_TOKEN}` and `${PUSHOVER_USER}` with your own details.
+The script uses [Pushover](https://pushover.net/) to send the push notification.
+Pushover is great.
+I have used it for years to get notifications from my headless computers.
+If you use the below script, replace `${PUSHOVER_TOKEN}` and `${PUSHOVER_USER}` with your own details.
 
 ```bash
 #!/bin/bash

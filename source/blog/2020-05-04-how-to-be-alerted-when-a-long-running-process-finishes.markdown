@@ -91,4 +91,5 @@ I haven't gotten around to it yet but I'll need to use something else on my Linu
 You may have noticed that I run `say` in the background and in a subshell.
 Running it in the background lets me continue interacting with my shell while `say` finishes executing and running it in a subshell prevents text from appearing in my shell when the background job finishes.
 
-With this setup, I can kick off a slow compile or test run and not feel so bad about dropping into Slack or reading Reddit. It is wonderful and I'd recommend it (though, I'd more strongly recommend not having commands that take a while to run).
+With this setup, I can kick off a slow compile or test run and not feel so bad about dropping into Slack or reading Reddit.
+It is wonderful and I'd recommend it (though, I'd more strongly recommend not having commands that take a while to run).
