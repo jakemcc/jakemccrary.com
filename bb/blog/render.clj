@@ -494,3 +494,87 @@
     (when (seq errors)
       (run! println errors)
       (System/exit -1))))
+
+(def conj+ (fnil conj []))
+
+(defn- format-batch
+  ([r] (format-batch r nil))
+  ([r line]
+   (-> r
+       (cond->
+        (seq (:next-batch r))
+         (update :formatted
+                 conj+
+                 (clojure.string/replace (clojure.string/join " " (:next-batch r))
+                                         #"([.!?]) (?=[a-zA-Z\[`])" "$1\n"))
+         line
+         (update :formatted conj+ line))
+       (assoc :next-batch []))))
+
+(defn fix-wraps [{:keys [lines] :as article}]
+  (format-batch
+   (reduce
+    (fn [{:keys [in-block header-fences] :as r} line]
+      (dbg in-block)
+      (dbg line)
+      (cond
+        (< header-fences 2)
+        (-> r
+            (update :formatted conj+ line)
+            (update :header-fences + (if (= "---" line)
+                                       1
+                                       0))
+            (assoc :next-batch []))
+
+        (and in-block (not (clojure.string/starts-with? line "```")))
+        (-> r
+            (update :formatted conj+ line)
+            (assoc :next-batch []))
+
+        (and in-block (clojure.string/starts-with? line "```"))
+        (-> r
+            (update :formatted conj+ line)
+            (assoc :next-batch [])
+            (assoc :in-block false))
+
+        (and (not in-block) (clojure.string/starts-with? line "```"))
+        (-> r
+            (format-batch line)
+            (assoc :in-block true))
+
+        (clojure.string/blank? line)
+        (format-batch r line)
+
+        (some #(clojure.string/starts-with? line %) ["#" ">" "-" #_"[" "* " "1." "2." "3." "4." "5." "6." "7." "8." "9." "10." "11."])
+        (format-batch r line)
+
+        :else
+        (-> r
+            (update :next-batch conj+ line))))
+    (assoc article :header-fences 0)
+    lines)))
+
+(comment
+  (def blog-files (mapv fs/file (fs/list-dir "source/blog")))
+
+  (def with-data (mapv (fn [f] {:file f
+                                :lines (clojure.string/split-lines (slurp f))})
+                       blog-files))
+
+  (filter #(clojure.string/includes? % "history")  (map (comp str :file) with-data))
+  (def specific-article (first (filter (fn [{:keys [file]}] (clojure.string/includes? (str file) "history"))
+                                       with-data)))
+
+  (def fixed (fix-wraps specific-article))
+
+  (:formatted (fix-wraps {:lines (vec (concat ["---" "---"] (take 12 (drop 22 (:lines fixed)))))}))
+  (= (:lines fixed) (:formatted fixed))
+
+
+  (doseq [art with-data]
+    (dbg (:file art))
+    (spit (:file art) (clojure.string/join \newline (:formatted (fix-wraps art)))))
+  (spit (:file fixed) (clojure.string/join \newline (:formatted fixed)))
+
+;;
+  )
