@@ -24,7 +24,7 @@ Here's the configuration I use in my Emacs setup:
 
 ```lisp
 (use-package apheleia
-  :straight (apheleia :host github :repo "raxod502/apheleia")
+  :straight (apheleia :host github :repo "radian-software/apheleia")
   :config
   (setf (alist-get 'zprint apheleia-formatters)
         '("zprint" "{:style [:community] :map {:comma? false}}" "--write" inplace))
