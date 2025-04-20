@@ -19,6 +19,7 @@ This flexibility is powerful since it lets you format your code exactly how you 
 
 I've recently migrated from my own custom `before-save-hook` that triggered `zprint` whenever I saved a buffer to using [Apheleia](https://github.com/radian-software/apheleia).
 Apheleia is an Emacs package that applies code formatters automatically on save.
+I won't quote the [whole introduction](https://github.com/radian-software/apheleia/tree/2b491144fe157867ce1cc4538a9562edff57c891?tab=readme-ov-file#apheleia) in Apheleia's readme but it is designed to keep Emacs feeling responsive.
 
 Here's the configuration I use in my Emacs setup:
 
