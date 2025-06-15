@@ -5,11 +5,13 @@
             [camel-snake-kebab.core :as csk]
             [camel-snake-kebab.extras :as cske]
             [cheshire.core]
+            [clj-yaml.core]
             [clojure.data.xml :as xml]
             [clojure.java.io]
             [clojure.set]
             [clojure.string]
             [hiccup2.core :as hiccup]
+            [nextjournal.markdown]
             [markdown.core :as markdown]
             [selmer.parser])
   (:import
@@ -226,18 +228,53 @@
                                (map #(clojure.string/replace % " " "-")))
                          categories))))))
 
+(defn parse-metadata
+  [lines]
+  (let [yaml (->> lines
+                  (drop 1)
+                  (take-while (comp not (partial re-matches #"---\s*"))))]
+    {:metadata (clj-yaml.core/parse-string (clojure.string/join \newline yaml))
+     :lines (drop (+ 2 (count yaml)) lines)}))
+
 (defn markdown->source
   [file]
-  (let [markdown (slurp (fs/file file))]
-    ;; (println "Processing markdown for file:" (str file))
-    (-> markdown
-        ;; pre-process-markdown
-        (markdown/md-to-html-string-with-meta
-         :reference-links? true
-         :footnotes? true
-         :code-style (fn [lang] (format "class=\"language-%s\"" lang)))
-        post-process-metadata
-        #_#_:html post-process-markdown)))
+  (with-open [r (clojure.java.io/reader (fs/file file))]
+    (let [{:keys [metadata lines]} (parse-metadata (line-seq r))
+          html (->> (clojure.string/join \newline lines)
+                    nextjournal.markdown/parse
+                    (nextjournal.markdown/->hiccup
+                     (assoc nextjournal.markdown/default-hiccup-renderers
+                            :html-inline (comp hiccup/raw
+                                               nextjournal.markdown/node->text)
+                            :html-block (comp hiccup/raw
+                                              nextjournal.markdown/node->text)))
+                    (hiccup/html)
+                    str
+                    #_(markdown/md-to-html-string-with-meta
+                       :reference-links? true
+                       :footnotes? true
+                       :code-style (fn [lang]
+                                     (format "class=\"language-%s\"" lang))))]
+      (post-process-metadata {:metadata metadata :html html}))))
+
+(comment
+  (def mds (fs/glob source-dir "**.markdown"))
+  ;  (markdown->source (first mds))
+  {:metadata #ordered/map
+              ([:layout "page"] [:title "Newsletter"] [:sharing false])
+   :html
+   "<p>Enough readers demanded a way of getting notified about new posts thorough email, so a newsletter exists. Besides periodically notifying about new articles, it also includes notes on books and other media I've been consuming.</p><p>If that interests you, you can sign up over at <a href='https://jakemccrary.substack.com/welcome'>Substack</a>.</p><p>If you want timely notifications when new articles are published, I'd encourage you to subscribe to the <a href='http://feeds.feedburner.com/JakeMccrarysMusings'>RSS feed</a>.</p>"}
+  {:metadata #ordered/map
+              ([:layout "page"] [:title "Newsletter"] [:sharing false])
+   :html ""}
+  (markdown->source (first mds))
+  {:metadata #ordered/map
+              ([:layout "page"] [:title "Newsletter"] [:sharing false])
+   :html
+   "<div><p>Enough readers demanded a way of getting notified about new posts thorough email, so a newsletter exists. Besides periodically notifying about new articles, it also includes notes on books and other media I&apos;ve been consuming.</p><p>If that interests you, you can sign up over at <a href=\"https://jakemccrary.substack.com/welcome\">Substack</a>.</p><p>If you want timely notifications when new articles are published, I&apos;d encourage you to subscribe to the <a href=\"http://feeds.feedburner.com/JakeMccrarysMusings\">RSS feed</a>.</p></div>"}
+  (def text (slurp (fs/file (first mds))))
+  ;;
+)
 
 (defn blog-url
   ([path] (blog-url "" path))
@@ -284,6 +321,8 @@
                             :metadata
                             :published)))]
       source)))
+
+
 
 (defn blog-article?
   [{:keys [input-file]}]

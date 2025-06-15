@@ -1,17 +1,15 @@
-{:paths ["bb"]
- :deps {markdown-clj/markdown-clj {:mvn/version "1.11.2"}
+{:deps {camel-snake-kebab/camel-snake-kebab {:mvn/version "0.4.2"}
+        io.github.nextjournal/markdown {:mvn/version "0.7.186"}
+        markdown-clj/markdown-clj {:mvn/version "1.11.2"}
         org.babashka/http-server {:mvn/version "0.1.11"}
-        selmer/selmer {:mvn/version "1.12.53"}
-        camel-snake-kebab/camel-snake-kebab {:mvn/version "0.4.2"}}
-
- :tasks
- {:requires ([blog.render]
-             [blog.articles])
-  render {:task (exec 'blog.render/render)}
-  publish {:task (exec 'blog.articles/publish)}
-  test {:task (exec 'blog.render/test)}
-  list-drafts {:task (exec 'blog.articles/list-drafts)}
-  new-post {:doc "Create a new blog post"
-            :task (exec 'blog.articles/new-post)}
-  new-adventure {:doc "Create a new adventure post"
-                 :task (exec 'blog.articles/new-adventure)}}}
+        selmer/selmer {:mvn/version "1.12.53"}}
+ :paths ["bb"]
+ :tasks {:requires ([blog.render] [blog.articles])
+         list-drafts {:task (exec 'blog.articles/list-drafts)}
+         new-adventure {:doc "Create a new adventure post"
+                        :task (exec 'blog.articles/new-adventure)}
+         new-post {:doc "Create a new blog post"
+                   :task (exec 'blog.articles/new-post)}
+         publish {:task (exec 'blog.articles/publish)}
+         render {:task (exec 'blog.render/render)}
+         test {:task (exec 'blog.render/test)}}}
