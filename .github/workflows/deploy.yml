@@ -29,7 +29,7 @@ jobs:
       - name: Setup Babashka
         uses: turtlequeue/setup-babashka@v1.7.0
         with:
-          babashka-version: 1.12.197
+          babashka-version: 1.12.207
 
       - name: Ensure build.sh is executable
         run: chmod +x ./build.sh
