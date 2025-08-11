@@ -12,7 +12,8 @@
             [clojure.string]
             [hiccup2.core :as hiccup]
             [nextjournal.markdown]
-            [markdown.core :as markdown]
+            [nextjournal.markdown.transform :as markdown.transform]
+            [nextjournal.markdown.utils]
             [selmer.parser])
   (:import
     (java.time LocalDate LocalDateTime ZoneId ZonedDateTime)
@@ -236,18 +237,43 @@
     {:metadata (clj-yaml.core/parse-string (clojure.string/join \newline yaml))
      :lines (drop (+ 2 (count yaml)) lines)}))
 
+(defn insert-footnotes
+  [m]
+  (cond-> m
+    (seq (:footnotes m))
+    (update :content conj {:type :footnotes :content (:footnotes m)})))
+
+(def custom-renderers
+  {:html-inline (comp hiccup/raw nextjournal.markdown/node->text)
+   :html-block (comp hiccup/raw nextjournal.markdown/node->text)
+   :footnote-ref (fn [_ {:keys [ref label]}] [:a
+                                              {:href (str "#fn-" label)
+                                               :id (str "fnref" label)}
+                                              [:sup label]])
+   :footnotes (fn [ctx node]
+                (markdown.transform/into-markup [:ol.footnotes] ctx node))
+   :footnote (fn [ctx {:as node :keys [label]}]
+               (markdown.transform/into-markup
+                [:li.footnote {:id (str "fn-" label)}]
+                ctx
+                (update-in node
+                           [:content 0 :content]
+                           conj
+                           {:type :link
+                            :attrs {:href (str "#fnref" label)}
+                            :content [{:type :text :text "↩"}]})))})
+
+
 (defn markdown->source
   [file]
   (with-open [r (clojure.java.io/reader (fs/file file))]
     (let [{:keys [metadata lines]} (parse-metadata (line-seq r))
           html (->> (clojure.string/join \newline lines)
                     nextjournal.markdown/parse
+                    insert-footnotes
                     (nextjournal.markdown/->hiccup
-                     (assoc nextjournal.markdown/default-hiccup-renderers
-                            :html-inline (comp hiccup/raw
-                                               nextjournal.markdown/node->text)
-                            :html-block (comp hiccup/raw
-                                              nextjournal.markdown/node->text)))
+                     (merge nextjournal.markdown/default-hiccup-renderers
+                            custom-renderers))
                     (hiccup/html)
                     str
                     #_(markdown/md-to-html-string-with-meta
@@ -259,15 +285,19 @@
 
 (comment
   (def mds (fs/glob source-dir "**.markdown"))
-  ;  (markdown->source (first mds))
-  {:metadata #ordered/map
-              ([:layout "page"] [:title "Newsletter"] [:sharing false])
-   :html
-   "<p>Enough readers demanded a way of getting notified about new posts thorough email, so a newsletter exists. Besides periodically notifying about new articles, it also includes notes on books and other media I've been consuming.</p><p>If that interests you, you can sign up over at <a href='https://jakemccrary.substack.com/welcome'>Substack</a>.</p><p>If you want timely notifications when new articles are published, I'd encourage you to subscribe to the <a href='http://feeds.feedburner.com/JakeMccrarysMusings'>RSS feed</a>.</p>"}
-  {:metadata #ordered/map
-              ([:layout "page"] [:title "Newsletter"] [:sharing false])
-   :html ""}
-  (markdown->source (first mds))
+  (def f (first (filter #(clojure.string/includes? % "zprint") mds)))
+  (markdown->source f)
+  (def xxx
+    (with-open [r (clojure.java.io/reader (fs/file f))]
+      (parse-metadata (doall (line-seq r)))))
+  (->> (clojure.string/join \newline (:lines xxx))
+       nextjournal.markdown/parse
+       insert-footnotes
+       #_(nextjournal.markdown/->hiccup
+          (merge nextjournal.markdown/default-hiccup-renderers
+                 custom-renderers))
+       #_hiccup/html
+       #_str)
   {:metadata #ordered/map
               ([:layout "page"] [:title "Newsletter"] [:sharing false])
    :html
@@ -407,9 +437,7 @@
                    {:keys [title local-date published]} (:metadata article)]
              :when published
              :let [link (str blog-root (str output-file))]]
-         [::atom/entry [::atom/id link] [::atom/link {:href link}] ;;TODO:
-                                                                   ;;check
-                                                                   ;;this
+         [::atom/entry [::atom/id link] [::atom/link {:href link}]
           [::atom/title [:-cdata title]] [::atom/updated (rfc-3339 local-date)]
           [::atom/content {:type "html"} [:-cdata (:html article)]]])])
      xml/indent-str)))
