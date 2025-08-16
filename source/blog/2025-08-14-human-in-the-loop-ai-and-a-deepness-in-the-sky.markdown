@@ -57,7 +57,7 @@ This wasn't something that a simple `sed` command could do as each file was movi
 I provided a command to run that would tell the AI agent (or me, if I were doing this by hand) if the config values were correct and told it to update config values until that command succeeded.
 I didn't tell it what to change, just provided a command to let it know when it was done, and it figured it out while I did less rote work with another coworker.
 
-## 🧍Asks ➡ 🤖 Proposes ➡ 🧍 decides
+## 🙂 Asks ➡ 🤖 Proposes ➡ 🙂 Decides
 
 We used to have to specify specific instructions to a computer through programming.
 Now we can specify desires/outcomes with natural language and often the computer will do a decent job of achieving our goal or at least get you to a reasonable starting point for you to take over.
