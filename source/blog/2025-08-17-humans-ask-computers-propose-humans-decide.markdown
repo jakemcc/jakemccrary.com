@@ -1,9 +1,9 @@
 ---
 layout: post
 title: "Humans ask, computers propose, humans decide"
-date: 2025-08-14 10:00 -0500
+date: 2025-08-17T19:35:49+00:00
 comments: true
-published: false
+published: true
 description: Vernor Vinge’s “ziphead support” without the dystopia.
 keywords: ai, llms, human-in-the-loop, Vernor Vinge, A Deepness in the Sky
 categories:
@@ -84,4 +84,4 @@ This is an exciting change and thankfully we're able to achieve it without turni
 
 This feels like Vinge's ziphead-supported computer but we've replaced infected humans with AI models[^2].
 
-[^2]: How much longer until the non-infected humans are also replaced. Hopefully we're able to avoid a future dystopia.
+[^2]: How much longer until the non-infected humans are also replaced? Hopefully we're able to avoid a future dystopia.
