@@ -25,8 +25,8 @@ In the following paragraph, one of the Emergents talks about how they use a subs
 > They left the group room and started back down the central tower. “See, Pham, you—all you Qeng Ho—grew up wearing blinders. You just know certain things are impossible. I see the clichés in your literature: ‘Garbage input means garbage output’; ‘The trouble with automation is that it does exactly what you ask it’; ‘Automation can never be truly creative.’ Humankind has accepted such claims for thousands of years. But we Emergents have disproved them! With ziphead support, I can get correct performance from ambiguous inputs. I can get effective natural language translation. I can get human-quality judgment as part of the automation!”
 
 The zipheads see the requests made by the users of the ship, apply their human judgment to the request, and then work with the computer to fulfill their interpretation of what the user is requesting.
-This allows the Emergents to make ambigious requests to their ship's computer, requests a human would understand but a computer could not, and get back quality results.
-There are literally humans-in-the-loop of the Emergents computer system.
+This allows the Emergents to make ambiguous requests to their ship's computer, requests a human would understand but a computer could not, and get back quality results.
+There are literally humans-in-the-loop of the Emergents' computer system.
 
 This paragraph made me think about how I use the current crop of AI tools and how it's changed how I interact with computers.
 I can now open an app and poorly specify what I want (don't fix typos, don't bother with full sentences, be vague) and the computer still often manages to perform the task or find the information I'm asking about.
@@ -48,7 +48,7 @@ Here are three examples of varying degrees of specification while working with a
 
 I rarely correct typos anymore when searching on Google or asking an AI for help with something.
 The computer doesn't care and still mostly does the right thing.
-To be fair, this has been gradually happening overtime with Google's ability to make sense of garbage searches but modern AI tools have drastically accelerated it.
+To be fair, this has been gradually happening over time with Google's ability to make sense of garbage searches, but modern AI tools have drastically accelerated it.
 
 ### Time series triage with `o3`
 
@@ -68,7 +68,7 @@ Once I wrapped up with my coworkers, I reviewed the changes, agreed with them, a
 ## 🙂 Asks ➡ 🤖 Proposes ➡ 🙂 Decides
 
 We used to have to specify specific instructions to a computer through programming.
-Now we can specify desires/outcomes with natural language and often the computer will do a decent job of achieving our goal or at least get you to a reasonable starting point for you to take over.
+Now we can specify desires/outcomes with natural language and often the computer will do a decent job of achieving our goal or at least getting us to a reasonable starting point to take over.
 
 The computer takes our ambiguous input, proposes a solution, and then we're able to step in and accept, change, and modify the results.
 This is an exciting change and thankfully we're able to achieve it without turning other humans into infected appliances.
@@ -76,10 +76,10 @@ This is an exciting change and thankfully we're able to achieve it without turni
 ```bash
 ┌─────────────┐     ┌────────────────┐     ┌─────────────┐
 │  Humans ask │ ──▶ │ Computer       │ ──▶ │ Humans      │
-└─────────────┘     │   propose      │     │   decide    │
+└─────────────┘     │  proposes      │     │   decide    │
       ▲             └────────────────┘     └─────────────┘
       │                                               │
       └───────────────────────────────────────────────┘
 ```
 
-This feels like Vinge's ziphead supported computer but we've replaced infected humans with AI models.
+This feels like Vinge's ziphead-supported computer but we've replaced infected humans with AI models.
