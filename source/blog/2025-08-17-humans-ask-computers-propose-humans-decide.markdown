@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Human-in-the-loop AI and 'A Deepness in the Sky'"
+title: "Humans ask, computers propose, humans decide"
 date: 2025-08-14 10:00 -0500
 comments: true
 published: false
