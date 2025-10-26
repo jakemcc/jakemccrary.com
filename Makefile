@@ -4,8 +4,12 @@ help:
 	 sort | \
 	 awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 
+.PHONY:
+serve: ## serve up the output directory
+	cd output && http-server .
+
 .PHONY: watch
-watch: ## Watch for changes and serve preview of site with drafts
+watch: ## Watch for changes and generate a preview of site with drafts
 	./watch-preview.sh
 
 .PHONY: develop
