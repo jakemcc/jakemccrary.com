@@ -156,9 +156,9 @@ Create a html file called `cover.html` and substitute in the appropriate values.
 ```
 
 Amazon wants you to provide an image as well but you don't actually have to do this.
-You probably need to do this if you actually publish the dictionary through Amazon[^3].
+You probably need to do this if you actually publish the dictionary through Amazon[^1].
 
-[^3]: This is actually a challenge to do due to restrictions on what Amazon allows published.
+[^1]: This is actually a challenge to do due to restrictions on what Amazon allows published.
 
 ### 4. Create a copyright page
 
@@ -244,7 +244,7 @@ I only have it there since I had it in earlier dictionaries I made.
 
 The publishing guidelines (as of October 2020) tell you to combine the previously created files together using the command line tool `kindlegen`.
 The problem with those instructions is that Amazon doesn't offer `kindlegen` as a download anymore.
-If you want to use it, you can still find it through the Internet Archive.
+If you want to use it, you can still find it through the Internet Archive (see newly added section at end of article).
 
 Instead of following the publishing guidelines, we'll use Kindle Previewer to finish making the dictionary.
 It is pretty straight forward.
@@ -292,3 +292,24 @@ I also think this means you can no longer make a dictionary from a Linux machine
 If you're ever in a situation where you think a custom dictionary would be useful, feel free to reach out.
 
 Go forth and make dictionaries.
+
+## `kindlegen` download
+
+I haven't verified this but a reader sent me an email and provided the following helpful details about downloading kindlegen.
+
+```
+Thanks a lot for your page about kindle dictionaries.
+For your information, it is still possible to use the kindlegen on linux.
+ 
+You can download the old i386 version from the internet archive:
+https://archive.org/details/kindlegen_linux_2_6_i386_v2_9
+ 
+In order to make it work on a recent amd64 architecture, you need to
+ 
+enable i386 support:
+      enable multi-arch
+      (debian) sudo dpkg --add-architecture i386
+               sudo apt update
+Install essential libraries:
+      (debian) sudo apt install libc6:i386 libncurses5:i386 libstdc++6:i386
+```
