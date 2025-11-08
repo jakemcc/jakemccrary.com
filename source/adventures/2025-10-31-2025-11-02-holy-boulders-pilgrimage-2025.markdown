@@ -17,7 +17,7 @@ While I don't consider myself a competitive person, this was motivating to me si
 
 That was my goal this year: try to place on the podium in the Stone Master category.
 Even if I didn't place, pursuing this goal would be beneficial to my climbing.
-It encouraged me to take some solo trips to the Holy Boulders this year (two in the hot and humid off-season and one in early October), which was a blast .
+It encouraged me to take some solo trips to the Holy Boulders this year (two in the hot and humid off-season and one in early October), which was a blast.
 
 While I didn't make it on the podium, I did put down a pretty good score, despite failing to repeat a few v5s I had thought I'd be able to send again.
 Even if I had put down 2-3 more v5s, I don't think the additional points (~200-300 more) would have bumped me to third, though I would have been closer.
@@ -46,7 +46,7 @@ We went back to our campsite and made breakfast (Huel for me and some oatmeal fo
 If you really want delicious coffee while camping, pick up some Cometeer packets and make coffee using those.
 So, so tasty.
 
-I warmed up some using my the [Zodd](https://www.fingers-of-fury.com/products/the-zodd-ergonomic-training) from Fingers of Fury and we walked over for the announcements.
+I warmed up some using the [Zodd](https://www.fingers-of-fury.com/products/the-zodd-ergonomic-training) from Fingers of Fury and we walked over for the announcements.
 While waiting, I did some push ups and lower body warm up.
 
 Unlike previous years, this year I had a list of climbs to try to send.
@@ -63,7 +63,7 @@ By getting there immediately, the climb would be a bit cleaner and my finger tip
 I think I sent Shadow of a Man on my fourth attempt of the day, took a short break, and then sent the sit-start my next go.
 My sit-start go was better climbed than the earlier one, with the crux move of Shadow of a Man going down even easier, despite being more fatigued from the elongated intro.
 Unfortunately, the sit start wasn't worth many more points than Shadow of a Man, so tacking on a v6 to my score card wasn't that beneficial over adding another v5.
-Still felt nice to have it thought 🙂.
+Still felt nice to have it though 🙂.
 
 After finishing there, we moved on to the Brown Cow boulder where my goals were Sukha Sit (v5) and Helios (v4).
 
@@ -106,7 +106,7 @@ It was not broken!
 We headed to the Vultures Nest area after this so I could knock out [Embryo Stasis](https://www.mountainproject.com/route/108601180/embryo-stasis) (v4).
 I've sent this problem about four times (once three years ago at the competition, then three times in October as I tried different beta).
 Even still, the top was wet and you're pulling on slopers, so I had a couple unexpected falls when topping out.
-Still managed to get the send on my third or forth try.
+Still managed to get the send on my third or fourth try.
 Rewardingly, I was also able to help coach a newly met climber and was so happy to learn later he managed to send after we left.
 
 While here, I also climbed [Peace Pipe](https://www.mountainproject.com/route/108606884/peace-pipe) (v3).
