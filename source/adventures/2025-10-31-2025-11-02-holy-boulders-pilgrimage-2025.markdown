@@ -1,6 +1,6 @@
 ---
 layout: adventure
-title: Holy Boulders: The Pilgrimage 2025
+title: "Holy Boulders: The Pilgrimage 2025"
 date: 2025-11-08 12:29 -0600
 start-date: 2025-10-31
 end-date: 2025-11-02
@@ -17,14 +17,16 @@ While I'm not especially competitive, the smaller field of older dudes made a po
 
 The goal this year was simple: land on the Stone Master podium.
 Even if I missed, pursuing it would beneficial.
+Turns out, the pursuit was benficial.
 It pushed me to take multiple solo trips to the Holies (two in the hot and humid off-season and one in early October), and those trips were a blast.
+I learned the joy of solo bouldering trips and became more comfortable without spotters.
 
 I missed the podium but still put down a solid score, even after failing to repeat a few v5s I thought would go.
-Even two or three more v5s (~200-300 points) probably wouldn't have bumped me into third, though it would have been close.
+Even two or three more v5s (approximately an additional 200-300 points) probably wouldn't have bumped me into third, though it would have been close.
 My total score would have been a comfortable third in 2024, but in 2025 it left me just outside the podium; I'm looking forward to seeing the full rankings to see how close I was.
 
 This year, like the three previous years, was a ton of fun.
-The Illinois climbing community keeps the stoke high: everyone is encouraging, willing to share beta, and provide a spot and happy when you do the same for them.
+The Illinois climbing community keeps the stoke high: everyone is encouraging, willing to share beta, and provide a spot and are happy when you do the same for them.
 
 ## October 31 – Southbound
 
@@ -50,14 +52,14 @@ Unlike previous years, I arrived with a list of climbs to try to send.
 It was mostly climbs I'd already done and felt I could repeat with minimal attempts, spread across styles so my body absorbed different stresses throughout the day.
 
 We started by heading to the Shadow of a Man boulder.
-I wanted to knock out Shadow of a Man (v5) and its sit-start (v6) before the crowd descended.
+I wanted to knock out [Shadow of a Man](https://www.mountainproject.com/route/108312154/shadow-of-a-man) (v5) and its [sit-start](https://www.mountainproject.com/route/112802515/shadow-of-a-man-sit) (v6) before the crowd descended.
 During my early October trip it felt much harder on sensitive fingertips, so getting there early in the day meant cleaner holds and happier skin.
 
 I sent Shadow of a Man on my fourth attempt, took a short break, and sent the sit-start on my next go.
 That sit-start felt smoother than the stand-alone send, even though the extended intro added some fatigue.
-The sit-start wasn't worth many more points than the stand, so adding a v6 to the scorecard didn't move the needle much, but it still felt good to have it.
+The sit-start wasn't worth many more points than the stand, so adding a v6 to the scorecard didn't move the needle beyond knocking out another v5, but it still felt good to have it.
 
-After finishing there, we moved on to the Brown Cow boulder where my goals were Sukha Sit (v5) and Helios (v4).
+After finishing there, we moved on to the Brown Cow boulder where my goals were [Sukha Sit](https://www.mountainproject.com/route/111289342/sukha-sit) (v5) and [Helios](https://www.mountainproject.com/route/108408965/helios) (v4).
 
 Sukha Sit is hard.
 I linked the sit into the stand twice during my early October trip, but this time I punted five or six times before moving on.
@@ -151,7 +153,7 @@ Underground was tasty.
 I'd go there again.
 
 We still wanted to climb, so we adjusted our route home to go through Peoria, stopped at the First Ascent there, and did some top-rope climbing.
-After three or four climbs, I stopped because of the toe pain.
+After three or four climbs, I stopped because of toe pain.
 
 We continued home and got back relatively early for a short weekend trip down to southern Illinois.
 
@@ -170,8 +172,8 @@ Quick list of notes:
 - Thank you Chicago crew for all the encouragement during the competition and the beta on Open Gates. It was fun seeing Chicago so well represented at this event. 
 - It was super fun trying Open Gates, an almost entirely new boulder to me, instead of only repeating prior climbs.
 
-Even if I had sent the three remaining v5s and the v4/5 (Cruisers), I probably would have landed just outside third.
-Using my average v5 score (~450) for Sukha Sit, Suede, Tabernacle, and Cruisers (likely an overestimate) puts me around 3,229 - still shy of the podium.
+Even if I had repeated the three v5s (Sukha Sit, Suede, Tabernacle) and the v4/5 (Cruisers), I probably would have landed just outside third.
+Using my average v5 score (~450) for Sukha Sit, Suede, Tabernacle, and Cruisers (likely an overestimate) puts me around 3,229, just shy of the podium.
 
 If I want to be competitive in future years, I need to aim for harder boulders.
 Luckily, there are a lot of them down at the Holies that I'm excited to try for the first time or to revisit.
