@@ -1,10 +1,10 @@
 ---
 layout: adventure
 title: "Holy Boulders: The Pilgrimage 2025"
-date: 2025-11-08 12:29 -0600
+date: 2025-11-16T17:34:43+00:00
 start-date: 2025-10-31
 end-date: 2025-11-02
-published: false
+published: true
 description: A quick Halloween-weekend run to The Holy Boulders for the 2025 Pilgrimage
 ---  
 
