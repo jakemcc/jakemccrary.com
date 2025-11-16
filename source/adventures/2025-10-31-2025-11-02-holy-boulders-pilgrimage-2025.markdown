@@ -16,8 +16,8 @@ I turned 40 this year, which qualified me for the Stone Master (40+) category.
 While I'm not especially competitive, the smaller field of older dudes made a podium feel attainable; in previous years some of my scorecards would have landed me in fourth.
 
 The goal this year was simple: land on the Stone Master podium.
-Even if I missed, pursuing it would beneficial.
-Turns out, the pursuit was benficial.
+Even if I missed, pursuing it would be beneficial.
+As expected, the pursuit was beneficial.
 It pushed me to take multiple solo trips to the Holies (two in the hot and humid off-season and one in early October), and those trips were a blast.
 I learned the joy of solo bouldering trips and became more comfortable without spotters.
 
@@ -26,7 +26,7 @@ Even two or three more v5s (approximately an additional 200-300 points) probably
 My total score would have been a comfortable third in 2024, but in 2025 it left me just outside the podium; I'm looking forward to seeing the full rankings to see how close I was.
 
 This year, like the three previous years, was a ton of fun.
-The Illinois climbing community keeps the stoke high: everyone is encouraging, willing to share beta, and provide a spot and are happy when you do the same for them.
+The Illinois climbing community keeps the stoke high: everyone is encouraging, willing to share beta, and happy to provide a spot.
 
 ## October 31 – Southbound
 
@@ -53,18 +53,18 @@ It was mostly climbs I'd already done and felt I could repeat with minimal attem
 
 We started by heading to the Shadow of a Man boulder.
 I wanted to knock out [Shadow of a Man](https://www.mountainproject.com/route/108312154/shadow-of-a-man) (v5) and its [sit-start](https://www.mountainproject.com/route/112802515/shadow-of-a-man-sit) (v6) before the crowd descended.
-During my early October trip it felt much harder on sensitive fingertips, so getting there early in the day meant cleaner holds and happier skin.
+During my early October trip, it felt much harder on sensitive fingertips, so getting there early in the day meant cleaner holds and happier skin.
 
 I sent Shadow of a Man on my fourth attempt, took a short break, and sent the sit-start on my next go.
 That sit-start felt smoother than the stand-alone send, even though the extended intro added some fatigue.
-The sit-start wasn't worth many more points than the stand, so adding a v6 to the scorecard didn't move the needle beyond knocking out another v5, but it still felt good to have it.
+The sit-start wasn't worth many more points than the stand, so adding a v6 to the scorecard didn't move the needle much beyond knocking out another v5, but it still felt good to have it.
 
-After finishing there, we moved on to the Brown Cow boulder where my goals were [Sukha Sit](https://www.mountainproject.com/route/111289342/sukha-sit) (v5) and [Helios](https://www.mountainproject.com/route/108408965/helios) (v4).
+After finishing there, we moved on to the Brown Cow boulder, where my goals were [Sukha Sit](https://www.mountainproject.com/route/111289342/sukha-sit) (v5) and [Helios](https://www.mountainproject.com/route/108408965/helios) (v4).
 
 Sukha Sit is hard.
 I linked the sit into the stand twice during my early October trip, but this time I punted five or six times before moving on.
 I made progress on most goes and think a little more aggression could have made it happen, but I didn't want to burn skin and energy on one boulder.
-I day-flashed Helios and we moved on after Christine climbed a problem here as well.
+I day-flashed Helios, and we moved on after Christine climbed a problem here as well.
 
 Our next targets were [Full Grain](https://www.mountainproject.com/route/111359226/full-grain) (v4) and [Suede](https://www.mountainproject.com/route/112392205/suede) (v5), but we stopped at the Cliffline area so I could try [Cliffline roof right](https://www.mountainproject.com/route/125205255/cliffline-roof-right) (v5).
 I'd climbed pieces of it on solo trips but never topped out because I wasn't sure I could downclimb and didn't want to risk jumping to a single pad.
@@ -76,10 +76,10 @@ Christine onsighted an easier arete, I sent Full Grain on my first attempt, and 
 Rain had started, and continuing to attempt a wet friction slab seemed like a losing proposition.
 
 I was a bit bummed to not send Suede after doing it twice in a row in early October.
-I wasn't surprised to miss Sukha Sit but I expected Suede to be automatic.
+I wasn't surprised to miss Sukha Sit, but I expected Suede to be automatic.
 
 Next up was trying to repeat [Tabernacle](https://www.mountainproject.com/route/112297553/tabernacle) (v5).
-It was my last send of the early October trip and that go was a battle, so I knew it would be a fight.
+It was my last send of the early October trip, and that go was a battle, so I knew it would be a fight.
 I tried a few times but bailed to keep energy for the rest of the day.
 
 We moved on to [Cruisers](https://www.mountainproject.com/route/112790640/cruisers) next.
@@ -89,18 +89,18 @@ Maybe it was the rain, but I couldn't get my left foot placed well for the (crux
 
 On my first attempt at Cruisers, I slipped and rammed my big toe into either the rock or the ground.
 It hurt immediately and turned black.
-I kept climbing, but any time I used that toe (or accidentally tapped it) the pain spiked.
+I kept climbing, but any time I used that toe (or accidentally tapped it), the pain spiked.
 My partner was concerned it might be broken, so when I was back in Chicago, I had x-rays taken.
 It was not broken!
 
 We headed to the Vultures Nest area after this so I could knock out [Embryo Stasis](https://www.mountainproject.com/route/108601180/embryo-stasis) (v4).
 I've sent it about four times (once three years ago at the competition, then three times in October trying out different beta).
-Even so, the top was wet and you're pulling on slopers, so I had a couple of unexpected falls before sticking it on my third or fourth try.
-As a bonus, I was able to help coach a newly met climber and later heard he managed to send after we left.
-He was super thankful and it felt good to know I helped someone achieve a goal.
+Even so, the top was wet and I was pulling on slopers, so I had a couple of unexpected falls before sticking it on my third or fourth try.
+As a bonus, I was able to help coach a newly met climber, and later we ran into each other and he excitedly told me he sent!
+He was super thankful, and it felt good to know I helped someone achieve a goal.
 
 While here, I also climbed [Peace Pipe](https://www.mountainproject.com/route/108606884/peace-pipe) (v3).
-It was my first time on it and I did it to make sure I'd be able to submit seven climbs on my scorecard.
+It was my first time on it, and I did it to make sure I'd be able to submit seven climbs on my scorecard.
 
 After Peace Pipe, we went to the Open Gates boulder so I could try [Open Gates](https://www.mountainproject.com/route/110192020/open-gates) (v5).
 Except for the first move, I hadn't tried it before, and the huge Chicago crew there made it a ton of fun.
@@ -111,7 +111,7 @@ Something can feel quite challenging at first, but as you refine the technique i
 After Open Gates, we had about an hour before the competition ended.
 I considered going to try [Secret of Davenport](https://www.mountainproject.com/route/108312199/secret-of-davenport) (v6), but on the way there I saw a bunch of friends working on Tabernacle.
 Encouraged by the crew, I stopped and tried Tabernacle some more.
-I picked up some better starting beta but I still failed to send.
+I picked up some better starting beta, but I still failed to send.
 During one of the better attempts I muttered "I'm so tired," which is not something you want to think while trying hard.
 
 My final tick list in table form was the following.
@@ -135,7 +135,7 @@ I knew my score would have placed third in 2024 and not in 2023, so there was a 
 I didn't, and that's entirely OK.
 Going after the goal led to good and fun choices in 2025 and I'm glad I chased it.
 
-It rained during the after party, which I think cut the band off early and sent part of the crowd home.
+It rained during the after-party, which I think cut the band off early and sent part of the crowd home.
 Christine and I eventually bailed to her tailgate to keep hanging out and sipping wine.
 
 ## November 2 – Homeward
@@ -144,7 +144,7 @@ It sprinkled and rained much of the night, so we expected the boulder field to b
 We didn't bother checking it out, and other climbers confirmed it was.
 
 We drove to [Ferne Clyff](https://dnr.illinois.gov/parks/park.ferneclyffe.html), thinking we'd do some rope climbing if it was dry.
-It seemed dry enough, but as we stood at the base of a cliff we realized neither of us wanted to take a lead fall.
+It seemed dry enough, but as we stood at the base of a cliff, we realized neither of us wanted to take a lead fall.
 My big toe still throbbed and Christine had tweaked her ankle hiking during the competition.
 
 So instead we left and went to Carbondale for lunch.
@@ -161,19 +161,20 @@ We continued home and got back relatively early for a short weekend trip down to
 
 Having a goal for the year was motivating.
 I hadn't really climbed with a specific target before.
-I could have done more, my first half of the year was fairly unfocused, but I'm overall happy with what I achieved.
+I could have done more.
+My first half of the year was fairly unfocused, but I'm overall happy with what I achieved.
 
 Quick list of notes:
 - I should have snapped photos of the climb labels when I was nearby. Knowing the points values of more climbs would help with strategy.
 - My modeling overestimated the points I'd get. I assumed `(v-grade * 100)` based on my 2022 scorecard (mostly House Boulders problems), but that math didn't hold up elsewhere.
-- Points aren't necessarily scaled by listed grade. If I remember Double Rainbow (v3, haven't tried it yet, but it looks sweet) at Open Gates correctly, it was worth about 10 more points than many of the v4s I climbed.
+- Points aren't necessarily scaled by the listed grade. For example, if I remember correctly, Double Rainbow (a v3 I haven't tried yet) was worth about 10 more points than many of the v4s I climbed.
 - Focusing on a scorecard changes how much I try to cram into one day.
-- I couldn't have had the day I had without Christine's support. She encouraged, spotted, and carried a pad, often at areas without problems she wanted to climb so I could keep trying things. Thank you.
+- I couldn't have had the day I had without Christine's support. She encouraged me, spotted me, and carried a pad, often at areas without problems she wanted to climb so I could keep trying things. Thank you.
 - Thank you Chicago crew for all the encouragement during the competition and the beta on Open Gates. It was fun seeing Chicago so well represented at this event. 
 - It was super fun trying Open Gates, an almost entirely new boulder to me, instead of only repeating prior climbs.
 
 Even if I had repeated the three v5s (Sukha Sit, Suede, Tabernacle) and the v4/5 (Cruisers), I probably would have landed just outside third.
-Using my average v5 score (~450) for Sukha Sit, Suede, Tabernacle, and Cruisers (likely an overestimate) puts me around 3,229, just shy of the podium.
+Using my average v5 score (~450) for Sukha Sit, Suede, Tabernacle, and Cruisers (likely an overestimate) would have put me around 3,229, just shy of the podium.
 
 If I want to be competitive in future years, I need to aim for harder boulders.
 Luckily, there are a lot of them down at the Holies that I'm excited to try for the first time or to revisit.
