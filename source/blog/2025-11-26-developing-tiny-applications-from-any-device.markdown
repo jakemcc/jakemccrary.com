@@ -4,7 +4,7 @@ title: Developing tiny applications from any device
 date: 2025-11-26 09:56 -0600
 comments: true
 published: false
-description: TODO
+description: Building tiny apps from anywhere using Codex and a shared experiments repo
 categories:
 - ai
 - programming
@@ -36,7 +36,7 @@ As models improve, the bar is getting even lower.
 
 Here is my setup:
 
-- I have a single repo named experiments[^1] on GitHub.
+- I have a single repo named [experiments](https://github.com/jakemcc/experiments)[^1] on GitHub.
 - This repo has a subdirectory per application.
 - The applications are in a variety of web languages (html, css, typescript, javascript, clojurescript).
 - OpenAI Codex is linked with this experiments repo.
