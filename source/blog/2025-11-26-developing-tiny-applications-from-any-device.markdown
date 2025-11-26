@@ -11,8 +11,8 @@ categories:
 - inspiration
 ---
 
-I'm a big fan of making small (sometimes silly) programs (TODO: Add link to related article on blog).
-You can make your life a bit better by recognizing when some specific piece of software is missing and, if scoped small enough, you can cause that software to exist without too much time investiment.
+I'm a big fan of making [small (sometimes silly) programs](/blog/2020/10/03/go-create-silly-small-programs/).
+You can make your life a bit better by recognizing when some specific piece of software is missing and, if scoped small enough, you can cause that software to exist without too much time investment.
 
 When you develop the practice of recognizing when a bit of software would be helpful, you see opportunities all the time.
 You don't control when you get inspiration for these programs.
@@ -24,19 +24,19 @@ Another valid strategy: Think about the inspiration and then let go of it under 
 
 My new strategy:
 1. Inspiration strikes!
-2. I pull out my phone and open my web browser to OpenAI's Codex webapp.
-3. I translate my inspiration to task and type (or voice-to-text) it into Codex
+2. I pull out my phone and open my web browser to OpenAI's Codex web app.
+3. I translate my inspiration to a task and type (or voice-to-text) it into Codex
 4. I submit the task to Codex, go about my day, and check on it later.
-5. Later: read the diff, click button to open a PR, merge the PR, and let Github actions deploy the changes to github pages.
+5. Later: read the diff, click a button to open a PR, merge the PR, and let GitHub Actions deploy the changes to GitHub Pages.
 
 AI tools lower the bar to creating those small, specific programs and lowers the bar to iterating on those small programs.
 
-Since early summer 2025, I've been able to develop and iterate on a handful of single page web applications this way.
+Since early summer 2025, I've been able to develop and iterate on a handful of single-page web applications this way.
 As models improve, the bar is getting even lower.
 
 Here is my setup:
 
-- I have a single repo named experiments[^1] on github.
+- I have a single repo named experiments[^1] on GitHub.
 - This repo has a subdirectory per application.
 - The applications are in a variety of web languages (html, css, typescript, javascript, clojurescript).
 - OpenAI Codex is linked with this experiments repo.
@@ -49,4 +49,4 @@ When Codex is done, I do a quick scan through the diff, click the buttons to ope
 
 All of this can be done from a cellphone.
 
-[^1]: I don't know if this limitation still exists but when I was initially setting ths up my experiments repo had zero commits. This caused problems in Codex that were fixed by adding a single commit.
+[^1]: I don't know if this limitation still exists but when I was initially setting this up my experiments repo had zero commits. This caused problems in Codex that were fixed by adding a single commit.
