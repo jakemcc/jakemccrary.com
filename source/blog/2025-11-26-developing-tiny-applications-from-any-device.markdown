@@ -46,6 +46,7 @@ If I have an idea for a new little application, I open Codex and provide a descr
 When I have an idea for tweaking an application, I open Codex, tell it what subdirectory the app is in and what tweak I want made.
 
 When Codex is done, I do a quick scan through the diff, click the buttons to open a PR, merge it, wait for the deploy, and then check on the deployed artifacts.
+The apps end up published at [jake.in/experiments](https://jake.in/experiments).
 
 All of this can be done from a cellphone.
 
