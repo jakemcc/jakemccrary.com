@@ -13,7 +13,7 @@ categories:
 
 I'm a big fan of making [small (sometimes silly) programs](/blog/2020/10/03/go-create-silly-small-programs/).
 As a software developer, you have a superpower: you can identify problems in your life and fix them by creating some specific software that solves for exactly what you need.
-When scoped small enough, these tiny programs take minimal time investment to create.
+When scoped small enough, creating these tiny programs takes minimal time investment.
 
 When you develop the practice of recognizing when a bit of software would be helpful, you see opportunities all the time.
 But you don't control when you get inspiration for these programs.
@@ -23,6 +23,9 @@ One strategy: Write yourself a note (paper, email to yourself, some app on your 
 (You occasionally manage to get around to it later.)
 Another strategy: Think about the inspiration and trick yourself into thinking you'll remember it later when you're at a computer.
 You justify this by claiming if you forget it, it must not have been important.
+
+These workflows are fine but they leave a lot of room for never following up.
+With modern AI tools, we can do better.
 
 My new strategy:
 1. Inspiration strikes!
@@ -34,6 +37,7 @@ My new strategy:
 I started using this technique in early summer 2025.
 Since then, I've been able to develop and iterate on a handful of single-page web applications this way.
 As models improve, it is getting even easier to knock them out.
+It works well for either making a new application or tweaking an existing one.
 
 Here is my setup:
 
