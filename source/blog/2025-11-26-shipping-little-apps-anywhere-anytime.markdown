@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Developing tiny applications from any device
+title: Shipping little apps anywhere, anytime
 date: 2025-11-26 09:56 -0600
 comments: true
 published: false
@@ -46,10 +46,10 @@ Here is my setup:
 - The applications are in a variety of web languages (HTML, CSS, TypeScript, JavaScript, ClojureScript).
 - OpenAI Codex is linked with this experiments repo.
 
-With this setup, I'm able to follow the above strategy with very minimal friction.
+With this setup, I'm able to follow the above strategy with minimal friction.
 If I have an idea for a new little application, I open Codex and provide a description of what I want and what it should be called, and it usually manages to start work on it.
 When I have an idea for tweaking an application, I open Codex, tell it what subdirectory the app is in and what tweak I want made.
-All of this can be done from a cellphone.
+All of this can be done from a smartphone.
 
 When Codex is done, I do a quick scan through the diff, click the buttons to open a PR, merge it, wait for the deploy, and then check on the deployed artifacts.
 The apps end up published at [jake.in/experiments](https://jake.in/experiments).
