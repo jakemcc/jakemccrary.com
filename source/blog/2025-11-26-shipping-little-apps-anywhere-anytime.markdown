@@ -1,9 +1,9 @@
 ---
 layout: post
 title: Shipping little apps anywhere, anytime
-date: 2025-11-26 09:56 -0600
+date: 2025-11-28T22:34:17+00:00
 comments: true
-published: false
+published: true
 description: How I create tiny web apps from anywhere using my phone.
 categories:
 - ai
