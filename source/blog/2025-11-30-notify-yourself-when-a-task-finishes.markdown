@@ -12,8 +12,8 @@ categories:
 - terminal-notifier
 ---
 
-I often have some task running in a hidden terminal that performs some action with files change.
-This is most often running Clojure tests whenever a file changes through either [test-refresh](https://github.com/jakemcc/test-refresh) or [lein-autoexpect](https://github.com/jakemcc/lein-autoexpect).
+I often have some task running in a hidden terminal that performs some action when files change.
+This is most often running Clojure tests whenever a file changes through either [test-refresh](https://github.com/jakemcc/lein-test-refresh) or [lein-autoexpect](https://github.com/jakemcc/lein-autoexpect).
 Another common watch task is rendering this website whenever one of the markdown files changes.
 
 I don't like needing to have these processes always visible, since I mostly only care about when they finish.
@@ -24,7 +24,7 @@ On MacOS, one way of doing this is using [terminal-notifier](https://github.com/
 `terminal-notifier` makes it trivial to send notifications.
 
 Below is the script I run while working on this website.
-It uses `entr` for monitoring for changes to the input files and when changes are detected, it renders this site using my homegrown [Babashka](https://babashka.org/) code and when that finishes, it uses `terminal-notifier` to alert me.
+It uses `entr` to monitor the input files; when changes are detected, it renders this site using my homegrown [Babashka](https://babashka.org/) static site generator, and when that finishes, it uses `terminal-notifier` to alert me.
 
 ```bash
 #!/bin/bash
@@ -34,14 +34,14 @@ while sleep 0.5; do
 done
 ```
 
-This site renders fast so I can usually make some edits, save, and toggle to a browser to refresh and see the output. 
+This site renders quickly so I can usually make some edits, save, and toggle to a browser to refresh and see the output. 
 Still, it is nice to see that little notification pop-up appear on my screen so I know for sure if I hit refresh I'm seeing the latest render.
 
-When I'm running my Clojure tests, both `lein-autoexpect` and `test-refresh` send a notification with a Pass or Failed message based on the status of the just ran unit tests.
+When I'm running my Clojure tests, both `lein-autoexpect` and `test-refresh` send a notification with a pass or fail message based on the status of the unit tests that just ran.
 
 I'd encourage you to think about what processes you might want to get a notification from when they are done and look into how to set that up.
 `terminal-notifier` works great on MacOS.
 I can't make recommendations for other operating systems since it has been years since I've used any alternatives besides sshing into a Linux server.
 It is worth the effort to figure out how to have notifications.
 They remove a trivial inconvenience (having to switch programs, needing to keep a window visible on your screen) and make life a little better.
-By stacking small, slightly life improving techniques, all of a sudden you find yourself much more productive.
+By stacking small, slightly life-improving techniques, all of a sudden you find yourself much more productive.
