@@ -4,7 +4,7 @@ layout: post
 title: "Flexible notification of Clojure tests failing"
 date: 2014-02-02 18:11
 comments: true
-categories: [clojure, testing]
+categories: [clojure, testing, notifications]
 ---
 
 [lein-test-refresh](https://github.com/jakemcc/test-refresh) has always supported notifying you of your tests' status through growl.

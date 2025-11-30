@@ -9,6 +9,7 @@ categories:
 - tmux
 - tmate
 - osx
+- notifications
 ---
 
 For nearly the last two years, I've been doing most of my development in OS X.

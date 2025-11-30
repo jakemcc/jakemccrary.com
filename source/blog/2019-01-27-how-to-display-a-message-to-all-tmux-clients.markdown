@@ -11,6 +11,7 @@ keywords: tmux
 categories:
 - tmux
 - tools
+- notifications
 ---
 
 <!-- Estimated time: 30 minutes -->

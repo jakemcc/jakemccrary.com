@@ -15,6 +15,7 @@ categories:
 - testing
 - clojure
 - tools
+- notifications
 ---
 
 I've been using Emacs in a remote [tmux](https://github.com/tmux/tmux) session lately and I've been missing [lein-test-refresh](https://github.com/jakemcc/test-refresh#notifications) notifications when my Clojure tests pass or fail.

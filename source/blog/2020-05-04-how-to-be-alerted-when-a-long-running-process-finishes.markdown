@@ -12,6 +12,7 @@ categories:
 - bash
 - osx
 - command-line
+- notifications
 ---
 
 Let me set the stage.
