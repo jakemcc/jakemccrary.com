@@ -13,7 +13,7 @@ categories:
 ---
 
 I often have some task running in a hidden terminal that performs some action when files change.
-This is most often running Clojure tests whenever a file changes through either [test-refresh](https://github.com/jakemcc/test-refresh) or [lein-autoexpect](https://github.com/jakemcc/lein-autoexpect).
+This is most often running Clojure tests whenever a file changes using either [test-refresh](https://github.com/jakemcc/test-refresh) or [lein-autoexpect](https://github.com/jakemcc/lein-autoexpect).
 Another common watch task is rendering this website whenever one of the markdown files changes.
 
 I don't like needing to have these processes always visible, since I mostly only care about when they finish.
@@ -38,6 +38,8 @@ This site renders quickly, so I can usually make some edits, save, and toggle to
 Still, it is nice to see that little notification pop-up appear on my screen so I know for sure that if I hit refresh, I'm seeing the latest render.
 
 When I'm running my Clojure tests, both `lein-autoexpect` and `test-refresh` send a notification with a pass or fail message based on the status of the unit tests that just ran.
+If the tests are passing, I don't have to glance at my terminal.
+If they are failing, I do.
 
 I'd encourage you to think about what processes you might want to get notifications from when they are done and look into how to set that up.
 `terminal-notifier` works great on macOS.
