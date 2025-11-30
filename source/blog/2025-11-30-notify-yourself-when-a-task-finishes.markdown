@@ -10,6 +10,7 @@ categories:
 - tools
 - clojure
 - terminal-notifier
+- notifications
 ---
 
 I often have some task running in a hidden terminal that performs some action when files change.
