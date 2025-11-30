@@ -16,10 +16,10 @@ categories:
 
 If you follow my work you probably know that I value fast feedback cycles.
 Most of the open-source I maintain was developed to enable faster feedback cycles.
-This is why [lein-test-refresh](https://github.com/jakemcc/lein-test-refresh/) and [lein-autoexpect](https://github.com/clojure-expectations/lein-autoexpect) were originally created.
+This is why [lein-test-refresh](https://github.com/jakemcc/test-refresh/) and [lein-autoexpect](https://github.com/clojure-expectations/lein-autoexpect) were originally created.
 
 
-Leiningen supports [test selectors](https://github.com/technomancy/leiningen/blob/master/doc/TUTORIAL.md#tests) and lein-test-refresh [does as well](https://github.com/jakemcc/lein-test-refresh/blob/master/CHANGES.md#040).
+Leiningen supports [test selectors](https://github.com/technomancy/leiningen/blob/master/doc/TUTORIAL.md#tests) and lein-test-refresh [does as well](https://github.com/jakemcc/test-refresh/blob/master/CHANGES.md#040).
 This lets you start-up a testing session and only run tests or namespaces with certain metadata on them.
 This is a super useful feature as it lets you narrow your testing scope to one (or a handful) of tests while working on solving a specific problem.
 

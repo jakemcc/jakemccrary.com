@@ -24,7 +24,7 @@ By using the new `clojure.test` compatible syntax, `expectations` can take advan
 
 ### Using lein-test-refresh with expectations
 
-If you move to the new `clojure.test` compatible syntax, you can start using [lein-test-refresh](https://github.com/jakemcc/lein-test-refresh) to automatically rerun your tests when your code changes.
+If you move to the new `clojure.test` compatible syntax, you can start using [lein-test-refresh](https://github.com/jakemcc/test-refresh) to automatically rerun your tests when your code changes.
 `lein-test-refresh` is a fork of the original expectations autorunner, [lein-autoexpect](https://github.com/clojure-expectations/lein-autoexpect), but it has grown to have more features than its original inspiration.
 Now you can use it with `expectations`[^2].
 
@@ -102,7 +102,7 @@ Passed all tests
 Finished at 11:53:59.045 (run time: 0.013s)
 ```
 
-If you're using `expectations` and switch to the new `clojure.test` compatible syntax, I'd encourage you to start using [lein-test-refresh](https://github.com/jakemcc/lein-test-refresh).
+If you're using `expectations` and switch to the new `clojure.test` compatible syntax, I'd encourage you to start using [lein-test-refresh](https://github.com/jakemcc/test-refresh).
 
 
 [^1]: As of 2016-02-27 `2.2.0` isn't out yet, but `2.2.0-beta1` has been released and has the changes.

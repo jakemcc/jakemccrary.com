@@ -17,7 +17,7 @@ categories:
 - tools
 ---
 
-I've been using Emacs in a remote [tmux](https://github.com/tmux/tmux) session lately and I've been missing [lein-test-refresh](https://github.com/jakemcc/lein-test-refresh#notifications) notifications when my Clojure tests pass or fail.
+I've been using Emacs in a remote [tmux](https://github.com/tmux/tmux) session lately and I've been missing [lein-test-refresh](https://github.com/jakemcc/test-refresh#notifications) notifications when my Clojure tests pass or fail.
 Luckily, it only took me a little bit of searching to figure out a solution for when I'm working inside of tmux.
 
 Below is a GIF of the notifications I get as my tests run and pass or fail.
@@ -28,11 +28,11 @@ With the above notifications, I can keep my focus on my code and only switch to 
 
 This was pretty easy to setup.
 You can trigger a message in tmux by running `tmux display-message <MESSAGE_HERE>`.
-To configure [lein-test-refresh](https://github.com/jakemcc/lein-test-refresh#notifications) to send notifications to tmux simply include the following in your `:test-refresh` section of your `project.clj` or `profiles.clj`.
+To configure [lein-test-refresh](https://github.com/jakemcc/test-refresh#notifications) to send notifications to tmux simply include the following in your `:test-refresh` section of your `project.clj` or `profiles.clj`.
 
 ```clojure
 :test-refresh {:notify-command ["tmux" "display-message"]}
 ```
 
 I hope you enjoy this.
-Its has made using a remote terminal with tmux and [lein-test-refresh](https://github.com/jakemcc/lein-test-refresh) more enjoyable.
+Its has made using a remote terminal with tmux and [lein-test-refresh](https://github.com/jakemcc/test-refresh) more enjoyable.

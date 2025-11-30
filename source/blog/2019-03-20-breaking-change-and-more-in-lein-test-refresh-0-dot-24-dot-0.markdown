@@ -13,7 +13,7 @@ categories:
 - lein-test-refresh
 ---
 
-Today I released [lein-test-refresh](https://github.com/jakemcc/lein-test-refresh) `0.24.1`[^1].
+Today I released [lein-test-refresh](https://github.com/jakemcc/test-refresh) `0.24.1`[^1].
 I don't always announce new lein-test-refresh versions with an article but this release breaks some existing behavior so I thought it was worth it.
 
 [^1]: This was originally 0.24.0 but that had a bug in it. Sorry about that.
@@ -40,7 +40,7 @@ Thanks [Alan Thompson](https://github.com/cloojure) for bringing this to my atte
 
 Being able to tell `test-refresh` to narrow its focus by adding `:test-refresh/focus` as metadata on a test or namespace has quickly become a favorite feature of many users.
 Now you can configure a shorter keyword by specifying configuration in your profile.
-See the [sample project.clj](https://github.com/jakemcc/lein-test-refresh/blob/1b5165660d9e40d9394809a95b148ec758a6d56b/sample.project.clj#L61-L65) for how to set this up.
+See the [sample project.clj](https://github.com/jakemcc/test-refresh/blob/1b5165660d9e40d9394809a95b148ec758a6d56b/sample.project.clj#L61-L65) for how to set this up.
 
 Thanks [Yuri Govorushchenko](https://github.com/metametadata) for the suggestion.
 
@@ -61,12 +61,12 @@ user=> (com.jakemccrary.test-refresh/run-in-repl "test")
 *************** Running tests ***************
 ```
 
-[This request](https://github.com/jakemcc/lein-test-refresh/issues/80) was done so that you can run it in Cursive's repl and gain the ability to click on stacktraces.
+[This request](https://github.com/jakemcc/test-refresh/issues/80) was done so that you can run it in Cursive's repl and gain the ability to click on stacktraces.
 Thanks [Klaus Wuestefeld](https://github.com/klauswuestefeld) for bringing this up again with a really solid and focused use case.
 
 ### Better output on exceptions while reloading
 
-This was a [pull request](https://github.com/jakemcc/lein-test-refresh/pull/81) from [Minh Tuan Nguyen](https://github.com/minhtuannguyen).
+This was a [pull request](https://github.com/jakemcc/test-refresh/pull/81) from [Minh Tuan Nguyen](https://github.com/minhtuannguyen).
 Now figuring out where to look for the error will be a little easier.
 
 

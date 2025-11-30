@@ -22,9 +22,9 @@ categories:
 Leiningen test selectors are great.
 They allow you to filter what tests run by applying a function to the test's metadata.
 If that function returns a truthy value then that test will run.
-[lein-test-refresh](https://github.com/jakemcc/lein-test-refresh/blob/master/CHANGES.md#040) supports them and even includes a built in one for its [focus feature](https://github.com/jakemcc/lein-test-refresh#built-in-test-narrowing-test-selector).
+[lein-test-refresh](https://github.com/jakemcc/test-refresh/blob/master/CHANGES.md#040) supports them and even includes a built in one for its [focus feature](https://github.com/jakemcc/test-refresh#built-in-test-narrowing-test-selector).
 
-I was recently [asked](https://github.com/jakemcc/lein-test-refresh/issues/78) if test-refresh could support filtering tests using a regular expression against the name of a namespace or test.
+I was recently [asked](https://github.com/jakemcc/test-refresh/issues/78) if test-refresh could support filtering tests using a regular expression against the name of a namespace or test.
 Lucky for me, test-refresh already supports this because of its support of test selectors.
 
 Most of the examples of Leiningen test selectors show very simple functions that look for the existence of a keyword in the metadata.

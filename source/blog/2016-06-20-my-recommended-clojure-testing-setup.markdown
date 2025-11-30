@@ -19,7 +19,7 @@ I've come to this recommendation through observing teams using a variety of test
 
 > Use clojure.test with
 > [humane-test-output](https://github.com/pjstadig/humane-test-output)
-> and [lein-test-refresh](https://github.com/jakemcc/lein-test-refresh).
+> and [lein-test-refresh](https://github.com/jakemcc/test-refresh).
 
 ### Use clojure.test
 
@@ -34,13 +34,13 @@ Together they provide a testing library that has minimal additional syntax and g
 ### Use lein-test-refresh
 
 If you're not using a tool that reloads and reruns your tests on file changes then you are wasting your time.
-The delay between changing code and seeing test results is drastically reduced by using a tool like [lein-test-refresh](https://github.com/jakemcc/lein-test-refresh).
+The delay between changing code and seeing test results is drastically reduced by using a tool like [lein-test-refresh](https://github.com/jakemcc/test-refresh).
 Nearly everyone I know who tries adding lein-test-refresh to their testing toolbox continues to use it.
 Many of these converts were not newcomers to Clojure either, they had years of experience and had already developed workflows that worked for them.
 
 ### Use lein-test-refresh's advanced features
 
-[lein-test-refresh](https://github.com/jakemcc/lein-test-refresh) makes development better even if you don't change any of its settings.
+[lein-test-refresh](https://github.com/jakemcc/test-refresh) makes development better even if you don't change any of its settings.
 It gets even better if you use some of its advanced features.
 
 Below is a stripped down version of my `~/.lein/profiles.clj`.

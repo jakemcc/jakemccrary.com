@@ -10,14 +10,14 @@ categories:
 - testing
 ---
 
-If you use `clojure.test` then there is a good chance you've been annoyed by all the [output](https://github.com/jakemcc/lein-test-refresh/issues/33) when you run your tests in the terminal.
+If you use `clojure.test` then there is a good chance you've been annoyed by all the [output](https://github.com/jakemcc/test-refresh/issues/33) when you run your tests in the terminal.
 When there is a test failure you have to scroll through pages of output to find the error.
 
-With release `0.9.0` of [lein-test-refresh](https://github.com/jakemcc/lein-test-refresh) you can minimize the output of `clojure.test` and **only** see failure and summary messages.
+With release `0.9.0` of [lein-test-refresh](https://github.com/jakemcc/test-refresh) you can minimize the output of `clojure.test` and **only** see failure and summary messages.
 To enable this feature add `:quiet true` to the `:test-refresh` configuration map in either your project.clj or profiles.clj file.
 If you configure `lein-test-refresh` in `~/.lein/profiles.clj` then turning on this feature looks like the following.[^1]
 
-[^1]: More configuration options can be found [here](https://github.com/jakemcc/lein-test-refresh/blob/master/sample.project.clj#L5-L24)
+[^1]: More configuration options can be found [here](https://github.com/jakemcc/test-refresh/blob/master/sample.project.clj#L5-L24)
 
 ``` clojure
 {:user {:plugins [[com.jakemccrary/lein-test-refresh "0.9.0"]]

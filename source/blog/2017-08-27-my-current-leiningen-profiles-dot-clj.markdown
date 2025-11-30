@@ -39,10 +39,10 @@ As a result, I rarely used them and I’ve removed them.
 Instead, I’ve started using [joker](https://github.com/candid82/joker) for some basic static analysis and am really enjoying it.
 It is fast, and it has made refactoring in Emacs noticeably better.
 
-[lein-test-refresh](https://github.com/jakemcc/lein-test-refresh), [lein-autoexpect](https://github.com/clojure-expectations/lein-autoexpect), and [humane-test-output](https://github.com/pjstadig/humane-test-output) have stuck around and have been updated to the latest versions.
+[lein-test-refresh](https://github.com/jakemcc/test-refresh), [lein-autoexpect](https://github.com/clojure-expectations/lein-autoexpect), and [humane-test-output](https://github.com/pjstadig/humane-test-output) have stuck around and have been updated to the latest versions.
 These tools make testing Clojure much nicer.
 
-I'm also taking advantage of some new features that [lein-test-refresh](https://github.com/jakemcc/lein-test-refresh) provides.
+I'm also taking advantage of some new features that [lein-test-refresh](https://github.com/jakemcc/test-refresh) provides.
 These settings enable the most reliable, fastest feedback possible while writing tests.
 My [recommended testing setup](/blog/2016/06/20/my-recommended-clojure-testing-setup/) article goes into more details.
 

@@ -7,7 +7,7 @@ comments: true
 categories: [clojure, testing]
 ---
 
-[lein-test-refresh](https://github.com/jakemcc/lein-test-refresh) has always supported notifying you of your tests' status through growl.
+[lein-test-refresh](https://github.com/jakemcc/test-refresh) has always supported notifying you of your tests' status through growl.
 With the release of version 0.3.4 it now will notify you using whatever program you want.
 
 To make my Mac whisper my the results of running my tests I can use the following project.clj
@@ -20,6 +20,6 @@ To make my Mac whisper my the results of running my tests I can use the followin
 ```
 
 The specification of the command is found in the `:test-refresh {:notify-command ["say" "-v" "Whisper"]}` entry in the above project.clj.
-After running your tests [lein-test-refresh](https://github.com/jakemcc/lein-test-refresh) will pass a (usually) short summary message as the final parameter to the specified command.
+After running your tests [lein-test-refresh](https://github.com/jakemcc/test-refresh) will pass a (usually) short summary message as the final parameter to the specified command.
 
 Now you can finally have the results of running your tests whispered to you.

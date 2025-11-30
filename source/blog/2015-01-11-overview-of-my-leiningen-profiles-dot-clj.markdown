@@ -18,7 +18,7 @@ categories:
 One thing profiles are useful for is allowing you to have development tools available to a project without having them as dependencies when you release your project.
 An example of when you might want to do this is when you are using a testing library like [expectations](https://github.com/jaycfields/expectations).
 
-Some development tools, such as [lein-test-refresh](https://github.com/jakemcc/lein-test-refresh), are useful to have across most of your Clojure projects.
+Some development tools, such as [lein-test-refresh](https://github.com/jakemcc/test-refresh), are useful to have across most of your Clojure projects.
 Rather nicely, Leiningen supports adding global profiles to `~/.lein/profiles.clj`.
 These profiles are available in all your projects.
 
@@ -80,7 +80,7 @@ This dependency is required for me to be effective while writing Clojure.
 I actually don't use any of those refactorings (I only use move to let, extract to let, and introduce let refactorings) but I still keep it around.
 
 `com.jakemccrary/lein-test-refresh` is next.
-This lets me use [lein-test-refresh](https://github.com/jakemcc/lein-test-refresh) globally.
+This lets me use [lein-test-refresh](https://github.com/jakemcc/test-refresh) globally.
 `lein-test-refresh` runs your `clojure.test` tests whenever a file changes in your project.
 This is another key development tool in my process.
 
@@ -104,7 +104,7 @@ The final plugin is `lein-pprint`.
 [lein-pprint](https://github.com/technomancy/leiningen/tree/master/lein-pprint) prints out your project map.
 It is useful for trying to grasp what is going on when messing around with various Leiningen options.
 
-The final part, seen below, of my `profiles.clj` is configuration for `lein-test-refresh.` It configures `lein-test-refresh` to use [terminal-notifier](https://github.com/alloy/terminal-notifier) to notify me when my tests pass or fail.
+The final part, seen below, of my `profiles.clj` is configuration for `lein-test-refresh.` It configures `lein-test-refresh` to use [terminal-notifier](https://github.com/julienXX/terminal-notifier) to notify me when my tests pass or fail.
 Using a continuous tester that allows flexible notification is useful.
 Not having to glance at a terminal to see if your tests are passing or failing is great.
 

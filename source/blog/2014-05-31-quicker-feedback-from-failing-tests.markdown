@@ -8,7 +8,7 @@ categories: [clojure, testing]
 ---
 
 Over the last couple of years I've desired quicker feedback from my Clojure tests.
-This has resulted in the development of [lein-autoexpect](https://github.com/jakemcc/lein-autoexpect) and more recently [lein-test-refresh](https://github.com/jakemcc/lein-test-refresh).
+This has resulted in the development of [lein-autoexpect](https://github.com/jakemcc/lein-autoexpect) and more recently [lein-test-refresh](https://github.com/jakemcc/test-refresh).
 Each tool monitors your project for changes and on change uses [tools.namespace](https://github.com/clojure/tools.namespace) to reload your code and then reruns either your [expectations](http://jayfields.com/expectations/) or `clojure.test` tests.
 Using tools like these has changed my development process.
 
@@ -17,14 +17,14 @@ This release enables even quicker feedback by tracking which tests fail and afte
 Only when your previously failed tests pass does it then rerun all of your tests.
 
 **lein-test-refresh** has had quite a few features added since I last wrote about it.
-The [readme](https://github.com/jakemcc/lein-test-refresh/blob/master/README.md#features) will always have the latest list but as of the time of writing this they include:
+The [readme](https://github.com/jakemcc/test-refresh/blob/master/README.md#features) will always have the latest list but as of the time of writing this they include:
 
 * Reloads code and reruns tests on changes to your project's code.
 * Runs previously failing tests first.
-* Supports [custom notification](https://github.com/jakemcc/lein-test-refresh/blob/d6b2f2710ae94ae3270d92b0efd85d481717477b/sample.project.clj#L6-L9) commands.
+* Supports [custom notification](https://github.com/jakemcc/test-refresh/blob/d6b2f2710ae94ae3270d92b0efd85d481717477b/sample.project.clj#L6-L9) commands.
 * Built in [Growl](http://growl.info/) support.
-* Can notify after test success and failure or [just after failure](https://github.com/jakemcc/lein-test-refresh/blob/d6b2f2710ae94ae3270d92b0efd85d481717477b/sample.project.clj#L12).
-* Supports a [subset](https://github.com/jakemcc/lein-test-refresh/blob/master/CHANGES.md#040) of Leiningen test selectors.
+* Can notify after test success and failure or [just after failure](https://github.com/jakemcc/test-refresh/blob/d6b2f2710ae94ae3270d92b0efd85d481717477b/sample.project.clj#L12).
+* Supports a [subset](https://github.com/jakemcc/test-refresh/blob/master/CHANGES.md#040) of Leiningen test selectors.
 * Reports on your tests running time.
 
 I don't have enough experience with the new **lein-test-refresh** to say how having failing tests will affect my development practices.

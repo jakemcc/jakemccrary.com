@@ -13,7 +13,7 @@ categories:
 ---
 
 I often have some task running in a hidden terminal that performs some action when files change.
-This is most often running Clojure tests whenever a file changes through either [test-refresh](https://github.com/jakemcc/lein-test-refresh) or [lein-autoexpect](https://github.com/jakemcc/lein-autoexpect).
+This is most often running Clojure tests whenever a file changes through either [test-refresh](https://github.com/jakemcc/test-refresh) or [lein-autoexpect](https://github.com/jakemcc/lein-autoexpect).
 Another common watch task is rendering this website whenever one of the markdown files changes.
 
 I don't like needing to have these processes always visible, since I mostly only care about when they finish.
