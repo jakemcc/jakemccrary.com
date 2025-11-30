@@ -24,7 +24,7 @@ On MacOS, one way of doing this is using [terminal-notifier](https://github.com/
 `terminal-notifier` makes it trivial to send notifications.
 
 Below is the script I run while working on this website.
-It uses `entr` for monitoring for changes to the input files and when changes are detected, it renders this site using my homegrown Babashka code and when that finishes, it uses `terminal-notifier` to alert me.
+It uses `entr` for monitoring for changes to the input files and when changes are detected, it renders this site using my homegrown [Babashka](https://babashka.org/) code and when that finishes, it uses `terminal-notifier` to alert me.
 
 ```bash
 #!/bin/bash
