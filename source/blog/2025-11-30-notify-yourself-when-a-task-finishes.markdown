@@ -4,13 +4,16 @@ title: Notify yourself when a task finishes
 date: 2025-11-30 15:33 -0600
 comments: true
 published: false
-description: TODO
+description: Desktop notifications when tasks finish are great.
 categories:
-- TODO
+- osx
+- tools
+- clojure
+- terminal-notifier
 ---
 
 I often have some task running in a hidden terminal that performs some action with files change.
-This is most often running Clojure tests whenever a file changes through either test-refresh (TODO: link test-refresh github repo) or lein-autoexpect (TODO: link lein-autoexpect).
+This is most often running Clojure tests whenever a file changes through either [test-refresh](https://github.com/jakemcc/test-refresh) or [lein-autoexpect](https://github.com/jakemcc/lein-autoexpect).
 Another common watch task is rendering this website whenever one of the markdown files changes.
 
 I don't like needing to have these processes always visible, since I mostly only care about when they finish.
@@ -42,4 +45,3 @@ I can't make recommendations for other operating systems since it has been years
 It is worth the effort to figure out how to have notifications.
 They remove a trivial inconvenience (having to switch programs, needing to keep a window visible on your screen) and make life a little better.
 By stacking small, slightly life improving techniques, all of a sudden you find yourself much more productive.
-
