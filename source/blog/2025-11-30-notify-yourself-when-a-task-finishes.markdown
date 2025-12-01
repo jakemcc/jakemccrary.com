@@ -13,7 +13,8 @@ categories:
 - notifications
 ---
 
-I often have some task running in a hidden terminal that performs some action when files change.
+If you've got a ridiculously good memory and you've been reading my writing for a while, you know I'm a fan of processes [notifying](/blog/categories/notifications/) you when they are done.
+I often have some task running in a hidden terminal that performs actions when files change.
 This is most often running Clojure tests whenever a file changes using either [test-refresh](https://github.com/jakemcc/test-refresh) or [lein-autoexpect](https://github.com/jakemcc/lein-autoexpect).
 Another common watch task is rendering this website whenever one of the markdown files changes.
 
@@ -31,12 +32,12 @@ It uses `entr` to monitor the input files; when changes are detected, it renders
 #!/bin/bash
 while sleep 0.5; do 
     rg bb templates source --files -t css -t clojure -t markdown -t html \
-        | entr -d -s 'rm -rf output/*; time /opt/homebrew/bin/bb render --preview true && terminal-notifier -message "Rendering complete"';
+        | entr -d -s 'rm -rf output/*; bb render && terminal-notifier -message "Rendering complete"';
 done
 ```
 
 This site renders quickly, so I can usually make some edits, save, and toggle to a browser to refresh and see the output. 
-Still, it is nice to see that little notification pop-up appear on my screen so I know for sure that if I hit refresh, I'm seeing the latest render.
+Still, it is nice to see that little notification pop-up on my screen so I know for sure that if I hit refresh, I'm seeing the latest render.
 
 When I'm running my Clojure tests, both `lein-autoexpect` and `test-refresh` send a notification with a pass or fail message based on the status of the unit tests that just ran.
 If the tests are passing, I don't have to glance at my terminal.
