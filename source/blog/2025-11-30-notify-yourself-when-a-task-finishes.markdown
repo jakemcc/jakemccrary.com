@@ -1,9 +1,9 @@
 ---
 layout: post
 title: Notify yourself when a task finishes
-date: 2025-11-30 15:33 -0600
+date: 2025-12-01T15:08:53+00:00
 comments: true
-published: false
+published: true
 description: Desktop notifications when tasks finish are great.
 categories:
 - osx
